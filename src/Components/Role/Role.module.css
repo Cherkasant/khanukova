@@ -1,0 +1,16 @@
+.container {
+    padding: 23px 30px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+    background: #FFFFFF;
+    border-radius: 5px;
+}
+
+.container:hover {
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #4270A7;
+    background: #F6F8FC;
+}
