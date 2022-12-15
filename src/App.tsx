@@ -4,6 +4,7 @@ import Button, { ButtonTypes } from "./Components/Button";
 import { GoogleIcon } from "./Assets/icons/GoogleIcon";
 import { LinkedinIcon } from "./Assets/icons/LinkedinIcon";
 import Role from "./Components/Role";
+import SignIn from "./Pages/SignIn";
 
 import Input from "./Components/Input";
 import onChangeInput from "./Components/Input";
@@ -26,6 +27,7 @@ function App() {
       <Button title={<LinkedinIcon />} type={ButtonTypes.IconButton} />
       <Button title={"Login"} type={ButtonTypes.TextButton} disabled={true}/>
       <ProjectsIcon />
+      <SignIn></SignIn>
 
     </div>
   );
