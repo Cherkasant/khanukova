@@ -1,0 +1,55 @@
+.container {
+  width: 400px;
+  height: 350px;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(182, 191, 208, 0.15);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  width: 330px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 31px;
+  color: #000000;
+  margin: 35px 130px 0 35px;
+  padding-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(230, 230, 230, 1);
+}
+
+.projectContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 30px 35px;
+}
+.task {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.taskName {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #242424;
+}
+.taskProgress {
+  width: 150px;
+  height: 50px;
+  background: #f3f3f3;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #242424;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
