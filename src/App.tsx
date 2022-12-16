@@ -1,20 +1,25 @@
 import React from "react";
 import "./App.css";
 import Button, { ButtonTypes } from "./Components/Button";
-import { GoogleIcon } from "./Assets/icons/GoogleIcon";
 import { LinkedinIcon } from "./Assets/icons/LinkedinIcon";
 import Role from "./Components/Role";
-import { ProjectsIcon } from "./Assets/icons/ProjectsIcon";
+import Header from "./Components/Header";
+import UserMenu from "./Components/Header/Menu";
+import { ProSidebarProvider } from 'react-pro-sidebar';
 
 function App() {
   return (
-    <div className="App">
+    <ProSidebarProvider>
+      <div className="App">
+      <Header />
+      <UserMenu />
       <Role name={"Test"} />
       <Button title={"Login"} type={ButtonTypes.TextButton}/>
       <Button title={<LinkedinIcon />} type={ButtonTypes.IconButton} />
       <Button title={"Login"} type={ButtonTypes.TextButton} disabled={true}/>
-      <ProjectsIcon />
+      
     </div>
+    </ProSidebarProvider>
   );
 }
 

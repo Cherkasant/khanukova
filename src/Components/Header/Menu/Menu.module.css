@@ -1,0 +1,37 @@
+.menuContainer {
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column;
+   height: 100vh;
+   padding: 46px 0 20px 0;
+   width: 244px;
+   background-color: white;
+}
+
+.menuIcons {
+   display: flex;
+   flex-direction: column;
+   gap: 45px;
+   align-items: flex-start;
+   padding-left: 25px;
+}
+
+.icons {
+   display: flex;
+   gap: 35px;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 20px;
+   line-height: 24px;
+   color: #343434;
+   cursor: pointer;
+}
+
+.icons:hover {
+   opacity: 0.5;
+}
+
+.button {
+   padding: 0;
+}
