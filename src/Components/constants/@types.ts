@@ -7,3 +7,5 @@ export type CardType = {
   budget: string;
   payment: string;
 };
+
+export type CardsListType = Array<CardType>;
