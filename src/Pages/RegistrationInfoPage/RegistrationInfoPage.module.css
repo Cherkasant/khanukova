@@ -1,0 +1,20 @@
+.formContainer {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 60px;
+    bottom: 30px;
+}
+
+.button {
+    width: 174px;
+    height: 69px;
+}
