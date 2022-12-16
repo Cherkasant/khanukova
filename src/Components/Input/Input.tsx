@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent } from "react";
+import React, { ChangeEvent, FC } from "react";
 import styles from "./Input.module.css";
 import classnames from "classnames";
 
@@ -9,6 +9,7 @@ type InputProps = {
   disabled?: boolean;
   error?: string;
   className?: string;
+  type?: string;
 };
 
 const Input: FC<InputProps> = ({
@@ -18,6 +19,7 @@ const Input: FC<InputProps> = ({
   disabled,
   error,
   className,
+  type,
 }) => {
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -25,6 +27,7 @@ const Input: FC<InputProps> = ({
   return (
     <div className={styles.container}>
       <input
+        type={type}
         value={value}
         onChange={onChangeInput}
         placeholder={placeholder}
