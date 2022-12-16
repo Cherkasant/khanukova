@@ -1,0 +1,26 @@
+.containerRow {
+    display: flex;
+    gap: 20px;
+}
+
+.formContainer {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    width: 50%;
+    row-gap: 46px;
+    column-gap: 20px;
+
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    right: 60px;
+    bottom: 30px;
+}
+
+.button {
+    width: 174px;
+    height: 69px;
+}

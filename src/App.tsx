@@ -1,11 +1,14 @@
 import React from "react";
 import "./App.css";
+
 import Button, { ButtonTypes } from "./Components/Button";
 import { LinkedinIcon } from "./Assets/icons/LinkedinIcon";
 import Role from "./Components/Role";
 import { ProjectsIcon } from "./Assets/icons/ProjectsIcon";
 import Card from "./Components/Card";
 import CardsList from "./Components/CardsList";
+import Router from "./Pages/Router";
+
 
 function App() {
   const MOCK_CARDS_LIST = [
@@ -77,7 +80,10 @@ function App() {
 
   return (
     <div className="App">
+
       <CardsList cardsList={MOCK_CARDS_LIST} />
+
+      <Router />
     </div>
   );
 }
