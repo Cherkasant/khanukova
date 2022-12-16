@@ -9,8 +9,14 @@
 }
 
 .container:hover {
-    font-weight: 600;
+    /*font-weight: 600;*/
     cursor: pointer;
     border: 1px solid #4270A7;
     background: #F6F8FC;
+
+}
+
+
+.clicked {
+    background-color: #F6F8FC;
 }
