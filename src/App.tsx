@@ -15,11 +15,12 @@ function App() {
       <div className="App">
       <Header />
       <UserMenu />
-      <Role name={"Test"} />
       <Button title={"Login"} type={ButtonTypes.TextButton}/>
       <Button title={<LinkedinIcon />} type={ButtonTypes.IconButton} />
       <Button title={"Login"} type={ButtonTypes.TextButton} disabled={true}/>
+      </div>
       </ProSidebarProvider>
+
   );
 }
 
