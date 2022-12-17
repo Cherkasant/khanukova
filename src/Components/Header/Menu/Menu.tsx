@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Menu.module.css";
 
-import { Sidebar, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
+import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu } from 'react-pro-sidebar';
 
 import { ProjectsIcon } from "../../../Assets/icons/ProjectsIcon";
 import { PaymentsIcon } from "../../../Assets/icons/PaymentsIcon";
@@ -15,18 +15,23 @@ const UserMenu = () => {
    const { collapseSidebar } = useProSidebar();
 
    return (
-      <div style={{ display: 'flex', height: '100vh'}}>
-         <Sidebar className={styles.menuContainer}>
-
-            <Menu>
-               <MenuItem> <div className={styles.icons}><ProjectsIcon /> <div>Projects</div></div></MenuItem>
-               <MenuItem> <div className={styles.icons}><PaymentsIcon /> <div>Payments</div></div></MenuItem>
-               <MenuItem> <div className={styles.icons}><ChatsIcon /> <div>Chats</div></div></MenuItem>
-               <MenuItem> <div className={styles.icons}><LibraryIcon /> <div>Library</div></div></MenuItem>
-               <MenuItem> <div className={styles.icons}><NotificationsIcon /> <div>Notifications</div></div></MenuItem>
+      <div style={{ display: 'flex', height: '100%', width:"244px"}}>
+         <Sidebar collapsedWidth="80px"  backgroundColor="white">
+         <div className={styles.menuContainer}>
+            <div>
+               <Menu>
+               <MenuItem icon={<ProjectsIcon />}><div className={styles.icons}> Projects</div></MenuItem>
+               <MenuItem icon={<PaymentsIcon />}><div className={styles.icons}>Payments</div></MenuItem>
+               <MenuItem icon={<ChatsIcon />}><div className={styles.icons}>Chats</div></MenuItem>
+               <MenuItem icon={<LibraryIcon />}><div className={styles.icons}>Library</div></MenuItem>
+               <MenuItem icon={<NotificationsIcon />}><div className={styles.icons}>Notifications</div></MenuItem>
             </Menu>
+            </div>
 
-            <Button onClick={() => collapseSidebar()} title={<OpenMenuIcon />} type={ButtonTypes.IconButton}/>
+            <div className={styles.containerButton}>
+            <Button onClick={() => collapseSidebar()} title={<OpenMenuIcon />} type={ButtonTypes.IconButton} className={styles.button}/>
+            </div>
+            </div>
 
          </Sidebar>
       </div>
