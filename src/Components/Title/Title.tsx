@@ -9,7 +9,7 @@ type TitleProps = {
 };
 
 const Title: FC<TitleProps> = ({ name, className }) => {
-  return <div className={classnames(styles.container, className)}>{name}</div>;
+  return <div className={classnames(className, styles.container)}>{name}</div>;
 };
 
 export default Title;
