@@ -1,8 +1,9 @@
 .container {
-    padding: 23px 30px;
+    box-sizing: border-box;
+    padding: 20px 40px;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
+    font-size: 24px;
+    line-height: 29px;
     color: #000000;
     background: #FFFFFF;
     border-radius: 5px;
@@ -23,9 +24,9 @@
     width: 50%;
     row-gap: 46px;
     column-gap: 20px;
-
 }
 
 .clicked {
-    background-color: #D5D5D5
+    background-color: #D5D5D5;
+    border: 1px solid #4270A7;
 }

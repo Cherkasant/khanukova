@@ -4,15 +4,17 @@ import SignIn from "../SignIn";
 import RegistrationRolePage from "../RegistrationRolePage";
 import RegistrationInfoPage from "../RegistrationInfoPage";
 import CardsList from "../../Components/CardsList";
+import PagesWrapper from "../../Components/PagesWrapper";
 
 export enum PathNames {
   Home = "/",
+  Main = "/main",
   SignIn = "/sign-in",
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
 }
 
-const MOCK_CARDS_LIST = [
+export const MOCK_CARDS_LIST = [
   {
     id: 1,
     title: "Яндекс",
@@ -83,10 +85,13 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path={PathNames.Home}
-          element={<CardsList cardsList={MOCK_CARDS_LIST} />}
-        />
+        <Route path={PathNames.Home} element={<PagesWrapper />}>
+          <Route
+            path={PathNames.Main}
+            element={<CardsList cardsList={MOCK_CARDS_LIST} />}
+          />
+        </Route>
+
         <Route path={PathNames.SignIn} element={<SignIn />} />
         <Route
           path={PathNames.SignUpPageRole}

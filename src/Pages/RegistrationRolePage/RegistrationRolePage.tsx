@@ -21,13 +21,15 @@ const RegistrationRolePage = () => {
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState(true);
   const [role, setRole] = useState(Roles.default);
-  const onClickRole = (role: Roles) => {
-    setRole(role);
+  const onClickRole = (newRole: Roles) => {
+    if (newRole !== role) {
+      setRole(newRole);
+    } else setRole(Roles.default);
     activeButton ? setActiveButton(false) : setActiveButton(true);
   };
 
   return (
-    <RegisterContainer title={"Выберете вашу роль в проекте"}>
+    <RegisterContainer title={"Choose your role in the project"}>
       <>
         <Role
           activeRole={role}
