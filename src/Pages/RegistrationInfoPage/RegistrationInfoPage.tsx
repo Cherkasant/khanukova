@@ -16,7 +16,7 @@ const RegistrationInfoPage = () => {
     } else setActiveButton(true);
   }, [name, email, phone, password]);
   return (
-    <RegisterContainer title={"Заполните информацию о себе"}>
+    <RegisterContainer title={"Choose your role in the project"}>
       <>
         <div className={styles.formContainer}>
           <Input

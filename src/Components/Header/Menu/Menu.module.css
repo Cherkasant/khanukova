@@ -1,36 +1,59 @@
 .menuContainer {
-   display: flex;
-   justify-content: space-between;
-   flex-direction: column;
-   padding: 46px 0 20px 0;
-   height: 530px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 46px 0 20px 0;
+    height: 530px;
 }
 
 .icons {
-   padding-left: 35px;
-   font-family: 'Inter';
-   font-style: normal;
-   font-weight: 500;
-   font-size: 20px;
-   line-height: 24px;
-   color: #343434;
-   cursor: pointer;
-   text-align: start;
+    padding-left: 45px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #343434;
+    cursor: pointer;
+    text-align: start;
 }
 
 .icons:hover {
-   opacity: 0.5;
+    opacity: 0.5;
 }
 
 .containerButton {
-padding-left: 20px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
 }
 
 .button {
-   width: 40px;
-   height: 40px;
-   padding: 10px 15px;
-   background: #ECF1F6;
-   border-radius: 5px;
-   border: none;
+    width: 40px;
+    height: 40px;
+    padding: 10px 15px;
+    background: #ECF1F6;
+    border-radius: 5px;
+    border: none;
+}
+
+.submenuIcons {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #7A7A7A;
+}
+
+.submenu {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #343434;
+    cursor: pointer;
+}
+
+.test {
+    color: red
 }

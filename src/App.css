@@ -2,9 +2,11 @@
     text-align: center;
     padding: 0;
     display: flex;
+    justify-content: center;
     height: 100%;
-    flex-direction: column;
+    /*flex-direction: column;*/
     background: #F6F8FC;
+    box-sizing: border-box;
 }
 
 

@@ -1,35 +1,35 @@
 .container {
-   margin: 0;
-   position: relative;
-   display: flex;
-   background: #E5E5E5;
-   padding: 0 35px 0 30px;
-   box-sizing: border-box;
+    margin: 0;
+    position: relative;
+    display: flex;
+    background: #E5E5E5;
+    padding: 0 35px 0 30px;
+    box-sizing: border-box;
 }
 
 .headerLine {
-   display: flex;
-   justify-content: space-between;
-   height: 99px;
-   align-items: center;
-   border-bottom: 1px solid #DBDBDB;
-   width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    height: 99px;
+    align-items: center;
+    border-bottom: 1px solid #DBDBDB;
+    width: 100%;
 }
 
 .title {
-   font-family: "Inter";
-   font-style: normal;
-   font-weight: 500;
-   font-size: 32px;
-   line-height: 39px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 39px;
 }
 
 .iconsContainer {
-   display: flex;
-   gap: 23px;
+    display: flex;
+    gap: 23px;
 }
 
 .icon {
-   border-radius: 5px;
-   border: none;
+    border-radius: 5px;
+    border: none;
 }
