@@ -7,28 +7,27 @@ type CardProps = {
 };
 
 const Card: FC<CardProps> = ({ card }) => {
-  const { title, tasksProgress, date, budget, payment } = card;
+  const { projectName, tasks, deadline, budget, paid } = card;
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{title}</div>
-      {/*<hr className={styles.hr} />*/}
+      <div className={styles.title}>{projectName}</div>
       <div className={styles.projectContainer}>
         <div className={styles.task}>
-          <div className={styles.taskName}>Задачи</div>
-          <div className={styles.taskProgress}>{tasksProgress}</div>
+          <div className={styles.taskName}>Tasks</div>
+          <div className={styles.taskProgress}>{tasks}</div>
         </div>
         <div className={styles.task}>
-          <div className={styles.taskName}>Дедлайн</div>
-          <div className={styles.taskProgress}>{date}</div>
+          <div className={styles.taskName}>Deadline</div>
+          <div className={styles.taskProgress}>{deadline}</div>
         </div>
         <div className={styles.task}>
-          <div className={styles.taskName}>Бюджет</div>
+          <div className={styles.taskName}>Budget</div>
           <div className={styles.taskProgress}>{budget}</div>
         </div>
         <div className={styles.task}>
-          <div className={styles.taskName}>Выплачено</div>
-          <div className={styles.taskProgress}>{payment}</div>
+          <div className={styles.taskName}>Paid</div>
+          <div className={styles.taskProgress}>{paid}</div>
         </div>
       </div>
     </div>

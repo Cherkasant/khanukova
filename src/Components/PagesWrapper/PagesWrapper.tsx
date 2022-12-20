@@ -3,9 +3,9 @@ import Header from "../Header";
 import UserMenu from "../Header/Menu";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Outlet, useLocation } from "react-router-dom";
-import CardsList from "../CardsList";
-import { MOCK_CARDS_LIST, PathNames } from "../../Pages/Router/Router";
+import { PathNames } from "../../Pages/Router/Router";
 import styles from "./PagesWrapper.module.css";
+import Home from "../../Pages/Home";
 
 const PagesWrapper = () => {
   const { pathname } = useLocation();
@@ -15,11 +15,7 @@ const PagesWrapper = () => {
         <UserMenu />
         <div className={styles.menuContainer}>
           <Header />
-          {pathname === PathNames.Home ? (
-            <CardsList cardsList={MOCK_CARDS_LIST} />
-          ) : (
-            <Outlet />
-          )}
+          {pathname === PathNames.Home ? <Home /> : <Outlet />}
         </div>
       </div>
     </ProSidebarProvider>

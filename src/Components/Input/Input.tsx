@@ -32,7 +32,7 @@ const Input: FC<InputProps> = ({
         onChange={onChangeInput}
         placeholder={placeholder}
         disabled={disabled}
-        className={classnames(styles.input, {
+        className={classnames(className, styles.input, {
           [styles.disabled]: !!disabled,
         })}
       />
