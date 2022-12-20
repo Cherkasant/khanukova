@@ -15,6 +15,7 @@ const Checkbox: FC<CheckboxProps> = ({ isChecked, handleChange, label }) => {
         id={label}
         checked={isChecked}
         onChange={handleChange}
+        className={styles.input}
       />
       <label htmlFor={label} className={styles.label}>
         {label}

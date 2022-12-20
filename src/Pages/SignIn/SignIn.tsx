@@ -23,7 +23,7 @@ const SignIn = () => {
           <div className={styles.titleBlock}>
             <Title name={"Login to account"} className={styles.title} />
             <div className={styles.subtitle}>
-              {"Please enter your login detalis to sign in"}
+              {"Please enter your login details to sign in"}
             </div>
           </div>
 
