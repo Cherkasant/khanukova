@@ -20,7 +20,7 @@
 }
 
 .text:hover {
-  opacity: 0.9;
+  background: #759AC8;
 }
 
 .icon {
@@ -35,8 +35,7 @@
 }
 
 .disabled {
-  background: #4270A7;
-  opacity: 0.5;
+  background: #ADB4BD;
   pointer-events: none;
 }
 
