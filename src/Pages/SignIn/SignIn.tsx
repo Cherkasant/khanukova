@@ -55,6 +55,7 @@ const SignIn = () => {
             title={"Login"}
             type={ButtonTypes.TextButton}
             className={styles.button}
+            disabled={true}
           />
           <div className={styles.lineBlock}>
             <div className={styles.straightLine}></div>
