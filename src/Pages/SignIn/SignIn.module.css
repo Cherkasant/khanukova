@@ -48,7 +48,6 @@
     justify-content: center;
     align-self: center;
     box-sizing: border-box;
-    background: #ADB4BD;
     margin-bottom: 82px;
 }
 
@@ -131,7 +130,7 @@
 
 .straightLine {
     width: 219px;
-    height: 0px;
+    height: 0;
     border: 1px solid #4270A7;
 }
 

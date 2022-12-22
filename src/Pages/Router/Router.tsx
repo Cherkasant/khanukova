@@ -5,6 +5,7 @@ import RegistrationRolePage from "../RegistrationRolePage";
 import RegistrationInfoPage from "../RegistrationInfoPage";
 import CardsList from "../../Components/CardsList";
 import PagesWrapper from "../../Components/PagesWrapper";
+import PasswordRequestPage from "../PasswordRequestPage";
 
 export enum PathNames {
   Home = "/",
@@ -12,6 +13,7 @@ export enum PathNames {
   SignIn = "/sign-in",
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
+  PasswordRequestPage = "/password",
 }
 
 export const MOCK_CARDS_LIST = [
@@ -100,6 +102,10 @@ const Router = () => {
         <Route
           path={PathNames.SignUpPageInfo}
           element={<RegistrationInfoPage />}
+        />
+        <Route
+          path={PathNames.PasswordRequestPage}
+          element={<PasswordRequestPage />}
         />
       </Routes>
     </BrowserRouter>
