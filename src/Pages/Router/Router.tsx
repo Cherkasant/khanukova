@@ -6,11 +6,13 @@ import RegistrationInfoPage from "../RegistrationInfoPage";
 import CardsList from "../../Components/CardsList";
 import PagesWrapper from "../../Components/PagesWrapper";
 import PasswordRequestPage from "../PasswordRequestPage";
+import SignUp from "../SignUp";
 
 export enum PathNames {
   Home = "/",
   Main = "/main",
   SignIn = "/sign-in",
+  SignUp = "/sign-up",
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
   PasswordRequestPage = "/password",
@@ -95,6 +97,7 @@ const Router = () => {
         </Route>
 
         <Route path={PathNames.SignIn} element={<SignIn />} />
+        <Route path={PathNames.SignUp} element={<SignUp />} />
         <Route
           path={PathNames.SignUpPageRole}
           element={<RegistrationRolePage />}

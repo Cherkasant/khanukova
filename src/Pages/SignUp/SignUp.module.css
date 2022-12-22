@@ -16,10 +16,10 @@
   justify-content: flex-start;
   font-family: "Inter";
   font-style: normal;
-  font-weight: 500 !important;
-  font-size: 32px !important;
-  line-height: 39px !important;
-  color: #212121 !important;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
+  color: #212121;
 }
 
 .inputs {
@@ -27,20 +27,6 @@
   flex-direction: column;
   gap: 20px;
   margin-bottom: 30px;
-}
-
-.line {
-  display: flex;
-  align-self: flex-end;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 18px;
-  text-align: right;
-  color: #9e9e9e;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 .button {
@@ -81,13 +67,6 @@
   line-height: 17px;
   text-align: right;
   color: #808080;
-}
-
-.checkboxContainer {
-  width: 100%;
-  display: flex;
-  margin-bottom: 30px;
-  justify-content: space-between;
 }
 
 .titleBlock {
