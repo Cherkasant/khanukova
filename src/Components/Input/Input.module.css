@@ -52,3 +52,8 @@
     line-height: 19px;
     color: #9E9E9E;
 }
+
+
+.input:focus:invalid {
+    border: 1px solid #BF3535;
+}
