@@ -1,53 +1,59 @@
 .input {
-  width: 500px;
-  height: 60px;
-  border: 1px solid #d0d0d0;
-  border-radius: 10px;
-  font-family: "Inter";
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  color: #0e0e0e;
-  padding-left: 19px;
-  outline: none;
+    width: 500px;
+    height: 60px;
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #0e0e0e;
+    padding-left: 19px;
+    outline: none
 }
 
 .input:hover {
-  border: 1px solid #4270a7;
+    border: 1px solid #4270A7;
 }
 
 .input:focus {
-  border: 1px solid #4270a7;
+    border: 1px solid #4270A7;
 }
 
 .input:active {
-  color: #313037;
+    color: #313037;
 }
 
+
 .disabled {
-  color: #cdcdcd;
+    color: #CDCDCD;
 }
 
 .error {
-  color: #fd3419;
+    color: #fd3419;
 }
 
 .input:focus::placeholder {
-  position: absolute;
-  top: 12px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 140%;
-  color: #898b9b;
+    position: absolute;
+    top: 8px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 140%;
+    color: #898B9B;
 }
 
 .input::placeholder {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  color: #9e9e9e;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #9E9E9E;
+}
+
+
+.input:focus:invalid {
+    border: 1px solid #BF3535;
 }
