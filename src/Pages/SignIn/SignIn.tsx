@@ -54,7 +54,11 @@ const SignIn = () => {
                 placeholder={"Password"}
               />
               <div className={styles.eyeicon} onClick={onEyeClick}>
-                {type !== "password" ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                {password && type !== "password" ? (
+                  <ClosedEyeIcon />
+                ) : (
+                  <OpenEyeIcon />
+                )}
               </div>
             </div>
           </div>
