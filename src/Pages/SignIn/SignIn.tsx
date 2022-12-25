@@ -2,8 +2,6 @@ import React, { ChangeEvent, useState } from "react";
 import Input from "../../Components/Input";
 import Button, { ButtonTypes } from "../../Components/Button";
 import styles from "./SignIn.module.css";
-import { LinkedinIcon } from "../../Assets/icons/LinkedinIcon";
-import { GoogleIcon } from "../../Assets/icons/GoogleIcon";
 import Title from "../../Components/Title";
 import { NavLink } from "react-router-dom";
 import { PathNames } from "../Router/Router";
@@ -83,16 +81,7 @@ const SignIn = () => {
             className={styles.button}
             disabled={!(login !== "" || password !== "")}
           />
-          <div className={styles.lineBlock}>
-            <div className={styles.straightLine}></div>
-            <div className={styles.or}>or</div>
-            <div className={styles.straightLine}></div>
-          </div>
 
-          <div className={styles.icons}>
-            <Button title={<LinkedinIcon />} type={ButtonTypes.IconButton} />
-            <Button title={<GoogleIcon />} type={ButtonTypes.IconButton} />
-          </div>
           <div className={styles.info}>
             {"Don`t have an account?"}
             <NavLink to={PathNames.SignUp} className={styles.link}>
