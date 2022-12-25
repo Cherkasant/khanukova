@@ -1,40 +1,46 @@
 .container {
 }
+
 .widgets {
-  padding: 20px 0 40px 0;
-  display: flex;
-  gap: 20px;
+    padding: 20px 0 40px 0;
+    display: flex;
+    gap: 20px;
 }
+
 .btnAdd,
 .searchContainer {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  color: #606060;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #606060;
 }
+
 .btnAdd {
-  cursor: pointer;
+    cursor: pointer;
 }
+
 .searchContainer {
-  display: flex;
-  gap: 5px;
+    display: flex;
+    gap: 5px;
 }
+
 .searchInput {
-  width: 120px;
-  height: 24px;
+    width: 120px;
+    height: 24px;
 }
+
 .searchInput::placeholder {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  color: #606060;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #606060;
 }
 
 .searchInput:focus::placeholder {
-  position: absolute;
-  top: 5px;
+    position: absolute;
+    top: 5px;
 }

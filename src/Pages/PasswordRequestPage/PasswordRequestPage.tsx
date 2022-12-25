@@ -19,6 +19,7 @@ const PasswordRequestPage = () => {
         </div>
         <div className={styles.inputContainer}>
           <Input
+            required={true}
             type={"email"}
             value={email}
             onChange={(value) => {
@@ -29,7 +30,7 @@ const PasswordRequestPage = () => {
           <Button
             title={"Continue"}
             type={ButtonTypes.TextButton}
-            disabled={true}
+            disabled={!email}
           />
         </div>
       </div>

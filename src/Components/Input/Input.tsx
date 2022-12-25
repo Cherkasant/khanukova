@@ -10,6 +10,7 @@ type InputProps = {
   error?: string;
   className?: string;
   type?: string;
+  required?: boolean;
 };
 
 const Input: FC<InputProps> = ({
@@ -20,6 +21,7 @@ const Input: FC<InputProps> = ({
   error,
   className,
   type,
+  required,
 }) => {
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -27,6 +29,7 @@ const Input: FC<InputProps> = ({
   return (
     <div className={styles.container}>
       <input
+        required={required}
         type={type}
         value={value}
         onChange={onChangeInput}
