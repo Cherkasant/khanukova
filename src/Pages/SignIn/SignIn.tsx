@@ -8,11 +8,23 @@ import Title from "../../Components/Title";
 import { NavLink } from "react-router-dom";
 import { PathNames } from "../Router/Router";
 import Checkbox from "../../Components/Checkbox";
+import { useNavigate } from "react-router";
+import { ClosedEyeIcon } from "../../Assets/icons/ClosedEyeIcon";
+import { OpenEyeIcon } from "../../Assets/icons/OpenEyeIcon";
+import { PasswordTypes } from "../../Components/constants/@types";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
+  const [type, setType] = useState(PasswordTypes.Password);
+  const onEyeClick = () => {
+    type === PasswordTypes.Password
+      ? setType(PasswordTypes.Text)
+      : setType(PasswordTypes.Password);
+  };
   const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
@@ -34,12 +46,21 @@ const SignIn = () => {
               onChange={(value: string) => setLogin(value)}
               placeholder={"Email"}
             />
-            <Input
-              type={"password"}
-              value={password}
-              onChange={(value: string) => setPassword(value)}
-              placeholder={"Password"}
-            />
+            <div className={styles.passwordContainer}>
+              <Input
+                type={type}
+                value={password}
+                onChange={(value: string) => setPassword(value)}
+                placeholder={"Password"}
+              />
+              <div className={styles.eyeicon} onClick={onEyeClick}>
+                {password && type !== "password" ? (
+                  <ClosedEyeIcon />
+                ) : (
+                  <OpenEyeIcon />
+                )}
+              </div>
+            </div>
           </div>
           <div className={styles.checkboxContainer}>
             <Checkbox
@@ -48,7 +69,12 @@ const SignIn = () => {
               label={"Remember me"}
             />
 
-            <div className={styles.line}>Forgot your password?</div>
+            <div
+              className={styles.line}
+              onClick={() => navigate(PathNames.PasswordRequestPage)}
+            >
+              Forgot your password?
+            </div>
           </div>
 
           <Button
