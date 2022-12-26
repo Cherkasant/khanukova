@@ -14,13 +14,13 @@
 }
 
 .text {
-    background: #4270A7;
+    background: #1258CA;
     border: 1px solid #D0D0D0;
     color: #FFFFFF;
 }
 
 .text:hover {
-    opacity: 0.9;
+    background: #0E4298;
 }
 
 .icon {
@@ -35,7 +35,7 @@
 }
 
 .disabled {
-    background: #ADB4BD;
+    background: #9BACC9;
     pointer-events: none;
 }
 
