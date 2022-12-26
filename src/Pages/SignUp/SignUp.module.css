@@ -1,3 +1,13 @@
+/*.iti__flag {*/
+/*  background-image: url("path/to/flags.png");*/
+/*}*/
+
+/*@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {*/
+/*  .iti__flag {*/
+/*    background-image: url("path/to/flags@2x.png");*/
+/*  }*/
+/*}*/
+
 .container {
   box-sizing: border-box;
   width: 660px;
@@ -116,4 +126,22 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+}
+.checkboxContainer {
+  width: 100%;
+  display: flex;
+  margin-bottom: 30px;
+  gap: 5px;
+}
+.line {
+  display: flex;
+  align-self: flex-end;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: right;
+  color: #4270a7;
+  text-decoration: underline;
+  cursor: pointer;
 }
