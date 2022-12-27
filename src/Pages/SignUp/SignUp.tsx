@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from "react";
-// import Select from "react-select";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import "react-phone-number-input/style.css";
@@ -70,6 +69,7 @@ const SignUp = () => {
               placeholder="Enter phone number"
               value={value}
               onChange={setValue}
+              className={styles.phoneInput}
             />
             <Dropdown
               options={options}
@@ -79,7 +79,9 @@ const SignUp = () => {
               className={styles.dropdownContainer}
               controlClassName={styles.dropdownControl}
               placeholderClassName={styles.dropdownPlaceholder}
-              arrowClassName={styles.dropdownArrow}
+              // arrowClassName={styles.dropdownArrow}
+              arrowClosed={<span className={styles.arrowClosed} />}
+              arrowOpen={<span className={styles.arrowOpen} />}
               menuClassName={styles.dropdownMenu}
             />
             <Input
