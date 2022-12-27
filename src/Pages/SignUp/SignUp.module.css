@@ -1,12 +1,3 @@
-/*.iti__flag {*/
-/*  background-image: url("path/to/flags.png");*/
-/*}*/
-
-/*@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {*/
-/*  .iti__flag {*/
-/*    background-image: url("path/to/flags@2x.png");*/
-/*  }*/
-/*}*/
 
 .container {
   box-sizing: border-box;
@@ -144,4 +135,17 @@
   color: #4270a7;
   text-decoration: underline;
   cursor: pointer;
+}
+.selectContainer{
+  text-align: start;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #9E9E9E;
+}
+.select-control-placeholder{
+  padding-left: 19px;
+  outline: none;
+  min-height: 60px;
 }

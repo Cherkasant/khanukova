@@ -69,6 +69,18 @@ const SignUp = () => {
               onChange={setSelectedOption}
               options={options}
               placeholder={"Role in the project"}
+              className={styles.selectContainer}
+              classNamePrefix={styles.select}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 10,
+                // boxShadow: none,
+                colors: {
+                  ...theme.colors,
+                  primary25: "#4270a7",
+                  primary: '#4270A7',
+                },
+              })}
             />
             <Input
               type={"password"}
