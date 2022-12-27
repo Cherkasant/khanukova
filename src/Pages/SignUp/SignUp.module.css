@@ -136,16 +136,30 @@
   text-decoration: underline;
   cursor: pointer;
 }
-.selectContainer{
+
+.dropdownControl{
+  height: 60px;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
   text-align: start;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
   color: #9E9E9E;
-}
-.select-control-placeholder{
-  padding-left: 19px;
+  cursor: pointer;
+  transition: all 200ms ease;
   outline: none;
-  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.dropdownControl:hover{
+  border: 1px solid #4270A7;
+}
+.dropdownMenu{
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
 }

@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-import Select from "react-select";
+// import Select from "react-select";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 
@@ -13,6 +15,9 @@ import { NavLink } from "react-router-dom";
 import { PathNames } from "../Router/Router";
 import Checkbox from "../../Components/Checkbox";
 
+// const options = [
+
+// ];
 const options = [
   { value: "productOwner", label: "Product Owner" },
   { value: "ceo", label: "CEO" },
@@ -22,6 +27,7 @@ const options = [
   { value: "qa", label: "QA" },
   { value: "programmer", label: "Programmer" },
 ];
+
 const SignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,6 +43,7 @@ const SignUp = () => {
     setChecked(event.target.checked);
   };
   const [value, setValue] = useState<any>();
+
   return (
     <>
       <div className={styles.container}>
@@ -64,23 +71,16 @@ const SignUp = () => {
               value={value}
               onChange={setValue}
             />
-            <Select
-              defaultValue={selectedOption}
-              onChange={setSelectedOption}
+            <Dropdown
               options={options}
-              placeholder={"Role in the project"}
-              className={styles.selectContainer}
-              classNamePrefix={styles.select}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 10,
-                // boxShadow: none,
-                colors: {
-                  ...theme.colors,
-                  primary25: "#4270a7",
-                  primary: '#4270A7',
-                },
-              })}
+              onChange={setSelectedOption}
+              value={selectedOption}
+              placeholder="Role in the project"
+              className={styles.dropdownContainer}
+              controlClassName={styles.dropdownControl}
+              placeholderClassName={styles.dropdownPlaceholder}
+              arrowClassName={styles.dropdownArrow}
+              menuClassName={styles.dropdownMenu}
             />
             <Input
               type={"password"}
