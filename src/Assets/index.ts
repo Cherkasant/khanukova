@@ -9,4 +9,5 @@ import { NotificationsIcon } from "./icons/NotificationsIcon"
 import { UserIcon } from "./icons/UserIcon";
 import { OpenMenuIcon } from "./icons/OpenMenuIcon";
 import { CloseMenuIcon } from "./icons/CloseMenuIcon";
+import { BellIcon } from "./icons/BellIcon";
 

@@ -1,0 +1,26 @@
+.container {
+    
+    font-weight: 400;
+font-size: 16px;
+    line-height: 54px;
+    color: #212121;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-right: 34px;
+    
+  }
+  
+  .letter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #4270A7;
+    font-weight: 400;
+font-size: 14px;
+  }
