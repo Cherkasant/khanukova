@@ -6,6 +6,7 @@ import RegistrationInfoPage from "../RegistrationInfoPage";
 import PagesWrapper from "../../Components/PagesWrapper";
 import PasswordRequestPage from "../PasswordRequestPage";
 import SignUp from "../SignUp";
+import Home from "../Home";
 
 export enum PathNames {
   Home = "/",
@@ -21,7 +22,9 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={PathNames.Home} element={<PagesWrapper />}></Route>
+        <Route path={PathNames.Home} element={<PagesWrapper />}>
+          <Route path={PathNames.Main} element={<Home />} />
+        </Route>
 
         <Route path={PathNames.SignIn} element={<SignIn />} />
         <Route path={PathNames.SignUp} element={<SignUp />} />

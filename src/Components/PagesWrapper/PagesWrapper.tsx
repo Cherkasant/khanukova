@@ -12,9 +12,9 @@ const PagesWrapper = () => {
   return (
     <ProSidebarProvider>
       <div className={styles.container}>
-        <UserMenu />
+        <Header />
         <div className={styles.menuContainer}>
-          <Header />
+          <UserMenu />
           {pathname === PathNames.Home ? <Home /> : <Outlet />}
         </div>
       </div>

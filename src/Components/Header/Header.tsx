@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { BellIcon } from "../../Assets/icons/BellIcon";
-import { NotificationsSmallIcon } from "../../Assets/icons/NotificationsSmallIcon";
 import { UserIcon } from "../../Assets/icons/UserIcon";
 import Button, { ButtonTypes } from "../Button";
 import Title from "../Title";

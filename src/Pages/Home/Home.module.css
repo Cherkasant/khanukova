@@ -2,9 +2,10 @@
 }
 
 .widgets {
-    padding: 20px 0 40px 0;
+    padding: 15px 34px 10px 53px;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .btnAdd,
@@ -18,29 +19,51 @@
 }
 
 .btnAdd {
+    display: flex;
+    justify-content: start;
     cursor: pointer;
+    margin-bottom: 25px;
+    padding-left: 53px;
 }
 
 .searchContainer {
     display: flex;
-    gap: 5px;
+    position: relative;
 }
 
 .searchInput {
-    width: 120px;
-    height: 24px;
+    width: 270px;
+    height: 40px;
+    border-color: #1258CA;
+    border-radius: 25px;
+
 }
 
 .searchInput::placeholder {
     font-family: "Inter";
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    color: #606060;
+    font-size: 16px;
+    line-height: 19px;
+    color: #A3A3A3;
 }
 
 .searchInput:focus::placeholder {
     position: absolute;
     top: 5px;
+}
+
+.title {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 46px;
+    color: #343434;
+}
+
+.icon {
+    position: absolute;
+    top: 13px;
+    right: 22px;
+    cursor: pointer;
 }

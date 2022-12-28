@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./Home.module.css";
 import CardsList from "../../Components/CardsList";
 import Input from "../../Components/Input";
+import Title from "../../Components/Title";
+import { SearchIcon } from "../../Assets/icons/SearchIcon";
 
 const MOCK_CARDS_LIST = [
   {
@@ -62,17 +64,20 @@ const Home = () => {
   return (
     <div className={styles.container}>
       <div className={styles.widgets}>
-        <div className={styles.btnAdd}>{"+Add new"}</div>
+        <Title name={"Projects"} className={styles.title} />
         <div className={styles.searchContainer}>
-          {"Search: "}
           <Input
             value={inputSearch}
             onChange={onChange}
             placeholder={"Project name"}
             className={styles.searchInput}
           />
+          <div className={styles.icon}>
+            <SearchIcon />
+          </div>
         </div>
       </div>
+      <div className={styles.btnAdd}>{"+Add new"}</div>
       <CardsList cardsList={MOCK_CARDS_LIST} />
     </div>
   );
