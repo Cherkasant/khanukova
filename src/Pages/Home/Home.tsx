@@ -52,22 +52,6 @@ const MOCK_CARDS_LIST = [
     budget: "1000000$",
     paid: "12500$",
   },
-  {
-    id: 7,
-    projectName: "Google",
-    tasks: "20%",
-    deadline: "16.02.2222",
-    budget: "1000000$",
-    paid: "12500$",
-  },
-  {
-    id: 8,
-    projectName: "Apple",
-    tasks: "20%",
-    deadline: "16.02.2222",
-    budget: "1000000$",
-    paid: "12500$",
-  },
 ];
 const Home = () => {
   const [inputSearch, setInputSearch] = useState("");
