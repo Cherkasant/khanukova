@@ -51,7 +51,7 @@ const SignIn = () => {
                 onChange={(value: string) => setPassword(value)}
                 placeholder={"Password"}
               />
-              <div className={styles.eyeicon} onClick={onEyeClick}>
+              <div className={styles.eyeIcon} onClick={onEyeClick}>
                 {password && type !== "password" ? (
                   <ClosedEyeIcon />
                 ) : (
