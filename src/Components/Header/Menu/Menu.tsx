@@ -1,87 +1,45 @@
 import React from "react";
-import styles from "./Menu.module.css";
-
-import {
-  Menu,
-  MenuItem,
-  Sidebar,
-  SubMenu,
-  useProSidebar,
-} from "react-pro-sidebar";
-import { PaymentsIcon } from "../../../Assets/icons/PaymentsIcon";
+import { NavLink, useLocation } from "react-router-dom";
 import { ChatsIcon } from "../../../Assets/icons/ChatsIcon";
-import { LibraryIcon } from "../../../Assets/icons/LibraryIcon";
-import { NotificationsIcon } from "../../../Assets/icons/NotificationsIcon";
-import { OpenMenuIcon } from "../../../Assets/icons/OpenMenuIcon";
-import Button, { ButtonTypes } from "../../Button";
-import { AddNewProjectIcon } from "../../../Assets/icons/AddNewProjectIcon";
-import { FileCreateIcon } from "../../../Assets/icons/FileCreateIcon";
-import { TransformIcon } from "../../../Assets/icons/TransformIcon";
+
+import styles from "./Menu.module.css";
+import classNames from "classnames";
 import { ProjectsIcon } from "../../../Assets/icons/ProjectsIcon";
+import { LibraryIcon } from "../../../Assets/icons/LibraryIcon";
+import { PaymentsIcon } from "../../../Assets/icons/PaymentsIcon";
+import { NotificationsIcon } from "../../../Assets/icons/NotificationsIcon";
 
 const UserMenu = () => {
-  const { collapseSidebar, collapsed } = useProSidebar();
+
+  const { pathname } = useLocation();
+  const navButtons = [
+    { name: "Chats", icon: <ChatsIcon />, link: "/" },
+    { name: "Projects", icon: <ProjectsIcon />, link: "" },
+    { name: "Library", icon: <LibraryIcon />, link: "" },
+    { name: "Payments", icon: <PaymentsIcon />, link: "" },
+    { name: "Notifications", icon: <NotificationsIcon />, link: "" },
+  ];
 
   return (
-    <div style={{ display: "flex", height: "100%", width: "244px" }}>
-      <Sidebar
-        collapsedWidth="80px"
-        backgroundColor="white"
-        defaultCollapsed={true}
-      >
-        <div className={styles.menuContainer}>
-          <div>
-            <Menu
-              menuItemStyles={{
-                SubMenuExpandIcon: { color: "#4270A7" },
-              }}
-            >
-              <SubMenu
-                icon={<ProjectsIcon />}
-                label={"Projects"}
-                className={styles.submenu}
-              >
-                <MenuItem icon={<AddNewProjectIcon />}>
-                  <div className={styles.submenuIcons}>New project</div>
-                </MenuItem>
-                <MenuItem icon={<FileCreateIcon />}>
-                  <div className={styles.submenuIcons}>New project</div>
-                </MenuItem>
-                <MenuItem icon={<FileCreateIcon />}>
-                  <div className={styles.submenuIcons}>New project</div>
-                </MenuItem>
-                <MenuItem icon={<FileCreateIcon />}>
-                  <div className={styles.submenuIcons}>New project</div>
-                </MenuItem>
-              </SubMenu>
-
-              <MenuItem icon={<PaymentsIcon />}>
-                <div className={styles.icons}>Payments</div>
-              </MenuItem>
-              <MenuItem icon={<ChatsIcon />}>
-                <div className={styles.icons}>Chats</div>
-              </MenuItem>
-              <MenuItem icon={<LibraryIcon />}>
-                <div className={styles.icons}>Library</div>
-              </MenuItem>
-              <MenuItem icon={<NotificationsIcon />}>
-                <div className={styles.icons}>Notifications</div>
-              </MenuItem>
-            </Menu>
-          </div>
-          <div className={styles.containerButton}>
-            <Button
-              onClick={() => collapseSidebar()}
-              title={collapsed ? <OpenMenuIcon /> : <TransformIcon />}
-              type={ButtonTypes.IconButton}
-              className={styles.button}
-            />
-            <div className={styles.icons}>Close</div>
-          </div>
-        </div>
-      </Sidebar>
+    <>
+    <div className={styles.container}>
+      {navButtons.map(({ link, name, icon }) => {
+        return (
+          <NavLink
+            key={link}
+            to={link}
+            className={classNames(styles.navButton, {
+              [styles.activeNavButton]: pathname === link,
+            })}
+          >
+            {icon}
+            {name}
+          </NavLink>
+        );
+      })}
     </div>
-  );
+  </>
+);
 };
 
 export default UserMenu;

@@ -1,12 +1,28 @@
-.menuContainer {
+.container {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
     padding: 46px 0 20px 0;
-    height: 530px;
+    width: 222px;
+    background-color: white;
+    height: 100%;
+    padding: 25px 20px 0 38px;
 }
 
-.icons {
+.navButton {
+    display: flex;
+    margin-bottom: 41px;
+    text-decoration: none;
+    align-items: center;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #212121;
+    gap: 25px;
+}
+
+/*.icons {
     padding-left: 45px;
     font-family: 'Inter';
     font-style: normal;
@@ -20,12 +36,6 @@
 
 .icons:hover {
     opacity: 0.5;
-}
-
-.containerButton {
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
 }
 
 .button {
@@ -57,3 +67,4 @@
 .test {
     color: red
 }
+*/
