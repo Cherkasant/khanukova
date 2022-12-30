@@ -13,10 +13,10 @@ import Title from "../../Components/Title";
 import { NavLink } from "react-router-dom";
 import { PathNames } from "../Router/Router";
 import Checkbox from "../../Components/Checkbox";
+import {PasswordTypes} from "../../Components/constants/@types";
+import {ClosedEyeIcon} from "../../Assets/icons/ClosedEyeIcon";
+import {OpenEyeIcon} from "../../Assets/icons/OpenEyeIcon";
 
-// const options = [
-
-// ];
 const options = [
   { value: "productOwner", label: "Product Owner" },
   { value: "ceo", label: "CEO" },
@@ -34,6 +34,19 @@ const SignUp = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   const onSignUp = () => {};
+
+    const [type, setType] = useState(PasswordTypes.Password);
+    const onEyeClick = () => {
+        type === PasswordTypes.Password
+            ? setType(PasswordTypes.Text)
+            : setType(PasswordTypes.Password);
+    };
+  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
+  const onEyeClickConfirm = () => {
+    typeConfirm === PasswordTypes.Password
+        ? setTypeConfirm(PasswordTypes.Text)
+        : setTypeConfirm(PasswordTypes.Password);
+  };
 
   const [selectedOption, setSelectedOption] = useState<any>(null);
 
@@ -79,23 +92,41 @@ const SignUp = () => {
               className={styles.dropdownContainer}
               controlClassName={styles.dropdownControl}
               placeholderClassName={styles.dropdownPlaceholder}
-              // arrowClassName={styles.dropdownArrow}
+              arrowClassName={styles.dropdownArrow}
               arrowClosed={<span className={styles.arrowClosed} />}
               arrowOpen={<span className={styles.arrowOpen} />}
               menuClassName={styles.dropdownMenu}
             />
+            <div className={styles.passwordContainer}>
             <Input
-              type={"password"}
+              type={type}
               value={password}
               onChange={(value: string) => setPassword(value)}
               placeholder={"Password"}
             />
+              <div className={styles.eyeIcon} onClick={onEyeClick}>
+                {password && type !== "password" ? (
+                    <ClosedEyeIcon />
+                ) : (
+                    <OpenEyeIcon />
+                )}
+              </div>
+            </div>
+            <div className={styles.passwordContainer}>
             <Input
-              type={"password"}
+              type={typeConfirm}
               value={passwordConfirmation}
               onChange={(value: string) => setPasswordConfirmation(value)}
               placeholder={"Confirm password"}
             />
+              <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
+                {passwordConfirmation && typeConfirm !== "password" ? (
+                    <ClosedEyeIcon />
+                ) : (
+                    <OpenEyeIcon />
+                )}
+              </div>
+          </div>
           </div>
           <div className={styles.checkboxContainer}>
             <Checkbox
