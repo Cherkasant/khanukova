@@ -10,7 +10,6 @@ import { PaymentsIcon } from "../../../Assets/icons/PaymentsIcon";
 import { NotificationsIcon } from "../../../Assets/icons/NotificationsIcon";
 
 const UserMenu = () => {
-
   const { pathname } = useLocation();
   const navButtons = [
     { name: "Chats", icon: <ChatsIcon />, link: "/" },
@@ -22,24 +21,24 @@ const UserMenu = () => {
 
   return (
     <>
-    <div className={styles.container}>
-      {navButtons.map(({ link, name, icon }) => {
-        return (
-          <NavLink
-            key={link}
-            to={link}
-            className={classNames(styles.navButton, {
-              [styles.activeNavButton]: pathname === link,
-            })}
-          >
-            {icon}
-            {name}
-          </NavLink>
-        );
-      })}
-    </div>
-  </>
-);
+      <div className={styles.container}>
+        {navButtons.map(({ link, name, icon }) => {
+          return (
+            <NavLink
+              key={link}
+              to={link}
+              className={classNames(styles.navButton, {
+                [styles.activeNavButton]: pathname === link,
+              })}
+            >
+              {icon}
+              {name}
+            </NavLink>
+          );
+        })}
+      </div>
+    </>
+  );
 };
 
 export default UserMenu;
