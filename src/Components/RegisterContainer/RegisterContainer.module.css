@@ -1,5 +1,4 @@
 .container {
-    /*height: 100%;*/
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -20,7 +19,6 @@
     justify-content: start;
     margin-bottom: 60px;
 }
-
 
 .title {
     display: flex;
