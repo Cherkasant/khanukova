@@ -13,10 +13,13 @@ import Title from "../../Components/Title";
 import { NavLink } from "react-router-dom";
 import { PathNames } from "../Router/Router";
 import Checkbox from "../../Components/Checkbox";
+import { PasswordTypes } from "../../Components/constants/@types";
+import { ClosedEyeIcon } from "../../Assets/icons/ClosedEyeIcon";
+import { OpenEyeIcon } from "../../Assets/icons/OpenEyeIcon";
+import { registerUser } from "../../Redux/Reducers/authReducer";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
-// const options = [
-
-// ];
 const options = [
   { value: "productOwner", label: "Product Owner" },
   { value: "ceo", label: "CEO" },
@@ -28,12 +31,26 @@ const options = [
 ];
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const onSignUp = () => {};
+  const [type, setType] = useState(PasswordTypes.Password);
+  const onEyeClick = () => {
+    type === PasswordTypes.Password
+      ? setType(PasswordTypes.Text)
+      : setType(PasswordTypes.Password);
+  };
+  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
+  const onEyeClickConfirm = () => {
+    typeConfirm === PasswordTypes.Password
+      ? setTypeConfirm(PasswordTypes.Text)
+      : setTypeConfirm(PasswordTypes.Password);
+  };
 
   const [selectedOption, setSelectedOption] = useState<any>(null);
 
@@ -42,6 +59,25 @@ const SignUp = () => {
     setChecked(event.target.checked);
   };
   const [value, setValue] = useState<any>();
+
+  const onSignUp = () => {
+    dispatch(
+      registerUser({
+        data: {
+          full_name: fullName,
+          nickname: "Test",
+          email: email,
+          phone: value,
+          user_status: selectedOption.label,
+          password: password,
+          password_rep: passwordConfirmation,
+        },
+        callback: () => {
+          navigate(PathNames.SignUpPageRole);
+        },
+      })
+    );
+  };
 
   return (
     <>
@@ -79,23 +115,41 @@ const SignUp = () => {
               className={styles.dropdownContainer}
               controlClassName={styles.dropdownControl}
               placeholderClassName={styles.dropdownPlaceholder}
-              // arrowClassName={styles.dropdownArrow}
+              arrowClassName={styles.dropdownArrow}
               arrowClosed={<span className={styles.arrowClosed} />}
               arrowOpen={<span className={styles.arrowOpen} />}
               menuClassName={styles.dropdownMenu}
             />
-            <Input
-              type={"password"}
-              value={password}
-              onChange={(value: string) => setPassword(value)}
-              placeholder={"Password"}
-            />
-            <Input
-              type={"password"}
-              value={passwordConfirmation}
-              onChange={(value: string) => setPasswordConfirmation(value)}
-              placeholder={"Confirm password"}
-            />
+            <div className={styles.passwordContainer}>
+              <Input
+                type={type}
+                value={password}
+                onChange={(value: string) => setPassword(value)}
+                placeholder={"Password"}
+              />
+              <div className={styles.eyeIcon} onClick={onEyeClick}>
+                {password && type !== "password" ? (
+                  <ClosedEyeIcon />
+                ) : (
+                  <OpenEyeIcon />
+                )}
+              </div>
+            </div>
+            <div className={styles.passwordContainer}>
+              <Input
+                type={typeConfirm}
+                value={passwordConfirmation}
+                onChange={(value: string) => setPasswordConfirmation(value)}
+                placeholder={"Confirm password"}
+              />
+              <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
+                {passwordConfirmation && typeConfirm !== "password" ? (
+                  <ClosedEyeIcon />
+                ) : (
+                  <OpenEyeIcon />
+                )}
+              </div>
+            </div>
           </div>
           <div className={styles.checkboxContainer}>
             <Checkbox

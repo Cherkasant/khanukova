@@ -1,0 +1,32 @@
+.container {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 12px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #212121;
+    border: none;
+}
+
+.container:hover {
+    cursor: pointer;
+    background: #1258CA;
+    color: #FFFFFF;
+
+
+}
+
+.formContainer {
+    box-sizing: border-box;
+    padding: 0;
+    width: 940px;
+    height: 42px;
+    display: flex;
+    gap: 20px;
+}
+
+.clicked {
+    background: #1258CA;
+    color: #FFFFFF;
+}

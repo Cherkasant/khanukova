@@ -12,7 +12,6 @@ import { ArrayDownIcon } from "../../../Assets/icons/ArrayDownIcon";
 import { AddNewProjectIcon } from "../../../Assets/icons/AddNewProjectIcon";
 
 const UserMenu = () => {
-
   const { pathname } = useLocation();
 
   const navButtons = [
@@ -29,6 +28,7 @@ const UserMenu = () => {
 
   return (
     <>
+
     <div className={styles.container}>
 
       {navButtons.map(({ link, name, icon, button, active }) =>
@@ -70,6 +70,7 @@ const UserMenu = () => {
     </div>
   </>
 );
+
 };
 
 export default UserMenu;
