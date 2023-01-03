@@ -6,6 +6,7 @@
     background-color: white;
     height: 100%;
     padding: 25px 20px 0 38px;
+    
 }
 
 .navButton {
@@ -20,51 +21,39 @@
     line-height: 24px;
     color: #212121;
     gap: 25px;
+    
 }
 
-/*.icons {
-    padding-left: 45px;
+.navButton:hover {
+    color: #0E4298;
+}
+
+.navButton:active {
+    color: #727171;
+}
+
+.div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.list {
+    display: none;
+}
+
+.listActive {
+    display: block;
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    color: #343434;
-    cursor: pointer;
-    text-align: start;
-}
-
-.icons:hover {
-    opacity: 0.5;
-}
-
-.button {
-    width: 40px;
-    height: 40px;
-    padding: 10px 15px;
-    background: #ECF1F6;
-    border-radius: 5px;
-    border: none;
-}
-
-.submenuIcons {
     font-weight: 400;
     font-size: 18px;
-    line-height: 22px;
-    color: #7A7A7A;
+    line-height: 22px;    
+    color: #212121;
 }
 
-.submenu {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    color: #343434;
-    cursor: pointer;
+.el {
+    display: flex;
+    gap: 10px;
 }
-
-.test {
-    color: red
-}
-*/
