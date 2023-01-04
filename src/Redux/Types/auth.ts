@@ -1,6 +1,5 @@
 export type RegisterUserData = {
   full_name: string;
-  nickname: string;
   email: string;
   phone: string;
   user_status: string;
