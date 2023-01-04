@@ -65,7 +65,6 @@ const SignUp = () => {
       registerUser({
         data: {
           full_name: fullName,
-          nickname: "Test",
           email: email,
           phone: value,
           user_status: selectedOption.label,
