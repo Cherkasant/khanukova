@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { ACCESS_TOKEN_KEY } from "../../Components/constants/consts";
-import { RegisterUserPayload } from "../Types/auth";
+import { RegisterUserPayload, SendResetEmailPayload } from "../Types/auth";
 
 const initialState = {
   isLoggedIn: !!localStorage.getItem(ACCESS_TOKEN_KEY),
@@ -22,10 +22,12 @@ const authSlice = createSlice({
       state.userName = action.payload;
     },
     logoutUser: (state, action: PayloadAction<undefined>) => {},
+    sendResetEmail: (state, action: PayloadAction<SendResetEmailPayload>) => {},
   },
 });
 export const {
   registerUser,
+  sendResetEmail,
 
   setLoggedIn,
 } = authSlice.actions;

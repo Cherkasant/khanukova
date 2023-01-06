@@ -11,3 +11,8 @@ export type RegisterUserPayload = {
   data: RegisterUserData;
   callback: () => void;
 };
+
+export type SendResetEmailPayload = {
+  email: string;
+  callback: () => void;
+};
