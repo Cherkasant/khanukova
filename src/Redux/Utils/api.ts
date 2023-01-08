@@ -1,8 +1,12 @@
 import { create } from "apisauce";
-import { RegisterUserData } from "../Types/auth";
+import {
+  ActivateUserData,
+  RegisterUserData,
+  SignInUserData,
+} from "../Types/auth";
 
 const JWT_TOKEN =
-  "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMDExMTM0LCJqdGkiOiIzNWNkMDU2NzczZWI0YzBhODEwZjg5OTQ4YjZiOTgyMiIsInVzZXJfaWQiOjV9.lulJFS-lh4dqEkA8LRqytPOy48zG-IYDo_KrXZAMup4";
+  "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMjA0OTE4LCJqdGkiOiJhNGUyYmY0NjUzMjA0NGRmYWUzZGRkODhlMDAzNTRkZiIsInVzZXJfaWQiOjV9.3ji5KMeItdUtnjzEFG_HaORO43HVySmo0UyNZ53XDi0";
 
 const API = create({ baseURL: "https://apipuzzle.herokuapp.com/" });
 
@@ -26,7 +30,21 @@ const sendResetEmail = (email: string) => {
   );
 };
 
+const activateUser = (data: ActivateUserData) => {
+  return API.post("/auth/users/activation/", data);
+};
+
+const signInUser = (data: SignInUserData) => {
+  return API.post("/auth/token/login/", data, {
+    headers: {
+      Authorization: JWT_TOKEN,
+    },
+  });
+};
+
 export default {
   registerUser,
   sendResetEmail,
+  activateUser,
+  signInUser,
 };

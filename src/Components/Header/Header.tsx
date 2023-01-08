@@ -5,10 +5,12 @@ import Button, { ButtonTypes } from "../Button";
 import Title from "../Title";
 import styles from "./Header.module.css";
 import UserName from "../UserName";
+import { useSelector } from "react-redux";
+import authSelectors from "../../Redux/Selectors/authSelectors";
 
 const Header = () => {
   const hasMessage = true;
-  const isLoggedIn = true;
+  const isLoggedIn = useSelector(authSelectors.getLoggedIn);
 
   return (
     <div className={styles.container}>

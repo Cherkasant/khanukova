@@ -16,3 +16,22 @@ export type SendResetEmailPayload = {
   email: string;
   callback: () => void;
 };
+
+export type SignInUserData = {
+  email: string;
+  password: string;
+};
+
+export type SignInUserPayload = {
+  data: SignInUserData;
+  callback: () => void;
+};
+
+export type ActivateUserData = {
+  uid: string;
+  token: string;
+};
+export type ActivateUserPayload = {
+  data: ActivateUserData;
+  callback: () => void;
+};
