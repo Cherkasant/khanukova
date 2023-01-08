@@ -10,9 +10,22 @@ import { useNavigate } from "react-router";
 import { ClosedEyeIcon } from "../../Assets/icons/ClosedEyeIcon";
 import { OpenEyeIcon } from "../../Assets/icons/OpenEyeIcon";
 import { PasswordTypes } from "../../Components/constants/@types";
+import { useDispatch } from "react-redux";
+import { signInUser } from "../../Redux/Reducers/authReducer";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onSignIn = () => {
+    dispatch(
+      signInUser({
+        data: { email: login, password },
+        callback: () => {
+          navigate(PathNames.Home);
+        },
+      })
+    );
+  };
 
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -79,6 +92,7 @@ const SignIn = () => {
             title={"Login"}
             type={ButtonTypes.TextButton}
             className={styles.button}
+            onClick={onSignIn}
             disabled={!(login !== "" || password !== "")}
           />
 

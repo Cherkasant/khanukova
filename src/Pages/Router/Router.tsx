@@ -8,6 +8,8 @@ import PasswordRequestPage from "../PasswordRequestPage";
 import SignUp from "../SignUp";
 import Home from "../Home";
 import ProjectScreen from "../ProjectScreen";
+import PasswordReset from "../PasswordResetPage";
+import ActivationPage from "../ActivationPage";
 
 export enum PathNames {
   Home = "/",
@@ -18,6 +20,8 @@ export enum PathNames {
   SignUpPageInfo = "/sign-up/2",
   PasswordRequestPage = "/password/reset",
   ProjectScreen = "/project",
+  ActivateUser = "/activate/:uid/:token",
+  PasswordReset = "/request",
 }
 
 const Router = () => {
@@ -35,6 +39,9 @@ const Router = () => {
           path={PathNames.SignUpPageRole}
           element={<RegistrationRolePage />}
         />
+
+        <Route path={PathNames.PasswordReset} element={<PasswordReset />} />
+        <Route path={PathNames.ActivateUser} element={<ActivationPage />} />
         <Route
           path={PathNames.SignUpPageInfo}
           element={<RegistrationInfoPage />}

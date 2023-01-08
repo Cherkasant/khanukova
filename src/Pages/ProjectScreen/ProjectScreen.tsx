@@ -56,7 +56,7 @@ const ProjectScreen = () => {
         </div>
         <div className={styles.milestoneButton}>
           <AddRoundIcon />
-          {"Add new milestone"}
+          {"Add item"}
         </div>
       </div>
     </div>

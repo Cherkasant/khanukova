@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import styles from "./PasswordReset.module.css";
-import classNames from "classnames";
 import Title from "../../Components/Title";
 import Input from "../../Components/Input";
+
+import Button, { ButtonTypes } from "../../Components/Button";
+
 import Button from "../../Components/Button";
 import { ButtonTypes } from "../../Components/Button";
 import { PasswordTypes } from "../../Components/constants/@types";
 import { ClosedEyeIcon } from "../../Assets/icons/ClosedEyeIcon";
 import { OpenEyeIcon } from "../../Assets/icons/OpenEyeIcon";
+
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
