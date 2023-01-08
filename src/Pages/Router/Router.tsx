@@ -16,7 +16,7 @@ export enum PathNames {
   SignUp = "/sign-up",
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
-  PasswordRequestPage = "/password",
+  PasswordRequestPage = "/password/reset",
   ProjectScreen = "/project",
 }
 
