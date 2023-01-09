@@ -18,10 +18,10 @@ export enum PathNames {
   SignUp = "/sign-up",
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
-  PasswordRequestPage = "/password/reset",
+  PasswordRequestPage = "/password/request",
+  PasswordReset = "/password/reset",
   ProjectScreen = "/project",
   ActivateUser = "/activate/:uid/:token",
-  PasswordReset = "/request",
 }
 
 const Router = () => {

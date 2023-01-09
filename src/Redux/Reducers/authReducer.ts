@@ -6,6 +6,7 @@ import {
   RegisterUserPayload,
   SendResetEmailPayload,
   SignInUserPayload,
+  ResetPasswordConfirmPayload,
 } from "../Types/auth";
 
 const initialState = {
@@ -29,11 +30,16 @@ const authSlice = createSlice({
     },
     logoutUser: (state, action: PayloadAction<undefined>) => {},
     sendResetEmail: (state, action: PayloadAction<SendResetEmailPayload>) => {},
+    resetPasswordConfirm: (
+      state,
+      action: PayloadAction<ResetPasswordConfirmPayload>
+    ) => {},
   },
 });
 export const {
   registerUser,
   sendResetEmail,
+  resetPasswordConfirm,
   signInUser,
   setLoggedIn,
   activateUser,
