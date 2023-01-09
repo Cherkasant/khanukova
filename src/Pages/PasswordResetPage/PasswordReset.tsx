@@ -8,8 +8,16 @@ import Button, { ButtonTypes } from "../../Components/Button";
 import { PasswordTypes } from "../../Components/constants/@types";
 import { ClosedEyeIcon } from "../../Assets/icons/ClosedEyeIcon";
 import { OpenEyeIcon } from "../../Assets/icons/OpenEyeIcon";
+import { useDispatch } from "react-redux";
+import { resetPasswordConfirm } from "../../Redux/Reducers/authReducer";
+import { useNavigate, useParams } from "react-router";
+import { PathNames } from "../Router/Router";
 
 const ResetPassword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { uid, token } = useParams();
+
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
@@ -24,6 +32,22 @@ const ResetPassword = () => {
     typeConfirm === PasswordTypes.Password
       ? setTypeConfirm(PasswordTypes.Text)
       : setTypeConfirm(PasswordTypes.Password);
+  };
+
+  const onSetPassword = () => {
+    if (uid && token) {
+      dispatch(
+        resetPasswordConfirm({
+          data: {
+            uid,
+            token,
+            new_password: password,
+            re_new_password: passwordConfirm,
+          },
+          callback: () => navigate(PathNames.SignIn),
+        })
+      );
+    }
   };
 
   return (
@@ -73,7 +97,7 @@ const ResetPassword = () => {
           <Button
             title={"Save new password"}
             type={ButtonTypes.TextButton}
-            onClick={() => {}}
+            onClick={onSetPassword}
             className={styles.button}
             disabled={!(password !== "" && password === passwordConfirm)}
           />

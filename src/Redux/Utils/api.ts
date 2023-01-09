@@ -6,8 +6,7 @@ import {
   SignInUserData,
 } from "../Types/auth";
 
-const JWT_TOKEN =
-  "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMjA0OTE4LCJqdGkiOiJhNGUyYmY0NjUzMjA0NGRmYWUzZGRkODhlMDAzNTRkZiIsInVzZXJfaWQiOjV9.3ji5KMeItdUtnjzEFG_HaORO43HVySmo0UyNZ53XDi0";
+const JWT_TOKEN = "Token cd92edeb6259b11047117e0920cda3da66215a4e";
 
 const API = create({ baseURL: "https://apipuzzle.herokuapp.com/" });
 
