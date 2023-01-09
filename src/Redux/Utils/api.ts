@@ -6,7 +6,7 @@ import {
 } from "../Types/auth";
 
 const JWT_TOKEN =
-  "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMjA0OTE4LCJqdGkiOiJhNGUyYmY0NjUzMjA0NGRmYWUzZGRkODhlMDAzNTRkZiIsInVzZXJfaWQiOjV9.3ji5KMeItdUtnjzEFG_HaORO43HVySmo0UyNZ53XDi0";
+  "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMjk5OTU3LCJqdGkiOiIyM2Y0NzIyZWUyNGI0NGE1OWQzZDYzNmRjN2RlZDY2ZiIsInVzZXJfaWQiOjN9.mtNrK79FgIHlH1UT5hP3utFfvKDlJXf7R1HQeFV3e1w";
 
 const API = create({ baseURL: "https://apipuzzle.herokuapp.com/" });
 
