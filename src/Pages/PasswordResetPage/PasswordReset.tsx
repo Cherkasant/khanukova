@@ -5,12 +5,9 @@ import Input from "../../Components/Input";
 
 import Button, { ButtonTypes } from "../../Components/Button";
 
-import Button from "../../Components/Button";
-import { ButtonTypes } from "../../Components/Button";
 import { PasswordTypes } from "../../Components/constants/@types";
 import { ClosedEyeIcon } from "../../Assets/icons/ClosedEyeIcon";
 import { OpenEyeIcon } from "../../Assets/icons/OpenEyeIcon";
-
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -33,7 +30,7 @@ const ResetPassword = () => {
     <>
       <div className={styles.container}>
         <div className={styles.title}>
-          <Title name={"Reset password"}></Title>
+          <Title name={"Reset password"} />
           <div className={styles.description}>
             {"Please enter your new password"}
           </div>

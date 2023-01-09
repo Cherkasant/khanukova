@@ -37,6 +37,7 @@ export const {
   signInUser,
   setLoggedIn,
   activateUser,
+  logoutUser,
 } = authSlice.actions;
 const authReducer = authSlice.reducer;
 
