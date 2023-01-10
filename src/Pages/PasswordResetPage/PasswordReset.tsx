@@ -8,6 +8,7 @@ import Button, { ButtonTypes } from "../../Components/Button";
 import { PasswordTypes } from "../../Components/constants/@types";
 import { ClosedEyeIcon } from "../../Assets/icons/ClosedEyeIcon";
 import { OpenEyeIcon } from "../../Assets/icons/OpenEyeIcon";
+
 import { useDispatch } from "react-redux";
 import { resetPasswordConfirm } from "../../Redux/Reducers/authReducer";
 import { useNavigate, useParams } from "react-router";
@@ -54,7 +55,7 @@ const ResetPassword = () => {
     <>
       <div className={styles.container}>
         <div className={styles.title}>
-          <Title name={"Reset password"}></Title>
+          <Title name={"Reset password"} />
           <div className={styles.description}>
             {"Please enter your new password"}
           </div>

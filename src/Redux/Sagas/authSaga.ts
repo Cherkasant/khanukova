@@ -1,6 +1,7 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import {
   activateUser,
+  logoutUser,
   registerUser,
   resetPasswordConfirm,
   sendResetEmail,
@@ -76,6 +77,12 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
   }
 }
 
+function* logOutUserWorker() {
+  yield put(setLoggedIn(false));
+  localStorage.removeItem(ACCESS_TOKEN_KEY);
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
+}
+
 export default function* authSagaWatcher() {
   yield all([
     takeLatest(registerUser, registerUserWorker),
@@ -83,5 +90,6 @@ export default function* authSagaWatcher() {
     takeLatest(resetPasswordConfirm, resetPasswordConfirmWorker),
     takeLatest(signInUser, signInUserWorker),
     takeLatest(activateUser, activateUserWorker),
+    takeLatest(logoutUser, logOutUserWorker),
   ]);
 }

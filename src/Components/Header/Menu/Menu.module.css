@@ -1,12 +1,11 @@
 .container {
     display: flex;
     flex-direction: column;
-    padding: 46px 0 20px 0;
     width: 222px;
     background-color: white;
     height: 100%;
-    padding: 25px 20px 0 38px;
-    
+    padding: 25px 20px 40px 25px;
+    justify-content: space-between;
 }
 
 .navButton {
@@ -21,7 +20,7 @@
     line-height: 24px;
     color: #212121;
     gap: 25px;
-    
+
 }
 
 .navButton:hover {
@@ -49,11 +48,29 @@
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-    line-height: 22px;    
+    line-height: 22px;
     color: #212121;
 }
 
 .el {
     display: flex;
     gap: 10px;
+}
+
+.logoutContainer {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+
+}
+
+.logoutContainer:hover {
+    cursor: pointer;
+}
+
+.logout {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #212121;
 }
