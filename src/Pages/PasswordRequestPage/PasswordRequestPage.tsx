@@ -5,15 +5,23 @@ import Input from "../../Components/Input";
 import Button, { ButtonTypes } from "../../Components/Button";
 import { sendResetEmail } from "../../Redux/Reducers/authReducer";
 import { useDispatch } from "react-redux";
+import { PathNames } from "../Router/Router";
+import { useNavigate } from "react-router";
 
 const PasswordRequestPage = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-
-  const [isSent, setSent] = useState(false);
+  const navigate = useNavigate();
 
   const onSend = () => {
-    dispatch(sendResetEmail({ email, callback: () => setSent(!isSent) }));
+    dispatch(
+      sendResetEmail({
+        email,
+        callback: () => {
+          navigate(PathNames.CheckNewPassword);
+        },
+      })
+    );
   };
 
   return (
@@ -28,31 +36,23 @@ const PasswordRequestPage = () => {
           </div>
         </div>
         <div className={styles.inputContainer}>
-          {!isSent ? (
-            <>
-              <Input
-                required={true}
-                type={"email"}
-                value={email}
-                onChange={(value) => {
-                  setEmail(value);
-                }}
-                placeholder={"Email"}
-              />
-              <Button
-                title={"Continue"}
-                type={ButtonTypes.TextButton}
-                disabled={!email}
-                onClick={onSend}
-              />
-            </>
-          ) : (
-            <div>
-              {
-                "Email with instructions on password recovery was sent to the email address you provided." // сделать переход на страницу Востановление пароля- вам отправлено письмо
-              }
-            </div>
-          )}
+          <>
+            <Input
+              required={true}
+              type={"email"}
+              value={email}
+              onChange={(value) => {
+                setEmail(value);
+              }}
+              placeholder={"Email"}
+            />
+            <Button
+              title={"Continue"}
+              type={ButtonTypes.TextButton}
+              disabled={!email}
+              onClick={onSend}
+            />
+          </>
         </div>
       </div>
     </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./CheckNewPassword.module.css";
 import Title from "../../Components/Title";
+import { NavLink } from "react-router-dom";
+import { PathNames } from "../Router/Router";
 
 const CheckNewPassword = () => {
   return (
@@ -14,6 +16,12 @@ const CheckNewPassword = () => {
         </div>
         <div className={styles.description}>
           {"Please follow the link in the email to recover your password."}
+        </div>
+        <div className={styles.info}>
+          {"The letter didn’t arrive?"}
+          <NavLink to={PathNames.PasswordRequestPage} className={styles.link}>
+            <span>{"Resend the email"}</span>
+          </NavLink>
         </div>
       </div>
     </>
