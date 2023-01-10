@@ -7,11 +7,6 @@ export type RegisterUserData = {
   password_rep: string;
 };
 
-export type RegisterUserPayload = {
-  data: RegisterUserData;
-  callback: () => void;
-};
-
 export type SendResetEmailPayload = {
   email: string;
   callback: () => void;
@@ -22,16 +17,23 @@ export type SignInUserData = {
   password: string;
 };
 
-export type SignInUserPayload = {
-  data: SignInUserData;
-  callback: () => void;
-};
-
 export type ActivateUserData = {
   uid: string;
   token: string;
 };
-export type ActivateUserPayload = {
-  data: ActivateUserData;
+export type ResetPasswordData = {
+  uid: string;
+  token: string;
+  new_password: string;
+  re_new_password: string;
+};
+
+export type BasePayload<T> = {
+  data: T;
   callback: () => void;
 };
+
+export type RegisterUserPayload = BasePayload<RegisterUserData>;
+export type ActivateUserPayload = BasePayload<ActivateUserData>;
+export type SignInUserPayload = BasePayload<SignInUserData>;
+export type ResetPasswordConfirmPayload = BasePayload<ResetPasswordData>;

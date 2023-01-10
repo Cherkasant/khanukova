@@ -3,6 +3,7 @@ import {
   activateUser,
   logoutUser,
   registerUser,
+  resetPasswordConfirm,
   sendResetEmail,
   setLoggedIn,
   signInUser,
@@ -11,6 +12,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import {
   ActivateUserPayload,
   RegisterUserPayload,
+  ResetPasswordConfirmPayload,
   SendResetEmailPayload,
   SignInUserPayload,
 } from "../Types/auth";
@@ -37,6 +39,18 @@ function* sendResetEmailWorker(action: PayloadAction<SendResetEmailPayload>) {
     callback();
   } else {
     console.warn("Error while sending reset email", problem);
+  }
+}
+
+function* resetPasswordConfirmWorker(
+  action: PayloadAction<ResetPasswordConfirmPayload>
+) {
+  const { data, callback } = action.payload;
+  const { ok, problem } = yield call(API.resetPasswordConfirm, data);
+  if (ok) {
+    callback();
+  } else {
+    console.warn("Error while sending reset password", problem);
   }
 }
 
@@ -73,6 +87,7 @@ export default function* authSagaWatcher() {
   yield all([
     takeLatest(registerUser, registerUserWorker),
     takeLatest(sendResetEmail, sendResetEmailWorker),
+    takeLatest(resetPasswordConfirm, resetPasswordConfirmWorker),
     takeLatest(signInUser, signInUserWorker),
     takeLatest(activateUser, activateUserWorker),
     takeLatest(logoutUser, logOutUserWorker),
