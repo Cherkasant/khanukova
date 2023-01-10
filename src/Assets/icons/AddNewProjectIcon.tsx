@@ -9,20 +9,20 @@ export const AddNewProjectIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="16" cy="16" r="12" fill="#7E869E" fill-opacity="0.25" />
+      <circle cx="16" cy="16" r="12" fill="#7E869E" fillOpacity="0.25" />
       <path
         d="M16 10.667L16 21.3337"
         stroke="white"
-        stroke-width="1.2"
-        stroke-linecap="square"
-        stroke-linejoin="round"
+        strokeWidth="1.2"
+        strokeLinecap="square"
+        strokeLinejoin="round"
       />
       <path
         d="M21.3334 16L10.6667 16"
         stroke="white"
-        stroke-width="1.2"
-        stroke-linecap="square"
-        stroke-linejoin="round"
+        strokeWidth="1.2"
+        strokeLinecap="square"
+        strokeLinejoin="round"
       />
     </svg>
   );
