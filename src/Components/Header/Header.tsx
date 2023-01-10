@@ -7,8 +7,11 @@ import styles from "./Header.module.css";
 import UserName from "../UserName";
 import { useSelector } from "react-redux";
 import authSelectors from "../../Redux/Selectors/authSelectors";
+import { useNavigate } from "react-router";
+import { PathNames } from "../../Pages/Router/Router";
 
 const Header = () => {
+  const navigate = useNavigate();
   const hasMessage = true;
   const isLoggedIn = useSelector(authSelectors.getLoggedIn);
 
@@ -28,12 +31,13 @@ const Header = () => {
             {hasMessage && <div className={styles.notificationCount}></div>}
           </div>
           {isLoggedIn ? (
-            <UserName username={"Irina Ivanova"}></UserName>
+            <UserName username={"Irina Ivanova"} />
           ) : (
             <Button
               title={<UserIcon />}
               type={ButtonTypes.IconButton}
               className={styles.iconUser}
+              onClick={() => navigate(PathNames.SignIn)}
             />
           )}
         </div>
