@@ -24,7 +24,6 @@
     color: #313037;
 }
 
-
 .disabled {
     color: #CDCDCD;
 }
@@ -50,9 +49,20 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-    color: #9E9E9E;
+    color: #A3A3A3;
 }
 
 .input:focus:invalid {
     border: 1px solid #BF3535;
+}
+
+.title {
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 140%;
+text-align: start;
+color: #212121;
+margin-bottom: 5px;
 }

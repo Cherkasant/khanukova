@@ -7,6 +7,7 @@ import PagesWrapper from "../../Components/PagesWrapper";
 import PasswordRequestPage from "../PasswordRequestPage";
 import SignUp from "../SignUp";
 import Home from "../Home";
+import ProfilePage from "../ProfilePage";
 
 export enum PathNames {
   Home = "/",
@@ -16,6 +17,7 @@ export enum PathNames {
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
   PasswordRequestPage = "/password",
+  Profile = "/profile",
 }
 
 const Router = () => {
@@ -24,6 +26,8 @@ const Router = () => {
       <Routes>
         <Route path={PathNames.Home} element={<PagesWrapper />}>
           <Route path={PathNames.Main} element={<Home />} />
+          <Route path={PathNames.Profile} element={<ProfilePage />} />
+
         </Route>
 
         <Route path={PathNames.SignIn} element={<SignIn />} />
