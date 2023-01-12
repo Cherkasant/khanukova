@@ -1,0 +1,38 @@
+.container{
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.filtersHeader{
+    display: flex;
+    padding: 40px 40px 30px 40px;
+    justify-content: space-between;
+}
+.headerTitle{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #212121;
+}
+.closeIcon{
+    cursor: pointer;
+}
+.btnContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 40px 40px 30px 40px;
+
+}
+
+.clearBtn{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+     color: #A3A3A3;
+    cursor: pointer;
+}
+.clearBtn:hover{
+    opacity: 0.5;
+}
