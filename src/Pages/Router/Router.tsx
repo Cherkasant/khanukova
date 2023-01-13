@@ -11,6 +11,7 @@ import ProjectScreen from "../ProjectScreen";
 import PasswordReset from "../PasswordResetPage";
 import ActivationPage from "../ActivationPage";
 import CheckNewPassword from "../CheckNewPassword";
+import ProfilePage from "../ProfilePage";
 
 export enum PathNames {
   Home = "/",
@@ -24,6 +25,7 @@ export enum PathNames {
   CheckNewPassword = "/check-password",
   ProjectScreen = "/project",
   ActivateUser = "/activate/:uid/:token",
+  Profile = "/profile",
 }
 
 const Router = () => {
@@ -32,6 +34,7 @@ const Router = () => {
       <Routes>
         <Route path={PathNames.Home} element={<PagesWrapper />}>
           <Route path={PathNames.Main} element={<Home />} />
+          <Route path={PathNames.Profile} element={<ProfilePage />} />
           <Route path={PathNames.ProjectScreen} element={<ProjectScreen />} />
         </Route>
 

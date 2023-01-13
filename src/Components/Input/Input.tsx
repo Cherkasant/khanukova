@@ -11,6 +11,7 @@ type InputProps = {
   className?: string;
   type?: string;
   required?: boolean;
+  title?: string;
 };
 
 const Input: FC<InputProps> = ({
@@ -22,12 +23,14 @@ const Input: FC<InputProps> = ({
   className,
   type,
   required,
+  title,
 }) => {
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
   return (
     <div className={styles.container}>
+      {title && <div className={styles.title} >{title}</div>}
       <input
         required={required}
         type={type}
@@ -38,6 +41,7 @@ const Input: FC<InputProps> = ({
         className={classnames(className, styles.input, {
           [styles.disabled]: !!disabled,
         })}
+        title={title}
       />
       {error && <div className={styles.error}>{error}</div>}
     </div>
