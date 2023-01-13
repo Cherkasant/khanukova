@@ -1,0 +1,12 @@
+.container{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 15px;
+
+}
+.input{
+    width: 300px;
+    height: 40px;
+}

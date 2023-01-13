@@ -3,6 +3,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #FFFFFF;
+}
+.children{
+    height: 100vh;
+    overflow: auto;
 }
 .filtersHeader{
     display: flex;

@@ -16,7 +16,8 @@ const FiltersPanel: FC<FiltersPanelProps> = ({ children }) => {
           <CloseFilterIcon />
         </div>
       </div>
-      <div>{children}</div>
+      <div className={styles.children}>{children}</div>
+
       <div className={styles.btnContainer}>
         <Button title={"Apply"} type={ButtonTypes.TextButton} />
         <div className={styles.clearBtn}>{"Clear the filter"}</div>
