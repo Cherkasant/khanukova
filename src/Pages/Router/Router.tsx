@@ -13,6 +13,7 @@ import ActivationPage from "../ActivationPage";
 import CheckNewPassword from "../CheckNewPassword";
 import ProfilePage from "../ProfilePage";
 import SignUpHead from "../SignUpHead";
+import SignUpHeadInfo from "../SignUp/SignUpHeadInfo";
 
 export enum PathNames {
   Home = "/",
@@ -20,6 +21,7 @@ export enum PathNames {
   SignIn = "/sign-in",
   SignUp = "/sign-up",
   SignUpHead = "/sign-up-head",
+  SignUpHeadInfo = "/sign-up-head/info",
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
   PasswordRequestPage = "/password/request",
@@ -43,6 +45,7 @@ const Router = () => {
         <Route path={PathNames.SignIn} element={<SignIn />} />
         <Route path={PathNames.SignUp} element={<SignUp />} />
         <Route path={PathNames.SignUpHead} element={<SignUpHead />} />
+        <Route path={PathNames.SignUpHeadInfo} element={<SignUpHeadInfo />} />
         <Route
           path={PathNames.SignUpPageRole}
           element={<RegistrationRolePage />}

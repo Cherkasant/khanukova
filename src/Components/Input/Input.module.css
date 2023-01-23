@@ -1,3 +1,8 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
 .input {
     width: 500px;
     height: 60px;
@@ -10,6 +15,14 @@
     color: #0e0e0e;
     padding-left: 19px;
     outline: none
+}
+.title{
+    align-self: flex-start;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+
 }
 
 .input:hover {
