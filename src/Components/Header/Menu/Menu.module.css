@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 222px;
     background-color: white;
-    height: 100%;
+    height: calc(100vh - 100px);
     padding: 25px 20px 40px 25px;
     justify-content: space-between;
 }

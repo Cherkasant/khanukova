@@ -62,16 +62,47 @@
 }
 
 .title {
+    border: none;
+    outline: none;
     font-family: 'Inter';
     font-weight: 500;
     font-size: 32px;
     line-height: 39px;
     color: #0E4298;
+    background-color: #F6F8FC;
+}
+
+.title:hover, .title:focus {
+    border: none;
+    outline: none;
+}
+
+.title:focus::placeholder {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 140%;
+    color: #898B9B;
+}
+
+.title::placeholder {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 39px;
+    color: #0E4298;
+
 }
 
 .titleContainer {
     display: flex;
-    align-items: flex-end;
+    position: relative;
+}
+
+.edit {
+    position: absolute;
+    top: 30px;
+    left: 110px;
 }
 
 .edit:hover {
@@ -126,7 +157,7 @@
     align-items: center;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 .filterButton:hover {

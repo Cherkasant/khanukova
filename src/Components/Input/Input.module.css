@@ -56,3 +56,10 @@
 .input:focus:invalid {
     border: 1px solid #BF3535;
 }
+
+.title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+}

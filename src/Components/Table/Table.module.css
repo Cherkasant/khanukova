@@ -1,0 +1,62 @@
+.tableContainer {
+    border: 1px solid #C8C8C8;
+    border-left: none;
+    border-right: none;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.tableHeader {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+    border: 1px solid #C8C8C8;
+
+}
+
+.tableCell {
+    padding: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    border: 1px solid #C8C8C8;
+
+}
+
+.tableFooter {
+    border: 1px solid #C8C8C8;
+}
+
+.container {
+    padding: 15px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.cell {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+}
+
+.addTask {
+    cursor: pointer;
+}
+
+.label {
+    padding: 5px 20px;
+    border-radius: 20px;
+    background: #1258CA;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+}
+
