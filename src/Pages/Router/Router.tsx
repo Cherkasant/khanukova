@@ -1,6 +1,22 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+
+
 import FilterProjectScreen from "../../Components/FilteresPanel/FilterProjectScreen";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignIn from "../SignIn";
+import RegistrationRolePage from "../RegistrationRolePage";
+import RegistrationInfoPage from "../RegistrationInfoPage";
+import PagesWrapper from "../../Components/PagesWrapper";
+import PasswordRequestPage from "../PasswordRequestPage";
+import SignUp from "../SignUp";
+import Home from "../Home";
+import ProjectScreen from "../ProjectScreen";
+import PasswordReset from "../PasswordResetPage";
+import ActivationPage from "../ActivationPage";
+import CheckNewPassword from "../CheckNewPassword";
+import ProfilePage from "../ProfilePage";
+
 
 export enum PathNames {
   Home = "/",
@@ -14,16 +30,20 @@ export enum PathNames {
   CheckNewPassword = "/check-password",
   ProjectScreen = "/project",
   ActivateUser = "/activate/:uid/:token",
+  Profile = "/profile",
 }
 
 const Router = () => {
   return (
     <BrowserRouter>
-      {/*<Routes>*/}
-      {/*  <Route path={PathNames.Home} element={<PagesWrapper />}>*/}
-      {/*    <Route path={PathNames.Main} element={<Home />} />*/}
-      {/*    <Route path={PathNames.ProjectScreen} element={<ProjectScreen />} />*/}
-      {/*  </Route>*/}
+
+      <Routes>
+        <Route path={PathNames.Home} element={<PagesWrapper />}>
+          <Route path={PathNames.Main} element={<Home />} />
+          <Route path={PathNames.Profile} element={<ProfilePage />} />
+          <Route path={PathNames.ProjectScreen} element={<ProjectScreen />} />
+        </Route>
+
 
       {/*  <Route path={PathNames.SignIn} element={<SignIn />} />*/}
       {/*  <Route path={PathNames.SignUp} element={<SignUp />} />*/}
