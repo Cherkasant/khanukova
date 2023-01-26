@@ -6,11 +6,9 @@ import {
   SignInUserData,
 } from "../Types/auth";
 
+const JWT_TOKEN = "Token 215da0663fecc34db27c8aae4030e61af592fdc8";
 
-const JWT_TOKEN = "Token cd92edeb6259b11047117e0920cda3da66215a4e";
-
-
-const API = create({ baseURL: "https://apipuzzle.herokuapp.com/" });
+const API = create({ baseURL: " https://apipuzzle-be.herokuapp.com" });
 
 const registerUser = (data: RegisterUserData) => {
   return API.post("auth/users/", data, {

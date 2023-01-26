@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Home.module.css";
-import CardsList from "../../Components/CardsList";
 import Input from "../../Components/Input";
 import Title from "../../Components/Title";
 import { SearchIcon } from "../../Assets/icons/SearchIcon";
+import CardsList from "../../Components/CardsList";
+import { PathNames } from "../Router/Router";
+import { useNavigate } from "react-router";
 
 const MOCK_CARDS_LIST = [
   {
@@ -56,6 +58,7 @@ const MOCK_CARDS_LIST = [
   },
 ];
 const Home = () => {
+  const navigate = useNavigate();
   const [inputSearch, setInputSearch] = useState("");
 
   const onChange = (value: string) => {
@@ -77,7 +80,13 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className={styles.btnAdd}>{"+Add new"}</div>
+      <div
+        className={styles.btnAdd}
+        onClick={() => navigate(PathNames.ProjectScreen)}
+      >
+        {"+Add new"}
+      </div>
+
       <CardsList cardsList={MOCK_CARDS_LIST} />
     </div>
   );

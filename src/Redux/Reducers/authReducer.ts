@@ -4,9 +4,9 @@ import { ACCESS_TOKEN_KEY } from "../../Components/constants/consts";
 import {
   ActivateUserPayload,
   RegisterUserPayload,
+  ResetPasswordConfirmPayload,
   SendResetEmailPayload,
   SignInUserPayload,
-  ResetPasswordConfirmPayload,
 } from "../Types/auth";
 
 const initialState = {
@@ -18,22 +18,30 @@ const authSlice = createSlice({
   name: "authReducer",
   initialState,
   reducers: {
-    registerUser: (state, action: PayloadAction<RegisterUserPayload>) => {},
-    activateUser: (state, action: PayloadAction<ActivateUserPayload>) => {},
-    signInUser: (state, action: PayloadAction<SignInUserPayload>) => {},
+    registerUser: (state, action: PayloadAction<RegisterUserPayload>) => {
+    },
+    activateUser: (state, action: PayloadAction<ActivateUserPayload>) => {
+    },
+    signInUser: (state, action: PayloadAction<SignInUserPayload>) => {
+    },
     setLoggedIn: (state, action: PayloadAction<boolean>) => {
       state.isLoggedIn = action.payload;
     },
-    getUserName: (state, action: PayloadAction<undefined>) => {},
+    getUserName: (state, action: PayloadAction<undefined>) => {
+    },
     setUserName: (state, action: PayloadAction<any>) => {
       state.userName = action.payload;
     },
-    logoutUser: (state, action: PayloadAction<undefined>) => {},
-    sendResetEmail: (state, action: PayloadAction<SendResetEmailPayload>) => {},
+    logoutUser: (state, action: PayloadAction<undefined>) => {
+    },
+    sendResetEmail: (state, action: PayloadAction<SendResetEmailPayload>) => {
+    },
     resetPasswordConfirm: (
-      state,
-      action: PayloadAction<ResetPasswordConfirmPayload>
-    ) => {},
+        state,
+        action: PayloadAction<ResetPasswordConfirmPayload>
+    ) => {
+    },
+
   },
 });
 export const {
@@ -44,6 +52,7 @@ export const {
   setLoggedIn,
   activateUser,
   logoutUser,
+
 } = authSlice.actions;
 const authReducer = authSlice.reducer;
 
