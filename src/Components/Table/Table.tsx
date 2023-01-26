@@ -114,7 +114,7 @@ const Table = () => {
     },
   ];
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => taskInfo, [taskInfo]);
+  const data = useMemo(() => DATA, []);
   const {
     getTableProps,
     getTableBodyProps,
