@@ -17,3 +17,29 @@
   line-height: 18px;
   color: #212121;
 }
+.icon{
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+.blue{
+  background-color: #1258CA;
+}
+.lime{
+  background-color: #16CA12;
+}
+.green{
+  background-color: #0F8622;
+}
+.orange{
+  background-color: #CA8012;
+}
+.pink{
+  background-color: #CA12C3;
+}
+.purple{
+  background-color: #A27CF2;
+}
+.yellow{
+  background-color: #DDD625;
+}

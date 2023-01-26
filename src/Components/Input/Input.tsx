@@ -23,7 +23,7 @@ const Input: FC<InputProps> = ({
   className,
   type,
   required,
-  title,
+                                 title,
 }) => {
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -41,7 +41,6 @@ const Input: FC<InputProps> = ({
         className={classnames(className, styles.input, {
           [styles.disabled]: !!disabled,
         })}
-        title={title}
       />
       {error && <div className={styles.error}>{error}</div>}
     </div>
