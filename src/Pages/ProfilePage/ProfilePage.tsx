@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import RegisterContainer from "../../Components/RegisterContainer";
 import styles from "./ProfilePage.module.css";
 import Button, { ButtonTypes } from "../../Components/Button";
@@ -8,6 +8,8 @@ import { PencilIcon } from "../../Assets/Profile/PencilIcon";
 import Dropdown from "react-dropdown";
 import type { DatePickerProps } from 'antd';
 import { DatePicker, Space } from 'antd';
+import TabsListProfile from "../../Components/TabsListProfile";
+import { TabsProfile } from "../../Components/constants/@types";
 
 const ProfilePage = () => {
    const [name, setName] = useState("Ivanova Irina");
@@ -25,6 +27,11 @@ const ProfilePage = () => {
    const [experience, setExperience] = useState("");
 
    const [info, setInfo] = useState("");
+
+   const [activeTab, setActiveTab] = useState(TabsProfile.PersonalInfo);
+   const onTabClick = (tab: TabsProfile) => {
+      setActiveTab(tab);
+   };
 
    const currencyOptions = [
       {value:"EUR", label: "EUR"},
@@ -46,9 +53,17 @@ const ProfilePage = () => {
 
    const isHead = true;
 
+   const TABS_NAMES = useMemo ( () => [
+      { name: "Personal Info", key: TabsProfile.PersonalInfo },
+      { name: "Company Profile", key: TabsProfile.CompanyProfile },
+      { name: "Dev Team", key: TabsProfile.DevTeam },
+   ], []);
+
    return (
       <div className={styles.container}>
-         <Title name={"Projects"} className={styles.title} />
+         <Title name={"My Profile"} className={styles.title} />
+         <TabsListProfile activeTab={activeTab} onSelectTab={onTabClick} tabsList={TABS_NAMES}/>
+         
 
          <div className={styles.containerInfo}>
 
