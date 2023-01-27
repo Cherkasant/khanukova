@@ -45,28 +45,28 @@ const Router = () => {
         </Route>
 
 
-      {/*  <Route path={PathNames.SignIn} element={<SignIn />} />*/}
-      {/*  <Route path={PathNames.SignUp} element={<SignUp />} />*/}
-      {/*  <Route*/}
-      {/*    path={PathNames.SignUpPageRole}*/}
-      {/*    element={<RegistrationRolePage />}*/}
-      {/*  />*/}
+     <Route path={PathNames.SignIn} element={<SignIn />} />
+   <Route path={PathNames.SignUp} element={<SignUp />} />
+     <Route
+     path={PathNames.SignUpPageRole}
+  element={<RegistrationRolePage />}
+      />
 
-      {/*  <Route path={PathNames.ActivateUser} element={<ActivationPage />} />*/}
-      {/*  <Route*/}
-      {/*    path={PathNames.SignUpPageInfo}*/}
-      {/*    element={<RegistrationInfoPage />}*/}
-      {/*  />*/}
-      {/*  <Route path={PathNames.PasswordReset} element={<PasswordReset />} />*/}
-      {/*  <Route*/}
-      {/*    path={PathNames.CheckNewPassword}*/}
-      {/*    element={<CheckNewPassword />}*/}
-      {/*  />*/}
-      {/*  <Route*/}
-      {/*    path={PathNames.PasswordRequestPage}*/}
-      {/*    element={<PasswordRequestPage />}*/}
-      {/*  />*/}
-      {/*</Routes>*/}
+      <Route path={PathNames.ActivateUser} element={<ActivationPage />} />
+     <Route
+        path={PathNames.SignUpPageInfo}
+       element={<RegistrationInfoPage />}
+       />
+      <Route path={PathNames.PasswordReset} element={<PasswordReset />} />
+     <Route
+      path={PathNames.CheckNewPassword}
+      element={<CheckNewPassword />}
+       />
+        <Route
+          path={PathNames.PasswordRequestPage}
+          element={<PasswordRequestPage />}
+      />
+      </Routes>
       <FilterProjectScreen />
     </BrowserRouter>
   );
