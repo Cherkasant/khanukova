@@ -26,6 +26,12 @@ export enum PasswordTypes {
   Text = "text",
 }
 
+export enum TabsProfile {
+  PersonalInfo = 'personalInfo',
+  CompanyProfile = 'companyProfile',
+  DevTeam = 'devTeam',
+}
+
 export enum Tabs {
   Planning = "Planning",
   Gantt = "Gantt",

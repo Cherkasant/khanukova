@@ -1,0 +1,36 @@
+.tabs {
+   height: 48px;
+   display: flex;
+   justify-content: space-between;
+   font-weight: 600;
+   font-size: 16px;
+   line-height: 24px;
+   color: #313037;
+   border-bottom: 5px solid #9BACC9;;
+   margin-bottom: 25px;
+}
+
+.tab {
+   width: 33%;
+   cursor: pointer;
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 600;
+   font-size: 24px;
+   line-height: 29px;
+   color: #212121;
+   padding: 0 60px 48px 60px;
+   text-align: center;
+}
+
+.tab:hover {
+   color: #2231aa;
+}
+
+.disabled {
+   color: #8d8e97;
+}
+
+.active {
+   border-bottom: 5px solid #0E4298;;
+}
