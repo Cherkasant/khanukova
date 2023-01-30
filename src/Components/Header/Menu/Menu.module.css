@@ -50,11 +50,14 @@
     font-size: 18px;
     line-height: 22px;
     color: #212121;
+    margin-top: 5px;
+
 }
 
 .el {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .logoutContainer {

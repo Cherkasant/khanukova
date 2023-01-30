@@ -1,29 +1,38 @@
-.container{
+.container {
     width: 380px;
     display: flex;
+    height: 100vh;
     flex-direction: column;
     justify-content: space-between;
     background-color: #FFFFFF;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
-.children{
+
+.children {
     height: 100vh;
     overflow: auto;
 }
-.filtersHeader{
+
+.filtersHeader {
     display: flex;
     padding: 40px 40px 30px 40px;
     justify-content: space-between;
 }
-.headerTitle{
+
+.headerTitle {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
     color: #212121;
 }
-.closeIcon{
+
+.closeIcon {
     cursor: pointer;
 }
-.btnContainer{
+
+.btnContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -31,13 +40,14 @@
 
 }
 
-.clearBtn{
+.clearBtn {
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-     color: #A3A3A3;
+    color: #A3A3A3;
     cursor: pointer;
 }
-.clearBtn:hover{
+
+.clearBtn:hover {
     opacity: 0.5;
 }

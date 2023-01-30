@@ -38,6 +38,7 @@ const NewTask: FC<Props> = (props) => {
         deadline: deadline,
         priority: priority.value,
         progress: progress.value,
+        color: colors,
       })
     );
   };
@@ -94,7 +95,6 @@ const NewTask: FC<Props> = (props) => {
             </div>
           ) : null}
         </div>
-        {/*<div className={styles.titleTask}>{"Title new task"}</div>*/}
       </div>
       <div className={styles.mainBlock}>
         <div className={styles.leftBlock}>

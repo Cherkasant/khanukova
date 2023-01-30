@@ -1,8 +1,5 @@
 import React from "react";
 
-
-import FilterProjectScreen from "../../Components/FilteresPanel/FilterProjectScreen";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignIn from "../SignIn";
 import RegistrationRolePage from "../RegistrationRolePage";
@@ -16,7 +13,6 @@ import PasswordReset from "../PasswordResetPage";
 import ActivationPage from "../ActivationPage";
 import CheckNewPassword from "../CheckNewPassword";
 import ProfilePage from "../ProfilePage";
-
 
 export enum PathNames {
   Home = "/",
@@ -36,7 +32,6 @@ export enum PathNames {
 const Router = () => {
   return (
     <BrowserRouter>
-
       <Routes>
         <Route path={PathNames.Home} element={<PagesWrapper />}>
           <Route path={PathNames.Main} element={<Home />} />
@@ -44,30 +39,28 @@ const Router = () => {
           <Route path={PathNames.ProjectScreen} element={<ProjectScreen />} />
         </Route>
 
+        <Route path={PathNames.SignIn} element={<SignIn />} />
+        <Route path={PathNames.SignUp} element={<SignUp />} />
+        <Route
+          path={PathNames.SignUpPageRole}
+          element={<RegistrationRolePage />}
+        />
 
-     <Route path={PathNames.SignIn} element={<SignIn />} />
-   <Route path={PathNames.SignUp} element={<SignUp />} />
-     <Route
-     path={PathNames.SignUpPageRole}
-  element={<RegistrationRolePage />}
-      />
-
-      <Route path={PathNames.ActivateUser} element={<ActivationPage />} />
-     <Route
-        path={PathNames.SignUpPageInfo}
-       element={<RegistrationInfoPage />}
-       />
-      <Route path={PathNames.PasswordReset} element={<PasswordReset />} />
-     <Route
-      path={PathNames.CheckNewPassword}
-      element={<CheckNewPassword />}
-       />
+        <Route path={PathNames.ActivateUser} element={<ActivationPage />} />
+        <Route
+          path={PathNames.SignUpPageInfo}
+          element={<RegistrationInfoPage />}
+        />
+        <Route path={PathNames.PasswordReset} element={<PasswordReset />} />
+        <Route
+          path={PathNames.CheckNewPassword}
+          element={<CheckNewPassword />}
+        />
         <Route
           path={PathNames.PasswordRequestPage}
           element={<PasswordRequestPage />}
-      />
+        />
       </Routes>
-      <FilterProjectScreen />
     </BrowserRouter>
   );
 };

@@ -11,10 +11,12 @@ import NewTask from "../../Components/ModalNewTask";
 import { useDispatch, useSelector } from "react-redux";
 import postSelector from "../../Redux/Selectors/postSelector";
 import {
+  setFilterVisible,
   setSelectedModalVisible,
   setTitleTask,
 } from "../../Redux/Reducers/postReducer";
 import Input from "../../Components/Input";
+import FilterProjectScreen from "../../Components/FilteresPanel/FilterProjectScreen";
 
 const TABS_NAMES = [
   { name: "Planning", key: Tabs.Planning },
@@ -27,6 +29,11 @@ const TABS_NAMES = [
 ];
 
 const ProjectScreen = () => {
+  const onFilterClick = () => {
+    dispatch(setFilterVisible(true));
+  };
+  const isFilterVisible = useSelector(postSelector.getFilter);
+
   const isVisible = useSelector(postSelector.getModal);
   const dispatch = useDispatch();
   const onCloseClick = () => {
@@ -91,7 +98,7 @@ const ProjectScreen = () => {
       </div>
       <div className={styles.blueLine}></div>
       <div className={styles.bottomContainer}>
-        <div className={styles.filterButton}>
+        <div className={styles.filterButton} onClick={onFilterClick}>
           <FilterIcon />
           {"Filters"}
         </div>
@@ -112,6 +119,7 @@ const ProjectScreen = () => {
         onRequestClose={onCloseClick}
         ariaHideApp={false}
       />
+      {isFilterVisible ? <FilterProjectScreen /> : null}
     </div>
   );
 };
