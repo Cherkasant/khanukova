@@ -74,11 +74,12 @@ const UserMenu = () => {
                         [styles.listActive]: isOpened,
                       })}
                     >
-                      <div className={styles.el}>
-                        <div>
-                          <AddNewProjectIcon />
-                        </div>
-                        New project
+                      <div
+                        className={styles.el}
+                        onClick={() => navigate(PathNames.ProjectScreen)}
+                      >
+                        <AddNewProjectIcon />
+                        {"New project"}
                       </div>
                     </div>
                   ) : null}

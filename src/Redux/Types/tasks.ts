@@ -9,6 +9,7 @@ export type TaskType = {
   deadline: string;
   priority: string;
   progress: string;
+  color: string;
 };
 
 export type CardTaskType = Array<TaskType>;

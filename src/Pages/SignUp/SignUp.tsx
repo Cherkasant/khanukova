@@ -72,7 +72,7 @@ const SignUp = () => {
           password_rep: passwordConfirmation,
         },
         callback: () => {
-          navigate(PathNames.SignUpPageRole);
+          navigate(PathNames.SignIn);
         },
       })
     );

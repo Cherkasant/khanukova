@@ -1,5 +1,5 @@
 .container {
-    /*padding: 15px 34px 10px 53px;*/
+    padding: 15px 34px 10px 53px;
     background: #F4F8FE;
     height: 100%;
     width: 100%;
@@ -28,6 +28,10 @@
     cursor: pointer;
     margin-bottom: 25px;
     padding-left: 53px;
+}
+
+.btnAdd:hover {
+    opacity: 0.8;
 }
 
 .searchContainer {

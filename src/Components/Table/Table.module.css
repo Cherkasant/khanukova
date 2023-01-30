@@ -12,7 +12,7 @@
     line-height: 17px;
     color: #212121;
     border: 1px solid #C8C8C8;
-
+    border-left: none;
 }
 
 .tableCell {
@@ -22,7 +22,7 @@
     line-height: 17px;
     color: #000000;
     border: 1px solid #C8C8C8;
-
+    border-left: none;
 }
 
 .tableFooter {
@@ -33,6 +33,7 @@
     padding: 15px 10px;
     display: flex;
     justify-content: space-between;
+
 }
 
 
@@ -60,3 +61,95 @@
     color: #FFFFFF;
 }
 
+.responsibleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.responsibleCell {
+    width: 30px;
+    height: 36px;
+    border-radius: 50%;
+    background: #9BACC9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+}
+
+.responsibleCell:hover {
+    background: #0E4298;
+}
+
+.dependence {
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+}
+
+.status {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+}
+
+.duration {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+}
+
+.footer {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    color: #A3A3A3;
+}
+
+.footer:hover {
+    cursor: pointer;
+}
+
+.blue {
+    background: #1258CA;;
+}
+
+.red {
+    background: #CA12C3;
+}
+
+.green {
+    background: #16CA12;
+}
+
+.darkgreen {
+    background: #0F8622;
+}
+
+.brown {
+    background: #CA8012;
+}
+
+.ultraviolet {
+    background: #A27CF2;
+}
+
+.yellow {
+    background: #DDD625;
+}
