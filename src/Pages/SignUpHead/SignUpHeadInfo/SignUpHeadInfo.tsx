@@ -12,6 +12,7 @@ import {PathNames} from "../../Router/Router";
 import {registerUser} from "../../../Redux/Reducers/authReducer";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router";
+import Checkbox from "../../../Components/Checkbox";
 
 const options = [
     // { value: "productOwner", label: "Product Owner" },
@@ -31,7 +32,6 @@ const SignUpHeadInfo = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
 
     const [selectedOption, setSelectedOption] = useState<any>(null);
 
@@ -88,7 +88,40 @@ const SignUpHeadInfo = () => {
                                 "4. Tagline (service description in one sentence or mission/vision)*"
                             }
                             className={styles.input}
+                        />{" "}
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"5. Industries that your clients are coming from*"}
+                            className={styles.input}
+                        />{" "}
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"6. Preferable Software Stack*"}
+                            className={styles.input}
                         />
+                        <div className={styles.checkboxBlock}>
+                            <div className={styles.checkboxBlockTitle}>7. Choose the preferable industries where you
+                                have the most successful experience and where the potential clients are expected to come
+                                from*
+                            </div>
+                            <div className={styles.checkboxContainer}>
+                                <Checkbox isChecked={false} handleChange={() => {
+                                }} label={'Ecommerce'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'AI and Machine Learning'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'Martech (Marketing Tech'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'Live Chat software'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'Logistics'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'Data Science'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'HR Software'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'Webinar software'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'eLearning'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'Cybersecurity'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'Augmented Reality'}/><Checkbox isChecked={false} handleChange={() => {
+                            }} label={'Project Management software'}/>
+                            </div>
+                        </div>
                     </div>
                     <Button
                         title={"Create an Account"}
