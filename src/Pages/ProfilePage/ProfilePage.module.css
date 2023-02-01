@@ -1,6 +1,8 @@
 .container {
     padding: 15px 40px;
+    width: 70%;
     height: 100vh;
+    position: relative;
 }
 
 .title {
@@ -12,6 +14,11 @@
     color: #0E4298;
     text-align: start;
     margin-bottom: 30px;
+}
+
+.containerBlockWithBtn {
+    display: flex;
+    flex-direction: column;
 }
 
 .containerInfo {
@@ -216,6 +223,9 @@
     display: flex;
     justify-content: end;
     gap: 20px;
+    position: absolute;
+    bottom: 100px;
+    right: 35px;
 }
 
 .buttonCancel {

@@ -27,9 +27,9 @@ export enum PasswordTypes {
 }
 
 export enum TabsProfile {
-  PersonalInfo = 'personalInfo',
-  CompanyProfile = 'companyProfile',
-  DevTeam = 'devTeam',
+  PersonalInfo = "personalInfo",
+  CompanyProfile = "companyProfile",
+  DevTeam = "devTeam",
 }
 
 export enum Tabs {
@@ -41,4 +41,26 @@ export enum Tabs {
   Documents = "Documents",
   ExternalSources = "External Sources",
   default = "default",
+}
+
+export enum CompanyList {
+  CompanyName = "1. Company name ",
+  LogoCompany = "2. Logo company ",
+  WebsiteDomain = "3. Website domain name  ",
+  Tagline = "4. Tagline (service description in one sentence or mission/vision) ",
+  ClientIndustry = "5. Industries that your clients are coming from",
+  SoftwareStack = "6. Preferable Software Stack ",
+  Industries = "7. Industries",
+  CompanyDescription = "8. Company Short Description ",
+  FullCompanyDescription = "9. Full company Description",
+  AverageHourlyRate = "10. Average hourly rate",
+  MinimumBudget = "11. Minimum project budget",
+  TeamSize = "12. Team Size",
+  Location = "13. Location",
+  FoundationDate = "14. Foundation date",
+  ClientsFocus = "15. Client's Focus (Ideal Client Profile based on your portfolio) ",
+  ContactDetails = "16. Marketing manager contact details",
+  ProjectExpertContactDetails = "17. Tech or Project Expert contact details (who will be in touch with a client)",
+  LinkToClient = "18. Links to client's success cases",
+  ClientPortrait = "19. Describe ideal client portrait",
 }
