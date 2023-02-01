@@ -52,7 +52,7 @@ const Table = () => {
       progress: "20%",
       responsible: "User2",
       status: "Ready for QA",
-      color: "Blue",
+      color: "Fiolet",
     },
     {
       deadline: "1/31/2023",
@@ -65,7 +65,7 @@ const Table = () => {
       progress: "30%",
       responsible: "User2",
       status: "On Hold",
-      color: "Red",
+      color: "Green",
     },
   ];
   const [taskInfo, setTaskInfo] = useState<CardTaskType>(DATA);
@@ -87,7 +87,7 @@ const Table = () => {
     {
       Header: TableColumns.item,
       Footer: () => (
-        <div className={styles.footer}>
+        <div className={styles.footer} onClick={onAddTaskClick}>
           <AddNewTaskIcon />
           {"Add item"}
         </div>

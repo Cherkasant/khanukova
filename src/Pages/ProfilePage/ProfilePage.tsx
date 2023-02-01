@@ -8,7 +8,8 @@ import Dropdown from "react-dropdown";
 import type { DatePickerProps } from "antd";
 import { DatePicker, Space } from "antd";
 import TabsListProfile from "../../Components/TabsListProfile";
-import { TabsProfile } from "../../Components/constants/@types";
+import { CompanyList, TabsProfile } from "../../Components/constants/@types";
+import CompanyProfile from "../../Components/CompanyProfile";
 
 const ProfilePage = () => {
   const [name, setName] = useState("Ivanova Irina");
@@ -63,6 +64,37 @@ const ProfilePage = () => {
     []
   );
 
+  const COMPANY_LIST = useMemo(
+    () => [
+      { name: "CompanyName", key: CompanyList.CompanyName },
+      { name: "LogoCompany", key: CompanyList.LogoCompany },
+      { name: "WebsiteDomain", key: CompanyList.WebsiteDomain },
+      { name: "Tagline", key: CompanyList.Tagline },
+      { name: "ClientIndustry", key: CompanyList.ClientIndustry },
+      { name: "SoftwareStack", key: CompanyList.SoftwareStack },
+      { name: "Industries", key: CompanyList.Industries },
+      { name: "CompanyDescription", key: CompanyList.CompanyDescription },
+      {
+        name: "FullCompanyDescription",
+        key: CompanyList.FullCompanyDescription,
+      },
+      { name: "AverageHourlyRate", key: CompanyList.AverageHourlyRate },
+      { name: "MinimumBudget", key: CompanyList.MinimumBudget },
+      { name: "TeamSize", key: CompanyList.TeamSize },
+      { name: "Location", key: CompanyList.Location },
+      { name: "FoundationDate", key: CompanyList.FoundationDate },
+      { name: "ClientsFocus", key: CompanyList.ClientsFocus },
+      { name: "ContactDetails", key: CompanyList.ContactDetails },
+      {
+        name: "ProjectExpertContactDetails",
+        key: CompanyList.ProjectExpertContactDetails,
+      },
+      { name: "LinkToClient", key: CompanyList.LinkToClient },
+      { name: "ClientPortrait", key: CompanyList.ClientPortrait },
+    ],
+    []
+  );
+
   return (
     <div className={styles.container}>
       <Title name={"My Profile"} className={styles.title} />
@@ -71,81 +103,100 @@ const ProfilePage = () => {
         onSelectTab={onTabClick}
         tabsList={TABS_NAMES}
       />
+      {activeTab === TabsProfile.PersonalInfo ? (
+        <div className={styles.containerBlockWithBtn}>
+          <div className={styles.containerInfo}>
+            <div className={styles.containerPhoto}>
+              <h2 className={styles.subTitle}>Account photo</h2>
+              <div className={styles.photo}></div>
+              <div className={styles.description}>
+                Edit photo <PencilIcon />
+              </div>
+            </div>
 
-      <div className={styles.containerInfo}>
-        <div className={styles.containerPhoto}>
-          <h2 className={styles.subTitle}>Account photo</h2>
-          <div className={styles.photo}></div>
-          <div className={styles.description}>
-            Edit photo <PencilIcon />
-          </div>
-        </div>
+            <div className={styles.containerContactInfo}>
+              <div>
+                <h2 className={styles.subTitle}>Contact info</h2>
 
-        <div className={styles.containerContactInfo}>
-          <div>
-            <h2 className={styles.subTitle}>Contact info</h2>
+                <div className={styles.containerInput}>
+                  <Input
+                    title={"Full name"}
+                    type={"text"}
+                    value={name}
+                    onChange={(value) => setName(value)}
+                    placeholder={"Full name"}
+                    className={styles.input}
+                  />
 
-            <div className={styles.containerInput}>
-              <Input
-                title={"Full name"}
-                type={"text"}
-                value={name}
-                onChange={(value) => setName(value)}
-                placeholder={"Full name"}
-                className={styles.input}
-              />
+                  <Input
+                    title={"Nick name"}
+                    type={"text"}
+                    value={nickName}
+                    onChange={(value) => setNickName(value)}
+                    placeholder={"Nick name"}
+                    className={styles.input}
+                  />
 
-              <Input
-                title={"Nick name"}
-                type={"text"}
-                value={nickName}
-                onChange={(value) => setNickName(value)}
-                placeholder={"Nick name"}
-                className={styles.input}
-              />
+                  <Input
+                    title={"Positions"}
+                    type={"text"}
+                    value={positions}
+                    onChange={(value) => setPositions(value)}
+                    placeholder={"Positions"}
+                    disabled
+                    className={styles.input}
+                  />
+                </div>
+              </div>
 
-              <Input
-                title={"Positions"}
-                type={"text"}
-                value={positions}
-                onChange={(value) => setPositions(value)}
-                placeholder={"Positions"}
-                disabled
-                className={styles.input}
-              />
+              <div className={styles.containerInput}>
+                <Input
+                  title={"Email"}
+                  type={"email"}
+                  value={email}
+                  onChange={(value) => setEmail(value)}
+                  placeholder={"Email"}
+                  className={styles.input}
+                />
+
+                <Input
+                  title={"Phone number "}
+                  type={"tel"}
+                  value={phone}
+                  onChange={(value) => setPhone(value)}
+                  placeholder={"Phone"}
+                  className={styles.input}
+                />
+
+                <Input
+                  title={"Telegram"}
+                  type={"text"}
+                  value={telegram}
+                  onChange={(value) => setTelegram(value)}
+                  placeholder={"Enter the profile link telegram"}
+                  className={styles.input}
+                />
+              </div>
             </div>
           </div>
 
-          <div className={styles.containerInput}>
-            <Input
-              title={"Email"}
-              type={"email"}
-              value={email}
-              onChange={(value) => setEmail(value)}
-              placeholder={"Email"}
-              className={styles.input}
+          <div className={styles.buttonsBlock}>
+            <Button
+              title={"Cancel"}
+              type={ButtonTypes.TextButton}
+              onClick={() => {}}
+              className={styles.buttonCancel}
             />
 
-            <Input
-              title={"Phone number "}
-              type={"tel"}
-              value={phone}
-              onChange={(value) => setPhone(value)}
-              placeholder={"Phone"}
-              className={styles.input}
-            />
-
-            <Input
-              title={"Telegram"}
-              type={"text"}
-              value={telegram}
-              onChange={(value) => setTelegram(value)}
-              placeholder={"Enter the profile link telegram"}
-              className={styles.input}
+            <Button
+              title={"Save"}
+              type={ButtonTypes.TextButton}
+              onClick={() => {}}
+              className={styles.buttonSave}
             />
           </div>
         </div>
-      </div>
+      ) : null}
 
       {isHead && (
         <div className={styles.containerHead}>
@@ -257,21 +308,9 @@ const ProfilePage = () => {
         </div>
       )}
 
-      <div className={styles.buttonsBlock}>
-        <Button
-          title={"Cancel"}
-          type={ButtonTypes.TextButton}
-          onClick={() => {}}
-          className={styles.buttonCancel}
-        />
-
-        <Button
-          title={"Save"}
-          type={ButtonTypes.TextButton}
-          onClick={() => {}}
-          className={styles.buttonSave}
-        />
-      </div>
+      {activeTab === TabsProfile.CompanyProfile ? (
+        <CompanyProfile CompanyList={COMPANY_LIST} />
+      ) : null}
     </div>
   );
 };

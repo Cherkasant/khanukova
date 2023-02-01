@@ -3,7 +3,7 @@
     padding: 30px;
     position: absolute;
     top: 54px;
-    left: 440px;
+    left: 30%;
     right: 0;
     bottom: 0;
     outline: none;
@@ -90,6 +90,7 @@
 .mainBlock {
     display: flex;
     justify-content: space-between;
+
 }
 
 .arrowOpen {

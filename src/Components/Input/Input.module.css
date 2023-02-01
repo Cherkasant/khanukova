@@ -35,7 +35,7 @@
 
 .input:focus::placeholder {
     position: absolute;
-    top: 8px;
+    top: 2px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
