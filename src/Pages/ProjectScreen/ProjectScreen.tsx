@@ -45,11 +45,11 @@ const ProjectScreen = () => {
     setAddItem(!addItem);
     dispatch(setSelectedModalVisible(true));
   };
-  const [activeTab, setActiveTab] = useState(Tabs.default);
+  const [activeTab, setActiveTab] = useState(Tabs.Planning);
   const onTabClick = (newTab: Tabs) => {
     if (newTab !== activeTab) {
       setActiveTab(newTab);
-    } else setActiveTab(Tabs.default);
+    } else setActiveTab(Tabs.Planning);
   };
 
   const [title, setTitle] = useState("");

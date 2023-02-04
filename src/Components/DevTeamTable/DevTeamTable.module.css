@@ -1,0 +1,102 @@
+.tableContainer {
+    border: none;
+    outline: none;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.tableHeader {
+    padding: 5px 40px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+    border: none;
+    border-bottom: 1px solid #C8C8C8;
+    border-top: 1px solid #C8C8C8;
+    background: #FFFFFF;
+}
+
+.tableCell {
+    padding: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    border: none;
+    border-bottom: 1px solid #C8C8C8;
+}
+
+.nameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+}
+
+.name:hover {
+    cursor: pointer;
+    color: #0E4298;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #9BACC9;
+    color: #FFFFFF;
+}
+
+.avatar:hover {
+    background: #0E4298;
+}
+
+.btn {
+    width: 120px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.telegram {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #A3A3A3;
+    display: flex;
+    justify-content: start;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+}

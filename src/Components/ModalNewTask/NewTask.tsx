@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import ReactModal, { Props } from "react-modal";
+import "react-dropdown/style.css";
 import styles from "./NewTask.module.css";
 import { CloseModalIcon } from "../../Assets/icons/CloseModalIcon";
 import { AttachmentIcon } from "../../Assets/icons/AttachmentIcon";

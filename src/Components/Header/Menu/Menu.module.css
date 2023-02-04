@@ -4,7 +4,7 @@
     width: 222px;
     background-color: white;
     height: calc(100vh - 100px);
-    padding: 25px 20px 40px 25px;
+    padding: 30px 20px 40px 20px;
     justify-content: space-between;
 }
 
@@ -31,11 +31,41 @@
     color: #727171;
 }
 
+.activeNavButton path {
+    stroke: #1258CA;
+}
+
+.activeNavButton circle {
+    stroke: #1258CA;
+}
+
 .div {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #212121;
+    font-family: 'Inter';
+    font-style: normal;
+}
+
+.div:hover path {
+    stroke: #1258CA;
+}
+
+.div:hover rect {
+    stroke: #1258CA;
+}
+
+.div:hover circle {
+    stroke: #1258CA;
+}
+
+.div:hover {
+    color: #0E4298;
 }
 
 .list {

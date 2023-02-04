@@ -2,11 +2,9 @@
     width: 100%;
     height: 100vh;
     position: relative;
+    padding: 22px 34px 45px 43px;
 }
 
-.header {
-    padding: 15px 40px;
-}
 
 .title {
     font-family: 'Inter';
@@ -16,11 +14,10 @@
     line-height: 39px;
     color: #0E4298;
     text-align: start;
-    margin-bottom: 30px;
+
 }
 
 .containerBlockWithBtn {
-    padding: 8px 40px;
     display: flex;
     flex-direction: column;
 }
@@ -37,7 +34,7 @@
 
 .containerContactInfo {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: 80px;
 }
 
@@ -225,7 +222,7 @@
     justify-content: end;
     gap: 20px;
     position: absolute;
-    bottom: 100px;
+    bottom: 140px;
     right: 35px;
 }
 
