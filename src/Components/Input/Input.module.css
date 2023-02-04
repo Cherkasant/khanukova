@@ -58,6 +58,7 @@
 }
 
 .title {
+    text-align: start;
     font-weight: 500;
     font-size: 14px;
     line-height: 140%;

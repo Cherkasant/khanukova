@@ -16,6 +16,7 @@ import { useNavigate } from "react-router";
 import { logoutUser } from "../../../Redux/Reducers/authReducer";
 import authSelectors from "../../../Redux/Selectors/authSelectors";
 import { PathNames } from "../../../Pages/Router/Router";
+import { MyProfileIcon } from "../../../Assets/icons/MyProfileIcon";
 
 const UserMenu = () => {
   const { pathname } = useLocation();
@@ -32,11 +33,12 @@ const UserMenu = () => {
   };
 
   const navButtons = [
-    { name: "Chats", icon: <ChatsIcon />, link: "/" },
+    { name: "My profile", icon: <MyProfileIcon />, link: "/profile" },
+    { name: "Chats", icon: <ChatsIcon />, link: "" },
     {
       name: "Projects",
       icon: <ProjectsIcon />,
-      link: "",
+      link: "/",
       button: <ArrayDownIcon />,
       active: true,
     },

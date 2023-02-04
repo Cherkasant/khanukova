@@ -10,6 +10,7 @@ import { DatePicker, Space } from "antd";
 import TabsListProfile from "../../Components/TabsListProfile";
 import { CompanyList, TabsProfile } from "../../Components/constants/@types";
 import CompanyProfile from "../../Components/CompanyProfile";
+import DevTeamTable from "../../Components/DevTeamTable";
 
 const ProfilePage = () => {
   const [name, setName] = useState("Ivanova Irina");
@@ -66,43 +67,90 @@ const ProfilePage = () => {
 
   const COMPANY_LIST = useMemo(
     () => [
-      { name: "CompanyName", key: CompanyList.CompanyName },
-      { name: "LogoCompany", key: CompanyList.LogoCompany },
-      { name: "WebsiteDomain", key: CompanyList.WebsiteDomain },
-      { name: "Tagline", key: CompanyList.Tagline },
-      { name: "ClientIndustry", key: CompanyList.ClientIndustry },
-      { name: "SoftwareStack", key: CompanyList.SoftwareStack },
-      { name: "Industries", key: CompanyList.Industries },
-      { name: "CompanyDescription", key: CompanyList.CompanyDescription },
+      {
+        name: "CompanyName",
+        key: CompanyList.CompanyName,
+        answers: "CAPIX",
+      },
+      { name: "LogoCompany", key: CompanyList.LogoCompany, answers: "CAPIX" },
+      {
+        name: "WebsiteDomain",
+        key: CompanyList.WebsiteDomain,
+        answers: "https://",
+      },
+      { name: "Tagline", key: CompanyList.Tagline, answers: "CAPIX" },
+      {
+        name: "ClientIndustry",
+        key: CompanyList.ClientIndustry,
+        answers: "CAPIX",
+      },
+      {
+        name: "SoftwareStack",
+        key: CompanyList.SoftwareStack,
+        answers: "CAPIX",
+      },
+      { name: "Industries", key: CompanyList.Industries, answers: "CAPIX" },
+      {
+        name: "CompanyDescription",
+        key: CompanyList.CompanyDescription,
+        answers:
+          "Our company is one of the largest and oldest car-manufacturing companies in Germany.",
+      },
       {
         name: "FullCompanyDescription",
         key: CompanyList.FullCompanyDescription,
+        answers:
+          "Our cars are manufactured in accordance with the highest international standards. They are sold in different countries of the world. The motors manufactured by our company are used not only in the automobile industry. ",
       },
-      { name: "AverageHourlyRate", key: CompanyList.AverageHourlyRate },
-      { name: "MinimumBudget", key: CompanyList.MinimumBudget },
-      { name: "TeamSize", key: CompanyList.TeamSize },
-      { name: "Location", key: CompanyList.Location },
-      { name: "FoundationDate", key: CompanyList.FoundationDate },
-      { name: "ClientsFocus", key: CompanyList.ClientsFocus },
-      { name: "ContactDetails", key: CompanyList.ContactDetails },
+      {
+        name: "AverageHourlyRate",
+        key: CompanyList.AverageHourlyRate,
+        answers: "CAPIX",
+      },
+      {
+        name: "MinimumBudget",
+        key: CompanyList.MinimumBudget,
+        answers: "CAPIX",
+      },
+      { name: "TeamSize", key: CompanyList.TeamSize, answers: "CAPIX" },
+      { name: "Location", key: CompanyList.Location, answers: "CAPIX" },
+      {
+        name: "FoundationDate",
+        key: CompanyList.FoundationDate,
+        answers: "CAPIX",
+      },
+      { name: "ClientsFocus", key: CompanyList.ClientsFocus, answers: "CAPIX" },
+      {
+        name: "ContactDetails",
+        key: CompanyList.ContactDetails,
+        answers: "CAPIX",
+      },
       {
         name: "ProjectExpertContactDetails",
         key: CompanyList.ProjectExpertContactDetails,
+        answers: "CAPIX",
       },
-      { name: "LinkToClient", key: CompanyList.LinkToClient },
-      { name: "ClientPortrait", key: CompanyList.ClientPortrait },
+      { name: "LinkToClient", key: CompanyList.LinkToClient, answers: "CAPIX" },
+      {
+        name: "ClientPortrait",
+        key: CompanyList.ClientPortrait,
+        answers: "CAPIX",
+      },
     ],
     []
   );
 
   return (
     <div className={styles.container}>
-      <Title name={"My Profile"} className={styles.title} />
-      <TabsListProfile
-        activeTab={activeTab}
-        onSelectTab={onTabClick}
-        tabsList={TABS_NAMES}
-      />
+      <div className={styles.header}>
+        <Title name={"My Profile"} className={styles.title} />
+        <TabsListProfile
+          activeTab={activeTab}
+          onSelectTab={onTabClick}
+          tabsList={TABS_NAMES}
+        />
+      </div>
+
       {activeTab === TabsProfile.PersonalInfo ? (
         <div className={styles.containerBlockWithBtn}>
           <div className={styles.containerInfo}>
@@ -198,7 +246,7 @@ const ProfilePage = () => {
         </div>
       ) : null}
 
-      {isHead && (
+      {isHead && activeTab === TabsProfile.PersonalInfo ? (
         <div className={styles.containerHead}>
           <h2 className={styles.subTitle}>Info for Head</h2>
 
@@ -306,11 +354,12 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
 
       {activeTab === TabsProfile.CompanyProfile ? (
         <CompanyProfile CompanyList={COMPANY_LIST} />
       ) : null}
+      {activeTab === TabsProfile.DevTeam ? <DevTeamTable /> : null}
     </div>
   );
 };
