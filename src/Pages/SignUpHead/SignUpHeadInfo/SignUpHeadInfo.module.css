@@ -13,6 +13,7 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
 .titleBlock {
     width: 100%;
     display: flex;
@@ -56,10 +57,48 @@
     margin-bottom: 50px;
 }
 
-.input{
-    height: 40px;
+.checkboxBlockTitle {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+    text-align: left;
+    margin-bottom: 7px;
 }
 
+.checkboxContainer {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    column-gap: 40px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+
+}
+
+.checkboxInput {
+    border: none;
+    width: 230px;
+    height: 16px;
+    border-radius: 0;
+    border-bottom: 1px solid #0e4298;
+}
+
+.checkboxInput:hover,
+.checkboxInput:focus {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #0e4298;
+}
+
+.input {
+    height: 40px;
+}
 
 .button {
     width: 100%;

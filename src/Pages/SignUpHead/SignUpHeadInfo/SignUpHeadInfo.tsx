@@ -1,11 +1,10 @@
 import React, {ChangeEvent, useState} from "react";
-import "react-dropdown/style.css";
-import "react-phone-number-input/style.css";
 
-import "intl-tel-input/build/css/intlTelInput.css";
-
+import {UploadOutlined} from '@ant-design/icons';
+import type {UploadProps} from 'antd';
+import {Button, message, Upload} from 'antd';
 import Input from "../../../Components/Input";
-import Button, {ButtonTypes} from "../../../Components/Button";
+import PuzzleButton, {ButtonTypes} from "../../../Components/PuzzleButton";
 import styles from "./SignUpHeadInfo.module.css";
 import Title from "../../../Components/Title";
 import {PathNames} from "../../Router/Router";
@@ -14,15 +13,6 @@ import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router";
 import Checkbox from "../../../Components/Checkbox";
 
-const options = [
-    // { value: "productOwner", label: "Product Owner" },
-    {value: "ceo", label: "CEO"},
-    {value: "cto", label: "CTO"},
-    {value: "projectManger", label: "Project Manager"},
-    // { value: "designer", label: "Designer" },
-    // { value: "qa", label: "QA" },
-    // { value: "programmer", label: "Programmer" },
-];
 
 const SignUpHeadInfo = () => {
     const dispatch = useDispatch();
@@ -58,7 +48,19 @@ const SignUpHeadInfo = () => {
             })
         );
     };
-
+    const props: UploadProps = {
+        beforeUpload: (file) => {
+            const isPNG = file.type === 'image/png';
+            const isJPG = file.type === 'image/jpg';
+            if (!isPNG && !isJPG) {
+                message.error(`${file.name} is not a png or jpg file`);
+            }
+            return isPNG || isJPG || Upload.LIST_IGNORE;
+        },
+        onChange: (info) => {
+            console.log(info.fileList);
+        },
+    };
     return (
         <>
             <div className={styles.container}>
@@ -75,6 +77,14 @@ const SignUpHeadInfo = () => {
                             title={"1. Company name"}
                             className={styles.input}
                         />
+                        <div className={styles.uploadContainer}>
+                            <div className={styles.uploadContainerTitle}>
+                                2. Logo company - 300x300, png or jpg, white background*
+                            </div>
+                            <Upload {...props}>
+                                <Button icon={<UploadOutlined/>}>Add a file</Button>
+                            </Upload>
+                        </div>
                         <Input
                             value={""}
                             onChange={onSignUp}
@@ -88,13 +98,13 @@ const SignUpHeadInfo = () => {
                                 "4. Tagline (service description in one sentence or mission/vision)*"
                             }
                             className={styles.input}
-                        />{" "}
+                        />
                         <Input
                             value={""}
                             onChange={onSignUp}
                             title={"5. Industries that your clients are coming from*"}
                             className={styles.input}
-                        />{" "}
+                        />
                         <Input
                             value={""}
                             onChange={onSignUp}
@@ -102,28 +112,218 @@ const SignUpHeadInfo = () => {
                             className={styles.input}
                         />
                         <div className={styles.checkboxBlock}>
-                            <div className={styles.checkboxBlockTitle}>7. Choose the preferable industries where you
-                                have the most successful experience and where the potential clients are expected to come
-                                from*
+                            <div className={styles.checkboxBlockTitle}>
+                                7. Choose the preferable industries where you have the most
+                                successful experience and where the potential clients are
+                                expected to come from*
                             </div>
                             <div className={styles.checkboxContainer}>
-                                <Checkbox isChecked={false} handleChange={() => {
-                                }} label={'Ecommerce'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'AI and Machine Learning'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'Martech (Marketing Tech'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'Live Chat software'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'Logistics'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'Data Science'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'HR Software'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'Webinar software'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'eLearning'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'Cybersecurity'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'Augmented Reality'}/><Checkbox isChecked={false} handleChange={() => {
-                            }} label={'Project Management software'}/>
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Ecommerce"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"AI and Machine Learning"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Martech (Marketing Tech"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Live Chat software"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Logistics"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Data Science"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"HR Software"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Webinar software"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"eLearning"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Cybersecurity"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Augmented Reality"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Project Management software"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Fintech"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Blockchain"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Marketplaces"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Point of sale software"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Mobile Development"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Voice recognition"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"CRM software"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Game Development"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Video (Face) recognition"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"ERP software"}
+                                />
+                                <Checkbox
+                                    isChecked={false}
+                                    handleChange={() => {
+                                    }}
+                                    label={"Other"}
+                                />
+                                <Input
+                                    value={""}
+                                    onChange={() => {
+                                    }}
+                                    className={styles.checkboxInput}
+                                />
                             </div>
                         </div>
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"8. Company Short Description*"}
+                            className={styles.input}
+                        />
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"9. Full company Description*"}
+                            className={styles.input}
+                        />
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"12. Team Size*"}
+                            className={styles.input}
+                        />
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"13. Location*"}
+                            className={styles.input}
+                        />
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={
+                                "15. Client's Focus (Ideal Client Profile based on your portfolio)"
+                            }
+                            className={styles.input}
+                        />
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"16. Marketing manager contact details*"}
+                            className={styles.input}
+                        />
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={
+                                "17. Tech or Project Expert contact details (who will be in touch with a client)*"
+                            }
+                            className={styles.input}
+                        />
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"18. Links to client's success cases*"}
+                            className={styles.input}
+                        />
+                        <Input
+                            value={""}
+                            onChange={onSignUp}
+                            title={"19. Describe ideal client portrait*"}
+                            className={styles.input}
+                        />
                     </div>
-                    <Button
+                    <PuzzleButton
                         title={"Create an Account"}
                         type={ButtonTypes.TextButton}
                         className={styles.button}
