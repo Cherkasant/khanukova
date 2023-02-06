@@ -52,10 +52,11 @@ const SignUpHeadInfo = () => {
         beforeUpload: (file) => {
             const isPNG = file.type === 'image/png';
             const isJPG = file.type === 'image/jpg';
-            if (!isPNG && !isJPG) {
+            const isJPEG = file.type === 'image/jpeg';
+            if (!isPNG && !isJPG && !isJPEG) {
                 message.error(`${file.name} is not a png or jpg file`);
             }
-            return isPNG || isJPG || Upload.LIST_IGNORE;
+            return isPNG || isJPG || isJPEG || Upload.LIST_IGNORE;
         },
         onChange: (info) => {
             console.log(info.fileList);
@@ -82,7 +83,7 @@ const SignUpHeadInfo = () => {
                                 2. Logo company - 300x300, png or jpg, white background*
                             </div>
                             <Upload {...props}>
-                                <Button icon={<UploadOutlined/>}>Add a file</Button>
+                                <Button icon={<UploadOutlined/>} className={styles.uploadButton}>Add a file</Button>
                             </Upload>
                         </div>
                         <Input

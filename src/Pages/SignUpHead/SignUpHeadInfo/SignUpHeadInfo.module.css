@@ -57,7 +57,20 @@
     margin-bottom: 50px;
 }
 
-.checkboxBlockTitle {
+.uploadContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.uploadButton {
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.checkboxBlockTitle, .uploadContainerTitle {
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
