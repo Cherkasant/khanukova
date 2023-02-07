@@ -12,6 +12,7 @@ import {registerUser} from "../../../Redux/Reducers/authReducer";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router";
 import Checkbox from "../../../Components/Checkbox";
+import Dropdown from "react-dropdown";
 
 
 const SignUpHeadInfo = () => {
@@ -30,6 +31,11 @@ const SignUpHeadInfo = () => {
         setChecked(event.target.checked);
     };
     const [value, setValue] = useState<any>();
+    const currencyOptions = [
+        {value: "EUR", label: "EUR"},
+        {value: "USD", label: "USD"}
+    ];
+    const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null);
 
     const onSignUp = () => {
         dispatch(
@@ -277,6 +283,50 @@ const SignUpHeadInfo = () => {
                             title={"9. Full company Description*"}
                             className={styles.input}
                         />
+                        <div className={styles.rateContainer}>
+                            <div className={styles.rateContainerTitle}>10. Average hourly rate*</div>
+                            <div className={styles.rateContainerInput}>
+                                <Input
+                                    value={""}
+                                    onChange={onSignUp}
+                                    className={styles.inputRate}
+                                />
+                                <Dropdown
+                                    options={currencyOptions}
+                                    onChange={setSelectedCurrencyOptions}
+                                    value={selectedCurrencyOptions}
+                                    placeholder="USD"
+                                    className={styles.dropdownContainer}
+                                    controlClassName={styles.dropdownControl}
+                                    placeholderClassName={styles.dropdownPlaceholder}
+                                    arrowClosed={<span className={styles.arrowClosed}/>}
+                                    arrowOpen={<span className={styles.arrowOpen}/>}
+                                    menuClassName={styles.dropdownMenu}
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.budgetContainer}>
+                            <div className={styles.budgetContainerTitle}>11. Minimum project budget*</div>
+                            <div className={styles.budgetContainerInput}>
+                                <Input
+                                    value={""}
+                                    onChange={onSignUp}
+                                    className={styles.inputRate}
+                                />
+                                <Dropdown
+                                    options={currencyOptions}
+                                    onChange={setSelectedCurrencyOptions}
+                                    value={selectedCurrencyOptions}
+                                    placeholder="USD"
+                                    className={styles.dropdownContainer}
+                                    controlClassName={styles.dropdownControl}
+                                    placeholderClassName={styles.dropdownPlaceholder}
+                                    arrowClosed={<span className={styles.arrowClosed}/>}
+                                    arrowOpen={<span className={styles.arrowOpen}/>}
+                                    menuClassName={styles.dropdownMenu}
+                                />
+                            </div>
+                        </div>
                         <Input
                             value={""}
                             onChange={onSignUp}

@@ -113,6 +113,82 @@
     height: 40px;
 }
 
+.rateContainer, .budgetContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.rateContainerTitle, .budgetContainerTitle {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+    text-align: left;
+}
+
+.rateContainerInput, .budgetContainerInput {
+    display: flex;
+    gap: 15px;
+}
+
+.inputRate {
+    height: 40px;
+    width: 120px;
+}
+
+.dropdownControl {
+    width: 90px;
+    height: 44px;
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dropdownPlaceholder {
+    text-align: start;
+}
+
+.dropdownControl:hover {
+    border: 1px solid #4270a7;
+}
+
+.dropdownMenu {
+    border: 1px solid #d0d0d0;
+    border-radius: 0 0 10px 10px;
+    max-height: 150px;
+}
+
+.arrowClosed,
+.arrowOpen {
+    top: 19px;
+    border-color: #1258ca transparent transparent;
+    border-style: solid;
+    border-width: 5px 5px 0;
+    content: " ";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: 15px;
+    width: 0;
+}
+
+.arrowOpen {
+    border-color: transparent transparent #1258ca;
+    border-width: 0 5px 5px;
+}
+
 .button {
     width: 100%;
     justify-content: center;
