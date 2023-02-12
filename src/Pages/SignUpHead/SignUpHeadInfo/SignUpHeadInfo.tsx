@@ -4,7 +4,7 @@ import {UploadOutlined} from '@ant-design/icons';
 import type {UploadProps} from 'antd';
 import {Button, message, Upload} from 'antd';
 import Input from "../../../Components/Input";
-import PuzzleButton, {ButtonTypes} from "../../../Components/PuzzleButton";
+import PuzzleButton, {PuzzleButtonTypes} from "../../../Components/PuzzleButton";
 import styles from "./SignUpHeadInfo.module.css";
 import Title from "../../../Components/Title";
 import {PathNames} from "../../Router/Router";
@@ -375,11 +375,11 @@ const SignUpHeadInfo = () => {
                         />
                     </div>
                     <PuzzleButton
-                        title={"Create an Account"}
-                        type={ButtonTypes.TextButton}
+                        btnTitle={"Create an Account"}
+                        btnType={PuzzleButtonTypes.TextButton}
                         className={styles.button}
                         onClick={onSignUp}
-                        disabled={
+                        btnDisabled={
                             !(password !== "" && password === passwordConfirmation) ||
                             !checked
                         }

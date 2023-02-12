@@ -1,6 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
 import Input from "../../Components/Input";
-import PuzzleButton, {ButtonTypes} from "../../Components/PuzzleButton";
 import styles from "./SignIn.module.css";
 import Title from "../../Components/Title";
 import {NavLink} from "react-router-dom";
@@ -12,14 +11,16 @@ import {OpenEyeIcon} from "../../Assets/icons/OpenEyeIcon";
 import {PasswordTypes} from "../../Components/constants/@types";
 import {useDispatch} from "react-redux";
 import {signInUser} from "../../Redux/Reducers/authReducer";
+import {Button, Form} from "antd";
+import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
 
 const SignIn = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const onSignIn = () => {
+    const onSignIn = (values: any) => {
         dispatch(
             signInUser({
-                data: {email: login, password},
+                data: {email: values.email, password: values.password},
                 callback: () => {
                     navigate(PathNames.Home);
                 },
@@ -49,53 +50,59 @@ const SignIn = () => {
                             {"Please enter your login details to sign in"}
                         </div>
                     </div>
-
-                    <div className={styles.inputs}>
-                        <Input
-                            type={"email"}
-                            value={login}
-                            onChange={(value: string) => setLogin(value)}
-                            placeholder={"Email"}
-                        />
-                        <div className={styles.passwordContainer}>
-                            <Input
-                                type={type}
-                                value={password}
-                                onChange={(value: string) => setPassword(value)}
-                                placeholder={"Password"}
-                            />
-                            <div className={styles.eyeIcon} onClick={onEyeClick}>
-                                {password && type !== "password" ? (
-                                    <ClosedEyeIcon/>
-                                ) : (
-                                    <OpenEyeIcon/>
-                                )}
+                    <Form onFinish={onSignIn}>
+                        <div className={styles.inputs}>
+                            <Form.Item name="email"
+                            >
+                                <Input
+                                    type={"email"}
+                                    // value={login}
+                                    // onChange={(value: string) => setLogin(value)}
+                                    placeholder={"Email"}
+                                />
+                            </Form.Item>
+                            <div className={styles.passwordContainer}>
+                                <Form.Item name='password'>
+                                    <Input
+                                        type={type}
+                                        // value={password}
+                                        // onChange={(value: string) => setPassword(value)}
+                                        placeholder={"Password"}
+                                    />
+                                </Form.Item>
+                                <div className={styles.eyeIcon} onClick={onEyeClick}>
+                                    {password && type !== "password" ? (
+                                        <ClosedEyeIcon/>
+                                    ) : (
+                                        <OpenEyeIcon/>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className={styles.checkboxContainer}>
-                        <Checkbox
-                            isChecked={checked}
-                            handleChange={onChangeCheck}
-                            label={"Remember me"}
-                        />
 
-                        <div
-                            className={styles.line}
-                            onClick={() => navigate(PathNames.PasswordRequestPage)}
-                        >
-                            Forgot your password?
+                        <div className={styles.checkboxContainer}>
+                            <Checkbox
+                                isChecked={checked}
+                                handleChange={onChangeCheck}
+                                label={"Remember me"}
+                            />
+
+                            <div
+                                className={styles.line}
+                                onClick={() => navigate(PathNames.PasswordRequestPage)}
+                            >
+                                Forgot your password?
+                            </div>
                         </div>
-                    </div>
-
-                    <PuzzleButton
-                        title={"Login"}
-                        type={ButtonTypes.TextButton}
-                        className={styles.button}
-                        onClick={onSignIn}
-                        disabled={!(login !== "" || password !== "")}
-                    />
-
+                        <Button htmlType='submit'>Login</Button>
+                        <PuzzleButton htmlType='submit'
+                                      btnTitle={"Login"}
+                                      btnType={PuzzleButtonTypes.TextButton}
+                                      btnClassName={styles.button}
+                            // onClick={onSignIn}
+                                      btnDisabled={!(login !== "" || password !== "")}
+                        />
+                    </Form>
                     <div className={styles.info}>
                         {"Don`t have an account?"}
                         <NavLink to={PathNames.SignUp} className={styles.link}>

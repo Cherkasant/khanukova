@@ -1,7 +1,7 @@
 import React from "react";
 import {BellIcon} from "../../Assets/icons/BellIcon";
 import {UserIcon} from "../../Assets/icons/UserIcon";
-import PuzzleButton, {ButtonTypes} from "../PuzzleButton";
+import PuzzleButton from "../PuzzleButton";
 import Title from "../Title";
 import styles from "./Header.module.css";
 import UserName from "../UserName";
@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 import authSelectors from "../../Redux/Selectors/authSelectors";
 import {useNavigate} from "react-router";
 import {PathNames} from "../../Pages/Router/Router";
+import {PuzzleButtonTypes} from "../PuzzleButton/PuzzleButton";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -24,8 +25,8 @@ const Header = () => {
                 <div className={styles.iconsContainer}>
                     <div className={styles.notificationContainer}>
                         <PuzzleButton
-                            title={<BellIcon/>}
-                            type={ButtonTypes.IconButton}
+                            btnTitle={<BellIcon/>}
+                            btnType={PuzzleButtonTypes.IconButton}
                             className={styles.iconBell}
                         />
                         {hasMessage && <div className={styles.notificationCount}></div>}
@@ -34,8 +35,8 @@ const Header = () => {
                         <UserName username={"Irina Ivanova"}/>
                     ) : (
                         <PuzzleButton
-                            title={<UserIcon/>}
-                            type={ButtonTypes.IconButton}
+                            btnTitle={<UserIcon/>}
+                            btnType={PuzzleButtonTypes.IconButton}
                             className={styles.iconUser}
                             onClick={() => navigate(PathNames.SignIn)}
                         />

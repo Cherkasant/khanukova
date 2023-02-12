@@ -3,7 +3,7 @@ import styles from "./PasswordReset.module.css";
 import Title from "../../Components/Title";
 import Input from "../../Components/Input";
 
-import PuzzleButton, {ButtonTypes} from "../../Components/PuzzleButton";
+import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
 
 import {PasswordTypes} from "../../Components/constants/@types";
 import {ClosedEyeIcon} from "../../Assets/icons/ClosedEyeIcon";
@@ -96,11 +96,11 @@ const ResetPassword = () => {
                     </div>
 
                     <PuzzleButton
-                        title={"Save new password"}
-                        type={ButtonTypes.TextButton}
+                        btnTitle={"Save new password"}
+                        btnType={PuzzleButtonTypes.TextButton}
                         onClick={onSetPassword}
                         className={styles.button}
-                        disabled={!(password !== "" && password === passwordConfirm)}
+                        btnDisabled={!(password !== "" && password === passwordConfirm)}
                     />
                 </div>
             </div>

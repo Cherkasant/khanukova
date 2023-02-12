@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Title from "../../Components/Title";
 import styles from "./PasswordRequestPage.module.css";
 import Input from "../../Components/Input";
-import PuzzleButton, {ButtonTypes} from "../../Components/PuzzleButton";
+import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
 import {sendResetEmail} from "../../Redux/Reducers/authReducer";
 import {useDispatch} from "react-redux";
 import {PathNames} from "../Router/Router";
@@ -47,9 +47,9 @@ const PasswordRequestPage = () => {
                             placeholder={"Email"}
                         />
                         <PuzzleButton
-                            title={"Continue"}
-                            type={ButtonTypes.TextButton}
-                            disabled={!email}
+                            btnTitle={"Continue"}
+                            btnType={PuzzleButtonTypes.TextButton}
+                            btnDisabled={!email}
                             onClick={onSend}
                         />
                     </>

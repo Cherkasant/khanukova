@@ -7,7 +7,7 @@ import PhoneInput from "react-phone-number-input";
 import "intl-tel-input/build/css/intlTelInput.css";
 
 import Input from "../../Components/Input";
-import PuzzleButton, {ButtonTypes} from "../../Components/PuzzleButton";
+import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
 import styles from "./SignUpHead.module.css";
 import Title from "../../Components/Title";
 import {NavLink} from "react-router-dom";
@@ -160,11 +160,11 @@ const SignUpHead = () => {
                         <div className={styles.line}>Terms and Conditions</div>
                     </div>
                     <PuzzleButton
-                        title={"Next step"}
-                        type={ButtonTypes.TextButton}
+                        btnTitle={"Next step"}
+                        btnType={PuzzleButtonTypes.TextButton}
                         className={styles.button}
                         onClick={onSignUp}
-                        disabled={
+                        btnDisabled={
                             !(password !== "" && password === passwordConfirmation) ||
                             !checked
                         }

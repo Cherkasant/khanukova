@@ -1,35 +1,37 @@
-import React, {FC, ReactElement} from "react";
+import React, {FC, PropsWithChildren, ReactElement} from "react";
 import classNames from "classnames";
+import {Button} from "antd";
 
 import styles from "./PuzzleButton.module.css";
+import {ButtonProps} from "antd/es/button/button";
 
-export enum ButtonTypes {
+export enum PuzzleButtonTypes {
     TextButton = "text",
     IconButton = "icon",
 };
 
-type ButtonProps = {
-    title: string | ReactElement;
-    type: ButtonTypes;
+export type PuzzleButtonProps = PropsWithChildren<ButtonProps> & {
+    btnTitle?: string | ReactElement;
+    btnType?: PuzzleButtonTypes;
     onClick?: () => void;
-    className?: string;
-    disabled?: boolean;
+    btnClassName?: string;
+    btnDisabled?: boolean;
 };
 
-const PuzzleButton: FC<ButtonProps> = (props) => {
-    const {type, title, onClick, className, disabled} = props;
+const PuzzleButton: FC<PuzzleButtonProps> = (props) => {
+    const {btnType, btnTitle, btnClassName, onClick, btnDisabled} = props;
 
-    const buttonClassName = styles[type];
+    const buttonClassName = btnType && styles[btnType];
 
     return (
-        <div
-            className={classNames(styles.button, buttonClassName, className, {
-                [styles.disabled]: !!disabled,
+        <Button
+            className={classNames(styles.button, buttonClassName, btnClassName, {
+                [styles.disabled]: !!btnDisabled,
             })}
             onClick={onClick}
         >
-            {title}
-        </div>
+            {btnTitle}
+        </Button>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styles from "./ProfilePage.module.css";
-import PuzzleButton, {ButtonTypes} from "../../Components/PuzzleButton";
+import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
 import Input from "../../Components/Input";
 import Title from "../../Components/Title";
 import {PencilIcon} from "../../Assets/Profile/PencilIcon";
@@ -235,16 +235,16 @@ const ProfilePage = () => {
 
             <div className={styles.buttonsBlock}>
                 <PuzzleButton
-                    title={'Cancel'}
-                    type={ButtonTypes.TextButton}
+                    btnTitle={'Cancel'}
+                    btnType={PuzzleButtonTypes.TextButton}
                     onClick={() => {
                     }}
                     className={styles.buttonCancel}
                 />
 
                 <PuzzleButton
-                    title={"Save"}
-                    type={ButtonTypes.TextButton}
+                    btnTitle={"Save"}
+                    btnType={PuzzleButtonTypes.TextButton}
                     onClick={() => {
                     }}
                     className={styles.buttonSave}

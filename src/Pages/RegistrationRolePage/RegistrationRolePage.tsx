@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Role from "../../Components/Role";
 import RegisterContainer from "../../Components/RegisterContainer";
 import styles from "./RegistrationRolePage.module.css";
-import PuzzleButton, {ButtonTypes} from "../../Components/PuzzleButton";
+import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
 import {useNavigate} from "react-router";
 import {PathNames} from "../Router/Router";
 import {Roles} from "../../Components/constants/@types";
@@ -38,9 +38,9 @@ const RegistrationRolePage = () => {
                 />
                 <div className={styles.buttonContainer}>
                     <PuzzleButton
-                        title={"Next"}
-                        type={ButtonTypes.TextButton}
-                        disabled={activeButton}
+                        btnTitle={"Next"}
+                        btnType={PuzzleButtonTypes.TextButton}
+                        btnDisabled={activeButton}
                         className={styles.button}
                         onClick={() => navigate(PathNames.SignUpPageInfo)}
                     />

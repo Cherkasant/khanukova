@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import RegisterContainer from "../../Components/RegisterContainer";
 import styles from "./RegistrationInfoPage.module.css";
-import PuzzleButton, {ButtonTypes} from "../../Components/PuzzleButton";
+import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
 import Input from "../../Components/Input";
 
 const RegistrationInfoPage = () => {
@@ -47,9 +47,9 @@ const RegistrationInfoPage = () => {
 
                 <div className={styles.buttonContainer}>
                     <PuzzleButton
-                        title={"Next"}
-                        type={ButtonTypes.TextButton}
-                        disabled={activeButton}
+                        btnTitle={"Next"}
+                        btnType={PuzzleButtonTypes.TextButton}
+                        btnDisabled={activeButton}
                         className={styles.button}
                     />
                 </div>
