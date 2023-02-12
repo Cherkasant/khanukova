@@ -42,7 +42,7 @@ const DevTeamTable = () => {
   const columns: Array<Column> = useMemo(
     () => [
       {
-        Header: "Name",
+        Header: () => <div className={styles.headerName}>{"Name"}</div>,
         accessor: "name",
         Cell: (props: any) => (
           <div className={styles.nameContainer}>
@@ -65,17 +65,20 @@ const DevTeamTable = () => {
         ),
       },
       {
-        Header: "Positions",
+        Header: () => <div className={styles.headerName}>{"Positions"}</div>,
         accessor: "position",
+        Cell: ({ value }) => <div className={styles.headerName}>{value}</div>,
       },
       {
-        Header: "Email",
+        Header: () => <div className={styles.headerName}>{"Email"}</div>,
         accessor: "email",
+        Cell: ({ value }) => <div className={styles.headerName}>{value}</div>,
       },
 
       {
-        Header: "Project",
+        Header: () => <div className={styles.headerName}>{"Project"}</div>,
         accessor: "project",
+        Cell: ({ value }) => <div className={styles.headerName}>{value}</div>,
       },
       {
         Header: "",

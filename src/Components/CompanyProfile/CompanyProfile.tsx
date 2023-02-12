@@ -10,10 +10,7 @@ type CompanyProfileProps = {
   onChangeList?: (value: string) => void;
 };
 
-const CompanyProfile: FC<CompanyProfileProps> = ({
-  CompanyList,
-  onChangeList,
-}) => {
+const CompanyProfile: FC<CompanyProfileProps> = ({ CompanyList }) => {
   const [edit, setEdit] = useState(false);
   const onEditClick = () => {
     setEdit(!edit);
@@ -30,7 +27,7 @@ const CompanyProfile: FC<CompanyProfileProps> = ({
               name={"text"}
               wrap={"soft"}
               className={styles.input}
-              value={list.answers}
+              defaultValue={list.answers}
               disabled={edit}
             />
             <div className={styles.icon} onClick={onEditClick}>

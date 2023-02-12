@@ -1,14 +1,14 @@
 .container {
     width: 100%;
+    padding: 15px 30px 10px 30px;
 }
 
 .topContainer {
-    padding: 15px 34px 10px 53px;
+
 }
 
 
 .widgets {
-
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -44,7 +44,6 @@
     height: 40px;
     border-color: #1258CA;
     border-radius: 25px;
-
 }
 
 .searchInput::placeholder {
@@ -70,6 +69,7 @@
     line-height: 39px;
     color: #0E4298;
     background-color: #F6F8FC;
+    padding: 0;
 }
 
 .title:hover, .title:focus {
@@ -102,7 +102,7 @@
 .edit {
     position: absolute;
     top: 30px;
-    left: 110px;
+    left: 100px;
 }
 
 .edit:hover {
@@ -171,7 +171,7 @@
 }
 
 .bottomContainer {
-    padding: 15px 34px 10px 53px;
+    padding-top: 15px;
 }
 
 .milestoneButton {
@@ -192,4 +192,37 @@
 .milestoneButton:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+.clientRequestContainer {
+    width: 100%;
+    height: 75%;
+    display: flex;
+    gap: 31px;
+    margin-top: 20px;
+}
+
+.openedRequest, .inProgressRequest, .closedRequest {
+    padding: 15px 15px 20px 10px;
+    background: #D9E1F0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.addRequestBtn {
+    padding-left: 20px;
+    display: flex;
+    justify-content: start;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #828282;
+}
+
+.addRequestBtn:hover {
+    cursor: pointer;
 }

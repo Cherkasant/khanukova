@@ -1,24 +1,25 @@
 .tableContainer {
-    border: none;
+    border: 1px solid #C8C8C8;
+    border-bottom: none;
     outline: none;
     border-spacing: 0;
     width: 100%;
 }
 
 .tableHeader {
-    padding: 5px 40px;
+    padding: 5px 20px;
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
     color: #212121;
     border: none;
     border-bottom: 1px solid #C8C8C8;
-    border-top: 1px solid #C8C8C8;
     background: #FFFFFF;
+
 }
 
 .tableCell {
-    padding: 10px;
+    padding: 16px 20px;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -29,7 +30,7 @@
 
 .nameContainer {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     gap: 8px;
 }
@@ -99,4 +100,8 @@
 .infoContainer {
     display: flex;
     flex-direction: column;
+}
+
+.headerName {
+    display: flex;
 }

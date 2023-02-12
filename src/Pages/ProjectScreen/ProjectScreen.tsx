@@ -6,17 +6,26 @@ import Tab from "../../Components/Tabs";
 import { FilterIcon } from "../../Assets/icons/FilterIcon";
 import { AddRoundIcon } from "../../Assets/icons/AddRoundIcon";
 import { EditTitleIcon } from "../../Assets/icons/EditTitleIcon";
-import Table from "../../Components/Table";
 import NewTask from "../../Components/ModalNewTask";
 import { useDispatch, useSelector } from "react-redux";
 import postSelector from "../../Redux/Selectors/postSelector";
 import {
+  setEcaseModalVisible,
   setFilterVisible,
+  setRequestModalVisible,
   setSelectedModalVisible,
   setTitleTask,
 } from "../../Redux/Reducers/postReducer";
 import Input from "../../Components/Input";
 import FilterProjectScreen from "../../Components/FilteresPanel/FilterProjectScreen";
+import Table from "../../Components/Table";
+import ClientsRequestCard from "../../Components/ClientsRequestCard";
+import {
+  requestInProgressArray,
+  requestOpenedArray,
+} from "../../Components/ClientsRequestCard/constantsRequest";
+import ModalEcase from "../../Components/ModalEcase";
+import ModalRequest from "../../Components/ModalRequest";
 
 const TABS_NAMES = [
   { name: "Planning", key: Tabs.Planning },
@@ -33,11 +42,20 @@ const ProjectScreen = () => {
     dispatch(setFilterVisible(true));
   };
   const isFilterVisible = useSelector(postSelector.getFilter);
+  const isSaveClicked = useSelector(postSelector.getTask);
 
   const isVisible = useSelector(postSelector.getModal);
+  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal);
+  const isModalRequestVisible = useSelector(postSelector.getRequestModal);
   const dispatch = useDispatch();
   const onCloseClick = () => {
     dispatch(setSelectedModalVisible(false));
+  };
+  const onEcaseModalCloseClick = () => {
+    dispatch(setEcaseModalVisible(false));
+  };
+  const onRequestModalCloseClick = () => {
+    dispatch(setRequestModalVisible(false));
   };
 
   const [addItem, setAddItem] = useState(false);
@@ -97,29 +115,63 @@ const ProjectScreen = () => {
         />
       </div>
       <div className={styles.blueLine}></div>
-      <div className={styles.bottomContainer}>
-        <div className={styles.filterButton} onClick={onFilterClick}>
-          <FilterIcon />
-          {"Filters"}
+      {activeTab === Tabs.Planning ? (
+        <div className={styles.bottomContainer}>
+          <div className={styles.filterButton} onClick={onFilterClick}>
+            <FilterIcon />
+            {"Filters"}
+          </div>
         </div>
-      </div>
-      {!addItem ? (
+      ) : null}
+      {!isSaveClicked && activeTab === Tabs.Planning ? (
         <div className={styles.bottomContainer}>
           <div className={styles.milestoneButton} onClick={onAddItemClick}>
             <AddRoundIcon />
             {"Add item"}
           </div>
         </div>
-      ) : (
-        <Table />
-      )}
+      ) : null}
+      {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
 
+      {isFilterVisible ? <FilterProjectScreen /> : null}
+      {activeTab === Tabs.ClientsRequests ? (
+        <div className={styles.clientRequestContainer}>
+          <div className={styles.openedRequest}>
+            <ClientsRequestCard
+              openedArray={requestOpenedArray}
+              nameOfArray={"Opened"}
+            />
+            <div className={styles.addRequestBtn}>{"+ Add request"}</div>
+          </div>
+          <div className={styles.inProgressRequest}>
+            <ClientsRequestCard
+              openedArray={requestInProgressArray}
+              nameOfArray={"In progress"}
+            />
+          </div>
+          <div className={styles.closedRequest}>
+            <ClientsRequestCard
+              openedArray={requestInProgressArray}
+              nameOfArray={"Closed"}
+            />
+          </div>
+        </div>
+      ) : null}
       <NewTask
         isOpen={isVisible}
         onRequestClose={onCloseClick}
         ariaHideApp={false}
       />
-      {isFilterVisible ? <FilterProjectScreen /> : null}
+      <ModalEcase
+        isOpen={isModalEcaseVisible}
+        onRequestClose={onEcaseModalCloseClick}
+        ariaHideApp={false}
+      />
+      <ModalRequest
+        isOpen={isModalRequestVisible}
+        onRequestClose={onRequestModalCloseClick}
+        ariaHideApp={false}
+      />
     </div>
   );
 };

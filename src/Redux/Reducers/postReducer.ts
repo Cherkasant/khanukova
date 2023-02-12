@@ -6,6 +6,9 @@ type PostReducerState = {
   TaskForm: TaskType | null;
   TaskTitle: string;
   isFilterVisible: boolean;
+  isEcaseModalOpened: boolean;
+  isRequestModalOpened: boolean;
+  titleRequest: string;
 };
 
 const initialState: PostReducerState = {
@@ -13,6 +16,9 @@ const initialState: PostReducerState = {
   TaskForm: null,
   TaskTitle: "",
   isFilterVisible: false,
+  isEcaseModalOpened: false,
+  isRequestModalOpened: false,
+  titleRequest: "",
 };
 
 const postsSlice = createSlice({
@@ -31,6 +37,16 @@ const postsSlice = createSlice({
     setFilterVisible: (state, action: PayloadAction<boolean>) => {
       state.isFilterVisible = action.payload;
     },
+    setEcaseModalVisible: (state, action: PayloadAction<boolean>) => {
+      state.isEcaseModalOpened = action.payload;
+    },
+    setRequestModalVisible: (state, action: PayloadAction<boolean>) => {
+      state.isRequestModalOpened = action.payload;
+    },
+    setTitleRequest: (state, action: PayloadAction<string>) => {
+      state.titleRequest = action.payload;
+      state.isRequestModalOpened = true;
+    },
   },
 });
 
@@ -39,6 +55,9 @@ export const {
   setTaskCard,
   setTitleTask,
   setFilterVisible,
+  setEcaseModalVisible,
+  setRequestModalVisible,
+  setTitleRequest,
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;

@@ -6,12 +6,13 @@ import { ArrowDropDownIcon } from "../../Assets/icons/ArrowDropDownIcon";
 import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedModalVisible } from "../../Redux/Reducers/postReducer";
-import PostSelector from "../../Redux/Selectors/postSelector";
 import { CardTaskType } from "../../Redux/Types/tasks";
 import { AddNewTaskIcon } from "../../Assets/icons/AddNewTaskIcon";
 import classnames from "classnames";
+import classNames from "classnames";
 import { SortIcon } from "../../Assets/icons/SortIcon";
 import { RotateSortIcon } from "../../Assets/icons/RotateSortIcon";
+import PostSelector from "../../Redux/Selectors/postSelector";
 
 const Table = () => {
   const DATA: CardTaskType = [
@@ -70,6 +71,10 @@ const Table = () => {
   ];
   const [taskInfo, setTaskInfo] = useState<CardTaskType>(DATA);
   const task = useSelector(PostSelector.getTask);
+  const [isOpened, setOpened] = useState(false);
+  const onArrowClick = () => {
+    setOpened(!isOpened);
+  };
   useEffect(() => {
     if (task) {
       // @ts-ignore
@@ -94,14 +99,25 @@ const Table = () => {
       ),
       accessor: "item",
       Cell: ({ value }) => (
-        <div className={styles.container}>
+        <div className={styles.container} key={value}>
           <div className={styles.cell}>
-            <ArrowDropDownIcon />
+            <div className={styles.arrow} onClick={onArrowClick}>
+              <ArrowDropDownIcon />
+            </div>
             {value}
           </div>
           <div className={styles.addTask} onClick={onAddTaskClick}>
-            <AddNewTaskIcon key={value} />
+            <AddNewTaskIcon />
           </div>
+          {isOpened ? (
+            <div
+              className={classNames(styles.list, {
+                [styles.listActive]: isOpened,
+              })}
+            >
+              <div className={styles.el}>{"subtask"}</div>
+            </div>
+          ) : null}
         </div>
       ),
     },
@@ -227,7 +243,7 @@ const Table = () => {
               {row.cells.map((cell) => {
                 return (
                   <td {...cell.getCellProps()} className={styles.tableCell}>
-                    {cell.render("Cell", { color: "Blue" })}
+                    {cell.render("Cell")}
                   </td>
                 );
               })}

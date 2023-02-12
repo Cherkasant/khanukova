@@ -1,21 +1,27 @@
 .tableContainer {
     border: 1px solid #C8C8C8;
-    border-left: none;
     border-right: none;
     border-spacing: 0;
     width: 100%;
 }
 
 .tableHeader {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
     color: #212121;
-    border: 1px solid #C8C8C8;
+    border-right: 1px solid #C8C8C8;
     border-left: none;
+    border-bottom: none;
+    border-top: none;
+    background: #FFFFFF;
 }
 
 .tableCell {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
     padding: 10px;
     font-weight: 400;
     font-size: 14px;
@@ -87,7 +93,7 @@
 }
 
 .dependence {
-
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -152,4 +158,33 @@
 
 .yellow {
     background: #DDD625;
+}
+
+.list {
+    display: flex;
+}
+
+.list {
+    cursor: pointer;
+}
+
+.listActive {
+    display: block;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #212121;
+    margin-top: 5px;
+}
+
+.el {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.arrow {
+    cursor: pointer;
 }
