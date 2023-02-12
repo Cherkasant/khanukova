@@ -41,3 +41,15 @@ export const Colors = [
   { value: "Brown", label: "Brown" },
   { value: "Fiolet", label: "Fiolet" },
 ];
+
+export const Dependence = [
+  { value: "Test1", label: "Test1" },
+  { value: "Test2", label: "Test2" },
+  { value: "Test3", label: "Test3" },
+];
+
+export const ClientsRequestStatus = [
+  { value: "Opened", label: "Opened" },
+  { value: "In progress", label: "In progress" },
+  { value: "Closed", label: "Closed" },
+];

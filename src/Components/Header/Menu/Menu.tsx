@@ -54,40 +54,37 @@ const UserMenu = () => {
       <div className={styles.container}>
         <div>
           {navButtons.map(({ link, name, icon, button, active }) => (
-            <div>
-              <NavLink
-                key={link}
-                to={link}
-                className={classNames(styles.navButton, {
-                  [styles.activeNavButton]: pathname === link,
-                  [styles.new]: name === "Projects",
-                })}
-              >
-                <div>
-                  <div className={styles.div}>
-                    {icon}
-                    {name}
-                    <div onClick={() => setOpened(!isOpened)}>{button}</div>
-                  </div>
-
-                  {active ? (
-                    <div
-                      className={classNames(styles.list, {
-                        [styles.listActive]: isOpened,
-                      })}
-                    >
-                      <div
-                        className={styles.el}
-                        onClick={() => navigate(PathNames.ProjectScreen)}
-                      >
-                        <AddNewProjectIcon />
-                        {"New project"}
-                      </div>
-                    </div>
-                  ) : null}
+            <NavLink
+              key={name}
+              to={link}
+              className={classNames(styles.navButton, {
+                [styles.activeNavButton]: pathname === link,
+              })}
+            >
+              <div>
+                <div className={styles.div}>
+                  {icon}
+                  {name}
+                  <div onClick={() => setOpened(!isOpened)}>{button}</div>
                 </div>
-              </NavLink>
-            </div>
+
+                {active ? (
+                  <div
+                    className={classNames(styles.list, {
+                      [styles.listActive]: isOpened,
+                    })}
+                  >
+                    <div
+                      className={styles.el}
+                      onClick={() => navigate(PathNames.ProjectScreen)}
+                    >
+                      <AddNewProjectIcon />
+                      {"New project"}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            </NavLink>
           ))}
         </div>
         <div className={styles.logoutContainer} onClick={onLogOutClick}>

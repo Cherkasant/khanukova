@@ -1,12 +1,53 @@
-.container{
+
+.container {
     width: 300px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-left: 15px;
-
+    padding: 15px 0;
 }
-.input{
-    width: 300px;
+
+.panel {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #212121;
+}
+
+.panel > div > div:first-child {
+    padding: 0 !important;
+}
+
+.panel > div:first-child {
+    padding: 10px 0 !important;
+}
+
+.panel > div:first-child > span {
+    padding: 0 !important;
+    text-align: start;
+}
+
+.input {
+    width: 275px;
     height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.collapseContainer {
+    background-color: #FFFFFF;
+    padding: 0;
+}
+
+.rangePicker {
+    color: #A3A3A3;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    display: flex;
+    justify-content: center;
 }

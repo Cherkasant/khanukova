@@ -43,7 +43,7 @@ const ResetPassword = () => {
             uid,
             token,
             new_password: password,
-            re_new_password: passwordConfirm,
+            re_password: passwordConfirm,
           },
           callback: () => navigate(PathNames.SignIn),
         })

@@ -13,10 +13,14 @@ import { CalendarIcon } from "../../Assets/icons/CalendarIcon";
 import { DownloadIcon } from "../../Assets/icons/DownloadIcon";
 import { EditTitleIcon } from "../../Assets/icons/EditTitleIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { setTaskCard } from "../../Redux/Reducers/postReducer";
+import {
+  setSelectedModalVisible,
+  setTaskCard,
+} from "../../Redux/Reducers/postReducer";
 import postSelector from "../../Redux/Selectors/postSelector";
 import {
   Colors,
+  Dependence,
   Priority,
   Progress,
   responsibleOptions,
@@ -39,9 +43,10 @@ const NewTask: FC<Props> = (props) => {
         deadline: deadline,
         priority: priority.value,
         progress: progress.value,
-        color: colors,
+        color: colors.value,
       })
     );
+    dispatch(setSelectedModalVisible(false));
   };
   const [launchDate, setLaunchDate] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -60,12 +65,16 @@ const NewTask: FC<Props> = (props) => {
     useState<any>(null);
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
+  const [dependence, setDependence] = useState<any>(null);
   const [progress, setProgress] = useState<any>(null);
   const [colors, setColors] = useState<any>(null);
   const [title, setTitle] = useState("");
   const [edit, setEdit] = useState(false);
   const onEditClick = () => {
     setEdit(!edit);
+  };
+  const onCancelClick = () => {
+    dispatch(setSelectedModalVisible(false));
   };
   useEffect(() => {
     setEdit(false);
@@ -249,9 +258,9 @@ const NewTask: FC<Props> = (props) => {
             <div>
               <div className={styles.title}>{"Dependence"}</div>
               <Dropdown
-                options={Priority}
-                onChange={setPriority}
-                value={priority}
+                options={Dependence}
+                onChange={setDependence}
+                value={dependence}
                 placeholder="Nothing selected"
                 className={styles.dropdownContainer}
                 controlClassName={styles.dropdownControl}
@@ -298,6 +307,7 @@ const NewTask: FC<Props> = (props) => {
                 title={"Cancel"}
                 type={ButtonTypes.TextButton}
                 className={styles.cancelBtn}
+                onClick={onCancelClick}
               />
               <Button
                 title={"Save"}
