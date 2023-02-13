@@ -11,7 +11,7 @@ import {OpenEyeIcon} from "../../Assets/icons/OpenEyeIcon";
 import {PasswordTypes} from "../../Components/constants/@types";
 import {useDispatch} from "react-redux";
 import {signInUser} from "../../Redux/Reducers/authReducer";
-import {Button, Form} from "antd";
+import {Form} from "antd";
 import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
 
 const SignIn = () => {
@@ -56,8 +56,6 @@ const SignIn = () => {
                             >
                                 <Input
                                     type={"email"}
-                                    // value={login}
-                                    // onChange={(value: string) => setLogin(value)}
                                     placeholder={"Email"}
                                 />
                             </Form.Item>
@@ -95,14 +93,14 @@ const SignIn = () => {
                             </div>
                         </div>
                         {/*<Button htmlType='submit'>Login</Button>*/}
-                       <Form.Item> <PuzzleButton htmlType='submit'
-                                      btnTitle={"Login"}
-                                      btnType={PuzzleButtonTypes.TextButton}
-                                      btnClassName={styles.button}
+                        <Form.Item> <PuzzleButton htmlType='submit'
+                                                  btnTitle={"Login"}
+                                                  btnType={PuzzleButtonTypes.TextButton}
+                                                  btnClassName={styles.button}
                             // onClick={onSignIn}
                             //           btnDisabled={!(login !== "" || password !== "")}
                         />
-                       </Form.Item>
+                        </Form.Item>
                     </Form>
                     <div className={styles.info}>
                         {"Don`t have an account?"}
