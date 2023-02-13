@@ -94,14 +94,15 @@ const SignIn = () => {
                                 Forgot your password?
                             </div>
                         </div>
-                        <Button htmlType='submit'>Login</Button>
-                        <PuzzleButton htmlType='submit'
+                        {/*<Button htmlType='submit'>Login</Button>*/}
+                       <Form.Item> <PuzzleButton htmlType='submit'
                                       btnTitle={"Login"}
                                       btnType={PuzzleButtonTypes.TextButton}
                                       btnClassName={styles.button}
                             // onClick={onSignIn}
-                                      btnDisabled={!(login !== "" || password !== "")}
+                            //           btnDisabled={!(login !== "" || password !== "")}
                         />
+                       </Form.Item>
                     </Form>
                     <div className={styles.info}>
                         {"Don`t have an account?"}

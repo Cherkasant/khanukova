@@ -18,8 +18,7 @@ export type PuzzleButtonProps = PropsWithChildren<ButtonProps> & {
     btnDisabled?: boolean;
 };
 
-const PuzzleButton: FC<PuzzleButtonProps> = (props) => {
-    const {btnType, btnTitle, btnClassName, onClick, btnDisabled} = props;
+const PuzzleButton: FC<PuzzleButtonProps> = ({btnType, btnTitle, btnClassName, onClick, btnDisabled, ...rest}:PuzzleButtonProps) => {
 
     const buttonClassName = btnType && styles[btnType];
 
@@ -29,6 +28,7 @@ const PuzzleButton: FC<PuzzleButtonProps> = (props) => {
                 [styles.disabled]: !!btnDisabled,
             })}
             onClick={onClick}
+            {...rest}
         >
             {btnTitle}
         </Button>
