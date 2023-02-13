@@ -10,7 +10,7 @@ export enum PuzzleButtonTypes {
     IconButton = "icon",
 };
 
-export type PuzzleButtonProps = PropsWithChildren<ButtonProps> & {
+export type PuzzleButtonProps = Omit<PropsWithChildren<ButtonProps>, 'onClick'> & {
     btnTitle?: string | ReactElement;
     btnType?: PuzzleButtonTypes;
     onClick?: () => void;
