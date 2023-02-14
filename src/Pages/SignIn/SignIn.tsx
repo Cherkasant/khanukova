@@ -28,7 +28,7 @@ const SignIn = () => {
         );
     };
 
-    const [login, setLogin] = useState("");
+
     const [password, setPassword] = useState("");
     const [checked, setChecked] = useState(false);
     const [type, setType] = useState(PasswordTypes.Password);
@@ -50,9 +50,10 @@ const SignIn = () => {
                             {"Please enter your login details to sign in"}
                         </div>
                     </div>
-                    <Form onFinish={onSignIn}>
+                    <Form onFinish={onSignIn} className={styles.form}>
                         <div className={styles.inputs}>
-                            <Form.Item name="email"
+                            <Form.Item name="email" rules={[{required: true, message: 'Please input your username!'}]}
+                                       className={styles.formItem}
                             >
                                 <Input
                                     type={"email"}
@@ -60,11 +61,13 @@ const SignIn = () => {
                                 />
                             </Form.Item>
                             <div className={styles.passwordContainer}>
-                                <Form.Item name='password' className={styles.formItem}>
+                                <Form.Item name='password'
+                                           rules={[{required: true, message: 'Please input your password!'}]}
+                                           className={styles.formItem}>
                                     <Input
                                         type={type}
-                                        // value={password}
-                                        // onChange={(value: string) => setPassword(value)}
+                                        value={password}
+                                        onChange={(value: string) => setPassword(value)}
                                         placeholder={"Password"}
                                     />
                                 </Form.Item>
@@ -92,14 +95,13 @@ const SignIn = () => {
                                 Forgot your password?
                             </div>
                         </div>
-                        {/*<Button htmlType='submit'>Login</Button>*/}
-                        <Form.Item> <PuzzleButton htmlType='submit'
-                                                  btnTitle={"Login"}
-                                                  btnType={PuzzleButtonTypes.TextButton}
-                                                  btnClassName={styles.button}
-                            // onClick={onSignIn}
-                            //           btnDisabled={!(login !== "" || password !== "")}
-                        />
+                        <Form.Item className={styles.formItem}>
+                            <PuzzleButton htmlType='submit'
+                                          btnTitle={"Login"}
+                                          btnType={PuzzleButtonTypes.TextButton}
+                                          btnClassName={styles.button}
+                                // btnDisabled={!(login !== "" || password !== "")}
+                            />
                         </Form.Item>
                     </Form>
                     <div className={styles.info}>

@@ -53,38 +53,6 @@
     margin-bottom: 88px;
 }
 
-.or {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    padding: 0;
-    color: #9e9e9e;
-}
-
-.icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 60px;
-}
-
-.info {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    padding-left: 30px;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: right;
-    color: #808080;
-}
-
 .checkboxContainer {
     width: 100%;
     display: flex;
@@ -127,20 +95,6 @@
     flex-direction: column;
 }
 
-.straightLine {
-    width: 219px;
-    height: 0;
-    border: 1px solid #4270a7;
-}
-
-.lineBlock {
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
 .passwordContainer {
     position: relative;
     width: 100%;
@@ -150,8 +104,14 @@
     position: absolute;
     top: 22px;
     right: 20px;
+    cursor: pointer;
 }
 
-.formItem{
+.form {
     margin-bottom: 0;
 }
+
+.formItem {
+    margin-bottom: 0;
+}
+
