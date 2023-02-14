@@ -60,7 +60,7 @@ const SignIn = () => {
                                 />
                             </Form.Item>
                             <div className={styles.passwordContainer}>
-                                <Form.Item name='password'>
+                                <Form.Item name='password' className={styles.formItem}>
                                     <Input
                                         type={type}
                                         // value={password}
