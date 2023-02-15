@@ -43,7 +43,7 @@ const ResetPassword = () => {
                         uid,
                         token,
                         new_password: password,
-                        re_new_password: passwordConfirm,
+                        re_password: passwordConfirm,
                     },
                     callback: () => navigate(PathNames.SignIn),
                 })
@@ -98,8 +98,9 @@ const ResetPassword = () => {
                     <PuzzleButton
                         btnTitle={"Save new password"}
                         btnType={PuzzleButtonTypes.TextButton}
+
                         onClick={onSetPassword}
-                        className={styles.button}
+                        btnClassName={styles.button}
                         btnDisabled={!(password !== "" && password === passwordConfirm)}
                     />
                 </div>
