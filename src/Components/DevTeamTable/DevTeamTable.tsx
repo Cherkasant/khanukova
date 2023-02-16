@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Column, useTable } from "react-table";
 import styles from "./DevTeamTable.module.css";
-import Button, { ButtonTypes } from "../Button";
+import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
 import { TrashIcon } from "../../Assets/icons/TrashIcon";
 import { EditTitleIcon } from "../../Assets/icons/EditTitleIcon";
 import { useNavigate } from "react-router";
@@ -85,9 +85,9 @@ const DevTeamTable = () => {
         accessor: "button",
         Cell: () => (
           <div className={styles.buttonContainer}>
-            <Button
+            <PuzzleButton
               title={"Add the team"}
-              type={ButtonTypes.TextButton}
+              type={PuzzleButtonTypes.TextButton}
               className={styles.btn}
             />
             <div className={styles.iconContainer}>

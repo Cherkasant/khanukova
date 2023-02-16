@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ProfileDev.module.css";
-import Button, { ButtonTypes } from "../../Components/Button";
+import PuzzleButton, { PuzzleButtonTypes } from "../../Components/PuzzleButton";
 import Input from "../../Components/Input";
 import Title from "../../Components/Title";
 import { PencilIcon } from "../../Assets/Profile/PencilIcon";
@@ -252,16 +252,16 @@ const ProfileDev = () => {
         </div>
       )}
       <div className={styles.buttonsBlock}>
-        <Button
+        <PuzzleButton
           title={"Cancel"}
-          type={ButtonTypes.TextButton}
+          type={PuzzleButtonTypes.TextButton}
           onClick={() => {}}
           className={styles.buttonCancel}
         />
 
-        <Button
+        <PuzzleButton
           title={"Save"}
-          type={ButtonTypes.TextButton}
+          type={PuzzleButtonTypes.TextButton}
           onClick={() => {}}
           className={styles.buttonSave}
         />

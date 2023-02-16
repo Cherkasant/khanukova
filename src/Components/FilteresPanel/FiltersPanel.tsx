@@ -1,9 +1,9 @@
 import React, { FC, ReactElement } from "react";
 import styles from "./FiltersPanel.module.css";
 import { CloseFilterIcon } from "../../Assets/icons/CloseFilterIcon";
-import Button, { ButtonTypes } from "../Button";
 import { useDispatch } from "react-redux";
 import { setFilterVisible } from "../../Redux/Reducers/postReducer";
+import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
 
 type FiltersPanelProps = {
   children: ReactElement;
@@ -25,7 +25,7 @@ const FiltersPanel: FC<FiltersPanelProps> = ({ children }) => {
       <div className={styles.children}>{children}</div>
 
       <div className={styles.btnContainer}>
-        <Button title={"Apply"} type={ButtonTypes.TextButton} />
+        <PuzzleButton title={"Apply"} type={PuzzleButtonTypes.TextButton} />
         <div className={styles.clearBtn}>{"Clear the filter"}</div>
       </div>
     </div>

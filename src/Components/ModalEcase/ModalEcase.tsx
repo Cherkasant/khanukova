@@ -6,7 +6,7 @@ import { CloseModalIcon } from "../../Assets/icons/CloseModalIcon";
 import { AttachmentIcon } from "../../Assets/icons/AttachmentIcon";
 import Dropdown from "react-dropdown";
 import "react-datepicker/dist/react-datepicker.css";
-import Button, { ButtonTypes } from "../Button";
+
 import { List, Upload } from "antd";
 import { DownloadIcon } from "../../Assets/icons/DownloadIcon";
 import { useDispatch } from "react-redux";
@@ -17,6 +17,7 @@ import {
   responsibleOptions,
 } from "../constants/Modal/ModalData";
 import { EcaseData } from "../constants/Modal/EcaseData";
+import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
 
 const ModalEcase: FC<Props> = (props) => {
   const dispatch = useDispatch();
@@ -76,9 +77,9 @@ const ModalEcase: FC<Props> = (props) => {
               value={descriptionValue}
               onChange={onChangeDescription}
             />
-            <Button
+            <PuzzleButton
               title={"Submit new"}
-              type={ButtonTypes.TextButton}
+              type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!descriptionValue}
             />
@@ -110,9 +111,9 @@ const ModalEcase: FC<Props> = (props) => {
               value={comment}
               onChange={onChangeComment}
             />
-            <Button
+            <PuzzleButton
               title={"Comment"}
-              type={ButtonTypes.TextButton}
+              type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!comment}
             />
@@ -169,16 +170,16 @@ const ModalEcase: FC<Props> = (props) => {
           </div>
           <div>
             <div className={styles.buttonsContainer}>
-              <Button
-                title={"Cancel"}
-                type={ButtonTypes.TextButton}
-                className={styles.cancelBtn}
+              <PuzzleButton
+                btnTitle={"Cancel"}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.cancelBtn}
                 onClick={onCancelClick}
               />
-              <Button
-                title={"Save"}
-                type={ButtonTypes.TextButton}
-                className={styles.saveBtn}
+              <PuzzleButton
+                btnTitle={"Save"}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.saveBtn}
                 onClick={onSaveClick}
               />
             </div>

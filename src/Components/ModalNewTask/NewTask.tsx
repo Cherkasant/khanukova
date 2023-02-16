@@ -7,7 +7,7 @@ import { AttachmentIcon } from "../../Assets/icons/AttachmentIcon";
 import Dropdown from "react-dropdown";
 import Input from "../Input";
 import "react-datepicker/dist/react-datepicker.css";
-import Button, { ButtonTypes } from "../Button";
+import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
 import { DatePicker, Upload } from "antd";
 import { CalendarIcon } from "../../Assets/icons/CalendarIcon";
 import { DownloadIcon } from "../../Assets/icons/DownloadIcon";
@@ -118,9 +118,9 @@ const NewTask: FC<Props> = (props) => {
               value={descriptionValue}
               onChange={onChangeDescription}
             />
-            <Button
+            <PuzzleButton
               title={"Submit new"}
-              type={ButtonTypes.TextButton}
+              type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!descriptionValue}
             />
@@ -152,9 +152,9 @@ const NewTask: FC<Props> = (props) => {
               value={comment}
               onChange={onChangeComment}
             />
-            <Button
+            <PuzzleButton
               title={"Comment"}
-              type={ButtonTypes.TextButton}
+              type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!comment}
             />
@@ -320,16 +320,16 @@ const NewTask: FC<Props> = (props) => {
 
           <div>
             <div className={styles.buttonsContainer}>
-              <Button
-                title={"Cancel"}
-                type={ButtonTypes.TextButton}
-                className={styles.cancelBtn}
+              <PuzzleButton
+                btnTitle={"Cancel"}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.cancelBtn}
                 onClick={onCancelClick}
               />
-              <Button
-                title={"Save"}
-                type={ButtonTypes.TextButton}
-                className={styles.saveBtn}
+              <PuzzleButton
+                btnTitle={"Save"}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.saveBtn}
                 onClick={onSaveClick}
               />
             </div>
