@@ -8,7 +8,7 @@ import "intl-tel-input/build/css/intlTelInput.css";
 
 import Input from "../../Components/Input";
 import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
-import styles from "./SignUp.module.css";
+import styles from "./SignUpHead.module.css";
 import Title from "../../Components/Title";
 import {NavLink} from "react-router-dom";
 import {PathNames} from "../Router/Router";
@@ -21,16 +21,16 @@ import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router";
 
 const options = [
-    {value: "productOwner", label: "Product Owner"},
+    // { value: "productOwner", label: "Product Owner" },
     {value: "ceo", label: "CEO"},
     {value: "cto", label: "CTO"},
     {value: "projectManger", label: "Project Manager"},
-    {value: "designer", label: "Designer"},
-    {value: "qa", label: "QA"},
-    {value: "programmer", label: "Programmer"},
+    // { value: "designer", label: "Designer" },
+    // { value: "qa", label: "QA" },
+    // { value: "programmer", label: "Programmer" },
 ];
 
-const SignUp = () => {
+const SignUpHead = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -60,23 +60,23 @@ const SignUp = () => {
     };
     const [value, setValue] = useState<any>();
 
-  const onSignUp = () => {
-    dispatch(
-      registerUser({
-        data: {
-          full_name: fullName,
-          email: email,
-          phone: value,
-          user_status: selectedOption.label,
-          password: password,
-          password_rep: passwordConfirmation,
-        },
-        callback: () => {
-          navigate(PathNames.SignUpPageRole);
-        },
-      })
-    );
-  };
+    const onSignUp = () => {
+        dispatch(
+            registerUser({
+                data: {
+                    full_name: fullName,
+                    email: email,
+                    phone: value,
+                    user_status: selectedOption.label,
+                    password: password,
+                    password_rep: passwordConfirmation,
+                },
+                callback: () => {
+                    navigate(PathNames.SignUpPageRole);
+                },
+            })
+        );
+    };
 
     return (
         <>
@@ -160,7 +160,7 @@ const SignUp = () => {
                         <div className={styles.line}>Terms and Conditions</div>
                     </div>
                     <PuzzleButton
-                        btnTitle={"Create an Account"}
+                        btnTitle={"Next step"}
                         btnType={PuzzleButtonTypes.TextButton}
                         className={styles.button}
                         onClick={onSignUp}
@@ -182,4 +182,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignUpHead;

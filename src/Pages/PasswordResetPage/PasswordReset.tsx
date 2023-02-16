@@ -3,7 +3,7 @@ import styles from "./PasswordReset.module.css";
 import Title from "../../Components/Title";
 import Input from "../../Components/Input";
 
-import Button, { ButtonTypes } from "../../Components/Button";
+import PuzzleButton, { PuzzleButtonTypes } from "../../Components/PuzzleButton";
 
 import { PasswordTypes } from "../../Components/constants/@types";
 import { ClosedEyeIcon } from "../../Assets/icons/ClosedEyeIcon";
@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { resetPasswordConfirm } from "../../Redux/Reducers/authReducer";
 import { useNavigate, useParams } from "react-router";
 import { PathNames } from "../Router/Router";
+import { Form } from "antd";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -62,46 +63,52 @@ const ResetPassword = () => {
         </div>
 
         <div className={styles.inputsContainer}>
-          <div className={styles.passwordContainer}>
-            <Input
-              type={type}
-              placeholder={"New password "}
-              value={password}
-              onChange={(value: string) => setPassword(value)}
-            />
-
-            <div className={styles.eyeIcon} onClick={onEyeClick}>
-              {password && type !== "password" ? (
-                <ClosedEyeIcon />
-              ) : (
-                <OpenEyeIcon />
-              )}
+          <Form>
+            <div className={styles.passwordContainer}>
+              <Form.Item>
+                <Input
+                  type={type}
+                  placeholder={"New password "}
+                  value={password}
+                  onChange={(value: string) => setPassword(value)}
+                />
+              </Form.Item>
+              <div className={styles.eyeIcon} onClick={onEyeClick}>
+                {password && type !== "password" ? (
+                  <ClosedEyeIcon />
+                ) : (
+                  <OpenEyeIcon />
+                )}
+              </div>
             </div>
-          </div>
 
-          <div className={styles.passwordContainer}>
-            <Input
-              type={typeConfirm}
-              placeholder={"Confirm Password "}
-              value={passwordConfirm}
-              onChange={(value: string) => setPasswordConfirm(value)}
-            />
-            <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
-              {passwordConfirm && typeConfirm !== "password" ? (
-                <ClosedEyeIcon />
-              ) : (
-                <OpenEyeIcon />
-              )}
+            <div className={styles.passwordContainer}>
+              <Form.Item>
+                <Input
+                  type={typeConfirm}
+                  placeholder={"Confirm Password "}
+                  value={passwordConfirm}
+                  onChange={(value: string) => setPasswordConfirm(value)}
+                />
+                <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
+                  {passwordConfirm && typeConfirm !== "password" ? (
+                    <ClosedEyeIcon />
+                  ) : (
+                    <OpenEyeIcon />
+                  )}
+                </div>
+              </Form.Item>
             </div>
-          </div>
-
-          <Button
-            title={"Save new password"}
-            type={ButtonTypes.TextButton}
-            onClick={onSetPassword}
-            className={styles.button}
-            disabled={!(password !== "" && password === passwordConfirm)}
-          />
+            <Form.Item>
+              <PuzzleButton
+                btnTitle={"Save new password"}
+                btnType={PuzzleButtonTypes.TextButton}
+                onClick={onSetPassword}
+                btnClassName={styles.button}
+                btnDisabled={!(password !== "" && password === passwordConfirm)}
+              />
+            </Form.Item>
+          </Form>
         </div>
       </div>
     </>

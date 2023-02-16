@@ -1,6 +1,5 @@
 import React from "react";
-
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import SignIn from "../SignIn";
 import RegistrationRolePage from "../RegistrationRolePage";
 import RegistrationInfoPage from "../RegistrationInfoPage";
@@ -13,6 +12,8 @@ import PasswordReset from "../PasswordResetPage";
 import ActivationPage from "../ActivationPage";
 import CheckNewPassword from "../CheckNewPassword";
 import ProfilePage from "../ProfilePage";
+import SignUpHead from "../SignUpHead";
+import SignUpHeadInfo from "../SignUpHead/SignUpHeadInfo";
 import ProfileDev from "../ProfileDev";
 import PaymentsPage from "../PaymentsPage";
 
@@ -23,6 +24,8 @@ export enum PathNames {
   SignUp = "/sign-up",
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
+  SignUpHead = "/sign-up-head",
+  SignUpHeadInfo = "/sign-up-head/info",
   PasswordRequestPage = "/password/request",
   PasswordReset = "/password/reset/:uid/:token",
   CheckNewPassword = "/check-password",
@@ -45,30 +48,32 @@ const Router = () => {
           <Route path={PathNames.Payments} element={<PaymentsPage />} />
         </Route>
 
-        <Route path={PathNames.SignIn} element={<SignIn />} />
-        <Route path={PathNames.SignUp} element={<SignUp />} />
-        <Route
-          path={PathNames.SignUpPageRole}
-          element={<RegistrationRolePage />}
-        />
+                <Route path={PathNames.SignIn} element={<SignIn/>}/>
+                <Route path={PathNames.SignUp} element={<SignUp/>}/>
+                <Route path={PathNames.SignUpHead} element={<SignUpHead/>}/>
+                <Route path={PathNames.SignUpHeadInfo} element={<SignUpHeadInfo/>}/>
+                <Route
+                    path={PathNames.SignUpPageRole}
+                    element={<RegistrationRolePage/>}
+                />
 
-        <Route path={PathNames.ActivateUser} element={<ActivationPage />} />
-        <Route
-          path={PathNames.SignUpPageInfo}
-          element={<RegistrationInfoPage />}
-        />
-        <Route path={PathNames.PasswordReset} element={<PasswordReset />} />
-        <Route
-          path={PathNames.CheckNewPassword}
-          element={<CheckNewPassword />}
-        />
-        <Route
-          path={PathNames.PasswordRequestPage}
-          element={<PasswordRequestPage />}
-        />
-      </Routes>
-    </BrowserRouter>
-  );
+                <Route path={PathNames.ActivateUser} element={<ActivationPage/>}/>
+                <Route
+                    path={PathNames.SignUpPageInfo}
+                    element={<RegistrationInfoPage/>}
+                />
+                <Route path={PathNames.PasswordReset} element={<PasswordReset/>}/>
+                <Route
+                    path={PathNames.CheckNewPassword}
+                    element={<CheckNewPassword/>}
+                />
+                <Route
+                    path={PathNames.PasswordRequestPage}
+                    element={<PasswordRequestPage/>}
+                />
+            </Routes>
+        </BrowserRouter>
+    );
 };
 
 export default Router;
