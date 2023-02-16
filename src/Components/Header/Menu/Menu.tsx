@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { ChatsIcon } from "../../../Assets/icons/ChatsIcon";
-
 import styles from "./Menu.module.css";
 import classNames from "classnames";
 import { ProjectsIcon } from "../../../Assets/icons/ProjectsIcon";
@@ -33,17 +32,18 @@ const UserMenu = () => {
   };
 
   const navButtons = [
-    { name: "My profile", icon: <MyProfileIcon />, link: "/profile" },
+    { name: "My profile", icon: <MyProfileIcon />, link: PathNames.Profile },
     { name: "Chats", icon: <ChatsIcon />, link: "" },
     {
       name: "Projects",
       icon: <ProjectsIcon />,
-      link: "/",
+      link: PathNames.Home,
       button: <ArrayDownIcon />,
       active: true,
+      sublink: PathNames.ProjectScreen,
     },
     { name: "Library", icon: <LibraryIcon />, link: "" },
-    { name: "Payments", icon: <PaymentsIcon />, link: "" },
+    { name: "Payments", icon: <PaymentsIcon />, link: PathNames.Payments },
     { name: "Notifications", icon: <NotificationsIcon />, link: "" },
   ];
 
@@ -53,7 +53,7 @@ const UserMenu = () => {
     <>
       <div className={styles.container}>
         <div>
-          {navButtons.map(({ link, name, icon, button, active }) => (
+          {navButtons.map(({ link, name, icon, button, active, sublink }) => (
             <NavLink
               key={name}
               to={link}
@@ -76,7 +76,7 @@ const UserMenu = () => {
                   >
                     <div
                       className={styles.el}
-                      onClick={() => navigate(PathNames.ProjectScreen)}
+                      onClick={() => navigate(sublink)}
                     >
                       <AddNewProjectIcon />
                       {"New project"}

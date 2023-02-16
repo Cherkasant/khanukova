@@ -21,6 +21,7 @@ import postSelector from "../../Redux/Selectors/postSelector";
 import {
   Colors,
   Dependence,
+  PaymentStatus,
   Priority,
   Progress,
   responsibleOptions,
@@ -65,6 +66,7 @@ const NewTask: FC<Props> = (props) => {
     useState<any>(null);
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
+  const [paymentStatus, setPaymentStatus] = useState<any>(null);
   const [dependence, setDependence] = useState<any>(null);
   const [progress, setProgress] = useState<any>(null);
   const [colors, setColors] = useState<any>(null);
@@ -160,9 +162,9 @@ const NewTask: FC<Props> = (props) => {
         </div>
 
         <div className={styles.rightBlock}>
+          <div className={styles.title}>{"Responsible"}</div>
           <div className={styles.inputsBlock}>
             <div>
-              <div className={styles.title}>{"Responsible"}</div>
               <Dropdown
                 options={responsibleOptions}
                 onChange={setSelectedResponsibleOptions}
@@ -297,10 +299,25 @@ const NewTask: FC<Props> = (props) => {
                 placeholderClassName={styles.dropdownPlaceholder}
                 arrowClosed={<span className={styles.arrowClosed} />}
                 arrowOpen={<span className={styles.arrowOpen} />}
-                menuClassName={styles.dropdownMenu}
+                // menuClassName={styles.dropdownMenuStatus}
+              />
+            </div>
+            <div>
+              <div className={styles.title}>{"Payment status"}</div>
+              <Dropdown
+                options={PaymentStatus}
+                onChange={setPaymentStatus}
+                value={paymentStatus}
+                placeholder="Select  status"
+                className={styles.dropdownContainer}
+                controlClassName={styles.dropdownControl}
+                placeholderClassName={styles.dropdownPlaceholder}
+                arrowClosed={<span className={styles.arrowClosed} />}
+                arrowOpen={<span className={styles.arrowOpen} />}
               />
             </div>
           </div>
+
           <div>
             <div className={styles.buttonsContainer}>
               <Button

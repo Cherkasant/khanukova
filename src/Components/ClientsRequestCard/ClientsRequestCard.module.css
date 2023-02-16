@@ -19,6 +19,12 @@
     color: #212121;
 }
 
+.title:hover {
+    cursor: pointer;
+    color: #0E4298;
+    opacity: 0.8;
+}
+
 .iconContainer {
     display: flex;
     flex-direction: column;

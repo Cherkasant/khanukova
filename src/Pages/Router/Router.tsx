@@ -14,6 +14,7 @@ import ActivationPage from "../ActivationPage";
 import CheckNewPassword from "../CheckNewPassword";
 import ProfilePage from "../ProfilePage";
 import ProfileDev from "../ProfileDev";
+import PaymentsPage from "../PaymentsPage";
 
 export enum PathNames {
   Home = "/",
@@ -29,6 +30,7 @@ export enum PathNames {
   ActivateUser = "/activate/:uid/:token",
   Profile = "/profile",
   ProfileDevTeam = "/profile/dev",
+  Payments = "/payments",
 }
 
 const Router = () => {
@@ -40,6 +42,7 @@ const Router = () => {
           <Route path={PathNames.Profile} element={<ProfilePage />} />
           <Route path={PathNames.ProjectScreen} element={<ProjectScreen />} />
           <Route path={PathNames.ProfileDevTeam} element={<ProfileDev />} />
+          <Route path={PathNames.Payments} element={<PaymentsPage />} />
         </Route>
 
         <Route path={PathNames.SignIn} element={<SignIn />} />

@@ -74,6 +74,8 @@
 }
 
 .title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 140%;
@@ -142,6 +144,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+
 }
 
 .label {
@@ -200,6 +204,7 @@
 }
 
 .buttonsContainer {
+    margin-top: 30px;
     display: flex;
     gap: 11px;
 }
@@ -230,6 +235,9 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    height: 75%;
+    overflow: auto;
+    padding-right: 10px;
 }
 
 .downloadBtn {
@@ -351,3 +359,6 @@
     flex-direction: column;
 }
 
+.dropdownMenuStatus {
+    margin-top: -234px;
+}
