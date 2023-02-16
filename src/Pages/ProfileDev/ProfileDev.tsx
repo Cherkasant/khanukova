@@ -253,17 +253,17 @@ const ProfileDev = () => {
       )}
       <div className={styles.buttonsBlock}>
         <PuzzleButton
-          title={"Cancel"}
-          type={PuzzleButtonTypes.TextButton}
+          btnTitle={"Cancel"}
+          btnType={PuzzleButtonTypes.TextButton}
           onClick={() => {}}
-          className={styles.buttonCancel}
+          btnClassName={styles.buttonCancel}
         />
 
         <PuzzleButton
-          title={"Save"}
-          type={PuzzleButtonTypes.TextButton}
+          btnTitle={"Save"}
+          btnType={PuzzleButtonTypes.TextButton}
           onClick={() => {}}
-          className={styles.buttonSave}
+          btnClassName={styles.buttonSave}
         />
       </div>
     </div>

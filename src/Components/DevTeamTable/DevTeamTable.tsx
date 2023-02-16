@@ -86,9 +86,9 @@ const DevTeamTable = () => {
         Cell: () => (
           <div className={styles.buttonContainer}>
             <PuzzleButton
-              title={"Add the team"}
-              type={PuzzleButtonTypes.TextButton}
-              className={styles.btn}
+              btnTitle={"Add the team"}
+              btnType={PuzzleButtonTypes.TextButton}
+              btnClassName={styles.btn}
             />
             <div className={styles.iconContainer}>
               <TrashIcon />

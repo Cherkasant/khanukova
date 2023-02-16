@@ -25,7 +25,10 @@ const FiltersPanel: FC<FiltersPanelProps> = ({ children }) => {
       <div className={styles.children}>{children}</div>
 
       <div className={styles.btnContainer}>
-        <PuzzleButton title={"Apply"} type={PuzzleButtonTypes.TextButton} />
+        <PuzzleButton
+          btnTitle={"Apply"}
+          btnType={PuzzleButtonTypes.TextButton}
+        />
         <div className={styles.clearBtn}>{"Clear the filter"}</div>
       </div>
     </div>
