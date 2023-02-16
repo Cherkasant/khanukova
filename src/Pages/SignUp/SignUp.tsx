@@ -60,23 +60,23 @@ const SignUp = () => {
     };
     const [value, setValue] = useState<any>();
 
-    const onSignUp = () => {
-        dispatch(
-            registerUser({
-                data: {
-                    full_name: fullName,
-                    email: email,
-                    phone: value,
-                    user_status: selectedOption.label,
-                    password: password,
-                    password_rep: passwordConfirmation,
-                },
-                callback: () => {
-                    navigate(PathNames.SignUpPageRole);
-                },
-            })
-        );
-    };
+  const onSignUp = () => {
+    dispatch(
+      registerUser({
+        data: {
+          full_name: fullName,
+          email: email,
+          phone: value,
+          user_status: selectedOption.label,
+          password: password,
+          password_rep: passwordConfirmation,
+        },
+        callback: () => {
+          navigate(PathNames.SignUpPageRole);
+        },
+      })
+    );
+  };
 
     return (
         <>

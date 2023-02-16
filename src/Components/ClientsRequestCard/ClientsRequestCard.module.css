@@ -1,0 +1,112 @@
+.container {
+    width: 340px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px 8px 8px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(190, 190, 190, 0.4);
+    border-radius: 10px;
+}
+
+.title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #212121;
+}
+
+.title:hover {
+    cursor: pointer;
+    color: #0E4298;
+    opacity: 0.8;
+}
+
+.iconContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.topBox {
+    display: flex;
+    justify-content: end;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1258CA;
+}
+
+.topBox:hover {
+    cursor: pointer;
+}
+
+.bottomIcons {
+    display: flex;
+    gap: 20px;
+}
+
+.commentContainer, .filesContainer {
+    display: flex;
+    gap: 5px;
+}
+
+.pinnedIcon {
+    display: flex;
+    padding-top: 10px;
+}
+
+.pinnedIcon:hover {
+    cursor: pointer;
+}
+
+.commentNumber, .filesNumber {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #9BACC9;
+}
+
+.name {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #212121;
+    display: flex;
+    justify-content: start;
+    padding-left: 10px;
+}
+
+.cardsContainer {
+    height: 100%;
+    overflow: auto;
+    padding-right: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #9BACC9;
+
+}
+
+::-webkit-scrollbar-thumb {
+    min-height: 60px;
+    background: #0E4298;
+    border-radius: 10px;
+
+}

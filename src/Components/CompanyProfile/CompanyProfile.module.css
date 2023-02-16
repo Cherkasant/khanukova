@@ -1,0 +1,44 @@
+.listContainer {
+    background: #FFFFFF;
+    box-shadow: 0 4px 50px 10px rgba(18, 88, 202, 0.08);
+    border-radius: 10px;
+    overflow: auto;
+    height: 70%;
+}
+
+.listContainer div:nth-child(2n) {
+    background: #F4F8FE;
+}
+
+.list {
+    padding: 30px 50px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+}
+
+.input {
+    resize: none;
+    width: 50%;
+    overflow: auto;
+    border: none;
+    outline: none;
+    background: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+}
+
+.icon {
+    padding: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.icon:hover {
+    cursor: pointer;
+}

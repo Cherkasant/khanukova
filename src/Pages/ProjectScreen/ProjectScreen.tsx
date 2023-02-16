@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ProjectScreen.module.css";
 import { AddMeetingIcon } from "../../Assets/icons/AddMeetingIcon";
 import { Tabs } from "../../Components/constants/@types";
@@ -6,6 +6,26 @@ import Tab from "../../Components/Tabs";
 import { FilterIcon } from "../../Assets/icons/FilterIcon";
 import { AddRoundIcon } from "../../Assets/icons/AddRoundIcon";
 import { EditTitleIcon } from "../../Assets/icons/EditTitleIcon";
+import NewTask from "../../Components/ModalNewTask";
+import { useDispatch, useSelector } from "react-redux";
+import postSelector from "../../Redux/Selectors/postSelector";
+import {
+  setEcaseModalVisible,
+  setFilterVisible,
+  setRequestModalVisible,
+  setSelectedModalVisible,
+  setTitleTask,
+} from "../../Redux/Reducers/postReducer";
+import Input from "../../Components/Input";
+import FilterProjectScreen from "../../Components/FilteresPanel/FilterProjectScreen";
+import Table from "../../Components/Table";
+import ClientsRequestCard from "../../Components/ClientsRequestCard";
+import {
+  requestInProgressArray,
+  requestOpenedArray,
+} from "../../Components/ClientsRequestCard/constantsRequest";
+import ModalEcase from "../../Components/ModalEcase";
+import ModalRequest from "../../Components/ModalRequest";
 
 const TABS_NAMES = [
   { name: "Planning", key: Tabs.Planning },
@@ -18,21 +38,67 @@ const TABS_NAMES = [
 ];
 
 const ProjectScreen = () => {
-  const [activeTab, setActiveTab] = useState(Tabs.default);
+  const onFilterClick = () => {
+    dispatch(setFilterVisible(true));
+  };
+  const isFilterVisible = useSelector(postSelector.getFilter);
+  const isSaveClicked = useSelector(postSelector.getTask);
+
+  const isVisible = useSelector(postSelector.getModal);
+  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal);
+  const isModalRequestVisible = useSelector(postSelector.getRequestModal);
+  const dispatch = useDispatch();
+  const onCloseClick = () => {
+    dispatch(setSelectedModalVisible(false));
+  };
+  const onEcaseModalCloseClick = () => {
+    dispatch(setEcaseModalVisible(false));
+  };
+  const onRequestModalCloseClick = () => {
+    dispatch(setRequestModalVisible(false));
+  };
+
+  const [addItem, setAddItem] = useState(false);
+  const onAddItemClick = () => {
+    setAddItem(!addItem);
+    dispatch(setSelectedModalVisible(true));
+  };
+  const [activeTab, setActiveTab] = useState(Tabs.Planning);
   const onTabClick = (newTab: Tabs) => {
     if (newTab !== activeTab) {
       setActiveTab(newTab);
-    } else setActiveTab(Tabs.default);
+    } else setActiveTab(Tabs.Planning);
   };
+
+  const [title, setTitle] = useState("");
+  const [edit, setEdit] = useState(false);
+  const onEditClick = () => {
+    setEdit(!edit);
+  };
+
+  useEffect(() => {
+    if (title) {
+      dispatch(setTitleTask(title));
+    } else setTitle(title);
+  }, [title]);
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <div className={styles.widgets}>
           <div className={styles.titleContainer}>
-            <div className={styles.title}>{"New project"}</div>
-            <div className={styles.edit}>
-              <EditTitleIcon />
-            </div>
+            <Input
+              value={title}
+              onChange={(value) => setTitle(value)}
+              className={styles.title}
+              placeholder={"Project"}
+              disabled={!edit}
+            />
+            {!edit ? (
+              <div className={styles.edit} onClick={onEditClick}>
+                <EditTitleIcon />
+              </div>
+            ) : null}
           </div>
 
           <div className={styles.addContainer}>
@@ -49,16 +115,63 @@ const ProjectScreen = () => {
         />
       </div>
       <div className={styles.blueLine}></div>
-      <div className={styles.bottomContainer}>
-        <div className={styles.filterButton}>
-          <FilterIcon />
-          {"Filters"}
+      {activeTab === Tabs.Planning ? (
+        <div className={styles.bottomContainer}>
+          <div className={styles.filterButton} onClick={onFilterClick}>
+            <FilterIcon />
+            {"Filters"}
+          </div>
         </div>
-        <div className={styles.milestoneButton}>
-          <AddRoundIcon />
-          {"Add item"}
+      ) : null}
+      {!isSaveClicked && activeTab === Tabs.Planning ? (
+        <div className={styles.bottomContainer}>
+          <div className={styles.milestoneButton} onClick={onAddItemClick}>
+            <AddRoundIcon />
+            {"Add item"}
+          </div>
         </div>
-      </div>
+      ) : null}
+      {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
+
+      {isFilterVisible ? <FilterProjectScreen /> : null}
+      {activeTab === Tabs.ClientsRequests ? (
+        <div className={styles.clientRequestContainer}>
+          <div className={styles.openedRequest}>
+            <ClientsRequestCard
+              openedArray={requestOpenedArray}
+              nameOfArray={"Opened"}
+            />
+            <div className={styles.addRequestBtn}>{"+ Add request"}</div>
+          </div>
+          <div className={styles.inProgressRequest}>
+            <ClientsRequestCard
+              openedArray={requestInProgressArray}
+              nameOfArray={"In progress"}
+            />
+          </div>
+          <div className={styles.closedRequest}>
+            <ClientsRequestCard
+              openedArray={requestInProgressArray}
+              nameOfArray={"Closed"}
+            />
+          </div>
+        </div>
+      ) : null}
+      <NewTask
+        isOpen={isVisible}
+        onRequestClose={onCloseClick}
+        ariaHideApp={false}
+      />
+      <ModalEcase
+        isOpen={isModalEcaseVisible}
+        onRequestClose={onEcaseModalCloseClick}
+        ariaHideApp={false}
+      />
+      <ModalRequest
+        isOpen={isModalRequestVisible}
+        onRequestClose={onRequestModalCloseClick}
+        ariaHideApp={false}
+      />
     </div>
   );
 };

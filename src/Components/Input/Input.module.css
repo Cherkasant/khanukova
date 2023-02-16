@@ -8,7 +8,7 @@
     height: 60px;
     border: 1px solid #d0d0d0;
     border-radius: 10px;
-    font-family: "Inter";
+    font-family: 'Inter';
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -48,7 +48,7 @@
 
 .input:focus::placeholder {
     position: absolute;
-    top: 8px;
+    top: 2px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -68,4 +68,12 @@
 
 .input:focus:invalid {
     border: 1px solid #BF3535;
+}
+
+.title {
+    text-align: start;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
 }
