@@ -37,7 +37,16 @@ const ClientsRequestCard: FC<ClientsRequestCardProps> = ({
         {openedArray.map((card) => {
           return (
             <div className={styles.container} key={card.title}>
-              <div className={styles.title}>{card?.title}</div>
+              <div
+                className={styles.title}
+                onClick={
+                  card.title === "E-case details"
+                    ? onPinnedIconClick
+                    : onPinnedIconRequestClick(card.title)
+                }
+              >
+                {card?.title}
+              </div>
               <div className={styles.iconContainer}>
                 <div className={styles.topBox}>
                   {card?.priority === null ? <EcaseIcon /> : card.priority}

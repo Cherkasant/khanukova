@@ -53,3 +53,8 @@ export const ClientsRequestStatus = [
   { value: "In progress", label: "In progress" },
   { value: "Closed", label: "Closed" },
 ];
+
+export const PaymentStatus = [
+  { value: "Paid", label: "Paid" },
+  { value: "Unpaid", label: "Unpaid" },
+];
