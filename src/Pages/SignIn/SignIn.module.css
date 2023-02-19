@@ -81,6 +81,20 @@
     color: #808080;
 }
 
+.info {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding-left: 30px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: right;
+    color: #808080;
+}
+
 .link {
     font-weight: 600;
     font-size: 14px;
