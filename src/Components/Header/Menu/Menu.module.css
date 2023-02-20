@@ -39,6 +39,10 @@
     stroke: #1258CA;
 }
 
+.activeNavButton rect {
+    stroke: #1258CA;
+}
+
 .div {
     display: flex;
     justify-content: start;

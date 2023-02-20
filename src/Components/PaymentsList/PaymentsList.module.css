@@ -1,4 +1,7 @@
-.list {
-    background: #FFFFFF;
-    border-radius: 10px;
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+
