@@ -5,6 +5,8 @@
     align-self: center;
     border-radius: 30px;
     background: #ffffff;
+    /*TODO - убрать*/
+    overflow: scroll;
 }
 
 .wrapper {

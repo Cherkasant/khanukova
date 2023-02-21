@@ -1,12 +1,20 @@
 import {create} from "apisauce";
-import {ActivateUserData, RegisterUserData, ResetPasswordData, SignInUserData,} from "../Types/auth";
+import {ActivateUserData, RegisterHeadData, RegisterUserData, ResetPasswordData, SignInUserData,} from "../Types/auth";
 
 const JWT_TOKEN = "Token 2b5698f59e13ef3d6535bf15c4016e57dcb530f9";
 
-const API = create({ baseURL: " https://apipuzzle-be.herokuapp.com" });
+const API = create({baseURL: " https://apipuzzle-be.herokuapp.com"});
 
 const registerUser = (data: RegisterUserData) => {
-    return API.post("auth/users/", data, {
+    return API.post("/auth/users/", data, {
+        headers: {
+            Authorization: JWT_TOKEN,
+        },
+    });
+};
+
+const registerHeadInfo = (data: RegisterHeadData) => {
+    return API.post("/user-profile/head-company/", data, {
         headers: {
             Authorization: JWT_TOKEN,
         },
@@ -47,6 +55,7 @@ const resetPasswordConfirm = (data: ResetPasswordData) => {
 
 export default {
     registerUser,
+    registerHeadInfo,
     sendResetEmail,
     activateUser,
     signInUser,
