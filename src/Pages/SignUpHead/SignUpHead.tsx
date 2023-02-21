@@ -35,10 +35,9 @@ const SignUpHead = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [form] = Form.useForm();
+    const checkPassword = Form.useWatch("password", form);
+    const checkPasswordConfirm = Form.useWatch("passwordConfirmation", form);
 
     const [type, setType] = useState(PasswordTypes.Password);
     const onEyeClick = () => {
@@ -53,8 +52,6 @@ const SignUpHead = () => {
             : setTypeConfirm(PasswordTypes.Password);
     };
 
-    const [selectedOption, setSelectedOption] = useState<any>(null);
-
     const [checked, setChecked] = useState(false);
     const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
@@ -66,14 +63,14 @@ const SignUpHead = () => {
             registerUser({
                 data: {
                     full_name: values.fullName,
-                    email: email,
-                    phone: value,
-                    user_status: selectedOption.label,
-                    password: password,
-                    password_rep: passwordConfirmation,
+                    email: values.email,
+                    phone: values.phone,
+                    user_status: values.userStatus.label,
+                    password: values.password,
+                    password_rep: values.passwordConfirmation,
                 },
                 callback: () => {
-                    navigate(PathNames.SignUpPageRole);
+                    navigate(PathNames.SignUpHeadInfo);
                 },
             })
         );
@@ -87,32 +84,31 @@ const SignUpHead = () => {
                         <Title name={"Sign up"} className={styles.title}/>
                         <div className={styles.subtitle}>{"Let’s get started"}</div>
                     </div>
-                    <Form>
+                    <Form onFinish={onSignUp} form={form} className={styles.form}>
                         <div className={styles.inputs}>
-                            <Form.Item name='fullName'>
+                            <Form.Item name='fullName' className={styles.formItem}>
                                 <Input
                                     type={"text"}
-                                    // value={fullName}
-                                    // onChange={(value: string) => setFullName(value)}
                                     placeholder={"Full name"}
                                 />
                             </Form.Item>
+                            <Form.Item name='email' className={styles.formItem}>
                             <Input
                                 type={"email"}
-                                value={email}
-                                onChange={(value: string) => setEmail(value)}
                                 placeholder={"Email"}
                             />
+                            </Form.Item>
+                            <Form.Item name='phone' className={styles.formItem}>
                             <PhoneInput
                                 placeholder="Enter phone number"
                                 value={value}
                                 onChange={setValue}
                                 className={styles.phoneInput}
                             />
+                            </Form.Item>
+                            <Form.Item name='userStatus' className={styles.formItem}>
                             <Dropdown
                                 options={options}
-                                onChange={setSelectedOption}
-                                value={selectedOption}
                                 placeholder="Role in the project"
                                 className={styles.dropdownContainer}
                                 controlClassName={styles.dropdownControl}
@@ -122,15 +118,17 @@ const SignUpHead = () => {
                                 arrowOpen={<span className={styles.arrowOpen}/>}
                                 menuClassName={styles.dropdownMenu}
                             />
+                            </Form.Item>
                             <div className={styles.passwordContainer}>
+                                <Form.Item name='password' className={styles.formItem}>
                                 <Input
                                     type={type}
-                                    value={password}
-                                    onChange={(value: string) => setPassword(value)}
+                                    value={checkPassword}
                                     placeholder={"Password"}
                                 />
+                                </Form.Item>
                                 <div className={styles.eyeIcon} onClick={onEyeClick}>
-                                    {password && type !== "password" ? (
+                                    {checkPassword && type !== "password" ? (
                                         <ClosedEyeIcon/>
                                     ) : (
                                         <OpenEyeIcon/>
@@ -138,14 +136,15 @@ const SignUpHead = () => {
                                 </div>
                             </div>
                             <div className={styles.passwordContainer}>
+                                <Form.Item name='passwordConfirmation' className={styles.formItem}>
                                 <Input
                                     type={typeConfirm}
-                                    value={passwordConfirmation}
-                                    onChange={(value: string) => setPasswordConfirmation(value)}
+                                    value={checkPasswordConfirm}
                                     placeholder={"Confirm password"}
                                 />
+                            </Form.Item>
                                 <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
-                                    {passwordConfirmation && typeConfirm !== "password" ? (
+                                    {checkPasswordConfirm && typeConfirm !== "password" ? (
                                         <ClosedEyeIcon/>
                                     ) : (
                                         <OpenEyeIcon/>
@@ -162,16 +161,18 @@ const SignUpHead = () => {
 
                             <div className={styles.line}>Terms and Conditions</div>
                         </div>
+                        <Form.Item className={styles.formItem}>
                         <PuzzleButton
+                            htmlType='submit'
                             btnTitle={"Next step"}
                             btnType={PuzzleButtonTypes.TextButton}
-                            className={styles.button}
-                            // onClick={onSignUp}
+                            btnClassName={styles.button}
                             btnDisabled={
-                                !(password !== "" && password === passwordConfirmation) ||
+                                !(checkPassword === checkPasswordConfirm) ||
                                 !checked
                             }
                         />
+                        </Form.Item>
                     </Form>
                     <div className={styles.info}>
                         {"Have an account?"}
