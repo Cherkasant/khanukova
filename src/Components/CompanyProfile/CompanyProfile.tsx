@@ -1,7 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { CompanyList } from "../constants/@types";
 import styles from "./CompanyProfile.module.css";
 import CompanyProfileCard from "../CompanyProfileCard";
+import { useDispatch, useSelector } from "react-redux";
+import TabsListProfile from "../TabsListProfile";
+import profileSelectors from "../../Redux/Selectors/profileSelectors";
+import { getPoCompanyListReducer } from "../../Redux/Reducers/profileReducer";
 
 type CompanyProfileProps = {
   activeTab?: CompanyList;
@@ -10,6 +14,7 @@ type CompanyProfileProps = {
 };
 
 const CompanyProfile: FC<CompanyProfileProps> = ({ CompanyList }) => {
+
   return (
     <div className={styles.listContainer}>
       {CompanyList.map((card) => {
