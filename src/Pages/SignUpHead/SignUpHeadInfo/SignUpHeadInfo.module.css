@@ -115,13 +115,13 @@
     height: 40px;
 }
 
-.rateContainer, .budgetContainer {
+.rateContainer, .budgetContainer, .datePickerContainer {
     display: flex;
     flex-direction: column;
     gap: 7px;
 }
 
-.rateContainerTitle, .budgetContainerTitle {
+.rateContainerTitle, .budgetContainerTitle, .datePickerContainerTitle {
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -197,4 +197,10 @@
     align-self: center;
     box-sizing: border-box;
     justify-self: flex-end;
+}
+
+.datePickerInput {
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
 }

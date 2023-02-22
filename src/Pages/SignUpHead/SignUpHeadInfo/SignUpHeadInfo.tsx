@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useState} from "react";
 
 import {UploadOutlined} from '@ant-design/icons';
-import type {UploadProps} from 'antd';
-import {Button, Form, message, Upload} from 'antd';
+import type {DatePickerProps, UploadProps} from 'antd';
+import {Button, DatePicker, Form, message, Upload} from 'antd';
 import Input from "../../../Components/Input";
 import PuzzleButton, {PuzzleButtonTypes} from "../../../Components/PuzzleButton";
 import styles from "./SignUpHeadInfo.module.css";
@@ -24,12 +24,13 @@ const SignUpHeadInfo = () => {
     const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
     };
-    const [value, setValue] = useState<any>();
     const currencyOptions = [
         {value: "EUR", label: "EUR"},
         {value: "USD", label: "USD"}
     ];
-    const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null);
+    const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+        console.log(date, dateString);
+    };
 
     const onSignUp = (values: any) => {
         dispatch(
@@ -48,14 +49,14 @@ const SignUpHeadInfo = () => {
                     currency_rate: values.currencyRate.label,
                     minimum_project_budget: values.minimumProjectBudget,
                     currency_budget: values.currencyBudget.label,
-                    // team_size: number,
-                    // location: string,
-                    // foundation_date: string,
-                    // clients_focus: string,
-                    // contact_marketing: string,
-                    // contact_expert: string,
-                    // links_case: string,
-                    // client_describe: string,
+                    team_size: values.teamSize,
+                    location: values.location,
+                    foundation_date: values.foundationDate,
+                    clients_focus: values.clientsFocus,
+                    contact_marketing: values.contactMarketing,
+                    contact_expert: values.contactExpert,
+                    links_case: values.linksCase,
+                    client_describe: values.clientDescribe,
                 },
                 callback: () => {
                     navigate(PathNames.ActivateUser);
@@ -108,24 +109,24 @@ const SignUpHeadInfo = () => {
                                 />
                             </Form.Item>
                             <Form.Item name='tagline'>
-                            <Input
-                                title={
-                                    "4. Tagline (service description in one sentence or mission/vision)*"
-                                }
-                                className={styles.input}
-                            />
-                        </Form.Item>
+                                <Input
+                                    title={
+                                        "4. Tagline (service description in one sentence or mission/vision)*"
+                                    }
+                                    className={styles.input}
+                                />
+                            </Form.Item>
                             <Form.Item name='clientIndustry'>
-                            <Input
-                                title={"5. Industries that your clients are coming from*"}
-                                className={styles.input}
-                            />
+                                <Input
+                                    title={"5. Industries that your clients are coming from*"}
+                                    className={styles.input}
+                                />
                             </Form.Item>
                             <Form.Item name='softwareStack'>
-                            <Input
-                                title={"6. Preferable Software Stack*"}
-                                className={styles.input}
-                            />
+                                <Input
+                                    title={"6. Preferable Software Stack*"}
+                                    className={styles.input}
+                                />
                             </Form.Item>
                             <div className={styles.checkboxBlock}>
                                 <div className={styles.checkboxBlockTitle}>
@@ -281,36 +282,36 @@ const SignUpHeadInfo = () => {
                                 </div>
                             </div>
                             <Form.Item name='shortDescription'>
-                            <Input
-                                title={"8. Company Short Description*"}
-                                className={styles.input}
-                            />
+                                <Input
+                                    title={"8. Company Short Description*"}
+                                    className={styles.input}
+                                />
                             </Form.Item>
                             <Form.Item name='fullDescription'>
-                            <Input
-                                title={"9. Full company Description*"}
-                                className={styles.input}
-                            />
+                                <Input
+                                    title={"9. Full company Description*"}
+                                    className={styles.input}
+                                />
                             </Form.Item>
                             <div className={styles.rateContainer}>
                                 <div className={styles.rateContainerTitle}>10. Average hourly rate*</div>
                                 <div className={styles.rateContainerInput}>
                                     <Form.Item name='averageHourlyRate'>
-                                    <Input
-                                        className={styles.inputRate}
-                                    />
-                                </Form.Item>
+                                        <Input
+                                            className={styles.inputRate}
+                                        />
+                                    </Form.Item>
                                     <Form.Item name='currencyRate'>
-                                    <Dropdown
-                                        options={currencyOptions}
-                                        placeholder="USD"
-                                        className={styles.dropdownContainer}
-                                        controlClassName={styles.dropdownControl}
-                                        placeholderClassName={styles.dropdownPlaceholder}
-                                        arrowClosed={<span className={styles.arrowClosed}/>}
-                                        arrowOpen={<span className={styles.arrowOpen}/>}
-                                        menuClassName={styles.dropdownMenu}
-                                    />
+                                        <Dropdown
+                                            options={currencyOptions}
+                                            placeholder="USD"
+                                            className={styles.dropdownContainer}
+                                            controlClassName={styles.dropdownControl}
+                                            placeholderClassName={styles.dropdownPlaceholder}
+                                            arrowClosed={<span className={styles.arrowClosed}/>}
+                                            arrowOpen={<span className={styles.arrowOpen}/>}
+                                            menuClassName={styles.dropdownMenu}
+                                        />
                                     </Form.Item>
                                 </div>
                             </div>
@@ -318,80 +319,87 @@ const SignUpHeadInfo = () => {
                                 <div className={styles.budgetContainerTitle}>11. Minimum project budget*</div>
                                 <div className={styles.budgetContainerInput}>
                                     <Form.Item name='minimumProjectBudget'>
-                                    <Input
-                                        className={styles.inputRate}
-                                    />
+                                        <Input
+                                            className={styles.inputRate}
+                                        />
                                     </Form.Item>
                                     <Form.Item name='currencyBudget'>
-                                    <Dropdown
-                                        options={currencyOptions}
-                                        placeholder="USD"
-                                        className={styles.dropdownContainer}
-                                        controlClassName={styles.dropdownControl}
-                                        placeholderClassName={styles.dropdownPlaceholder}
-                                        arrowClosed={<span className={styles.arrowClosed}/>}
-                                        arrowOpen={<span className={styles.arrowOpen}/>}
-                                        menuClassName={styles.dropdownMenu}
-                                    />
+                                        <Dropdown
+                                            options={currencyOptions}
+                                            placeholder="USD"
+                                            className={styles.dropdownContainer}
+                                            controlClassName={styles.dropdownControl}
+                                            placeholderClassName={styles.dropdownPlaceholder}
+                                            arrowClosed={<span className={styles.arrowClosed}/>}
+                                            arrowOpen={<span className={styles.arrowOpen}/>}
+                                            menuClassName={styles.dropdownMenu}
+                                        />
                                     </Form.Item>
                                 </div>
                             </div>
-                            <Input
-                                value={""}
-                                onChange={onSignUp}
-                                title={"12. Team Size*"}
-                                className={styles.input}
-                            />
-                            <Input
-                                value={""}
-                                onChange={onSignUp}
-                                title={"13. Location*"}
-                                className={styles.input}
-                            />
-                            <Input
-                                value={""}
-                                onChange={onSignUp}
-                                title={
-                                    "15. Client's Focus (Ideal Client Profile based on your portfolio)"
-                                }
-                                className={styles.input}
-                            />
-                            <Input
-                                value={""}
-                                onChange={onSignUp}
-                                title={"16. Marketing manager contact details*"}
-                                className={styles.input}
-                            />
-                            <Input
-                                value={""}
-                                onChange={onSignUp}
-                                title={
-                                    "17. Tech or Project Expert contact details (who will be in touch with a client)*"
-                                }
-                                className={styles.input}
-                            />
-                            <Input
-                                value={""}
-                                onChange={onSignUp}
-                                title={"18. Links to client's success cases*"}
-                                className={styles.input}
-                            />
-                            <Input
-                                value={""}
-                                onChange={onSignUp}
-                                title={"19. Describe ideal client portrait*"}
-                                className={styles.input}
-                            />
+                            <Form.Item name='teamSize'>
+                                <Input
+                                    title={"12. Team Size*"}
+                                    className={styles.input}
+                                />
+                            </Form.Item>
+                            <Form.Item name='location'>
+                                <Input
+                                    title={"13. Location*"}
+                                    className={styles.input}
+                                />
+                            </Form.Item>
+                            <div className={styles.datePickerContainer}>
+                                <div className={styles.datePickerContainerTitle}>14. Foundation date*</div>
+                                <Form.Item name='foundationDate'>
+                                    <DatePicker onChange={onChange} className={styles.datePickerInput}/>
+                                </Form.Item>
+                            </div>
+                            <Form.Item name='clientsFocus'>
+                                <Input
+                                    title={
+                                        "15. Client's Focus (Ideal Client Profile based on your portfolio)"
+                                    }
+                                    className={styles.input}
+                                />
+                            </Form.Item>
+                            <Form.Item name='contactMarketing'>
+                                <Input
+                                    title={"16. Marketing manager contact details*"}
+                                    className={styles.input}
+                                />
+                            </Form.Item>
+                            <Form.Item name='contactExpert'>
+                                <Input
+                                    title={
+                                        "17. Tech or Project Expert contact details (who will be in touch with a client)*"
+                                    }
+                                    className={styles.input}
+                                />
+                            </Form.Item>
+                            <Form.Item name='linksCase'>
+                                <Input
+                                    title={"18. Links to client's success cases*"}
+                                    className={styles.input}
+                                />
+                            </Form.Item>
+                            <Form.Item name='clientDescribe'>
+                                <Input
+                                    title={"19. Describe ideal client portrait*"}
+                                    className={styles.input}
+                                />
+                            </Form.Item>
                         </div>
-                        <PuzzleButton
-                            htmlType='submit'
-                            btnTitle={"Create an Account"}
-                            btnType={PuzzleButtonTypes.TextButton}
-                            btnClassName={styles.button}
-                            // onClick={onSignUp}
-                            // btnDisabled={}
-
-                        />
+                        <Form.Item>
+                            <PuzzleButton
+                                htmlType='submit'
+                                btnTitle={"Create an Account"}
+                                btnType={PuzzleButtonTypes.TextButton}
+                                btnClassName={styles.button}
+                                // onClick={onSignUp}
+                                // btnDisabled={}
+                            />
+                        </Form.Item>
                     </Form>
                 </div>
             </div>

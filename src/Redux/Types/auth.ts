@@ -21,14 +21,14 @@ export type RegisterHeadData = {
     currency_rate: string,
     minimum_project_budget: number,
     currency_budget: string,
-    // team_size: number,
-    // location: string,
-    // foundation_date: string,
-    // clients_focus: string,
-    // contact_marketing: string,
-    // contact_expert: string,
-    // links_case: string,
-    // client_describe: string,
+    team_size: number,
+    location: string,
+    foundation_date: string,
+    clients_focus: string,
+    contact_marketing: string,
+    contact_expert: string,
+    links_case: string,
+    client_describe: string,
 };
 
 export type SendResetEmailPayload = {
