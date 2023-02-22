@@ -5,7 +5,7 @@ import Input from "../../Components/Input";
 import Title from "../../Components/Title";
 import { PencilIcon } from "../../Assets/Profile/PencilIcon";
 import Dropdown from "react-dropdown";
-import type { DatePickerProps } from "antd";
+import { Avatar, DatePickerProps } from "antd";
 import { DatePicker, Space } from "antd";
 import { CalendarIcon } from "../../Assets/icons/CalendarIcon";
 
@@ -58,7 +58,7 @@ const ProfileDev = () => {
         <div className={styles.containerInfo}>
           <div className={styles.containerPhoto}>
             <h2 className={styles.subTitle}>Account photo</h2>
-            <div className={styles.photo}></div>
+            <div className={styles.photo}><Avatar /></div>
             <div className={styles.description}>
               Edit photo <PencilIcon />
             </div>
