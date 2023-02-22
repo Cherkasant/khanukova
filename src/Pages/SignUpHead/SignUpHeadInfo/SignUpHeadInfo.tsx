@@ -38,16 +38,16 @@ const SignUpHeadInfo = () => {
                     company_name: values.companyName,
                     // logo: string,
                     website: values.website,
-                    // tagline: string,
-                    // client_industry: string,
-                    // software_stack: string,
+                    tagline: values.tagline,
+                    client_industry: values.clientIndustry,
+                    software_stack: values.softwareStack,
                     // industry_choice: string,
-                    // short_description: string,
-                    // full_description: string,
-                    // average_hourly_rate: number,
-                    // currency_rate: string,
-                    // minimum_project_budget: number,
-                    // currency_budget: string,
+                    short_description: values.shortDescription,
+                    full_description: values.fullDescription,
+                    average_hourly_rate: values.averageHourlyRate,
+                    currency_rate: values.currencyRate.label,
+                    minimum_project_budget: values.minimumProjectBudget,
+                    currency_budget: values.currencyBudget.label,
                     // team_size: number,
                     // location: string,
                     // foundation_date: string,
@@ -107,26 +107,26 @@ const SignUpHeadInfo = () => {
                                     className={styles.input}
                                 />
                             </Form.Item>
+                            <Form.Item name='tagline'>
                             <Input
-                                value={""}
-                                onChange={onSignUp}
                                 title={
                                     "4. Tagline (service description in one sentence or mission/vision)*"
                                 }
                                 className={styles.input}
                             />
+                        </Form.Item>
+                            <Form.Item name='clientIndustry'>
                             <Input
-                                value={""}
-                                onChange={onSignUp}
                                 title={"5. Industries that your clients are coming from*"}
                                 className={styles.input}
                             />
+                            </Form.Item>
+                            <Form.Item name='softwareStack'>
                             <Input
-                                value={""}
-                                onChange={onSignUp}
                                 title={"6. Preferable Software Stack*"}
                                 className={styles.input}
                             />
+                            </Form.Item>
                             <div className={styles.checkboxBlock}>
                                 <div className={styles.checkboxBlockTitle}>
                                     7. Choose the preferable industries where you have the most
@@ -280,30 +280,29 @@ const SignUpHeadInfo = () => {
                                     />
                                 </div>
                             </div>
+                            <Form.Item name='shortDescription'>
                             <Input
-                                value={""}
-                                onChange={onSignUp}
                                 title={"8. Company Short Description*"}
                                 className={styles.input}
                             />
+                            </Form.Item>
+                            <Form.Item name='fullDescription'>
                             <Input
-                                value={""}
-                                onChange={onSignUp}
                                 title={"9. Full company Description*"}
                                 className={styles.input}
                             />
+                            </Form.Item>
                             <div className={styles.rateContainer}>
                                 <div className={styles.rateContainerTitle}>10. Average hourly rate*</div>
                                 <div className={styles.rateContainerInput}>
+                                    <Form.Item name='averageHourlyRate'>
                                     <Input
-                                        value={""}
-                                        onChange={onSignUp}
                                         className={styles.inputRate}
                                     />
+                                </Form.Item>
+                                    <Form.Item name='currencyRate'>
                                     <Dropdown
                                         options={currencyOptions}
-                                        onChange={setSelectedCurrencyOptions}
-                                        value={selectedCurrencyOptions}
                                         placeholder="USD"
                                         className={styles.dropdownContainer}
                                         controlClassName={styles.dropdownControl}
@@ -312,20 +311,20 @@ const SignUpHeadInfo = () => {
                                         arrowOpen={<span className={styles.arrowOpen}/>}
                                         menuClassName={styles.dropdownMenu}
                                     />
+                                    </Form.Item>
                                 </div>
                             </div>
                             <div className={styles.budgetContainer}>
                                 <div className={styles.budgetContainerTitle}>11. Minimum project budget*</div>
                                 <div className={styles.budgetContainerInput}>
+                                    <Form.Item name='minimumProjectBudget'>
                                     <Input
-                                        value={""}
-                                        onChange={onSignUp}
                                         className={styles.inputRate}
                                     />
+                                    </Form.Item>
+                                    <Form.Item name='currencyBudget'>
                                     <Dropdown
                                         options={currencyOptions}
-                                        onChange={setSelectedCurrencyOptions}
-                                        value={selectedCurrencyOptions}
                                         placeholder="USD"
                                         className={styles.dropdownContainer}
                                         controlClassName={styles.dropdownControl}
@@ -334,6 +333,7 @@ const SignUpHeadInfo = () => {
                                         arrowOpen={<span className={styles.arrowOpen}/>}
                                         menuClassName={styles.dropdownMenu}
                                     />
+                                    </Form.Item>
                                 </div>
                             </div>
                             <Input
