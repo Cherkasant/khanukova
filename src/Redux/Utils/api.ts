@@ -26,7 +26,7 @@ const activateUser = (data: ActivateUserData) => {
 };
 
 const signInUser = (data: SignInUserData) => {
-    return API.post("/auth/token/login/", data, {
+    return API.get("/auth/login/", data, {
         headers: {
             Authorization: JWT_TOKEN,
         },

@@ -28,6 +28,7 @@ const SignUpHeadInfo = () => {
         {value: "EUR", label: "EUR"},
         {value: "USD", label: "USD"}
     ];
+    const defaultCurrencyOption = currencyOptions[1].value
     const onChange: DatePickerProps['onChange'] = (date, dateString) => {
         console.log(date, dateString);
     };
@@ -304,7 +305,7 @@ const SignUpHeadInfo = () => {
                                     <Form.Item name='currencyRate'>
                                         <Dropdown
                                             options={currencyOptions}
-                                            placeholder="USD"
+                                            value={defaultCurrencyOption}
                                             className={styles.dropdownContainer}
                                             controlClassName={styles.dropdownControl}
                                             placeholderClassName={styles.dropdownPlaceholder}
@@ -326,7 +327,7 @@ const SignUpHeadInfo = () => {
                                     <Form.Item name='currencyBudget'>
                                         <Dropdown
                                             options={currencyOptions}
-                                            placeholder="USD"
+                                            value={defaultCurrencyOption}
                                             className={styles.dropdownContainer}
                                             controlClassName={styles.dropdownControl}
                                             placeholderClassName={styles.dropdownPlaceholder}
