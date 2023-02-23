@@ -52,7 +52,7 @@ const SignUpHeadInfo = () => {
                     currency_budget: values.currencyBudget.label,
                     team_size: values.teamSize,
                     location: values.location,
-                    foundation_date: values.foundationDate,
+                    foundation_date: values['datePicker'].format('YYYY-MM-DD'),
                     clients_focus: values.clientsFocus,
                     contact_marketing: values.contactMarketing,
                     contact_expert: values.contactExpert,
@@ -352,8 +352,8 @@ const SignUpHeadInfo = () => {
                             </Form.Item>
                             <div className={styles.datePickerContainer}>
                                 <div className={styles.datePickerContainerTitle}>14. Foundation date*</div>
-                                <Form.Item name='foundationDate'>
-                                    <DatePicker onChange={onChange} className={styles.datePickerInput}/>
+                                <Form.Item name='datePicker'>
+                                    <DatePicker format='YYYY-MM-DD' className={styles.datePickerInput}/>
                                 </Form.Item>
                             </div>
                             <Form.Item name='clientsFocus'>
