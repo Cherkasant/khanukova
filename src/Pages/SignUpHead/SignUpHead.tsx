@@ -65,9 +65,9 @@ const SignUpHead = () => {
                     full_name: values.fullName,
                     email: values.email,
                     phone: values.phone,
-                    user_status: values.userStatus.label,
+                    role: values.userStatus.label,
                     password: values.password,
-                    password_rep: values.passwordConfirmation,
+                    re_password: values.passwordConfirmation,
                 },
                 callback: () => {
                     navigate(PathNames.SignUpHeadInfo);

@@ -2,9 +2,9 @@ export type RegisterUserData = {
     full_name: string;
     email: string;
     phone: string;
-    user_status: string;
+    role: string;
     password: string;
-    password_rep: string;
+    re_password: string;
 };
 
 export type RegisterHeadData = {
@@ -14,7 +14,7 @@ export type RegisterHeadData = {
     tagline: string,
     client_industry: string,
     software_stack: string,
-    // industry_choice: string,
+    industry_choice: string,
     short_description: string,
     full_description: string,
     average_hourly_rate: number,
@@ -29,6 +29,7 @@ export type RegisterHeadData = {
     contact_expert: string,
     links_case: string,
     client_describe: string,
+    employees:[number],
 };
 
 export type SendResetEmailPayload = {
