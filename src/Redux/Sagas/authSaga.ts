@@ -7,13 +7,15 @@ import {
     registerUser,
     resetPasswordConfirm,
     sendResetEmail,
+    setIdUser,
     setLoggedIn,
     signInUser,
 } from "../Reducers/authReducer";
 import {PayloadAction} from "@reduxjs/toolkit";
 import {
     ActivateUserPayload,
-    RegisterHeadPayload, RegisterPoPayload,
+    RegisterHeadPayload,
+    RegisterPoPayload,
     RegisterUserPayload,
     ResetPasswordConfirmPayload,
     SendResetEmailPayload,
@@ -24,9 +26,11 @@ import {ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY,} from "../../Components/constants/c
 
 function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
     const {data: registerData, callback} = action.payload;
-    const {ok, problem} = yield call(API.registerUser, registerData);
-    if (ok) {
+    const {ok, data, problem} = yield call(API.registerUser, registerData);
+    if (ok && data) {
+        console.log(data.id);
         callback();
+        yield put(setIdUser(data.id));
     } else {
         console.warn("Error while registering user", problem);
     }
@@ -41,6 +45,7 @@ function* registerHeadInfoWorker(action: PayloadAction<RegisterHeadPayload>) {
         console.warn("Error while registering Head info", problem);
     }
 }
+
 function* registerPoInfoWorker(action: PayloadAction<RegisterPoPayload>) {
     const {data: registerPoData, callback} = action.payload;
     const {ok, problem} = yield call(API.registerPoInfo, registerPoData);
