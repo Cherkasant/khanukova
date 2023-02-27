@@ -22,7 +22,7 @@ import {useNavigate} from "react-router";
 import {Form} from "antd";
 
 const options = [
-    // { value: "productOwner", label: "Product Owner" },
+    { value: "productOwner", label: "Product Owner" },
     {value: "ceo", label: "CEO"},
     {value: "cto", label: "CTO"},
     {value: "projectManger", label: "Project Manager"},
@@ -69,8 +69,10 @@ const SignUpHead = () => {
                     password: values.password,
                     re_password: values.passwordConfirmation,
                 },
-                callback: () => {
-                    navigate(PathNames.SignUpHeadInfo);
+                callback: () => { if (values.userStatus.label === "Product Owner"){
+                    navigate(PathNames.SignUpPoInfo)
+                } else {navigate(PathNames.SignUpHeadInfo)}
+
                 },
             })
         );

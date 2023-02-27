@@ -32,6 +32,21 @@ export type RegisterHeadData = {
     employees:[number],
 };
 
+export type RegisterPoData = {
+    company_name: string,
+    company_size: string,
+    industry_choice: string,
+    development_team: string,
+    use_outsourcing: string,
+    description_project: string,
+    business_requirements: string,
+    technological_stack: string,
+    link_competitor: string,
+    start_project: string,
+    used_outsourcing: string,
+    owner: number,
+};
+
 export type SendResetEmailPayload = {
     email: string;
     callback: () => void;
@@ -63,3 +78,4 @@ export type ActivateUserPayload = BasePayload<ActivateUserData>;
 export type SignInUserPayload = BasePayload<SignInUserData>;
 export type ResetPasswordConfirmPayload = BasePayload<ResetPasswordData>;
 export type RegisterHeadPayload = BasePayload<RegisterHeadData>;
+export type RegisterPoPayload = BasePayload<RegisterPoData>;

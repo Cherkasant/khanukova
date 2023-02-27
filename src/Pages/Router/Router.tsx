@@ -16,6 +16,8 @@ import SignUpHead from "../SignUpHead";
 import SignUpHeadInfo from "../SignUpHead/SignUpHeadInfo";
 import ProfileDev from "../ProfileDev";
 import PaymentsPage from "../PaymentsPage";
+import SignUpPoInfo from "../SignUpHead/SignUpPoInfo";
+import SignUpDev from "../SignUpDev";
 
 export enum PathNames {
   Home = "/",
@@ -25,7 +27,9 @@ export enum PathNames {
   SignUpPageRole = "/sign-up/1",
   SignUpPageInfo = "/sign-up/2",
   SignUpHead = "/sign-up-head",
-  SignUpHeadInfo = "/sign-up-head/info",
+  SignUpDev = "/sign-up-dev",
+    SignUpHeadInfo = "/sign-up-head/info",
+  SignUpPoInfo = "/sign-up-po/info",
   PasswordRequestPage = "/password/request",
   PasswordReset = "/password/reset/:uid/:token",
   CheckNewPassword = "/check-password",
@@ -51,7 +55,9 @@ const Router = () => {
                 <Route path={PathNames.SignIn} element={<SignIn/>}/>
                 <Route path={PathNames.SignUp} element={<SignUp/>}/>
                 <Route path={PathNames.SignUpHead} element={<SignUpHead/>}/>
+                <Route path={PathNames.SignUpDev} element={<SignUpDev/>}/>
                 <Route path={PathNames.SignUpHeadInfo} element={<SignUpHeadInfo/>}/>
+                <Route path={PathNames.SignUpPoInfo} element={<SignUpPoInfo/>}/>
                 <Route
                     path={PathNames.SignUpPageRole}
                     element={<RegistrationRolePage/>}

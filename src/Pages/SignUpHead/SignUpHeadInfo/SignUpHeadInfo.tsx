@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 
 import { UploadOutlined } from "@ant-design/icons";
-import type { DatePickerProps, UploadProps } from "antd";
+import type { UploadProps } from "antd";
 import { Button, DatePicker, Form, message, Upload, Checkbox } from "antd";
 import Input from "../../../Components/Input";
 import PuzzleButton, {
@@ -10,32 +10,23 @@ import PuzzleButton, {
 import styles from "./SignUpHeadInfo.module.css";
 import Title from "../../../Components/Title";
 import { PathNames } from "../../Router/Router";
-import { registerHeadInfo } from "../../../Redux/Reducers/authReducer";
+import {registerHeadInfo} from "../../../Redux/Reducers/authReducer";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-// import Checkbox from "../../../Components/Checkbox";
 import Dropdown from "react-dropdown";
 
 const SignUpHeadInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [checked, setChecked] = useState(false);
-  const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-  };
   const currencyOptions = [
     { value: "EUR", label: "EUR" },
     { value: "USD", label: "USD" },
   ];
   const defaultCurrencyOption = currencyOptions[1].value;
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
-  };
 
-  const onSignUp = (values: any) => {
+  const onSignUpHeadInfo = (values: any) => {
     dispatch(
-      registerHeadInfo({
+        registerHeadInfo({
         data: {
           company_name: values.companyName,
           // logo: string,
@@ -58,7 +49,7 @@ const SignUpHeadInfo = () => {
           contact_expert: values.contactExpert,
           links_case: values.linksCase,
           client_describe: values.clientDescribe,
-          employees:[6],
+          employees: [6],
         },
         callback: () => {
           navigate(PathNames.ActivateUser);
@@ -88,7 +79,7 @@ const SignUpHeadInfo = () => {
             <Title name={"Sign up"} className={styles.title} />
             <div className={styles.subtitle}>{"Partner's profile"}</div>
           </div>
-          <Form onFinish={onSignUp} className={styles.form}>
+          <Form onFinish={onSignUpHeadInfo} className={styles.form}>
             <div className={styles.infoContainer}>
               <Form.Item name="companyName" className={styles.formItem}>
                 <Input title={"1. Company name"} className={styles.input} />

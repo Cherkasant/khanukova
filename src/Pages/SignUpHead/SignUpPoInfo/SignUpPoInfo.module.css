@@ -1,0 +1,211 @@
+.container {
+    width: 660px;
+    height: 860px;
+    display: flex;
+    align-self: center;
+    border-radius: 30px;
+    background: #ffffff;
+}
+
+.wrapper {
+    padding: 52px 75px 57px 85px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.titleBlock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 7px;
+    margin-bottom: 26px;
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+
+    line-height: 39px;
+    color: #212121;
+}
+
+.subtitle {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #808080;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    height: 580px;
+    width: 100%;
+    overflow: auto;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.companyContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+    text-align: left;
+}
+.companyContainerRadio{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.uploadButton {
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.checkboxBlockTitle {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+    text-align: left;
+    margin-bottom: 7px;
+}
+
+.checkboxContainer {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    column-gap: 40px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+
+}
+
+.input {
+    height: 40px;
+}
+
+.rateContainer, .budgetContainer, .datePickerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.rateContainerTitle, .budgetContainerTitle, .datePickerContainerTitle {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+    text-align: left;
+}
+
+.rateContainerInput, .budgetContainerInput {
+    display: flex;
+    gap: 15px;
+}
+
+.inputRate {
+    height: 40px;
+    width: 120px;
+}
+
+.dropdownControl {
+    width: 90px;
+    height: 44px;
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dropdownPlaceholder {
+    text-align: start;
+}
+
+.dropdownControl:hover {
+    border: 1px solid #4270a7;
+}
+
+.dropdownMenu {
+    border: 1px solid #d0d0d0;
+    border-radius: 0 0 10px 10px;
+    max-height: 150px;
+}
+
+.arrowClosed,
+.arrowOpen {
+    top: 19px;
+    border-color: #1258ca transparent transparent;
+    border-style: solid;
+    border-width: 5px 5px 0;
+    content: " ";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: 15px;
+    width: 0;
+}
+
+.arrowOpen {
+    border-color: transparent transparent #1258ca;
+    border-width: 0 5px 5px;
+}
+
+.button {
+    width: 100%;
+    height: 54px;
+    justify-content: center;
+    align-self: center;
+    box-sizing: border-box;
+    justify-self: flex-end;
+}
+
+.datePickerInput {
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+}
+
+.form {
+    margin-bottom: 0;
+
+}
+
+.formItem {
+    margin-bottom: 0;
+
+}

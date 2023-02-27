@@ -3,6 +3,7 @@ import {
     activateUser,
     logoutUser,
     registerHeadInfo,
+    registerPoInfo,
     registerUser,
     resetPasswordConfirm,
     sendResetEmail,
@@ -12,7 +13,7 @@ import {
 import {PayloadAction} from "@reduxjs/toolkit";
 import {
     ActivateUserPayload,
-    RegisterHeadPayload,
+    RegisterHeadPayload, RegisterPoPayload,
     RegisterUserPayload,
     ResetPasswordConfirmPayload,
     SendResetEmailPayload,
@@ -38,6 +39,15 @@ function* registerHeadInfoWorker(action: PayloadAction<RegisterHeadPayload>) {
         callback();
     } else {
         console.warn("Error while registering Head info", problem);
+    }
+}
+function* registerPoInfoWorker(action: PayloadAction<RegisterPoPayload>) {
+    const {data: registerPoData, callback} = action.payload;
+    const {ok, problem} = yield call(API.registerPoInfo, registerPoData);
+    if (ok) {
+        callback();
+    } else {
+        console.warn("Error while registering PO info", problem);
     }
 }
 
@@ -96,6 +106,7 @@ export default function* authSagaWatcher() {
     yield all([
         takeLatest(registerUser, registerUserWorker),
         takeLatest(registerHeadInfo, registerHeadInfoWorker),
+        takeLatest(registerPoInfo, registerPoInfoWorker),
         takeLatest(sendResetEmail, sendResetEmailWorker),
         takeLatest(resetPasswordConfirm, resetPasswordConfirmWorker),
         takeLatest(signInUser, signInUserWorker),
