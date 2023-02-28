@@ -13,9 +13,17 @@ import CompanyProfile from "../../Components/CompanyProfile";
 import DevTeamTable from "../../Components/DevTeamTable";
 import { useSelector } from "react-redux";
 import profileSelectors from "../../Redux/Selectors/profileSelectors";
+import { getHeadCompanyListReducer } from "../../Redux/Reducers/profileReducer";
+
 
 const ProfilePage = () => {
   const companyList = useSelector(profileSelectors.getCompanyList);
+
+  
+  useEffect(() => {
+      dispatch(getHeadCompanyListReducer());
+  }, []);
+  
 
   const [name, setName] = useState("Ivanova Irina");
   const [nickName, setNickName] = useState("");
@@ -69,80 +77,77 @@ const ProfilePage = () => {
     []
   );
 
-  const COMPANY_LIST = useMemo(
-    () => [
+  const COMPANY_LIST = [
       {
         name: "CompanyName",
         key: CompanyList.CompanyName,
-        answers: "CAPIX",
+        answers: companyList?.company_name,
       },
-      { name: "LogoCompany", key: CompanyList.LogoCompany, answers: "CAPIX" },
+      { name: "LogoCompany", key: CompanyList.LogoCompany, answers: companyList?.logo },
       {
         name: "WebsiteDomain",
         key: CompanyList.WebsiteDomain,
-        answers: "https://",
+        answers: companyList?.website,
       },
-      { name: "Tagline", key: CompanyList.Tagline, answers: "CAPIX" },
+      { name: "Tagline", key: CompanyList.Tagline, answers: companyList?.tagline },
       {
         name: "ClientIndustry",
         key: CompanyList.ClientIndustry,
-        answers: "CAPIX",
+        answers: companyList?.client_industry,
       },
       {
         name: "SoftwareStack",
         key: CompanyList.SoftwareStack,
-        answers: "CAPIX",
+        answers: companyList?.software_stack,
       },
-      { name: "Industries", key: CompanyList.Industries, answers: "CAPIX" },
+      { name: "Industries", key: CompanyList.Industries, answers: companyList?.industry_choice },
       {
         name: "CompanyDescription",
         key: CompanyList.CompanyDescription,
         answers:
-          "Our company is one of the largest and oldest car-manufacturing companies in Germany.",
+        companyList?.short_description,
       },
       {
         name: "FullCompanyDescription",
         key: CompanyList.FullCompanyDescription,
         answers:
-          "Our cars are manufactured in accordance with the highest international standards. They are sold in different countries of the world. The motors manufactured by our company are used not only in the automobile industry. ",
+        companyList?.full_description,
       },
       {
         name: "AverageHourlyRate",
         key: CompanyList.AverageHourlyRate,
-        answers: "CAPIX",
+        answers: companyList?.average_hourly_rate,
       },
       {
         name: "MinimumBudget",
         key: CompanyList.MinimumBudget,
-        answers: "CAPIX",
+        answers: companyList?.minimum_project_budget,
       },
-      { name: "TeamSize", key: CompanyList.TeamSize, answers: "CAPIX" },
-      { name: "Location", key: CompanyList.Location, answers: "CAPIX" },
+      { name: "TeamSize", key: CompanyList.TeamSize, answers: companyList?.team_size },
+      { name: "Location", key: CompanyList.Location, answers: companyList?.location },
       {
         name: "FoundationDate",
         key: CompanyList.FoundationDate,
-        answers: "CAPIX",
+        answers: companyList?.foundation_date,
       },
-      { name: "ClientsFocus", key: CompanyList.ClientsFocus, answers: "CAPIX" },
+      { name: "ClientsFocus", key: CompanyList.ClientsFocus, answers: companyList?.clients_focus },
       {
         name: "ContactDetails",
         key: CompanyList.ContactDetails,
-        answers: "CAPIX",
+        answers: companyList?.contact_marketing,
       },
       {
         name: "ProjectExpertContactDetails",
         key: CompanyList.ProjectExpertContactDetails,
-        answers: "CAPIX",
+        answers: companyList?.contact_expert,
       },
-      { name: "LinkToClient", key: CompanyList.LinkToClient, answers: "CAPIX" },
+      { name: "LinkToClient", key: CompanyList.LinkToClient, answers: companyList?.links_case },
       {
         name: "ClientPortrait",
         key: CompanyList.ClientPortrait,
-        answers: "CAPIX",
+        answers: companyList?.client_describe,
       },
-    ],
-    []
-  );
+    ];
 
   return (
     <div className={styles.container}>

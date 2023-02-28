@@ -67,9 +67,9 @@ const SignUp = () => {
           full_name: fullName,
           email: email,
           phone: value,
-          user_status: selectedOption.label,
+          role: selectedOption.label,
           password: password,
-          password_rep: passwordConfirmation,
+          re_password: passwordConfirmation,
         },
         callback: () => {
           navigate(PathNames.SignUpPageRole);
