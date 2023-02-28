@@ -88,19 +88,19 @@ const SignUpHead = () => {
                     </div>
                     <Form onFinish={onSignUp} form={form} className={styles.form}>
                         <div className={styles.inputs}>
-                            <Form.Item name='fullName' className={styles.formItem}>
+                            <Form.Item name='fullName' className={styles.formItem} rules={[{ required: true, message: 'Please input your full name!' }]}>
                                 <Input
                                     type={"text"}
                                     placeholder={"Full name"}
                                 />
                             </Form.Item>
-                            <Form.Item name='email' className={styles.formItem}>
+                            <Form.Item name='email' className={styles.formItem} rules={[{ required: true, message: 'Please input your email!' }]}>
                             <Input
                                 type={"email"}
                                 placeholder={"Email"}
                             />
                             </Form.Item>
-                            <Form.Item name='phone' className={styles.formItem}>
+                            <Form.Item name='phone' className={styles.formItem} rules={[{ required: true, message: 'Please input your phone number!' }]}>
                             <PhoneInput
                                 placeholder="Enter phone number"
                                 value={value}
@@ -108,7 +108,7 @@ const SignUpHead = () => {
                                 className={styles.phoneInput}
                             />
                             </Form.Item>
-                            <Form.Item name='userStatus' className={styles.formItem}>
+                            <Form.Item name='userStatus' className={styles.formItem} rules={[{ required: true, message: 'Please select users role in the project!' }]}>
                             <Dropdown
                                 options={options}
                                 placeholder="Role in the project"
@@ -122,7 +122,7 @@ const SignUpHead = () => {
                             />
                             </Form.Item>
                             <div className={styles.passwordContainer}>
-                                <Form.Item name='password' className={styles.formItem}>
+                                <Form.Item name='password' className={styles.formItem} rules={[{ required: true, message: 'Please input your password!' }]}>
                                 <Input
                                     type={type}
                                     value={checkPassword}
@@ -138,7 +138,7 @@ const SignUpHead = () => {
                                 </div>
                             </div>
                             <div className={styles.passwordContainer}>
-                                <Form.Item name='passwordConfirmation' className={styles.formItem}>
+                                <Form.Item name='passwordConfirmation' className={styles.formItem} rules={[{ required: true, message: 'Please confirm your password!' }]}>
                                 <Input
                                     type={typeConfirm}
                                     value={checkPasswordConfirm}

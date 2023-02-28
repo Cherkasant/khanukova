@@ -12,14 +12,16 @@ import PuzzleButton, {
 import styles from "./SignUpPoInfo.module.css";
 import { PathNames } from "../../Router/Router";
 import { registerPoInfo } from "../../../Redux/Reducers/authReducer";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router";
 import Title from "../../../Components/Title";
+import authSelectors from "../../../Redux/Selectors/authSelectors";
 
 const SignUpPoInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const idUser = useSelector(authSelectors.getUserId)
 
   const onSignUpPoInfo = (values: any) => {
     dispatch(
@@ -36,7 +38,7 @@ const SignUpPoInfo = () => {
           link_competitor: values.linkCompetitor,
           start_project: values.startProject,
           used_outsourcing: values.usedOutsourcing,
-          owner: 6,
+          owner: idUser,
         },
         callback: () => {
           navigate(PathNames.ActivateUser);
@@ -54,14 +56,14 @@ const SignUpPoInfo = () => {
           </div>
           <Form onFinish={onSignUpPoInfo} className={styles.form}>
             <div className={styles.infoContainer}>
-              <Form.Item name="companyName" className={styles.formItem}>
+              <Form.Item name="companyName" className={styles.formItem} rules={[{ required: true, message: 'Please input your Company name!' }]}>
                 <Input title={"1. Company name"} className={styles.input} />
               </Form.Item>
               <div className={styles.companyContainer}>
                 <div className={styles.companyContainerTitle}>
-                  2. Choose your company*
+                  2. Choose your company
                 </div>
-                <Form.Item name="companySize" className={styles.formItem}>
+                <Form.Item name="companySize" className={styles.formItem} rules={[{ required: true, message: 'Please choose company size' }]}>
                   <Radio.Group className={styles.companyContainerRadio}>
                     <Radio value="Startup">Startup</Radio>
                     <Radio value="Small">
@@ -82,7 +84,7 @@ const SignUpPoInfo = () => {
                   successful experience and where the potential clients are
                   expected to come from*
                 </div>
-                <Form.Item name="industryChoice" className={styles.formItem}>
+                <Form.Item name="industryChoice" className={styles.formItem} rules={[{ required: true, message: 'Please choose industry' }]}>
                   <Checkbox.Group className={styles.checkboxContainer}>
                     <Checkbox value="Ecommerce">Ecommerce</Checkbox>
                     <Checkbox
@@ -172,7 +174,7 @@ const SignUpPoInfo = () => {
                   </Checkbox.Group>
                 </Form.Item>
               </div>
-              <Form.Item name="developmentTeam" className={styles.formItem}>
+              <Form.Item name="developmentTeam" className={styles.formItem} rules={[{ required: true, message: 'Please input this value!' }]}>
                 <Input
                   title={
                     "4. Do you already have a tech expert or an internal development team for your project?"
@@ -180,7 +182,7 @@ const SignUpPoInfo = () => {
                   className={styles.input}
                 />
               </Form.Item>
-              <Form.Item name="useOutsourcing" className={styles.formItem}>
+              <Form.Item name="useOutsourcing" className={styles.formItem} rules={[{ required: true, message: 'Please input this value!' }]}>
                 <Input
                   title={
                     "5. Are you willing to use outsourcing services (software development including management responsibilities) or outstaffing (directly manage the work of their dedicated external team)?*"
@@ -188,25 +190,25 @@ const SignUpPoInfo = () => {
                   className={styles.input}
                 />
               </Form.Item>
-              <Form.Item name="descriptionProject" className={styles.formItem}>
+              <Form.Item name="descriptionProject" className={styles.formItem} rules={[{ required: true, message: 'Please input project description!' }]}>
                 <Input
                   title={"6. Please provide a brief. project description (Product Features) in three sentences (maximum)"}
                   className={styles.input}
                 />
               </Form.Item>
-              <Form.Item name="businessRequirements" className={styles.formItem}>
+              <Form.Item name="businessRequirements" className={styles.formItem} rules={[{ required: true, message: 'Please input business requirements description!' }]}>
                 <Input
                   title={"7. Do you have product business requirements description ready for your project"}
                   className={styles.input}
                 />
               </Form.Item>
-              <Form.Item name="technologicalStack" className={styles.formItem}>
+              <Form.Item name="technologicalStack" className={styles.formItem} rules={[{ required: true, message: 'Please input echnological/software stack!' }]}>
                 <Input
                   title={"8. Do you have a technological/software stack in mind for your project?"}
                   className={styles.input}
                 />
               </Form.Item>
-              <Form.Item name="linkCompetitor" className={styles.formItem}>
+              <Form.Item name="linkCompetitor" className={styles.formItem} rules={[{ required: true, message: 'Please input link to your competitor\'s project!' }]}>
                 <Input
                   title={"9. Please provide a link to your competitor's project that is similar to one you are willing to develop."}
                   className={styles.input}
@@ -216,7 +218,7 @@ const SignUpPoInfo = () => {
                     <div className={styles.companyContainerTitle}>
                         10. When are you willing to start your project (choose one)?
                     </div>
-                    <Form.Item name="startProject" className={styles.formItem}>
+                    <Form.Item name="startProject" className={styles.formItem} rules={[{ required: true, message: 'Please choose when are you willing to start your project' }]}>
                         <Radio.Group className={styles.companyContainerRadio}>
                             <Radio value="This month">This month</Radio>
                             <Radio value="In a month">
@@ -231,7 +233,7 @@ const SignUpPoInfo = () => {
                         </Radio.Group>
                     </Form.Item>
                 </div>
-              <Form.Item name="usedOutsourcing" className={styles.formItem}>
+              <Form.Item name="usedOutsourcing" className={styles.formItem} rules={[{ required: true, message: 'Please input this value!' }]}>
                 <Input title={"11. Have you ever used outsourcing/outstaffing software development services before?"} className={styles.input} />
               </Form.Item>
             </div>
@@ -241,7 +243,6 @@ const SignUpPoInfo = () => {
                 btnTitle={"Create an Account"}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.button}
-                // btnDisabled={}
               />
             </Form.Item>
           </Form>

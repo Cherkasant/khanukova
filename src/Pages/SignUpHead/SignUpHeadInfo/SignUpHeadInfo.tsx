@@ -50,6 +50,7 @@ const SignUpHeadInfo = () => {
                     links_case: values.linksCase,
                     client_describe: values.clientDescribe,
                     employees: [idUser],
+                    owner: idUser,
                 },
                 callback: () => {
                     navigate(PathNames.ActivateUser);
@@ -81,7 +82,7 @@ const SignUpHeadInfo = () => {
                     </div>
                     <Form onFinish={onSignUpHeadInfo} className={styles.form}>
                         <div className={styles.infoContainer}>
-                            <Form.Item name="companyName" className={styles.formItem}>
+                            <Form.Item name="companyName" className={styles.formItem} rules={[{ required: true, message: 'Please input your Company name!' }]}>
                                 <Input title={"1. Company name"} className={styles.input}/>
                             </Form.Item>
                             <div className={styles.uploadContainer}>
@@ -97,29 +98,29 @@ const SignUpHeadInfo = () => {
                                     </Button>
                                 </Upload>
                             </div>
-                            <Form.Item name="website" className={styles.formItem}>
+                            <Form.Item name="website" className={styles.formItem} rules={[{ required: true, message: 'Please input your website domain name with using http://, https://, ftp://, ftps://' }]}>
                                 <Input
                                     title={"3. Website domain name"}
                                     className={styles.input}
                                 />
                             </Form.Item>
-                            <Form.Item name="tagline" className={styles.formItem}>
+                            <Form.Item name="tagline" className={styles.formItem} rules={[{ required: true, message: 'Please input Tagline!' }]}>
                                 <Input
                                     title={
-                                        "4. Tagline (service description in one sentence or mission/vision)*"
+                                        "4. Tagline (service description in one sentence or mission/vision)"
                                     }
                                     className={styles.input}
                                 />
                             </Form.Item>
-                            <Form.Item name="clientIndustry" className={styles.formItem}>
+                            <Form.Item name="clientIndustry" className={styles.formItem} rules={[{ required: true, message: 'Please input Industries!' }]}>
                                 <Input
-                                    title={"5. Industries that your clients are coming from*"}
+                                    title={"5. Industries that your clients are coming from"}
                                     className={styles.input}
                                 />
                             </Form.Item>
-                            <Form.Item name="softwareStack" className={styles.formItem}>
+                            <Form.Item name="softwareStack" className={styles.formItem} rules={[{ required: true, message: 'Please input Software Stack!' }]}>
                                 <Input
-                                    title={"6. Preferable Software Stack*"}
+                                    title={"6. Preferable Software Stack"}
                                     className={styles.input}
                                 />
                             </Form.Item>
@@ -127,9 +128,9 @@ const SignUpHeadInfo = () => {
                                 <div className={styles.checkboxBlockTitle}>
                                     7. Choose the preferable industries where you have the most
                                     successful experience and where the potential clients are
-                                    expected to come from*
+                                    expected to come from
                                 </div>
-                                <Form.Item name="industryChoice" className={styles.formItem}>
+                                <Form.Item name="industryChoice" className={styles.formItem} rules={[{ required: true, message: 'Please choose industry' }]}>
                                     <Checkbox.Group className={styles.checkboxContainer}>
                                         <Checkbox value="Ecommerce">
                                             Ecommerce
@@ -190,30 +191,30 @@ const SignUpHeadInfo = () => {
                                     </Checkbox.Group>
                                 </Form.Item>
                             </div>
-                            <Form.Item name="shortDescription" className={styles.formItem}>
+                            <Form.Item name="shortDescription" className={styles.formItem} rules={[{ required: true, message: 'Please input Short Description!' }]}>
                                 <Input
-                                    title={"8. Company Short Description*"}
+                                    title={"8. Company Short Description"}
                                     className={styles.input}
                                 />
                             </Form.Item>
-                            <Form.Item name="fullDescription" className={styles.formItem}>
+                            <Form.Item name="fullDescription" className={styles.formItem} rules={[{ required: true, message: 'Please input Full Description!' }]}>
                                 <Input
-                                    title={"9. Full company Description*"}
+                                    title={"9. Full company Description"}
                                     className={styles.input}
                                 />
                             </Form.Item>
                             <div className={styles.rateContainer}>
                                 <div className={styles.rateContainerTitle}>
-                                    10. Average hourly rate*
+                                    10. Average hourly rate
                                 </div>
                                 <div className={styles.rateContainerInput}>
                                     <Form.Item
                                         name="averageHourlyRate"
-                                        className={styles.formItem}
+                                        className={styles.formItem} rules={[{ required: true, message: 'Please input hourly rate!' }]}
                                     >
                                         <Input className={styles.inputRate}/>
                                     </Form.Item>
-                                    <Form.Item name="currencyRate" className={styles.formItem}>
+                                    <Form.Item name="currencyRate" className={styles.formItem} rules={[{ required: true, message: 'Please select currency!' }]}>
                                         <Dropdown
                                             options={currencyOptions}
                                             value={defaultCurrencyOption}
@@ -229,16 +230,16 @@ const SignUpHeadInfo = () => {
                             </div>
                             <div className={styles.budgetContainer}>
                                 <div className={styles.budgetContainerTitle}>
-                                    11. Minimum project budget*
+                                    11. Minimum project budget
                                 </div>
                                 <div className={styles.budgetContainerInput}>
                                     <Form.Item
                                         name="minimumProjectBudget"
-                                        className={styles.formItem}
+                                        className={styles.formItem} rules={[{ required: true, message: 'Please input project budget!' }]}
                                     >
                                         <Input className={styles.inputRate}/>
                                     </Form.Item>
-                                    <Form.Item name="currencyBudget" className={styles.formItem}>
+                                    <Form.Item name="currencyBudget" className={styles.formItem} rules={[{ required: true, message: 'Please select currency!' }]}>
                                         <Dropdown
                                             options={currencyOptions}
                                             value={defaultCurrencyOption}
@@ -252,24 +253,24 @@ const SignUpHeadInfo = () => {
                                     </Form.Item>
                                 </div>
                             </div>
-                            <Form.Item name="teamSize" className={styles.formItem}>
-                                <Input title={"12. Team Size*"} className={styles.input}/>
+                            <Form.Item name="teamSize" className={styles.formItem} rules={[{ required: true, message: 'Please input Team Size!' }]}>
+                                <Input title={"12. Team Size"} className={styles.input}/>
                             </Form.Item>
-                            <Form.Item name="location" className={styles.formItem}>
-                                <Input title={"13. Location*"} className={styles.input}/>
+                            <Form.Item name="location" className={styles.formItem} rules={[{ required: true, message: 'Please input Location!' }]}>
+                                <Input title={"13. Location"} className={styles.input}/>
                             </Form.Item>
                             <div className={styles.datePickerContainer}>
                                 <div className={styles.datePickerContainerTitle}>
-                                    14. Foundation date*
+                                    14. Foundation date
                                 </div>
-                                <Form.Item name="datePicker" className={styles.formItem}>
+                                <Form.Item name="datePicker" className={styles.formItem} rules={[{ required: true, message: 'Please select Foundation date!' }]}>
                                     <DatePicker
                                         format="YYYY-MM-DD"
                                         className={styles.datePickerInput}
                                     />
                                 </Form.Item>
                             </div>
-                            <Form.Item name="clientsFocus" className={styles.formItem}>
+                            <Form.Item name="clientsFocus" className={styles.formItem} rules={[{ required: true, message: 'Please input Client\'s Focus!' }]}>
                                 <Input
                                     title={
                                         "15. Client's Focus (Ideal Client Profile based on your portfolio)"
@@ -277,29 +278,29 @@ const SignUpHeadInfo = () => {
                                     className={styles.input}
                                 />
                             </Form.Item>
-                            <Form.Item name="contactMarketing" className={styles.formItem}>
+                            <Form.Item name="contactMarketing" className={styles.formItem} rules={[{ required: true, message: 'Please input contact details!' }]}>
                                 <Input
-                                    title={"16. Marketing manager contact details*"}
+                                    title={"16. Marketing manager contact details"}
                                     className={styles.input}
                                 />
                             </Form.Item>
-                            <Form.Item name="contactExpert" className={styles.formItem}>
+                            <Form.Item name="contactExpert" className={styles.formItem} rules={[{ required: true, message: 'Please input contact details!' }]}>
                                 <Input
                                     title={
-                                        "17. Tech or Project Expert contact details (who will be in touch with a client)*"
+                                        "17. Tech or Project Expert contact details (who will be in touch with a client)"
                                     }
                                     className={styles.input}
                                 />
                             </Form.Item>
-                            <Form.Item name="linksCase" className={styles.formItem}>
+                            <Form.Item name="linksCase" className={styles.formItem} rules={[{ required: true, message: 'Please input Links!' }]}>
                                 <Input
-                                    title={"18. Links to client's success cases*"}
+                                    title={"18. Links to client's success cases"}
                                     className={styles.input}
                                 />
                             </Form.Item>
-                            <Form.Item name="clientDescribe" className={styles.formItem}>
+                            <Form.Item name="clientDescribe" className={styles.formItem} rules={[{ required: true, message: 'Please input Describe!' }]}>
                                 <Input
-                                    title={"19. Describe ideal client portrait*"}
+                                    title={"19. Describe ideal client portrait"}
                                     className={styles.input}
                                 />
                             </Form.Item>

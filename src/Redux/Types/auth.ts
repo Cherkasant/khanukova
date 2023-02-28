@@ -30,6 +30,7 @@ export type RegisterHeadData = {
     links_case: string,
     client_describe: string,
     employees:[number],
+    owner: number,
 };
 
 export type RegisterPoData = {
