@@ -8,14 +8,16 @@ import Dropdown from "react-dropdown";
 import Input from "../Input";
 import "react-datepicker/dist/react-datepicker.css";
 import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
+import type { DatePickerProps } from "antd";
 import { DatePicker, Upload } from "antd";
 import { CalendarIcon } from "../../Assets/icons/CalendarIcon";
 import { DownloadIcon } from "../../Assets/icons/DownloadIcon";
 import { EditTitleIcon } from "../../Assets/icons/EditTitleIcon";
+import { DeleteIcon } from "../../Assets/icons/DeleteIcon";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  postTaskCard,
   setSelectedModalVisible,
-  setTaskCard,
 } from "../../Redux/Reducers/postReducer";
 import postSelector from "../../Redux/Selectors/postSelector";
 import {
@@ -31,24 +33,30 @@ import {
 const NewTask: FC<Props> = (props) => {
   const dispatch = useDispatch();
   const milestone = useSelector(postSelector.getTitleMilestone);
+
   const onSaveClick = () => {
     dispatch(
-      setTaskCard({
-        item: title,
-        dependence: "",
-        status: status.value,
-        label: label,
-        duration: duration,
-        responsible: selectedResponsibleOptions.value,
-        launchDate: launchDate,
-        deadline: deadline,
+      postTaskCard({
+        milestone_name: milestone,
+        description: descriptionValue,
+        attachment: null,
+        responsible: [],
         priority: priority.value,
-        progress: progress.value,
-        color: colors.value,
+        start_date: launchDate,
+        deadline: deadline,
+        duration: +duration,
+        labels: label,
+        color_labels: colors.value,
+        dependence: [],
+        progress: +progress.value,
+        status: status.value,
+        payment_status: paymentStatus.value,
+        project: "TestOne",
       })
     );
     dispatch(setSelectedModalVisible(false));
   };
+  const [attachment, setAttachment] = useState("");
   const [launchDate, setLaunchDate] = useState("");
   const [deadline, setDeadline] = useState("");
   const [label, setLabel] = useState("");
@@ -82,6 +90,13 @@ const NewTask: FC<Props> = (props) => {
     setEdit(false);
     setTitle("Title");
   }, []);
+
+  const onChangeDeadline: DatePickerProps["onChange"] = (date, dateString) => {
+    setDeadline(dateString);
+  };
+  const onChangeLaunch: DatePickerProps["onChange"] = (date, dateString) => {
+    setLaunchDate(dateString);
+  };
   return (
     <ReactModal
       className={styles.modal}
@@ -89,7 +104,14 @@ const NewTask: FC<Props> = (props) => {
       {...props}
     >
       <div className={styles.container}>
-        <div className={styles.milestone}>{milestone}</div>
+        <div className={styles.milestone}>
+          {milestone}
+          <div className={styles.deleteContainer}>
+            <DeleteIcon />
+            {"Delete from project"}
+          </div>
+        </div>
+
         <div className={styles.icon} onClick={props.onRequestClose}>
           <CloseModalIcon />
         </div>
@@ -111,19 +133,19 @@ const NewTask: FC<Props> = (props) => {
       <div className={styles.mainBlock}>
         <div className={styles.leftBlock}>
           <div className={styles.descriptionContainer}>
-            <div className={styles.title}>{"Discription"}</div>
+            <div className={styles.title}>{"Description"}</div>
             <textarea
               className={styles.descriptionInput}
               placeholder={"Write"}
               value={descriptionValue}
               onChange={onChangeDescription}
             />
-            <PuzzleButton
-              title={"Submit new"}
-              type={PuzzleButtonTypes.TextButton}
-              className={styles.submitBtn}
-              disabled={!descriptionValue}
-            />
+            {/*<PuzzleButton*/}
+            {/*  title={"Submit new"}*/}
+            {/*  type={PuzzleButtonTypes.TextButton}*/}
+            {/*  className={styles.submitBtn}*/}
+            {/*  disabled={!descriptionValue}*/}
+            {/*/>*/}
           </div>
 
           <div>
@@ -131,9 +153,10 @@ const NewTask: FC<Props> = (props) => {
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture"
               className="upload-list-inline"
+              onChange={(info) => setAttachment(info.file.name)}
             >
               <div className={styles.attachmentBlock}>
-                <div className={styles.title}>{"Attanchment"}</div>
+                <div className={styles.title}>{"Attachment"}</div>
                 <AttachmentIcon />
               </div>
             </Upload>
@@ -200,10 +223,7 @@ const NewTask: FC<Props> = (props) => {
                 placeholder="Nothing selected"
                 suffixIcon={<CalendarIcon />}
                 className={styles.datepicker}
-                onChange={(value: any) => {
-                  const startDate = new Date(value).toLocaleDateString();
-                  setLaunchDate(startDate);
-                }}
+                onChange={onChangeLaunch}
               />
             </div>
 
@@ -214,10 +234,7 @@ const NewTask: FC<Props> = (props) => {
                   format="DD.MM.YYYY"
                   placeholder="Nothing selected"
                   suffixIcon={<CalendarIcon />}
-                  onChange={(value: any) => {
-                    const deadline = new Date(value).toLocaleDateString();
-                    setDeadline(deadline);
-                  }}
+                  onChange={onChangeDeadline}
                 />
               </div>
             </div>
@@ -308,7 +325,7 @@ const NewTask: FC<Props> = (props) => {
                 options={PaymentStatus}
                 onChange={setPaymentStatus}
                 value={paymentStatus}
-                placeholder="Select  status"
+                placeholder="Select status"
                 className={styles.dropdownContainer}
                 controlClassName={styles.dropdownControl}
                 placeholderClassName={styles.dropdownPlaceholder}

@@ -33,10 +33,18 @@
 }
 
 .milestone {
+    display: flex;
+    justify-content: space-between;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #A3A3A3;
+}
+
+.deleteContainer {
+    display: flex;
+    gap: 10px;
+    padding-right: 140px;
 }
 
 .titleTask {
@@ -164,16 +172,6 @@
     padding-left: 8px;
 }
 
-.test {
-    border: 0.690265px solid #E5E0EB !important;
-    border-radius: 2.76106px !important;
-    background: #FFFFFF !important;
-    padding: 25px !important;
-}
-
-.test1 {
-    background: red !important;
-}
 
 .deadline {
     height: 40px;

@@ -8,7 +8,10 @@ type UserNameProps = {
 const UserName: FC<UserNameProps> = ({ username }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.letter}>{username[0]}</div>
+      <div className={styles.letter}>
+        {username.split(" ")[0][0]}
+        {username.split(" ")[1][0]}
+      </div>
       {username}
     </div>
   );

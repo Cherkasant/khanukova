@@ -70,7 +70,7 @@ const ModalEcase: FC<Props> = (props) => {
             />
           </div>
           <div className={styles.descriptionContainer}>
-            <div className={styles.title}>{"Discription"}</div>
+            <div className={styles.title}>{"Description"}</div>
             <textarea
               className={styles.descriptionInput}
               placeholder={"Write"}
@@ -92,7 +92,7 @@ const ModalEcase: FC<Props> = (props) => {
               className="upload-list-inline"
             >
               <div className={styles.attachmentBlock}>
-                <div className={styles.title}>{"Attanchment"}</div>
+                <div className={styles.title}>{"Attachment"}</div>
                 <AttachmentIcon />
               </div>
             </Upload>

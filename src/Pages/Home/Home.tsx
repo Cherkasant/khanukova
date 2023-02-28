@@ -24,38 +24,6 @@ const MOCK_CARDS_LIST = [
     budget: "1000000$",
     paid: "12500$",
   },
-  // {
-  //   id: 3,
-  //   projectName: "Apple",
-  //   tasks: "20%",
-  //   deadline: "16.02.2222",
-  //   budget: "1000000$",
-  //   paid: "12500$",
-  // },
-  // {
-  //   id: 4,
-  //   projectName: "Google",
-  //   tasks: "20%",
-  //   deadline: "16.02.2222",
-  //   budget: "1000000$",
-  //   paid: "12500$",
-  // },
-  // {
-  //   id: 5,
-  //   projectName: "Apple",
-  //   tasks: "20%",
-  //   deadline: "16.02.2222",
-  //   budget: "1000000$",
-  //   paid: "12500$",
-  // },
-  // {
-  //   id: 6,
-  //   projectName: "Yandex",
-  //   tasks: "20%",
-  //   deadline: "16.02.2222",
-  //   budget: "1000000$",
-  //   paid: "12500$",
-  // },
 ];
 const Home = () => {
   const navigate = useNavigate();

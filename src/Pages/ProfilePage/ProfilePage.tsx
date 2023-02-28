@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import styles from "./ProfilePage.module.css";
 import PuzzleButton, { PuzzleButtonTypes } from "../../Components/PuzzleButton";
 import Input from "../../Components/Input";
@@ -6,27 +6,17 @@ import Title from "../../Components/Title";
 import { PencilIcon } from "../../Assets/Profile/PencilIcon";
 import { Avatar } from "../../Assets/Profile/avatar";
 import Dropdown from "react-dropdown";
-import { DatePickerProps } from "antd";
-import { DatePicker, Space } from "antd";
+import { DatePicker, DatePickerProps, Space } from "antd";
 import TabsListProfile from "../../Components/TabsListProfile";
 import { CompanyList, TabsProfile } from "../../Components/constants/@types";
 import CompanyProfile from "../../Components/CompanyProfile";
 import DevTeamTable from "../../Components/DevTeamTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import profileSelectors from "../../Redux/Selectors/profileSelectors";
-import { getPoCompanyListReducer } from "../../Redux/Reducers/profileReducer";
 
 const ProfilePage = () => {
-
-  const dispatch = useDispatch();
-  
   const companyList = useSelector(profileSelectors.getCompanyList);
-  
-  useEffect(() => {
-      dispatch(getPoCompanyListReducer());
-  }, []);
 
-  
   const [name, setName] = useState("Ivanova Irina");
   const [nickName, setNickName] = useState("");
   const [positions, setPositions] = useState("CEO");
@@ -170,7 +160,9 @@ const ProfilePage = () => {
           <div className={styles.containerInfo}>
             <div className={styles.containerPhoto}>
               <h2 className={styles.subTitle}>Account photo</h2>
-              <div className={styles.photo}><Avatar /></div>
+              <div className={styles.photo}>
+                <Avatar />
+              </div>
               <div className={styles.description}>
                 Edit photo <PencilIcon />
               </div>
