@@ -11,6 +11,8 @@ import {
 import { CompanyListData } from "../Types/profile";
 
 const JWT_TOKEN = "Token 2b5698f59e13ef3d6535bf15c4016e57dcb530f9";
+const JWT_TOKEN_PO = "Token 4fe1657489f4e420554f33120f98cf64957103f2";
+const JWT_TOKEN_HEAD = "Token 1e4b18fae204857eca1a4f110fc87b1c772b6c35";
 
 const API = create({baseURL: " https://apipuzzle-be.herokuapp.com"});
 
@@ -69,12 +71,20 @@ const resetPasswordConfirm = (data: ResetPasswordData) => {
     });
 };
 
-const getHeadCompanyList = () => {
-    return API.get("/user-profile/head-company/?format=api");
-}
+const getHeadCompanyList = (page?: number) => {
+    return API.get("/user-profile/head-company/", page, {
+        headers: {
+        Authorization: JWT_TOKEN_HEAD,
+        },
+    });
+};
 
-const getPoCompanyList = () => {
-    return API.get("/user-profile/po-company/");
+const getECaseList = (page?: number) => {
+    return API.get("/user-profile/po-company/", page, {
+        headers: {
+        Authorization: JWT_TOKEN_PO,
+        },
+    });
 }
 
 export default {
@@ -86,5 +96,5 @@ export default {
     signInUser,
     resetPasswordConfirm,
     getHeadCompanyList,
-    getPoCompanyList,
+    getECaseList,
 };

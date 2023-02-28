@@ -1,4 +1,4 @@
-export type CompanyListData = {
+export type CompanyListData =  {
    company_name: string,
    logo: string,
    website: string,
@@ -8,11 +8,11 @@ export type CompanyListData = {
    industry_choice: string,
    short_description: string,
    full_description: string,
-   average_hourly_rate: number,
+   average_hourly_rate: string,
    currency_rate: string,
-   minimum_project_budget: number,
-   currency_budget: number,
-   team_size: number,
+   minimum_project_budget: string,
+   currency_budget: string,
+   team_size: string,
    location: string,
    foundation_date: string,
    clients_focus: string,
@@ -20,6 +20,7 @@ export type CompanyListData = {
    contact_expert: string,
    links_case: string,
    client_describe: string,
-   employees: [],
-   owner: null
+   employees: undefined,
 }
+
+

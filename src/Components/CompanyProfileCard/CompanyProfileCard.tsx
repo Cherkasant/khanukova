@@ -4,7 +4,7 @@ import { EditTitleIcon } from "../../Assets/icons/EditTitleIcon";
 import { CompanyList } from "../constants/@types";
 
 type CompanyProfileCardProps = {
-  CardType: { name: string; key: CompanyList; answers: string };
+  CardType: { name: string; key: CompanyList; answers: string | undefined };
 };
 
 const CompanyProfileCard: FC<CompanyProfileCardProps> = ({ CardType }) => {

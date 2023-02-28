@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import ReactModal, { Props } from "react-modal";
 import "react-dropdown/style.css";
 import styles from "./ModalEcase.module.css";
@@ -9,21 +9,28 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { List, Upload } from "antd";
 import { DownloadIcon } from "../../Assets/icons/DownloadIcon";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setEcaseModalVisible } from "../../Redux/Reducers/postReducer";
 import {
   ClientsRequestStatus,
   Priority,
   responsibleOptions,
 } from "../constants/Modal/ModalData";
-import { EcaseData } from "../constants/Modal/EcaseData";
 import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
+import profileSelectors from "../../Redux/Selectors/profileSelectors";
+import { getECaseListReducer } from "../../Redux/Reducers/profileReducer";
 
 const ModalEcase: FC<Props> = (props) => {
   const dispatch = useDispatch();
   const onSaveClick = () => {
     dispatch(setEcaseModalVisible(false));
   };
+
+  const ECaseList = useSelector(profileSelectors.getECaseList);
+
+  useEffect(() => {
+    dispatch(getECaseListReducer());
+  }, []);
 
   const [descriptionValue, setDescriptionValue] = useState("");
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -42,6 +49,21 @@ const ModalEcase: FC<Props> = (props) => {
   const onCancelClick = () => {
     dispatch(setEcaseModalVisible(false));
   };
+
+  const EcaseData = [
+    { name: "1. Company name", answer: ECaseList?.company_name },
+    { name: "2. Company size ", answer: ECaseList?.company_size },
+    { name: "3. Industries ", answer: ECaseList?.industry_choice },
+    { name: "4. Already have a teach experience?", answer: ECaseList?.development_team},
+    { name: "5. Willing to use outsiursing/ outstaffing", answer: ECaseList?.use_outsourcing },
+    { name: "6. Project description ready?", answer: ECaseList?.description_project },
+    { name: "7. Business requirements for the product", answer: ECaseList?.business_requirements },
+    { name: "8. Technological stack:", answer: ECaseList?.technological_stack },
+    { name: "9. Link to your competitor's project:", answer: ECaseList?.link_competitor },
+    { name: "10. Start project ", answer: ECaseList?.start_project },
+    { name: "11. Used outsiursing/outstaffing before", answer: ECaseList?.used_outsourcing },
+  ];
+
   return (
     <ReactModal
       className={styles.modal}
@@ -70,7 +92,7 @@ const ModalEcase: FC<Props> = (props) => {
             />
           </div>
           <div className={styles.descriptionContainer}>
-            <div className={styles.title}>{"Discription"}</div>
+            <div className={styles.title}>{"Description"}</div>
             <textarea
               className={styles.descriptionInput}
               placeholder={"Write"}
@@ -92,7 +114,7 @@ const ModalEcase: FC<Props> = (props) => {
               className="upload-list-inline"
             >
               <div className={styles.attachmentBlock}>
-                <div className={styles.title}>{"Attanchment"}</div>
+                <div className={styles.title}>{"Attachment"}</div>
                 <AttachmentIcon />
               </div>
             </Upload>
