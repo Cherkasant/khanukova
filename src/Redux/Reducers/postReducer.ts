@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TaskType } from "../Types/tasks";
+import { TaskType, TaskTypeWithID } from "../Types/tasks";
 
 type PostReducerState = {
   isSelectedImageModalIsOpened: boolean;
-  TaskForm: TaskType | null;
+  TaskForm: TaskTypeWithID | null;
   TaskTitle: string;
   isFilterVisible: boolean;
   isEcaseModalOpened: boolean;
@@ -28,7 +28,10 @@ const postsSlice = createSlice({
     setSelectedModalVisible: (state, action: PayloadAction<boolean>) => {
       state.isSelectedImageModalIsOpened = action.payload;
     },
-    setTaskCard: (state, action: PayloadAction<TaskType>) => {
+
+    postTaskCard: (state, action: PayloadAction<TaskType>) => {},
+    getTaskCard: (state, action: PayloadAction<undefined>) => {},
+    setTaskCard: (state, action: PayloadAction<TaskTypeWithID>) => {
       state.TaskForm = action.payload;
     },
     setTitleTask: (state, action: PayloadAction<string>) => {
@@ -52,6 +55,8 @@ const postsSlice = createSlice({
 
 export const {
   setSelectedModalVisible,
+  postTaskCard,
+  getTaskCard,
   setTaskCard,
   setTitleTask,
   setFilterVisible,

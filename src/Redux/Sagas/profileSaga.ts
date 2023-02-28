@@ -1,7 +1,24 @@
-import { all, call, takeLatest, put } from "redux-saga/effects";
+import { all, call, put, takeLatest } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import API from "../Utils/api";
-import { getHeadCompanyListReducer, setHeadCompanyListReducer, getECaseListReducer, setECaseListReducer } from "../Reducers/profileReducer"
+import {
+  getHeadCompanyListReducer,
+  getPoCompanyListReducer,
+  setHeadCompanyListReducer,
+  setPoCompanyListReducer,
+} from "../Reducers/profileReducer";
+
+
+
+function* getPoCompanyListWorker(action: PayloadAction<undefined>) {
+  const { ok, data, problem } = yield call(API.getPoCompanyList);
+
+  if (ok && data) {
+    yield put(setPoCompanyListReducer(data));
+  } else {
+    console.warn("Authentication credentials were not provided", problem);
+  }
+}
 
 function* getHeadCompanyListWorker(action: PayloadAction<undefined>) {
    const { ok, data, problem } = yield call(API.getHeadCompanyList);
@@ -26,5 +43,7 @@ export default function* profileSaga() {
    yield all([
       takeLatest(getHeadCompanyListReducer, getHeadCompanyListWorker),
       takeLatest(getECaseListReducer, getECaseListWorker),
+      takeLatest(getPoCompanyListReducer, getPoCompanyListWorker),
    ]);
 }
+

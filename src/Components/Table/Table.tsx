@@ -3,7 +3,6 @@ import { Column, useSortBy, useTable } from "react-table";
 import styles from "./Table.module.css";
 import { TableColumns } from "../constants/Table/TableData";
 import { ArrowDropDownIcon } from "../../Assets/icons/ArrowDropDownIcon";
-import { format } from "date-fns";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedModalVisible } from "../../Redux/Reducers/postReducer";
 import { CardTaskType } from "../../Redux/Types/tasks";
@@ -13,77 +12,26 @@ import classNames from "classnames";
 import { SortIcon } from "../../Assets/icons/SortIcon";
 import { RotateSortIcon } from "../../Assets/icons/RotateSortIcon";
 import PostSelector from "../../Redux/Selectors/postSelector";
+import moment from "moment";
 
 const Table = () => {
-  const DATA: CardTaskType = [
-    {
-      deadline: "1/31/2023",
-      dependence: "",
-      duration: "132",
-      item: "Test 1",
-      label: "Check",
-      launchDate: "1/1/2023",
-      priority: "Medium",
-      progress: "20%",
-      responsible: "User2",
-      status: "To Do",
-      color: "Blue",
-    },
-    {
-      deadline: "1/31/2023",
-      dependence: "test1",
-      duration: "132",
-      item: "Test 2",
-      label: "Check",
-      launchDate: "1/1/2023",
-      priority: "Medium",
-      progress: "20%",
-      responsible: "User2",
-      status: "To Do",
-      color: "Red",
-    },
-    {
-      deadline: "1/31/2023",
-      dependence: "test 2",
-      duration: "132",
-      item: "Test 3",
-      label: "Check",
-      launchDate: "1/1/2023",
-      priority: "Medium",
-      progress: "20%",
-      responsible: "User2",
-      status: "Ready for QA",
-      color: "Fiolet",
-    },
-    {
-      deadline: "1/31/2023",
-      dependence: "test 3",
-      duration: "132",
-      item: "Test 4",
-      label: "Check",
-      launchDate: "1/1/2023",
-      priority: "Medium",
-      progress: "30%",
-      responsible: "User2",
-      status: "On Hold",
-      color: "Green",
-    },
-  ];
-  const [taskInfo, setTaskInfo] = useState<CardTaskType>(DATA);
+  const dispatch = useDispatch();
+
+  const DATA: CardTaskType = [];
+
   const task = useSelector(PostSelector.getTask);
+
   const [isOpened, setOpened] = useState(false);
   const onArrowClick = () => {
     setOpened(!isOpened);
   };
+
+  const [taskInfo, setTaskInfo] = useState<CardTaskType>(DATA);
   useEffect(() => {
     if (task) {
-      // @ts-ignore
-      setTaskInfo(taskInfo.push(task));
+      setTaskInfo((prevArray) => [...prevArray, task]);
     }
-  }, [task]);
-
-  const dispatch = useDispatch();
-
+  }, []);
   const onAddTaskClick = () => {
     dispatch(setSelectedModalVisible(true));
   };
@@ -97,7 +45,7 @@ const Table = () => {
           {"Add item"}
         </div>
       ),
-      accessor: "item",
+      accessor: "milestone_name",
       Cell: ({ value }) => (
         <div className={styles.container} key={value}>
           <div className={styles.cell}>
@@ -136,7 +84,7 @@ const Table = () => {
     {
       Header: TableColumns.label,
       Footer: "",
-      accessor: "label",
+      accessor: "labels",
       Cell: (props: any) => (
         <div
           className={classnames(styles.label, {
@@ -149,7 +97,7 @@ const Table = () => {
             [styles.yellow]: props.row.original.color === "Yellow",
           })}
         >
-          {props.row.original.label}
+          {props.row.original.labels}
         </div>
       ),
     },
@@ -157,9 +105,9 @@ const Table = () => {
       Header: TableColumns.responsible,
       Footer: "",
       accessor: "responsible",
-      Cell: ({ value }) => (
+      Cell: (props) => (
         <div className={styles.responsibleContainer}>
-          <div className={styles.responsibleCell}>{value[0]}</div>
+          <div className={styles.responsibleCell}>{props.value}</div>
         </div>
       ),
     },
@@ -172,19 +120,17 @@ const Table = () => {
     {
       Header: TableColumns.launchDate,
       Footer: "",
-      accessor: "launchDate",
-      //@ts-ignore
-      Cell: ({ value }) => {
-        return format(new Date(value), "dd MMM yyyy");
+      accessor: "start_date",
+      Cell: (props) => {
+        return <>{moment(props.value).format("DD MMM YYYY")}</>;
       },
     },
     {
       Header: TableColumns.deadline,
       Footer: "",
       accessor: "deadline",
-      //@ts-ignore
-      Cell: ({ value }) => {
-        return format(new Date(value), "dd MMM yyyy");
+      Cell: (props) => {
+        return <>{moment(props.value).format("DD MMM YYYY")}</>;
       },
     },
     {
@@ -197,11 +143,11 @@ const Table = () => {
       Header: TableColumns.progress,
       Footer: "",
       accessor: "progress",
-      Cell: ({ value }) => <div className={styles.duration}>{value}</div>,
+      Cell: ({ value }) => <div className={styles.duration}>{value}%</div>,
     },
   ];
   const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => DATA, []);
+  const data = useMemo(() => taskInfo, [taskInfo]);
   const {
     getTableProps,
     getTableBodyProps,
