@@ -22,13 +22,13 @@ import {useNavigate} from "react-router";
 import {Form} from "antd";
 
 const options = [
-    { value: "productOwner", label: "Product Owner" },
+    {value: "productOwner", label: "Product Owner"},
     {value: "ceo", label: "CEO"},
     {value: "cto", label: "CTO"},
     {value: "projectManger", label: "Project Manager"},
-    // { value: "designer", label: "Designer" },
-    // { value: "qa", label: "QA" },
-    // { value: "programmer", label: "Programmer" },
+    {value: "designer", label: "Designer"},
+    {value: "qa", label: "QA"},
+    {value: "programmer", label: "Programmer"},
 ];
 
 const SignUpHead = () => {
@@ -69,9 +69,14 @@ const SignUpHead = () => {
                     password: values.password,
                     re_password: values.passwordConfirmation,
                 },
-                callback: () => { if (values.userStatus.label === "Product Owner"){
-                    navigate(PathNames.SignUpPoInfo)
-                } else {navigate(PathNames.SignUpHeadInfo)}
+                callback: () => {
+                    if (values.userStatus.label === "Product Owner") {
+                        navigate(PathNames.SignUpPoInfo)
+                    } else if (values.userStatus.label === "Project Manager" || "CEO" || "CTO") {
+                        navigate(PathNames.SignUpHeadInfo)
+                    } else {
+                        navigate(PathNames.ActivateUser)
+                    }
 
                 },
             })
@@ -88,46 +93,51 @@ const SignUpHead = () => {
                     </div>
                     <Form onFinish={onSignUp} form={form} className={styles.form}>
                         <div className={styles.inputs}>
-                            <Form.Item name='fullName' className={styles.formItem} rules={[{ required: true, message: 'Please input your full name!' }]}>
+                            <Form.Item name='fullName' className={styles.formItem}
+                                       rules={[{required: true, message: 'Please input your full name!'}]}>
                                 <Input
                                     type={"text"}
                                     placeholder={"Full name"}
                                 />
                             </Form.Item>
-                            <Form.Item name='email' className={styles.formItem} rules={[{ required: true, message: 'Please input your email!' }]}>
-                            <Input
-                                type={"email"}
-                                placeholder={"Email"}
-                            />
+                            <Form.Item name='email' className={styles.formItem}
+                                       rules={[{required: true, message: 'Please input your email!'}]}>
+                                <Input
+                                    type={"email"}
+                                    placeholder={"Email"}
+                                />
                             </Form.Item>
-                            <Form.Item name='phone' className={styles.formItem} rules={[{ required: true, message: 'Please input your phone number!' }]}>
-                            <PhoneInput
-                                placeholder="Enter phone number"
-                                value={value}
-                                onChange={setValue}
-                                className={styles.phoneInput}
-                            />
+                            <Form.Item name='phone' className={styles.formItem}
+                                       rules={[{required: true, message: 'Please input your phone number!'}]}>
+                                <PhoneInput
+                                    placeholder="Enter phone number"
+                                    value={value}
+                                    onChange={setValue}
+                                    className={styles.phoneInput}
+                                />
                             </Form.Item>
-                            <Form.Item name='userStatus' className={styles.formItem} rules={[{ required: true, message: 'Please select users role in the project!' }]}>
-                            <Dropdown
-                                options={options}
-                                placeholder="Role in the project"
-                                className={styles.dropdownContainer}
-                                controlClassName={styles.dropdownControl}
-                                placeholderClassName={styles.dropdownPlaceholder}
-                                arrowClassName={styles.dropdownArrow}
-                                arrowClosed={<span className={styles.arrowClosed}/>}
-                                arrowOpen={<span className={styles.arrowOpen}/>}
-                                menuClassName={styles.dropdownMenu}
-                            />
+                            <Form.Item name='userStatus' className={styles.formItem}
+                                       rules={[{required: true, message: 'Please select users role in the project!'}]}>
+                                <Dropdown
+                                    options={options}
+                                    placeholder="Role in the project"
+                                    className={styles.dropdownContainer}
+                                    controlClassName={styles.dropdownControl}
+                                    placeholderClassName={styles.dropdownPlaceholder}
+                                    arrowClassName={styles.dropdownArrow}
+                                    arrowClosed={<span className={styles.arrowClosed}/>}
+                                    arrowOpen={<span className={styles.arrowOpen}/>}
+                                    menuClassName={styles.dropdownMenu}
+                                />
                             </Form.Item>
                             <div className={styles.passwordContainer}>
-                                <Form.Item name='password' className={styles.formItem} rules={[{ required: true, message: 'Please input your password!' }]}>
-                                <Input
-                                    type={type}
-                                    value={checkPassword}
-                                    placeholder={"Password"}
-                                />
+                                <Form.Item name='password' className={styles.formItem}
+                                           rules={[{required: true, message: 'Please input your password!'}]}>
+                                    <Input
+                                        type={type}
+                                        value={checkPassword}
+                                        placeholder={"Password"}
+                                    />
                                 </Form.Item>
                                 <div className={styles.eyeIcon} onClick={onEyeClick}>
                                     {checkPassword && type !== "password" ? (
@@ -138,13 +148,14 @@ const SignUpHead = () => {
                                 </div>
                             </div>
                             <div className={styles.passwordContainer}>
-                                <Form.Item name='passwordConfirmation' className={styles.formItem} rules={[{ required: true, message: 'Please confirm your password!' }]}>
-                                <Input
-                                    type={typeConfirm}
-                                    value={checkPasswordConfirm}
-                                    placeholder={"Confirm password"}
-                                />
-                            </Form.Item>
+                                <Form.Item name='passwordConfirmation' className={styles.formItem}
+                                           rules={[{required: true, message: 'Please confirm your password!'}]}>
+                                    <Input
+                                        type={typeConfirm}
+                                        value={checkPasswordConfirm}
+                                        placeholder={"Confirm password"}
+                                    />
+                                </Form.Item>
                                 <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
                                     {checkPasswordConfirm && typeConfirm !== "password" ? (
                                         <ClosedEyeIcon/>
@@ -164,16 +175,16 @@ const SignUpHead = () => {
                             <div className={styles.line}>Terms and Conditions</div>
                         </div>
                         <Form.Item className={styles.formItem}>
-                        <PuzzleButton
-                            htmlType='submit'
-                            btnTitle={"Next step"}
-                            btnType={PuzzleButtonTypes.TextButton}
-                            btnClassName={styles.button}
-                            btnDisabled={
-                                !(checkPassword === checkPasswordConfirm) ||
-                                !checked
-                            }
-                        />
+                            <PuzzleButton
+                                htmlType='submit'
+                                btnTitle={"Next step"}
+                                btnType={PuzzleButtonTypes.TextButton}
+                                btnClassName={styles.button}
+                                btnDisabled={
+                                    !(checkPassword === checkPasswordConfirm) ||
+                                    !checked
+                                }
+                            />
                         </Form.Item>
                     </Form>
                     <div className={styles.info}>
