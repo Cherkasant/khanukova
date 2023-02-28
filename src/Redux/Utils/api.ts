@@ -1,13 +1,36 @@
 import {create} from "apisauce";
-import {ActivateUserData, RegisterUserData, ResetPasswordData, SignInUserData,} from "../Types/auth";
+import {
+    ActivateUserData,
+    RegisterHeadData,
+    RegisterPoData,
+    RegisterUserData,
+    ResetPasswordData,
+    SignInUserData,
+} from "../Types/auth";
+
 import { CompanyListData } from "../Types/profile";
 
 const JWT_TOKEN = "Token 2b5698f59e13ef3d6535bf15c4016e57dcb530f9";
 
-const API = create({ baseURL: " https://apipuzzle-be.herokuapp.com" });
+const API = create({baseURL: " https://apipuzzle-be.herokuapp.com"});
 
 const registerUser = (data: RegisterUserData) => {
-    return API.post("auth/users/", data, {
+    return API.post("/auth/users/", data, {
+        headers: {
+            Authorization: JWT_TOKEN,
+        },
+    });
+};
+
+const registerHeadInfo = (data: RegisterHeadData) => {
+    return API.post("/user-profile/head-company/", data, {
+        headers: {
+            Authorization: JWT_TOKEN,
+        },
+    });
+};
+const registerPoInfo = (data: RegisterPoData) => {
+    return API.post("/user-profile/po-company/", data, {
         headers: {
             Authorization: JWT_TOKEN,
         },
@@ -19,7 +42,7 @@ const activateUser = (data: ActivateUserData) => {
 };
 
 const signInUser = (data: SignInUserData) => {
-    return API.post("/auth/token/login/", data, {
+    return API.get("/auth/login/", data, {
         headers: {
             Authorization: JWT_TOKEN,
         },
@@ -56,6 +79,8 @@ const getPoCompanyList = () => {
 
 export default {
     registerUser,
+    registerHeadInfo,
+    registerPoInfo,
     sendResetEmail,
     activateUser,
     signInUser,

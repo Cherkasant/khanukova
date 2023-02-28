@@ -1,5 +1,6 @@
-import { RootState } from "../store";
+import {RootState} from "../store";
 
 export default {
-  getLoggedIn: (state: RootState) => state.authReducer.isLoggedIn,
+    getLoggedIn: (state: RootState) => state.authReducer.isLoggedIn,
+    getUserId: (state: RootState) => state.authReducer.idUser
 };

@@ -58,20 +58,30 @@
     margin-bottom: 50px;
 }
 
-.uploadContainer {
+.companyContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 7px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 140%;
+    color: #212121;
+    text-align: left;
 }
-
+.companyContainerRadio{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
 .uploadButton {
     width: 120px;
     height: 40px;
     border-radius: 10px;
 }
 
-.checkboxBlockTitle, .uploadContainerTitle {
+.checkboxBlockTitle {
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -82,7 +92,7 @@
 }
 
 .checkboxContainer {
-    height: 300px;
+    height: 280px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -93,21 +103,6 @@
     line-height: 140%;
     color: #212121;
 
-}
-
-.checkboxInput {
-    border: none;
-    width: 230px;
-    height: 16px;
-    border-radius: 0;
-    border-bottom: 1px solid #0e4298;
-}
-
-.checkboxInput:hover,
-.checkboxInput:focus {
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid #0e4298;
 }
 
 .input {

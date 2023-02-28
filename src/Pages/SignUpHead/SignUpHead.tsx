@@ -19,9 +19,10 @@ import {OpenEyeIcon} from "../../Assets/icons/OpenEyeIcon";
 import {registerUser} from "../../Redux/Reducers/authReducer";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router";
+import {Form} from "antd";
 
 const options = [
-    // { value: "productOwner", label: "Product Owner" },
+    { value: "productOwner", label: "Product Owner" },
     {value: "ceo", label: "CEO"},
     {value: "cto", label: "CTO"},
     {value: "projectManger", label: "Project Manager"},
@@ -34,10 +35,9 @@ const SignUpHead = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [form] = Form.useForm();
+    const checkPassword = Form.useWatch("password", form);
+    const checkPasswordConfirm = Form.useWatch("passwordConfirmation", form);
 
     const [type, setType] = useState(PasswordTypes.Password);
     const onEyeClick = () => {
@@ -52,27 +52,27 @@ const SignUpHead = () => {
             : setTypeConfirm(PasswordTypes.Password);
     };
 
-    const [selectedOption, setSelectedOption] = useState<any>(null);
-
     const [checked, setChecked] = useState(false);
     const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
     };
     const [value, setValue] = useState<any>();
 
-    const onSignUp = () => {
+    const onSignUp = (values: any) => {
         dispatch(
             registerUser({
                 data: {
-                    full_name: fullName,
-                    email: email,
-                    phone: value,
-                    user_status: selectedOption.label,
-                    password: password,
-                    password_rep: passwordConfirmation,
+                    full_name: values.fullName,
+                    email: values.email,
+                    phone: values.phone,
+                    role: values.userStatus.label,
+                    password: values.password,
+                    re_password: values.passwordConfirmation,
                 },
-                callback: () => {
-                    navigate(PathNames.SignUpPageRole);
+                callback: () => { if (values.userStatus.label === "Product Owner"){
+                    navigate(PathNames.SignUpPoInfo)
+                } else {navigate(PathNames.SignUpHeadInfo)}
+
                 },
             })
         );
@@ -86,90 +86,96 @@ const SignUpHead = () => {
                         <Title name={"Sign up"} className={styles.title}/>
                         <div className={styles.subtitle}>{"Let’s get started"}</div>
                     </div>
-
-                    <div className={styles.inputs}>
-                        <Input
-                            type={"text"}
-                            value={fullName}
-                            onChange={(value: string) => setFullName(value)}
-                            placeholder={"Full name"}
-                        />
-                        <Input
-                            type={"email"}
-                            value={email}
-                            onChange={(value: string) => setEmail(value)}
-                            placeholder={"Email"}
-                        />
-                        <PhoneInput
-                            placeholder="Enter phone number"
-                            value={value}
-                            onChange={setValue}
-                            className={styles.phoneInput}
-                        />
-                        <Dropdown
-                            options={options}
-                            onChange={setSelectedOption}
-                            value={selectedOption}
-                            placeholder="Role in the project"
-                            className={styles.dropdownContainer}
-                            controlClassName={styles.dropdownControl}
-                            placeholderClassName={styles.dropdownPlaceholder}
-                            arrowClassName={styles.dropdownArrow}
-                            arrowClosed={<span className={styles.arrowClosed}/>}
-                            arrowOpen={<span className={styles.arrowOpen}/>}
-                            menuClassName={styles.dropdownMenu}
-                        />
-                        <div className={styles.passwordContainer}>
+                    <Form onFinish={onSignUp} form={form} className={styles.form}>
+                        <div className={styles.inputs}>
+                            <Form.Item name='fullName' className={styles.formItem} rules={[{ required: true, message: 'Please input your full name!' }]}>
+                                <Input
+                                    type={"text"}
+                                    placeholder={"Full name"}
+                                />
+                            </Form.Item>
+                            <Form.Item name='email' className={styles.formItem} rules={[{ required: true, message: 'Please input your email!' }]}>
                             <Input
-                                type={type}
-                                value={password}
-                                onChange={(value: string) => setPassword(value)}
-                                placeholder={"Password"}
+                                type={"email"}
+                                placeholder={"Email"}
                             />
-                            <div className={styles.eyeIcon} onClick={onEyeClick}>
-                                {password && type !== "password" ? (
-                                    <ClosedEyeIcon/>
-                                ) : (
-                                    <OpenEyeIcon/>
-                                )}
+                            </Form.Item>
+                            <Form.Item name='phone' className={styles.formItem} rules={[{ required: true, message: 'Please input your phone number!' }]}>
+                            <PhoneInput
+                                placeholder="Enter phone number"
+                                value={value}
+                                onChange={setValue}
+                                className={styles.phoneInput}
+                            />
+                            </Form.Item>
+                            <Form.Item name='userStatus' className={styles.formItem} rules={[{ required: true, message: 'Please select users role in the project!' }]}>
+                            <Dropdown
+                                options={options}
+                                placeholder="Role in the project"
+                                className={styles.dropdownContainer}
+                                controlClassName={styles.dropdownControl}
+                                placeholderClassName={styles.dropdownPlaceholder}
+                                arrowClassName={styles.dropdownArrow}
+                                arrowClosed={<span className={styles.arrowClosed}/>}
+                                arrowOpen={<span className={styles.arrowOpen}/>}
+                                menuClassName={styles.dropdownMenu}
+                            />
+                            </Form.Item>
+                            <div className={styles.passwordContainer}>
+                                <Form.Item name='password' className={styles.formItem} rules={[{ required: true, message: 'Please input your password!' }]}>
+                                <Input
+                                    type={type}
+                                    value={checkPassword}
+                                    placeholder={"Password"}
+                                />
+                                </Form.Item>
+                                <div className={styles.eyeIcon} onClick={onEyeClick}>
+                                    {checkPassword && type !== "password" ? (
+                                        <ClosedEyeIcon/>
+                                    ) : (
+                                        <OpenEyeIcon/>
+                                    )}
+                                </div>
+                            </div>
+                            <div className={styles.passwordContainer}>
+                                <Form.Item name='passwordConfirmation' className={styles.formItem} rules={[{ required: true, message: 'Please confirm your password!' }]}>
+                                <Input
+                                    type={typeConfirm}
+                                    value={checkPasswordConfirm}
+                                    placeholder={"Confirm password"}
+                                />
+                            </Form.Item>
+                                <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
+                                    {checkPasswordConfirm && typeConfirm !== "password" ? (
+                                        <ClosedEyeIcon/>
+                                    ) : (
+                                        <OpenEyeIcon/>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                        <div className={styles.passwordContainer}>
-                            <Input
-                                type={typeConfirm}
-                                value={passwordConfirmation}
-                                onChange={(value: string) => setPasswordConfirmation(value)}
-                                placeholder={"Confirm password"}
+                        <div className={styles.checkboxContainer}>
+                            <Checkbox
+                                isChecked={checked}
+                                handleChange={onChangeCheck}
+                                label={"I agree "}
                             />
-                            <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
-                                {passwordConfirmation && typeConfirm !== "password" ? (
-                                    <ClosedEyeIcon/>
-                                ) : (
-                                    <OpenEyeIcon/>
-                                )}
-                            </div>
+
+                            <div className={styles.line}>Terms and Conditions</div>
                         </div>
-                    </div>
-                    <div className={styles.checkboxContainer}>
-                        <Checkbox
-                            isChecked={checked}
-                            handleChange={onChangeCheck}
-                            label={"I agree "}
+                        <Form.Item className={styles.formItem}>
+                        <PuzzleButton
+                            htmlType='submit'
+                            btnTitle={"Next step"}
+                            btnType={PuzzleButtonTypes.TextButton}
+                            btnClassName={styles.button}
+                            btnDisabled={
+                                !(checkPassword === checkPasswordConfirm) ||
+                                !checked
+                            }
                         />
-
-                        <div className={styles.line}>Terms and Conditions</div>
-                    </div>
-                    <PuzzleButton
-                        btnTitle={"Next step"}
-                        btnType={PuzzleButtonTypes.TextButton}
-                        className={styles.button}
-                        onClick={onSignUp}
-                        btnDisabled={
-                            !(password !== "" && password === passwordConfirmation) ||
-                            !checked
-                        }
-                    />
-
+                        </Form.Item>
+                    </Form>
                     <div className={styles.info}>
                         {"Have an account?"}
                         <NavLink to={PathNames.SignIn} className={styles.link}>
