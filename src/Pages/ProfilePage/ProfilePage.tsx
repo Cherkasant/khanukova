@@ -18,10 +18,10 @@ import { getHeadCompanyListReducer } from "../../Redux/Reducers/profileReducer";
 
 const ProfilePage = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   
   const companyList = useSelector(profileSelectors.getCompanyList);
-  
+
   useEffect(() => {
       dispatch(getHeadCompanyListReducer());
   }, []);
