@@ -16,6 +16,7 @@ import { logoutUser } from "../../../Redux/Reducers/authReducer";
 import authSelectors from "../../../Redux/Selectors/authSelectors";
 import { PathNames } from "../../../Pages/Router/Router";
 import { MyProfileIcon } from "../../../Assets/icons/MyProfileIcon";
+import { ProjectFile } from "../../../Assets/icons/ProjectFile";
 
 const UserMenu = () => {
   const { pathname } = useLocation();
@@ -30,7 +31,10 @@ const UserMenu = () => {
       navigate(PathNames.SignIn);
     }
   };
-
+  const [isOpened, setOpened] = useState(false);
+  const onArrowClick = () => {
+    setOpened(!isOpened);
+  };
   const navButtons = [
     { name: "My profile", icon: <MyProfileIcon />, link: PathNames.Profile },
     { name: "Chats", icon: <ChatsIcon />, link: "" },
@@ -40,47 +44,54 @@ const UserMenu = () => {
       link: PathNames.Home,
       button: <ArrayDownIcon />,
       active: true,
-      sublink: PathNames.ProjectScreen,
+    },
+    {
+      name: "New project",
+      icon: <AddNewProjectIcon />,
+      link: PathNames.ProjectScreen,
+      active: isOpened,
+      projects: ["Project1", "Project2"],
     },
     { name: "Library", icon: <LibraryIcon />, link: "" },
     { name: "Payments", icon: <PaymentsIcon />, link: PathNames.Payments },
     { name: "Notifications", icon: <NotificationsIcon />, link: "" },
   ];
 
-  const [isOpened, setOpened] = useState(false);
-
   return (
     <>
       <div className={styles.container}>
         <div>
-          {navButtons.map(({ link, name, icon, button, active, sublink }) => (
+          {navButtons.map(({ link, name, icon, button, active, projects }) => (
             <NavLink
               key={name}
               to={link}
-              className={classNames(styles.navButton, {
-                [styles.activeNavButton]: pathname === link,
-              })}
+              className={classNames(
+                styles.navButton,
+                {
+                  [styles.activeNavButton]: pathname === link,
+                },
+                { [styles.list]: active === false },
+                {
+                  [styles.projectsMargin]: name === "Projects" && isOpened,
+                }
+              )}
             >
               <div>
-                <div className={styles.div}>
+                <div className={classNames(styles.div)}>
                   {icon}
                   {name}
-                  <div onClick={() => setOpened(!isOpened)}>{button}</div>
+                  <div onClick={onArrowClick}>{button}</div>
                 </div>
-
-                {active ? (
-                  <div
-                    className={classNames(styles.list, {
-                      [styles.listActive]: isOpened,
+                {projects ? (
+                  <div className={styles.projectList}>
+                    {projects.map((project: string) => {
+                      return (
+                        <div key={project} className={styles.projectBlock}>
+                          <ProjectFile />
+                          {project}
+                        </div>
+                      );
                     })}
-                  >
-                    <div
-                      className={styles.el}
-                      onClick={() => navigate(sublink)}
-                    >
-                      <AddNewProjectIcon />
-                      {"New project"}
-                    </div>
                   </div>
                 ) : null}
               </div>

@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./PaymentsPage.module.css";
 import Title from "../../Components/Title";
+import PaymentsList from "../../Components/PaymentsList";
+import { PaymentsData } from "../../Components/PaymentsList/constantsPayments";
 
 const PaymentsPage = () => {
   return (
@@ -10,8 +12,10 @@ const PaymentsPage = () => {
         <div className={styles.headerColumn}>{"Project name"}</div>
         <div className={styles.headerColumn}>{"Milestone-sprint"}</div>
         <div className={styles.headerColumn}>{"Status"}</div>
+        <div className={styles.headerColumn}>{"Paid"}</div>
         <div className={styles.headerColumn}>{"Payment Deadline"}</div>
       </div>
+      <PaymentsList PaymentsArray={PaymentsData} />
     </div>
   );
 };

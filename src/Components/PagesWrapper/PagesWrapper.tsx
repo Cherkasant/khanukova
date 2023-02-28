@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "../Header";
-import UserMenu from "../Header/Menu";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { Outlet, useLocation } from "react-router-dom";
 import { PathNames } from "../../Pages/Router/Router";
 import styles from "./PagesWrapper.module.css";
 import Home from "../../Pages/Home";
+import UserMenu from "../Header/Menu";
 
 const PagesWrapper = () => {
   const { pathname } = useLocation();

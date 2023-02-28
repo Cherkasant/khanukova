@@ -23,19 +23,23 @@
 
 }
 
-.navButton:hover {
-    color: #0E4298;
-}
+/*.navButton:hover {*/
+/*    color: #0E4298;*/
+/*}*/
 
 .navButton:active {
     color: #727171;
 }
 
-.activeNavButton path {
+.activeNavButton > div > div:nth-child(1) path {
     stroke: #1258CA;
 }
 
 .activeNavButton circle {
+    stroke: #1258CA;
+}
+
+.activeNavButton rect {
     stroke: #1258CA;
 }
 
@@ -72,6 +76,10 @@
     display: none;
 }
 
+.projectsMargin {
+    margin-bottom: 16px;
+}
+
 .listActive {
     display: block;
     font-family: 'Inter';
@@ -86,8 +94,13 @@
 
 .el {
     display: flex;
-    gap: 10px;
+    gap: 25px;
     align-items: center;
+    text-decoration: none;
+}
+
+.el:hover {
+    color: #1258CA;
 }
 
 .logoutContainer {
@@ -106,4 +119,31 @@
     font-size: 20px;
     line-height: 24px;
     color: #212121;
+}
+
+.projectList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #A3A3A3;
+}
+
+.projectBlock {
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+    align-items: center;
+}
+
+.projectBlock:hover path {
+    stroke: #1258CA;
+}
+
+.projectBlock:hover {
+    color: #0E4298;
 }

@@ -80,3 +80,4 @@ export type SignInUserPayload = BasePayload<SignInUserData>;
 export type ResetPasswordConfirmPayload = BasePayload<ResetPasswordData>;
 export type RegisterHeadPayload = BasePayload<RegisterHeadData>;
 export type RegisterPoPayload = BasePayload<RegisterPoData>;
+
