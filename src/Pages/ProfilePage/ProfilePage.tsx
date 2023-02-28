@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./ProfilePage.module.css";
 import PuzzleButton, { PuzzleButtonTypes } from "../../Components/PuzzleButton";
 import Input from "../../Components/Input";
@@ -11,19 +11,17 @@ import TabsListProfile from "../../Components/TabsListProfile";
 import { CompanyList, TabsProfile } from "../../Components/constants/@types";
 import CompanyProfile from "../../Components/CompanyProfile";
 import DevTeamTable from "../../Components/DevTeamTable";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import profileSelectors from "../../Redux/Selectors/profileSelectors";
 import { getHeadCompanyListReducer } from "../../Redux/Reducers/profileReducer";
 
-
 const ProfilePage = () => {
+  const dispatch = useDispatch();
   const companyList = useSelector(profileSelectors.getCompanyList);
 
-  
   useEffect(() => {
-      dispatch(getHeadCompanyListReducer());
+    dispatch(getHeadCompanyListReducer());
   }, []);
-  
 
   const [name, setName] = useState("Ivanova Irina");
   const [nickName, setNickName] = useState("");
@@ -78,76 +76,102 @@ const ProfilePage = () => {
   );
 
   const COMPANY_LIST = [
-      {
-        name: "CompanyName",
-        key: CompanyList.CompanyName,
-        answers: companyList?.company_name,
-      },
-      { name: "LogoCompany", key: CompanyList.LogoCompany, answers: companyList?.logo },
-      {
-        name: "WebsiteDomain",
-        key: CompanyList.WebsiteDomain,
-        answers: companyList?.website,
-      },
-      { name: "Tagline", key: CompanyList.Tagline, answers: companyList?.tagline },
-      {
-        name: "ClientIndustry",
-        key: CompanyList.ClientIndustry,
-        answers: companyList?.client_industry,
-      },
-      {
-        name: "SoftwareStack",
-        key: CompanyList.SoftwareStack,
-        answers: companyList?.software_stack,
-      },
-      { name: "Industries", key: CompanyList.Industries, answers: companyList?.industry_choice },
-      {
-        name: "CompanyDescription",
-        key: CompanyList.CompanyDescription,
-        answers:
-        companyList?.short_description,
-      },
-      {
-        name: "FullCompanyDescription",
-        key: CompanyList.FullCompanyDescription,
-        answers:
-        companyList?.full_description,
-      },
-      {
-        name: "AverageHourlyRate",
-        key: CompanyList.AverageHourlyRate,
-        answers: companyList?.average_hourly_rate,
-      },
-      {
-        name: "MinimumBudget",
-        key: CompanyList.MinimumBudget,
-        answers: companyList?.minimum_project_budget,
-      },
-      { name: "TeamSize", key: CompanyList.TeamSize, answers: companyList?.team_size },
-      { name: "Location", key: CompanyList.Location, answers: companyList?.location },
-      {
-        name: "FoundationDate",
-        key: CompanyList.FoundationDate,
-        answers: companyList?.foundation_date,
-      },
-      { name: "ClientsFocus", key: CompanyList.ClientsFocus, answers: companyList?.clients_focus },
-      {
-        name: "ContactDetails",
-        key: CompanyList.ContactDetails,
-        answers: companyList?.contact_marketing,
-      },
-      {
-        name: "ProjectExpertContactDetails",
-        key: CompanyList.ProjectExpertContactDetails,
-        answers: companyList?.contact_expert,
-      },
-      { name: "LinkToClient", key: CompanyList.LinkToClient, answers: companyList?.links_case },
-      {
-        name: "ClientPortrait",
-        key: CompanyList.ClientPortrait,
-        answers: companyList?.client_describe,
-      },
-    ];
+    {
+      name: "CompanyName",
+      key: CompanyList.CompanyName,
+      answers: companyList?.company_name,
+    },
+    {
+      name: "LogoCompany",
+      key: CompanyList.LogoCompany,
+      answers: companyList?.logo,
+    },
+    {
+      name: "WebsiteDomain",
+      key: CompanyList.WebsiteDomain,
+      answers: companyList?.website,
+    },
+    {
+      name: "Tagline",
+      key: CompanyList.Tagline,
+      answers: companyList?.tagline,
+    },
+    {
+      name: "ClientIndustry",
+      key: CompanyList.ClientIndustry,
+      answers: companyList?.client_industry,
+    },
+    {
+      name: "SoftwareStack",
+      key: CompanyList.SoftwareStack,
+      answers: companyList?.software_stack,
+    },
+    {
+      name: "Industries",
+      key: CompanyList.Industries,
+      answers: companyList?.industry_choice,
+    },
+    {
+      name: "CompanyDescription",
+      key: CompanyList.CompanyDescription,
+      answers: companyList?.short_description,
+    },
+    {
+      name: "FullCompanyDescription",
+      key: CompanyList.FullCompanyDescription,
+      answers: companyList?.full_description,
+    },
+    {
+      name: "AverageHourlyRate",
+      key: CompanyList.AverageHourlyRate,
+      answers: companyList?.average_hourly_rate,
+    },
+    {
+      name: "MinimumBudget",
+      key: CompanyList.MinimumBudget,
+      answers: companyList?.minimum_project_budget,
+    },
+    {
+      name: "TeamSize",
+      key: CompanyList.TeamSize,
+      answers: companyList?.team_size,
+    },
+    {
+      name: "Location",
+      key: CompanyList.Location,
+      answers: companyList?.location,
+    },
+    {
+      name: "FoundationDate",
+      key: CompanyList.FoundationDate,
+      answers: companyList?.foundation_date,
+    },
+    {
+      name: "ClientsFocus",
+      key: CompanyList.ClientsFocus,
+      answers: companyList?.clients_focus,
+    },
+    {
+      name: "ContactDetails",
+      key: CompanyList.ContactDetails,
+      answers: companyList?.contact_marketing,
+    },
+    {
+      name: "ProjectExpertContactDetails",
+      key: CompanyList.ProjectExpertContactDetails,
+      answers: companyList?.contact_expert,
+    },
+    {
+      name: "LinkToClient",
+      key: CompanyList.LinkToClient,
+      answers: companyList?.links_case,
+    },
+    {
+      name: "ClientPortrait",
+      key: CompanyList.ClientPortrait,
+      answers: companyList?.client_describe,
+    },
+  ];
 
   return (
     <div className={styles.container}>
