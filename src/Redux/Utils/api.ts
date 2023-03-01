@@ -70,22 +70,6 @@ const resetPasswordConfirm = (data: ResetPasswordData) => {
   });
 };
 
-const getHeadCompanyList = (page?: number) => {
-  return API.get("/user-profile/head-company/", page, {
-    headers: {
-      Authorization: "Token 1e4b18fae204857eca1a4f110fc87b1c772b6c35",
-    },
-  });
-};
-
-const getPoCompanyList = (page?: number) => {
-  return API.get("/user-profile/head-company/", page, {
-    headers: {
-      Authorization: "Token 1e4b18fae204857eca1a4f110fc87b1c772b6c35",
-    },
-  });
-};
-
 const postMilestone = (milestone: TaskType) => {
   return API.post("/project/milestone/", milestone, {
     headers: {
@@ -117,6 +101,22 @@ const getNewAccessToken = (refresh: string) => {
   return API.post("/auth/jwt/refresh/", { refresh });
 };
 
+const getHeadCompanyList = (page?: number) => {
+  return API.get("/user-profile/head-company/", page, {
+    headers: {
+      Authorization: JWT_TOKEN_HEAD,
+    },
+  });
+};
+
+const editHeadCompanyList = (id: string) => {
+  return API.patch(`/user-profile/head-company/${id}/`, {
+    headers: {
+      Authorization: JWT_TOKEN_HEAD,
+    },
+  } )
+}
+
 const getECaseList = (page?: number) => {
   return API.get("/user-profile/po-company/", page, {
     headers: {
@@ -131,14 +131,14 @@ export default {
   activateUser,
   signInUser,
   resetPasswordConfirm,
-  getHeadCompanyList,
-  getPoCompanyList,
   postMilestone,
   getMilestone,
   getNewAccessToken,
   verifyToken,
   postProjectTitle,
-  getECaseList,
   registerHeadInfo,
   registerPoInfo,
+  getHeadCompanyList,
+  editHeadCompanyList,
+  getECaseList,
 };

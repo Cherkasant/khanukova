@@ -23,4 +23,8 @@ export type CompanyListData =  {
    employees: undefined,
 }
 
+export type EditCompanyListPayload = {
+   callback: () => void;
+   id: string;
+}
 
