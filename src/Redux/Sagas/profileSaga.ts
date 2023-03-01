@@ -8,7 +8,6 @@ import {
   setHeadCompanyListReducer,
 } from "../Reducers/profileReducer";
 
-
 function* getHeadCompanyListWorker(action: PayloadAction<undefined>) {
   const { ok, data, problem } = yield call(API.getHeadCompanyList);
   console.log(data);
