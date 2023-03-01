@@ -8,15 +8,6 @@ import {
   setHeadCompanyListReducer,
 } from "../Reducers/profileReducer";
 
-// function* getPoCompanyListWorker(action: PayloadAction<undefined>) {
-//   const { ok, data, problem } = yield call(API.getPoCompanyList);
-//
-//   if (ok && data) {
-//     yield put(setPoCompanyListReducer(data));
-//   } else {
-//     console.warn("Authentication credentials were not provided", problem);
-//   }
-// }
 
 function* getHeadCompanyListWorker(action: PayloadAction<undefined>) {
   const { ok, data, problem } = yield call(API.getHeadCompanyList);
@@ -41,6 +32,5 @@ export default function* profileSaga() {
   yield all([
     takeLatest(getHeadCompanyListReducer, getHeadCompanyListWorker),
     takeLatest(getECaseListReducer, getECaseListWorker),
-    // takeLatest(getPoCompanyListReducer, getPoCompanyListWorker),
   ]);
 }
