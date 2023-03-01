@@ -6,7 +6,9 @@ import {
   getHeadCompanyListReducer,
   setECaseListReducer,
   setHeadCompanyListReducer,
+  editHeadCompanyListReducer,
 } from "../Reducers/profileReducer";
+import { EditCompanyListPayload } from "../Types/profile";
 
 function* getHeadCompanyListWorker(action: PayloadAction<undefined>) {
   const { ok, data, problem } = yield call(API.getHeadCompanyList);
@@ -27,9 +29,20 @@ function* getECaseListWorker(action: PayloadAction<undefined>) {
   }
 }
 
+function* editHeadCompanyListWorker(action: PayloadAction<EditCompanyListPayload>) {
+  const { callback, id } = action.payload;
+  const { ok, problem } = yield call (API.editHeadCompanyList, id);
+  if (ok) {
+    callback();
+  } else {
+    console.warn("Error editing list", problem);
+  }
+}
+
 export default function* profileSaga() {
   yield all([
     takeLatest(getHeadCompanyListReducer, getHeadCompanyListWorker),
     takeLatest(getECaseListReducer, getECaseListWorker),
+    takeLatest(editHeadCompanyListReducer, editHeadCompanyListWorker),
   ]);
 }
