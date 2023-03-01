@@ -97,6 +97,7 @@ const NewTask: FC<Props> = (props) => {
   const onChangeLaunch: DatePickerProps["onChange"] = (date, dateString) => {
     setLaunchDate(dateString);
   };
+
   return (
     <ReactModal
       className={styles.modal}
