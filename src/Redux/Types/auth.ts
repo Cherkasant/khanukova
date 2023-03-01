@@ -3,6 +3,7 @@ export type RegisterUserData = {
     email: string;
     phone: string;
     role: string;
+    code?: string,
     password: string;
     re_password: string;
 };
