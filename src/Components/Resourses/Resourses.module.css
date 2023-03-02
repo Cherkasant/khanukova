@@ -1,0 +1,78 @@
+.wrap {
+  padding-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.wrapModal {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(155, 172, 201, 0.3);
+  transition: all 0.9s;
+  position: fixed;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #212121;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #c8c8c8;
+  margin-bottom: 21px;
+}
+
+.positions {
+  text-align: start;
+}
+
+.inner {
+  margin-bottom: 60px;
+}
+
+.bodyItem {
+  position: relative;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #212121;
+  margin-bottom: 22px;
+}
+
+.addNew {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3;
+  margin-bottom: 20px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.total {
+  border-top: 1px solid #c8c8c8;
+  padding-top: 15px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #212121;
+}
+
+.iconsEdit {
+  position: absolute;
+  left: 90%;
+  top: 0;
+  cursor: pointer;
+}
+
+.showModal {
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.9s;
+}
