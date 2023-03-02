@@ -19,7 +19,7 @@
 
 }
 
-.subTitle {
+.subTitle, .description {
     text-align: start;
     width: 400px;
     justify-content: flex-start;
@@ -32,9 +32,34 @@
     padding-bottom: 20px;
 }
 
-.button {
-    width: 480px;
-    height: 54px;
-    align-self: center;
-    margin: 80px 0 60px;
+.description {
+    padding-bottom: 136px;
+}
+
+.info {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding-bottom: 60px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+
+}
+
+.link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #0E4298;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
 }
