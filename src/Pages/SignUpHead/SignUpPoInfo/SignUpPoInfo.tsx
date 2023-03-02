@@ -41,7 +41,7 @@ const SignUpPoInfo = () => {
           owner: idUser,
         },
         callback: () => {
-          navigate(PathNames.ActivateUser);
+          navigate(PathNames.CheckYourEmail);
         },
       })
     );

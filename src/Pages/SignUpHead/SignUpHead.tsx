@@ -88,7 +88,7 @@ const SignUpHead = () => {
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
-              navigate(PathNames.ActivateUser);
+              navigate(PathNames.CheckYourEmail);
               break;
 
             default:

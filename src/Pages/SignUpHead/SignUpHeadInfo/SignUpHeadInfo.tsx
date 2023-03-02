@@ -53,7 +53,7 @@ const SignUpHeadInfo = () => {
                     owner: idUser,
                 },
                 callback: () => {
-                    navigate(PathNames.ActivateUser);
+                    navigate(PathNames.CheckYourEmail);
                 },
             })
         );
