@@ -50,7 +50,7 @@ const SignIn = () => {
                             {"Please enter your login details to sign in"}
                         </div>
                     </div>
-                    <Form onFinish={onSignIn} className={styles.form} form={form}>
+                    <Form onFinish={onSignIn} className={styles.form} form={form}  initialValues={{ email: "", password: "" }}>
                         <div className={styles.inputs}>
                             <Form.Item
                                 name="email"

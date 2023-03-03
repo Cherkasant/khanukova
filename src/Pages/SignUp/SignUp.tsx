@@ -61,21 +61,21 @@ const SignUp = () => {
   const [value, setValue] = useState<any>();
 
   const onSignUp = () => {
-    dispatch(
-      registerUser({
-        data: {
-          full_name: fullName,
-          email: email,
-          phone: value,
-          role: selectedOption.label,
-          password: password,
-          re_password: passwordConfirmation,
-        },
-        callback: () => {
-          navigate(PathNames.SignIn);
-        },
-      })
-    );
+    // dispatch(
+    //   registerUser({
+    //     data: {
+    //       full_name: fullName,
+    //       email: email,
+    //       phone: value,
+    //       role: selectedOption.label,
+    //       password: password,
+    //       re_password: passwordConfirmation,
+    //     },
+    //     callback: () => {
+    //       navigate(PathNames.SignIn);
+    //     },
+    //   })
+    // );
   };
 
   return (

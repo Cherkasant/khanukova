@@ -62,7 +62,7 @@ const ResetPassword = () => {
                         {"Please enter your new password"}
                     </div>
                 </div>
-                <Form onFinish={onSetPassword} className={styles.form} form={form}>
+                <Form onFinish={onSetPassword} className={styles.form} form={form} initialValues={{ password: "", passwordNew: "" }}>
                     <div className={styles.inputsContainer}>
                         <div className={styles.passwordContainer}>
                             <Form.Item name="password" className={styles.formItem} rules={[

@@ -39,7 +39,7 @@ const PasswordRequestPage = () => {
                 </div>
                 <div className={styles.inputContainer}>
                     <>
-                        <Form onFinish={onSend} form={form}>
+                        <Form onFinish={onSend} form={form} initialValues={{email: "",}}>
                             <Form.Item
                                 name="email"
                                 rules={[
