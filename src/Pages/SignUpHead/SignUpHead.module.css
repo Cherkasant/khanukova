@@ -70,6 +70,7 @@
     line-height: 17px;
     text-align: right;
     color: #808080;
+    margin-bottom: 20px;
 }
 
 .titleBlock {
@@ -166,10 +167,6 @@
     border: 1px solid #4270a7;
 }
 
-/*.dropdownControl:active {*/
-/*  border-radius: 10px 10px 0 0;*/
-/*  border: 1px solid red;*/
-/*}*/
 .dropdownMenu {
     border: 1px solid #1258CA;
     border-radius: 0;
