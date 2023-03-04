@@ -43,7 +43,7 @@ const ProjectScreen = () => {
   };
   const isFilterVisible = useSelector(postSelector.getFilter);
   const isSaveClicked = useSelector(postSelector.getTask);
-
+  const projectTitle = useSelector(postSelector.getTitleMilestone);
   const isVisible = useSelector(postSelector.getModal);
   const isModalEcaseVisible = useSelector(postSelector.getEcaseModal);
   const isModalRequestVisible = useSelector(postSelector.getRequestModal);
@@ -60,8 +60,10 @@ const ProjectScreen = () => {
 
   const [addItem, setAddItem] = useState(false);
   const onAddItemClick = () => {
-    setAddItem(!addItem);
-    dispatch(setSelectedModalVisible(true));
+    if (projectTitle) {
+      setAddItem(!addItem);
+      dispatch(setSelectedModalVisible(true));
+    }
   };
   const [activeTab, setActiveTab] = useState(Tabs.Planning);
   const onTabClick = (newTab: Tabs) => {
@@ -76,7 +78,6 @@ const ProjectScreen = () => {
     setEdit(!edit);
   };
 
-  
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       dispatch(setTitleTask(title));
@@ -85,97 +86,97 @@ const ProjectScreen = () => {
   };
 
   return (
-      <div className={styles.container}>
-        <div className={styles.topContainer}>
-          <div className={styles.widgets}>
-            <div className={styles.titleContainer}>
-              <Input
-                  value={title}
-                  onChange={(value) => setTitle(value)}
-                  onKeyDown={onChangeKeyDown}
-                  className={styles.title}
-                  placeholder={"Project"}
-                  disabled={!edit}
-              />
-              {!edit ? (
-                  <div className={styles.edit} onClick={onEditClick}>
-                    <EditTitleIcon/>
-                  </div>
-              ) : null}
-            </div>
-
-            <div className={styles.addContainer}>
-              <div className={styles.icon}>
-                <AddMeetingIcon/>
+    <div className={styles.container}>
+      <div className={styles.topContainer}>
+        <div className={styles.widgets}>
+          <div className={styles.titleContainer}>
+            <Input
+              value={title}
+              onChange={(value) => setTitle(value)}
+              onKeyDown={onChangeKeyDown}
+              className={styles.title}
+              placeholder={"New project"}
+              disabled={!edit}
+            />
+            {!edit ? (
+              <div className={styles.edit} onClick={onEditClick}>
+                <EditTitleIcon />
               </div>
-              <div className={styles.button}>{"Create a Meeting"}</div>
-            </div>
+            ) : null}
           </div>
-          <Tab
-              activeTab={activeTab}
-              onClickedTab={onTabClick}
-              TabsList={TABS_NAMES}
-          />
-        </div>
-        <div className={styles.blueLine}></div>
-        {activeTab === Tabs.Planning ? (
-            <div className={styles.bottomContainer}>
-              <div className={styles.filterButton} onClick={onFilterClick}>
-                <FilterIcon/>
-                {"Filters"}
-              </div>
-            </div>
-        ) : null}
-        {!isSaveClicked && activeTab === Tabs.Planning ? (
-            <div className={styles.bottomContainer}>
-              <div className={styles.milestoneButton} onClick={onAddItemClick}>
-                <AddRoundIcon/>
-                {"Add item"}
-              </div>
-            </div>
-        ) : null}
-        {isSaveClicked && activeTab === Tabs.Planning ? <Table/> : null}
 
-        {isFilterVisible ? <FilterProjectScreen/> : null}
-        {activeTab === Tabs.ClientsRequests ? (
-            <div className={styles.clientRequestContainer}>
-              <div className={styles.openedRequest}>
-                <ClientsRequestCard
-                    openedArray={requestOpenedArray}
-                    nameOfArray={"Opened"}
-                />
-                <div className={styles.addRequestBtn}>{"+ Add request"}</div>
-              </div>
-              <div className={styles.inProgressRequest}>
-                <ClientsRequestCard
-                    openedArray={requestInProgressArray}
-                    nameOfArray={"In progress"}
-                />
-              </div>
-              <div className={styles.closedRequest}>
-                <ClientsRequestCard
-                    openedArray={requestInProgressArray}
-                    nameOfArray={"Closed"}
-                />
-              </div>
+          <div className={styles.addContainer}>
+            <div className={styles.icon}>
+              <AddMeetingIcon />
             </div>
-        ) : null}
-        <NewTask
-            isOpen={isVisible}
-            onRequestClose={onCloseClick}
-            ariaHideApp={false}
-        />
-        <ModalEcase
-            isOpen={isModalEcaseVisible}
-            onRequestClose={onEcaseModalCloseClick}
-            ariaHideApp={false}
-        />
-        <ModalRequest
-            isOpen={isModalRequestVisible}
-            onRequestClose={onRequestModalCloseClick}
-            ariaHideApp={false}
+            <div className={styles.button}>{"Create a Meeting"}</div>
+          </div>
+        </div>
+        <Tab
+          activeTab={activeTab}
+          onClickedTab={onTabClick}
+          TabsList={TABS_NAMES}
         />
       </div>
+      <div className={styles.blueLine}></div>
+      {activeTab === Tabs.Planning ? (
+        <div className={styles.bottomContainer}>
+          <div className={styles.filterButton} onClick={onFilterClick}>
+            <FilterIcon />
+            {"Filters"}
+          </div>
+        </div>
+      ) : null}
+      {!isSaveClicked && activeTab === Tabs.Planning ? (
+        <div className={styles.bottomContainer}>
+          <div className={styles.milestoneButton} onClick={onAddItemClick}>
+            <AddRoundIcon />
+            {"Add item"}
+          </div>
+        </div>
+      ) : null}
+      {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
+
+      {isFilterVisible ? <FilterProjectScreen /> : null}
+      {activeTab === Tabs.ClientsRequests ? (
+        <div className={styles.clientRequestContainer}>
+          <div className={styles.openedRequest}>
+            <ClientsRequestCard
+              openedArray={requestOpenedArray}
+              nameOfArray={"Opened"}
+            />
+            <div className={styles.addRequestBtn}>{"+ Add request"}</div>
+          </div>
+          <div className={styles.inProgressRequest}>
+            <ClientsRequestCard
+              openedArray={requestInProgressArray}
+              nameOfArray={"In progress"}
+            />
+          </div>
+          <div className={styles.closedRequest}>
+            <ClientsRequestCard
+              openedArray={requestInProgressArray}
+              nameOfArray={"Closed"}
+            />
+          </div>
+        </div>
+      ) : null}
+      <NewTask
+        isOpen={isVisible}
+        onRequestClose={onCloseClick}
+        ariaHideApp={false}
+      />
+      <ModalEcase
+        isOpen={isModalEcaseVisible}
+        onRequestClose={onEcaseModalCloseClick}
+        ariaHideApp={false}
+      />
+      <ModalRequest
+        isOpen={isModalRequestVisible}
+        onRequestClose={onRequestModalCloseClick}
+        ariaHideApp={false}
+      />
+    </div>
   );
 };
 
