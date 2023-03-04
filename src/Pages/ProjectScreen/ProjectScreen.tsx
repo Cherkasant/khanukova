@@ -40,15 +40,17 @@ const TABS_NAMES = [
 
 const ProjectScreen = () => {
   const onFilterClick = () => {
-    dispatch(setFilterVisible(true))
-  }
-  const isFilterVisible = useSelector(postSelector.getFilter)
-  const isSaveClicked = useSelector(postSelector.getTask)
 
-  const isVisible = useSelector(postSelector.getModal)
-  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal)
-  const isModalRequestVisible = useSelector(postSelector.getRequestModal)
-  const dispatch = useDispatch()
+    dispatch(setFilterVisible(true));
+  };
+  const isFilterVisible = useSelector(postSelector.getFilter);
+  const isSaveClicked = useSelector(postSelector.getTask);
+  const projectTitle = useSelector(postSelector.getTitleMilestone);
+  const isVisible = useSelector(postSelector.getModal);
+  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal);
+  const isModalRequestVisible = useSelector(postSelector.getRequestModal);
+  const dispatch = useDispatch();
+
   const onCloseClick = () => {
     dispatch(setSelectedModalVisible(false))
   }
@@ -61,10 +63,15 @@ const ProjectScreen = () => {
 
   const [addItem, setAddItem] = useState(false)
   const onAddItemClick = () => {
-    setAddItem(!addItem)
-    dispatch(setSelectedModalVisible(true))
-  }
-  const [activeTab, setActiveTab] = useState(Tabs.Planning)
+
+    if (projectTitle) {
+      setAddItem(!addItem);
+      dispatch(setSelectedModalVisible(true));
+    }
+  };
+  const [activeTab, setActiveTab] = useState(Tabs.Planning);
+
+
   const onTabClick = (newTab: Tabs) => {
     if (newTab !== activeTab) {
       setActiveTab(newTab)
@@ -94,14 +101,12 @@ const ProjectScreen = () => {
               onChange={(value) => setTitle(value)}
               onKeyDown={onChangeKeyDown}
               className={styles.title}
-              placeholder={'Project'}
+
+              placeholder={"New project"}
               disabled={!edit}
             />
             {!edit ? (
-              <div
-                className={styles.edit}
-                onClick={onEditClick}
-              >
+              <div className={styles.edit} onClick={onEditClick}>
                 <EditTitleIcon />
               </div>
             ) : null}
@@ -111,7 +116,9 @@ const ProjectScreen = () => {
             <div className={styles.icon}>
               <AddMeetingIcon />
             </div>
-            <div className={styles.button}>{'Create a Meeting'}</div>
+
+            <div className={styles.button}>{"Create a Meeting"}</div>
+
           </div>
         </div>
         <Tab
@@ -123,50 +130,54 @@ const ProjectScreen = () => {
       <div className={styles.blueLine}></div>
       {activeTab === Tabs.Planning ? (
         <div className={styles.bottomContainer}>
-          <div
-            className={styles.filterButton}
-            onClick={onFilterClick}
-          >
+
+          <div className={styles.filterButton} onClick={onFilterClick}>
             <FilterIcon />
-            {'Filters'}
+            {"Filters"}
+
           </div>
         </div>
       ) : null}
       {!isSaveClicked && activeTab === Tabs.Planning ? (
         <div className={styles.bottomContainer}>
-          <div
-            className={styles.milestoneButton}
-            onClick={onAddItemClick}
-          >
+
+          <div className={styles.milestoneButton} onClick={onAddItemClick}>
             <AddRoundIcon />
-            {'Add item'}
+            {"Add item"}
+
           </div>
         </div>
       ) : null}
       {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
-      {isFilterVisible ? <FilterProjectScreen /> : null}
 
-      {activeTab === Tabs.Resourses ? <Resourses /> : null}
+
+      {isFilterVisible ? <FilterProjectScreen /> : null}
 
       {activeTab === Tabs.ClientsRequests ? (
         <div className={styles.clientRequestContainer}>
           <div className={styles.openedRequest}>
             <ClientsRequestCard
               openedArray={requestOpenedArray}
-              nameOfArray={'Opened'}
+
+              nameOfArray={"Opened"}
             />
-            <div className={styles.addRequestBtn}>{'+ Add request'}</div>
+            <div className={styles.addRequestBtn}>{"+ Add request"}</div>
+
           </div>
           <div className={styles.inProgressRequest}>
             <ClientsRequestCard
               openedArray={requestInProgressArray}
-              nameOfArray={'In progress'}
+
+              nameOfArray={"In progress"}
+
             />
           </div>
           <div className={styles.closedRequest}>
             <ClientsRequestCard
               openedArray={requestInProgressArray}
-              nameOfArray={'Closed'}
+
+              nameOfArray={"Closed"}
+
             />
           </div>
         </div>
@@ -187,7 +198,9 @@ const ProjectScreen = () => {
         ariaHideApp={false}
       />
     </div>
-  )
-}
+
+  );
+};
+
 
 export default ProjectScreen
