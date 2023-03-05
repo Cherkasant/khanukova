@@ -1,32 +1,35 @@
-import React, { useState } from "react";
-import styles from "./ProjectScreen.module.css";
-import { AddMeetingIcon } from "../../Assets/icons/AddMeetingIcon";
-import { Tabs } from "../../Components/constants/@types";
-import Tab from "../../Components/Tabs";
-import { FilterIcon } from "../../Assets/icons/FilterIcon";
-import { AddRoundIcon } from "../../Assets/icons/AddRoundIcon";
-import { EditTitleIcon } from "../../Assets/icons/EditTitleIcon";
-import NewTask from "../../Components/ModalNewTask";
-import { useDispatch, useSelector } from "react-redux";
-import postSelector from "../../Redux/Selectors/postSelector";
+
+import React, { useState } from 'react'
+import { AddMeetingIcon } from '../../Assets/icons/AddMeetingIcon'
+import { Tabs } from '../../Components/constants/@types'
+import Tab from '../../Components/Tabs'
+import { FilterIcon } from '../../Assets/icons/FilterIcon'
+import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon'
+import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
+import NewTask from '../../Components/ModalNewTask'
+import { useDispatch, useSelector } from 'react-redux'
+import postSelector from '../../Redux/Selectors/postSelector'
+import Input from '../../Components/Input'
+import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen'
+import Table from '../../Components/Table'
+import ClientsRequestCard from '../../Components/ClientsRequestCard'
 import {
-  setEcaseModalVisible,
+  requestInProgressArray,
+  requestOpenedArray,
+} from '../../Components/ClientsRequestCard/constantsRequest'
+import ModalEcase from '../../Components/ModalEcase'
+import ModalRequest from '../../Components/ModalRequest'
+import Resourses from '../../Components/Resourses'
+import {
   setFilterVisible,
   setRequestModalVisible,
   setSelectedModalVisible,
   setTitleTask,
-} from "../../Redux/Reducers/postReducer";
-import Input from "../../Components/Input";
-import FilterProjectScreen from "../../Components/FilteresPanel/FilterProjectScreen";
-import Table from "../../Components/Table";
-import ClientsRequestCard from "../../Components/ClientsRequestCard";
-import {
-  requestInProgressArray,
-  requestOpenedArray,
-} from "../../Components/ClientsRequestCard/constantsRequest";
-import ModalEcase from "../../Components/ModalEcase";
-import ModalRequest from "../../Components/ModalRequest";
-import Resourses from "../../Components/Resourses";
+} from '../../Redux/Reducers/postReducer'
+import classNames from 'classnames'
+import styles from './ProjectScreen.module.css'
+
+
 
 const TABS_NAMES = [
   {name: 'Planning', key: Tabs.Planning},
@@ -41,25 +44,14 @@ const TABS_NAMES = [
 const ProjectScreen = () => {
   const onFilterClick = () => {
 
-    dispatch(setFilterVisible(true));
-  };
-  const isFilterVisible = useSelector(postSelector.getFilter);
-  const isSaveClicked = useSelector(postSelector.getTask);
-  const projectTitle = useSelector(postSelector.getTitleMilestone);
-  const isVisible = useSelector(postSelector.getModal);
-  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal);
-  const isModalRequestVisible = useSelector(postSelector.getRequestModal);
-  const dispatch = useDispatch();
+    dispatch(setFilterVisible(true))
+  }
+  const isSaveClicked = useSelector(postSelector.getTask)
 
-  const onCloseClick = () => {
-    dispatch(setSelectedModalVisible(false))
-  }
-  const onEcaseModalCloseClick = () => {
-    dispatch(setEcaseModalVisible(false))
-  }
-  const onRequestModalCloseClick = () => {
-    dispatch(setRequestModalVisible(false))
-  }
+  const isVisible = useSelector(postSelector.getModal)
+  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal)
+  const isModalRequestVisible = useSelector(postSelector.getRequestModal)
+  const dispatch = useDispatch()
 
   const [addItem, setAddItem] = useState(false)
   const onAddItemClick = () => {
@@ -200,7 +192,79 @@ const ProjectScreen = () => {
         />
       </div>
 
-  );
+      <div className={styles.blueLine}></div>
+      {activeTab === Tabs.Planning ? (
+        <div className={styles.bottomContainer}>
+          <div
+            className={styles.filterButton}
+            onClick={onFilterClick}
+          >
+            <FilterIcon />
+            {'Filters'}
+          </div>
+        </div>
+      ) : null}
+      {!isSaveClicked && activeTab === Tabs.Planning ? (
+        <div className={styles.bottomContainer}>
+          <div
+            className={styles.milestoneButton}
+            onClick={onAddItemClick}
+          >
+            <AddRoundIcon />
+            {'Add item'}
+          </div>
+        </div>
+      ) : null}
+      {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
+      <FilterProjectScreen />
+      {activeTab === Tabs.Resourses ? <Resourses /> : null}
+      {activeTab === Tabs.ClientsRequests ? (
+        <div className={styles.clientRequestContainer}>
+          <div className={styles.openedRequest}>
+            <ClientsRequestCard
+              openedArray={requestOpenedArray}
+              nameOfArray={'Opened'}
+            />
+            <div className={styles.addRequestBtn}>{'+ Add request'}</div>
+          </div>
+          <div className={styles.inProgressRequest}>
+            <ClientsRequestCard
+              openedArray={requestInProgressArray}
+              nameOfArray={'In progress'}
+            />
+          </div>
+          <div className={styles.closedRequest}>
+            <ClientsRequestCard
+              openedArray={requestInProgressArray}
+              nameOfArray={'Closed'}
+            />
+          </div>
+        </div>
+      ) : null}
+      <div
+        className={classNames(styles.wrapModal, {
+          [styles.showModal]: isVisible,
+        })}
+      >
+        <NewTask />
+      </div>
+      <div
+        className={classNames(styles.wrapModal, {
+          [styles.showModal]: isModalEcaseVisible,
+        })}
+      >
+        <ModalEcase />
+      </div>
+
+      <div
+        className={classNames(styles.wrapModal, {
+          [styles.showModal]: isModalRequestVisible,
+        })}
+      >
+        <ModalRequest />
+      </div>
+    </div>
+  )
 };
 
 
