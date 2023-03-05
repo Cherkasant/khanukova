@@ -1,6 +1,6 @@
 .wrap {
   transform: translateX(1500px);
-  transition: all 0.9s;
+  transition: all 0.7s;
   position: absolute;
   top: 54px;
   right: 0;
@@ -80,5 +80,5 @@
 
 .activeModal {
   transform: translateY(0);
-  transition: all 0.9s;
+  transition: all 0.7s;
 }

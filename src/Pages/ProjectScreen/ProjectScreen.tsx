@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import styles from './ProjectScreen.module.css'
 import { AddMeetingIcon } from '../../Assets/icons/AddMeetingIcon'
 import { Tabs } from '../../Components/constants/@types'
 import Tab from '../../Components/Tabs'
@@ -9,13 +8,6 @@ import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
 import NewTask from '../../Components/ModalNewTask'
 import { useDispatch, useSelector } from 'react-redux'
 import postSelector from '../../Redux/Selectors/postSelector'
-import {
-  setEcaseModalVisible,
-  setFilterVisible,
-  setRequestModalVisible,
-  setSelectedModalVisible,
-  setTitleTask,
-} from '../../Redux/Reducers/postReducer'
 import Input from '../../Components/Input'
 import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen'
 import Table from '../../Components/Table'
@@ -27,6 +19,14 @@ import {
 import ModalEcase from '../../Components/ModalEcase'
 import ModalRequest from '../../Components/ModalRequest'
 import Resourses from '../../Components/Resourses'
+import {
+  setFilterVisible,
+  setRequestModalVisible,
+  setSelectedModalVisible,
+  setTitleTask,
+} from '../../Redux/Reducers/postReducer'
+import classNames from 'classnames'
+import styles from './ProjectScreen.module.css'
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
@@ -42,23 +42,12 @@ const ProjectScreen = () => {
   const onFilterClick = () => {
     dispatch(setFilterVisible(true))
   }
-  const isFilterVisible = useSelector(postSelector.getFilter)
   const isSaveClicked = useSelector(postSelector.getTask)
 
   const isVisible = useSelector(postSelector.getModal)
   const isModalEcaseVisible = useSelector(postSelector.getEcaseModal)
   const isModalRequestVisible = useSelector(postSelector.getRequestModal)
   const dispatch = useDispatch()
-  const onCloseClick = () => {
-    dispatch(setSelectedModalVisible(false))
-  }
-  const onEcaseModalCloseClick = () => {
-    dispatch(setEcaseModalVisible(false))
-  }
-  const onRequestModalCloseClick = () => {
-    dispatch(setRequestModalVisible(false))
-  }
-
   const [addItem, setAddItem] = useState(false)
   const onAddItemClick = () => {
     setAddItem(!addItem)
@@ -144,10 +133,8 @@ const ProjectScreen = () => {
         </div>
       ) : null}
       {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
-      {isFilterVisible ? <FilterProjectScreen /> : null}
-
+      <FilterProjectScreen />
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
-
       {activeTab === Tabs.ClientsRequests ? (
         <div className={styles.clientRequestContainer}>
           <div className={styles.openedRequest}>
@@ -171,21 +158,28 @@ const ProjectScreen = () => {
           </div>
         </div>
       ) : null}
-      <NewTask
-        isOpen={isVisible}
-        onRequestClose={onCloseClick}
-        ariaHideApp={false}
-      />
-      <ModalEcase
-        isOpen={isModalEcaseVisible}
-        onRequestClose={onEcaseModalCloseClick}
-        ariaHideApp={false}
-      />
-      <ModalRequest
-        isOpen={isModalRequestVisible}
-        onRequestClose={onRequestModalCloseClick}
-        ariaHideApp={false}
-      />
+      <div
+        className={classNames(styles.wrapModal, {
+          [styles.showModal]: isVisible,
+        })}
+      >
+        <NewTask />
+      </div>
+      <div
+        className={classNames(styles.wrapModal, {
+          [styles.showModal]: isModalEcaseVisible,
+        })}
+      >
+        <ModalEcase />
+      </div>
+
+      <div
+        className={classNames(styles.wrapModal, {
+          [styles.showModal]: isModalRequestVisible,
+        })}
+      >
+        <ModalRequest />
+      </div>
     </div>
   )
 }

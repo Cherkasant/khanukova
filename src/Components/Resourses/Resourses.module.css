@@ -14,7 +14,7 @@
   bottom: 0;
   right: 0;
   background: rgba(155, 172, 201, 0.3);
-  transition: all 0.9s;
+  transition: all 0.7s;
   position: fixed;
 }
 
@@ -74,5 +74,5 @@
 .showModal {
   opacity: 1;
   visibility: visible;
-  transition: all 0.9s;
+  transition: all 0.7s;
 }
