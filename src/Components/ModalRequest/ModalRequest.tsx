@@ -1,49 +1,48 @@
-import React, { ChangeEvent, FC, useState } from 'react'
-import ReactModal, { Props } from 'react-modal'
-import 'react-dropdown/style.css'
-import styles from './ModalRequest.module.css'
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon'
-import Dropdown from 'react-dropdown'
-import 'react-datepicker/dist/react-datepicker.css'
-import { Upload } from 'antd'
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon'
-import { useDispatch, useSelector } from 'react-redux'
-import { setRequestModalVisible } from '../../Redux/Reducers/postReducer'
+import React, { ChangeEvent, useState } from "react";
+import "react-dropdown/style.css";
+import styles from "./ModalRequest.module.css";
+import { CloseModalIcon } from "../../Assets/icons/CloseModalIcon";
+import { AttachmentIcon } from "../../Assets/icons/AttachmentIcon";
+import Dropdown from "react-dropdown";
+import "react-datepicker/dist/react-datepicker.css";
+import { Upload } from "antd";
+import { DownloadIcon } from "../../Assets/icons/DownloadIcon";
+import { useDispatch, useSelector } from "react-redux";
+import { setRequestModalVisible } from "../../Redux/Reducers/postReducer";
 import {
   ClientsRequestStatus,
   Priority,
   responsibleOptions,
-} from '../constants/Modal/ModalData'
-import postSelector from '../../Redux/Selectors/postSelector'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import classNames from 'classnames'
+} from "../constants/Modal/ModalData";
+import postSelector from "../../Redux/Selectors/postSelector";
+import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
+import classNames from "classnames";
 
 const ModalRequest = () => {
-  const dispatch = useDispatch()
-  const titleRequest = useSelector(postSelector.getRequestTitle)
-  const isModalRequestVisible = useSelector(postSelector.getRequestModal)
+  const dispatch = useDispatch();
+  const titleRequest = useSelector(postSelector.getRequestTitle);
+  const isModalRequestVisible = useSelector(postSelector.getRequestModal);
   const onSaveClick = () => {
-    dispatch(setRequestModalVisible(false))
-  }
+    dispatch(setRequestModalVisible(false));
+  };
 
-  const [descriptionValue, setDescriptionValue] = useState('')
+  const [descriptionValue, setDescriptionValue] = useState("");
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescriptionValue(event.target.value)
-  }
-  const [comment, setComment] = useState('')
+    setDescriptionValue(event.target.value);
+  };
+  const [comment, setComment] = useState("");
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.target.value)
-  }
+    setComment(event.target.value);
+  };
 
   const [selectedResponsibleOptions, setSelectedResponsibleOptions] =
-    useState<any>(null)
-  const [priority, setPriority] = useState<any>(null)
-  const [status, setStatus] = useState<any>(null)
+    useState<any>(null);
+  const [priority, setPriority] = useState<any>(null);
+  const [status, setStatus] = useState<any>(null);
 
   const onCancelClick = () => {
-    dispatch(setRequestModalVisible(false))
-  }
+    dispatch(setRequestModalVisible(false));
+  };
   return (
     <div
       className={classNames(styles.modal, {
@@ -52,60 +51,57 @@ const ModalRequest = () => {
     >
       <div className={styles.container}>
         <div className={styles.milestone}>{titleRequest}</div>
-        <div
-          className={styles.icon}
-          onClick={onCancelClick}
-        >
+        <div className={styles.icon} onClick={onCancelClick}>
           <CloseModalIcon />
         </div>
-        <div className={styles.titleContainer}>{'opened 08/02/2023 '}</div>
+        <div className={styles.titleContainer}>{"opened 08/02/2023 "}</div>
       </div>
       <div className={styles.mainBlock}>
         <div className={styles.leftBlock}>
           <div className={styles.descriptionContainer}>
-            <div className={styles.title}>{'Description'}</div>
+            <div className={styles.title}>{"Description"}</div>
             <textarea
               className={styles.descriptionInput}
-              placeholder={'Write'}
+              placeholder={"Write"}
               value={descriptionValue}
               onChange={onChangeDescription}
             />
             <PuzzleButton
-              title={'Submit new'}
+              title={"Submit new"}
               type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!descriptionValue}
             />
           </div>
 
-          <div>
+          <div className={styles.attachmentContainer}>
             <Upload
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture"
               className="upload-list-inline"
             >
               <div className={styles.attachmentBlock}>
-                <div className={styles.title}>{'Attachment'}</div>
+                <div className={styles.title}>{"Attachment"}</div>
                 <AttachmentIcon />
               </div>
             </Upload>
           </div>
           <div className={styles.blockDownload}>
             <div className={styles.downloadBtn}>
-              {'Download all'}
+              {"Download all"}
               <DownloadIcon />
             </div>
           </div>
           <div className={styles.commentContainer}>
-            <div className={styles.title}>{'Comments'}</div>
+            <div className={styles.title}>{"Comments"}</div>
             <textarea
               className={styles.commentInput}
-              placeholder={'Write comment'}
+              placeholder={"Write comment"}
               value={comment}
               onChange={onChangeComment}
             />
             <PuzzleButton
-              title={'Comment'}
+              title={"Comment"}
               type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!comment}
@@ -115,7 +111,7 @@ const ModalRequest = () => {
         <div className={styles.rightBlock}>
           <div className={styles.inputsBlock}>
             <div>
-              <div className={styles.title}>{'Responsible'}</div>
+              <div className={styles.title}>{"Responsible"}</div>
               <Dropdown
                 options={responsibleOptions}
                 onChange={setSelectedResponsibleOptions}
@@ -130,7 +126,7 @@ const ModalRequest = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Priority'}</div>
+              <div className={styles.title}>{"Priority"}</div>
               <Dropdown
                 options={Priority}
                 onChange={setPriority}
@@ -145,7 +141,7 @@ const ModalRequest = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Status'}</div>
+              <div className={styles.title}>{"Status"}</div>
               <Dropdown
                 options={ClientsRequestStatus}
                 onChange={setStatus}
@@ -163,13 +159,13 @@ const ModalRequest = () => {
           <div>
             <div className={styles.buttonsContainer}>
               <PuzzleButton
-                btnTitle={'Cancel'}
+                btnTitle={"Cancel"}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.cancelBtn}
                 onClick={onCancelClick}
               />
               <PuzzleButton
-                btnTitle={'Save'}
+                btnTitle={"Save"}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.saveBtn}
                 onClick={onSaveClick}
@@ -179,7 +175,7 @@ const ModalRequest = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ModalRequest

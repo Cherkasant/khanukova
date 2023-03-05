@@ -1,88 +1,87 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react'
-import ReactModal, { Props } from 'react-modal'
-import 'react-dropdown/style.css'
-import styles from './ModalEcase.module.css'
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon'
-import Dropdown from 'react-dropdown'
-import 'react-datepicker/dist/react-datepicker.css'
+import React, { ChangeEvent, useEffect, useState } from "react";
+import "react-dropdown/style.css";
+import styles from "./ModalEcase.module.css";
+import { CloseModalIcon } from "../../Assets/icons/CloseModalIcon";
+import { AttachmentIcon } from "../../Assets/icons/AttachmentIcon";
+import Dropdown from "react-dropdown";
+import "react-datepicker/dist/react-datepicker.css";
 
-import { List, Upload } from 'antd'
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon'
-import { useDispatch, useSelector } from 'react-redux'
-import { setEcaseModalVisible } from '../../Redux/Reducers/postReducer'
+import { List, Upload } from "antd";
+import { DownloadIcon } from "../../Assets/icons/DownloadIcon";
+import { useDispatch, useSelector } from "react-redux";
+import { setEcaseModalVisible } from "../../Redux/Reducers/postReducer";
 import {
   ClientsRequestStatus,
   Priority,
   responsibleOptions,
-} from '../constants/Modal/ModalData'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import profileSelectors from '../../Redux/Selectors/profileSelectors'
-import { getECaseListReducer } from '../../Redux/Reducers/profileReducer'
-import classNames from 'classnames'
-import postSelector from '../../Redux/Selectors/postSelector'
+} from "../constants/Modal/ModalData";
+import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
+import profileSelectors from "../../Redux/Selectors/profileSelectors";
+import { getECaseListReducer } from "../../Redux/Reducers/profileReducer";
+import classNames from "classnames";
+import postSelector from "../../Redux/Selectors/postSelector";
 
 const ModalEcase = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onSaveClick = () => {
-    dispatch(setEcaseModalVisible(false))
-  }
-  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal)
-  const ECaseList = useSelector(profileSelectors.getECaseList)
+    dispatch(setEcaseModalVisible(false));
+  };
+  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal);
+  const ECaseList = useSelector(profileSelectors.getECaseList);
 
   useEffect(() => {
-    dispatch(getECaseListReducer())
-  }, [])
+    dispatch(getECaseListReducer());
+  }, []);
 
-  const [descriptionValue, setDescriptionValue] = useState('')
+  const [descriptionValue, setDescriptionValue] = useState("");
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescriptionValue(event.target.value)
-  }
-  const [comment, setComment] = useState('')
+    setDescriptionValue(event.target.value);
+  };
+  const [comment, setComment] = useState("");
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.target.value)
-  }
+    setComment(event.target.value);
+  };
 
   const [selectedResponsibleOptions, setSelectedResponsibleOptions] =
-    useState<any>(null)
-  const [priority, setPriority] = useState<any>(null)
-  const [status, setStatus] = useState<any>(null)
+    useState<any>(null);
+  const [priority, setPriority] = useState<any>(null);
+  const [status, setStatus] = useState<any>(null);
 
   const onCancelClick = () => {
-    dispatch(setEcaseModalVisible(false))
-  }
+    dispatch(setEcaseModalVisible(false));
+  };
 
   const EcaseData = [
-    { name: '1. Company name', answer: ECaseList?.company_name },
-    { name: '2. Company size ', answer: ECaseList?.company_size },
-    { name: '3. Industries ', answer: ECaseList?.industry_choice },
+    { name: "1. Company name", answer: ECaseList?.company_name },
+    { name: "2. Company size ", answer: ECaseList?.company_size },
+    { name: "3. Industries ", answer: ECaseList?.industry_choice },
     {
-      name: '4. Already have a teach experience?',
+      name: "4. Already have a teach experience?",
       answer: ECaseList?.development_team,
     },
     {
-      name: '5. Willing to use outsiursing/ outstaffing',
+      name: "5. Willing to use outsiursing/ outstaffing",
       answer: ECaseList?.use_outsourcing,
     },
     {
-      name: '6. Project description ready?',
+      name: "6. Project description ready?",
       answer: ECaseList?.description_project,
     },
     {
-      name: '7. Business requirements for the product',
+      name: "7. Business requirements for the product",
       answer: ECaseList?.business_requirements,
     },
-    { name: '8. Technological stack:', answer: ECaseList?.technological_stack },
+    { name: "8. Technological stack:", answer: ECaseList?.technological_stack },
     {
       name: "9. Link to your competitor's project:",
       answer: ECaseList?.link_competitor,
     },
-    { name: '10. Start project ', answer: ECaseList?.start_project },
+    { name: "10. Start project ", answer: ECaseList?.start_project },
     {
-      name: '11. Used outsiursing/outstaffing before',
+      name: "11. Used outsiursing/outstaffing before",
       answer: ECaseList?.used_outsourcing,
     },
-  ]
+  ];
 
   return (
     <div
@@ -91,14 +90,11 @@ const ModalEcase = () => {
       })}
     >
       <div className={styles.container}>
-        <div className={styles.milestone}>{'E-case details'}</div>
-        <div
-          className={styles.icon}
-          onClick={onCancelClick}
-        >
+        <div className={styles.milestone}>{"E-case details"}</div>
+        <div className={styles.icon} onClick={onCancelClick}>
           <CloseModalIcon />
         </div>
-        <div className={styles.titleContainer}>{'opened 08/02/2023 '}</div>
+        <div className={styles.titleContainer}>{"opened 08/02/2023 "}</div>
       </div>
       <div className={styles.mainBlock}>
         <div className={styles.leftBlock}>
@@ -107,10 +103,7 @@ const ModalEcase = () => {
               className={styles.list}
               dataSource={EcaseData}
               renderItem={(item) => (
-                <List.Item
-                  className={styles.listContainer}
-                  key={item.name}
-                >
+                <List.Item className={styles.listContainer} key={item.name}>
                   <div className={styles.nameList}>{item.name}</div>
                   <div className={styles.answerList}>{item.answer}</div>
                 </List.Item>
@@ -118,49 +111,49 @@ const ModalEcase = () => {
             />
           </div>
           <div className={styles.descriptionContainer}>
-            <div className={styles.title}>{'Description'}</div>
+            <div className={styles.title}>{"Description"}</div>
             <textarea
               className={styles.descriptionInput}
-              placeholder={'Write'}
+              placeholder={"Write"}
               value={descriptionValue}
               onChange={onChangeDescription}
             />
             <PuzzleButton
-              title={'Submit new'}
+              title={"Submit new"}
               type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!descriptionValue}
             />
           </div>
 
-          <div>
+          <div className={styles.attachmentContainer}>
             <Upload
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture"
               className="upload-list-inline"
             >
               <div className={styles.attachmentBlock}>
-                <div className={styles.title}>{'Attachment'}</div>
+                <div className={styles.title}>{"Attachment"}</div>
                 <AttachmentIcon />
               </div>
             </Upload>
           </div>
           <div className={styles.blockDownload}>
             <div className={styles.downloadBtn}>
-              {'Download all'}
+              {"Download all"}
               <DownloadIcon />
             </div>
           </div>
           <div className={styles.commentContainer}>
-            <div className={styles.title}>{'Comments'}</div>
+            <div className={styles.title}>{"Comments"}</div>
             <textarea
               className={styles.commentInput}
-              placeholder={'Write comment'}
+              placeholder={"Write comment"}
               value={comment}
               onChange={onChangeComment}
             />
             <PuzzleButton
-              title={'Comment'}
+              title={"Comment"}
               type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!comment}
@@ -171,7 +164,7 @@ const ModalEcase = () => {
         <div className={styles.rightBlock}>
           <div className={styles.inputsBlock}>
             <div>
-              <div className={styles.title}>{'Responsible'}</div>
+              <div className={styles.title}>{"Responsible"}</div>
               <Dropdown
                 options={responsibleOptions}
                 onChange={setSelectedResponsibleOptions}
@@ -186,7 +179,7 @@ const ModalEcase = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Priority'}</div>
+              <div className={styles.title}>{"Priority"}</div>
               <Dropdown
                 options={Priority}
                 onChange={setPriority}
@@ -201,7 +194,7 @@ const ModalEcase = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Status'}</div>
+              <div className={styles.title}>{"Status"}</div>
               <Dropdown
                 options={ClientsRequestStatus}
                 onChange={setStatus}
@@ -219,13 +212,13 @@ const ModalEcase = () => {
           <div>
             <div className={styles.buttonsContainer}>
               <PuzzleButton
-                btnTitle={'Cancel'}
+                btnTitle={"Cancel"}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.cancelBtn}
                 onClick={onCancelClick}
               />
               <PuzzleButton
-                btnTitle={'Save'}
+                btnTitle={"Save"}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.saveBtn}
                 onClick={onSaveClick}
@@ -235,7 +228,7 @@ const ModalEcase = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ModalEcase

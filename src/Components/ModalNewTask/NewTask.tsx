@@ -1,25 +1,24 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react'
-import ReactModal, { Props } from 'react-modal'
-import 'react-dropdown/style.css'
-import styles from './NewTask.module.css'
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon'
-import Dropdown from 'react-dropdown'
-import Input from '../Input'
-import 'react-datepicker/dist/react-datepicker.css'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import type { DatePickerProps } from 'antd'
-import { DatePicker, Upload } from 'antd'
-import { CalendarIcon } from '../../Assets/icons/CalendarIcon'
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon'
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
-import { DeleteIcon } from '../../Assets/icons/DeleteIcon'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { ChangeEvent, useEffect, useState } from "react";
+import "react-dropdown/style.css";
+import styles from "./NewTask.module.css";
+import { CloseModalIcon } from "../../Assets/icons/CloseModalIcon";
+import { AttachmentIcon } from "../../Assets/icons/AttachmentIcon";
+import Dropdown from "react-dropdown";
+import Input from "../Input";
+import "react-datepicker/dist/react-datepicker.css";
+import PuzzleButton, { PuzzleButtonTypes } from "../PuzzleButton";
+import type { DatePickerProps } from "antd";
+import { DatePicker, Upload } from "antd";
+import { CalendarIcon } from "../../Assets/icons/CalendarIcon";
+import { DownloadIcon } from "../../Assets/icons/DownloadIcon";
+import { EditTitleIcon } from "../../Assets/icons/EditTitleIcon";
+import { DeleteIcon } from "../../Assets/icons/DeleteIcon";
+import { useDispatch, useSelector } from "react-redux";
 import {
   postTaskCard,
   setSelectedModalVisible,
-} from '../../Redux/Reducers/postReducer'
-import postSelector from '../../Redux/Selectors/postSelector'
+} from "../../Redux/Reducers/postReducer";
+import postSelector from "../../Redux/Selectors/postSelector";
 import {
   Colors,
   Dependence,
@@ -28,12 +27,12 @@ import {
   Progress,
   responsibleOptions,
   Status,
-} from '../constants/Modal/ModalData'
-import classNames from 'classnames'
+} from "../constants/Modal/ModalData";
+import classNames from "classnames";
 
 const NewTask = () => {
-  const dispatch = useDispatch()
-  const milestone = useSelector(postSelector.getTitleMilestone)
+  const dispatch = useDispatch();
+  const milestone = useSelector(postSelector.getTitleMilestone);
 
   const onSaveClick = () => {
     dispatch(
@@ -52,53 +51,53 @@ const NewTask = () => {
         progress: +progress.value,
         status: status.value,
         payment_status: paymentStatus.value,
-        project: 'TestOne',
+        project: "TestOne",
       })
-    )
-    dispatch(setSelectedModalVisible(false))
-  }
-  const [attachment, setAttachment] = useState('')
-  const [launchDate, setLaunchDate] = useState('')
-  const [deadline, setDeadline] = useState('')
-  const [label, setLabel] = useState('')
-  const [duration, setDuration] = useState('')
-  const [descriptionValue, setDescriptionValue] = useState('')
-  const isVisible = useSelector(postSelector.getModal)
+    );
+    dispatch(setSelectedModalVisible(false));
+  };
+  const [attachment, setAttachment] = useState("");
+  const [launchDate, setLaunchDate] = useState("");
+  const [deadline, setDeadline] = useState("");
+  const [label, setLabel] = useState("");
+  const [duration, setDuration] = useState("");
+  const [descriptionValue, setDescriptionValue] = useState("");
+  const isVisible = useSelector(postSelector.getModal);
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescriptionValue(event.target.value)
-  }
-  const [comment, setComment] = useState('')
+    setDescriptionValue(event.target.value);
+  };
+  const [comment, setComment] = useState("");
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.target.value)
-  }
+    setComment(event.target.value);
+  };
 
   const [selectedResponsibleOptions, setSelectedResponsibleOptions] =
-    useState<any>(null)
-  const [priority, setPriority] = useState<any>(null)
-  const [status, setStatus] = useState<any>(null)
-  const [paymentStatus, setPaymentStatus] = useState<any>(null)
-  const [dependence, setDependence] = useState<any>(null)
-  const [progress, setProgress] = useState<any>(null)
-  const [colors, setColors] = useState<any>(null)
-  const [title, setTitle] = useState('')
-  const [edit, setEdit] = useState(false)
+    useState<any>(null);
+  const [priority, setPriority] = useState<any>(null);
+  const [status, setStatus] = useState<any>(null);
+  const [paymentStatus, setPaymentStatus] = useState<any>(null);
+  const [dependence, setDependence] = useState<any>(null);
+  const [progress, setProgress] = useState<any>(null);
+  const [colors, setColors] = useState<any>(null);
+  const [title, setTitle] = useState("");
+  const [edit, setEdit] = useState(false);
   const onEditClick = () => {
-    setEdit(!edit)
-  }
+    setEdit(!edit);
+  };
   const onCancelClick = () => {
-    dispatch(setSelectedModalVisible(false))
-  }
+    dispatch(setSelectedModalVisible(false));
+  };
   useEffect(() => {
-    setEdit(false)
-    setTitle('Title')
-  }, [])
+    setEdit(false);
+    setTitle("Title");
+  }, []);
 
-  const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
-    setDeadline(dateString)
-  }
-  const onChangeLaunch: DatePickerProps['onChange'] = (date, dateString) => {
-    setLaunchDate(dateString)
-  }
+  const onChangeDeadline: DatePickerProps["onChange"] = (date, dateString) => {
+    setDeadline(dateString);
+  };
+  const onChangeLaunch: DatePickerProps["onChange"] = (date, dateString) => {
+    setLaunchDate(dateString);
+  };
 
   return (
     <div
@@ -109,14 +108,11 @@ const NewTask = () => {
           {milestone}
           <div className={styles.deleteContainer}>
             <DeleteIcon />
-            {'Delete from project'}
+            {"Delete from project"}
           </div>
         </div>
 
-        <div
-          className={styles.icon}
-          onClick={onCancelClick}
-        >
+        <div className={styles.icon} onClick={onCancelClick}>
           <CloseModalIcon />
         </div>
         <div className={styles.titleContainer}>
@@ -124,14 +120,11 @@ const NewTask = () => {
             value={title}
             onChange={(value) => setTitle(value)}
             className={styles.titleInput}
-            placeholder={'Title'}
+            placeholder={"Title"}
             disabled={!edit}
           />
           {!edit ? (
-            <div
-              className={styles.editIcon}
-              onClick={onEditClick}
-            >
+            <div className={styles.editIcon} onClick={onEditClick}>
               <EditTitleIcon />
             </div>
           ) : null}
@@ -140,10 +133,10 @@ const NewTask = () => {
       <div className={styles.mainBlock}>
         <div className={styles.leftBlock}>
           <div className={styles.descriptionContainer}>
-            <div className={styles.title}>{'Description'}</div>
+            <div className={styles.title}>{"Description"}</div>
             <textarea
               className={styles.descriptionInput}
-              placeholder={'Write'}
+              placeholder={"Write"}
               value={descriptionValue}
               onChange={onChangeDescription}
             />
@@ -155,7 +148,7 @@ const NewTask = () => {
             {/*/>*/}
           </div>
 
-          <div>
+          <div className={styles.attachmentContainer}>
             <Upload
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture"
@@ -163,27 +156,27 @@ const NewTask = () => {
               onChange={(info) => setAttachment(info.file.name)}
             >
               <div className={styles.attachmentBlock}>
-                <div className={styles.title}>{'Attachment'}</div>
+                <div className={styles.title}>{"Attachment"}</div>
                 <AttachmentIcon />
               </div>
             </Upload>
           </div>
           <div className={styles.blockDownload}>
             <div className={styles.downloadBtn}>
-              {'Download all'}
+              {"Download all"}
               <DownloadIcon />
             </div>
           </div>
           <div className={styles.commentContainer}>
-            <div className={styles.title}>{'Comments'}</div>
+            <div className={styles.title}>{"Comments"}</div>
             <textarea
               className={styles.commentInput}
-              placeholder={'Write comment'}
+              placeholder={"Write comment"}
               value={comment}
               onChange={onChangeComment}
             />
             <PuzzleButton
-              title={'Comment'}
+              title={"Comment"}
               type={PuzzleButtonTypes.TextButton}
               className={styles.submitBtn}
               disabled={!comment}
@@ -192,7 +185,7 @@ const NewTask = () => {
         </div>
 
         <div className={styles.rightBlock}>
-          <div className={styles.title}>{'Responsible'}</div>
+          <div className={styles.title}>{"Responsible"}</div>
           <div className={styles.inputsBlock}>
             <div>
               <Dropdown
@@ -209,7 +202,7 @@ const NewTask = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Priority'}</div>
+              <div className={styles.title}>{"Priority"}</div>
               <Dropdown
                 options={Priority}
                 onChange={setPriority}
@@ -224,7 +217,7 @@ const NewTask = () => {
               />
             </div>
             <div className={styles.startDateContainer}>
-              <div className={styles.title}>{'Start date'}</div>
+              <div className={styles.title}>{"Start date"}</div>
               <DatePicker
                 format="DD.MM.YYYY"
                 placeholder="Nothing selected"
@@ -236,37 +229,38 @@ const NewTask = () => {
 
             <div className={styles.startDateContainer}>
               <div className={styles.startDateContainer}>
-                <div className={styles.title}>{'Deadline'}</div>
+                <div className={styles.title}>{"Deadline"}</div>
                 <DatePicker
                   format="DD.MM.YYYY"
                   placeholder="Nothing selected"
                   suffixIcon={<CalendarIcon />}
+                  className={styles.datepicker}
                   onChange={onChangeDeadline}
                 />
               </div>
             </div>
             <div>
-              <div className={styles.title}>{'Duration'}</div>
+              <div className={styles.title}>{"Duration"}</div>
               <Input
                 value={duration}
                 onChange={(value) => setDuration(value)}
-                type={'text'}
+                type={"text"}
                 className={styles.label}
-                placeholder={'Enter duration'}
+                placeholder={"Enter duration"}
               />
             </div>
             <div>
-              <div className={styles.title}>{'Labels'}</div>
+              <div className={styles.title}>{"Labels"}</div>
               <Input
                 value={label}
                 onChange={(value) => setLabel(value)}
-                type={'text'}
+                type={"text"}
                 className={styles.label}
-                placeholder={'Enter labels'}
+                placeholder={"Enter labels"}
               />
             </div>
             <div>
-              <div className={styles.title}>{'Color labels'}</div>
+              <div className={styles.title}>{"Color labels"}</div>
 
               <Dropdown
                 options={Colors}
@@ -282,7 +276,7 @@ const NewTask = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Dependence'}</div>
+              <div className={styles.title}>{"Dependence"}</div>
               <Dropdown
                 options={Dependence}
                 onChange={setDependence}
@@ -297,7 +291,7 @@ const NewTask = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Progress'}</div>
+              <div className={styles.title}>{"Progress"}</div>
               <Dropdown
                 options={Progress}
                 onChange={setProgress}
@@ -312,7 +306,7 @@ const NewTask = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Status'}</div>
+              <div className={styles.title}>{"Status"}</div>
               <Dropdown
                 options={Status}
                 onChange={setStatus}
@@ -327,7 +321,7 @@ const NewTask = () => {
               />
             </div>
             <div>
-              <div className={styles.title}>{'Payment status'}</div>
+              <div className={styles.title}>{"Payment status"}</div>
               <Dropdown
                 options={PaymentStatus}
                 onChange={setPaymentStatus}
@@ -345,13 +339,13 @@ const NewTask = () => {
           <div>
             <div className={styles.buttonsContainer}>
               <PuzzleButton
-                btnTitle={'Cancel'}
+                btnTitle={"Cancel"}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.cancelBtn}
                 onClick={onCancelClick}
               />
               <PuzzleButton
-                btnTitle={'Save'}
+                btnTitle={"Save"}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.saveBtn}
                 onClick={onSaveClick}
@@ -361,7 +355,7 @@ const NewTask = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewTask
+export default NewTask;
