@@ -54,6 +54,17 @@
   padding-right: 140px;
 }
 
+.deleteContainer:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    color: #0E4298;
+}
+
+.deleteContainer:hover path {
+    opacity: 0.8;
+    stroke: #0E4298;
+}
+
 .titleTask {
   font-weight: 600;
   font-size: 20px;

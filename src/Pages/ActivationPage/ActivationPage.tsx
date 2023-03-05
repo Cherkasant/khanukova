@@ -1,39 +1,45 @@
 import React from "react";
-import {useNavigate, useParams} from "react-router";
-import {useDispatch} from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { useDispatch } from "react-redux";
 import styles from "./ActivationPage.module.css";
-import PuzzleButton, {PuzzleButtonTypes} from "../../Components/PuzzleButton";
-import {activateUser} from "../../Redux/Reducers/authReducer";
-import {PathNames} from "../Router/Router";
+import PuzzleButton, { PuzzleButtonTypes } from "../../Components/PuzzleButton";
+import { activateUser } from "../../Redux/Reducers/authReducer";
+import { PathNames } from "../Router/Router";
+import Title from "../../Components/Title";
 
 const ActivationPage = () => {
-    const {uid, token} = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const onConfirm = () => {
-        if (uid && token) {
-            dispatch(
-                activateUser({
-                    data: {uid, token},
-                    callback: () => {
-                        navigate(PathNames.SignIn);
-                    },
-                })
-            );
-        }
-    };
+  const { uid, token } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const onConfirm = () => {
+    if (uid && token) {
+      dispatch(
+        activateUser({
+          data: { uid, token },
+          callback: () => {
+            navigate(PathNames.SignIn);
+          },
+        })
+      );
+    }
+  };
 
-    return (
-        <div className={styles.container}>
-            <div> {"You need to confirm your email"}</div>
-            <div>{"Please confirm"}</div>
-            <PuzzleButton
-                btnTitle={"Confirm"}
-                btnType={PuzzleButtonTypes.TextButton}
-                onClick={onConfirm}
-            />
+  return (
+    <>
+      <div className={styles.container}>
+        <Title name={"Activate your account"} className={styles.title} />
+        <div className={styles.subTitle}>
+          {"You need to confirm your email"}
         </div>
-    );
+        <PuzzleButton
+          btnTitle={"Confirm"}
+          btnClassName={styles.button}
+          btnType={PuzzleButtonTypes.TextButton}
+          onClick={onConfirm}
+        />
+      </div>
+    </>
+  );
 };
 
 export default ActivationPage;

@@ -53,7 +53,7 @@ const SignUpHeadInfo = () => {
                     owner: idUser,
                 },
                 callback: () => {
-                    navigate(PathNames.ActivateUser);
+                    navigate(PathNames.CheckYourEmail);
                 },
             })
         );
@@ -80,7 +80,28 @@ const SignUpHeadInfo = () => {
                         <Title name={"Sign up"} className={styles.title}/>
                         <div className={styles.subtitle}>{"Partner's profile"}</div>
                     </div>
-                    <Form onFinish={onSignUpHeadInfo} className={styles.form}>
+                    <Form onFinish={onSignUpHeadInfo} className={styles.form}
+                        initialValues={{
+                            companyName: "",
+                                website: "",
+                                tagline: "",
+                                clientIndustry: "",
+                                softwareStack: "",
+                        shortDescription: "",
+                           fullDescription: "",
+                           averageHourlyRate: "",
+                           minimumProjectBudget: "",
+                           teamSize: "",
+                           location: "",
+                           clientsFocus: "",
+                        contactMarketing: "",
+                           contactExpert: "",
+                           linksCase: "",
+                           clientDescribe: "",
+                           currencyRate: defaultCurrencyOption,
+                           currencyBudget: defaultCurrencyOption,
+                        }}
+                    >
                         <div className={styles.infoContainer}>
                             <Form.Item name="companyName" className={styles.formItem} rules={[{ required: true, message: 'Please input your Company name!' }]}>
                                 <Input title={"1. Company name"} className={styles.input}/>
@@ -217,7 +238,6 @@ const SignUpHeadInfo = () => {
                                     <Form.Item name="currencyRate" className={styles.formItem} rules={[{ required: true, message: 'Please select currency!' }]}>
                                         <Dropdown
                                             options={currencyOptions}
-                                            value={defaultCurrencyOption}
                                             className={styles.dropdownContainer}
                                             controlClassName={styles.dropdownControl}
                                             placeholderClassName={styles.dropdownPlaceholder}
@@ -242,7 +262,6 @@ const SignUpHeadInfo = () => {
                                     <Form.Item name="currencyBudget" className={styles.formItem} rules={[{ required: true, message: 'Please select currency!' }]}>
                                         <Dropdown
                                             options={currencyOptions}
-                                            value={defaultCurrencyOption}
                                             className={styles.dropdownContainer}
                                             controlClassName={styles.dropdownControl}
                                             placeholderClassName={styles.dropdownPlaceholder}

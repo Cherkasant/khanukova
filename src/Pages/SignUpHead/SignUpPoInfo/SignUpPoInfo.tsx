@@ -41,7 +41,7 @@ const SignUpPoInfo = () => {
           owner: idUser,
         },
         callback: () => {
-          navigate(PathNames.ActivateUser);
+          navigate(PathNames.CheckYourEmail);
         },
       })
     );
@@ -54,7 +54,18 @@ const SignUpPoInfo = () => {
             <Title name={"Sign up"} className={styles.title} />
             <div className={styles.subtitle}>{"Create an e-business case"}</div>
           </div>
-          <Form onFinish={onSignUpPoInfo} className={styles.form}>
+          <Form onFinish={onSignUpPoInfo} className={styles.form}
+                initialValues={{
+                      companyName: "",
+                          developmentTeam: "",
+                          useOutsourcing: "",
+                          descriptionProject: "",
+                          businessRequirements: "",
+                          technologicalStack: "",
+                          linkCompetitor: "",
+                          usedOutsourcing: "",
+                    }}
+          >
             <div className={styles.infoContainer}>
               <Form.Item name="companyName" className={styles.formItem} rules={[{ required: true, message: 'Please input your Company name!' }]}>
                 <Input title={"1. Company name"} className={styles.input} />

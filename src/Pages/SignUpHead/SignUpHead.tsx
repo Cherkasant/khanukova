@@ -75,7 +75,7 @@ const SignUpHead = () => {
           email: values.email,
           phone: values.phone,
           role: values.userStatus.label,
-          code: values.code,
+          code: null,
           password: values.password,
           re_password: values.passwordConfirmation,
         },
@@ -88,7 +88,7 @@ const SignUpHead = () => {
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
-              navigate(PathNames.ActivateUser);
+              navigate(PathNames.CheckYourEmail);
               break;
 
             default:
@@ -107,7 +107,18 @@ const SignUpHead = () => {
             <Title name={"Sign up"} className={styles.title} />
             <div className={styles.subtitle}>{"Let’s get started"}</div>
           </div>
-          <Form onFinish={onSignUp} form={form} className={styles.form}>
+          <Form
+            onFinish={onSignUp}
+            form={form}
+            className={styles.form}
+            initialValues={{
+              fullName: "",
+              email: "",
+              code: "",
+              password: "",
+              passwordConfirmation: "",
+            }}
+          >
             <div className={styles.inputs}>
               <Form.Item
                 name="fullName"
