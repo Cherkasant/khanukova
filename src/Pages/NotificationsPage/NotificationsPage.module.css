@@ -1,0 +1,38 @@
+.container {
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   padding: 15px 30px;
+   box-sizing: border-box;
+   position: relative;
+}
+
+.header {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.icon {
+   height: 30px;
+   cursor: pointer;
+}
+
+.title {
+   font-family: 'Inter';
+   font-style: normal;
+   font-weight: 500;
+   font-size: 32px;
+   line-height: 39px;
+   color: #0E4298;
+   text-align: start;
+   margin-bottom: 20px;
+}
+
+.blueLine {
+   margin-top: 20px;
+   border-top: 1px solid #1258ca;
+   margin-bottom: 30px;
+}
+

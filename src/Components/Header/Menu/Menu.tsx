@@ -54,7 +54,9 @@ const UserMenu = () => {
     },
     { name: "Library", icon: <LibraryIcon />, link: "" },
     { name: "Payments", icon: <PaymentsIcon />, link: PathNames.Payments },
-    { name: "Notifications", icon: <NotificationsIcon />, link: "" },
+    { name: "Notifications",
+      icon: <NotificationsIcon />,
+      link: PathNames.Notifications },
   ];
 
   return (
