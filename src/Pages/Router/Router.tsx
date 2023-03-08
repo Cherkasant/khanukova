@@ -15,6 +15,7 @@ import ProfileDev from "../ProfileDev";
 import PaymentsPage from "../PaymentsPage";
 import SignUpPoInfo from "../SignUpHead/SignUpPoInfo";
 import CheckEmailPage from "../CheckEmailPage";
+import NotificationsPage from "../NotificationsPage";
 
 export enum PathNames {
   Home = "/",
@@ -33,6 +34,7 @@ export enum PathNames {
   Profile = "/profile",
   ProfileDevTeam = "/profile/dev",
   Payments = "/payments",
+  Notifications = "/notifications"
 }
 
 const Router = () => {
@@ -45,6 +47,7 @@ const Router = () => {
           <Route path={PathNames.ProjectScreen} element={<ProjectScreen />} />
           <Route path={PathNames.ProfileDevTeam} element={<ProfileDev />} />
           <Route path={PathNames.Payments} element={<PaymentsPage />} />
+          <Route path={PathNames.Notifications} element={<NotificationsPage />} />
         </Route>
 
         <Route path={PathNames.SignIn} element={<SignIn />} />

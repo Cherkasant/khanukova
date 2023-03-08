@@ -8,6 +8,17 @@ export type CardType = {
   paid: string;
 };
 
+export type CardNotificationsType = {
+  id: number;
+  avatar: string;
+  userName: string;
+  status: string;
+  location: string;
+  date: string;
+};
+
+export type CardsListNotificationsType = Array<CardNotificationsType>;
+
 export enum Roles {
   ProductOwner = "Product Owner",
   CEO = "CEO",
@@ -41,6 +52,14 @@ export enum Tabs {
   Documents = "Documents",
   ExternalSources = "External Sources",
   default = "default",
+}
+
+export enum TabsNotifications {
+  All = "all",
+  Actions = "actions",
+  Deadlines = "deadlines",
+  Events = "events",
+  Payments = "payments",
 }
 
 export enum CompanyList {
