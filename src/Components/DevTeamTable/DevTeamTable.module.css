@@ -1,107 +1,111 @@
 .tableContainer {
-    border: 1px solid #C8C8C8;
-    border-bottom: none;
-    outline: none;
-    border-spacing: 0;
-    width: 100%;
+	border: 1px solid #c8c8c8;
+	border-bottom: none;
+	outline: none;
+	border-spacing: 0;
+	width: 100%;
 }
 
 .tableHeader {
-    padding: 5px 20px;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #212121;
-    border: none;
-    border-bottom: 1px solid #C8C8C8;
-    background: #FFFFFF;
-
+	padding: 5px 20px;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 17px;
+	color: #212121;
+	border: none;
+	border-bottom: 1px solid #c8c8c8;
+	background: #ffffff;
 }
 
 .tableCell {
-    padding: 16px 20px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: #000000;
-    border: none;
-    border-bottom: 1px solid #C8C8C8;
+	padding: 16px 20px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	color: #000000;
+	border: none;
+	border-bottom: 1px solid #c8c8c8;
 }
 
 .nameContainer {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 8px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 8px;
 }
 
 .name {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #212121;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 17px;
+	color: #212121;
 }
 
 .name:hover {
-    cursor: pointer;
-    color: #0E4298;
+	cursor: pointer;
+	color: #0e4298;
 }
 
 .avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #9BACC9;
-    color: #FFFFFF;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #9bacc9;
+	color: #ffffff;
 }
 
 .avatar:hover {
-    background: #0E4298;
+	background: #0e4298;
 }
 
 .btn {
-    width: 120px;
-    height: 36px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 90px;
+	height: 36px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .buttonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 64px;
+}
+
+.btnBlock {
+	display: flex;
+	gap: 10px;
 }
 
 .iconContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
 }
 
 .telegram {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 140%;
-    color: #A3A3A3;
-    display: flex;
-    justify-content: start;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 140%;
+	color: #a3a3a3;
+	display: flex;
+	justify-content: start;
 }
 
 .infoContainer {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .headerName {
-    display: flex;
+	display: flex;
 }

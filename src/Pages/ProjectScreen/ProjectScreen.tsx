@@ -78,6 +78,13 @@ const ProjectScreen = () => {
 			<div className={styles.topContainer}>
 				<div className={styles.widgets}>
 					<div className={styles.titleContainer}>
+						<div
+							className={classNames(styles.popoverTitle, {
+								[styles.hide]: projectTitle
+							})}
+						>
+							{'Please enter a project name and press Enter to get started'}
+						</div>
 						<Input
 							value={title}
 							onChange={value => setTitle(value)}
@@ -118,13 +125,6 @@ const ProjectScreen = () => {
 			) : null}
 			{!isSaveClicked && activeTab === Tabs.Planning ? (
 				<div className={styles.bottomContainer}>
-					<div
-						className={classNames(styles.popover, {
-							[styles.hide]: projectTitle
-						})}
-					>
-						{'Please enter a project name and press Enter to get started'}
-					</div>
 					<div
 						className={classNames(styles.milestoneButton, {
 							[styles.disabled]: !projectTitle
