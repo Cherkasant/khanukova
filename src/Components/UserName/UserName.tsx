@@ -1,20 +1,27 @@
-import React, { FC } from "react";
-import styles from "./UserName.module.css";
+import React, { FC } from 'react'
+import styles from './UserName.module.css'
+import { AvatarIcon } from '../../Assets/Header/AvatarIcon'
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
+import { useNavigate } from 'react-router'
+import { PathNames } from '../../Pages/Router/Router'
 
 type UserNameProps = {
-  username: string;
-};
+	username?: string
+}
 
 const UserName: FC<UserNameProps> = ({ username }) => {
-  return (
-    <div className={styles.container}>
-      <div className={styles.letter}>
-        {username.split(" ")[0][0]}
-        {username.split(" ")[1][0]}
-      </div>
-      {username}
-    </div>
-  );
-};
+	const navigate = useNavigate()
+	return (
+		<div className={styles.container}>
+			<PuzzleButton
+				btnTitle={<AvatarIcon />}
+				btnType={PuzzleButtonTypes.IconButton}
+				btnClassName={styles.avatar}
+				onClick={() => navigate(PathNames.ProfileDevTeam)}
+			/>
+			{username}
+		</div>
+	)
+}
 
-export default UserName;
+export default UserName

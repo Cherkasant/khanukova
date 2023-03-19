@@ -1,6 +1,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects'
 import {
 	activateUser,
+	getUserName,
 	logoutUser,
 	registerHeadInfo,
 	registerPoInfo,
@@ -9,6 +10,7 @@ import {
 	sendResetEmail,
 	setIdUser,
 	setLoggedIn,
+	setUserName,
 	signInUser
 } from '../Reducers/authReducer'
 import { PayloadAction } from '@reduxjs/toolkit'
@@ -26,6 +28,7 @@ import {
 	ACCESS_TOKEN_KEY,
 	REFRESH_TOKEN_KEY
 } from '../../Components/constants/consts'
+import callCheckingAuth from './callCheckingAuth'
 
 function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
 	const { data: registerData, callback } = action.payload
@@ -109,6 +112,15 @@ function* logOutUserWorker() {
 	localStorage.removeItem(REFRESH_TOKEN_KEY)
 }
 
+function* getUserNameWorker() {
+	const { ok, data, problem } = yield callCheckingAuth(API.getUserName)
+	if (ok && data) {
+		yield put(setUserName(data.full_name))
+	} else {
+		console.warn('Error while  fetching username: ', problem)
+	}
+}
+
 export default function* authSagaWatcher() {
 	yield all([
 		takeLatest(registerUser, registerUserWorker),
@@ -118,6 +130,7 @@ export default function* authSagaWatcher() {
 		takeLatest(resetPasswordConfirm, resetPasswordConfirmWorker),
 		takeLatest(signInUser, signInUserWorker),
 		takeLatest(activateUser, activateUserWorker),
-		takeLatest(logoutUser, logOutUserWorker)
+		takeLatest(logoutUser, logOutUserWorker),
+		takeLatest(getUserName, getUserNameWorker)
 	])
 }

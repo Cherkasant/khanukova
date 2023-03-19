@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects'
+import { all, put, takeLatest } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit'
 import API from '../Utils/api'
 import {
@@ -9,9 +9,10 @@ import {
 	setHeadCompanyListReducer
 } from '../Reducers/profileReducer'
 import { EditCompanyListPayload } from '../Types/profile'
+import callCheckingAuth from './callCheckingAuth'
 
 function* getHeadCompanyListWorker(action: PayloadAction<undefined>) {
-	const { ok, data, problem } = yield call(API.getHeadCompanyList)
+	const { ok, data, problem } = yield callCheckingAuth(API.getHeadCompanyList)
 	if (ok && data) {
 		yield put(setHeadCompanyListReducer(data.results[0]))
 	} else {
@@ -20,7 +21,7 @@ function* getHeadCompanyListWorker(action: PayloadAction<undefined>) {
 }
 
 function* getECaseListWorker(action: PayloadAction<undefined>) {
-	const { ok, data, problem } = yield call(API.getECaseList)
+	const { ok, data, problem } = yield callCheckingAuth(API.getECaseList)
 	if (ok && data) {
 		yield put(setECaseListReducer(data.results[0]))
 	} else {
@@ -32,7 +33,7 @@ function* editHeadCompanyListWorker(
 	action: PayloadAction<EditCompanyListPayload>
 ) {
 	const { callback, id } = action.payload
-	const { ok, problem } = yield call(API.editHeadCompanyList, id)
+	const { ok, problem } = yield callCheckingAuth(API.editHeadCompanyList, id)
 	if (ok) {
 		callback()
 	} else {
