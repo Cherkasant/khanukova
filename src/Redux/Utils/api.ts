@@ -10,8 +10,6 @@ import {
 import { TaskType } from '../Types/tasks'
 
 const JWT_TOKEN = 'Token cc55ec64983887bb2e985d9f408085447eb850e9'
-const JWT_TOKEN_PO = 'Token 4fe1657489f4e420554f33120f98cf64957103f2'
-const JWT_TOKEN_HEAD = 'Token 1e4b18fae204857eca1a4f110fc87b1c772b6c35'
 
 const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' })
 
@@ -78,7 +76,7 @@ const getMilestone = (token: string, page?: number) => {
 	return API.get(
 		'/project/milestone/',
 		{ page },
-		{ headers: { Authorization: `Bearer ${token}` } }
+		{ headers: { Authorization: `JWT ${token}` } }
 	)
 }
 
@@ -97,28 +95,39 @@ const getNewAccessToken = (refresh: string) => {
 	return API.post('/auth/jwt/refresh/', { refresh })
 }
 
-const getHeadCompanyList = (page?: number) => {
-	return API.get('/user-profile/head-company/', page, {
-		headers: {
-			Authorization: JWT_TOKEN_HEAD
+const getHeadCompanyList = (token: string) => {
+	return API.get(
+		'/user-profile/head-company/',
+		{},
+		{
+			headers: { Authorization: `JWT ${token}` }
 		}
-	})
+	)
 }
 
-const editHeadCompanyList = (id: string) => {
+const editHeadCompanyList = (token: string, id: string) => {
 	return API.patch(`/user-profile/head-company/${id}/`, {
-		headers: {
-			Authorization: JWT_TOKEN_HEAD
-		}
+		headers: { Authorization: `JWT ${token}` }
 	})
 }
 
-const getECaseList = (page?: number) => {
-	return API.get('/user-profile/po-company/', page, {
-		headers: {
-			Authorization: JWT_TOKEN_PO
+const getECaseList = (token: string) => {
+	return API.get(
+		'/user-profile/po-company/',
+		{},
+		{
+			headers: { Authorization: `JWT ${token}` }
 		}
-	})
+	)
+}
+const getUserName = (token: string) => {
+	return API.get(
+		'/auth/users/me/',
+		{},
+		{
+			headers: { Authorization: `JWT ${token}` }
+		}
+	)
 }
 
 export default {
@@ -136,5 +145,6 @@ export default {
 	registerPoInfo,
 	getHeadCompanyList,
 	editHeadCompanyList,
-	getECaseList
+	getECaseList,
+	getUserName
 }
