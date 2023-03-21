@@ -11,7 +11,7 @@ import {
 import { EditCompanyListPayload } from '../Types/profile'
 import callCheckingAuth from './callCheckingAuth'
 
-function* getHeadCompanyListWorker(action: PayloadAction<undefined>) {
+function* getHeadCompanyListWorker() {
 	const { ok, data, problem } = yield callCheckingAuth(API.getHeadCompanyList)
 	if (ok && data) {
 		yield put(setHeadCompanyListReducer(data.results[0]))
@@ -20,7 +20,7 @@ function* getHeadCompanyListWorker(action: PayloadAction<undefined>) {
 	}
 }
 
-function* getECaseListWorker(action: PayloadAction<undefined>) {
+function* getECaseListWorker() {
 	const { ok, data, problem } = yield callCheckingAuth(API.getECaseList)
 	if (ok && data) {
 		yield put(setECaseListReducer(data.results[0]))

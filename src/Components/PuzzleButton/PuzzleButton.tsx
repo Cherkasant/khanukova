@@ -1,38 +1,47 @@
-import React, {FC, PropsWithChildren, ReactElement} from "react";
-import classNames from "classnames";
-import {Button} from "antd";
+import React, { FC, PropsWithChildren, ReactElement } from 'react'
+import classNames from 'classnames'
+import { Button } from 'antd'
 
-import styles from "./PuzzleButton.module.css";
-import {ButtonProps} from "antd/es/button/button";
+import styles from './PuzzleButton.module.css'
+import { ButtonProps } from 'antd/es/button/button'
 
 export enum PuzzleButtonTypes {
-    TextButton = "text",
-    IconButton = "icon",
-};
+	TextButton = 'text',
+	IconButton = 'icon'
+}
 
-export type PuzzleButtonProps = Omit<PropsWithChildren<ButtonProps>, 'onClick'> & {
-    btnTitle?: string | ReactElement;
-    btnType?: PuzzleButtonTypes;
-    onClick?: () => void;
-    btnClassName?: string;
-    btnDisabled?: boolean;
-};
+export type PuzzleButtonProps = Omit<
+	PropsWithChildren<ButtonProps>,
+	'onClick'
+> & {
+	btnTitle?: string | ReactElement
+	btnType?: PuzzleButtonTypes
+	onClick?: () => void
+	btnClassName?: string
+	btnDisabled?: boolean
+}
 
-const PuzzleButton: FC<PuzzleButtonProps> = ({btnType, btnTitle, btnClassName, onClick, btnDisabled, ...rest}:PuzzleButtonProps) => {
+const PuzzleButton: FC<PuzzleButtonProps> = ({
+	btnType,
+	btnTitle,
+	btnClassName,
+	onClick,
+	btnDisabled,
+	...rest
+}: PuzzleButtonProps) => {
+	const buttonClassName = btnType && styles[btnType]
 
-    const buttonClassName = btnType && styles[btnType];
+	return (
+		<Button
+			className={classNames(styles.button, buttonClassName, btnClassName, {
+				[styles.disabled]: !!btnDisabled
+			})}
+			onClick={onClick}
+			{...rest}
+		>
+			{btnTitle}
+		</Button>
+	)
+}
 
-    return (
-        <Button
-            className={classNames(styles.button, buttonClassName, btnClassName, {
-                [styles.disabled]: !!btnDisabled,
-            })}
-            onClick={onClick}
-            {...rest}
-        >
-            {btnTitle}
-        </Button>
-    );
-};
-
-export default PuzzleButton;
+export default PuzzleButton

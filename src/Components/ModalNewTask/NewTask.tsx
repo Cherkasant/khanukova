@@ -72,9 +72,6 @@ const NewTask = () => {
 	const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
 		setComment(event.target.value)
 	}
-
-	const [selectedResponsibleOptions, setSelectedResponsibleOptions] =
-		useState<any>(null)
 	const [priority, setPriority] = useState<any>(null)
 	const [status, setStatus] = useState<any>(null)
 	const [paymentStatus, setPaymentStatus] = useState<any>(null)

@@ -24,7 +24,7 @@ const ProfilePage = () => {
 
 	useEffect(() => {
 		dispatch(getHeadCompanyListReducer())
-	}, [])
+	})
 
 	const [name, setName] = useState('Ivanova Irina')
 	const [nickName, setNickName] = useState('')

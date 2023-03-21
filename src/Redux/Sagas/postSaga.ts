@@ -16,7 +16,7 @@ function* postTaskCardWorker(action: PayloadAction<TaskType>) {
 	}
 }
 
-function* getTaskCardWorker(action: PayloadAction<undefined>) {
+function* getTaskCardWorker() {
 	const { ok, data, problem } = yield callCheckingAuth(API.getMilestone)
 	if (ok && data) {
 		console.log(data)
