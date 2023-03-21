@@ -3,6 +3,7 @@ import { CardNotificationsType } from '../constants/@types'
 import { Avatar } from '../../Assets/Notification/Avatar'
 
 import styles from './CardNotifications.module.css'
+
 import classNames from 'classnames'
 
 type CardNotificationsProps = {

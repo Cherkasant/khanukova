@@ -7,7 +7,7 @@
 				"quotes": ["error", "single"],
 				"no-console": "warn",
 				"indent": ["warn", 2, { "SwitchCase": 1 }],
-				"no-unused-vars": ["warn", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
+				"no-unused-vars": ["error", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
 				"jsx-quotes": ["error", "prefer-double"],
 				"prefer-const": "error",
 				"max-len": [

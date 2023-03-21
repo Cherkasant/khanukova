@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { CompanyList } from '../constants/@types'
 import styles from './CompanyProfile.module.css'
 import CompanyProfileCard from '../CompanyProfileCard'
