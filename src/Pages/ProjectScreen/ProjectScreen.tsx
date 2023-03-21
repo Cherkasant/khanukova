@@ -114,7 +114,7 @@ const ProjectScreen = () => {
 					TabsList={TABS_NAMES}
 				/>
 			</div>
-			<div className={styles.blueLine}></div>
+			<div className={styles.blueLine}>{}</div>
 			{activeTab === Tabs.Planning ? (
 				<div className={styles.bottomContainer}>
 					<div className={styles.filterButton} onClick={onFilterClick}>
