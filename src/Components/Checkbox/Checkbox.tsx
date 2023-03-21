@@ -26,16 +26,8 @@ const Checkbox: FC<CheckboxProps> = props => {
 	const IconClassName = color ? styles[color] : ' without-color'
 	return (
 		<div className={styles.container}>
-			<input
-				type='checkbox'
-				id={label}
-				checked={isChecked}
-				onChange={handleChange}
-				className={styles.input}
-			/>
-			{icon ? (
-				<div className={classNames(styles.icon, IconClassName)}>{''}</div>
-			) : null}
+			<input type='checkbox' id={label} checked={isChecked} onChange={handleChange} className={styles.input} />
+			{icon ? <div className={classNames(styles.icon, IconClassName)}>{''}</div> : null}
 			<label htmlFor={label} className={styles.label}>
 				{label}
 			</label>

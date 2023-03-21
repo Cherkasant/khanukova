@@ -1,23 +1,22 @@
-import React from "react";
-import "./App.css";
-import Router from "./Pages/Router";
-import { store } from "./Redux/store";
-import { Provider } from "react-redux";
+import './App.css'
+import Router from './Pages/Router'
+import { store } from './Redux/store'
+import { Provider } from 'react-redux'
 
 function App() {
-  return (
-    <div className="App">
-      <Router />
-    </div>
-  );
+	return (
+		<div className='App'>
+			<Router />
+		</div>
+	)
 }
 
 const AppWithStore = () => {
-  return (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
-};
+	return (
+		<Provider store={store}>
+			<App />
+		</Provider>
+	)
+}
 
-export default AppWithStore;
+export default AppWithStore
