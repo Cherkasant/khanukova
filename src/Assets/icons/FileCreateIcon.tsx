@@ -1,14 +1,6 @@
-import React from "react";
-
 export const FileCreateIcon = () => {
   return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M17.3333 9.33333V4H10.6666C8.78101 4 7.8382 4 7.25241 4.58579C6.66663 5.17157 6.66663 6.11438 6.66663 8V24C6.66663 25.8856 6.66663 26.8284 7.25241 27.4142C7.8382 28 8.78101 28 10.6666 28H21.3333C23.2189 28 24.1617 28 24.7475 27.4142C25.3333 26.8284 25.3333 25.8856 25.3333 24V12H20C18.7429 12 18.1143 12 17.7238 11.6095C17.3333 11.219 17.3333 10.5904 17.3333 9.33333Z"
         fill="#7E869E"
@@ -25,5 +17,5 @@ export const FileCreateIcon = () => {
         strokeWidth="1.2"
       />
     </svg>
-  );
-};
+  )
+}

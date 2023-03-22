@@ -1,14 +1,15 @@
-import React, { FC } from "react";
-import styles from "./Card.module.css";
-import { CardType } from "../constants/@types";
+import { FC } from 'react'
+
+import { CardType } from '../constants/@types'
+
+import styles from './Card.module.css'
 
 type CardProps = {
-  card: CardType;
-};
+  card: CardType
+}
 
 const Card: FC<CardProps> = ({ card }) => {
-  const { projectName, tasks, deadline, budget, paid } = card;
-
+  const { projectName, tasks, deadline, budget, paid } = card
   return (
     <div className={styles.container}>
       <div className={styles.title}>{projectName}</div>
@@ -31,7 +32,7 @@ const Card: FC<CardProps> = ({ card }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

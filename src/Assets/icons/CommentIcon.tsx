@@ -1,14 +1,6 @@
-import React from "react";
-
 export const CommentIcon = () => {
   return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 15 15"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M1.96018 1H12.5527C12.8081 1 13.053 1.10536 13.2336 1.29289C13.4142 1.48043 13.5156 1.73478 13.5156 2V10.5C13.5156 10.7652 13.4142 11.0196 13.2336 11.2071C13.053 11.3946 12.8081 11.5 12.5527 11.5H10.6268V14L7.62235 11.5H1.96018C1.70478 11.5 1.45985 11.3946 1.27926 11.2071C1.09868 11.0196 0.997222 10.7652 0.997222 10.5V2C0.997222 1.73478 1.09868 1.48043 1.27926 1.29289C1.45985 1.10536 1.70478 1 1.96018 1Z"
         stroke="#9BACC9"
@@ -16,5 +8,5 @@ export const CommentIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  );
-};
+  )
+}

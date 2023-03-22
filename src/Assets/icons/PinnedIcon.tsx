@@ -1,14 +1,6 @@
-import React from "react";
-
 export const PinnedIcon = () => {
   return (
-    <svg
-      width="9"
-      height="2"
-      viewBox="0 0 9 2"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="9" height="2" viewBox="0 0 9 2" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M4.55079 1.5C4.80644 1.5 5.01369 1.27614 5.01369 1C5.01369 0.723858 4.80644 0.5 4.55079 0.5C4.29514 0.5 4.08789 0.723858 4.08789 1C4.08789 1.27614 4.29514 1.5 4.55079 1.5Z"
         stroke="#0E4298"
@@ -28,5 +20,5 @@ export const PinnedIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  );
-};
+  )
+}

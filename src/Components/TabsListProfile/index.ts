@@ -1,1 +1,1 @@
-export { default } from "./TabsList"
+export { default } from './TabsList'

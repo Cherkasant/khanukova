@@ -1,14 +1,6 @@
-import React from "react";
-
 export const ProjectFile = () => {
   return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M17.3327 9.33333V4H10.666C8.7804 4 7.83759 4 7.2518 4.58579C6.66602 5.17157 6.66602 6.11438 6.66602 8V24C6.66602 25.8856 6.66602 26.8284 7.2518 27.4142C7.83759 28 8.7804 28 10.666 28H21.3327C23.2183 28 24.1611 28 24.7469 27.4142C25.3327 26.8284 25.3327 25.8856 25.3327 24V12H19.9993C18.7423 12 18.1137 12 17.7232 11.6095C17.3327 11.219 17.3327 10.5904 17.3327 9.33333Z"
         fill="#7E869E"
@@ -25,5 +17,5 @@ export const ProjectFile = () => {
         strokeWidth="1.2"
       />
     </svg>
-  );
-};
+  )
+}

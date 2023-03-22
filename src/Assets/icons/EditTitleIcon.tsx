@@ -1,14 +1,6 @@
-import React from "react";
-
 export const EditTitleIcon = () => {
   return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="21" height="21" rx="10.5" fill="white" />
       <path
         d="M11.375 5.625L6.55319 10.4468C6.34066 10.6593 6.23439 10.7656 6.16453 10.8962C6.09466 11.0267 6.06519 11.1741 6.00624 11.4688L5.52209 13.8896C5.45557 14.2222 5.4223 14.3885 5.51691 14.4831C5.61152 14.5777 5.77783 14.5444 6.11044 14.4779L8.53121 13.9938C8.82593 13.9348 8.9733 13.9053 9.10385 13.8355C9.23439 13.7656 9.34066 13.6593 9.55319 13.4468L14.375 8.625L11.375 5.625Z"
@@ -20,5 +12,5 @@ export const EditTitleIcon = () => {
       />
       <path d="M11.375 5.625L14.375 8.625" stroke="#1258CA" strokeWidth="1.2" />
     </svg>
-  );
-};
+  )
+}

@@ -1,1 +1,1 @@
-export { default } from "./FilterProgectScreen";
+export { default } from './FilterProgectScreen'

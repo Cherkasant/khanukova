@@ -1,14 +1,6 @@
-import React from "react";
-
-export const UserIcon = ({ width = "20", height = "20" }) => {
+export const UserIcon = ({ width = '20', height = '20' }) => {
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width={width} height={height} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -20,23 +12,8 @@ export const UserIcon = ({ width = "20", height = "20" }) => {
         stroke="#4270A7"
         strokeWidth="1.2"
       />
-      <circle
-        cx="10"
-        cy="8"
-        r="3"
-        stroke="#4270A7"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-      <rect
-        x="0.6"
-        y="0.6"
-        width="18.8"
-        height="18.8"
-        rx="3.4"
-        stroke="#4270A7"
-        strokeWidth="1.2"
-      />
+      <circle cx="10" cy="8" r="3" stroke="#4270A7" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="0.6" y="0.6" width="18.8" height="18.8" rx="3.4" stroke="#4270A7" strokeWidth="1.2" />
     </svg>
-  );
-};
+  )
+}
