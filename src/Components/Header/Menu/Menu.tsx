@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,9 +14,11 @@ import { AddNewProjectIcon } from '../../../Assets/icons/AddNewProjectIcon'
 import { LogOutIcon } from '../../../Assets/icons/LogOutIcon'
 import { logoutUser } from '../../../Redux/Reducers/authReducer'
 import authSelectors from '../../../Redux/Selectors/authSelectors'
+import postSelector from '../../../Redux/Selectors/postSelector'
 import { PathNames } from '../../../Pages/Router/Router'
 import { MyProfileIcon } from '../../../Assets/icons/MyProfileIcon'
 import { ProjectFile } from '../../../Assets/icons/ProjectFile'
+import { getAllProjects } from '../../../Redux/Reducers/postReducer'
 
 import styles from './Menu.module.css'
 
@@ -25,7 +27,12 @@ const UserMenu = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isLoggedIn = useSelector(authSelectors.getLoggedIn)
-
+  const allProjects = useSelector(postSelector.getAllProjects)
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(getAllProjects())
+    }
+  }, [isLoggedIn])
   const onLogOutClick = () => {
     if (isLoggedIn) {
       dispatch(logoutUser())
@@ -52,7 +59,7 @@ const UserMenu = () => {
       icon: <AddNewProjectIcon />,
       link: PathNames.ProjectScreen,
       active: isOpened,
-      projects: ['Project1', 'Project2']
+      projects: [...allProjects]
     },
     { name: 'Library', icon: <LibraryIcon />, link: '' },
     { name: 'Payments', icon: <PaymentsIcon />, link: PathNames.Payments },

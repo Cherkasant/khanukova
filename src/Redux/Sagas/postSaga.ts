@@ -2,7 +2,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit'
 
 import API from '../Utils/api'
-import { getTaskCard, postTaskCard, setTaskCard } from '../Reducers/postReducer'
+import { getAllProjects, getTaskCard, postTaskCard, setAllProjects, setTaskCard } from '../Reducers/postReducer'
 import { TaskType } from '../Types/tasks'
 
 import callCheckingAuth from './callCheckingAuth'
@@ -38,8 +38,18 @@ function* postProjectTitleWorker(action: PayloadAction<string>) {
   }
 }
 
+function* getAllProjectsWorker() {
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllProjects)
+  if (ok && data) {
+    yield put(setAllProjects(data.results))
+  } else {
+    console.warn('Error while getting all projects', problem)
+  }
+}
+
 export default function* postSaga() {
   yield all([takeLatest(getTaskCard, getTaskCardWorker)])
   yield all([takeLatest(postTaskCard, postTaskCardWorker)])
+  yield all([takeLatest(getAllProjects, getAllProjectsWorker)])
   // yield all([takeLatest(setTitleTask, postProjectTitleWorker)]);
 }
