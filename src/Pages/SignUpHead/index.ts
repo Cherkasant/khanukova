@@ -1,1 +1,1 @@
-export {default} from './SignUpHead'
+export { default } from './SignUpHead'

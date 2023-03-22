@@ -1,14 +1,10 @@
 import { FC, ReactElement } from 'react'
-
 import { useDispatch, useSelector } from 'react-redux'
-
 import classNames from 'classnames'
 
 import { CloseFilterIcon } from '../../Assets/icons/CloseFilterIcon'
-
 import { setFilterVisible } from '../../Redux/Reducers/postReducer'
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-
 import postSelector from '../../Redux/Selectors/postSelector'
 
 import styles from './FiltersPanel.module.css'

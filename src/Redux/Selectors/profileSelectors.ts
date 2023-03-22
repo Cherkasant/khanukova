@@ -1,6 +1,6 @@
-import { RootState } from "../store";
+import { RootState } from '../store'
 
 export default {
-   getECaseList: (state: RootState) => state.profileReducer.ECaseList,
-   getCompanyList: (state: RootState) => state.profileReducer.CompanyList,
-};
+  getECaseList: (state: RootState) => state.profileReducer.ECaseList,
+  getCompanyList: (state: RootState) => state.profileReducer.CompanyList
+}

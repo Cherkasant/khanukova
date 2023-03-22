@@ -1,1 +1,1 @@
-export { default } from "./CardNotifications";
+export { default } from './CardNotifications'

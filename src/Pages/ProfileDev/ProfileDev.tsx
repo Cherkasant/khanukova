@@ -1,64 +1,66 @@
-import React, { useState } from "react";
-import styles from "./ProfileDev.module.css";
-import PuzzleButton, { PuzzleButtonTypes } from "../../Components/PuzzleButton";
-import Input from "../../Components/Input";
-import Title from "../../Components/Title";
-import { PencilIcon } from "../../Assets/Profile/PencilIcon";
-import Dropdown from "react-dropdown";
-import { Avatar, DatePickerProps } from "antd";
-import { DatePicker, Space } from "antd";
-import { CalendarIcon } from "../../Assets/icons/CalendarIcon";
+import { useState } from 'react'
+import Dropdown from 'react-dropdown'
+import { Avatar, DatePickerProps } from 'antd'
+import { DatePicker, Space } from 'antd'
+
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
+import Input from '../../Components/Input'
+import Title from '../../Components/Title'
+import { PencilIcon } from '../../Assets/Profile/PencilIcon'
+import { CalendarIcon } from '../../Assets/icons/CalendarIcon'
+
+import styles from './ProfileDev.module.css'
 
 const ProfileDev = () => {
-  const [name, setName] = useState("Ivanova Irina");
-  const [nickName, setNickName] = useState("");
-  const [positions, setPositions] = useState("CEO");
-  const [company, setCompany] = useState("CAPIX");
-  const [email, setEmail] = useState("irina@gmail.com");
-  const [phone, setPhone] = useState("+375 (29) 758-78-47");
-  const [telegram, setTelegram] = useState("");
+  const [name, setName] = useState('Ivanova Irina')
+  const [nickName, setNickName] = useState('')
+  const [positions, setPositions] = useState('CEO')
+  const [company, setCompany] = useState('CAPIX')
+  const [email, setEmail] = useState('irina@gmail.com')
+  const [phone, setPhone] = useState('+375 (29) 758-78-47')
+  const [telegram, setTelegram] = useState('')
 
-  const [level, setLevel] = useState("");
-  const [rate, setRate] = useState("");
+  const [level, setLevel] = useState('')
+  const [rate, setRate] = useState('')
 
-  const [projects, setProjects] = useState("");
-  const [stack, setStack] = useState("");
-  const [experience, setExperience] = useState("");
+  const [projects, setProjects] = useState('')
+  const [stack, setStack] = useState('')
+  const [experience, setExperience] = useState('')
 
-  const [info, setInfo] = useState("");
+  const [info, setInfo] = useState('')
 
   const currencyOptions = [
-    { value: "EUR", label: "EUR" },
-    { value: "USD", label: "USD" },
-  ];
+    { value: 'EUR', label: 'EUR' },
+    { value: 'USD', label: 'USD' }
+  ]
 
-  const [selectedCurrencyOptions, setSelectedCurrencyOptions] =
-    useState<any>(null);
+  const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null)
 
   const languageOptions = [
-    { value: "English", label: "English" },
-    { value: "Russian", label: "Russian" },
-  ];
+    { value: 'English', label: 'English' },
+    { value: 'Russian', label: 'Russian' }
+  ]
 
-  const [selectedLanguageOptions, setSelectedLanguageOptions] =
-    useState<any>(null);
+  const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null)
 
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
-  };
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+    console.log(date, dateString)
+  }
 
-  const isHead = true;
+  const isHead = true
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Title name={"My Profile"} className={styles.title} />
+        <Title name={'My Profile'} className={styles.title} />
       </div>
       <div className={styles.containerBlockWithBtn}>
         <div className={styles.containerInfo}>
           <div className={styles.containerPhoto}>
             <h2 className={styles.subTitle}>Account photo</h2>
-            <div className={styles.photo}><Avatar /></div>
+            <div className={styles.photo}>
+              <Avatar />
+            </div>
             <div className={styles.description}>
               Edit photo <PencilIcon />
             </div>
@@ -70,38 +72,38 @@ const ProfileDev = () => {
 
               <div className={styles.containerInput}>
                 <Input
-                  title={"Full name"}
-                  type={"text"}
+                  title={'Full name'}
+                  type={'text'}
                   value={name}
                   onChange={(value) => setName(value)}
-                  placeholder={"Full name"}
+                  placeholder={'Full name'}
                   className={styles.input}
                 />
 
                 <Input
-                  title={"Nick name"}
-                  type={"text"}
+                  title={'Nick name'}
+                  type={'text'}
                   value={nickName}
                   onChange={(value) => setNickName(value)}
-                  placeholder={"Nick name"}
+                  placeholder={'Nick name'}
                   className={styles.input}
                 />
 
                 <Input
-                  title={"Company"}
-                  type={"text"}
+                  title={'Company'}
+                  type={'text'}
                   value={company}
                   onChange={(value) => setCompany(value)}
-                  placeholder={"Company"}
+                  placeholder={'Company'}
                   disabled
                   className={styles.input}
                 />
                 <Input
-                  title={"Positions"}
-                  type={"text"}
+                  title={'Positions'}
+                  type={'text'}
                   value={positions}
                   onChange={(value) => setPositions(value)}
-                  placeholder={"Positions"}
+                  placeholder={'Positions'}
                   disabled
                   className={styles.input}
                 />
@@ -109,29 +111,29 @@ const ProfileDev = () => {
             </div>
             <div className={styles.containerInput}>
               <Input
-                title={"Email"}
-                type={"email"}
+                title={'Email'}
+                type={'email'}
                 value={email}
                 onChange={(value) => setEmail(value)}
-                placeholder={"Email"}
+                placeholder={'Email'}
                 className={styles.input}
               />
 
               <Input
-                title={"Phone number "}
-                type={"tel"}
+                title={'Phone number '}
+                type={'tel'}
                 value={phone}
                 onChange={(value) => setPhone(value)}
-                placeholder={"Phone"}
+                placeholder={'Phone'}
                 className={styles.input}
               />
 
               <Input
-                title={"Telegram"}
-                type={"text"}
+                title={'Telegram'}
+                type={'text'}
                 value={telegram}
                 onChange={(value) => setTelegram(value)}
-                placeholder={"Enter the profile link telegram"}
+                placeholder={'Enter the profile link telegram'}
                 className={styles.input}
               />
             </div>
@@ -146,21 +148,21 @@ const ProfileDev = () => {
           <div className={styles.blockHead}>
             <div className={styles.containerInputHead}>
               <Input
-                title={"Position Level"}
-                type={"text"}
+                title={'Position Level'}
+                type={'text'}
                 value={level}
                 onChange={(value) => setLevel(value)}
-                placeholder={"Select position"}
+                placeholder={'Select position'}
                 className={styles.input}
               />
 
               <div className={styles.containerRate}>
                 <Input
-                  title={"Rate"}
-                  type={"text"}
+                  title={'Rate'}
+                  type={'text'}
                   value={rate}
                   onChange={(value) => setRate(value)}
-                  placeholder={"10.00"}
+                  placeholder={'10.00'}
                   className={styles.inputRate}
                 />
 
@@ -211,40 +213,40 @@ const ProfileDev = () => {
 
             <div className={styles.containerInputHead}>
               <Input
-                title={"Projects"}
-                type={"text"}
+                title={'Projects'}
+                type={'text'}
                 value={projects}
                 onChange={(value) => setProjects(value)}
-                placeholder={"Text"}
+                placeholder={'Text'}
                 className={styles.inputBigLong}
               />
 
               <Input
-                title={"Tech Stack"}
-                type={"text"}
+                title={'Tech Stack'}
+                type={'text'}
                 value={stack}
                 onChange={(value) => setStack(value)}
-                placeholder={"Text"}
+                placeholder={'Text'}
                 className={styles.inputBigLong}
               />
             </div>
 
             <div className={styles.containerInputHead}>
               <Input
-                title={"Experience"}
-                type={"text"}
+                title={'Experience'}
+                type={'text'}
                 value={experience}
                 onChange={(value) => setExperience(value)}
-                placeholder={"Text"}
+                placeholder={'Text'}
                 className={styles.inputBig}
               />
 
               <Input
-                title={"Personal info"}
-                type={"text"}
+                title={'Personal info'}
+                type={'text'}
                 value={info}
                 onChange={(value) => setInfo(value)}
-                placeholder={"Text"}
+                placeholder={'Text'}
                 className={styles.inputBig}
               />
             </div>
@@ -253,21 +255,21 @@ const ProfileDev = () => {
       )}
       <div className={styles.buttonsBlock}>
         <PuzzleButton
-          btnTitle={"Cancel"}
+          btnTitle={'Cancel'}
           btnType={PuzzleButtonTypes.TextButton}
           onClick={() => {}}
           btnClassName={styles.buttonCancel}
         />
 
         <PuzzleButton
-          btnTitle={"Save"}
+          btnTitle={'Save'}
           btnType={PuzzleButtonTypes.TextButton}
           onClick={() => {}}
           btnClassName={styles.buttonSave}
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProfileDev;
+export default ProfileDev

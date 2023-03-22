@@ -6,7 +6,6 @@ import { CommentIcon } from '../../Assets/icons/CommentIcon'
 import { FilesIcon } from '../../Assets/icons/FilesIcon'
 import { PinnedIcon } from '../../Assets/icons/PinnedIcon'
 import { EcaseIcon } from '../../Assets/icons/EcaseIcon'
-
 import { setEcaseModalVisible, setTitleRequest } from '../../Redux/Reducers/postReducer'
 
 import styles from './ClientsRequestCard.module.css'

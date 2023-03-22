@@ -1,14 +1,15 @@
-import React from "react";
-import Header from "../Header";
-import { ProSidebarProvider } from "react-pro-sidebar";
-import { Outlet, useLocation } from "react-router-dom";
-import { PathNames } from "../../Pages/Router/Router";
-import styles from "./PagesWrapper.module.css";
-import Home from "../../Pages/Home";
-import UserMenu from "../Header/Menu";
+import { ProSidebarProvider } from 'react-pro-sidebar'
+import { Outlet, useLocation } from 'react-router-dom'
+
+import Header from '../Header'
+import { PathNames } from '../../Pages/Router/Router'
+import Home from '../../Pages/Home'
+import UserMenu from '../Header/Menu'
+
+import styles from './PagesWrapper.module.css'
 
 const PagesWrapper = () => {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
   return (
     <ProSidebarProvider>
       <div className={styles.container}>
@@ -19,7 +20,7 @@ const PagesWrapper = () => {
         </div>
       </div>
     </ProSidebarProvider>
-  );
-};
+  )
+}
 
-export default PagesWrapper;
+export default PagesWrapper
