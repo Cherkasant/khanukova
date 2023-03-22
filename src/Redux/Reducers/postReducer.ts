@@ -10,6 +10,7 @@ type PostReducerState = {
   isEcaseModalOpened: boolean
   isRequestModalOpened: boolean
   titleRequest: string
+  allProjects: Array<string>
 }
 
 const initialState: PostReducerState = {
@@ -19,7 +20,8 @@ const initialState: PostReducerState = {
   isFilterVisible: false,
   isEcaseModalOpened: false,
   isRequestModalOpened: false,
-  titleRequest: ''
+  titleRequest: '',
+  allProjects: []
 }
 
 const postsSlice = createSlice({
@@ -50,6 +52,10 @@ const postsSlice = createSlice({
     setTitleRequest: (state, action: PayloadAction<string>) => {
       state.titleRequest = action.payload
       state.isRequestModalOpened = true
+    },
+    getAllProjects: (state, action: PayloadAction<undefined>) => {},
+    setAllProjects: (state, action: PayloadAction<Array<string>>) => {
+      state.allProjects = action.payload
     }
   }
 })
@@ -63,7 +69,9 @@ export const {
   setFilterVisible,
   setEcaseModalVisible,
   setRequestModalVisible,
-  setTitleRequest
+  setTitleRequest,
+  getAllProjects,
+  setAllProjects
 } = postsSlice.actions
 const postsReducer = postsSlice.reducer
 export default postsReducer

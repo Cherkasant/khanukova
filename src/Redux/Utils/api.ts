@@ -127,6 +127,10 @@ const getUserName = (token: string) => {
   )
 }
 
+const getAllProjects = (token: string, page?: number) => {
+  return API.get('/project/', { page }, { headers: { Authorization: `JWT ${token}` } })
+}
+
 export default {
   registerUser,
   sendResetEmail,
@@ -143,5 +147,6 @@ export default {
   getHeadCompanyList,
   editHeadCompanyList,
   getECaseList,
-  getUserName
+  getUserName,
+  getAllProjects
 }

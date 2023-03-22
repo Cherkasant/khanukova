@@ -7,5 +7,6 @@ export default {
   getFilter: (state: RootState) => state.postsReducer.isFilterVisible,
   getEcaseModal: (state: RootState) => state.postsReducer.isEcaseModalOpened,
   getRequestModal: (state: RootState) => state.postsReducer.isRequestModalOpened,
-  getRequestTitle: (state: RootState) => state.postsReducer.titleRequest
+  getRequestTitle: (state: RootState) => state.postsReducer.titleRequest,
+  getAllProjects: (state: RootState) => state.postsReducer.allProjects
 }
