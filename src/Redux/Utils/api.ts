@@ -8,6 +8,7 @@ import {
   ResetPasswordData,
   SignInUserData
 } from '../Types/auth'
+import { CompanyListData } from '../Types/profile'
 import { TaskType } from '../Types/tasks'
 
 const JWT_TOKEN = 'Token cc55ec64983887bb2e985d9f408085447eb850e9'
@@ -102,8 +103,8 @@ const getHeadCompanyList = (token: string) => {
   )
 }
 
-const editHeadCompanyList = (token: string, id: string) => {
-  return API.patch(`/user-profile/head-company/${id}/`, {
+const editHeadCompanyList = (token: string, id: string, data: CompanyListData) => {
+  return API.patch(`/user-profile/head-company/${id}/`, data, {
     headers: { Authorization: `JWT ${token}` }
   })
 }

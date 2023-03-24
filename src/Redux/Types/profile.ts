@@ -23,6 +23,17 @@ export type CompanyListData = {
   employees: undefined
 }
 
+export type PersonalInfoData = {
+  id: number
+  email: string
+  full_name: string
+  nickname: string
+  phone: string
+  role: string
+  is_active: boolean
+  account_photo: string
+}
+
 export type EditCompanyListPayload = {
   callback: () => void
   id: string

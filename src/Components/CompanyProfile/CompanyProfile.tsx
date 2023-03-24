@@ -17,6 +17,7 @@ type CompanyProfileProps = {
 }
 
 const CompanyProfile: FC<CompanyProfileProps> = ({ CompanyList }) => {
+
   return (
     <div className={styles.listContainer}>
       {CompanyList.map((card) => {
