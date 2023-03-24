@@ -8,7 +8,6 @@ import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
 import Input from '../../Components/Input'
 import Title from '../../Components/Title'
 import { PencilIcon } from '../../Assets/Profile/PencilIcon'
-import { Avatar } from '../../Assets/Profile/avatar'
 import TabsListProfile from '../../Components/TabsListProfile'
 import { CompanyList, TabsProfile } from '../../Components/constants/@types'
 import CompanyProfile from '../../Components/CompanyProfile'
@@ -42,7 +41,15 @@ const ProfilePage = () => {
   const [phone, setPhone] = useState('+375 (29) 758-78-47')
   const [telegram, setTelegram] = useState('')
 
-  const [level, setLevel] = useState('')
+
+  const levelOptions = [
+    { value: 'Junior', label: 'Junior' },
+    { value: 'Middle', label: 'Middle' },
+    { value: 'Senior', label: 'Senior' },
+    { value: 'Lead', label: 'Lead' }
+  ]
+
+  const [selectedLevelOptions, setSelectedLevelOptions] = useState<any>(null)
   const [rate, setRate] = useState('')
 
   const [projects, setProjects] = useState('')
@@ -72,7 +79,12 @@ const ProfilePage = () => {
 
   const languageOptions = [
     { value: 'English', label: 'English' },
-    { value: 'Russian', label: 'Russian' }
+    { value: 'French', label: 'French' },
+    { value: 'Hebrew', label: 'Hebrew' },
+    { value: 'Spanish', label: 'Spanish' },
+    { value: 'Russian', label: 'Russian' },
+    { value: 'Ukrainian', label: 'Ukrainian' },
+    { value: 'Arabic', label: 'Arabic' },
   ]
 
   const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null)
@@ -81,7 +93,7 @@ const ProfilePage = () => {
     console.log(date, dateString)
   }
 
-  const isHead = false
+  const isHead = true
 
   const TABS_NAMES = useMemo(
     () => [
@@ -94,7 +106,6 @@ const ProfilePage = () => {
 
   const COMPANY_LIST = [
     {
-      
       name: 'CompanyName',
       key: CompanyList.CompanyName,
       answers: companyList?.company_name
@@ -299,14 +310,21 @@ const ProfilePage = () => {
 
           <div className={styles.blockHead}>
             <div className={styles.containerInputHead}>
-              <Input
-                title={'Position Level'}
-                type={'text'}
-                value={level}
-                onChange={(value) => setLevel(value)}
-                placeholder={'Select position'}
-                className={styles.input}
+
+              <Dropdown
+                options={levelOptions}
+                onChange={setSelectedLevelOptions}
+                value={selectedLevelOptions}
+                placeholder="Select position'"
+                className={styles.dropdownContainer}
+                controlClassName={styles.dropdownControl}
+                placeholderClassName={styles.dropdownPlaceholder}
+                arrowClosed={<span className={styles.arrowClosed} />}
+                arrowOpen={<span className={styles.arrowOpen} />}
+                menuClassName={styles.dropdownMenu}
               />
+
+              
 
               <div className={styles.containerRate}>
                 <Input
