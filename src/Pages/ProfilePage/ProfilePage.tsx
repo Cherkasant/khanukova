@@ -15,7 +15,7 @@ import CompanyProfile from '../../Components/CompanyProfile'
 import DevTeamTable from '../../Components/DevTeamTable'
 
 import profileSelectors from '../../Redux/Selectors/profileSelectors'
-import { getHeadCompanyListReducer } from '../../Redux/Reducers/profileReducer'
+import { getHeadCompanyListReducer, getPersonalInfoReducer } from '../../Redux/Reducers/profileReducer'
 import { GenerateIcon } from '../../Assets/DevTeam/GenerateIcon'
 import ModalGeneratePassword from '../../Components/ModalGeneratePassword'
 
@@ -23,11 +23,17 @@ import styles from './ProfilePage.module.css'
 
 const ProfilePage = () => {
   const dispatch = useDispatch()
+
+  const personalInfoList = useSelector(profileSelectors.getPersonalInfo)
   const companyList = useSelector(profileSelectors.getCompanyList)
 
   useEffect(() => {
     dispatch(getHeadCompanyListReducer())
-  })
+  },[])
+
+  useEffect(() => {
+    dispatch(getPersonalInfoReducer())
+  },[])
 
   const [name, setName] = useState('Ivanova Irina')
   const [nickName, setNickName] = useState('')
@@ -88,6 +94,7 @@ const ProfilePage = () => {
 
   const COMPANY_LIST = [
     {
+      
       name: 'CompanyName',
       key: CompanyList.CompanyName,
       answers: companyList?.company_name
@@ -196,9 +203,7 @@ const ProfilePage = () => {
           <div className={styles.containerInfo}>
             <div className={styles.containerPhoto}>
               <h2 className={styles.subTitle}>Account photo</h2>
-              <div className={styles.photo}>
-                <Avatar />
-              </div>
+              <img className={styles.photo} src={personalInfoList?.account_photo} alt={''} />
               <div className={styles.description}>
                 Edit photo <PencilIcon />
               </div>
@@ -212,7 +217,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Full name'}
                     type={'text'}
-                    value={companyList?.company_name}
+                    value={personalInfoList?.full_name}
                     onChange={(value) => setName(value)}
                     placeholder={'Full name'}
                     className={styles.input}
@@ -221,7 +226,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Nick name'}
                     type={'text'}
-                    value={nickName}
+                    value={personalInfoList?.nickname}
                     onChange={(value) => setNickName(value)}
                     placeholder={'Nick name'}
                     className={styles.input}
@@ -230,7 +235,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Positions'}
                     type={'text'}
-                    value={positions}
+                    value={personalInfoList?.role}
                     onChange={(value) => setPositions(value)}
                     placeholder={'Positions'}
                     disabled
@@ -243,7 +248,7 @@ const ProfilePage = () => {
                 <Input
                   title={'Email'}
                   type={'email'}
-                  value={email}
+                  value={personalInfoList?.email}
                   onChange={(value) => setEmail(value)}
                   placeholder={'Email'}
                   className={styles.input}
@@ -252,7 +257,7 @@ const ProfilePage = () => {
                 <Input
                   title={'Phone number '}
                   type={'tel'}
-                  value={phone}
+                  value={personalInfoList?.phone}
                   onChange={(value) => setPhone(value)}
                   placeholder={'Phone'}
                   className={styles.input}

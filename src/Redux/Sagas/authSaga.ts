@@ -116,7 +116,7 @@ function* getUserNameWorker() {
   if (ok && data) {
     yield put(setUserName(data.full_name))
   } else {
-    console.warn('Error while  fetching username: ', problem)
+    console.warn('Error while fetching username: ', problem)
   }
 }
 
