@@ -88,10 +88,10 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal }) => {
             <Typography>{value.name}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-              <TableDoc docArr={value.doc} />
-              <div onClick={() => setModal(true)} className={styles.addDoc}>
-                + Add new documents
-              </div>
+            <TableDoc docArr={value.doc} />
+            <div onClick={() => setModal(true)} className={styles.addDoc}>
+              + Add new documents
+            </div>
           </AccordionDetails>
         </Accordion>
       ))}
