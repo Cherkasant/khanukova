@@ -28,6 +28,7 @@ import {
   setSelectedModalVisible,
   setTitleTask
 } from '../../Redux/Reducers/postReducer'
+import Documents from '../../Components/Documents'
 
 import styles from './SingleProject.module.css'
 
@@ -165,6 +166,7 @@ const SingleProject = () => {
         </div>
       ) : null}
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
+      {activeTab === Tabs.Documents ? <Documents /> : null}
       <NewTask />
       <ModalEcase />
       <ModalRequest />
