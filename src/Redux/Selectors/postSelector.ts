@@ -8,5 +8,6 @@ export default {
   getEcaseModal: (state: RootState) => state.postsReducer.isEcaseModalOpened,
   getRequestModal: (state: RootState) => state.postsReducer.isRequestModalOpened,
   getRequestTitle: (state: RootState) => state.postsReducer.titleRequest,
-  getAllProjects: (state: RootState) => state.postsReducer.allProjects
+  getAllProjects: (state: RootState) => state.postsReducer.allProjects,
+  getSingleProject: (state: RootState) => state.postsReducer.singleProject
 }

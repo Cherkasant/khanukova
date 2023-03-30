@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,6 +19,7 @@ import { PathNames } from '../../../Pages/Router/Router'
 import { MyProfileIcon } from '../../../Assets/icons/MyProfileIcon'
 import { ProjectFile } from '../../../Assets/icons/ProjectFile'
 import { getAllProjects } from '../../../Redux/Reducers/postReducer'
+import { ProjectType } from '../../../Redux/Types/tasks'
 
 import styles from './Menu.module.css'
 
@@ -59,7 +60,7 @@ const UserMenu = () => {
       icon: <AddNewProjectIcon />,
       link: PathNames.ProjectScreen,
       active: isOpened,
-      projects: [...allProjects]
+      projects: allProjects
     },
     { name: 'Library', icon: <LibraryIcon />, link: '' },
     { name: 'Payments', icon: <PaymentsIcon />, link: PathNames.Payments },
@@ -92,11 +93,17 @@ const UserMenu = () => {
                 </div>
                 {projects ? (
                   <div className={styles.projectList}>
-                    {projects.map((project: string) => {
+                    {projects.map((project: ProjectType) => {
                       return (
-                        <div key={project} className={styles.projectBlock}>
+                        <div
+                          key={project.id}
+                          className={styles.projectBlock}
+                          onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+                            e.preventDefault()
+                            navigate(`/project/${project.id}`)
+                          }}>
                           <ProjectFile />
-                          {project}
+                          {project.project_name}
                         </div>
                       )
                     })}
