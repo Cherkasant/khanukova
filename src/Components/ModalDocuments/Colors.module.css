@@ -1,0 +1,40 @@
+.color {
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  top: 0;
+  right: 0;
+}
+
+.labelRed {
+  background-color: red;
+}
+
+.labelBlue {
+  background-color: blue;
+}
+
+.labelYellow {
+  background-color: yellow;
+}
+
+.labelDarkgreen {
+  background-color: Darkgreen;
+}
+
+.labelGreen {
+  background-color: Green;
+}
+
+.labelBrown {
+  background-color: Brown;
+}
+
+.labelViolet {
+  background-color: violet;
+}

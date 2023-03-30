@@ -30,7 +30,6 @@ const MOCK_CARDS_LIST = [
 const Home = () => {
   const navigate = useNavigate()
   const [inputSearch, setInputSearch] = useState('')
-
   const onChange = (value: string) => {
     setInputSearch(value)
   }

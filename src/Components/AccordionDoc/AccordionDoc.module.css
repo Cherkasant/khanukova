@@ -1,0 +1,12 @@
+.accordionWrap {
+  height: calc(72vh - 100px);
+  overflow-y: scroll;
+}
+
+.addDoc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3;
+  cursor: pointer;
+}

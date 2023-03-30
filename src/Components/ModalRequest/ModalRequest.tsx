@@ -14,7 +14,7 @@ import { setRequestModalVisible } from '../../Redux/Reducers/postReducer'
 import { ClientsRequestStatus, Priority } from '../constants/Modal/ModalData'
 import postSelector from '../../Redux/Selectors/postSelector'
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants'
+import { LabelCheckbox } from '../FilteresPanel/FilterProjectScreen/constants'
 import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
 
 import styles from './ModalRequest.module.css'
@@ -113,7 +113,7 @@ const ModalRequest = () => {
               <div>
                 <div className={styles.title}>{'Responsible'}</div>
                 <Cascader
-                  options={ResponsibleCheckbox}
+                  options={LabelCheckbox}
                   multiple={true}
                   className={styles.cascader}
                   popupClassName={styles.popup}
