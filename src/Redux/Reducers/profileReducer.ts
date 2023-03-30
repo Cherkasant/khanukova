@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { ECaseListData } from '../../Components/constants/Modal/EcaseData'
-import { CompanyListData, EditCompanyListPayload } from '../Types/profile'
+import { CompanyListData, EditCompanyListPayload, PersonalInfoData } from '../Types/profile'
 
 type ProfileReducerState = {
   CompanyList: CompanyListData | null
   ECaseList: ECaseListData | null
+  PersonalInfoList: PersonalInfoData | null
 }
 
 const initialState: ProfileReducerState = {
   CompanyList: null,
-  ECaseList: null
+  ECaseList: null,
+  PersonalInfoList: null
 }
 
 const profileSlice = createSlice({
@@ -20,6 +22,11 @@ const profileSlice = createSlice({
     getHeadCompanyListReducer: (state, action: PayloadAction<undefined>) => {},
     setHeadCompanyListReducer: (state, action: PayloadAction<CompanyListData>) => {
       state.CompanyList = action.payload
+    },
+
+    getPersonalInfoReducer: (state, action: PayloadAction<undefined>) => {},
+    setPersonalInfoReducer: (state, action: PayloadAction<PersonalInfoData>) => {
+      state.PersonalInfoList = action.payload
     },
 
     getECaseListReducer: (state, action: PayloadAction<undefined>) => {},
@@ -36,7 +43,9 @@ export const {
   setHeadCompanyListReducer,
   getECaseListReducer,
   setECaseListReducer,
-  editHeadCompanyListReducer
+  editHeadCompanyListReducer,
+  getPersonalInfoReducer,
+  setPersonalInfoReducer
 } = profileSlice.actions
 
 const profileReducer = profileSlice.reducer

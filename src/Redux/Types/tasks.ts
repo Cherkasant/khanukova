@@ -58,3 +58,17 @@ export type TaskFormPayload = {
   data: TaskType
   callback: () => void
 }
+export type ProjectType = {
+  id: number
+  project_name: string
+  company_head: null | string
+  company_po: number
+  user: Array<number> | []
+  creator: number
+  milestone_data: []
+}
+export type ArrayOfProjectType = Array<ProjectType>
+
+export type ProjectData = {
+  project_name: string
+}

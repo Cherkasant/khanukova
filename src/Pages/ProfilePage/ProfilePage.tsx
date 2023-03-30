@@ -8,14 +8,13 @@ import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
 import Input from '../../Components/Input'
 import Title from '../../Components/Title'
 import { PencilIcon } from '../../Assets/Profile/PencilIcon'
-import { Avatar } from '../../Assets/Profile/avatar'
 import TabsListProfile from '../../Components/TabsListProfile'
 import { CompanyList, TabsProfile } from '../../Components/constants/@types'
 import CompanyProfile from '../../Components/CompanyProfile'
 import DevTeamTable from '../../Components/DevTeamTable'
 
 import profileSelectors from '../../Redux/Selectors/profileSelectors'
-import { getHeadCompanyListReducer } from '../../Redux/Reducers/profileReducer'
+import { getHeadCompanyListReducer, getPersonalInfoReducer } from '../../Redux/Reducers/profileReducer'
 import { GenerateIcon } from '../../Assets/DevTeam/GenerateIcon'
 import ModalGeneratePassword from '../../Components/ModalGeneratePassword'
 
@@ -23,11 +22,17 @@ import styles from './ProfilePage.module.css'
 
 const ProfilePage = () => {
   const dispatch = useDispatch()
+
+  const personalInfoList = useSelector(profileSelectors.getPersonalInfo)
   const companyList = useSelector(profileSelectors.getCompanyList)
 
   useEffect(() => {
     dispatch(getHeadCompanyListReducer())
-  })
+  },[])
+
+  useEffect(() => {
+    dispatch(getPersonalInfoReducer())
+  },[])
 
   const [name, setName] = useState('Ivanova Irina')
   const [nickName, setNickName] = useState('')
@@ -36,7 +41,15 @@ const ProfilePage = () => {
   const [phone, setPhone] = useState('+375 (29) 758-78-47')
   const [telegram, setTelegram] = useState('')
 
-  const [level, setLevel] = useState('')
+
+  const levelOptions = [
+    { value: 'Junior', label: 'Junior' },
+    { value: 'Middle', label: 'Middle' },
+    { value: 'Senior', label: 'Senior' },
+    { value: 'Lead', label: 'Lead' }
+  ]
+
+  const [selectedLevelOptions, setSelectedLevelOptions] = useState<any>(null)
   const [rate, setRate] = useState('')
 
   const [projects, setProjects] = useState('')
@@ -66,7 +79,12 @@ const ProfilePage = () => {
 
   const languageOptions = [
     { value: 'English', label: 'English' },
-    { value: 'Russian', label: 'Russian' }
+    { value: 'French', label: 'French' },
+    { value: 'Hebrew', label: 'Hebrew' },
+    { value: 'Spanish', label: 'Spanish' },
+    { value: 'Russian', label: 'Russian' },
+    { value: 'Ukrainian', label: 'Ukrainian' },
+    { value: 'Arabic', label: 'Arabic' },
   ]
 
   const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null)
@@ -75,7 +93,7 @@ const ProfilePage = () => {
     console.log(date, dateString)
   }
 
-  const isHead = false
+  const isHead = true
 
   const TABS_NAMES = useMemo(
     () => [
@@ -196,9 +214,7 @@ const ProfilePage = () => {
           <div className={styles.containerInfo}>
             <div className={styles.containerPhoto}>
               <h2 className={styles.subTitle}>Account photo</h2>
-              <div className={styles.photo}>
-                <Avatar />
-              </div>
+              <img className={styles.photo} src={personalInfoList?.account_photo} alt={''} />
               <div className={styles.description}>
                 Edit photo <PencilIcon />
               </div>
@@ -212,7 +228,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Full name'}
                     type={'text'}
-                    value={companyList?.company_name}
+                    value={personalInfoList?.full_name}
                     onChange={(value) => setName(value)}
                     placeholder={'Full name'}
                     className={styles.input}
@@ -221,7 +237,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Nick name'}
                     type={'text'}
-                    value={nickName}
+                    value={personalInfoList?.nickname}
                     onChange={(value) => setNickName(value)}
                     placeholder={'Nick name'}
                     className={styles.input}
@@ -230,7 +246,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Positions'}
                     type={'text'}
-                    value={positions}
+                    value={personalInfoList?.role}
                     onChange={(value) => setPositions(value)}
                     placeholder={'Positions'}
                     disabled
@@ -243,7 +259,7 @@ const ProfilePage = () => {
                 <Input
                   title={'Email'}
                   type={'email'}
-                  value={email}
+                  value={personalInfoList?.email}
                   onChange={(value) => setEmail(value)}
                   placeholder={'Email'}
                   className={styles.input}
@@ -252,7 +268,7 @@ const ProfilePage = () => {
                 <Input
                   title={'Phone number '}
                   type={'tel'}
-                  value={phone}
+                  value={personalInfoList?.phone}
                   onChange={(value) => setPhone(value)}
                   placeholder={'Phone'}
                   className={styles.input}
@@ -294,14 +310,21 @@ const ProfilePage = () => {
 
           <div className={styles.blockHead}>
             <div className={styles.containerInputHead}>
-              <Input
-                title={'Position Level'}
-                type={'text'}
-                value={level}
-                onChange={(value) => setLevel(value)}
-                placeholder={'Select position'}
-                className={styles.input}
+
+              <Dropdown
+                options={levelOptions}
+                onChange={setSelectedLevelOptions}
+                value={selectedLevelOptions}
+                placeholder="Select position'"
+                className={styles.dropdownContainer}
+                controlClassName={styles.dropdownControl}
+                placeholderClassName={styles.dropdownPlaceholder}
+                arrowClosed={<span className={styles.arrowClosed} />}
+                arrowOpen={<span className={styles.arrowOpen} />}
+                menuClassName={styles.dropdownMenu}
               />
+
+              
 
               <div className={styles.containerRate}>
                 <Input
