@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router'
 
 import classNames from 'classnames'
 
@@ -21,9 +22,14 @@ import { requestInProgressArray, requestOpenedArray } from '../../Components/Cli
 import ModalEcase from '../../Components/ModalEcase'
 import ModalRequest from '../../Components/ModalRequest'
 import Resourses from '../../Components/Resourses'
-import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer'
+import {
+  getSingleProject,
+  setFilterVisible,
+  setSelectedModalVisible,
+  setTitleTask
+} from '../../Redux/Reducers/postReducer'
 
-import styles from './ProjectScreen.module.css'
+import styles from './SingleProject.module.css'
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
@@ -35,17 +41,21 @@ const TABS_NAMES = [
   { name: 'External Sources', key: Tabs.ExternalSources }
 ]
 
-const ProjectScreen = () => {
+const SingleProject = () => {
+  const params = useParams()
+  const { id } = params
+
   const onFilterClick = () => {
     dispatch(setFilterVisible(true))
   }
   const isSaveClicked = useSelector(postSelector.getTask)
-  const projectTitle = useSelector(postSelector.getTitleMilestone)
+  const singleProject = useSelector(postSelector.getSingleProject)
+
   const dispatch = useDispatch()
 
   const [addItem, setAddItem] = useState(false)
   const onAddItemClick = () => {
-    if (projectTitle) {
+    if (singleProject) {
       setAddItem(!addItem)
       dispatch(setSelectedModalVisible(true))
     }
@@ -57,6 +67,15 @@ const ProjectScreen = () => {
       setActiveTab(newTab)
     } else setActiveTab(Tabs.Planning)
   }
+  useEffect(() => {
+    if (id) {
+      dispatch(getSingleProject(+id))
+      if (singleProject) {
+        dispatch(setTitleTask(singleProject.project_name))
+        setEdit(true)
+      }
+    }
+  }, [id])
 
   const [title, setTitle] = useState('')
   const [edit, setEdit] = useState(false)
@@ -66,11 +85,11 @@ const ProjectScreen = () => {
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(postProject({ project_name: title }))
-      // dispatch(setTitleTask(title))
-      // setEdit(!edit)
+      dispatch(setTitleTask(title))
+      setEdit(!edit)
     }
   }
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
@@ -78,12 +97,12 @@ const ProjectScreen = () => {
           <div className={styles.titleContainer}>
             <div
               className={classNames(styles.popoverTitle, {
-                [styles.hide]: projectTitle
+                [styles.hide]: singleProject
               })}>
               {'Please enter a project name and press Enter to get started'}
             </div>
             <Input
-              value={title}
+              value={singleProject?.project_name}
               onChange={(value) => setTitle(value)}
               onKeyDown={onChangeKeyDown}
               className={styles.title}
@@ -120,7 +139,7 @@ const ProjectScreen = () => {
         <div className={styles.bottomContainer}>
           <div
             className={classNames(styles.milestoneButton, {
-              [styles.disabled]: !projectTitle
+              [styles.disabled]: !singleProject
             })}
             onClick={onAddItemClick}>
             <AddRoundIcon />
@@ -153,4 +172,4 @@ const ProjectScreen = () => {
   )
 }
 
-export default ProjectScreen
+export default SingleProject

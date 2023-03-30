@@ -21,6 +21,7 @@ import NotificationsPage from '../NotificationsPage'
 
 import { getUserName } from '../../Redux/Reducers/authReducer'
 import authSelectors from '../../Redux/Selectors/authSelectors'
+import SingleProject from '../SingleProject/SingleProject'
 
 export enum PathNames {
   Home = '/',
@@ -34,7 +35,8 @@ export enum PathNames {
   PasswordReset = '/password/reset/:uid/:token',
   CheckNewPassword = '/check-password',
   CheckYourEmail = '/check-email',
-  ProjectScreen = '/project',
+  ProjectScreen = '/project/',
+  SingleProject = '/project/:id',
   ActivateUser = '/activate/:uid/:token',
   Profile = '/profile',
   ProfileDevTeam = '/profile/dev',
@@ -57,6 +59,7 @@ const Router = () => {
           <Route path={PathNames.Main} element={<Home />} />
           <Route path={PathNames.Profile} element={<ProfilePage />} />
           <Route path={PathNames.ProjectScreen} element={<ProjectScreen />} />
+          <Route path={PathNames.SingleProject} element={<SingleProject />} />
           <Route path={PathNames.ProfileDevTeam} element={<ProfileDev />} />
           <Route path={PathNames.Payments} element={<PaymentsPage />} />
           <Route path={PathNames.Notifications} element={<NotificationsPage />} />

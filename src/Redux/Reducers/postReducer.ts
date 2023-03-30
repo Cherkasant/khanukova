@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { TaskType, TaskTypeWithID } from '../Types/tasks'
+import { ArrayOfProjectType, ProjectData, ProjectType, TaskType, TaskTypeWithID } from '../Types/tasks'
 
 type PostReducerState = {
   isSelectedImageModalIsOpened: boolean
@@ -10,7 +10,9 @@ type PostReducerState = {
   isEcaseModalOpened: boolean
   isRequestModalOpened: boolean
   titleRequest: string
-  allProjects: Array<string>
+  allProjects: ArrayOfProjectType
+  singleProject: ProjectType | null
+  projectTitle: ProjectData | null
 }
 
 const initialState: PostReducerState = {
@@ -21,7 +23,9 @@ const initialState: PostReducerState = {
   isEcaseModalOpened: false,
   isRequestModalOpened: false,
   titleRequest: '',
-  allProjects: []
+  allProjects: [],
+  singleProject: null,
+  projectTitle: null
 }
 
 const postsSlice = createSlice({
@@ -54,8 +58,15 @@ const postsSlice = createSlice({
       state.isRequestModalOpened = true
     },
     getAllProjects: (state, action: PayloadAction<undefined>) => {},
-    setAllProjects: (state, action: PayloadAction<Array<string>>) => {
+    setAllProjects: (state, action: PayloadAction<ArrayOfProjectType>) => {
       state.allProjects = action.payload
+    },
+    getSingleProject: (state, action: PayloadAction<number>) => {},
+    setSingleProject: (state, action: PayloadAction<ProjectType>) => {
+      state.singleProject = action.payload
+    },
+    postProject: (state, action: PayloadAction<ProjectData>) => {
+      state.projectTitle = action.payload
     }
   }
 })
@@ -71,7 +82,10 @@ export const {
   setRequestModalVisible,
   setTitleRequest,
   getAllProjects,
-  setAllProjects
+  setAllProjects,
+  getSingleProject,
+  setSingleProject,
+  postProject
 } = postsSlice.actions
 const postsReducer = postsSlice.reducer
 export default postsReducer

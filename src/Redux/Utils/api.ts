@@ -9,7 +9,7 @@ import {
   SignInUserData
 } from '../Types/auth'
 import { CompanyListData } from '../Types/profile'
-import { TaskType } from '../Types/tasks'
+import { ProjectData, TaskType } from '../Types/tasks'
 
 const JWT_TOKEN = 'Token cc55ec64983887bb2e985d9f408085447eb850e9'
 
@@ -131,6 +131,13 @@ const getUserName = (token: string) => {
 const getAllProjects = (token: string, page?: number) => {
   return API.get('/project/', { page }, { headers: { Authorization: `JWT ${token}` } })
 }
+const postProject = (token: string, data: ProjectData) => {
+  return API.post('/project/', data, { headers: { Authorization: `JWT ${token}` } })
+}
+
+const getSingleProject = (token: string, id: string) => {
+  return API.get(`/project/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } })
+}
 
 export default {
   registerUser,
@@ -149,5 +156,7 @@ export default {
   editHeadCompanyList,
   getECaseList,
   getUserName,
-  getAllProjects
+  getAllProjects,
+  postProject,
+  getSingleProject
 }
