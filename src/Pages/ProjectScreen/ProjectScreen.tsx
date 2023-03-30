@@ -22,7 +22,6 @@ import ModalEcase from '../../Components/ModalEcase'
 import ModalRequest from '../../Components/ModalRequest'
 import Resourses from '../../Components/Resourses'
 import Documents from '../../Components/Documents'
-import { setFilterVisible, setSelectedModalVisible, setTitleTask } from '../../Redux/Reducers/postReducer'
 import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer'
 
 import styles from './ProjectScreen.module.css'
