@@ -66,12 +66,8 @@ const resetPasswordConfirm = (data: ResetPasswordData) => {
   })
 }
 
-const postMilestone = (milestone: TaskType) => {
-  return API.post('/project/milestone/', milestone, {
-    headers: {
-      Authorization: 'Token 1e4b18fae204857eca1a4f110fc87b1c772b6c35'
-    }
-  })
+const postMilestone = (token: string, milestone: TaskType) => {
+  return API.post('/project/milestone/', milestone, { headers: { Authorization: `JWT ${token}` } })
 }
 
 const getMilestone = (token: string, page?: number) => {

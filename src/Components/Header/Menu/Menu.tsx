@@ -4,11 +4,17 @@ import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 
-import { ChatsIcon } from '../../../Assets/icons/ChatsIcon'
-import { ProjectsIcon } from '../../../Assets/icons/ProjectsIcon'
-import { LibraryIcon } from '../../../Assets/icons/LibraryIcon'
-import { PaymentsIcon } from '../../../Assets/icons/PaymentsIcon'
-import { NotificationsIcon } from '../../../Assets/icons/NotificationsIcon'
+import { ProjectActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ProjectActiveIcon'
+import { LibraryActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/LibraryActiveIcon'
+import { NotificationActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/NotificationActiveIcon'
+import { PaymentsActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/PaymentsActiveIcon'
+import { ChatActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ChatActiveIcon'
+import { MyProfileActive } from '../../../Assets/Header/Menu/ActiveIcons/MyProfileActive'
+import { NotificationIcon } from '../../../Assets/Header/Menu/NotificationIcon'
+import { PaymentIcon } from '../../../Assets/Header/Menu/PaymentIcon'
+import { ProjectIcon } from '../../../Assets/Header/Menu/ProjectIcon'
+import { ChatIcon } from '../../../Assets/Header/Menu/ChatIcon'
+import { LibraryIcon } from '../../../Assets/Header/Menu/LibraryIcon'
 import { ArrayDownIcon } from '../../../Assets/icons/ArrayDownIcon'
 import { AddNewProjectIcon } from '../../../Assets/icons/AddNewProjectIcon'
 import { LogOutIcon } from '../../../Assets/icons/LogOutIcon'
@@ -16,7 +22,7 @@ import { logoutUser } from '../../../Redux/Reducers/authReducer'
 import authSelectors from '../../../Redux/Selectors/authSelectors'
 import postSelector from '../../../Redux/Selectors/postSelector'
 import { PathNames } from '../../../Pages/Router/Router'
-import { MyProfileIcon } from '../../../Assets/icons/MyProfileIcon'
+import { MyProfileIcon } from '../../../Assets/Header/Menu/MyProfileIcon'
 import { ProjectFile } from '../../../Assets/icons/ProjectFile'
 import { getAllProjects } from '../../../Redux/Reducers/postReducer'
 import { ProjectType } from '../../../Redux/Types/tasks'
@@ -46,14 +52,20 @@ const UserMenu = () => {
     setOpened(!isOpened)
   }
   const navButtons = [
-    { name: 'My profile', icon: <MyProfileIcon />, link: PathNames.Profile },
-    { name: 'Chats', icon: <ChatsIcon />, link: '' },
+    {
+      name: 'My profile',
+      icon: <MyProfileIcon />,
+      link: PathNames.Profile,
+      activeIcon: <MyProfileActive />
+    },
+    { name: 'Chats', icon: <ChatIcon />, link: '', activeIcon: <ChatActiveIcon /> },
     {
       name: 'Projects',
-      icon: <ProjectsIcon />,
+      icon: <ProjectIcon />,
       link: PathNames.Home,
       button: <ArrayDownIcon />,
-      active: true
+      active: true,
+      activeIcon: <ProjectActiveIcon />
     },
     {
       name: 'New project',
@@ -62,16 +74,21 @@ const UserMenu = () => {
       active: isOpened,
       projects: allProjects
     },
-    { name: 'Library', icon: <LibraryIcon />, link: '' },
-    { name: 'Payments', icon: <PaymentsIcon />, link: PathNames.Payments },
-    { name: 'Notifications', icon: <NotificationsIcon />, link: PathNames.Notifications }
+    { name: 'Library', icon: <LibraryIcon />, link: '', activeIcon: <LibraryActiveIcon /> },
+    { name: 'Payments', icon: <PaymentIcon />, link: PathNames.Payments, activeIcon: <PaymentsActiveIcon /> },
+    {
+      name: 'Notifications',
+      icon: <NotificationIcon />,
+      link: PathNames.Notifications,
+      activeIcon: <NotificationActiveIcon />
+    }
   ]
 
   return (
     <>
       <div className={styles.container}>
         <div>
-          {navButtons.map(({ link, name, icon, button, active, projects }) => (
+          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon }) => (
             <NavLink
               key={name}
               to={link}
@@ -87,7 +104,7 @@ const UserMenu = () => {
               )}>
               <div>
                 <div className={classNames(styles.div)}>
-                  {icon}
+                  {pathname === link ? activeIcon : icon}
                   {name}
                   <div onClick={onArrowClick}>{button}</div>
                 </div>

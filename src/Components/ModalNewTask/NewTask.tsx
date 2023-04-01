@@ -1,10 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 
+import type { DatePickerProps } from 'antd'
+import { Cascader, DatePicker, Upload } from 'antd'
 import 'react-dropdown/style.css'
 import 'antd/README.md'
 import Dropdown from 'react-dropdown'
 import 'react-datepicker/dist/react-datepicker.css'
-import { Cascader, DatePicker, Upload } from 'antd'
+
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
 
@@ -24,8 +26,6 @@ import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
 
 import styles from './NewTask.module.css'
 
-import type { DatePickerProps } from 'antd'
-
 const NewTask = () => {
   const dispatch = useDispatch()
   const milestone = useSelector(postSelector.getTitleMilestone)
@@ -33,7 +33,7 @@ const NewTask = () => {
   const onSaveClick = () => {
     dispatch(
       postTaskCard({
-        milestone_name: milestone,
+        milestone_name: title,
         description: descriptionValue,
         attachment: null,
         responsible: [],
@@ -47,7 +47,7 @@ const NewTask = () => {
         progress: +progress.value,
         status: status.value,
         payment_status: paymentStatus.value,
-        project: 'TestOne'
+        project: 25
       })
     )
     dispatch(setSelectedModalVisible(false))

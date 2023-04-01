@@ -43,7 +43,7 @@ const ProjectScreen = () => {
   const isSaveClicked = useSelector(postSelector.getTask)
   const projectTitle = useSelector(postSelector.getTitleMilestone)
   const dispatch = useDispatch()
-
+  const [titleDown, setTitleDown] = useState('')
   const [addItem, setAddItem] = useState(false)
   const onAddItemClick = () => {
     if (projectTitle) {
@@ -68,8 +68,8 @@ const ProjectScreen = () => {
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       dispatch(postProject({ project_name: title }))
-      // dispatch(setTitleTask(title))
-      // setEdit(!edit)
+      setTitleDown(title)
+      setEdit(!edit)
     }
   }
   return (
@@ -83,14 +83,16 @@ const ProjectScreen = () => {
               })}>
               {'Please enter a project name and press Enter to get started'}
             </div>
-            <Input
+            {!titleDown ? <Input
               value={title}
               onChange={(value) => setTitle(value)}
               onKeyDown={onChangeKeyDown}
               className={styles.title}
               placeholder={'New project'}
               disabled={!edit}
-            />
+            /> : (
+              <div className={styles.titleDiv}>{title}</div>
+            )}
             {!edit ? (
               <div className={styles.edit} onClick={onEditClick}>
                 <EditTitleIcon />
