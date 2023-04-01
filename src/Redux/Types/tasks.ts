@@ -13,7 +13,7 @@ export type TaskType = {
   progress: number
   status: string
   payment_status: string
-  project: string
+  project: number
 }
 
 export type TaskTypeWithID = {

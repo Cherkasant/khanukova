@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects'
+import { all, put, takeLatest } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit'
 
 import API from '../Utils/api'
@@ -18,10 +18,9 @@ import callCheckingAuth from './callCheckingAuth'
 
 function* postTaskCardWorker(action: PayloadAction<TaskType>) {
   const { ...task } = action.payload
-  const { ok, data, problem } = yield call(API.postMilestone, task)
+  const { ok, data, problem } = yield callCheckingAuth(API.postMilestone, task)
   if (ok && data) {
     console.log('Success')
-    yield put(setTaskCard(data))
   } else {
     console.warn('Error while posting milestone', problem)
   }
