@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -42,7 +43,11 @@ const ProjectScreen = () => {
   }
   const isSaveClicked = useSelector(postSelector.getTask)
   const projectTitle = useSelector(postSelector.getTitleMilestone)
+  const projectId = useSelector(postSelector.getProjectId)
+  
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [titleDown, setTitleDown] = useState('')
   const [addItem, setAddItem] = useState(false)
   const onAddItemClick = () => {
@@ -70,8 +75,10 @@ const ProjectScreen = () => {
       dispatch(postProject({ project_name: title }))
       setTitleDown(title)
       setEdit(!edit)
+      navigate(`/project/${projectId}`)
     }
   }
+
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
@@ -83,14 +90,16 @@ const ProjectScreen = () => {
               })}>
               {'Please enter a project name and press Enter to get started'}
             </div>
-            {!titleDown ? <Input
-              value={title}
-              onChange={(value) => setTitle(value)}
-              onKeyDown={onChangeKeyDown}
-              className={styles.title}
-              placeholder={'New project'}
-              disabled={!edit}
-            /> : (
+            {!titleDown ? (
+              <Input
+                value={title}
+                onChange={(value) => setTitle(value)}
+                onKeyDown={onChangeKeyDown}
+                className={styles.title}
+                placeholder={'New project'}
+                disabled={!edit}
+              />
+            ) : (
               <div className={styles.titleDiv}>{title}</div>
             )}
             {!edit ? (
