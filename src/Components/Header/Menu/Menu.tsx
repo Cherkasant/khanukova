@@ -72,7 +72,8 @@ const UserMenu = () => {
       icon: <AddNewProjectIcon />,
       link: PathNames.ProjectScreen,
       active: isOpened,
-      projects: allProjects
+      projects: allProjects,
+      activeIcon: <AddNewProjectIcon />
     },
     { name: 'Library', icon: <LibraryIcon />, link: '', activeIcon: <LibraryActiveIcon /> },
     { name: 'Payments', icon: <PaymentIcon />, link: PathNames.Payments, activeIcon: <PaymentsActiveIcon /> },

@@ -9,8 +9,10 @@ import {
   postProject,
   postTaskCard,
   setAllProjects,
+  setProjectId,
   setSingleProject,
-  setTaskCard
+  setTaskCard,
+  setTitleTask
 } from '../Reducers/postReducer'
 import { ProjectData, TaskType } from '../Types/tasks'
 
@@ -37,9 +39,10 @@ function* getTaskCardWorker() {
 }
 
 function* postProjectTitleWorker(action: PayloadAction<ProjectData>) {
-  const { ok, problem } = yield callCheckingAuth(API.postProject, action.payload)
-  if (ok) {
-    console.log('Success posting title')
+  const { ok, data, problem } = yield callCheckingAuth(API.postProject, action.payload)
+  if (ok && data) {
+    yield put(setTitleTask(data.project_name))
+    yield put(setProjectId(data.id))
   } else {
     console.warn('Error while posting project title', problem)
   }

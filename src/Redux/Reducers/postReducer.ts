@@ -13,6 +13,7 @@ type PostReducerState = {
   allProjects: ArrayOfProjectType
   singleProject: ProjectType | null
   projectTitle: ProjectData | null
+  projectId: number
 }
 
 const initialState: PostReducerState = {
@@ -25,7 +26,8 @@ const initialState: PostReducerState = {
   titleRequest: '',
   allProjects: [],
   singleProject: null,
-  projectTitle: null
+  projectTitle: null,
+  projectId: 0
 }
 
 const postsSlice = createSlice({
@@ -67,6 +69,9 @@ const postsSlice = createSlice({
     },
     postProject: (state, action: PayloadAction<ProjectData>) => {
       state.projectTitle = action.payload
+    },
+    setProjectId: (state, action: PayloadAction<number>) => {
+      state.projectId = action.payload
     }
   }
 })
@@ -85,7 +90,8 @@ export const {
   setAllProjects,
   getSingleProject,
   setSingleProject,
-  postProject
+  postProject,
+  setProjectId
 } = postsSlice.actions
 const postsReducer = postsSlice.reducer
 export default postsReducer

@@ -57,6 +57,7 @@ const SingleProject = () => {
   const [addItem, setAddItem] = useState(false)
   const onAddItemClick = () => {
     if (singleProject) {
+      dispatch(setTitleTask(singleProject.project_name))
       setAddItem(!addItem)
       dispatch(setSelectedModalVisible(true))
     }
@@ -71,10 +72,6 @@ const SingleProject = () => {
   useEffect(() => {
     if (id) {
       dispatch(getSingleProject(+id))
-      if (singleProject) {
-        dispatch(setTitleTask(singleProject.project_name))
-        setEdit(true)
-      }
     }
   }, [id])
 
