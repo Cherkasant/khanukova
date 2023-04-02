@@ -1,19 +1,20 @@
+import type { UploadProps } from 'antd'
+
 import { UploadOutlined } from '@ant-design/icons'
-import { Button, Checkbox, DatePicker, Form, message, Upload } from 'antd'
+import { Button, Checkbox, DatePicker, Form, Upload, message } from 'antd'
+import Dropdown from 'react-dropdown'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import Dropdown from 'react-dropdown'
 
-import PuzzleButton, { PuzzleButtonTypes } from '../../../Components/PuzzleButton'
 import Input from '../../../Components/Input'
+import PuzzleButton, { PuzzleButtonTypes } from '../../../Components/PuzzleButton'
 import Title from '../../../Components/Title'
-import { PathNames } from '../../Router/Router'
 import { registerHeadInfo } from '../../../Redux/Reducers/authReducer'
 import authSelectors from '../../../Redux/Selectors/authSelectors'
+import { PathNames } from '../../Router/Router'
 
 import styles from './SignUpHeadInfo.module.css'
 
-import type { UploadProps } from 'antd'
 
 const SignUpHeadInfo = () => {
   const dispatch = useDispatch()
