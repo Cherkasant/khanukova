@@ -8,24 +8,28 @@ import styles from './Resourses.module.css'
 
 const dataResourses = [
   {
+    id: 1,
     positions: 'Dev 1',
     projecthours: 367,
     rateHour: 45,
     budget: '16515.00'
   },
   {
+    id: 2,
     positions: 'Dev 2',
     projecthours: 387,
     rateHour: 30,
     budget: '12999.00'
   },
   {
+    id: 3,
     positions: 'Dev 3',
     projecthours: 476,
     rateHour: 20,
     budget: '83432.00'
   },
   {
+    id: 4,
     positions: 'Dev 4',
     projecthours: 367,
     rateHour: 20,
@@ -50,7 +54,7 @@ const Resourses = () => {
   const [dataEdit, setDataEdit] = React.useState<dataResourseType | null>(null)
   const btnAddNewRef = useRef(null)
   const btnEditRef = useRef(null)
-
+  const [id, setId] = useState(0)
   return (
     <div className={styles.wrap}>
       <div className={styles.positions}>
@@ -97,12 +101,13 @@ const Resourses = () => {
             <div key={index} className={styles.bodyItem}>
               {value.budget}
               <div
-                ref={btnEditRef}
+                ref={value.id === id ? btnEditRef : null}
                 className={styles.iconsEdit}
                 onClick={() => {
                   setDataEdit(value)
                   setModal(true)
                   setEditClick(true)
+                  setId(value.id)
                 }}>
                 <Edit />
               </div>

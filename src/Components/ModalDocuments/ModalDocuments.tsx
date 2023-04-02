@@ -15,11 +15,12 @@ import styles from './ModalDocuments.module.css'
 import { Colors } from './Colors'
 
 type ModalDocumentsProps = {
+  addDocRef: React.RefObject<HTMLDivElement>
   modal: boolean
   setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal }) => {
+const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDocRef }) => {
   const [title, setTitle] = useState('')
   const [titleDown, setTitleDown] = useState('')
   const [priority, setPriority] = useState<any>(null)
@@ -30,6 +31,8 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal }) => {
   const inputRef = useRef<any>(null)
   const [files, setFiles] = useState<File[]>([])
   const filesList = fileInput ? [...fileInput] : []
+  const modalRef = useRef<HTMLDivElement>(null)
+  const titleModalRef = useRef<HTMLDivElement>(null)
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -37,7 +40,8 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal }) => {
       setEdit(!edit)
     }
   }
-  const onEditClick = () => {
+  const onEditClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation()
     setTitleDown('')
     setEdit(!edit)
   }
@@ -132,11 +136,30 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal }) => {
     }
   }, [fileInput])
 
+  useEffect(() => {
+    const eventModal = (e: MouseEvent) => {
+      const _e = e as MouseEvent & {
+        target: HTMLElement
+      }
+      if (
+        !addDocRef.current?.contains(_e.target) &&
+        !modalRef.current?.contains(_e.target) &&
+        !titleModalRef.current?.contains(_e.target)
+      ) {
+        setModal(false)
+      }
+    }
+    document.body.addEventListener('click', eventModal)
+    return () => {
+      document.body.removeEventListener('click', eventModal)
+    }
+  }, [])
+
   return (
-    <div className={classNames(styles.wrap, { [styles.activeModal]: modal })}>
+    <div ref={modalRef} className={classNames(styles.wrap, { [styles.activeModal]: modal })}>
       <div>
         <div className={classNames(styles.titleContainer, { [styles.titleContainerDiv]: titleDown })}>
-          <div className={classNames(styles.popoverTitle, {})}>
+          <div className={classNames(styles.popoverTitle)}>
             {'Please enter a documents name and press Enter to get started'}
           </div>
           <DocumentIcon width={'25'} height={'28'} />
@@ -153,7 +176,10 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal }) => {
             <div className={styles.titleDiv}>{title}</div>
           )}
           {!edit ? (
-            <div className={classNames(styles.edit, { [styles.editDiv]: titleDown })} onClick={onEditClick}>
+            <div
+              ref={titleModalRef}
+              className={classNames(styles.edit, { [styles.editDiv]: titleDown })}
+              onClick={onEditClick}>
               <EditTitleIcon />
             </div>
           ) : null}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import classNames from 'classnames'
 
@@ -12,7 +12,7 @@ import styles from './Documents.module.css'
 const Documents = () => {
   const [inputSearch, setInputSearch] = useState('')
   const [modal, setModal] = useState(false)
-
+  const addDocRef = useRef<HTMLDivElement>(null)
   const onChange = (value: string) => {
     setInputSearch(value)
   }
@@ -25,10 +25,10 @@ const Documents = () => {
         </div>
       </div>
       <div className={styles.milestoneWrap}>
-        <AccordionDoc modal={modal} setModal={setModal} />
+        <AccordionDoc addDocRef={addDocRef} modal={modal} setModal={setModal} />
       </div>
       <div className={classNames(styles.wrapModal, { [styles.showModal]: modal })}>
-        <ModalDocuments modal={modal} setModal={setModal} />
+        <ModalDocuments addDocRef={addDocRef} modal={modal} setModal={setModal} />
       </div>
     </div>
   )
