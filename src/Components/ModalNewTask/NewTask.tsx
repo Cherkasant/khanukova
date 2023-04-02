@@ -1,31 +1,30 @@
-import { ChangeEvent, useEffect, useState } from 'react'
-
-import 'react-dropdown/style.css'
-import 'antd/README.md'
-import Dropdown from 'react-dropdown'
-import 'react-datepicker/dist/react-datepicker.css'
-
 import type { DatePickerProps } from 'antd'
+
 import { Cascader, DatePicker, Upload } from 'antd'
-
-import { useDispatch, useSelector } from 'react-redux'
+import 'antd/README.md'
 import classNames from 'classnames'
+import { ChangeEvent, useEffect, useState } from 'react'
+import 'react-datepicker/dist/react-datepicker.css'
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
+import { useDispatch, useSelector } from 'react-redux'
 
-import Input from '../Input'
+import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
 import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon'
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
 import { CalendarIcon } from '../../Assets/icons/CalendarIcon'
+import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
+import { DeleteIcon } from '../../Assets/icons/DeleteIcon'
 import { DownloadIcon } from '../../Assets/icons/DownloadIcon'
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
-import { DeleteIcon } from '../../Assets/icons/DeleteIcon'
 import { postTaskCard, setSelectedModalVisible } from '../../Redux/Reducers/postReducer'
 import postSelector from '../../Redux/Selectors/postSelector'
-import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData'
 import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants'
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
+import Input from '../Input'
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
+import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData'
 
 import styles from './NewTask.module.css'
+
 
 const NewTask = () => {
   const dispatch = useDispatch()
