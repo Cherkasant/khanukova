@@ -1,40 +1,39 @@
 .button {
-    border-radius: 10px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
+  border-radius: 10px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 .button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .text {
-    background: #1258CA;
-    border: 1px solid #D0D0D0;
-    color: #FFFFFF;
+  background: #1258ca;
+  border: 1px solid #d0d0d0;
+  color: #ffffff;
 }
 
 .text:hover {
-    background: #0E4298;
+  background: #0e4298;
 }
 
 .icon {
-    background: #FFFFFF;
-    border: 1px solid #BBCBDF;
-    width: 60px;
-    height: 60px;
+  background: #ffffff;
+  border: 1px solid #bbcbdf;
+  width: 60px;
+  height: 60px;
 }
 
 .icon:hover {
-    background-color: #dadada;
+  background-color: #dadada;
 }
 
 .disabled {
-    background: #9BACC9;
-    pointer-events: none;
+  background: #d9e1f0;
+  color: #9bacc9;
+  pointer-events: none;
 }
-
-
