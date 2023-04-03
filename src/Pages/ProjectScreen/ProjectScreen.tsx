@@ -23,6 +23,7 @@ import ModalEcase from '../../Components/ModalEcase'
 import ModalRequest from '../../Components/ModalRequest'
 import Resourses from '../../Components/Resourses'
 import Documents from '../../Components/Documents'
+import Events from '../../Components/Events'
 import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer'
 
 import styles from './ProjectScreen.module.css'
@@ -159,6 +160,7 @@ const ProjectScreen = () => {
       ) : null}
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
       {activeTab === Tabs.Documents ? <Documents /> : null}
+      {activeTab === Tabs.Events ? <Events /> : null}
       <NewTask />
       <ModalEcase />
       <ModalRequest />
