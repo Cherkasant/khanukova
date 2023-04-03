@@ -31,7 +31,6 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
   const [projectHoursValue, setProjectHoursValue] = useState('')
   const [rateHourValue, setRateHourValue] = useState('')
   const [budgetValue, setBudgetValue] = useState('')
-
   useEffect(() => {
     if (editClick) {
       setPositionsValue(data.positions)
@@ -57,6 +56,7 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
         !btnEditRef.current?.contains(_e.target)
       ) {
         setModal(false)
+        setEditClick(false)
       }
     }
     document.body.addEventListener('click', eventModal)

@@ -4,6 +4,7 @@ import MuiAccordion, { AccordionProps } from '@mui/material/Accordion'
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary'
 import MuiAccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
+import { useState } from 'react'
 
 import ArrowDocIcon from '../../Assets/icons/ArrowDocIcon'
 import TableDoc from '../TableDoc'
@@ -11,13 +12,16 @@ import TableDoc from '../TableDoc'
 import styles from './AccordionDoc.module.css'
 
 type AccordionDocProps = {
+  addDocRef: any
   modal: boolean
   setModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal }) => {
+const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
+  const [id, setId] = useState(0)
   const milestoneMoc = [
     {
+      id: 1,
       name: 'Test milestone 1',
       doc: [
         { nameDoc: 'Software.doc', created: 'Irina Ivanova', data: '15 mar 2023', label: 'BA' },
@@ -25,6 +29,7 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal }) => {
       ]
     },
     {
+      id: 2,
       name: 'Test milestone 2',
       doc: [
         { nameDoc: 'Kinoa.doc', created: 'Galina Ivanova', data: '19 mar 2023', label: 'Front' },
@@ -33,8 +38,9 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal }) => {
     }
   ]
   const [expanded, setExpanded] = React.useState<string | false>('')
-  const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+  const handleChange = (panel: string, id: number) => (event: React.SyntheticEvent, newExpanded: boolean) => {
     setExpanded(newExpanded ? panel : false)
+    setId(id)
   }
 
   const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} square {...props} />)(
@@ -83,14 +89,22 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal }) => {
   return (
     <div className={styles.accordionWrap}>
       {milestoneMoc.map((value, index) => (
-        <Accordion expanded={expanded === value.name} onChange={handleChange(value.name)} key={index}>
+        <Accordion expanded={expanded === value.name} onChange={handleChange(value.name, value.id)} key={index}>
           <AccordionSummary aria-controls="panel1d-content" id={value.name}>
             <Typography>{value.name}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <TableDoc docArr={value.doc} />
-            <div onClick={() => setModal(true)} className={styles.addDoc}>
-              + Add new documents
+            <div>
+              <div
+                ref={addDocRef}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  setModal(true)
+                }}
+                className={styles.addDoc}>
+                + Add new documents
+              </div>
             </div>
           </AccordionDetails>
         </Accordion>
