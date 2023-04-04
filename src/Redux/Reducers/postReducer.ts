@@ -1,6 +1,14 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { ArrayOfProjectType, ProjectData, ProjectType, TaskType, TaskTypeWithID } from '../Types/tasks'
+import {
+  ArrayOfProjectType,
+  CardTaskType,
+  ProjectData,
+  ProjectDataPayload,
+  ProjectType,
+  TaskType,
+  TaskTypeWithID
+} from '../Types/tasks'
 
 type PostReducerState = {
   isSelectedImageModalIsOpened: boolean
@@ -14,6 +22,7 @@ type PostReducerState = {
   singleProject: ProjectType | null
   projectTitle: ProjectData | null
   projectId: number
+  allMilestones: CardTaskType | []
 }
 
 const initialState: PostReducerState = {
@@ -27,7 +36,8 @@ const initialState: PostReducerState = {
   allProjects: [],
   singleProject: null,
   projectTitle: null,
-  projectId: 0
+  projectId: 0,
+  allMilestones: []
 }
 
 const postsSlice = createSlice({
@@ -67,12 +77,15 @@ const postsSlice = createSlice({
     setSingleProject: (state, action: PayloadAction<ProjectType>) => {
       state.singleProject = action.payload
     },
-    postProject: (state, action: PayloadAction<ProjectData>) => {
-      state.projectTitle = action.payload
-    },
+    postProject: (state, action: PayloadAction<ProjectDataPayload>) => {},
     setProjectId: (state, action: PayloadAction<number>) => {
       state.projectId = action.payload
-    }
+    },
+    getAllMilestones: (state, action: PayloadAction<number>) => {},
+    setAllMilestones: (state, action: PayloadAction<CardTaskType>) => {
+      state.allMilestones = action.payload
+    },
+    getAllTasks: (state, action: PayloadAction<number>) => {}
   }
 })
 
@@ -91,7 +104,10 @@ export const {
   getSingleProject,
   setSingleProject,
   postProject,
-  setProjectId
+  setProjectId,
+  getAllMilestones,
+  setAllMilestones,
+  getAllTasks
 } = postsSlice.actions
 const postsReducer = postsSlice.reducer
 export default postsReducer

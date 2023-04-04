@@ -72,3 +72,8 @@ export type ArrayOfProjectType = Array<ProjectType>
 export type ProjectData = {
   project_name: string
 }
+export type BasePayload<T> = {
+  data: T
+  callback: () => void
+}
+export type ProjectDataPayload = BasePayload<ProjectData>

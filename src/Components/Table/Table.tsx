@@ -1,29 +1,30 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Column, useSortBy, useTable } from 'react-table'
-
 import classnames from 'classnames'
 import classNames from 'classnames'
 import moment from 'moment'
-
+import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Column, useExpanded, useSortBy, useTable } from 'react-table'
 
-import { CardTaskType } from '../../Redux/Types/tasks'
 import { AddNewTaskIcon } from '../../Assets/icons/AddNewTaskIcon'
-import { TableColumns } from '../constants/Table/TableData'
 import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
-import { setSelectedModalVisible } from '../../Redux/Reducers/postReducer'
-import { SortIcon } from '../../Assets/icons/SortIcon'
 import { RotateSortIcon } from '../../Assets/icons/RotateSortIcon'
+import { SortIcon } from '../../Assets/icons/SortIcon'
+import { setSelectedModalVisible, setTitleTask } from '../../Redux/Reducers/postReducer'
 import PostSelector from '../../Redux/Selectors/postSelector'
+import postSelector from '../../Redux/Selectors/postSelector'
+import { CardTaskType } from '../../Redux/Types/tasks'
+import { TableColumns } from '../constants/Table/TableData'
 
 import styles from './Table.module.css'
+
 
 const Table = () => {
   const dispatch = useDispatch()
 
   const DATA: CardTaskType = []
 
-  const task = useSelector(PostSelector.getTask)
+  const task = useSelector(PostSelector.getAllMilestones)
+  const singleProject = useSelector(postSelector.getSingleProject)
 
   const [isOpened, setOpened] = useState(false)
   const onArrowClick = () => {
@@ -33,11 +34,14 @@ const Table = () => {
   const [taskInfo, setTaskInfo] = useState<CardTaskType>(DATA)
   useEffect(() => {
     if (task) {
-      setTaskInfo((prevArray) => [...prevArray, task])
+      setTaskInfo(task)
     }
-  }, [])
+  }, [task])
   const onAddTaskClick = () => {
-    dispatch(setSelectedModalVisible(true))
+    if (singleProject) {
+      dispatch(setTitleTask(singleProject.project_name))
+      dispatch(setSelectedModalVisible(true))
+    }
   }
 
   const COLUMNS: Array<Column> = [
@@ -148,11 +152,13 @@ const Table = () => {
       Cell: ({ value }) => <div className={styles.duration}>{value}%</div>
     }
   ]
+
   const columns = useMemo(() => COLUMNS, [])
   const data = useMemo(() => taskInfo, [taskInfo])
   const { getTableProps, getTableBodyProps, headerGroups, footerGroups, rows, prepareRow } = useTable(
     { columns, data },
-    useSortBy
+    useSortBy,
+    useExpanded
   )
   return (
     <table {...getTableProps()} className={styles.tableContainer}>

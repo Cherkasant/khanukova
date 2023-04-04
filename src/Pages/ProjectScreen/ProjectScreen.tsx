@@ -1,32 +1,31 @@
-import React, { useState } from 'react'
+import classNames from 'classnames'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 
-import { useDispatch, useSelector } from 'react-redux'
-
-import classNames from 'classnames'
-
 import { AddMeetingIcon } from '../../Assets/icons/AddMeetingIcon'
-import { Tabs } from '../../Components/constants/@types'
-import Tab from '../../Components/Tabs'
-import { FilterIcon } from '../../Assets/icons/FilterIcon'
 import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon'
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
-import NewTask from '../../Components/ModalNewTask'
-
-import postSelector from '../../Redux/Selectors/postSelector'
-import Input from '../../Components/Input'
-import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen'
-import Table from '../../Components/Table'
+import { FilterIcon } from '../../Assets/icons/FilterIcon'
 import ClientsRequestCard from '../../Components/ClientsRequestCard'
 import { requestInProgressArray, requestOpenedArray } from '../../Components/ClientsRequestCard/constantsRequest'
+import Documents from '../../Components/Documents'
+import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen'
+import Input from '../../Components/Input'
 import ModalEcase from '../../Components/ModalEcase'
+import NewTask from '../../Components/ModalNewTask'
 import ModalRequest from '../../Components/ModalRequest'
 import Resourses from '../../Components/Resourses'
+import Table from '../../Components/Table'
+import Tab from '../../Components/Tabs'
+import { Tabs } from '../../Components/constants/@types'
 import Documents from '../../Components/Documents'
 import Events from '../../Components/Events'
 import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer'
+import postSelector from '../../Redux/Selectors/postSelector'
 
 import styles from './ProjectScreen.module.css'
+
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
@@ -45,7 +44,6 @@ const ProjectScreen = () => {
   const isSaveClicked = useSelector(postSelector.getTask)
   const projectTitle = useSelector(postSelector.getTitleMilestone)
   const projectId = useSelector(postSelector.getProjectId)
-  
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -64,7 +62,7 @@ const ProjectScreen = () => {
       setActiveTab(newTab)
     } else setActiveTab(Tabs.Planning)
   }
-
+  const [refresh, setRefresh] = useState(false)
   const [title, setTitle] = useState('')
   const [edit, setEdit] = useState(false)
   const onEditClick = () => {
@@ -73,12 +71,16 @@ const ProjectScreen = () => {
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(postProject({ project_name: title }))
+      dispatch(postProject({ data: { project_name: title }, callback: () => setRefresh(true) }))
       setTitleDown(title)
       setEdit(!edit)
-      navigate(`/project/${projectId}`)
     }
   }
+  useEffect(() => {
+    if (refresh) {
+      navigate(`/project/${projectId}`)
+    }
+  }, [refresh])
 
   return (
     <div className={styles.container}>
