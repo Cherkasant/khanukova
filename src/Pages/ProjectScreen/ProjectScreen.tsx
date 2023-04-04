@@ -38,7 +38,7 @@ const TABS_NAMES = [
 
 const ProjectScreen = () => {
   const onFilterClick = () => {
-    dispatch(setFilterVisible(true))
+    dispatch(setFilterVisible(true));
   }
   const isSaveClicked = useSelector(postSelector.getTask)
   const projectTitle = useSelector(postSelector.getTitleMilestone)
