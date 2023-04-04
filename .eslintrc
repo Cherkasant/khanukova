@@ -40,7 +40,7 @@
             "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
           }
         ],
-        "semi": ["warn", "always"],
+        "semi": ["error", "always"],
         "import/order": [
           "error",
           {
