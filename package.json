@@ -88,6 +88,10 @@
     "npm": "9.1.2"
   },
   "lint-staged": {
+    "**/*.ts": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
     "**/*.tsx": [
       "eslint --fix",
       "prettier --write --ignore-unknown"
