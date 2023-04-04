@@ -19,6 +19,8 @@ import Resourses from '../../Components/Resourses'
 import Table from '../../Components/Table'
 import Tab from '../../Components/Tabs'
 import { Tabs } from '../../Components/constants/@types'
+import Documents from '../../Components/Documents'
+import Events from '../../Components/Events'
 import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer'
 import postSelector from '../../Redux/Selectors/postSelector'
 
@@ -160,6 +162,7 @@ const ProjectScreen = () => {
       ) : null}
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
       {activeTab === Tabs.Documents ? <Documents /> : null}
+      {activeTab === Tabs.Events ? <Events /> : null}
       <NewTask />
       <ModalEcase />
       <ModalRequest />
