@@ -1,10 +1,10 @@
-import classNames from 'classnames'
-import React, { useRef, useState } from 'react'
+import classNames from 'classnames';
+import React, { useRef, useState } from 'react';
 
-import { Edit } from '../../Assets/icons/Edit'
-import ModalResourses from '../ModalResourses'
+import { Edit } from '../../Assets/icons/Edit';
+import ModalResourses from '../ModalResourses';
 
-import styles from './Resourses.module.css'
+import styles from './Resourses.module.css';
 
 const dataResourses = [
   {
@@ -35,26 +35,26 @@ const dataResourses = [
     rateHour: 20,
     budget: '23748.00'
   }
-]
+];
 
 type dataResourseType = {
-  positions: string
-  projecthours: number
-  rateHour: number
-  budget: string
-}
+  positions: string;
+  projecthours: number;
+  rateHour: number;
+  budget: string;
+};
 
-const sumBudget = dataResourses.reduce((sum, currentValue) => sum + Number(currentValue.budget), 0)
+const sumBudget = dataResourses.reduce((sum, currentValue) => sum + Number(currentValue.budget), 0);
 
-const sumProjecthours = dataResourses.reduce((sum, currentValue) => sum + currentValue.projecthours, 0)
+const sumProjecthours = dataResourses.reduce((sum, currentValue) => sum + currentValue.projecthours, 0);
 
 const Resourses = () => {
-  const [modal, setModal] = useState(false)
-  const [editClick, setEditClick] = useState(false)
-  const [dataEdit, setDataEdit] = React.useState<dataResourseType | null>(null)
-  const btnAddNewRef = useRef(null)
-  const btnEditRef = useRef(null)
-  const [id, setId] = useState(0)
+  const [modal, setModal] = useState(false);
+  const [editClick, setEditClick] = useState(false);
+  const [dataEdit, setDataEdit] = React.useState<dataResourseType | null>(null);
+  const btnAddNewRef = useRef(null);
+  const btnEditRef = useRef(null);
+  const [id, setId] = useState(0);
   return (
     <div className={styles.wrap}>
       <div className={styles.positions}>
@@ -104,10 +104,10 @@ const Resourses = () => {
                 ref={value.id === id ? btnEditRef : null}
                 className={styles.iconsEdit}
                 onClick={() => {
-                  setDataEdit(value)
-                  setModal(true)
-                  setEditClick(true)
-                  setId(value.id)
+                  setDataEdit(value);
+                  setModal(true);
+                  setEditClick(true);
+                  setId(value.id);
                 }}>
                 <Edit />
               </div>
@@ -128,7 +128,7 @@ const Resourses = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Resourses
+export default Resourses;

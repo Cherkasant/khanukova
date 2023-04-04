@@ -1,26 +1,25 @@
-import { Form } from 'antd'
-import 'intl-tel-input/build/css/intlTelInput.css'
-import { ChangeEvent, useState } from 'react'
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
-import PhoneInput from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router'
-import { NavLink } from 'react-router-dom'
+import { Form } from 'antd';
+import 'intl-tel-input/build/css/intlTelInput.css';
+import { ChangeEvent, useState } from 'react';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
-import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon'
-import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon'
-import Checkbox from '../../Components/Checkbox'
-import Input from '../../Components/Input'
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
-import Title from '../../Components/Title'
-import { PasswordTypes } from '../../Components/constants/@types'
-import { registerUser } from '../../Redux/Reducers/authReducer'
-import { PathNames } from '../Router/Router'
+import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon';
+import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
+import Checkbox from '../../Components/Checkbox';
+import Input from '../../Components/Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import Title from '../../Components/Title';
+import { PasswordTypes } from '../../Components/constants/@types';
+import { registerUser } from '../../Redux/Reducers/authReducer';
+import { PathNames } from '../Router/Router';
 
-import styles from './SignUpHead.module.css'
-
+import styles from './SignUpHead.module.css';
 
 export enum Role {
   PO = 'productOwner',
@@ -40,31 +39,33 @@ const options = [
   { value: Role.Designer, label: 'Designer' },
   { value: Role.QA, label: 'QA' },
   { value: Role.Programmer, label: 'Programmer' }
-]
+];
 
 const SignUpHead = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [form] = Form.useForm()
-  const checkPassword = Form.useWatch('password', form)
-  const checkPasswordConfirm = Form.useWatch('passwordConfirmation', form)
-  const checkRole = Form.useWatch('userStatus', form)
+  const [form] = Form.useForm();
+  const checkPassword = Form.useWatch('password', form);
+  const checkPasswordConfirm = Form.useWatch('passwordConfirmation', form);
+  const checkRole = Form.useWatch('userStatus', form);
 
-  const [type, setType] = useState(PasswordTypes.Password)
+  const [type, setType] = useState(PasswordTypes.Password);
   const onEyeClick = () => {
-    type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password)
-  }
-  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password)
+    type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password);
+  };
+  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
   const onEyeClickConfirm = () => {
-    typeConfirm === PasswordTypes.Password ? setTypeConfirm(PasswordTypes.Text) : setTypeConfirm(PasswordTypes.Password)
-  }
+    typeConfirm === PasswordTypes.Password
+      ? setTypeConfirm(PasswordTypes.Text)
+      : setTypeConfirm(PasswordTypes.Password);
+  };
 
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
   const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
-  }
-  const [value, setValue] = useState<any>()
+    setChecked(event.target.checked);
+  };
+  const [value, setValue] = useState<any>();
 
   const onSignUp = (values: any) => {
     dispatch(
@@ -81,22 +82,22 @@ const SignUpHead = () => {
         callback: () => {
           switch (checkRole.value) {
             case Role.PO:
-              navigate(PathNames.SignUpPoInfo)
-              break
+              navigate(PathNames.SignUpPoInfo);
+              break;
 
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
-              navigate(PathNames.CheckYourEmail)
-              break
+              navigate(PathNames.CheckYourEmail);
+              break;
 
             default:
-              navigate(PathNames.SignUpHeadInfo)
+              navigate(PathNames.SignUpHeadInfo);
           }
         }
       })
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -172,10 +173,10 @@ const SignUpHead = () => {
               {checkRole?.value === Role.Programmer ||
               checkRole?.value === Role.Designer ||
               checkRole?.value === Role.QA ? (
-                  <Form.Item name="code" className={styles.formItem}>
-                    <Input type={'text'} placeholder={'Code'} />
-                  </Form.Item>
-                ) : null}
+                <Form.Item name="code" className={styles.formItem}>
+                  <Input type={'text'} placeholder={'Code'} />
+                </Form.Item>
+              ) : null}
 
               <div className={styles.passwordContainer}>
                 <Form.Item
@@ -235,7 +236,7 @@ const SignUpHead = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignUpHead
+export default SignUpHead;

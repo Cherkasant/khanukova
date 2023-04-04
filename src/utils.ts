@@ -12,10 +12,10 @@ export const dataFn = () => {
     'october',
     'november',
     'december'
-  ]
-  const date = new Date()
-  const D = date.getDate()
-  const M = months[date.getMonth()]
-  const Y = date.getFullYear()
-  return `${D} ${M.slice(0, 3)} ${Y}`
-}
+  ];
+  const date = new Date();
+  const D = date.getDate();
+  const M = months[date.getMonth()];
+  const Y = date.getFullYear();
+  return `${D} ${M.slice(0, 3)} ${Y}`;
+};

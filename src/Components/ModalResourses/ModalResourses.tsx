@@ -1,21 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
+import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 
-import styles from './ModalResourses.module.css'
+import styles from './ModalResourses.module.css';
 
 type ModalResoursesProps = {
-  btnAddNewRef: React.RefObject<HTMLDivElement>
-  btnEditRef: React.RefObject<HTMLDivElement>
-  data?: any
-  modal: boolean
-  editClick: boolean
-  setModal: React.Dispatch<React.SetStateAction<boolean>>
-  setEditClick: React.Dispatch<React.SetStateAction<boolean>>
-}
+  btnAddNewRef: React.RefObject<HTMLDivElement>;
+  btnEditRef: React.RefObject<HTMLDivElement>;
+  data?: any;
+  modal: boolean;
+  editClick: boolean;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditClick: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const ModalResourses: React.FC<ModalResoursesProps> = ({
   data,
@@ -26,44 +26,53 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
   btnAddNewRef,
   btnEditRef
 }) => {
-  const modalRef = useRef<HTMLDivElement>(null)
-  const [positionsValue, setPositionsValue] = useState('')
-  const [projectHoursValue, setProjectHoursValue] = useState('')
-  const [rateHourValue, setRateHourValue] = useState('')
-  const [budgetValue, setBudgetValue] = useState('')
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [positionsValue, setPositionsValue] = useState('');
+  const [projectHoursValue, setProjectHoursValue] = useState('');
+  const [rateHourValue, setRateHourValue] = useState('');
+  const [budgetValue, setBudgetValue] = useState('');
+
+  const closeModal = () => {
+    setPositionsValue('');
+    setProjectHoursValue('');
+    setRateHourValue('');
+    setBudgetValue('');
+  };
+
   useEffect(() => {
     if (editClick) {
-      setPositionsValue(data.positions)
-      setProjectHoursValue(data.projecthours)
-      setRateHourValue(data.rateHour)
-      setBudgetValue(data.budget)
+      setPositionsValue(data.positions);
+      setProjectHoursValue(data.projecthours);
+      setRateHourValue(data.rateHour);
+      setBudgetValue(data.budget);
     } else {
-      setPositionsValue('')
-      setProjectHoursValue('')
-      setRateHourValue('')
-      setBudgetValue('')
+      setPositionsValue('');
+      setProjectHoursValue('');
+      setRateHourValue('');
+      setBudgetValue('');
     }
-  }, [editClick])
+  }, [editClick]);
 
   useEffect(() => {
     const eventModal = (e: MouseEvent) => {
       const _e = e as MouseEvent & {
-        target: HTMLElement
-      }
+        target: HTMLElement;
+      };
       if (
         !modalRef.current?.contains(_e.target) &&
         !btnAddNewRef.current?.contains(_e.target) &&
         !btnEditRef.current?.contains(_e.target)
       ) {
-        setModal(false)
-        setEditClick(false)
+        setModal(false);
+        setEditClick(false);
+        closeModal();
       }
-    }
-    document.body.addEventListener('click', eventModal)
+    };
+    document.body.addEventListener('click', eventModal);
     return () => {
-      document.body.removeEventListener('click', eventModal)
-    }
-  }, [])
+      document.body.removeEventListener('click', eventModal);
+    };
+  }, []);
   return (
     <div ref={modalRef} className={classNames(styles.wrap, { [styles.activeModal]: modal })}>
       <div className={styles.items}>
@@ -110,8 +119,9 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
           btnType={PuzzleButtonTypes.TextButton}
           btnClassName={styles.cancelBtn}
           onClick={() => {
-            setEditClick(false)
-            setModal(false)
+            setEditClick(false);
+            setModal(false);
+            closeModal();
           }}
         />
         <PuzzleButton
@@ -124,13 +134,14 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
       <div
         className={styles.icon}
         onClick={() => {
-          setModal(false)
-          setEditClick(false)
+          setModal(false);
+          setEditClick(false);
+          closeModal();
         }}>
         <CloseModalIcon />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModalResourses
+export default ModalResourses;

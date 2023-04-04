@@ -1,48 +1,47 @@
-import classnames from 'classnames'
-import classNames from 'classnames'
-import moment from 'moment'
-import { useEffect, useMemo, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Column, useExpanded, useSortBy, useTable } from 'react-table'
+import classnames from 'classnames';
+import classNames from 'classnames';
+import moment from 'moment';
+import { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Column, useExpanded, useSortBy, useTable } from 'react-table';
 
-import { AddNewTaskIcon } from '../../Assets/icons/AddNewTaskIcon'
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
-import { RotateSortIcon } from '../../Assets/icons/RotateSortIcon'
-import { SortIcon } from '../../Assets/icons/SortIcon'
-import { setSelectedModalVisible, setTitleTask } from '../../Redux/Reducers/postReducer'
-import PostSelector from '../../Redux/Selectors/postSelector'
-import postSelector from '../../Redux/Selectors/postSelector'
-import { CardTaskType } from '../../Redux/Types/tasks'
-import { TableColumns } from '../constants/Table/TableData'
+import { AddNewTaskIcon } from '../../Assets/icons/AddNewTaskIcon';
+import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
+import { RotateSortIcon } from '../../Assets/icons/RotateSortIcon';
+import { SortIcon } from '../../Assets/icons/SortIcon';
+import { setSelectedModalVisible, setTitleTask } from '../../Redux/Reducers/postReducer';
+import PostSelector from '../../Redux/Selectors/postSelector';
+import postSelector from '../../Redux/Selectors/postSelector';
+import { CardTaskType } from '../../Redux/Types/tasks';
+import { TableColumns } from '../constants/Table/TableData';
 
-import styles from './Table.module.css'
-
+import styles from './Table.module.css';
 
 const Table = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const DATA: CardTaskType = []
+  const DATA: CardTaskType = [];
 
-  const task = useSelector(PostSelector.getAllMilestones)
-  const singleProject = useSelector(postSelector.getSingleProject)
+  const task = useSelector(PostSelector.getAllMilestones);
+  const singleProject = useSelector(postSelector.getSingleProject);
 
-  const [isOpened, setOpened] = useState(false)
+  const [isOpened, setOpened] = useState(false);
   const onArrowClick = () => {
-    setOpened(!isOpened)
-  }
+    setOpened(!isOpened);
+  };
 
-  const [taskInfo, setTaskInfo] = useState<CardTaskType>(DATA)
+  const [taskInfo, setTaskInfo] = useState<CardTaskType>(DATA);
   useEffect(() => {
     if (task) {
-      setTaskInfo(task)
+      setTaskInfo(task);
     }
-  }, [task])
+  }, [task]);
   const onAddTaskClick = () => {
     if (singleProject) {
-      dispatch(setTitleTask(singleProject.project_name))
-      dispatch(setSelectedModalVisible(true))
+      dispatch(setTitleTask(singleProject.project_name));
+      dispatch(setSelectedModalVisible(true));
     }
-  }
+  };
 
   const COLUMNS: Array<Column> = [
     {
@@ -128,7 +127,7 @@ const Table = () => {
       Footer: '',
       accessor: 'start_date',
       Cell: (props) => {
-        return <>{moment(props.value).format('DD MMM YYYY')}</>
+        return <>{moment(props.value).format('DD MMM YYYY')}</>;
       }
     },
     {
@@ -136,7 +135,7 @@ const Table = () => {
       Footer: '',
       accessor: 'deadline',
       Cell: (props) => {
-        return <>{moment(props.value).format('DD MMM YYYY')}</>
+        return <>{moment(props.value).format('DD MMM YYYY')}</>;
       }
     },
     {
@@ -151,15 +150,15 @@ const Table = () => {
       accessor: 'progress',
       Cell: ({ value }) => <div className={styles.duration}>{value}%</div>
     }
-  ]
+  ];
 
-  const columns = useMemo(() => COLUMNS, [])
-  const data = useMemo(() => taskInfo, [taskInfo])
+  const columns = useMemo(() => COLUMNS, []);
+  const data = useMemo(() => taskInfo, [taskInfo]);
   const { getTableProps, getTableBodyProps, headerGroups, footerGroups, rows, prepareRow } = useTable(
     { columns, data },
     useSortBy,
     useExpanded
-  )
+  );
   return (
     <table {...getTableProps()} className={styles.tableContainer}>
       <thead>
@@ -176,7 +175,7 @@ const Table = () => {
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
-          prepareRow(row)
+          prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
@@ -184,10 +183,10 @@ const Table = () => {
                   <td {...cell.getCellProps()} className={styles.tableCell}>
                     {cell.render('Cell')}
                   </td>
-                )
+                );
               })}
             </tr>
-          )
+          );
         })}
       </tbody>
       <tfoot className={styles.tableFooter}>
@@ -202,7 +201,7 @@ const Table = () => {
         ))}
       </tfoot>
     </table>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;

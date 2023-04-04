@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import { Cascader, Collapse, DatePicker } from 'antd'
+import { useState } from 'react';
+import { Cascader, Collapse, DatePicker } from 'antd';
 
-import Checkbox from '../../Checkbox'
-import FiltersPanel from '../FiltersPanel'
-import Input from '../../Input'
+import Checkbox from '../../Checkbox';
+import FiltersPanel from '../FiltersPanel';
+import Input from '../../Input';
 
-import { CalendarIcon } from '../../../Assets/icons/CalendarIcon'
+import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 
-import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon'
+import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
 
-import styles from './FilterProjectScreen.module.css'
+import styles from './FilterProjectScreen.module.css';
 import {
   LabelCheckbox,
   LastChangeCheckbox,
@@ -17,13 +17,13 @@ import {
   PriorityCheckbox,
   ResponsibleCheckbox,
   StatusCheckbox
-} from './constants'
+} from './constants';
 
-const { Panel } = Collapse
+const { Panel } = Collapse;
 
 const FilterProjectScreen = () => {
-  const [searchLabel, setSearchLabel] = useState('')
-  const { RangePicker } = DatePicker
+  const [searchLabel, setSearchLabel] = useState('');
+  const { RangePicker } = DatePicker;
   return (
     <FiltersPanel>
       <>
@@ -102,7 +102,7 @@ const FilterProjectScreen = () => {
         />
       </>
     </FiltersPanel>
-  )
-}
+  );
+};
 
-export default FilterProjectScreen
+export default FilterProjectScreen;
