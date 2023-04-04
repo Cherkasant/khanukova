@@ -1,32 +1,32 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
-import { CommentIcon } from '../../Assets/icons/CommentIcon'
-import { FilesIcon } from '../../Assets/icons/FilesIcon'
-import { PinnedIcon } from '../../Assets/icons/PinnedIcon'
-import { EcaseIcon } from '../../Assets/icons/EcaseIcon'
-import { setEcaseModalVisible, setTitleRequest } from '../../Redux/Reducers/postReducer'
+import { CommentIcon } from '../../Assets/icons/CommentIcon';
+import { FilesIcon } from '../../Assets/icons/FilesIcon';
+import { PinnedIcon } from '../../Assets/icons/PinnedIcon';
+import { EcaseIcon } from '../../Assets/icons/EcaseIcon';
+import { setEcaseModalVisible, setTitleRequest } from '../../Redux/Reducers/postReducer';
 
-import styles from './ClientsRequestCard.module.css'
+import styles from './ClientsRequestCard.module.css';
 
 type ClientsRequestCardProps = {
-  nameOfArray: string
-  disabled?: boolean
+  nameOfArray: string;
+  disabled?: boolean;
   openedArray: Array<{
-    title: string
-    priority: string | null
-  }>
-}
+    title: string;
+    priority: string | null;
+  }>;
+};
 
 const ClientsRequestCard: FC<ClientsRequestCardProps> = ({ openedArray, nameOfArray }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onPinnedIconClick = () => {
-    dispatch(setEcaseModalVisible(true))
-  }
+    dispatch(setEcaseModalVisible(true));
+  };
   const onPinnedIconRequestClick = (title: string) => () => {
-    dispatch(setTitleRequest(title))
-  }
+    dispatch(setTitleRequest(title));
+  };
   return (
     <>
       <div className={styles.name}>{nameOfArray}</div>
@@ -60,11 +60,11 @@ const ClientsRequestCard: FC<ClientsRequestCardProps> = ({ openedArray, nameOfAr
                 </div>
               </div>
             </div>
-          )
+          );
         })}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ClientsRequestCard
+export default ClientsRequestCard;

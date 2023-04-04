@@ -1,16 +1,8 @@
 {
-  "extends": [
-    "react-app",
-    "react-app/jest",
-    "prettier",
-    "eslint:recommended"
-  ],
+  "extends": ["react-app", "react-app/jest", "prettier", "eslint:recommended"],
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
+      "files": ["*.ts", "*.tsx"],
       "rules": {
         "quotes": [
           "error",
@@ -35,10 +27,7 @@
             "ignoreRestSiblings": false
           }
         ],
-        "jsx-quotes": [
-          "error",
-          "prefer-double"
-        ],
+        "jsx-quotes": ["error", "prefer-double"],
         "prefer-const": "error",
         "max-len": [
           "error",
@@ -51,23 +40,11 @@
             "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\("
           }
         ],
-        "semi": [
-          "warn",
-          "never"
-        ],
+        "semi": ["warn", "always"],
         "import/order": [
           "error",
           {
-            "groups": [
-              "type",
-              "builtin",
-              "external",
-              "internal",
-              "parent",
-              "sibling",
-              "index",
-              "object"
-            ],
+            "groups": ["type", "builtin", "external", "internal", "parent", "sibling", "index", "object"],
             "newlines-between": "always-and-inside-groups"
           }
         ],
