@@ -11,31 +11,17 @@ import {
 import { CompanyListData } from '../Types/profile'
 import { ProjectData, TaskType } from '../Types/tasks'
 
-const JWT_TOKEN = 'Token cc55ec64983887bb2e985d9f408085447eb850e9'
-
 const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' })
 
 const registerUser = (data: RegisterUserData) => {
-  return API.post('/auth/users/', data, {
-    headers: {
-      Authorization: JWT_TOKEN
-    }
-  })
+  return API.post('/auth/users/', data)
 }
 
 const registerHeadInfo = (data: RegisterHeadData) => {
-  return API.post('/user-profile/head-company/', data, {
-    headers: {
-      Authorization: JWT_TOKEN
-    }
-  })
+  return API.post('/user-profile/head-company/', data)
 }
 const registerPoInfo = (data: RegisterPoData) => {
-  return API.post('/user-profile/po-company/', data, {
-    headers: {
-      Authorization: JWT_TOKEN
-    }
-  })
+  return API.post('/user-profile/po-company/', data)
 }
 
 const activateUser = (data: ActivateUserData) => {
@@ -47,23 +33,11 @@ const signInUser = (data: SignInUserData) => {
 }
 
 const sendResetEmail = (email: string) => {
-  return API.post(
-    'auth/users/reset_password/',
-    { email },
-    {
-      headers: {
-        Authorization: JWT_TOKEN
-      }
-    }
-  )
+  return API.post('auth/users/reset_password/', { email })
 }
 
 const resetPasswordConfirm = (data: ResetPasswordData) => {
-  return API.post('/auth/users/reset_password_confirm/', data, {
-    headers: {
-      Authorization: JWT_TOKEN
-    }
-  })
+  return API.post('/auth/users/reset_password_confirm/', data)
 }
 
 const postMilestone = (token: string, milestone: TaskType) => {
@@ -135,6 +109,13 @@ const getSingleProject = (token: string, id: string) => {
   return API.get(`/project/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } })
 }
 
+const getAllMilestones = (token: string, idProject: number) => {
+  return API.get('/project/milestone/', { project: idProject }, { headers: { Authorization: `JWT ${token}` } })
+}
+const getAllTasks = (token: string, idMilestone: number) => {
+  return API.get('/project/task/', { milestone: idMilestone }, { headers: { Authorization: `JWT ${token}` } })
+}
+
 export default {
   registerUser,
   sendResetEmail,
@@ -154,5 +135,7 @@ export default {
   getUserName,
   getAllProjects,
   postProject,
-  getSingleProject
+  getSingleProject,
+  getAllMilestones,
+  getAllTasks
 }

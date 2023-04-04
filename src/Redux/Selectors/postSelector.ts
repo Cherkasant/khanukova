@@ -10,5 +10,6 @@ export default {
   getRequestTitle: (state: RootState) => state.postsReducer.titleRequest,
   getAllProjects: (state: RootState) => state.postsReducer.allProjects,
   getSingleProject: (state: RootState) => state.postsReducer.singleProject,
-  getProjectId: (state: RootState) => state.postsReducer.projectId
+  getProjectId: (state: RootState) => state.postsReducer.projectId,
+  getAllMilestones: (state: RootState) => state.postsReducer.allMilestones
 }

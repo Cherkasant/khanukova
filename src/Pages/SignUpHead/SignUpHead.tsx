@@ -1,27 +1,27 @@
+import { Form } from 'antd'
+import 'intl-tel-input/build/css/intlTelInput.css'
 import { ChangeEvent, useState } from 'react'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
-import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-
-import 'intl-tel-input/build/css/intlTelInput.css'
-
-import { NavLink } from 'react-router-dom'
-import { Form } from 'antd'
-import { useNavigate } from 'react-router'
+import 'react-phone-number-input/style.css'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
-import Title from '../../Components/Title'
-import { PathNames } from '../Router/Router'
-import Checkbox from '../../Components/Checkbox'
-import { PasswordTypes } from '../../Components/constants/@types'
 import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon'
 import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon'
-import { registerUser } from '../../Redux/Reducers/authReducer'
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
+import Checkbox from '../../Components/Checkbox'
 import Input from '../../Components/Input'
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
+import Title from '../../Components/Title'
+import { PasswordTypes } from '../../Components/constants/@types'
+import { registerUser } from '../../Redux/Reducers/authReducer'
+import { PathNames } from '../Router/Router'
 
 import styles from './SignUpHead.module.css'
+
+
 export enum Role {
   PO = 'productOwner',
   CEO = 'ceo',
@@ -31,6 +31,7 @@ export enum Role {
   QA = 'qa',
   Programmer = 'programmer'
 }
+
 const options = [
   { value: Role.PO, label: 'Product Owner' },
   { value: Role.CEO, label: 'CEO' },
@@ -72,7 +73,7 @@ const SignUpHead = () => {
           full_name: values.fullName,
           email: values.email,
           phone: values.phone,
-          role: values.userStatus.label,
+          position: values.userStatus.label,
           code: null,
           password: values.password,
           re_password: values.passwordConfirmation
@@ -171,10 +172,10 @@ const SignUpHead = () => {
               {checkRole?.value === Role.Programmer ||
               checkRole?.value === Role.Designer ||
               checkRole?.value === Role.QA ? (
-                <Form.Item name="code" className={styles.formItem}>
-                  <Input type={'text'} placeholder={'Code'} />
-                </Form.Item>
-              ) : null}
+                  <Form.Item name="code" className={styles.formItem}>
+                    <Input type={'text'} placeholder={'Code'} />
+                  </Form.Item>
+                ) : null}
 
               <div className={styles.passwordContainer}>
                 <Form.Item

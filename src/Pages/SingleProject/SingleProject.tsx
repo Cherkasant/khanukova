@@ -1,36 +1,36 @@
+import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 
-import classNames from 'classnames'
-
 import { AddMeetingIcon } from '../../Assets/icons/AddMeetingIcon'
-import { Tabs } from '../../Components/constants/@types'
-import Tab from '../../Components/Tabs'
-import { FilterIcon } from '../../Assets/icons/FilterIcon'
 import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon'
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
-import NewTask from '../../Components/ModalNewTask'
-
-import postSelector from '../../Redux/Selectors/postSelector'
-import Input from '../../Components/Input'
-import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen'
-import Table from '../../Components/Table'
+import { FilterIcon } from '../../Assets/icons/FilterIcon'
 import ClientsRequestCard from '../../Components/ClientsRequestCard'
 import { requestInProgressArray, requestOpenedArray } from '../../Components/ClientsRequestCard/constantsRequest'
+import Documents from '../../Components/Documents'
+import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen'
+import Input from '../../Components/Input'
 import ModalEcase from '../../Components/ModalEcase'
+import NewTask from '../../Components/ModalNewTask'
 import ModalRequest from '../../Components/ModalRequest'
 import Resourses from '../../Components/Resourses'
+import Table from '../../Components/Table'
+import Tab from '../../Components/Tabs'
+import { Tabs } from '../../Components/constants/@types'
 import {
+  getAllMilestones,
+  getAllTasks,
   getSingleProject,
   setFilterVisible,
   setSelectedModalVisible,
   setTitleTask
 } from '../../Redux/Reducers/postReducer'
-import Documents from '../../Components/Documents'
+import postSelector from '../../Redux/Selectors/postSelector'
 
 import styles from './SingleProject.module.css'
+
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
@@ -49,7 +49,7 @@ const SingleProject = () => {
   const onFilterClick = () => {
     dispatch(setFilterVisible(true))
   }
-  const isSaveClicked = useSelector(postSelector.getTask)
+  const isSaveClicked = useSelector(postSelector.getAllMilestones)
   const singleProject = useSelector(postSelector.getSingleProject)
 
   const dispatch = useDispatch()
@@ -72,6 +72,8 @@ const SingleProject = () => {
   useEffect(() => {
     if (id) {
       dispatch(getSingleProject(+id))
+      dispatch(getAllMilestones(+id))
+      dispatch(getAllTasks(1))
     }
   }, [id])
 

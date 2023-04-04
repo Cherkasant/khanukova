@@ -2,7 +2,7 @@ export type RegisterUserData = {
   full_name: string
   email: string
   phone: string
-  role: string
+  position: string
   code: string | null
   password: string
   re_password: string
