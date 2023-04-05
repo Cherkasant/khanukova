@@ -46,6 +46,7 @@ export type RegisterPoData = {
   link_competitor: string
   start_project: string
   used_outsourcing: string
+  employees: [number]
   owner: number
 }
 
