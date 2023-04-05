@@ -21,25 +21,26 @@ import { PathNames } from '../Router/Router'
 
 import styles from './SignUpHead.module.css'
 
-
 export enum Role {
-  PO = 'productOwner',
+  PjO = 'projectOwner',
   CEO = 'ceo',
   CTO = 'cto',
   PM = 'projectManger',
   Designer = 'designer',
   QA = 'qa',
-  Programmer = 'programmer'
+  Programmer = 'programmer',
+  PdO = 'productOwner'
 }
 
 const options = [
-  { value: Role.PO, label: 'Product Owner' },
+  { value: Role.PjO, label: 'Project Owner' },
   { value: Role.CEO, label: 'CEO' },
   { value: Role.CTO, label: 'CTO' },
   { value: Role.PM, label: 'Project Manager' },
   { value: Role.Designer, label: 'Designer' },
   { value: Role.QA, label: 'QA' },
-  { value: Role.Programmer, label: 'Programmer' }
+  { value: Role.Programmer, label: 'Programmer' },
+  { value: Role.PdO, label: 'Product Owner' }
 ]
 
 const SignUpHead = () => {
@@ -80,13 +81,14 @@ const SignUpHead = () => {
         },
         callback: () => {
           switch (checkRole.value) {
-            case Role.PO:
+            case Role.PjO:
               navigate(PathNames.SignUpPoInfo)
               break
 
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
+            case Role.PdO:
               navigate(PathNames.CheckYourEmail)
               break
 
@@ -171,11 +173,12 @@ const SignUpHead = () => {
 
               {checkRole?.value === Role.Programmer ||
               checkRole?.value === Role.Designer ||
+              checkRole?.value === Role.PdO ||
               checkRole?.value === Role.QA ? (
-                  <Form.Item name="code" className={styles.formItem}>
-                    <Input type={'text'} placeholder={'Code'} />
-                  </Form.Item>
-                ) : null}
+                <Form.Item name="code" className={styles.formItem}>
+                  <Input type={'text'} placeholder={'Code'} />
+                </Form.Item>
+              ) : null}
 
               <div className={styles.passwordContainer}>
                 <Form.Item
@@ -216,6 +219,7 @@ const SignUpHead = () => {
                 btnTitle={
                   checkRole?.value === Role.Designer ||
                   checkRole?.value === Role.QA ||
+                  checkRole?.value === Role.PdO ||
                   checkRole?.value === Role.Programmer
                     ? 'Create account'
                     : 'Next step'
