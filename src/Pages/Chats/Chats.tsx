@@ -5,8 +5,12 @@ import { Collapse } from 'antd';
 import classNames from 'classnames';
 
 import Input from '../../Components/Input';
+import InputChat from '../../Components/Chats/InputChat';
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import { SearchIcon } from '../../Assets/icons/SearchIcon';
 import UserChat from '../../Components/UserChat/UserChat';
+import Quote from '../../Assets/Chat/Quote';
+import More from '../../Assets/Chat/More';
 
 import styles from './Chats.module.css';
 
@@ -84,7 +88,34 @@ const Chats = () => {
           </div>
         </div>
       </div>
-      <div className={styles.Chats}></div>
+      <div className={styles.chats}>
+        <div className={styles.chatsHeader}>
+          <UserChat name={'Pavel'} team={'CAPIX'} />
+          <div className={styles.chatsPanel}>
+            <div className={styles.quote}>
+              <Quote /> {'Request a quote'}
+            </div>
+            <PuzzleButton
+              btnDisabled
+              btnClassName={styles.btn}
+              btnTitle={'Launch a project'}
+              btnType={PuzzleButtonTypes.TextButton}
+            />
+            <PuzzleButton
+              btnDisabled
+              btnClassName={styles.btn}
+              btnTitle={'Create a Meeting'}
+              btnType={PuzzleButtonTypes.TextButton}
+            />
+            <More className={styles.more} />
+          </div>
+        </div>
+        <div className={styles.chatsMain}></div>
+        <div className={styles.chatsFooter}>
+          <InputChat />
+          <PuzzleButton btnTitle={'Send'} btnType={PuzzleButtonTypes.TextButton} />
+        </div>
+      </div>
     </div>
   );
 };

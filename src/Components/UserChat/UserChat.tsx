@@ -8,7 +8,7 @@ type UserChatType = {
   className?: string;
   name: string;
   team: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const UserChat: React.FC<UserChatType> = ({ className, name, team, onClick }) => {

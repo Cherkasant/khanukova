@@ -1,10 +1,10 @@
-import { FC, PropsWithChildren, ReactElement } from 'react'
-import classNames from 'classnames'
-import { Button } from 'antd'
+import { FC, PropsWithChildren, ReactElement } from 'react';
+import classNames from 'classnames';
+import { Button } from 'antd';
 
-import { ButtonProps } from 'antd/es/button/button'
+import { ButtonProps } from 'antd/es/button/button';
 
-import styles from './PuzzleButton.module.css'
+import styles from './PuzzleButton.module.css';
 
 export enum PuzzleButtonTypes {
   TextButton = 'text',
@@ -12,12 +12,12 @@ export enum PuzzleButtonTypes {
 }
 
 export type PuzzleButtonProps = Omit<PropsWithChildren<ButtonProps>, 'onClick'> & {
-  btnTitle?: string | ReactElement
-  btnType?: PuzzleButtonTypes
-  onClick?: () => void
-  btnClassName?: string
-  btnDisabled?: boolean
-}
+  btnTitle?: string | ReactElement;
+  btnType?: PuzzleButtonTypes;
+  onClick?: () => void;
+  btnClassName?: string;
+  btnDisabled?: boolean;
+};
 
 const PuzzleButton: FC<PuzzleButtonProps> = ({
   btnType,
@@ -27,7 +27,7 @@ const PuzzleButton: FC<PuzzleButtonProps> = ({
   btnDisabled,
   ...rest
 }: PuzzleButtonProps) => {
-  const buttonClassName = btnType && styles[btnType]
+  const buttonClassName = btnType && styles[btnType];
 
   return (
     <Button
@@ -38,7 +38,7 @@ const PuzzleButton: FC<PuzzleButtonProps> = ({
       {...rest}>
       {btnTitle}
     </Button>
-  )
-}
+  );
+};
 
-export default PuzzleButton
+export default PuzzleButton;
