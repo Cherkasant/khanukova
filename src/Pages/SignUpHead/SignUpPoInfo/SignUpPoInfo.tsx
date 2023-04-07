@@ -33,6 +33,7 @@ const SignUpPoInfo = () => {
           link_competitor: values.linkCompetitor,
           start_project: values.startProject,
           used_outsourcing: values.usedOutsourcing,
+          employees: [idUser],
           owner: idUser
         },
         callback: () => {
