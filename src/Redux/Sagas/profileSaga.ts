@@ -14,6 +14,7 @@ import {
 } from '../Reducers/profileReducer';
 import { EditCompanyListPayload } from '../Types/profile';
 import API from '../Utils/api';
+
 import callCheckingAuth from './callCheckingAuth';
 
 function* getHeadCompanyListWorker() {
