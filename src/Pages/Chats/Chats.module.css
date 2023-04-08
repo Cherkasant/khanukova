@@ -8,6 +8,7 @@
 
 .panelChats {
   width: 489px;
+  flex-shrink: 0;
   border-right: 1px solid #4270a7;
 }
 
@@ -24,8 +25,7 @@
   display: flex;
   justify-content: center;
   position: relative;
-  margin-top: 20px;
-  margin-bottom: 45px;
+  margin: 15px 0;
 }
 
 .searchInput {
@@ -63,7 +63,9 @@
 }
 
 .panelChatsFilters {
-  width: 244px;
+  border-right: 1px solid #0e4298;
+  width: 100%;
+  height: 100vh;
 }
 
 .collapseContainer {
@@ -87,9 +89,8 @@
 }
 
 .panelChatsUsers {
-  border-left: 1px solid #0e4298;
   height: 100vh;
-  width: 243px;
+  width: 100%;
 }
 
 .active {
