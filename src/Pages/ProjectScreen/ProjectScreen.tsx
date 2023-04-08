@@ -25,6 +25,7 @@ import postSelector from '../../Redux/Selectors/postSelector';
 
 import styles from './ProjectScreen.module.css';
 
+
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
   { name: 'Gantt', key: Tabs.Gantt },
