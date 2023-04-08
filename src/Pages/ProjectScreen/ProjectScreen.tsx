@@ -22,6 +22,7 @@ import Tab from '../../Components/Tabs';
 import { Tabs } from '../../Components/constants/@types';
 import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
+
 import styles from './ProjectScreen.module.css';
 
 const TABS_NAMES = [
