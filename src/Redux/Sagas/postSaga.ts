@@ -88,12 +88,13 @@ function* getAllTasksWorker(action: PayloadAction<number>) {
 }
 
 export default function* postSaga() {
-  yield all([takeLatest(getTaskCard, getTaskCardWorker)]);
-  yield all([takeLatest(postTaskCard, postTaskCardWorker)]);
-  yield all([takeLatest(getAllProjects, getAllProjectsWorker)]);
-  yield all([takeLatest(getSingleProject, getSingleProjectWorker)]);
-  yield all([takeLatest(postProject, postProjectTitleWorker)]);
-  yield all([takeLatest(getAllMilestones, getAllMilestonesWorker)]);
-  yield all([takeLatest(getAllTasks, getAllTasksWorker)]);
-  // yield all([takeLatest(setTitleTask, postProjectTitleWorker)]);
+  yield all([
+    takeLatest(getTaskCard, getTaskCardWorker),
+    takeLatest(postTaskCard, postTaskCardWorker),
+    takeLatest(getAllProjects, getAllProjectsWorker),
+    takeLatest(getSingleProject, getSingleProjectWorker),
+    takeLatest(postProject, postProjectTitleWorker),
+    takeLatest(getAllMilestones, getAllMilestonesWorker),
+    takeLatest(getAllTasks, getAllTasksWorker)
+  ]);
 }
