@@ -1,81 +1,88 @@
-import { useEffect, useMemo, useState } from 'react'
-import Dropdown from 'react-dropdown'
-import { DatePicker, DatePickerProps, Space } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
-import classNames from 'classnames'
+import { DatePicker, DatePickerProps, Space } from 'antd';
+import classNames from 'classnames';
+import { useEffect, useMemo, useState } from 'react';
+import Dropdown from 'react-dropdown';
+import { useDispatch, useSelector } from 'react-redux';
 
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
-import Input from '../../Components/Input'
-import Title from '../../Components/Title'
-import { PencilIcon } from '../../Assets/Profile/PencilIcon'
-import TabsListProfile from '../../Components/TabsListProfile'
-import { CompanyList, TabsProfile } from '../../Components/constants/@types'
-import CompanyProfile from '../../Components/CompanyProfile'
-import DevTeamTable from '../../Components/DevTeamTable'
+import { GenerateIcon } from '../../Assets/DevTeam/GenerateIcon';
+import { PencilIcon } from '../../Assets/Profile/PencilIcon';
+import { DeleteProjectIcon } from '../../Assets/ProfilePage/DeleteProjectIcon';
+import { PauseProjectIcon } from '../../Assets/ProfilePage/PauseProjectIcon';
+import CompanyProfile from '../../Components/CompanyProfile';
+import DevTeamTable from '../../Components/DevTeamTable';
+import Input from '../../Components/Input';
+import ModalGeneratePassword from '../../Components/ModalGeneratePassword';
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import TabsListProfile from '../../Components/TabsListProfile';
+import Title from '../../Components/Title';
+import { CompanyList, TabsProfile } from '../../Components/constants/@types';
+import {
+  getGeneratePassword,
+  getHeadCompanyListReducer,
+  getPersonalInfoReducer
+} from '../../Redux/Reducers/profileReducer';
+import profileSelectors from '../../Redux/Selectors/profileSelectors';
 
-import profileSelectors from '../../Redux/Selectors/profileSelectors'
-import { getHeadCompanyListReducer, getPersonalInfoReducer } from '../../Redux/Reducers/profileReducer'
-import { GenerateIcon } from '../../Assets/DevTeam/GenerateIcon'
-import ModalGeneratePassword from '../../Components/ModalGeneratePassword'
+import styles from './ProfilePage.module.css';
 
-import styles from './ProfilePage.module.css'
 
 const ProfilePage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const personalInfoList = useSelector(profileSelectors.getPersonalInfo)
-  const companyList = useSelector(profileSelectors.getCompanyList)
-
-  useEffect(() => {
-    dispatch(getHeadCompanyListReducer())
-  },[])
+  const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
+  const companyList = useSelector(profileSelectors.getCompanyList);
+  const password = useSelector(profileSelectors.getGeneratePassword);
 
   useEffect(() => {
-    dispatch(getPersonalInfoReducer())
-  },[])
+    dispatch(getHeadCompanyListReducer());
+  }, []);
 
-  const [name, setName] = useState('Ivanova Irina')
-  const [nickName, setNickName] = useState('')
-  const [positions, setPositions] = useState('CEO')
-  const [email, setEmail] = useState('irina@gmail.com')
-  const [phone, setPhone] = useState('+375 (29) 758-78-47')
-  const [telegram, setTelegram] = useState('')
+  useEffect(() => {
+    dispatch(getPersonalInfoReducer());
+  }, []);
 
+  const [name, setName] = useState('Ivanova Irina');
+  const [nickName, setNickName] = useState('');
+  const [positions, setPositions] = useState('CEO');
+  const [email, setEmail] = useState('irina@gmail.com');
+  const [phone, setPhone] = useState('+375 (29) 758-78-47');
+  const [telegram, setTelegram] = useState('');
 
   const levelOptions = [
     { value: 'Junior', label: 'Junior' },
     { value: 'Middle', label: 'Middle' },
     { value: 'Senior', label: 'Senior' },
     { value: 'Lead', label: 'Lead' }
-  ]
+  ];
 
-  const [selectedLevelOptions, setSelectedLevelOptions] = useState<any>(null)
-  const [rate, setRate] = useState('')
+  const [selectedLevelOptions, setSelectedLevelOptions] = useState<any>(null);
+  const [rate, setRate] = useState('');
 
-  const [projects, setProjects] = useState('')
-  const [stack, setStack] = useState('')
-  const [experience, setExperience] = useState('')
+  const [projects, setProjects] = useState('');
+  const [stack, setStack] = useState('');
+  const [experience, setExperience] = useState('');
 
-  const [info, setInfo] = useState('')
+  const [info, setInfo] = useState('');
 
-  const [activeTab, setActiveTab] = useState(TabsProfile.PersonalInfo)
+  const [activeTab, setActiveTab] = useState(TabsProfile.PersonalInfo);
   const onTabClick = (tab: TabsProfile) => {
-    setActiveTab(tab)
-  }
-  const [activeModal, setActiveModal] = useState(false)
+    setActiveTab(tab);
+  };
+  const [activeModal, setActiveModal] = useState(false);
   const onGenerateClick = () => {
-    setActiveModal(true)
-  }
+    dispatch(getGeneratePassword());
+    setActiveModal(true);
+  };
   const onScreenClick = () => {
-    setActiveModal(false)
-  }
+    setActiveModal(false);
+  };
 
   const currencyOptions = [
     { value: 'EUR', label: 'EUR' },
     { value: 'USD', label: 'USD' }
-  ]
+  ];
 
-  const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null)
+  const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null);
 
   const languageOptions = [
     { value: 'English', label: 'English' },
@@ -84,16 +91,16 @@ const ProfilePage = () => {
     { value: 'Spanish', label: 'Spanish' },
     { value: 'Russian', label: 'Russian' },
     { value: 'Ukrainian', label: 'Ukrainian' },
-    { value: 'Arabic', label: 'Arabic' },
-  ]
+    { value: 'Arabic', label: 'Arabic' }
+  ];
 
-  const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null)
+  const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null);
 
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString)
-  }
+    console.log(date, dateString);
+  };
 
-  const isHead = true
+  const isHead = true;
 
   const TABS_NAMES = useMemo(
     () => [
@@ -102,7 +109,17 @@ const ProfilePage = () => {
       { name: 'Dev Team', key: TabsProfile.DevTeam }
     ],
     []
-  )
+  );
+
+  const [showClose, setShowClose] = useState(false);
+  const onCloseProjectClick = () => {
+    setShowClose(!showClose);
+  };
+
+  const ClOSEBUTTON_LIST = [
+    { value: 'Pause', label: 'Pause', icon: <DeleteProjectIcon /> },
+    { value: 'Delete', label: 'Delete', icon: <PauseProjectIcon /> }
+  ];
 
   const COMPANY_LIST = [
     {
@@ -200,12 +217,30 @@ const ProfilePage = () => {
       key: CompanyList.ClientPortrait,
       answers: companyList?.client_describe
     }
-  ]
+  ];
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Title name={'My Profile'} className={styles.title} />
+        <div className={styles.titleBlock}>
+          <Title name={'My Profile'} className={styles.title} />
+          <div className={styles.dropdown_container}>
+            <div className={styles.btnProject} onClick={onCloseProjectClick}>
+              {'Close a project'}
+            </div>
+            {showClose ? (
+              <div className={styles.dropdown_menu}>
+                {ClOSEBUTTON_LIST.map((el) => (
+                  <div key={el.value} className={styles.dropdown_item}>
+                    {el.icon}
+                    {el.label}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </div>
+
         <TabsListProfile activeTab={activeTab} onSelectTab={onTabClick} tabsList={TABS_NAMES} />
       </div>
 
@@ -310,7 +345,6 @@ const ProfilePage = () => {
 
           <div className={styles.blockHead}>
             <div className={styles.containerInputHead}>
-
               <Dropdown
                 options={levelOptions}
                 onChange={setSelectedLevelOptions}
@@ -323,8 +357,6 @@ const ProfilePage = () => {
                 arrowOpen={<span className={styles.arrowOpen} />}
                 menuClassName={styles.dropdownMenu}
               />
-
-              
 
               <div className={styles.containerRate}>
                 <Input
@@ -431,12 +463,12 @@ const ProfilePage = () => {
               [styles.showModal]: activeModal
             })}
             onClick={onScreenClick}>
-            <ModalGeneratePassword modal={activeModal} />
+            <ModalGeneratePassword modal={activeModal} password={password} />
           </div>
         </div>
       ) : null}
     </div>
-  )
-}
+  );
+};
 
-export default ProfilePage
+export default ProfilePage;

@@ -1,26 +1,27 @@
-import React, { FC, useState } from 'react'
-import classNames from 'classnames'
+import classNames from 'classnames';
+import React, { FC, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { CopyIcon } from '../../Assets/DevTeam/CopyIcon';
+import { TelegramIcon } from '../../Assets/DevTeam/TelegramIcon';
+import { ViberIcon } from '../../Assets/DevTeam/ViberIcon';
+import { WhatsappIcon } from '../../Assets/DevTeam/WhatsappIcon';
+import styles from '../ModalGeneratePassword/ModalGeneratePassword.module.css';
 
-import styles from '../ModalGeneratePassword/ModalGeneratePassword.module.css'
-import { TelegramIcon } from '../../Assets/DevTeam/TelegramIcon'
-import { ViberIcon } from '../../Assets/DevTeam/ViberIcon'
-import { WhatsappIcon } from '../../Assets/DevTeam/WhatsappIcon'
-import { CopyIcon } from '../../Assets/DevTeam/CopyIcon'
 
 type ModalGeneratePasswordProps = {
-  modal: boolean
-}
+  modal: boolean;
+  password: string;
+};
 
-const ModalGeneratePassword: FC<ModalGeneratePasswordProps> = ({ modal }) => {
-  const [copied, setCopied] = useState(false)
+const ModalGeneratePassword: FC<ModalGeneratePasswordProps> = ({ modal, password }) => {
+  const [copied, setCopied] = useState(false);
   const onCopyClick = () => {
-    setCopied(true)
+    setCopied(true);
     setTimeout(() => {
-      setCopied(false)
-    }, 1500)
-  }
+      setCopied(false);
+    }, 1500);
+  };
   return (
     <div
       className={classNames(styles.wrap, { [styles.activeModal]: modal })}
@@ -28,8 +29,8 @@ const ModalGeneratePassword: FC<ModalGeneratePasswordProps> = ({ modal }) => {
       <div className={styles.container}>
         <div className={styles.passwordBlock}>
           <div className={styles.popoverTitle}>{'Copy password to clipboard'}</div>
-          <div className={styles.password}>{'01udpo35cmsn'}</div>
-          <CopyToClipboard text="01udpo35cmsn" onCopy={onCopyClick}>
+          <div className={styles.password}>{password}</div>
+          <CopyToClipboard text={password} onCopy={onCopyClick}>
             <div className={styles.copyIcon}>
               <CopyIcon />
             </div>
@@ -53,7 +54,7 @@ const ModalGeneratePassword: FC<ModalGeneratePasswordProps> = ({ modal }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModalGeneratePassword
+export default ModalGeneratePassword;

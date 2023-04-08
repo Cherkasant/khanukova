@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const ProjectActiveIcon = () => {
   return (
@@ -12,5 +12,5 @@ export const ProjectActiveIcon = () => {
       />
       <rect x="5" y="15" width="30" height="18" rx="2" fill="#1258CA" />
     </svg>
-  )
-}
+  );
+};

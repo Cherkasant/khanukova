@@ -9,5 +9,5 @@ export const DeleteIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

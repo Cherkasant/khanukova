@@ -1,47 +1,47 @@
-import { ChangeEvent, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { NavLink } from 'react-router-dom'
+import { ChangeEvent, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
-import { Form } from 'antd'
+import { Form } from 'antd';
 
-import Input from '../../Components/Input'
-import Title from '../../Components/Title'
-import { PathNames } from '../Router/Router'
-import Checkbox from '../../Components/Checkbox'
-import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon'
-import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon'
-import { PasswordTypes } from '../../Components/constants/@types'
-import { signInUser } from '../../Redux/Reducers/authReducer'
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
+import Input from '../../Components/Input';
+import Title from '../../Components/Title';
+import { PathNames } from '../Router/Router';
+import Checkbox from '../../Components/Checkbox';
+import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon';
+import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
+import { PasswordTypes } from '../../Components/constants/@types';
+import { signInUser } from '../../Redux/Reducers/authReducer';
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 
-import styles from './SignIn.module.css'
+import styles from './SignIn.module.css';
 
 const SignIn = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onSignIn = (values: any) => {
     dispatch(
       signInUser({
         data: { email: values.email, password: values.password },
         callback: () => {
-          navigate(PathNames.Home)
+          navigate(PathNames.Home);
         }
       })
-    )
-  }
-  const [form] = Form.useForm()
-  const checkEmail = Form.useWatch('email', form)
-  const checkPassword = Form.useWatch('password', form)
-  const [checked, setChecked] = useState(false)
-  const [type, setType] = useState(PasswordTypes.Password)
+    );
+  };
+  const [form] = Form.useForm();
+  const checkEmail = Form.useWatch('email', form);
+  const checkPassword = Form.useWatch('password', form);
+  const [checked, setChecked] = useState(false);
+  const [type, setType] = useState(PasswordTypes.Password);
   const onEyeClick = () => {
-    type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password)
-  }
+    type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password);
+  };
   const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
-  }
+    setChecked(event.target.checked);
+  };
   return (
     <>
       <div className={styles.container}>
@@ -97,7 +97,7 @@ const SignIn = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

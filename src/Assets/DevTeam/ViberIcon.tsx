@@ -18,5 +18,5 @@ export const ViberIcon = () => {
         fill="#7E57C2"
       />
     </svg>
-  )
-}
+  );
+};

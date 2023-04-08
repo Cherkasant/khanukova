@@ -8,5 +8,5 @@ export const AvatarIcon = () => {
         strokeWidth="1.01899"
       />
     </svg>
-  )
-}
+  );
+};

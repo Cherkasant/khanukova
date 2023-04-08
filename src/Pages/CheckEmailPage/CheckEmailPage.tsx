@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
-import Title from '../../Components/Title'
+import Title from '../../Components/Title';
 
-import { PathNames } from '../Router/Router'
+import { PathNames } from '../Router/Router';
 
-import styles from './CheckEmailPage.module.css'
+import styles from './CheckEmailPage.module.css';
 
 const CheckEmailPage = () => {
   return (
@@ -23,7 +23,7 @@ const CheckEmailPage = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CheckEmailPage
+export default CheckEmailPage;

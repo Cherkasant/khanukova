@@ -6,5 +6,5 @@ export const RotateSortIcon = () => {
         fill="#9BACC9"
       />
     </svg>
-  )
-}
+  );
+};

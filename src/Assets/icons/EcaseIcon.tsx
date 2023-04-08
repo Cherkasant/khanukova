@@ -10,5 +10,5 @@ export const EcaseIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

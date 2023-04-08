@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import styles from './Checkbox.module.css'
+import styles from './Checkbox.module.css';
 
 export enum IconColor {
   Blue = 'blue',
@@ -23,9 +23,9 @@ type CheckboxProps = {
 }
 
 const Checkbox: FC<CheckboxProps> = (props) => {
-  const { isChecked, handleChange, label, color, icon } = props
+  const { isChecked, handleChange, label, color, icon } = props;
 
-  const IconClassName = color ? styles[color] : ' without-color'
+  const IconClassName = color ? styles[color] : ' without-color';
   return (
     <div className={styles.container}>
       <input type="checkbox" id={label} checked={isChecked} onChange={handleChange} className={styles.input} />
@@ -34,7 +34,7 @@ const Checkbox: FC<CheckboxProps> = (props) => {
         {label}
       </label>
     </div>
-  )
-}
+  );
+};
 
-export default Checkbox
+export default Checkbox;

@@ -8,5 +8,5 @@ export const BellIcon = ({ width = '28', height = '28' }) => {
         strokeWidth="1.2"
       />
     </svg>
-  )
-}
+  );
+};

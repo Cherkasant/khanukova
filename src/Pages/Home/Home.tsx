@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-import Input from '../../Components/Input'
-import Title from '../../Components/Title'
-import { SearchIcon } from '../../Assets/icons/SearchIcon'
-import CardsList from '../../Components/CardsList'
-import { PathNames } from '../Router/Router'
+import Input from '../../Components/Input';
+import Title from '../../Components/Title';
+import { SearchIcon } from '../../Assets/icons/SearchIcon';
+import CardsList from '../../Components/CardsList';
+import { PathNames } from '../Router/Router';
 
-import styles from './Home.module.css'
+import styles from './Home.module.css';
 
 const MOCK_CARDS_LIST = [
   {
@@ -26,13 +26,13 @@ const MOCK_CARDS_LIST = [
     budget: '1000000$',
     paid: '12500$'
   }
-]
+];
 const Home = () => {
-  const navigate = useNavigate()
-  const [inputSearch, setInputSearch] = useState('')
+  const navigate = useNavigate();
+  const [inputSearch, setInputSearch] = useState('');
   const onChange = (value: string) => {
-    setInputSearch(value)
-  }
+    setInputSearch(value);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.widgets}>
@@ -50,7 +50,7 @@ const Home = () => {
 
       <CardsList cardsList={MOCK_CARDS_LIST} />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

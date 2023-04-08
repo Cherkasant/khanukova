@@ -6,7 +6,7 @@ const ArrowDocIcon = () => {
         fill="#1258CA"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default ArrowDocIcon
+export default ArrowDocIcon;

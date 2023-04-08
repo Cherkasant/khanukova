@@ -6,5 +6,5 @@ export const CopyIcon = () => {
         fill="#9BACC9"
       />
     </svg>
-  )
-}
+  );
+};

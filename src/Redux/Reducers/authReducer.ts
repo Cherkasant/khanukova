@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { ACCESS_TOKEN_KEY } from '../../Components/constants/consts'
+import { ACCESS_TOKEN_KEY } from '../../Components/constants/consts';
 import {
   ActivateUserPayload,
   RegisterHeadPayload,
@@ -9,18 +9,18 @@ import {
   ResetPasswordConfirmPayload,
   SendResetEmailPayload,
   SignInUserPayload
-} from '../Types/auth'
+} from '../Types/auth';
 
 type authReducerState = {
-  idUser: number
-  isLoggedIn: boolean
-  userName: string
-}
+  idUser: number;
+  isLoggedIn: boolean;
+  userName: string;
+};
 const initialState: authReducerState = {
   isLoggedIn: !!localStorage.getItem(ACCESS_TOKEN_KEY),
   userName: '',
   idUser: 0
-}
+};
 
 const authSlice = createSlice({
   name: 'authReducer',
@@ -28,24 +28,24 @@ const authSlice = createSlice({
   reducers: {
     registerUser: (state, action: PayloadAction<RegisterUserPayload>) => {},
     setIdUser: (state, action: PayloadAction<number>) => {
-      state.idUser = action.payload
+      state.idUser = action.payload;
     },
     registerHeadInfo: (state, action: PayloadAction<RegisterHeadPayload>) => {},
     registerPoInfo: (state, action: PayloadAction<RegisterPoPayload>) => {},
     activateUser: (state, action: PayloadAction<ActivateUserPayload>) => {},
     signInUser: (state, action: PayloadAction<SignInUserPayload>) => {},
     setLoggedIn: (state, action: PayloadAction<boolean>) => {
-      state.isLoggedIn = action.payload
+      state.isLoggedIn = action.payload;
     },
     getUserName: (state, action: PayloadAction<undefined>) => {},
     setUserName: (state, action: PayloadAction<string>) => {
-      state.userName = action.payload
+      state.userName = action.payload;
     },
     logoutUser: (state, action: PayloadAction<undefined>) => {},
     sendResetEmail: (state, action: PayloadAction<SendResetEmailPayload>) => {},
     resetPasswordConfirm: (state, action: PayloadAction<ResetPasswordConfirmPayload>) => {}
   }
-})
+});
 export const {
   registerUser,
   setIdUser,
@@ -59,7 +59,7 @@ export const {
   logoutUser,
   getUserName,
   setUserName
-} = authSlice.actions
-const authReducer = authSlice.reducer
+} = authSlice.actions;
+const authReducer = authSlice.reducer;
 
-export default authReducer
+export default authReducer;

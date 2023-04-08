@@ -8,5 +8,5 @@ export const LinkedinIcon = ({ width = '20', height = '20', fill = '#4270A7' }) 
         fill={fill}
       />
     </svg>
-  )
-}
+  );
+};

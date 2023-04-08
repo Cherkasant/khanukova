@@ -1,1 +1,1 @@
-export { default } from './ModalGeneratePassword'
+export { default } from './ModalGeneratePassword';

@@ -10,5 +10,5 @@ export const GenerateIcon = () => {
         fill="#1258CA"
       />
     </svg>
-  )
-}
+  );
+};

@@ -6,5 +6,5 @@ export const SearchIcon = () => {
         fill="#1258CA"
       />
     </svg>
-  )
-}
+  );
+};

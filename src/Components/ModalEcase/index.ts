@@ -1,1 +1,1 @@
-export { default } from './ModalEcase'
+export { default } from './ModalEcase';

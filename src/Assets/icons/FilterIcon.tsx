@@ -24,5 +24,5 @@ export const FilterIcon = () => {
         fill="white"
       />
     </svg>
-  )
-}
+  );
+};

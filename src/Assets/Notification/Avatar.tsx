@@ -7,5 +7,5 @@ export const Avatar = ({ width = '18', height = '18' }) => {
         strokeWidth="1.35234"
       />
     </svg>
-  )
-}
+  );
+};

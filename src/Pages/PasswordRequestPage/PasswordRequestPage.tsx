@@ -1,31 +1,31 @@
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router'
-import { Form } from 'antd'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { Form } from 'antd';
 
-import Input from '../../Components/Input'
-import { PathNames } from '../Router/Router'
-import { sendResetEmail } from '../../Redux/Reducers/authReducer'
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
-import Title from '../../Components/Title'
+import Input from '../../Components/Input';
+import { PathNames } from '../Router/Router';
+import { sendResetEmail } from '../../Redux/Reducers/authReducer';
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import Title from '../../Components/Title';
 
-import styles from './PasswordRequestPage.module.css'
+import styles from './PasswordRequestPage.module.css';
 
 const PasswordRequestPage = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSend = (value: any) => {
     dispatch(
       sendResetEmail({
         email: value.email,
         callback: () => {
-          navigate(PathNames.CheckNewPassword)
+          navigate(PathNames.CheckNewPassword);
         }
       })
-    )
-  }
-  const [form] = Form.useForm()
-  const checkEmail = Form.useWatch('email', form)
+    );
+  };
+  const [form] = Form.useForm();
+  const checkEmail = Form.useWatch('email', form);
 
   return (
     <div className={styles.container}>
@@ -59,7 +59,7 @@ const PasswordRequestPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PasswordRequestPage
+export default PasswordRequestPage;

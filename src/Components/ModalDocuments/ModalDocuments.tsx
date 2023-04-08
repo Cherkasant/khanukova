@@ -1,18 +1,18 @@
-import classNames from 'classnames'
-import { useEffect, useRef, useState } from 'react'
-import 'react-dropdown/style.css'
-import Dropdown from 'react-dropdown'
+import classNames from 'classnames';
+import { useEffect, useRef, useState } from 'react';
+import 'react-dropdown/style.css';
+import Dropdown from 'react-dropdown';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import DocumentIcon from '../../Assets/icons/DocumentIcon'
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
-import ProfileDocIcons from '../../Assets/icons/ProfileDocIcon'
-import { dataFn } from '../../utils'
-import Input from '../Input'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
+import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
+import DocumentIcon from '../../Assets/icons/DocumentIcon';
+import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
+import ProfileDocIcons from '../../Assets/icons/ProfileDocIcon';
+import { dataFn } from '../../utils';
+import Input from '../Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 
-import styles from './ModalDocuments.module.css'
-import { Colors } from './Colors'
+import styles from './ModalDocuments.module.css';
+import { Colors } from './Colors';
 
 type ModalDocumentsProps = {
   addDocRef: React.RefObject<HTMLDivElement>
@@ -21,45 +21,45 @@ type ModalDocumentsProps = {
 }
 
 const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDocRef }) => {
-  const [title, setTitle] = useState('')
-  const [titleDown, setTitleDown] = useState('')
-  const [priority, setPriority] = useState<any>(null)
-  const [labels, setLabels] = useState('')
-  const [desc, setDesc] = useState('')
-  const [edit, setEdit] = useState(false)
-  const [fileInput, setFileInput] = useState<FileList | null>(null)
-  const inputRef = useRef<any>(null)
-  const [files, setFiles] = useState<File[]>([])
-  const filesList = fileInput ? [...fileInput] : []
-  const modalRef = useRef<HTMLDivElement>(null)
-  const titleModalRef = useRef<HTMLDivElement>(null)
+  const [title, setTitle] = useState('');
+  const [titleDown, setTitleDown] = useState('');
+  const [priority, setPriority] = useState<any>(null);
+  const [labels, setLabels] = useState('');
+  const [desc, setDesc] = useState('');
+  const [edit, setEdit] = useState(false);
+  const [fileInput, setFileInput] = useState<FileList | null>(null);
+  const inputRef = useRef<any>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const filesList = fileInput ? [...fileInput] : [];
+  const modalRef = useRef<HTMLDivElement>(null);
+  const titleModalRef = useRef<HTMLDivElement>(null);
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      setTitleDown(title)
-      setEdit(!edit)
+      setTitleDown(title);
+      setEdit(!edit);
     }
-  }
+  };
   const onEditClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation()
-    setTitleDown('')
-    setEdit(!edit)
-  }
+    event.stopPropagation();
+    setTitleDown('');
+    setEdit(!edit);
+  };
 
   const closeModal = () => {
-    setLabels('')
-    setPriority(null)
-    setModal(false)
-    setDesc('')
-    setTitle('')
-    setTitleDown('')
-    setFileInput(null)
-    setFiles([])
-  }
+    setLabels('');
+    setPriority(null);
+    setModal(false);
+    setDesc('');
+    setTitle('');
+    setTitleDown('');
+    setFileInput(null);
+    setFiles([]);
+  };
 
   const deleteDocumetsHandler = (doc: string) => {
-    setFiles(files.filter((value) => value.name !== doc))
-  }
+    setFiles(files.filter((value) => value.name !== doc));
+  };
 
   const dataArr = [
     {
@@ -108,13 +108,13 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
             {!files.length
               ? '+ Add new documents'
               : files.map((value, index) => (
-                  <div key={index} className={styles.doc}>
-                    {value.name}
-                    <span onClick={() => deleteDocumetsHandler(value.name)} className={styles.deleteDoc}>
+                <div key={index} className={styles.doc}>
+                  {value.name}
+                  <span onClick={() => deleteDocumetsHandler(value.name)} className={styles.deleteDoc}>
                       x
-                    </span>
-                  </div>
-                ))}
+                  </span>
+                </div>
+              ))}
           </div>
           <input
             ref={inputRef}
@@ -128,32 +128,32 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
         </div>
       )
     }
-  ]
+  ];
 
   useEffect(() => {
     if (fileInput) {
-      setFiles(filesList)
+      setFiles(filesList);
     }
-  }, [fileInput])
+  }, [fileInput]);
 
   useEffect(() => {
     const eventModal = (e: MouseEvent) => {
       const _e = e as MouseEvent & {
         target: HTMLElement
-      }
+      };
       if (
         !addDocRef.current?.contains(_e.target) &&
         !modalRef.current?.contains(_e.target) &&
         !titleModalRef.current?.contains(_e.target)
       ) {
-        setModal(false)
+        setModal(false);
       }
-    }
-    document.body.addEventListener('click', eventModal)
+    };
+    document.body.addEventListener('click', eventModal);
     return () => {
-      document.body.removeEventListener('click', eventModal)
-    }
-  }, [])
+      document.body.removeEventListener('click', eventModal);
+    };
+  }, []);
 
   return (
     <div ref={modalRef} className={classNames(styles.wrap, { [styles.activeModal]: modal })}>
@@ -219,7 +219,7 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
         <CloseModalIcon />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModalDocuments
+export default ModalDocuments;

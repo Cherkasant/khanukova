@@ -1,11 +1,11 @@
-import { FC, useState } from 'react'
+import { FC, useState } from 'react';
 
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import { CardNotificationsType } from '../constants/@types'
-import { Avatar } from '../../Assets/Notification/Avatar'
+import { CardNotificationsType } from '../constants/@types';
+import { Avatar } from '../../Assets/Notification/Avatar';
 
-import styles from './CardNotifications.module.css'
+import styles from './CardNotifications.module.css';
 
 type CardNotificationsProps = {
   card: CardNotificationsType
@@ -13,11 +13,11 @@ type CardNotificationsProps = {
   className?: string
 }
 const CardNotifications: FC<CardNotificationsProps> = ({ card }) => {
-  const [isReading, setIsReading] = useState(false)
+  const [isReading, setIsReading] = useState(false);
 
   const onNotificationClick = () => {
-    setIsReading(!isReading)
-  }
+    setIsReading(!isReading);
+  };
   return (
     <div
       className={classNames(styles.container, {
@@ -37,7 +37,7 @@ const CardNotifications: FC<CardNotificationsProps> = ({ card }) => {
 
       <div className={styles.date}>{card?.date}</div>
     </div>
-  )
-}
+  );
+};
 
-export default CardNotifications
+export default CardNotifications;

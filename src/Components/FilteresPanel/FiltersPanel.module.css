@@ -53,6 +53,10 @@
     margin: 40px 40px 70px 40px;
 }
 
+.applyBtn {
+    height: 54px;
+}
+
 .clearBtn {
     font-weight: 500;
     font-size: 18px;

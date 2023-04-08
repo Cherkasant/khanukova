@@ -1,15 +1,13 @@
-import { useState } from 'react'
-import { Cascader, Collapse, DatePicker } from 'antd'
+import { Cascader, Collapse, DatePicker } from 'antd';
+import { useState } from 'react';
 
-import Checkbox from '../../Checkbox'
-import FiltersPanel from '../FiltersPanel'
-import Input from '../../Input'
+import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
+import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
+import Checkbox from '../../Checkbox';
+import Input from '../../Input';
+import FiltersPanel from '../FiltersPanel';
 
-import { CalendarIcon } from '../../../Assets/icons/CalendarIcon'
-
-import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon'
-
-import styles from './FilterProjectScreen.module.css'
+import styles from './FilterProjectScreen.module.css';
 import {
   LabelCheckbox,
   LastChangeCheckbox,
@@ -17,13 +15,13 @@ import {
   PriorityCheckbox,
   ResponsibleCheckbox,
   StatusCheckbox
-} from './constants'
+} from './constants';
 
-const { Panel } = Collapse
+const { Panel } = Collapse;
 
 const FilterProjectScreen = () => {
-  const [searchLabel, setSearchLabel] = useState('')
-  const { RangePicker } = DatePicker
+  const [searchLabel, setSearchLabel] = useState('');
+  const { RangePicker } = DatePicker;
   return (
     <FiltersPanel>
       <>
@@ -42,7 +40,7 @@ const FilterProjectScreen = () => {
               />
               {LabelCheckbox.map(({ label, icon, color }) => (
                 <Checkbox
-                  isChecked={false}
+                  isChecked={true}
                   handleChange={() => {}}
                   label={label}
                   icon={icon}
@@ -81,7 +79,7 @@ const FilterProjectScreen = () => {
           <Panel header="Priority" key="5" className={styles.panel}>
             <div className={styles.container}>
               {PriorityCheckbox.map(({ label }) => (
-                <Checkbox isChecked={false} handleChange={() => {}} label={label} key={label} />
+                <Checkbox isChecked={true} handleChange={() => {}} label={label} key={label} />
               ))}
             </div>
           </Panel>
@@ -102,7 +100,7 @@ const FilterProjectScreen = () => {
         />
       </>
     </FiltersPanel>
-  )
-}
+  );
+};
 
-export default FilterProjectScreen
+export default FilterProjectScreen;

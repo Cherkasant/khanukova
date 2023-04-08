@@ -18,5 +18,5 @@ export const AttachmentIcon = () => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  );
+};

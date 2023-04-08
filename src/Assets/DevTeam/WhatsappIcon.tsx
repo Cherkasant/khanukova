@@ -32,5 +32,5 @@ export const WhatsappIcon = () => {
         fill="white"
       />
     </svg>
-  )
-}
+  );
+};

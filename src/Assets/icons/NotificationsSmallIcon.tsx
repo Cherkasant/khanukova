@@ -14,5 +14,5 @@ export const NotificationsSmallIcon = ({ width = '18', height = '19' }) => {
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};

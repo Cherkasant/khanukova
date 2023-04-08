@@ -1,9 +1,9 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
-import Title from '../../Components/Title'
-import { PathNames } from '../Router/Router'
+import Title from '../../Components/Title';
+import { PathNames } from '../Router/Router';
 
-import styles from './CheckNewPassword.module.css'
+import styles from './CheckNewPassword.module.css';
 
 const CheckNewPassword = () => {
   return (
@@ -22,7 +22,7 @@ const CheckNewPassword = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default CheckNewPassword
+export default CheckNewPassword;

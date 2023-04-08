@@ -1,55 +1,55 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react';
 
-import 'react-dropdown/style.css'
-import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css';
+import Dropdown from 'react-dropdown';
 
-import classNames from 'classnames'
-import { Cascader, List, Upload } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
+import classNames from 'classnames';
+import { Cascader, List, Upload } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon'
-import 'react-datepicker/dist/react-datepicker.css'
+import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
+import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
+import 'react-datepicker/dist/react-datepicker.css';
 
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon'
-import { setEcaseModalVisible } from '../../Redux/Reducers/postReducer'
-import { ClientsRequestStatus, Priority } from '../constants/Modal/ModalData'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import profileSelectors from '../../Redux/Selectors/profileSelectors'
-import { getECaseListReducer } from '../../Redux/Reducers/profileReducer'
-import postSelector from '../../Redux/Selectors/postSelector'
-import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants'
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
+import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
+import { setEcaseModalVisible } from '../../Redux/Reducers/postReducer';
+import { ClientsRequestStatus, Priority } from '../constants/Modal/ModalData';
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import profileSelectors from '../../Redux/Selectors/profileSelectors';
+import { getECaseListReducer } from '../../Redux/Reducers/profileReducer';
+import postSelector from '../../Redux/Selectors/postSelector';
+import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
+import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
 
-import styles from './ModalEcase.module.css'
+import styles from './ModalEcase.module.css';
 
 const ModalEcase = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onSaveClick = () => {
-    dispatch(setEcaseModalVisible(false))
-  }
-  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal)
-  const ECaseList = useSelector(profileSelectors.getECaseList)
+    dispatch(setEcaseModalVisible(false));
+  };
+  const isModalEcaseVisible = useSelector(postSelector.getEcaseModal);
+  const ECaseList = useSelector(profileSelectors.getECaseList);
 
   useEffect(() => {
-    dispatch(getECaseListReducer())
-  })
+    dispatch(getECaseListReducer());
+  });
 
-  const [descriptionValue, setDescriptionValue] = useState('')
+  const [descriptionValue, setDescriptionValue] = useState('');
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescriptionValue(event.target.value)
-  }
-  const [comment, setComment] = useState('')
+    setDescriptionValue(event.target.value);
+  };
+  const [comment, setComment] = useState('');
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.target.value)
-  }
+    setComment(event.target.value);
+  };
 
-  const [priority, setPriority] = useState<any>(null)
-  const [status, setStatus] = useState<any>(null)
+  const [priority, setPriority] = useState<any>(null);
+  const [status, setStatus] = useState<any>(null);
 
   const onCancelClick = () => {
-    dispatch(setEcaseModalVisible(false))
-  }
+    dispatch(setEcaseModalVisible(false));
+  };
 
   const EcaseData = [
     { name: '1. Company name', answer: ECaseList?.company_name },
@@ -81,7 +81,7 @@ const ModalEcase = () => {
       name: '11. Used outsiursing/outstaffing before',
       answer: ECaseList?.used_outsourcing
     }
-  ]
+  ];
 
   return (
     <div
@@ -229,7 +229,7 @@ const ModalEcase = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModalEcase
+export default ModalEcase;

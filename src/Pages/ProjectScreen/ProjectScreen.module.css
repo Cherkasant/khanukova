@@ -45,7 +45,8 @@
 
 .addContainer {
   display: flex;
-  gap: 15px;
+  gap: 25px;
+  height: 32px;
 }
 
 .searchInput {
@@ -130,17 +131,17 @@
   justify-content: center;
 }
 
-.button,
-.icon {
+.button {
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 10px 15px;
-  background: #ffffff;
-  color: #212121;
-  border-radius: 10px;
+  padding: 8px 15px;
+  background: #1258ca;
+  border-radius: 6px;
+  color: #ffffff;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 14px;
+  line-height: 16px;
   cursor: pointer;
 }
 
@@ -163,12 +164,12 @@
 }
 
 .filterButton {
-  background: #9bacc9;
+  background: #d9e1f0;
   border-radius: 50px;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: #ffffff;
+  color: #9bacc9;
   width: 130px;
   height: 30px;
   display: flex;

@@ -5,5 +5,5 @@ export const AddNewProjectIcon = () => {
       <path d="M16 10.667L16 21.3337" stroke="white" strokeWidth="1.2" strokeLinecap="square" strokeLinejoin="round" />
       <path d="M21.3334 16L10.6667 16" stroke="white" strokeWidth="1.2" strokeLinecap="square" strokeLinejoin="round" />
     </svg>
-  )
-}
+  );
+};

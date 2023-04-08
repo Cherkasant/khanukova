@@ -14,5 +14,5 @@ export const NotificationsIcon = () => {
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};

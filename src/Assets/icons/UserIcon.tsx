@@ -15,5 +15,5 @@ export const UserIcon = ({ width = '20', height = '20' }) => {
       <circle cx="10" cy="8" r="3" stroke="#4270A7" strokeWidth="1.2" strokeLinecap="round" />
       <rect x="0.6" y="0.6" width="18.8" height="18.8" rx="3.4" stroke="#4270A7" strokeWidth="1.2" />
     </svg>
-  )
-}
+  );
+};
