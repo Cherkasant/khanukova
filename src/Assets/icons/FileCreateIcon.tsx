@@ -17,5 +17,5 @@ export const FileCreateIcon = () => {
         strokeWidth="1.2"
       />
     </svg>
-  )
-}
+  );
+};

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import { AddMeetingIcon } from '../../Assets/icons/AddMeetingIcon';
+import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
 import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon';
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
 import { FilterIcon } from '../../Assets/icons/FilterIcon';
@@ -22,6 +22,9 @@ import Tab from '../../Components/Tabs';
 import { Tabs } from '../../Components/constants/@types';
 import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
+
+import styles from './ProjectScreen.module.css';
+
 
 import styles from './ProjectScreen.module.css';
 
@@ -112,7 +115,7 @@ const ProjectScreen = () => {
 
           <div className={styles.addContainer}>
             <div className={styles.icon}>
-              <AddMeetingIcon />
+              <AddNewUser />
             </div>
 
             <div className={styles.button}>{'Create a Meeting'}</div>
@@ -169,3 +172,4 @@ const ProjectScreen = () => {
 };
 
 export default ProjectScreen;
+

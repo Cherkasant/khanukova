@@ -6,5 +6,5 @@ export const ArrowDropDownIcon = () => {
         fill="#1258CA"
       />
     </svg>
-  )
-}
+  );
+};

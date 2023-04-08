@@ -1,1 +1,1 @@
-export { default } from './ActivationPage'
+export { default } from './ActivationPage';

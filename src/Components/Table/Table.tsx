@@ -10,19 +10,20 @@ import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
 import { RotateSortIcon } from '../../Assets/icons/RotateSortIcon';
 import { SortIcon } from '../../Assets/icons/SortIcon';
 import { setSelectedModalVisible, setTitleTask } from '../../Redux/Reducers/postReducer';
-import PostSelector from '../../Redux/Selectors/postSelector';
 import postSelector from '../../Redux/Selectors/postSelector';
-import { CardTaskType } from '../../Redux/Types/tasks';
+import { MilestoneCardType } from '../../Redux/Types/tasks';
 import { TableColumns } from '../constants/Table/TableData';
+
+import styles from './Table.module.css';
+
 
 import styles from './Table.module.css';
 
 const Table = () => {
   const dispatch = useDispatch();
 
-  const DATA: CardTaskType = [];
+  const DATA: MilestoneCardType = [];
 
-  const task = useSelector(PostSelector.getAllMilestones);
   const singleProject = useSelector(postSelector.getSingleProject);
 
   const [isOpened, setOpened] = useState(false);
@@ -30,12 +31,14 @@ const Table = () => {
     setOpened(!isOpened);
   };
 
-  const [taskInfo, setTaskInfo] = useState<CardTaskType>(DATA);
+
+  const [taskInfo, setTaskInfo] = useState<MilestoneCardType>(DATA);
   useEffect(() => {
-    if (task) {
-      setTaskInfo(task);
+    if (singleProject) {
+      setTaskInfo(singleProject?.milestone_data);
     }
-  }, [task]);
+  }, [singleProject]);
+
   const onAddTaskClick = () => {
     if (singleProject) {
       dispatch(setTitleTask(singleProject.project_name));
@@ -205,3 +208,4 @@ const Table = () => {
 };
 
 export default Table;
+

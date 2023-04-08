@@ -1,1 +1,1 @@
-export { default } from './SignUpPoInfo'
+export { default } from './SignUpPoInfo';

@@ -17,5 +17,5 @@ export const ProjectFile = () => {
         strokeWidth="1.2"
       />
     </svg>
-  )
-}
+  );
+};

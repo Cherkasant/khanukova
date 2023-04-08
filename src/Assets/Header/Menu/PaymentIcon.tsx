@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const PaymentIcon = () => {
   return (
@@ -11,5 +11,5 @@ export const PaymentIcon = () => {
       <path d="M11.666 25H11.6827" stroke="#F4F8FE" strokeWidth="1.2" strokeLinecap="round" />
       <path d="M5 18.333L35 18.333" stroke="#1258CA" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
-  )
-}
+  );
+};

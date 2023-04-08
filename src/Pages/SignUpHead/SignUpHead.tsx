@@ -1,4 +1,3 @@
-
 import { Form } from 'antd';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import { ChangeEvent, useState } from 'react';
@@ -43,7 +42,7 @@ const options = [
   { value: Role.QA, label: 'QA' },
   { value: Role.Programmer, label: 'Programmer' },
   { value: Role.PdO, label: 'Product Owner' }
-]
+];
 
 
 const SignUpHead = () => {
@@ -87,15 +86,15 @@ const SignUpHead = () => {
         callback: () => {
           switch (checkRole.value) {
             case Role.PjO:
-              navigate(PathNames.SignUpPoInfo)
-              break
+              navigate(PathNames.SignUpPoInfo);
+              break;
               
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
             case Role.PdO:
-              navigate(PathNames.CheckYourEmail)
-              break
+              navigate(PathNames.CheckYourEmail);
+              break;
 
             default:
               navigate(PathNames.SignUpHeadInfo);
@@ -180,10 +179,10 @@ const SignUpHead = () => {
               checkRole?.value === Role.Designer ||
               checkRole?.value === Role.PdO ||
               checkRole?.value === Role.QA ? (
-                <Form.Item name="code" className={styles.formItem}>
-                  <Input type={'text'} placeholder={'Code'} />
-                </Form.Item>
-              ) : null}
+                  <Form.Item name="code" className={styles.formItem}>
+                    <Input type={'text'} placeholder={'Code'} />
+                  </Form.Item>
+                ) : null}
 
               <div className={styles.passwordContainer}>
                 <Form.Item
@@ -247,5 +246,5 @@ const SignUpHead = () => {
   );
 };
 
-export default SignUpHead
+export default SignUpHead;
 

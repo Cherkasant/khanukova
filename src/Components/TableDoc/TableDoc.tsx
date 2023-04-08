@@ -14,6 +14,8 @@ import styles from './TableDoc.module.css';
 type TableDocType = {
   docArr: any;
 };
+
+
 const titleDoc = ['Title', 'Create by', 'Created time', 'Label'];
 const TableDoc: React.FC<TableDocType> = ({ docArr }) => {
   return (

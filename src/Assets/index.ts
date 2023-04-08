@@ -1,12 +1,11 @@
-import { LinkedinIcon } from './icons/LinkedinIcon'
-import { GoogleIcon } from './icons/GoogleIcon'
-
-import { ProjectsIcon } from './icons/ProjectsIcon'
-import { PaymentsIcon } from './icons/PaymentsIcon'
-import { ChatsIcon } from './icons/ChatsIcon'
-import { LibraryIcon } from './icons/LibraryIcon'
-import { NotificationsIcon } from './icons/NotificationsIcon'
-import { UserIcon } from './icons/UserIcon'
-import { OpenMenuIcon } from './icons/OpenMenuIcon'
-import { CloseMenuIcon } from './icons/CloseMenuIcon'
-import { BellIcon } from './icons/BellIcon'
+import { BellIcon } from './icons/BellIcon';
+import { ChatsIcon } from './icons/ChatsIcon';
+import { CloseMenuIcon } from './icons/CloseMenuIcon';
+import { GoogleIcon } from './icons/GoogleIcon';
+import { LibraryIcon } from './icons/LibraryIcon';
+import { LinkedinIcon } from './icons/LinkedinIcon';
+import { NotificationsIcon } from './icons/NotificationsIcon';
+import { OpenMenuIcon } from './icons/OpenMenuIcon';
+import { PaymentsIcon } from './icons/PaymentsIcon';
+import { ProjectsIcon } from './icons/ProjectsIcon';
+import { UserIcon } from './icons/UserIcon';

@@ -11,5 +11,5 @@ export const CloseModalIcon = () => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  );
+};

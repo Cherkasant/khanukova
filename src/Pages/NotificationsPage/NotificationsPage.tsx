@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { SettingsIcon } from '../../Assets/Notification/SettingsIcon'
-import Title from '../../Components/Title'
-import { TabsNotifications } from '../../Components/constants/@types'
-import TabsListNotifications from '../../Components/TabsListNotifications'
-import CardsListNotifications from '../../Components/CardsListNotifications'
+import { SettingsIcon } from '../../Assets/Notification/SettingsIcon';
+import Title from '../../Components/Title';
+import { TabsNotifications } from '../../Components/constants/@types';
+import TabsListNotifications from '../../Components/TabsListNotifications';
+import CardsListNotifications from '../../Components/CardsListNotifications';
 
-import styles from './NotificationsPage.module.css'
+import styles from './NotificationsPage.module.css';
 
 const TABS_NOTIFICATION_NAMES = [
   { name: 'All', key: TabsNotifications.All },
@@ -14,7 +14,7 @@ const TABS_NOTIFICATION_NAMES = [
   { name: 'Deadlines', key: TabsNotifications.Deadlines },
   { name: 'Events', key: TabsNotifications.Events },
   { name: 'Payments', key: TabsNotifications.Payments }
-]
+];
 
 const CARD_MOCK = {
   id: 1,
@@ -23,7 +23,7 @@ const CARD_MOCK = {
   status: 'Updated status',
   location: 'In Task 1',
   date: '4 min ago'
-}
+};
 
 const CARD_MOCK_TWO = {
   id: 1,
@@ -32,17 +32,17 @@ const CARD_MOCK_TWO = {
   status: 'Added attachment',
   location: 'In Task 1',
   date: '4 min ago'
-}
+};
 
-const MOCK_CARDSLISTNOTIFICATIONS = [CARD_MOCK, CARD_MOCK, CARD_MOCK, CARD_MOCK, CARD_MOCK_TWO]
+const MOCK_CARDSLISTNOTIFICATIONS = [CARD_MOCK, CARD_MOCK, CARD_MOCK, CARD_MOCK, CARD_MOCK_TWO];
 
 const NotificationsPage = () => {
-  const isNotification = true
-  const [activeTab, setActiveTab] = useState(TabsNotifications.All)
+  const isNotification = true;
+  const [activeTab, setActiveTab] = useState(TabsNotifications.All);
 
   const onTabClick = (tab: TabsNotifications) => {
-    setActiveTab(tab)
-  }
+    setActiveTab(tab);
+  };
 
   return (
     <div className={styles.container}>
@@ -60,7 +60,7 @@ const NotificationsPage = () => {
         <CardsListNotifications CardsListNotifications={MOCK_CARDSLISTNOTIFICATIONS} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NotificationsPage
+export default NotificationsPage;

@@ -1,1 +1,1 @@
-export { default } from './TableDoc'
+export { default } from './TableDoc';

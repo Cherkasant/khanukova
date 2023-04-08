@@ -24,6 +24,7 @@ import authSelectors from '../../Redux/Selectors/authSelectors';
 import SingleProject from '../SingleProject/SingleProject';
 import Chats from '../Chats';
 
+
 export enum PathNames {
   Home = '/',
   Main = '/main',
@@ -83,3 +84,4 @@ const Router = () => {
 };
 
 export default Router;
+

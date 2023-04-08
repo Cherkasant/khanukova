@@ -1,4 +1,4 @@
-import { RootState } from '../store'
+import { RootState } from '../store';
 
 export default {
   getModal: (state: RootState) => state.postsReducer.isSelectedImageModalIsOpened,
@@ -12,4 +12,4 @@ export default {
   getSingleProject: (state: RootState) => state.postsReducer.singleProject,
   getProjectId: (state: RootState) => state.postsReducer.projectId,
   getAllMilestones: (state: RootState) => state.postsReducer.allMilestones
-}
+};

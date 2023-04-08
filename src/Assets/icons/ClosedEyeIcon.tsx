@@ -15,5 +15,5 @@ export const ClosedEyeIcon = () => {
       />
       <line x1="5.41265" y1="2.71766" x2="18.4127" y2="21.7177" stroke="#0E4298" />
     </svg>
-  )
-}
+  );
+};

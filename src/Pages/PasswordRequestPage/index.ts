@@ -1,1 +1,1 @@
-export { default } from './PasswordRequestPage'
+export { default } from './PasswordRequestPage';

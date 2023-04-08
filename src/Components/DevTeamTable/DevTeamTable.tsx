@@ -1,18 +1,18 @@
-import { useMemo } from 'react'
-import { Column, useTable } from 'react-table'
+import { useMemo } from 'react';
+import { Column, useTable } from 'react-table';
 
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router';
 
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import { TrashIcon } from '../../Assets/icons/TrashIcon'
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import { TrashIcon } from '../../Assets/icons/TrashIcon';
+import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
 
-import { PathNames } from '../../Pages/Router/Router'
+import { PathNames } from '../../Pages/Router/Router';
 
-import styles from './DevTeamTable.module.css'
+import styles from './DevTeamTable.module.css';
 
 const DevTeamTable = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const data = useMemo(
     () => [
       {
@@ -41,7 +41,7 @@ const DevTeamTable = () => {
       }
     ],
     []
-  )
+  );
 
   const columns: Array<Column> = useMemo(
     () => [
@@ -108,9 +108,9 @@ const DevTeamTable = () => {
       }
     ],
     []
-  )
+  );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data })
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
   return (
     <table {...getTableProps()} className={styles.tableContainer}>
@@ -127,7 +127,7 @@ const DevTeamTable = () => {
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row) => {
-          prepareRow(row)
+          prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
@@ -135,13 +135,13 @@ const DevTeamTable = () => {
                   <td {...cell.getCellProps()} className={styles.tableCell}>
                     {cell.render('Cell')}
                   </td>
-                )
+                );
               })}
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
-  )
-}
-export default DevTeamTable
+  );
+};
+export default DevTeamTable;

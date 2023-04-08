@@ -1,34 +1,34 @@
-import type { DatePickerProps } from 'antd'
+import type { DatePickerProps } from 'antd';
 
-import { Cascader, DatePicker, Upload } from 'antd'
-import 'antd/README.md'
-import classNames from 'classnames'
-import { ChangeEvent, useEffect, useState } from 'react'
-import 'react-datepicker/dist/react-datepicker.css'
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { Cascader, DatePicker, Upload } from 'antd';
+import 'antd/README.md';
+import classNames from 'classnames';
+import { ChangeEvent, useEffect, useState } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon'
-import { CalendarIcon } from '../../Assets/icons/CalendarIcon'
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import { DeleteIcon } from '../../Assets/icons/DeleteIcon'
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon'
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
-import { postTaskCard, setSelectedModalVisible } from '../../Redux/Reducers/postReducer'
-import postSelector from '../../Redux/Selectors/postSelector'
-import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants'
-import Input from '../Input'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData'
+import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
+import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
+import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
+import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
+import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
+import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
+import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
+import { postTaskCard, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
+import postSelector from '../../Redux/Selectors/postSelector';
+import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
+import Input from '../Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
 
-import styles from './NewTask.module.css'
+import styles from './NewTask.module.css';
 
 
 const NewTask = () => {
-  const dispatch = useDispatch()
-  const milestone = useSelector(postSelector.getTitleMilestone)
+  const dispatch = useDispatch();
+  const milestone = useSelector(postSelector.getTitleMilestone);
 
   const onSaveClick = () => {
     dispatch(
@@ -49,48 +49,48 @@ const NewTask = () => {
         payment_status: paymentStatus.value,
         project: 25
       })
-    )
-    dispatch(setSelectedModalVisible(false))
-  }
-  const [attachment, setAttachment] = useState('')
-  const [launchDate, setLaunchDate] = useState('')
-  const [deadline, setDeadline] = useState('')
-  const [label, setLabel] = useState('')
-  const [duration, setDuration] = useState('')
-  const [descriptionValue, setDescriptionValue] = useState('')
-  const isVisible = useSelector(postSelector.getModal)
+    );
+    dispatch(setSelectedModalVisible(false));
+  };
+  const [attachment, setAttachment] = useState('');
+  const [launchDate, setLaunchDate] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [label, setLabel] = useState('');
+  const [duration, setDuration] = useState('');
+  const [descriptionValue, setDescriptionValue] = useState('');
+  const isVisible = useSelector(postSelector.getModal);
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescriptionValue(event.target.value)
-  }
-  const [comment, setComment] = useState('')
+    setDescriptionValue(event.target.value);
+  };
+  const [comment, setComment] = useState('');
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.target.value)
-  }
-  const [priority, setPriority] = useState<any>(null)
-  const [status, setStatus] = useState<any>(null)
-  const [paymentStatus, setPaymentStatus] = useState<any>(null)
-  const [dependence, setDependence] = useState<any>(null)
-  const [progress, setProgress] = useState<any>(null)
-  const [colors, setColors] = useState<any>(null)
-  const [title, setTitle] = useState('')
-  const [edit, setEdit] = useState(false)
+    setComment(event.target.value);
+  };
+  const [priority, setPriority] = useState<any>(null);
+  const [status, setStatus] = useState<any>(null);
+  const [paymentStatus, setPaymentStatus] = useState<any>(null);
+  const [dependence, setDependence] = useState<any>(null);
+  const [progress, setProgress] = useState<any>(null);
+  const [colors, setColors] = useState<any>(null);
+  const [title, setTitle] = useState('');
+  const [edit, setEdit] = useState(false);
   const onEditClick = () => {
-    setEdit(!edit)
-  }
+    setEdit(!edit);
+  };
   const onCancelClick = () => {
-    dispatch(setSelectedModalVisible(false))
-  }
+    dispatch(setSelectedModalVisible(false));
+  };
   useEffect(() => {
-    setEdit(false)
-    setTitle('Title')
-  }, [])
+    setEdit(false);
+    setTitle('Title');
+  }, []);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
-    setDeadline(dateString)
-  }
+    setDeadline(dateString);
+  };
   const onChangeLaunch: DatePickerProps['onChange'] = (date, dateString) => {
-    setLaunchDate(dateString)
-  }
+    setLaunchDate(dateString);
+  };
 
   return (
     <div
@@ -351,7 +351,7 @@ const NewTask = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewTask
+export default NewTask;

@@ -20,5 +20,5 @@ export const PinnedIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

@@ -1,53 +1,53 @@
-import { useState } from 'react'
-import Dropdown from 'react-dropdown'
-import { Avatar, DatePickerProps } from 'antd'
-import { DatePicker, Space } from 'antd'
+import { useState } from 'react';
+import Dropdown from 'react-dropdown';
+import { Avatar, DatePickerProps } from 'antd';
+import { DatePicker, Space } from 'antd';
 
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
-import Input from '../../Components/Input'
-import Title from '../../Components/Title'
-import { PencilIcon } from '../../Assets/Profile/PencilIcon'
-import { CalendarIcon } from '../../Assets/icons/CalendarIcon'
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import Input from '../../Components/Input';
+import Title from '../../Components/Title';
+import { PencilIcon } from '../../Assets/Profile/PencilIcon';
+import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
 
-import styles from './ProfileDev.module.css'
+import styles from './ProfileDev.module.css';
 
 const ProfileDev = () => {
-  const [name, setName] = useState('Ivanova Irina')
-  const [nickName, setNickName] = useState('')
-  const [positions, setPositions] = useState('CEO')
-  const [company, setCompany] = useState('CAPIX')
-  const [email, setEmail] = useState('irina@gmail.com')
-  const [phone, setPhone] = useState('+375 (29) 758-78-47')
-  const [telegram, setTelegram] = useState('')
+  const [name, setName] = useState('Ivanova Irina');
+  const [nickName, setNickName] = useState('');
+  const [positions, setPositions] = useState('CEO');
+  const [company, setCompany] = useState('CAPIX');
+  const [email, setEmail] = useState('irina@gmail.com');
+  const [phone, setPhone] = useState('+375 (29) 758-78-47');
+  const [telegram, setTelegram] = useState('');
 
-  const [level, setLevel] = useState('')
-  const [rate, setRate] = useState('')
+  const [level, setLevel] = useState('');
+  const [rate, setRate] = useState('');
 
-  const [projects, setProjects] = useState('')
-  const [stack, setStack] = useState('')
-  const [experience, setExperience] = useState('')
+  const [projects, setProjects] = useState('');
+  const [stack, setStack] = useState('');
+  const [experience, setExperience] = useState('');
 
-  const [info, setInfo] = useState('')
+  const [info, setInfo] = useState('');
 
   const currencyOptions = [
     { value: 'EUR', label: 'EUR' },
     { value: 'USD', label: 'USD' }
-  ]
+  ];
 
-  const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null)
+  const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null);
 
   const languageOptions = [
     { value: 'English', label: 'English' },
     { value: 'Russian', label: 'Russian' }
-  ]
+  ];
 
-  const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null)
+  const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null);
 
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString)
-  }
+    console.log(date, dateString);
+  };
 
-  const isHead = true
+  const isHead = true;
 
   return (
     <div className={styles.container}>
@@ -269,7 +269,7 @@ const ProfileDev = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileDev
+export default ProfileDev;

@@ -9,5 +9,5 @@ export const TrashIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

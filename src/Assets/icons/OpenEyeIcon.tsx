@@ -14,5 +14,5 @@ export const OpenEyeIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

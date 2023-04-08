@@ -1,7 +1,7 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects'
+import { PayloadAction } from '@reduxjs/toolkit';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 
-import { PayloadAction } from '@reduxjs/toolkit'
-
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../Components/constants/consts';
 import {
   activateUser,
   getUserName,
@@ -15,8 +15,7 @@ import {
   setLoggedIn,
   setUserName,
   signInUser
-} from '../Reducers/authReducer'
-
+} from '../Reducers/authReducer';
 import {
   ActivateUserPayload,
   RegisterHeadPayload,
@@ -25,98 +24,96 @@ import {
   ResetPasswordConfirmPayload,
   SendResetEmailPayload,
   SignInUserPayload
-} from '../Types/auth'
-import API from '../Utils/api'
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../Components/constants/consts'
-
-import callCheckingAuth from './callCheckingAuth'
+} from '../Types/auth';
+import API from '../Utils/api';
+import callCheckingAuth from './callCheckingAuth';
 
 function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
-  const { data: registerData, callback } = action.payload
-  const { ok, data, problem } = yield call(API.registerUser, registerData)
+  const { data: registerData, callback } = action.payload;
+  const { ok, data, problem } = yield call(API.registerUser, registerData);
   if (ok && data) {
-    callback()
-    yield put(setIdUser(data.id))
+    callback();
+    yield put(setIdUser(data.id));
   } else {
-    console.warn('Error while registering user', problem)
+    console.warn('Error while registering user', problem);
   }
 }
 
 function* registerHeadInfoWorker(action: PayloadAction<RegisterHeadPayload>) {
-  const { data: registerHeadData, callback } = action.payload
-  const { ok, problem } = yield call(API.registerHeadInfo, registerHeadData)
+  const { data: registerHeadData, callback } = action.payload;
+  const { ok, problem } = yield call(API.registerHeadInfo, registerHeadData);
   if (ok) {
-    callback()
+    callback();
   } else {
-    console.warn('Error while registering Head info', problem)
+    console.warn('Error while registering Head info', problem);
   }
 }
 
 function* registerPoInfoWorker(action: PayloadAction<RegisterPoPayload>) {
-  const { data: registerPoData, callback } = action.payload
-  const { ok, problem } = yield call(API.registerPoInfo, registerPoData)
+  const { data: registerPoData, callback } = action.payload;
+  const { ok, problem } = yield call(API.registerPoInfo, registerPoData);
   if (ok) {
-    callback()
+    callback();
   } else {
-    console.warn('Error while registering PO info', problem)
+    console.warn('Error while registering PO info', problem);
   }
 }
 
 function* sendResetEmailWorker(action: PayloadAction<SendResetEmailPayload>) {
-  const { email, callback } = action.payload
-  const { ok, problem } = yield call(API.sendResetEmail, email)
+  const { email, callback } = action.payload;
+  const { ok, problem } = yield call(API.sendResetEmail, email);
   if (ok) {
-    callback()
+    callback();
   } else {
-    console.warn('Error while sending reset email', problem)
+    console.warn('Error while sending reset email', problem);
   }
 }
 
 function* resetPasswordConfirmWorker(action: PayloadAction<ResetPasswordConfirmPayload>) {
-  const { data, callback } = action.payload
-  const { ok, problem } = yield call(API.resetPasswordConfirm, data)
+  const { data, callback } = action.payload;
+  const { ok, problem } = yield call(API.resetPasswordConfirm, data);
   if (ok) {
-    callback()
+    callback();
   } else {
-    console.warn('Error while sending reset password', problem)
+    console.warn('Error while sending reset password', problem);
   }
 }
 
 function* activateUserWorker(action: PayloadAction<ActivateUserPayload>) {
-  const { data: activateData, callback } = action.payload
-  const { ok, problem } = yield call(API.activateUser, activateData)
+  const { data: activateData, callback } = action.payload;
+  const { ok, problem } = yield call(API.activateUser, activateData);
   if (ok) {
-    callback()
+    callback();
   } else {
-    console.warn('Error while activating user', problem)
+    console.warn('Error while activating user', problem);
   }
 }
 
 function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
-  const { data: SignInUserData, callback } = action.payload
-  const { ok, problem, data } = yield call(API.signInUser, SignInUserData)
+  const { data: SignInUserData, callback } = action.payload;
+  const { ok, problem, data } = yield call(API.signInUser, SignInUserData);
   if (ok) {
-    localStorage.setItem(ACCESS_TOKEN_KEY, data?.access)
-    localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh)
-    yield put(setLoggedIn(true))
-    callback()
+    localStorage.setItem(ACCESS_TOKEN_KEY, data?.access);
+    localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh);
+    yield put(setLoggedIn(true));
+    callback();
   } else {
-    console.warn('Error while sign in user', problem)
+    console.warn('Error while sign in user', problem);
   }
 }
 
 function* logOutUserWorker() {
-  yield put(setLoggedIn(false))
-  localStorage.removeItem(ACCESS_TOKEN_KEY)
-  localStorage.removeItem(REFRESH_TOKEN_KEY)
+  yield put(setLoggedIn(false));
+  localStorage.removeItem(ACCESS_TOKEN_KEY);
+  localStorage.removeItem(REFRESH_TOKEN_KEY);
 }
 
 function* getUserNameWorker() {
-  const { ok, data, problem } = yield callCheckingAuth(API.getUserName)
+  const { ok, data, problem } = yield callCheckingAuth(API.getUserName);
   if (ok && data) {
-    yield put(setUserName(data.full_name))
+    yield put(setUserName(data.full_name));
   } else {
-    console.warn('Error while fetching username: ', problem)
+    console.warn('Error while fetching username: ', problem);
   }
 }
 
@@ -131,5 +128,5 @@ export default function* authSagaWatcher() {
     takeLatest(activateUser, activateUserWorker),
     takeLatest(logoutUser, logOutUserWorker),
     takeLatest(getUserName, getUserNameWorker)
-  ])
+  ]);
 }

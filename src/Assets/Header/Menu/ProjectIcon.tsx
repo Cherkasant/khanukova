@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const ProjectIcon = () => {
   return (
@@ -11,5 +11,5 @@ export const ProjectIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

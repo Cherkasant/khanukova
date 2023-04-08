@@ -1,8 +1,8 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import PaymentCard from '../PaymentCard'
+import PaymentCard from '../PaymentCard';
 
-import styles from './PaymentsList.module.css'
+import styles from './PaymentsList.module.css';
 
 type PaymentsListProps = {
   PaymentsArray: Array<{
@@ -17,10 +17,10 @@ const PaymentsList: FC<PaymentsListProps> = ({ PaymentsArray }) => {
   return (
     <div className={styles.container}>
       {PaymentsArray.map((card) => {
-        return <PaymentCard card={card} key={card.id} />
+        return <PaymentCard card={card} key={card.id} />;
       })}
     </div>
-  )
-}
+  );
+};
 
-export default PaymentsList
+export default PaymentsList;

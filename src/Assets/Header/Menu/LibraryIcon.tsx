@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const LibraryIcon = () => {
   return (
@@ -16,5 +16,5 @@ export const LibraryIcon = () => {
         strokeWidth="1.2"
       />
     </svg>
-  )
-}
+  );
+};

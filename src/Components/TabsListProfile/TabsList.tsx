@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import { TabsProfile } from '../constants/@types'
+import { TabsProfile } from '../constants/@types';
 
-import styles from './TabsList.module.css'
+import styles from './TabsList.module.css';
 
 type TabProps = {
   activeTab: TabsProfile
@@ -27,10 +27,10 @@ const TabsListProfile: FC<TabProps> = ({ activeTab, onSelectTab, tabsList }) => 
             })}>
             {tab.name}
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default TabsListProfile
+export default TabsListProfile;

@@ -18,5 +18,5 @@ export const TelegramIcon = () => {
         fill="#CFD8DC"
       />
     </svg>
-  )
-}
+  );
+};

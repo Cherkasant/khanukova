@@ -4,5 +4,5 @@ export const AddRoundIcon = () => {
       <path d="M12 6L12 18" stroke="#1258CA" strokeWidth="2" strokeLinecap="round" />
       <path d="M18 12L6 12" stroke="#1258CA" strokeWidth="2" strokeLinecap="round" />
     </svg>
-  )
-}
+  );
+};

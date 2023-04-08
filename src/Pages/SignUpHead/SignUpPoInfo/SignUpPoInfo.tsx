@@ -1,22 +1,22 @@
-import { Form, Checkbox, Radio } from 'antd'
+import { Form, Checkbox, Radio } from 'antd';
 
-import { useNavigate } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Input from '../../../Components/Input'
-import { PathNames } from '../../Router/Router'
-import { registerPoInfo } from '../../../Redux/Reducers/authReducer'
-import PuzzleButton, { PuzzleButtonTypes } from '../../../Components/PuzzleButton'
-import Title from '../../../Components/Title'
-import authSelectors from '../../../Redux/Selectors/authSelectors'
+import Input from '../../../Components/Input';
+import { PathNames } from '../../Router/Router';
+import { registerPoInfo } from '../../../Redux/Reducers/authReducer';
+import PuzzleButton, { PuzzleButtonTypes } from '../../../Components/PuzzleButton';
+import Title from '../../../Components/Title';
+import authSelectors from '../../../Redux/Selectors/authSelectors';
 
-import styles from './SignUpPoInfo.module.css'
+import styles from './SignUpPoInfo.module.css';
 
 const SignUpPoInfo = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const idUser = useSelector(authSelectors.getUserId)
+  const idUser = useSelector(authSelectors.getUserId);
 
   const onSignUpPoInfo = (values: any) => {
     dispatch(
@@ -37,11 +37,11 @@ const SignUpPoInfo = () => {
           owner: idUser
         },
         callback: () => {
-          navigate(PathNames.CheckYourEmail)
+          navigate(PathNames.CheckYourEmail);
         }
       })
-    )
-  }
+    );
+  };
   return (
     <>
       <div className={styles.container}>
@@ -259,7 +259,7 @@ const SignUpPoInfo = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignUpPoInfo
+export default SignUpPoInfo;

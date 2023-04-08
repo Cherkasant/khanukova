@@ -31,14 +31,12 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
   const [projectHoursValue, setProjectHoursValue] = useState('');
   const [rateHourValue, setRateHourValue] = useState('');
   const [budgetValue, setBudgetValue] = useState('');
-
   const closeModal = () => {
     setPositionsValue('');
     setProjectHoursValue('');
     setRateHourValue('');
     setBudgetValue('');
   };
-
   useEffect(() => {
     if (editClick) {
       setPositionsValue(data.positions);

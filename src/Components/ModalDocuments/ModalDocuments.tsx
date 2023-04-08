@@ -108,6 +108,7 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
             {!files.length
               ? '+ Add new documents'
               : files.map((value, index) => (
+
                   <div key={index} className={styles.doc}>
                     {value.name}
                     <span
@@ -117,9 +118,9 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
                       }}
                       className={styles.deleteDoc}>
                       x
-                    </span>
-                  </div>
-                ))}
+                  </span>
+                </div>
+              ))}
           </div>
           <input
             ref={inputRef}

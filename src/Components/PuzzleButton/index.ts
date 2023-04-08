@@ -1,1 +1,1 @@
-export { default, PuzzleButtonTypes } from './PuzzleButton'
+export { default, PuzzleButtonTypes } from './PuzzleButton';

@@ -1,10 +1,10 @@
 
-import styles from './Events.module.css'
+import styles from './Events.module.css';
 
 const Events = () => {
-    return <div className={styles.container}>
+  return <div className={styles.container}>
         Calendar
-    </div>
+  </div>;
 };
 
 export default Events;

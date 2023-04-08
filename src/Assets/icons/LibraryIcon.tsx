@@ -14,5 +14,5 @@ export const LibraryIcon = () => {
         strokeWidth="1.2"
       />
     </svg>
-  )
-}
+  );
+};

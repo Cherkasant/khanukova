@@ -1,8 +1,8 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import classnames from 'classnames'
+import classnames from 'classnames';
 
-import styles from './Title.module.css'
+import styles from './Title.module.css';
 
 type TitleProps = {
   name: string
@@ -10,7 +10,7 @@ type TitleProps = {
 }
 
 const Title: FC<TitleProps> = ({ name, className }) => {
-  return <div className={classnames(className, styles.container)}>{name}</div>
-}
+  return <div className={classnames(className, styles.container)}>{name}</div>;
+};
 
-export default Title
+export default Title;

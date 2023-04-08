@@ -11,5 +11,5 @@ export const Edit = () => {
       />
       <path d="M12.5 7.5L16.5 11.5" stroke="#1258CA" strokeWidth="1.2" />
     </svg>
-  )
-}
+  );
+};

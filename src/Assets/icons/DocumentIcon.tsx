@@ -14,7 +14,7 @@ const DocumentIcon: React.FC<DocumentIconType> = ({ width, height }) => {
       />
       <path d="M10.8516 0.855469V9.4269H19.423" stroke="#0E4298" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
-  )
-}
+  );
+};
 
-export default DocumentIcon
+export default DocumentIcon;

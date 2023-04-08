@@ -1,24 +1,24 @@
-import classNames from 'classnames'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router'
+import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 
-import { AddMeetingIcon } from '../../Assets/icons/AddMeetingIcon'
-import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon'
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon'
-import { FilterIcon } from '../../Assets/icons/FilterIcon'
-import ClientsRequestCard from '../../Components/ClientsRequestCard'
-import { requestInProgressArray, requestOpenedArray } from '../../Components/ClientsRequestCard/constantsRequest'
-import Documents from '../../Components/Documents'
-import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen'
-import Input from '../../Components/Input'
-import ModalEcase from '../../Components/ModalEcase'
-import NewTask from '../../Components/ModalNewTask'
-import ModalRequest from '../../Components/ModalRequest'
-import Resourses from '../../Components/Resourses'
-import Table from '../../Components/Table'
-import Tab from '../../Components/Tabs'
-import { Tabs } from '../../Components/constants/@types'
+import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
+import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon';
+import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
+import { FilterIcon } from '../../Assets/icons/FilterIcon';
+import ClientsRequestCard from '../../Components/ClientsRequestCard';
+import { requestInProgressArray, requestOpenedArray } from '../../Components/ClientsRequestCard/constantsRequest';
+import Documents from '../../Components/Documents';
+import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
+import Input from '../../Components/Input';
+import ModalEcase from '../../Components/ModalEcase';
+import NewTask from '../../Components/ModalNewTask';
+import ModalRequest from '../../Components/ModalRequest';
+import Resourses from '../../Components/Resourses';
+import Table from '../../Components/Table';
+import Tab from '../../Components/Tabs';
+import { Tabs } from '../../Components/constants/@types';
 import {
   getAllMilestones,
   getAllTasks,
@@ -26,10 +26,10 @@ import {
   setFilterVisible,
   setSelectedModalVisible,
   setTitleTask
-} from '../../Redux/Reducers/postReducer'
-import postSelector from '../../Redux/Selectors/postSelector'
+} from '../../Redux/Reducers/postReducer';
+import postSelector from '../../Redux/Selectors/postSelector';
 
-import styles from './SingleProject.module.css'
+import styles from './SingleProject.module.css';
 
 
 const TABS_NAMES = [
@@ -40,55 +40,55 @@ const TABS_NAMES = [
   { name: 'Clients Requests', key: Tabs.ClientsRequests },
   { name: 'Documents', key: Tabs.Documents },
   { name: 'External Sources', key: Tabs.ExternalSources }
-]
+];
 
 const SingleProject = () => {
-  const params = useParams()
-  const { id } = params
+  const params = useParams();
+  const { id } = params;
 
   const onFilterClick = () => {
-    dispatch(setFilterVisible(true))
-  }
-  const isSaveClicked = useSelector(postSelector.getAllMilestones)
-  const singleProject = useSelector(postSelector.getSingleProject)
+    dispatch(setFilterVisible(true));
+  };
+  const isSaveClicked = useSelector(postSelector.getAllMilestones);
+  const singleProject = useSelector(postSelector.getSingleProject);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [addItem, setAddItem] = useState(false)
+  const [addItem, setAddItem] = useState(false);
   const onAddItemClick = () => {
     if (singleProject) {
-      dispatch(setTitleTask(singleProject.project_name))
-      setAddItem(!addItem)
-      dispatch(setSelectedModalVisible(true))
+      dispatch(setTitleTask(singleProject.project_name));
+      setAddItem(!addItem);
+      dispatch(setSelectedModalVisible(true));
     }
-  }
-  const [activeTab, setActiveTab] = useState(Tabs.Planning)
+  };
+  const [activeTab, setActiveTab] = useState(Tabs.Planning);
 
   const onTabClick = (newTab: Tabs) => {
     if (newTab !== activeTab) {
-      setActiveTab(newTab)
-    } else setActiveTab(Tabs.Planning)
-  }
+      setActiveTab(newTab);
+    } else setActiveTab(Tabs.Planning);
+  };
   useEffect(() => {
     if (id) {
-      dispatch(getSingleProject(+id))
-      dispatch(getAllMilestones(+id))
-      dispatch(getAllTasks(1))
+      dispatch(getSingleProject(+id));
+      dispatch(getAllMilestones(+id));
+      dispatch(getAllTasks(1));
     }
-  }, [id])
+  }, [id]);
 
-  const [title, setTitle] = useState('')
-  const [edit, setEdit] = useState(false)
+  const [title, setTitle] = useState('');
+  const [edit, setEdit] = useState(false);
   const onEditClick = () => {
-    setEdit(!edit)
-  }
+    setEdit(!edit);
+  };
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(setTitleTask(title))
-      setEdit(!edit)
+      dispatch(setTitleTask(title));
+      setEdit(!edit);
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -118,7 +118,7 @@ const SingleProject = () => {
 
           <div className={styles.addContainer}>
             <div className={styles.icon}>
-              <AddMeetingIcon />
+              <AddNewUser />
             </div>
 
             <div className={styles.button}>{'Create a Meeting'}</div>
@@ -170,7 +170,7 @@ const SingleProject = () => {
       <ModalEcase />
       <ModalRequest />
     </div>
-  )
-}
+  );
+};
 
-export default SingleProject
+export default SingleProject;
