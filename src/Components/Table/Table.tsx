@@ -13,10 +13,6 @@ import { setSelectedModalVisible, setTitleTask } from '../../Redux/Reducers/post
 import postSelector from '../../Redux/Selectors/postSelector';
 import { MilestoneCardType } from '../../Redux/Types/tasks';
 import { TableColumns } from '../constants/Table/TableData';
-
-import styles from './Table.module.css';
-
-
 import styles from './Table.module.css';
 
 const Table = () => {
@@ -30,7 +26,6 @@ const Table = () => {
   const onArrowClick = () => {
     setOpened(!isOpened);
   };
-
 
   const [taskInfo, setTaskInfo] = useState<MilestoneCardType>(DATA);
   useEffect(() => {
@@ -208,4 +203,3 @@ const Table = () => {
 };
 
 export default Table;
-
