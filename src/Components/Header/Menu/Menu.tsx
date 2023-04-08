@@ -58,7 +58,7 @@ const UserMenu = () => {
       link: PathNames.Profile,
       activeIcon: <MyProfileActive />
     },
-    { name: 'Chats', icon: <ChatIcon />, link: '', activeIcon: <ChatActiveIcon /> },
+    { name: 'Chats', icon: <ChatIcon />, link: PathNames.Chats, activeIcon: <ChatActiveIcon /> },
     {
       name: 'Projects',
       icon: <ProjectIcon />,

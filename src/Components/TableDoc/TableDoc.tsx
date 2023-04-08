@@ -12,8 +12,10 @@ import ProfileDocIcons from '../../Assets/icons/ProfileDocIcon';
 import styles from './TableDoc.module.css';
 
 type TableDocType = {
-  docArr: any
-}
+  docArr: any;
+};
+
+
 const titleDoc = ['Title', 'Create by', 'Created time', 'Label'];
 const TableDoc: React.FC<TableDocType> = ({ docArr }) => {
   return (

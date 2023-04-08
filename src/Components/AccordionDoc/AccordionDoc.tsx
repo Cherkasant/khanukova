@@ -4,6 +4,7 @@ import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/Accord
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+
 import { useState } from 'react';
 
 import ArrowDocIcon from '../../Assets/icons/ArrowDocIcon';
@@ -115,3 +116,4 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
 };
 
 export default AccordionDoc;
+

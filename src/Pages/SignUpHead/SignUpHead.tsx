@@ -44,6 +44,7 @@ const options = [
   { value: Role.PdO, label: 'Product Owner' }
 ];
 
+
 const SignUpHead = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ const SignUpHead = () => {
             case Role.PjO:
               navigate(PathNames.SignUpPoInfo);
               break;
-
+              
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
@@ -246,3 +247,4 @@ const SignUpHead = () => {
 };
 
 export default SignUpHead;
+

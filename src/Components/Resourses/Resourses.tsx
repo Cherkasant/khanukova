@@ -38,11 +38,11 @@ const dataResourses = [
 ];
 
 type dataResourseType = {
-  positions: string
-  projecthours: number
-  rateHour: number
-  budget: string
-}
+  positions: string;
+  projecthours: number;
+  rateHour: number;
+  budget: string;
+};
 
 const sumBudget = dataResourses.reduce((sum, currentValue) => sum + Number(currentValue.budget), 0);
 

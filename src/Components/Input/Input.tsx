@@ -4,17 +4,17 @@ import classnames from 'classnames';
 import styles from './Input.module.css';
 
 type InputProps = {
-  value?: string
-  onChange?: (value: string) => void
-  placeholder?: string
-  disabled?: boolean
-  error?: string
-  className?: string
-  type?: string
-  required?: boolean
-  title?: string
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
-}
+  value?: string;
+  onChange?: (value: string) => void;
+  placeholder?: string;
+  disabled?: boolean;
+  error?: string;
+  className?: string;
+  type?: string;
+  required?: boolean;
+  title?: string;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+};
 
 const Input: FC<InputProps> = ({
   value,

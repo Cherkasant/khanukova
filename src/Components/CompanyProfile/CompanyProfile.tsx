@@ -7,17 +7,16 @@ import CompanyProfileCard from '../CompanyProfileCard';
 import styles from './CompanyProfile.module.css';
 
 type CompanyProfileProps = {
-  activeTab?: CompanyList
-  disabled?: boolean
+  activeTab?: CompanyList;
+  disabled?: boolean;
   CompanyList: Array<{
-    name: string
-    key: CompanyList
-    answers: string | undefined
-  }>
-}
+    name: string;
+    key: CompanyList;
+    answers: string | undefined;
+  }>;
+};
 
 const CompanyProfile: FC<CompanyProfileProps> = ({ CompanyList }) => {
-
   return (
     <div className={styles.listContainer}>
       {CompanyList.map((card) => {

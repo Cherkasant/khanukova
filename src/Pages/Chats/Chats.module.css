@@ -1,0 +1,159 @@
+.wrapChats {
+  font-family: 'Inter';
+  font-style: normal;
+  text-align: start;
+  display: flex;
+  width: 100%;
+}
+
+.panelChats {
+  width: 489px;
+  border-right: 1px solid #4270a7;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
+  color: #0e4298;
+  margin: 0;
+  padding: 15px 40px;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 45px;
+}
+
+.searchInput {
+  width: 440px;
+  height: 40px;
+  border-color: #1258ca;
+  border-radius: 25px;
+}
+
+.searchInput::placeholder {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3;
+}
+
+.searchInput:focus::placeholder {
+  position: absolute;
+  top: 5px;
+}
+
+.icon {
+  position: absolute;
+  top: 11px;
+  right: 30px;
+  cursor: pointer;
+}
+
+.panelChatsInner {
+  display: flex;
+  align-items: flex-start;
+  border-top: 1px solid #0e4298;
+}
+
+.panelChatsFilters {
+  width: 244px;
+}
+
+.collapseContainer {
+  background-color: transparent;
+}
+
+.panel {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.filters {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #212121;
+  margin-bottom: 6px;
+  padding-left: 15px;
+}
+
+.panelChatsUsers {
+  border-left: 1px solid #0e4298;
+  height: 100vh;
+  width: 243px;
+}
+
+.active {
+  background-color: #0e4298;
+}
+
+.activeTitle {
+  color: #ffff;
+}
+
+.chats {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 50px);
+  width: 100%;
+}
+
+.chatsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #4270a7;
+  padding: 10px 44px 10px 14px;
+}
+
+.chatsMain {
+  background-color: #ffffff;
+  height: 100vh;
+  border-bottom: 1px solid #4270a7;
+}
+
+.chatsFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px 34px 18px 10px;
+}
+
+.chatsPanel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  color: #1258ca;
+}
+
+.btn {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.more {
+  cursor: pointer;
+  margin-left: 10px;
+}

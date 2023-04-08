@@ -11,13 +11,13 @@ import { setEcaseModalVisible, setTitleRequest } from '../../Redux/Reducers/post
 import styles from './ClientsRequestCard.module.css';
 
 type ClientsRequestCardProps = {
-  nameOfArray: string
-  disabled?: boolean
+  nameOfArray: string;
+  disabled?: boolean;
   openedArray: Array<{
-    title: string
-    priority: string | null
-  }>
-}
+    title: string;
+    priority: string | null;
+  }>;
+};
 
 const ClientsRequestCard: FC<ClientsRequestCardProps> = ({ openedArray, nameOfArray }) => {
   const dispatch = useDispatch();

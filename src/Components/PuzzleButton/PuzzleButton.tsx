@@ -12,12 +12,12 @@ export enum PuzzleButtonTypes {
 }
 
 export type PuzzleButtonProps = Omit<PropsWithChildren<ButtonProps>, 'onClick'> & {
-  btnTitle?: string | ReactElement
-  btnType?: PuzzleButtonTypes
-  onClick?: () => void
-  btnClassName?: string
-  btnDisabled?: boolean
-}
+  btnTitle?: string | ReactElement;
+  btnType?: PuzzleButtonTypes;
+  onClick?: () => void;
+  btnClassName?: string;
+  btnDisabled?: boolean;
+};
 
 const PuzzleButton: FC<PuzzleButtonProps> = ({
   btnType,

@@ -1,26 +1,28 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-import PagesWrapper from '../../Components/PagesWrapper';
-import { getUserName } from '../../Redux/Reducers/authReducer';
-import authSelectors from '../../Redux/Selectors/authSelectors';
-import ActivationPage from '../ActivationPage';
-import CheckEmailPage from '../CheckEmailPage';
-import CheckNewPassword from '../CheckNewPassword';
-import Home from '../Home';
-import NotificationsPage from '../NotificationsPage';
-import PasswordRequestPage from '../PasswordRequestPage';
-import PasswordReset from '../PasswordResetPage';
-import PaymentsPage from '../PaymentsPage';
-import ProfileDev from '../ProfileDev';
-import ProfilePage from '../ProfilePage';
-import ProjectScreen from '../ProjectScreen';
 import SignIn from '../SignIn';
+import PagesWrapper from '../../Components/PagesWrapper';
+import PasswordRequestPage from '../PasswordRequestPage';
+import Home from '../Home';
+import ProjectScreen from '../ProjectScreen';
+import PasswordReset from '../PasswordResetPage';
+import ActivationPage from '../ActivationPage';
+import CheckNewPassword from '../CheckNewPassword';
+import ProfilePage from '../ProfilePage';
 import SignUpHead from '../SignUpHead';
 import SignUpHeadInfo from '../SignUpHead/SignUpHeadInfo';
+import ProfileDev from '../ProfileDev';
+import PaymentsPage from '../PaymentsPage';
 import SignUpPoInfo from '../SignUpHead/SignUpPoInfo';
+import CheckEmailPage from '../CheckEmailPage';
+import NotificationsPage from '../NotificationsPage';
+
+import { getUserName } from '../../Redux/Reducers/authReducer';
+import authSelectors from '../../Redux/Selectors/authSelectors';
 import SingleProject from '../SingleProject/SingleProject';
+import Chats from '../Chats';
 
 
 export enum PathNames {
@@ -41,7 +43,8 @@ export enum PathNames {
   Profile = '/profile',
   ProfileDevTeam = '/profile/dev',
   Payments = '/payments',
-  Notifications = '/notifications'
+  Notifications = '/notifications',
+  Chats = '/chats'
 }
 
 const Router = () => {
@@ -63,6 +66,7 @@ const Router = () => {
           <Route path={PathNames.ProfileDevTeam} element={<ProfileDev />} />
           <Route path={PathNames.Payments} element={<PaymentsPage />} />
           <Route path={PathNames.Notifications} element={<NotificationsPage />} />
+          <Route path={PathNames.Chats} element={<Chats />} />
         </Route>
 
         <Route path={PathNames.SignIn} element={<SignIn />} />
@@ -80,3 +84,4 @@ const Router = () => {
 };
 
 export default Router;
+

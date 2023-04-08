@@ -17,6 +17,8 @@ import { TableColumns } from '../constants/Table/TableData';
 import styles from './Table.module.css';
 
 
+import styles from './Table.module.css';
+
 const Table = () => {
   const dispatch = useDispatch();
 
@@ -29,12 +31,14 @@ const Table = () => {
     setOpened(!isOpened);
   };
 
+
   const [taskInfo, setTaskInfo] = useState<MilestoneCardType>(DATA);
   useEffect(() => {
     if (singleProject) {
       setTaskInfo(singleProject?.milestone_data);
     }
   }, [singleProject]);
+
   const onAddTaskClick = () => {
     if (singleProject) {
       dispatch(setTitleTask(singleProject.project_name));
@@ -204,3 +208,4 @@ const Table = () => {
 };
 
 export default Table;
+

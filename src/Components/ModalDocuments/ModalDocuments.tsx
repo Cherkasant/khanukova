@@ -15,10 +15,10 @@ import styles from './ModalDocuments.module.css';
 import { Colors } from './Colors';
 
 type ModalDocumentsProps = {
-  addDocRef: React.RefObject<HTMLDivElement>
-  modal: boolean
-  setModal: React.Dispatch<React.SetStateAction<boolean>>
-}
+  addDocRef: React.RefObject<HTMLDivElement>;
+  modal: boolean;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDocRef }) => {
   const [title, setTitle] = useState('');
@@ -108,9 +108,15 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
             {!files.length
               ? '+ Add new documents'
               : files.map((value, index) => (
-                <div key={index} className={styles.doc}>
-                  {value.name}
-                  <span onClick={() => deleteDocumetsHandler(value.name)} className={styles.deleteDoc}>
+
+                  <div key={index} className={styles.doc}>
+                    {value.name}
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteDocumetsHandler(value.name);
+                      }}
+                      className={styles.deleteDoc}>
                       x
                   </span>
                 </div>
@@ -139,7 +145,7 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
   useEffect(() => {
     const eventModal = (e: MouseEvent) => {
       const _e = e as MouseEvent & {
-        target: HTMLElement
+        target: HTMLElement;
       };
       if (
         !addDocRef.current?.contains(_e.target) &&
@@ -147,6 +153,7 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
         !titleModalRef.current?.contains(_e.target)
       ) {
         setModal(false);
+        closeModal();
       }
     };
     document.body.addEventListener('click', eventModal);

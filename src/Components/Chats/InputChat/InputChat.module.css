@@ -1,0 +1,26 @@
+.wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  border-radius: 25px;
+  max-width: 100%;
+  padding: 13px 16px;
+}
+
+.input {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  outline: none;
+  cursor: text;
+  border: none;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: #a3a3a3;
+}

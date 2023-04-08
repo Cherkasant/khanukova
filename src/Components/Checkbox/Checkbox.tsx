@@ -15,12 +15,12 @@ export enum IconColor {
 }
 
 type CheckboxProps = {
-  isChecked: boolean
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  label: string
-  icon?: boolean
-  color?: IconColor
-}
+  isChecked: boolean;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+  icon?: boolean;
+  color?: IconColor;
+};
 
 const Checkbox: FC<CheckboxProps> = (props) => {
   const { isChecked, handleChange, label, color, icon } = props;

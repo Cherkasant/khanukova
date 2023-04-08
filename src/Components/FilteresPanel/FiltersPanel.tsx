@@ -9,7 +9,6 @@ import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 
 import styles from './FiltersPanel.module.css';
 
-
 type FiltersPanelProps = {
   children: ReactElement;
 };
@@ -43,3 +42,4 @@ const FiltersPanel: FC<FiltersPanelProps> = ({ children }) => {
 };
 
 export default FiltersPanel;
+
