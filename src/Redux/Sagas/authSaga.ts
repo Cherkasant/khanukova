@@ -26,6 +26,7 @@ import {
   SignInUserPayload
 } from '../Types/auth';
 import API from '../Utils/api';
+
 import callCheckingAuth from './callCheckingAuth';
 
 function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
