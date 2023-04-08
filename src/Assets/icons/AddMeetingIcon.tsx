@@ -11,5 +11,5 @@ export const AddMeetingIcon = () => {
       <path d="M18 14L18 22" stroke="#1258CA" strokeWidth="1.2" strokeLinecap="round" />
       <path d="M22 18L14 18" stroke="#1258CA" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
-  )
-}
+  );
+};

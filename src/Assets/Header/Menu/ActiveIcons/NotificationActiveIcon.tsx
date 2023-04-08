@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const NotificationActiveIcon = () => {
   return (
@@ -16,5 +16,5 @@ export const NotificationActiveIcon = () => {
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};

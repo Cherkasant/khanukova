@@ -4,5 +4,5 @@ export const AddNewTaskIcon = () => {
       <path d="M8 4L8 12" stroke="#A3A3A3" strokeWidth="2" strokeLinecap="round" />
       <path d="M12 8L4 8" stroke="#A3A3A3" strokeWidth="2" strokeLinecap="round" />
     </svg>
-  )
-}
+  );
+};

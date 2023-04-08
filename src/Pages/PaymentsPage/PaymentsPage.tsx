@@ -1,8 +1,8 @@
-import Title from '../../Components/Title'
-import PaymentsList from '../../Components/PaymentsList'
-import { PaymentsData } from '../../Components/PaymentsList/constantsPayments'
+import Title from '../../Components/Title';
+import PaymentsList from '../../Components/PaymentsList';
+import { PaymentsData } from '../../Components/PaymentsList/constantsPayments';
 
-import styles from './PaymentsPage.module.css'
+import styles from './PaymentsPage.module.css';
 
 const PaymentsPage = () => {
   return (
@@ -17,7 +17,7 @@ const PaymentsPage = () => {
       </div>
       <PaymentsList PaymentsArray={PaymentsData} />
     </div>
-  )
-}
+  );
+};
 
-export default PaymentsPage
+export default PaymentsPage;

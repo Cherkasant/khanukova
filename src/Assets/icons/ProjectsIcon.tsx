@@ -9,5 +9,5 @@ export const ProjectsIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

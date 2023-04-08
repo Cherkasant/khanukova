@@ -1,8 +1,8 @@
-import { FC, ReactElement } from 'react'
+import { FC, ReactElement } from 'react';
 
-import Title from '../Title'
+import Title from '../Title';
 
-import styles from './RegisterContainer.module.css'
+import styles from './RegisterContainer.module.css';
 
 type FormContainerProps = {
   title: string
@@ -17,7 +17,7 @@ const RegisterContainer: FC<FormContainerProps> = ({ title, children }) => {
       </div>
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default RegisterContainer
+export default RegisterContainer;

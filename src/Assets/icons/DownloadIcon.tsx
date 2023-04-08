@@ -22,5 +22,5 @@ export const DownloadIcon = () => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  );
+};

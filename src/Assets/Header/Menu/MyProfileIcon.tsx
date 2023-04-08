@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const MyProfileIcon = () => {
   return (
@@ -21,5 +21,5 @@ export const MyProfileIcon = () => {
       <path d="M30 23.333L30 36.6663" stroke="#1258CA" strokeWidth="1.2" strokeLinecap="round" />
       <path d="M36.666 30L23.3327 30" stroke="#1258CA" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
-  )
-}
+  );
+};

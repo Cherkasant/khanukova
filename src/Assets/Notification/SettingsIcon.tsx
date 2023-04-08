@@ -31,5 +31,5 @@ export const SettingsIcon = ({ width = '30', height = '30' }) => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  );
+};

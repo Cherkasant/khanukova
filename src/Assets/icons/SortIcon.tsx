@@ -6,5 +6,5 @@ export const SortIcon = () => {
         fill="#9BACC9"
       />
     </svg>
-  )
-}
+  );
+};

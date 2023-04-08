@@ -14,5 +14,5 @@ export const BellIcon = () => {
         strokeLinecap="round"
       />
     </svg>
-  )
-}
+  );
+};

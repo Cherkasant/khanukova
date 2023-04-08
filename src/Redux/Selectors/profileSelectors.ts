@@ -1,7 +1,8 @@
-import { RootState } from '../store'
+import { RootState } from '../store';
 
 export default {
   getECaseList: (state: RootState) => state.profileReducer.ECaseList,
   getCompanyList: (state: RootState) => state.profileReducer.CompanyList,
-  getPersonalInfo: (state: RootState) => state.profileReducer.PersonalInfoList
-}
+  getPersonalInfo: (state: RootState) => state.profileReducer.PersonalInfoList,
+  getGeneratePassword: (state: RootState) => state.profileReducer.password
+};

@@ -1,46 +1,46 @@
-import { ChangeEvent, useState } from 'react'
-import 'react-dropdown/style.css'
-import Dropdown from 'react-dropdown'
-import classNames from 'classnames'
-import { Cascader, Upload } from 'antd'
+import { ChangeEvent, useState } from 'react';
+import 'react-dropdown/style.css';
+import Dropdown from 'react-dropdown';
+import classNames from 'classnames';
+import { Cascader, Upload } from 'antd';
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon'
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon'
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon'
-import 'react-datepicker/dist/react-datepicker.css'
-import { setRequestModalVisible } from '../../Redux/Reducers/postReducer'
-import { ClientsRequestStatus, Priority } from '../constants/Modal/ModalData'
-import postSelector from '../../Redux/Selectors/postSelector'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import { LabelCheckbox } from '../FilteresPanel/FilterProjectScreen/constants'
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon'
+import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
+import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
+import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
+import 'react-datepicker/dist/react-datepicker.css';
+import { setRequestModalVisible } from '../../Redux/Reducers/postReducer';
+import { ClientsRequestStatus, Priority } from '../constants/Modal/ModalData';
+import postSelector from '../../Redux/Selectors/postSelector';
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import { LabelCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
+import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
 
-import styles from './ModalRequest.module.css'
+import styles from './ModalRequest.module.css';
 
 const ModalRequest = () => {
-  const dispatch = useDispatch()
-  const titleRequest = useSelector(postSelector.getRequestTitle)
-  const isModalRequestVisible = useSelector(postSelector.getRequestModal)
+  const dispatch = useDispatch();
+  const titleRequest = useSelector(postSelector.getRequestTitle);
+  const isModalRequestVisible = useSelector(postSelector.getRequestModal);
   const onSaveClick = () => {
-    dispatch(setRequestModalVisible(false))
-  }
+    dispatch(setRequestModalVisible(false));
+  };
 
-  const [descriptionValue, setDescriptionValue] = useState('')
+  const [descriptionValue, setDescriptionValue] = useState('');
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescriptionValue(event.target.value)
-  }
-  const [comment, setComment] = useState('')
+    setDescriptionValue(event.target.value);
+  };
+  const [comment, setComment] = useState('');
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.target.value)
-  }
-  const [priority, setPriority] = useState<any>(null)
-  const [status, setStatus] = useState<any>(null)
+    setComment(event.target.value);
+  };
+  const [priority, setPriority] = useState<any>(null);
+  const [status, setStatus] = useState<any>(null);
 
   const onCancelClick = () => {
-    dispatch(setRequestModalVisible(false))
-  }
+    dispatch(setRequestModalVisible(false));
+  };
   return (
     <div
       className={classNames(styles.wrapModal, {
@@ -174,7 +174,7 @@ const ModalRequest = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModalRequest
+export default ModalRequest;

@@ -1,6 +1,6 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import styles from './Colors.module.css'
+import styles from './Colors.module.css';
 
 export const Colors = [
   {
@@ -59,4 +59,4 @@ export const Colors = [
       </div>
     )
   }
-]
+];

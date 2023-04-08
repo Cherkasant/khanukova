@@ -9,5 +9,5 @@ export const PaymentsIcon = () => {
       <path d="M11.666 25H11.6827" stroke="#D9E1F0" strokeWidth="1.2" strokeLinecap="round" />
       <path d="M5 18.333L35 18.333" stroke="#D9E1F0" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
-  )
-}
+  );
+};

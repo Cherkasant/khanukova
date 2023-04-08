@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FC } from 'react'
-import classnames from 'classnames'
+import React, { ChangeEvent, FC } from 'react';
+import classnames from 'classnames';
 
-import styles from './Input.module.css'
+import styles from './Input.module.css';
 
 type InputProps = {
   value?: string
@@ -29,8 +29,8 @@ const Input: FC<InputProps> = ({
   onKeyDown
 }) => {
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event.target.value)
-  }
+    onChange?.(event.target.value);
+  };
 
   return (
     <div className={styles.container}>
@@ -50,7 +50,7 @@ const Input: FC<InputProps> = ({
       />
       {error && <div className={styles.error}>{error}</div>}
     </div>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

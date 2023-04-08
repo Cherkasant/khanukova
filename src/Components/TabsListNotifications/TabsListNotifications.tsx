@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import classNames from 'classnames'
+import { FC } from 'react';
+import classNames from 'classnames';
 
-import { TabsNotifications } from '../constants/@types'
+import { TabsNotifications } from '../constants/@types';
 
-import styles from './TabsListNotifications.module.css'
+import styles from './TabsListNotifications.module.css';
 
 type TabsNotificationsProps = {
   activeTab: TabsNotifications
@@ -24,10 +24,10 @@ const TabsListNotifications: FC<TabsNotificationsProps> = ({ activeTab, TabsList
             })}>
             {tab.name}
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default TabsListNotifications
+export default TabsListNotifications;

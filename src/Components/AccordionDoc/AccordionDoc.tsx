@@ -1,24 +1,25 @@
-import * as React from 'react'
-import { styled } from '@mui/material/styles'
-import MuiAccordion, { AccordionProps } from '@mui/material/Accordion'
-import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary'
-import MuiAccordionDetails from '@mui/material/AccordionDetails'
-import Typography from '@mui/material/Typography'
-import { useState } from 'react'
+import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import * as React from 'react';
+import { useState } from 'react';
 
-import ArrowDocIcon from '../../Assets/icons/ArrowDocIcon'
-import TableDoc from '../TableDoc'
+import ArrowDocIcon from '../../Assets/icons/ArrowDocIcon';
+import TableDoc from '../TableDoc';
 
-import styles from './AccordionDoc.module.css'
+import styles from './AccordionDoc.module.css';
+
 
 type AccordionDocProps = {
-  addDocRef: any
-  modal: boolean
-  setModal: React.Dispatch<React.SetStateAction<boolean>>
-}
+  addDocRef: any;
+  modal: boolean;
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
-  const [id, setId] = useState(0)
+  const [id, setId] = useState(0);
   const milestoneMoc = [
     {
       id: 1,
@@ -36,12 +37,12 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
         { nameDoc: 'Progress.xlsx', created: 'Anna Ivanova', data: '16 mar 2023', label: 'PM' }
       ]
     }
-  ]
-  const [expanded, setExpanded] = React.useState<string | false>('')
+  ];
+  const [expanded, setExpanded] = React.useState<string | false>('');
   const handleChange = (panel: string, id: number) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-    setExpanded(newExpanded ? panel : false)
-    setId(id)
-  }
+    setExpanded(newExpanded ? panel : false);
+    setId(id);
+  };
 
   const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} square {...props} />)(
     ({ theme }) => ({
@@ -54,7 +55,7 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
         display: 'none'
       }
     })
-  )
+  );
 
   const AccordionSummary = styled((props: AccordionSummaryProps) => (
     <MuiAccordionSummary expandIcon={<ArrowDocIcon />} {...props} />
@@ -79,12 +80,12 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
       backgroundColor: '#D9E1F0',
       borderRadius: '5px'
     }
-  }))
+  }));
 
   const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     padding: '14px 0 12px',
     textAlign: 'start'
-  }))
+  }));
 
   return (
     <div className={styles.accordionWrap}>
@@ -99,8 +100,8 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
               <div
                 ref={addDocRef}
                 onClick={(event) => {
-                  event.stopPropagation()
-                  setModal(true)
+                  event.stopPropagation();
+                  setModal(true);
                 }}
                 className={styles.addDoc}>
                 + Add new documents
@@ -110,7 +111,7 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
         </Accordion>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default AccordionDoc
+export default AccordionDoc;

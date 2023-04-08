@@ -6,5 +6,5 @@ export const PencilIcon = ({ width = '13', height = '13' }) => {
         stroke="#1258CA"
       />
     </svg>
-  )
-}
+  );
+};

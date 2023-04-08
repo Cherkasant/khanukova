@@ -53,7 +53,7 @@
         ],
         "semi": [
           "warn",
-          "never"
+          "always"
         ],
         "import/order": [
           "error",

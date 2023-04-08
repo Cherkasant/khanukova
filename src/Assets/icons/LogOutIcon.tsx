@@ -26,5 +26,5 @@ export const LogOutIcon = () => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  );
+};

@@ -8,5 +8,5 @@ export const FilesIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

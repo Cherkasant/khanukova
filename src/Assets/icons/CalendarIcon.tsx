@@ -54,5 +54,5 @@ export const CalendarIcon = () => {
         </clipPath>
       </defs>
     </svg>
-  )
-}
+  );
+};

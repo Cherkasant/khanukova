@@ -1,29 +1,29 @@
-import { useNavigate, useParams } from 'react-router'
-import { useDispatch } from 'react-redux'
+import { useNavigate, useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
 
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
-import { activateUser } from '../../Redux/Reducers/authReducer'
-import { PathNames } from '../Router/Router'
-import Title from '../../Components/Title'
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import { activateUser } from '../../Redux/Reducers/authReducer';
+import { PathNames } from '../Router/Router';
+import Title from '../../Components/Title';
 
-import styles from './ActivationPage.module.css'
+import styles from './ActivationPage.module.css';
 
 const ActivationPage = () => {
-  const { uid, token } = useParams()
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const { uid, token } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onConfirm = () => {
     if (uid && token) {
       dispatch(
         activateUser({
           data: { uid, token },
           callback: () => {
-            navigate(PathNames.SignIn)
+            navigate(PathNames.SignIn);
           }
         })
-      )
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -38,7 +38,7 @@ const ActivationPage = () => {
         />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ActivationPage
+export default ActivationPage;

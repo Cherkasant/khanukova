@@ -1,1 +1,1 @@
-export { default } from './FiltersPanel'
+export { default } from './FiltersPanel';

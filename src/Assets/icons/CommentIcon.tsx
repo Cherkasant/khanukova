@@ -8,5 +8,5 @@ export const CommentIcon = () => {
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};

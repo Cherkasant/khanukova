@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import { CompanyList } from '../constants/@types'
+import { CompanyList } from '../constants/@types';
 
-import CompanyProfileCard from '../CompanyProfileCard'
+import CompanyProfileCard from '../CompanyProfileCard';
 
-import styles from './CompanyProfile.module.css'
+import styles from './CompanyProfile.module.css';
 
 type CompanyProfileProps = {
   activeTab?: CompanyList
@@ -21,10 +21,10 @@ const CompanyProfile: FC<CompanyProfileProps> = ({ CompanyList }) => {
   return (
     <div className={styles.listContainer}>
       {CompanyList.map((card) => {
-        return <CompanyProfileCard CardType={card} key={card.key} />
+        return <CompanyProfileCard CardType={card} key={card.key} />;
       })}
     </div>
-  )
-}
+  );
+};
 
-export default CompanyProfile
+export default CompanyProfile;

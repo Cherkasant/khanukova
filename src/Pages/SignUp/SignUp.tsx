@@ -1,23 +1,22 @@
-import { ChangeEvent, useState } from 'react'
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
+import 'intl-tel-input/build/css/intlTelInput.css';
+import { ChangeEvent, useState } from 'react';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { NavLink } from 'react-router-dom';
 
-import 'intl-tel-input/build/css/intlTelInput.css'
+import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon';
+import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
+import Checkbox from '../../Components/Checkbox';
+import Input from '../../Components/Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import Title from '../../Components/Title';
+import { PasswordTypes } from '../../Components/constants/@types';
+import { PathNames } from '../Router/Router';
 
-import { NavLink } from 'react-router-dom'
+import styles from './SignUp.module.css';
 
-import Title from '../../Components/Title'
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
-import Input from '../../Components/Input'
-import { PathNames } from '../Router/Router'
-import Checkbox from '../../Components/Checkbox'
-import { PasswordTypes } from '../../Components/constants/@types'
-import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon'
-import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon'
-
-import styles from './SignUp.module.css'
 
 const options = [
   { value: 'productOwner', label: 'Product Owner' },
@@ -27,30 +26,32 @@ const options = [
   { value: 'designer', label: 'Designer' },
   { value: 'qa', label: 'QA' },
   { value: 'programmer', label: 'Programmer' }
-]
+];
 
 const SignUp = () => {
-  const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const [type, setType] = useState(PasswordTypes.Password)
+  const [type, setType] = useState(PasswordTypes.Password);
   const onEyeClick = () => {
-    type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password)
-  }
-  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password)
+    type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password);
+  };
+  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
   const onEyeClickConfirm = () => {
-    typeConfirm === PasswordTypes.Password ? setTypeConfirm(PasswordTypes.Text) : setTypeConfirm(PasswordTypes.Password)
-  }
+    typeConfirm === PasswordTypes.Password
+      ? setTypeConfirm(PasswordTypes.Text)
+      : setTypeConfirm(PasswordTypes.Password);
+  };
 
-  const [selectedOption, setSelectedOption] = useState<any>(null)
+  const [selectedOption, setSelectedOption] = useState<any>(null);
 
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
   const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
-  }
-  const [value, setValue] = useState<any>()
+    setChecked(event.target.checked);
+  };
+  const [value, setValue] = useState<any>();
 
   const onSignUp = () => {
     // dispatch(
@@ -68,7 +69,7 @@ const SignUp = () => {
     //     },
     //   })
     // );
-  }
+  };
 
   return (
     <>
@@ -151,7 +152,7 @@ const SignUp = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

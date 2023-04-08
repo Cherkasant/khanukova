@@ -8,7 +8,7 @@ const ProfileDocIcons = () => {
         strokeWidth="0.741228"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default ProfileDocIcons
+export default ProfileDocIcons;

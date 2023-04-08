@@ -1,21 +1,21 @@
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
-import { BellIcon } from '../../Assets/Header/BellIcon'
-import { UserIcon } from '../../Assets/icons/UserIcon'
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton'
-import Title from '../Title'
-import UserName from '../UserName'
-import authSelectors from '../../Redux/Selectors/authSelectors'
-import { PathNames } from '../../Pages/Router/Router'
+import { BellIcon } from '../../Assets/Header/BellIcon';
+import { UserIcon } from '../../Assets/icons/UserIcon';
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import Title from '../Title';
+import UserName from '../UserName';
+import authSelectors from '../../Redux/Selectors/authSelectors';
+import { PathNames } from '../../Pages/Router/Router';
 
-import styles from './Header.module.css'
+import styles from './Header.module.css';
 
 const Header = () => {
-  const navigate = useNavigate()
-  const hasMessage = true
-  const isLoggedIn = useSelector(authSelectors.getLoggedIn)
-  const userName = useSelector(authSelectors.getUserName)
+  const navigate = useNavigate();
+  const hasMessage = true;
+  const isLoggedIn = useSelector(authSelectors.getLoggedIn);
+  const userName = useSelector(authSelectors.getUserName);
 
   return (
     <div className={styles.container}>
@@ -41,7 +41,7 @@ const Header = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

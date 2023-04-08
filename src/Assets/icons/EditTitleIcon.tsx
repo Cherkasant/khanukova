@@ -12,5 +12,5 @@ export const EditTitleIcon = () => {
       />
       <path d="M11.375 5.625L14.375 8.625" stroke="#1258CA" strokeWidth="1.2" />
     </svg>
-  )
-}
+  );
+};

@@ -1,30 +1,30 @@
-import type { UploadProps } from 'antd'
+import type { UploadProps } from 'antd';
 
-import { UploadOutlined } from '@ant-design/icons'
-import { Button, Checkbox, DatePicker, Form, Upload, message } from 'antd'
-import Dropdown from 'react-dropdown'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, Checkbox, DatePicker, Form, Upload, message } from 'antd';
+import Dropdown from 'react-dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
-import Input from '../../../Components/Input'
-import PuzzleButton, { PuzzleButtonTypes } from '../../../Components/PuzzleButton'
-import Title from '../../../Components/Title'
-import { registerHeadInfo } from '../../../Redux/Reducers/authReducer'
-import authSelectors from '../../../Redux/Selectors/authSelectors'
-import { PathNames } from '../../Router/Router'
+import Input from '../../../Components/Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../../Components/PuzzleButton';
+import Title from '../../../Components/Title';
+import { registerHeadInfo } from '../../../Redux/Reducers/authReducer';
+import authSelectors from '../../../Redux/Selectors/authSelectors';
+import { PathNames } from '../../Router/Router';
 
-import styles from './SignUpHeadInfo.module.css'
+import styles from './SignUpHeadInfo.module.css';
 
 
 const SignUpHeadInfo = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const currencyOptions = [
     { value: 'EUR', label: 'EUR' },
     { value: 'USD', label: 'USD' }
-  ]
-  const defaultCurrencyOption = currencyOptions[1].value
-  const idUser = useSelector(authSelectors.getUserId)
+  ];
+  const defaultCurrencyOption = currencyOptions[1].value;
+  const idUser = useSelector(authSelectors.getUserId);
 
   const onSignUpHeadInfo = (values: any) => {
     dispatch(
@@ -55,25 +55,25 @@ const SignUpHeadInfo = () => {
           owner: idUser
         },
         callback: () => {
-          navigate(PathNames.CheckYourEmail)
+          navigate(PathNames.CheckYourEmail);
         }
       })
-    )
-  }
+    );
+  };
   const props: UploadProps = {
     beforeUpload: (file) => {
-      const isPNG = file.type === 'image/png'
-      const isJPG = file.type === 'image/jpg'
-      const isJPEG = file.type === 'image/jpeg'
+      const isPNG = file.type === 'image/png';
+      const isJPG = file.type === 'image/jpg';
+      const isJPEG = file.type === 'image/jpeg';
       if (!isPNG && !isJPG && !isJPEG) {
-        message.error(`${file.name} is not a png or jpg file`)
+        message.error(`${file.name} is not a png or jpg file`);
       }
-      return isPNG || isJPG || isJPEG || Upload.LIST_IGNORE
+      return isPNG || isJPG || isJPEG || Upload.LIST_IGNORE;
     },
     onChange: (info) => {
-      console.log(info.fileList)
+      console.log(info.fileList);
     }
-  }
+  };
   return (
     <>
       <div className={styles.container}>
@@ -368,7 +368,7 @@ const SignUpHeadInfo = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SignUpHeadInfo
+export default SignUpHeadInfo;

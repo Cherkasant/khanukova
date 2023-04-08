@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const ChatIcon = () => {
   return (
@@ -12,5 +12,5 @@ export const ChatIcon = () => {
       <path d="M15 18.333L25 18.333" stroke="#1258CA" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M20 25H25" stroke="#1258CA" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
-  )
-}
+  );
+};

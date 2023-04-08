@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import classNames from 'classnames'
+import { FC } from 'react';
+import classNames from 'classnames';
 
-import { Tabs } from '../constants/@types'
+import { Tabs } from '../constants/@types';
 
-import styles from './Tabs.module.css'
+import styles from './Tabs.module.css';
 
 type TabsProps = {
   activeTab: Tabs
@@ -24,10 +24,10 @@ const Tab: FC<TabsProps> = ({ activeTab, TabsList, onClickedTab }) => {
             })}>
             {tab.name}
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Tab
+export default Tab;

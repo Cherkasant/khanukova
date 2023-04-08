@@ -1,20 +1,20 @@
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import classNames from 'classnames'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import classNames from 'classnames';
 
-import DocumentIcon from '../../Assets/icons/DocumentIcon'
-import ProfileDocIcons from '../../Assets/icons/ProfileDocIcon'
+import DocumentIcon from '../../Assets/icons/DocumentIcon';
+import ProfileDocIcons from '../../Assets/icons/ProfileDocIcon';
 
-import styles from './TableDoc.module.css'
+import styles from './TableDoc.module.css';
 
 type TableDocType = {
   docArr: any
 }
-const titleDoc = ['Title', 'Create by', 'Created time', 'Label']
+const titleDoc = ['Title', 'Create by', 'Created time', 'Label'];
 const TableDoc: React.FC<TableDocType> = ({ docArr }) => {
   return (
     <TableContainer sx={{ marginBottom: '12px' }}>
@@ -84,7 +84,7 @@ const TableDoc: React.FC<TableDocType> = ({ docArr }) => {
         </TableBody>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};
 
-export default TableDoc
+export default TableDoc;

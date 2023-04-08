@@ -1,1 +1,1 @@
-export { default } from './TabsListNotifications'
+export { default } from './TabsListNotifications';

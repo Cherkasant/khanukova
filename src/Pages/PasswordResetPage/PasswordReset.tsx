@@ -1,37 +1,39 @@
-import { useState } from 'react'
+import { Form } from 'antd';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux'
-import { useNavigate, useParams } from 'react-router'
-import { Form } from 'antd'
-import { NavLink } from 'react-router-dom'
+import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon';
+import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
+import Input from '../../Components/Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import Title from '../../Components/Title';
+import { PasswordTypes } from '../../Components/constants/@types';
+import { resetPasswordConfirm } from '../../Redux/Reducers/authReducer';
+import { PathNames } from '../Router/Router';
 
-import Title from '../../Components/Title'
-import Input from '../../Components/Input'
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton'
-import { PasswordTypes } from '../../Components/constants/@types'
-import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon'
-import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon'
-import { resetPasswordConfirm } from '../../Redux/Reducers/authReducer'
-import { PathNames } from '../Router/Router'
+import styles from './PasswordReset.module.css';
 
-import styles from './PasswordReset.module.css'
 
 const ResetPassword = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { uid, token } = useParams()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { uid, token } = useParams();
 
-  const [form] = Form.useForm()
-  const checkPassword = Form.useWatch('password', form)
-  const checkPasswordConfirm = Form.useWatch('passwordNew', form)
-  const [type, setType] = useState(PasswordTypes.Password)
+  const [form] = Form.useForm();
+  const checkPassword = Form.useWatch('password', form);
+  const checkPasswordConfirm = Form.useWatch('passwordNew', form);
+  const [type, setType] = useState(PasswordTypes.Password);
   const onEyeClick = () => {
-    type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password)
-  }
-  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password)
+    type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password);
+  };
+  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
   const onEyeClickConfirm = () => {
-    typeConfirm === PasswordTypes.Password ? setTypeConfirm(PasswordTypes.Text) : setTypeConfirm(PasswordTypes.Password)
-  }
+    typeConfirm === PasswordTypes.Password
+      ? setTypeConfirm(PasswordTypes.Text)
+      : setTypeConfirm(PasswordTypes.Password);
+  };
 
   const onSetPassword = (values: any) => {
     if (uid && token) {
@@ -45,9 +47,9 @@ const ResetPassword = () => {
           },
           callback: () => navigate(PathNames.SignIn)
         })
-      )
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -104,7 +106,7 @@ const ResetPassword = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;
