@@ -1,7 +1,7 @@
 .container {
     box-sizing: border-box;
     width: 660px;
-    height: 860px;
+    height: 785px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,11 +11,16 @@
     background: #ffffff;
 }
 
+.content {
+    padding: 60px 80px 40px 80px;
+    display: flex;
+    flex-direction: column;
+}
+
 .title {
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 32px;
@@ -28,7 +33,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .button {
@@ -37,25 +42,7 @@
     justify-content: center;
     align-self: center;
     box-sizing: border-box;
-    margin-bottom: 48px;
-}
-
-.or {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    padding: 0;
-    color: #9e9e9e;
-}
-
-.icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .info {
@@ -63,7 +50,6 @@
     gap: 8px;
     justify-content: center;
     padding-left: 30px;
-    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -86,7 +72,6 @@
     display: flex;
     width: 100%;
     justify-content: flex-start;
-    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -101,26 +86,10 @@
     color: #4270a7;
     text-decoration: none;
 }
-
-.test {
-    padding: 60px 80px 40px 80px;
-    display: flex;
-    flex-direction: column;
+.link:hover{
+    text-decoration: underline;
 }
 
-.straightLine {
-    width: 219px;
-    height: 0;
-    border: 1px solid #4270a7;
-}
-
-.lineBlock {
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
 
 .checkboxContainer {
     width: 100%;
@@ -129,21 +98,24 @@
     gap: 5px;
 }
 
-.line {
+.linkRules {
     display: flex;
     align-items: center;
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 17px;
     text-align: right;
-    color: #4270a7;
-    text-decoration: underline;
+    color: #1258CA;
     cursor: pointer;
 }
 
+.linkRules:hover{
+    text-decoration: underline;
+}
+
 .dropdownControl {
-    height: 60px;
+    height: 54px;
     border: 1px solid #d0d0d0;
     border-radius: 10px;
     text-align: start;
@@ -206,7 +178,7 @@
 }
 
 .phoneInput {
-    height: 60px;
+    height: 54px;
     border: 1px solid #d0d0d0;
     border-radius: 10px;
 }
@@ -222,7 +194,6 @@
 
 .phoneInput > input {
     border: none;
-    font-family: "Inter";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -241,7 +212,7 @@
 
 .eyeIcon {
     position: absolute;
-    top: 22px;
+    top: 18px;
     right: 20px;
 }
 

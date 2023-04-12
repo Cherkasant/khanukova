@@ -21,7 +21,6 @@ import { PathNames } from '../Router/Router';
 
 import styles from './SignUpHead.module.css';
 
-
 export enum Role {
   PjO = 'projectOwner',
   CEO = 'ceo',
@@ -43,7 +42,6 @@ const options = [
   { value: Role.Programmer, label: 'Programmer' },
   { value: Role.PdO, label: 'Product Owner' }
 ];
-
 
 const SignUpHead = () => {
   const dispatch = useDispatch();
@@ -79,7 +77,7 @@ const SignUpHead = () => {
           email: values.email,
           phone: values.phone,
           position: values.userStatus.label,
-          code: null,
+          code: values.code || null,
           password: values.password,
           re_password: values.passwordConfirmation
         },
@@ -88,7 +86,7 @@ const SignUpHead = () => {
             case Role.PjO:
               navigate(PathNames.SignUpPoInfo);
               break;
-              
+
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
@@ -107,7 +105,7 @@ const SignUpHead = () => {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.test}>
+        <div className={styles.content}>
           <div className={styles.titleBlock}>
             <Title name={'Sign up'} className={styles.title} />
             <div className={styles.subtitle}>{'Let’s get started'}</div>
@@ -179,10 +177,10 @@ const SignUpHead = () => {
               checkRole?.value === Role.Designer ||
               checkRole?.value === Role.PdO ||
               checkRole?.value === Role.QA ? (
-                  <Form.Item name="code" className={styles.formItem}>
-                    <Input type={'text'} placeholder={'Code'} />
-                  </Form.Item>
-                ) : null}
+                <Form.Item name="code" className={styles.formItem}>
+                  <Input type={'text'} placeholder={'Code'} />
+                </Form.Item>
+              ) : null}
 
               <div className={styles.passwordContainer}>
                 <Form.Item
@@ -215,7 +213,7 @@ const SignUpHead = () => {
             <div className={styles.checkboxContainer}>
               <Checkbox isChecked={checked} handleChange={onChangeCheck} label={'I agree '} />
 
-              <div className={styles.line}>Terms and Conditions</div>
+              <div className={styles.linkRules}>Terms and Conditions</div>
             </div>
             <Form.Item className={styles.formItem}>
               <PuzzleButton
@@ -247,4 +245,3 @@ const SignUpHead = () => {
 };
 
 export default SignUpHead;
-
