@@ -17,6 +17,15 @@
     flex-direction: column;
 }
 
+.titleBlock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 7px;
+    margin-bottom: 30px;
+}
+
 .title {
     width: 100%;
     display: flex;
@@ -24,9 +33,14 @@
     font-style: normal;
     font-weight: 500;
     font-size: 32px;
-
     line-height: 39px;
     color: #212121;
+}
+
+.checkboxChooseContainer {
+    display: flex;
+    gap: 70px;
+    margin-bottom: 30px;
 }
 
 .inputs {
@@ -59,15 +73,6 @@
     margin-bottom: 20px;
 }
 
-.titleBlock {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 7px;
-    margin-bottom: 40px;
-}
-
 .subtitle {
     display: flex;
     width: 100%;
@@ -86,7 +91,8 @@
     color: #4270a7;
     text-decoration: none;
 }
-.link:hover{
+
+.link:hover {
     text-decoration: underline;
 }
 
@@ -110,7 +116,7 @@
     cursor: pointer;
 }
 
-.linkRules:hover{
+.linkRules:hover {
     text-decoration: underline;
 }
 
