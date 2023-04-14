@@ -1,3 +1,11 @@
+import classNames from 'classnames';
+
+import React, { useEffect, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useParams } from 'react-router';
+
 import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
 import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon';
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
@@ -24,11 +32,8 @@ import {
   setSelectedModalVisible
 } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
+
 import styles from './SingleProject.module.css';
-import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
