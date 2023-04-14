@@ -40,7 +40,7 @@ const FilterProjectScreen = () => {
               />
               {LabelCheckbox.map(({ label, icon, color }) => (
                 <Checkbox
-                  isChecked={true}
+                  isChecked={false}
                   handleChange={() => {}}
                   label={label}
                   icon={icon}
@@ -79,7 +79,7 @@ const FilterProjectScreen = () => {
           <Panel header="Priority" key="5" className={styles.panel}>
             <div className={styles.container}>
               {PriorityCheckbox.map(({ label }) => (
-                <Checkbox isChecked={true} handleChange={() => {}} label={label} key={label} />
+                <Checkbox isChecked={false} handleChange={() => {}} label={label} key={label} />
               ))}
             </div>
           </Panel>
@@ -104,4 +104,3 @@ const FilterProjectScreen = () => {
 };
 
 export default FilterProjectScreen;
-

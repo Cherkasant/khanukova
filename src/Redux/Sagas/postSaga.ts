@@ -2,26 +2,31 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { all, put, takeLatest } from 'redux-saga/effects';
 
 import {
+  deleteMilestone,
   getAllMilestones,
   getAllProjects,
-  getAllTasks,
+  getSingleMilestone,
   getSingleProject,
   getTaskCard,
+  postMilestoneCard,
   postProject,
-  postTaskCard,
+  postSubTask,
+  postTask,
   setAllMilestones,
   setAllProjects,
   setProjectId,
+  setProjectTitle,
+  setSelectedModalVisible,
+  setSingleMilestone,
   setSingleProject,
-  setTaskCard,
-  setTitleTask
+  setTaskCard
 } from '../Reducers/postReducer';
-import { ProjectDataPayload, TaskType } from '../Types/tasks';
+import { MilestoneModalType, ProjectDataPayload, SubTaskDataPayload, TaskDataPayload } from '../Types/tasks';
 import API from '../Utils/api';
 
 import callCheckingAuth from './callCheckingAuth';
 
-function* postTaskCardWorker(action: PayloadAction<TaskType>) {
+function* postMilestoneCardWorker(action: PayloadAction<MilestoneModalType>) {
   const { ...task } = action.payload;
   const { ok, data, problem } = yield callCheckingAuth(API.postMilestone, task);
   if (ok && data) {
@@ -44,7 +49,7 @@ function* postProjectTitleWorker(action: PayloadAction<ProjectDataPayload>) {
   const { data: ProjectData, callback } = action.payload;
   const { ok, data, problem } = yield callCheckingAuth(API.postProject, ProjectData);
   if (ok && data) {
-    yield put(setTitleTask(data.project_name));
+    yield put(setProjectTitle(data.project_name));
     yield put(setProjectId(data.id));
     callback();
   } else {
@@ -66,7 +71,7 @@ function* getSingleProjectWorker(action: PayloadAction<number>) {
   if (ok && data) {
     yield put(setSingleProject(data));
   } else {
-    console.warn('Error while getting all projects', problem);
+    console.warn('Error while getting single project', problem);
   }
 }
 
@@ -79,23 +84,62 @@ function* getAllMilestonesWorker(action: PayloadAction<number>) {
   }
 }
 
-function* getAllTasksWorker(action: PayloadAction<number>) {
-  const { ok, data, problem } = yield callCheckingAuth(API.getAllTasks, action.payload);
+function* postTaskWorker(action: PayloadAction<TaskDataPayload>) {
+  const {
+    data: { ...task },
+    callback
+  } = action.payload;
+  const { ok, data, problem } = yield callCheckingAuth(API.postTask, task);
   if (ok && data) {
-    console.log(data.results);
+    callback();
+  } else {
+    console.warn('Error while posting milestone', problem);
+  }
+}
+
+function* postSubTaskWorker(action: PayloadAction<SubTaskDataPayload>) {
+  const {
+    data: { ...subTask },
+    callback
+  } = action.payload;
+  const { ok, data, problem } = yield callCheckingAuth(API.postSubTask, subTask);
+  if (ok && data) {
+    callback();
+  } else {
+    console.warn('Error while posting milestone', problem);
+  }
+}
+
+function* deleteMilestoneWorker(action: PayloadAction<number>) {
+  const { ok, data, problem } = yield callCheckingAuth(API.deleteMilestone, action.payload);
+  if (ok && data) {
+    yield put(setSelectedModalVisible(false));
   } else {
     console.warn('Error while getting all projects', problem);
+  }
+}
+
+function* getSingleMilestoneWorker(action: PayloadAction<number>) {
+  const { ok, data, problem } = yield callCheckingAuth(API.getSingleMilestone, action.payload);
+  if (ok && data) {
+    yield put(setSingleMilestone(data));
+    yield put(setSelectedModalVisible(true));
+  } else {
+    console.warn('Error while getting single project', problem);
   }
 }
 
 export default function* postSaga() {
   yield all([
     takeLatest(getTaskCard, getTaskCardWorker),
-    takeLatest(postTaskCard, postTaskCardWorker),
+    takeLatest(postMilestoneCard, postMilestoneCardWorker),
     takeLatest(getAllProjects, getAllProjectsWorker),
     takeLatest(getSingleProject, getSingleProjectWorker),
     takeLatest(postProject, postProjectTitleWorker),
     takeLatest(getAllMilestones, getAllMilestonesWorker),
-    takeLatest(getAllTasks, getAllTasksWorker)
+    takeLatest(postTask, postTaskWorker),
+    takeLatest(postSubTask, postSubTaskWorker),
+    takeLatest(deleteMilestone, deleteMilestoneWorker),
+    takeLatest(getSingleMilestone, getSingleMilestoneWorker)
   ]);
 }
