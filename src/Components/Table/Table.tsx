@@ -22,6 +22,7 @@ import {
 import postSelector from '../../Redux/Selectors/postSelector';
 import { MilestoneCardType, SubTaskTypeTable, TaskTypeTable } from '../../Redux/Types/tasks';
 import { TableColumns } from '../constants/Table/TableData';
+
 import styles from './Table.module.css';
 
 const Table = () => {
