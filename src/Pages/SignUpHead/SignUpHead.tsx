@@ -18,6 +18,7 @@ import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { registerUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
+
 import styles from './SignUpHead.module.css';
 
 export enum Role {
