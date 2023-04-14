@@ -1,8 +1,3 @@
-import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
-
 import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
 import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon';
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
@@ -24,6 +19,10 @@ import { Tabs } from '../../Components/constants/@types';
 import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
 import styles from './ProjectScreen.module.css';
+import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },

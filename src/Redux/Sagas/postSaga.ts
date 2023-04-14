@@ -1,6 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
-import { all, put, takeLatest } from 'redux-saga/effects';
-
 import {
   deleteMilestone,
   getAllMilestones,
@@ -24,6 +21,8 @@ import {
 import { MilestoneModalType, ProjectDataPayload, SubTaskDataPayload, TaskDataPayload } from '../Types/tasks';
 import API from '../Utils/api';
 import callCheckingAuth from './callCheckingAuth';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { all, put, takeLatest } from 'redux-saga/effects';
 
 function* postMilestoneCardWorker(action: PayloadAction<MilestoneModalType>) {
   const { ...task } = action.payload;
