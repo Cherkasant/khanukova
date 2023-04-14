@@ -1,3 +1,9 @@
+import classnames from 'classnames';
+import moment from 'moment';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Column, useExpanded, useSortBy, useTable } from 'react-table';
+
 import { Close } from '../../Assets/Table/Close';
 import { AddNewTaskIcon } from '../../Assets/icons/AddNewTaskIcon';
 import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
@@ -17,11 +23,6 @@ import postSelector from '../../Redux/Selectors/postSelector';
 import { MilestoneCardType, SubTaskTypeTable, TaskTypeTable } from '../../Redux/Types/tasks';
 import { TableColumns } from '../constants/Table/TableData';
 import styles from './Table.module.css';
-import classnames from 'classnames';
-import moment from 'moment';
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Column, useExpanded, useSortBy, useTable } from 'react-table';
 
 const Table = () => {
   const dispatch = useDispatch();

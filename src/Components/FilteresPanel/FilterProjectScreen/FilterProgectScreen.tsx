@@ -1,3 +1,6 @@
+import { Cascader, Collapse, DatePicker } from 'antd';
+import { useState } from 'react';
+
 import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
 import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import Checkbox from '../../Checkbox';
@@ -12,8 +15,6 @@ import {
   ResponsibleCheckbox,
   StatusCheckbox
 } from './constants';
-import { Cascader, Collapse, DatePicker } from 'antd';
-import { useState } from 'react';
 
 const { Panel } = Collapse;
 

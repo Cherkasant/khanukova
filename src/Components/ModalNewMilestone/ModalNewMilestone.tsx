@@ -1,3 +1,13 @@
+import type { DatePickerProps } from 'antd';
+import { Cascader, DatePicker, Upload } from 'antd';
+import 'antd/README.md';
+import classNames from 'classnames';
+import { ChangeEvent, useEffect, useState } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
 import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
@@ -12,15 +22,6 @@ import Input from '../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
 import styles from './ModalNewMilestone.module.css';
-import type { DatePickerProps } from 'antd';
-import { Cascader, DatePicker, Upload } from 'antd';
-import 'antd/README.md';
-import classNames from 'classnames';
-import { ChangeEvent, useEffect, useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
-import { useDispatch, useSelector } from 'react-redux';
 
 const ModalNewMilestone = () => {
   const dispatch = useDispatch();

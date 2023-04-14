@@ -1,13 +1,3 @@
-import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon';
-import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
-import Checkbox from '../../Components/Checkbox';
-import Input from '../../Components/Input';
-import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
-import Title from '../../Components/Title';
-import { PasswordTypes } from '../../Components/constants/@types';
-import { registerUser } from '../../Redux/Reducers/authReducer';
-import { PathNames } from '../Router/Router';
-import styles from './SignUpHead.module.css';
 import { Form } from 'antd';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import { ChangeEvent, useState } from 'react';
@@ -18,6 +8,17 @@ import 'react-phone-number-input/style.css';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
+
+import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon';
+import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
+import Checkbox from '../../Components/Checkbox';
+import Input from '../../Components/Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import Title from '../../Components/Title';
+import { PasswordTypes } from '../../Components/constants/@types';
+import { registerUser } from '../../Redux/Reducers/authReducer';
+import { PathNames } from '../Router/Router';
+import styles from './SignUpHead.module.css';
 
 export enum Role {
   PjO = 'projectOwner',
