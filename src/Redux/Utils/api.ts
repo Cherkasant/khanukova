@@ -9,7 +9,7 @@ import {
   SignInUserData
 } from '../Types/auth';
 import { CompanyListData } from '../Types/profile';
-import { ProjectData, TaskType } from '../Types/tasks';
+import { MilestoneModalType, ProjectData, SubTaskModalType, TaskModalType } from '../Types/tasks';
 
 const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' });
 
@@ -40,7 +40,7 @@ const resetPasswordConfirm = (data: ResetPasswordData) => {
   return API.post('/auth/users/reset_password_confirm/', data);
 };
 
-const postMilestone = (token: string, milestone: TaskType) => {
+const postMilestone = (token: string, milestone: MilestoneModalType) => {
   return API.post('/project/milestone/', milestone, { headers: { Authorization: `JWT ${token}` } });
 };
 
@@ -112,11 +112,25 @@ const getSingleProject = (token: string, id: string) => {
 const getAllMilestones = (token: string, idProject: number) => {
   return API.get('/project/milestone/', { project: idProject }, { headers: { Authorization: `JWT ${token}` } });
 };
+
 const getAllTasks = (token: string, idMilestone: number) => {
   return API.get('/project/task/', { milestone: idMilestone }, { headers: { Authorization: `JWT ${token}` } });
 };
+const postTask = (token: string, task: TaskModalType) => {
+  return API.post('/project/task/', task, { headers: { Authorization: `JWT ${token}` } });
+};
 const getGeneratePassword = (token: string) => {
   return API.get('/code/', {}, { headers: { Authorization: `JWT ${token}` } });
+};
+
+const postSubTask = (token: string, subTask: SubTaskModalType) => {
+  return API.post('/project/sub-task/', subTask, { headers: { Authorization: `JWT ${token}` } });
+};
+const deleteMilestone = (token: string, id: number) => {
+  return API.delete(`/project/milestone/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
+const getSingleMilestone = (token: string, id: number) => {
+  return API.get(`/project/milestone/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
 };
 
 export default {
@@ -141,5 +155,9 @@ export default {
   getSingleProject,
   getAllMilestones,
   getAllTasks,
-  getGeneratePassword
+  getGeneratePassword,
+  postTask,
+  postSubTask,
+  deleteMilestone,
+  getSingleMilestone
 };

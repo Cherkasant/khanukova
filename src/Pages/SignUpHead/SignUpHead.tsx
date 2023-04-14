@@ -18,9 +18,7 @@ import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { registerUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
-
 import styles from './SignUpHead.module.css';
-
 
 export enum Role {
   PjO = 'projectOwner',
@@ -43,7 +41,6 @@ const options = [
   { value: Role.Programmer, label: 'Programmer' },
   { value: Role.PdO, label: 'Product Owner' }
 ];
-
 
 const SignUpHead = () => {
   const dispatch = useDispatch();
@@ -79,7 +76,7 @@ const SignUpHead = () => {
           email: values.email,
           phone: values.phone,
           position: values.userStatus.label,
-          code: null,
+          code: values.code,
           password: values.password,
           re_password: values.passwordConfirmation
         },
@@ -88,7 +85,7 @@ const SignUpHead = () => {
             case Role.PjO:
               navigate(PathNames.SignUpPoInfo);
               break;
-              
+
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
@@ -179,10 +176,10 @@ const SignUpHead = () => {
               checkRole?.value === Role.Designer ||
               checkRole?.value === Role.PdO ||
               checkRole?.value === Role.QA ? (
-                  <Form.Item name="code" className={styles.formItem}>
-                    <Input type={'text'} placeholder={'Code'} />
-                  </Form.Item>
-                ) : null}
+                <Form.Item name="code" className={styles.formItem}>
+                  <Input type={'text'} placeholder={'Code'} />
+                </Form.Item>
+              ) : null}
 
               <div className={styles.passwordContainer}>
                 <Form.Item
@@ -247,4 +244,3 @@ const SignUpHead = () => {
 };
 
 export default SignUpHead;
-
