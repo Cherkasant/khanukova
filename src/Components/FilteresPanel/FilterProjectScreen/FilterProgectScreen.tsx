@@ -1,12 +1,8 @@
-import { Cascader, Collapse, DatePicker } from 'antd';
-import { useState } from 'react';
-
 import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
 import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import Checkbox from '../../Checkbox';
 import Input from '../../Input';
 import FiltersPanel from '../FiltersPanel';
-
 import styles from './FilterProjectScreen.module.css';
 import {
   LabelCheckbox,
@@ -16,6 +12,8 @@ import {
   ResponsibleCheckbox,
   StatusCheckbox
 } from './constants';
+import { Cascader, Collapse, DatePicker } from 'antd';
+import { useState } from 'react';
 
 const { Panel } = Collapse;
 
@@ -40,7 +38,7 @@ const FilterProjectScreen = () => {
               />
               {LabelCheckbox.map(({ label, icon, color }) => (
                 <Checkbox
-                  isChecked={true}
+                  isChecked={false}
                   handleChange={() => {}}
                   label={label}
                   icon={icon}
@@ -79,7 +77,7 @@ const FilterProjectScreen = () => {
           <Panel header="Priority" key="5" className={styles.panel}>
             <div className={styles.container}>
               {PriorityCheckbox.map(({ label }) => (
-                <Checkbox isChecked={true} handleChange={() => {}} label={label} key={label} />
+                <Checkbox isChecked={false} handleChange={() => {}} label={label} key={label} />
               ))}
             </div>
           </Panel>
@@ -104,4 +102,3 @@ const FilterProjectScreen = () => {
 };
 
 export default FilterProjectScreen;
-

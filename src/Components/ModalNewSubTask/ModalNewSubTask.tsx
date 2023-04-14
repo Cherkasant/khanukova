@@ -1,5 +1,18 @@
+import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
+import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
+import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
+import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
+import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
+import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
+import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
+import { getSingleProject, postSubTask, setSubTaskModalVisible } from '../../Redux/Reducers/postReducer';
+import postSelector from '../../Redux/Selectors/postSelector';
+import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
+import Input from '../Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
+import styles from './ModalNewSubTask.module.css';
 import type { DatePickerProps } from 'antd';
-
 import { Cascader, DatePicker, Upload } from 'antd';
 import 'antd/README.md';
 import classNames from 'classnames';
@@ -8,49 +21,46 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
-import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
-import { postTaskCard, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
-import postSelector from '../../Redux/Selectors/postSelector';
-import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
-import Input from '../Input';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
-import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
-
-import styles from './NewTask.module.css';
-
-
-const NewTask = () => {
+const ModalNewSubTask = () => {
+  const params = useParams();
+  const { id } = params;
   const dispatch = useDispatch();
-  const milestone = useSelector(postSelector.getTitleMilestone);
+  const TaskTitle = useSelector(postSelector.getTaskTitle);
+  const singleProject = useSelector(postSelector.getSingleProject);
+  const isVisible = useSelector(postSelector.getNewSubTaskModal);
+  const taskId = useSelector(postSelector.getTaskId);
 
   const onSaveClick = () => {
     dispatch(
-      postTaskCard({
-        milestone_name: title,
-        description: descriptionValue,
-        attachment: null,
-        responsible: [],
-        priority: priority.value,
-        start_date: launchDate,
-        deadline: deadline,
-        duration: +duration,
-        labels: label,
-        color_labels: colors.value,
-        dependence: [],
-        progress: +progress.value,
-        status: status.value,
-        payment_status: paymentStatus.value,
-        project: 25
+      postSubTask({
+        data: {
+          sub_task_name: title,
+          description: descriptionValue,
+          attachment: null,
+          responsible: [],
+          priority: priority.value,
+          start_date: launchDate,
+          deadline: deadline,
+          duration: +duration,
+          labels: label,
+          color_labels: colors.value,
+          dependence: [],
+          progress: +progress.value,
+          status: status.value,
+          payment_status: paymentStatus.value,
+          project: singleProject?.id,
+          task: taskId
+        },
+        callback: () => {
+          if (id) {
+            dispatch(getSingleProject(+id));
+          }
+        }
       })
     );
-    dispatch(setSelectedModalVisible(false));
+    dispatch(setSubTaskModalVisible(false));
   };
   const [attachment, setAttachment] = useState('');
   const [launchDate, setLaunchDate] = useState('');
@@ -58,7 +68,7 @@ const NewTask = () => {
   const [label, setLabel] = useState('');
   const [duration, setDuration] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
-  const isVisible = useSelector(postSelector.getModal);
+
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDescriptionValue(event.target.value);
   };
@@ -78,11 +88,11 @@ const NewTask = () => {
     setEdit(!edit);
   };
   const onCancelClick = () => {
-    dispatch(setSelectedModalVisible(false));
+    dispatch(setSubTaskModalVisible(false));
   };
   useEffect(() => {
     setEdit(false);
-    setTitle('Title');
+    setTitle('New sub-task');
   }, []);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
@@ -103,7 +113,7 @@ const NewTask = () => {
         })}>
         <div className={styles.container}>
           <div className={styles.milestone}>
-            {milestone}
+            {TaskTitle}
             <div className={styles.deleteContainer}>
               <DeleteIcon />
               {'Delete from project'}
@@ -118,7 +128,7 @@ const NewTask = () => {
               value={title}
               onChange={(value) => setTitle(value)}
               className={styles.titleInput}
-              placeholder={'Title'}
+              placeholder={'New Task'}
               disabled={!edit}
             />
             {!edit ? (
@@ -354,4 +364,4 @@ const NewTask = () => {
   );
 };
 
-export default NewTask;
+export default ModalNewSubTask;

@@ -1,1 +1,1 @@
-export { default } from './NewTask';
+export { default } from './ModalNewTask';

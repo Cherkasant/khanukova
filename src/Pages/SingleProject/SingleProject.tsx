@@ -1,8 +1,3 @@
-import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-
 import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
 import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon';
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
@@ -13,7 +8,9 @@ import Documents from '../../Components/Documents';
 import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 import Input from '../../Components/Input';
 import ModalEcase from '../../Components/ModalEcase';
-import NewTask from '../../Components/ModalNewTask';
+import ModalNewMilestone from '../../Components/ModalNewMilestone';
+import ModalNewSubTask from '../../Components/ModalNewSubTask';
+import ModalNewTask from '../../Components/ModalNewTask';
 import ModalRequest from '../../Components/ModalRequest';
 import Resourses from '../../Components/Resourses';
 import Table from '../../Components/Table';
@@ -21,16 +18,17 @@ import Tab from '../../Components/Tabs';
 import { Tabs } from '../../Components/constants/@types';
 import {
   getAllMilestones,
-  getAllTasks,
   getSingleProject,
   setFilterVisible,
-  setSelectedModalVisible,
-  setTitleTask
+  setProjectTitle,
+  setSelectedModalVisible
 } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
-
 import styles from './SingleProject.module.css';
-
+import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
@@ -57,7 +55,7 @@ const SingleProject = () => {
   const [addItem, setAddItem] = useState(false);
   const onAddItemClick = () => {
     if (singleProject) {
-      dispatch(setTitleTask(singleProject.project_name));
+      dispatch(setProjectTitle(singleProject.project_name));
       setAddItem(!addItem);
       dispatch(setSelectedModalVisible(true));
     }
@@ -73,7 +71,6 @@ const SingleProject = () => {
     if (id) {
       dispatch(getSingleProject(+id));
       dispatch(getAllMilestones(+id));
-      dispatch(getAllTasks(1));
     }
   }, [id]);
 
@@ -85,7 +82,7 @@ const SingleProject = () => {
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(setTitleTask(title));
+      dispatch(setProjectTitle(title));
       setEdit(!edit);
     }
   };
@@ -166,7 +163,9 @@ const SingleProject = () => {
       ) : null}
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
       {activeTab === Tabs.Documents ? <Documents /> : null}
-      <NewTask />
+      <ModalNewMilestone />
+      <ModalNewTask />
+      <ModalNewSubTask />
       <ModalEcase />
       <ModalRequest />
     </div>
