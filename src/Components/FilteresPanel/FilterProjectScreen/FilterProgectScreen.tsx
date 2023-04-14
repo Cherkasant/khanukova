@@ -6,6 +6,7 @@ import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import Checkbox from '../../Checkbox';
 import Input from '../../Input';
 import FiltersPanel from '../FiltersPanel';
+
 import styles from './FilterProjectScreen.module.css';
 import {
   LabelCheckbox,
