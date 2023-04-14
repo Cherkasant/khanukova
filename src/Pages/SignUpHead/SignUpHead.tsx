@@ -64,8 +64,16 @@ const SignUpHead = () => {
   };
 
   const [checked, setChecked] = useState(false);
+  const [checkedCode, setCheckedCode] = useState(false);
+  const [checkedCompany, setCheckedCompany] = useState(false);
   const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
+  };
+  const onChangeCheckCode = (event: ChangeEvent<HTMLInputElement>) => {
+    setCheckedCode(event.target.checked);
+  };
+  const onChangeCheckCompany = (event: ChangeEvent<HTMLInputElement>) => {
+    setCheckedCompany(event.target.checked);
   };
   const [value, setValue] = useState<any>();
 
@@ -77,7 +85,7 @@ const SignUpHead = () => {
           email: values.email,
           phone: values.phone,
           position: values.userStatus.label,
-          code: values.code,
+          code: values.code || null,
           password: values.password,
           re_password: values.passwordConfirmation
         },
@@ -105,10 +113,18 @@ const SignUpHead = () => {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.test}>
+        <div className={styles.content}>
           <div className={styles.titleBlock}>
             <Title name={'Sign up'} className={styles.title} />
             <div className={styles.subtitle}>{'Let’s get started'}</div>
+          </div>
+          <div className={styles.checkboxChooseContainer}>
+            <Checkbox isChecked={checkedCode} handleChange={onChangeCheckCode} label={'Sign up with code'} />
+            <Checkbox
+              isChecked={checkedCompany}
+              handleChange={onChangeCheckCompany}
+              label={'Sign up and create a company'}
+            />
           </div>
           <Form
             onFinish={onSignUp}
@@ -213,22 +229,23 @@ const SignUpHead = () => {
             <div className={styles.checkboxContainer}>
               <Checkbox isChecked={checked} handleChange={onChangeCheck} label={'I agree '} />
 
-              <div className={styles.line}>Terms and Conditions</div>
+              <div className={styles.linkRules}>Terms and Conditions</div>
             </div>
             <Form.Item className={styles.formItem}>
               <PuzzleButton
                 htmlType="submit"
                 btnTitle={
-                  checkRole?.value === Role.Designer ||
-                  checkRole?.value === Role.QA ||
-                  checkRole?.value === Role.PdO ||
-                  checkRole?.value === Role.Programmer
+                  checkedCode &&
+                  (checkRole?.value === Role.Designer ||
+                    checkRole?.value === Role.QA ||
+                    checkRole?.value === Role.PdO ||
+                    checkRole?.value === Role.Programmer)
                     ? 'Create account'
                     : 'Next step'
                 }
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.button}
-                btnDisabled={!(checkPassword === checkPasswordConfirm) || !checked}
+                btnDisabled={checkPassword === '' || !(checkPassword === checkPasswordConfirm) || !checked}
               />
             </Form.Item>
           </Form>
