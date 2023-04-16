@@ -1,7 +1,7 @@
 export const SettingsIcon = ({ width = '30', height = '30' }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_4287_5341)">
+      <g clipPath="url(#clip0_4287_5341)">
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
