@@ -1,23 +1,29 @@
 //todo уточнить со стороны бэкенда
 export type CardType = {
-  id: number
-  projectName: string
-  tasks: string
-  deadline: string
-  budget: string
-  paid: string
-}
+  id: number;
+  projectName: string;
+  tasks: string;
+  deadline: string;
+  budget: string;
+  paid: string;
+};
 
 export type CardNotificationsType = {
-  id: number
-  avatar: string
-  userName: string
-  status: string
-  location: string
-  date: string
-}
+  id: number;
+  avatar: string;
+  userName: string;
+  status: string;
+  location: string;
+  date: string;
+};
 
-export type CardsListNotificationsType = Array<CardNotificationsType>
+export type CardsListNotificationsType = Array<CardNotificationsType>;
+
+export enum Role {
+  PO = 'PO',
+  Head = 'HEAD',
+  DevTeam = 'DEVTEAM'
+}
 
 export enum Roles {
   ProductOwner = 'Product Owner',
@@ -30,7 +36,7 @@ export enum Roles {
   default = 'default'
 }
 
-export type CardsListType = Array<CardType>
+export type CardsListType = Array<CardType>;
 
 export enum PasswordTypes {
   Password = 'password',

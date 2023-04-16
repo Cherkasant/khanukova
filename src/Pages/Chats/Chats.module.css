@@ -7,6 +7,7 @@
 }
 
 .panelChats {
+  flex-shrink: 0;
   width: 489px;
   border-right: 1px solid #4270a7;
 }
@@ -21,15 +22,15 @@
 }
 
 .searchContainer {
-  display: flex;
-  justify-content: center;
   position: relative;
   margin-top: 20px;
   margin-bottom: 45px;
+  padding: 0 12px 0 15px;
 }
 
 .searchInput {
-  width: 440px;
+  width: 420px;
+  padding-right: 20px;
   height: 40px;
   border-color: #1258ca;
   border-radius: 25px;
@@ -63,7 +64,9 @@
 }
 
 .panelChatsFilters {
-  width: 244px;
+  border-right: 1px solid #0e4298;
+  width: 100%;
+  height: 100vh;
 }
 
 .collapseContainer {
@@ -87,9 +90,8 @@
 }
 
 .panelChatsUsers {
-  border-left: 1px solid #0e4298;
   height: 100vh;
-  width: 243px;
+  width: 100%;
 }
 
 .active {

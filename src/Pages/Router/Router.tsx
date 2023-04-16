@@ -23,7 +23,7 @@ import { getUserName } from '../../Redux/Reducers/authReducer';
 import authSelectors from '../../Redux/Selectors/authSelectors';
 import SingleProject from '../SingleProject/SingleProject';
 import Chats from '../Chats';
-
+import { getPersonalInfoReducer } from '../../Redux/Reducers/profileReducer';
 
 export enum PathNames {
   Home = '/',
@@ -53,8 +53,10 @@ const Router = () => {
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getUserName());
+      dispatch(getPersonalInfoReducer());
     }
   }, [isLoggedIn]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -84,4 +86,3 @@ const Router = () => {
 };
 
 export default Router;
-

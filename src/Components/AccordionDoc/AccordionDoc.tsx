@@ -6,12 +6,13 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import ArrowDocIcon from '../../Assets/icons/ArrowDocIcon';
 import TableDoc from '../TableDoc';
+import postSelector from '../../Redux/Selectors/postSelector';
 
 import styles from './AccordionDoc.module.css';
-
 
 type AccordionDocProps = {
   addDocRef: any;
@@ -20,25 +21,8 @@ type AccordionDocProps = {
 };
 
 const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
+  const milestone = useSelector(postSelector.getAllMilestones);
   const [id, setId] = useState(0);
-  const milestoneMoc = [
-    {
-      id: 1,
-      name: 'Test milestone 1',
-      doc: [
-        { nameDoc: 'Software.doc', created: 'Irina Ivanova', data: '15 mar 2023', label: 'BA' },
-        { nameDoc: 'Software.xml', created: 'Anna Ivanova', data: '16 mar 2023', label: 'PM' }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Test milestone 2',
-      doc: [
-        { nameDoc: 'Kinoa.doc', created: 'Galina Ivanova', data: '19 mar 2023', label: 'Front' },
-        { nameDoc: 'Progress.xlsx', created: 'Anna Ivanova', data: '16 mar 2023', label: 'PM' }
-      ]
-    }
-  ];
   const [expanded, setExpanded] = React.useState<string | false>('');
   const handleChange = (panel: string, id: number) => (event: React.SyntheticEvent, newExpanded: boolean) => {
     setExpanded(newExpanded ? panel : false);
@@ -90,13 +74,17 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
 
   return (
     <div className={styles.accordionWrap}>
-      {milestoneMoc.map((value, index) => (
-        <Accordion expanded={expanded === value.name} onChange={handleChange(value.name, value.id)} key={index}>
-          <AccordionSummary aria-controls="panel1d-content" id={value.name}>
-            <Typography>{value.name}</Typography>
+      {milestone.map((value, index) => (
+        <Accordion
+          expanded={expanded === value.milestone_name}
+          onChange={handleChange(value.milestone_name, value.id)}
+          key={index}>
+          <AccordionSummary aria-controls="panel1d-content" id={value.milestone_name}>
+            <Typography>{value.milestone_name}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <TableDoc docArr={value.doc} />
+            <TableDoc docArr={[]} />
+            {/* тут потом вставить документы */}
             <div>
               <div
                 ref={addDocRef}
@@ -116,4 +104,3 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
 };
 
 export default AccordionDoc;
-
