@@ -1,32 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { NavLink, useLocation } from 'react-router-dom';
 
-import { ProjectActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ProjectActiveIcon';
+import { ChatActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ChatActiveIcon';
 import { LibraryActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/LibraryActiveIcon';
+import { MyProfileActive } from '../../../Assets/Header/Menu/ActiveIcons/MyProfileActive';
 import { NotificationActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/NotificationActiveIcon';
 import { PaymentsActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/PaymentsActiveIcon';
-import { ChatActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ChatActiveIcon';
-import { MyProfileActive } from '../../../Assets/Header/Menu/ActiveIcons/MyProfileActive';
+import { ProjectActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ProjectActiveIcon';
+import { ChatIcon } from '../../../Assets/Header/Menu/ChatIcon';
+import { LibraryIcon } from '../../../Assets/Header/Menu/LibraryIcon';
+import { MyProfileIcon } from '../../../Assets/Header/Menu/MyProfileIcon';
 import { NotificationIcon } from '../../../Assets/Header/Menu/NotificationIcon';
 import { PaymentIcon } from '../../../Assets/Header/Menu/PaymentIcon';
 import { ProjectIcon } from '../../../Assets/Header/Menu/ProjectIcon';
-import { ChatIcon } from '../../../Assets/Header/Menu/ChatIcon';
-import { LibraryIcon } from '../../../Assets/Header/Menu/LibraryIcon';
-import { ArrayDownIcon } from '../../../Assets/icons/ArrayDownIcon';
 import { AddNewProjectIcon } from '../../../Assets/icons/AddNewProjectIcon';
+import { ArrayDownIcon } from '../../../Assets/icons/ArrayDownIcon';
 import { LogOutIcon } from '../../../Assets/icons/LogOutIcon';
+import { ProjectFile } from '../../../Assets/icons/ProjectFile';
+import { PathNames } from '../../../Pages/Router/Router';
 import { logoutUser } from '../../../Redux/Reducers/authReducer';
+import { getAllProjects } from '../../../Redux/Reducers/postReducer';
 import authSelectors from '../../../Redux/Selectors/authSelectors';
 import postSelector from '../../../Redux/Selectors/postSelector';
-import { PathNames } from '../../../Pages/Router/Router';
-import { MyProfileIcon } from '../../../Assets/Header/Menu/MyProfileIcon';
-import { ProjectFile } from '../../../Assets/icons/ProjectFile';
-import { getAllProjects } from '../../../Redux/Reducers/postReducer';
 import { ProjectType } from '../../../Redux/Types/tasks';
-
 import styles from './Menu.module.css';
 
 const UserMenu = () => {
@@ -39,10 +38,11 @@ const UserMenu = () => {
     if (isLoggedIn) {
       dispatch(getAllProjects());
     }
-  }, [isLoggedIn]);
+  }, [dispatch, isLoggedIn]);
   const onLogOutClick = () => {
     if (isLoggedIn) {
       dispatch(logoutUser());
+      navigate(PathNames.SignIn);
     } else {
       navigate(PathNames.SignIn);
     }
