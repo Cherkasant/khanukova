@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import Input from '../../Components/Input';
-import Title from '../../Components/Title';
 import { SearchIcon } from '../../Assets/icons/SearchIcon';
 import CardsList from '../../Components/CardsList';
+import Input from '../../Components/Input';
+import Title from '../../Components/Title';
 import { PathNames } from '../Router/Router';
-
 import styles from './Home.module.css';
 
 const MOCK_CARDS_LIST = [
