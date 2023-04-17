@@ -26,6 +26,7 @@ import { getAllProjects } from '../../../Redux/Reducers/postReducer';
 import authSelectors from '../../../Redux/Selectors/authSelectors';
 import postSelector from '../../../Redux/Selectors/postSelector';
 import { ProjectType } from '../../../Redux/Types/tasks';
+
 import styles from './Menu.module.css';
 
 const UserMenu = () => {
