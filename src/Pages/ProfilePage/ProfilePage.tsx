@@ -21,6 +21,7 @@ import {
   getPersonalInfoReducer
 } from '../../Redux/Reducers/profileReducer';
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
+
 import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
