@@ -6,6 +6,7 @@ import CardsList from '../../Components/CardsList';
 import Input from '../../Components/Input';
 import Title from '../../Components/Title';
 import { PathNames } from '../Router/Router';
+
 import styles from './Home.module.css';
 
 const MOCK_CARDS_LIST = [
