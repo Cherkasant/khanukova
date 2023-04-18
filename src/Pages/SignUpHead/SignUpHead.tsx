@@ -37,9 +37,17 @@ const options = [
   { value: Role.CEO, label: 'CEO' },
   { value: Role.CTO, label: 'CTO' },
   { value: Role.PM, label: 'Project Manager' },
+  { value: Role.PdO, label: 'Product Owner' },
   { value: Role.Designer, label: 'Designer' },
   { value: Role.QA, label: 'QA' },
-  { value: Role.Programmer, label: 'Programmer' },
+  { value: Role.Programmer, label: 'Programmer' }
+];
+
+const optionsHead = [
+  { value: Role.PjO, label: 'Project Owner' },
+  { value: Role.CEO, label: 'CEO' },
+  { value: Role.CTO, label: 'CTO' },
+  { value: Role.PM, label: 'Project Manager' },
   { value: Role.PdO, label: 'Product Owner' }
 ];
 
@@ -176,7 +184,7 @@ const SignUpHead = () => {
                   }
                 ]}>
                 <Dropdown
-                  options={options}
+                  options={!checkedCompany ? options : optionsHead}
                   placeholder="Role in the project"
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
@@ -189,14 +197,9 @@ const SignUpHead = () => {
                 />
               </Form.Item>
 
-              {checkRole?.value === Role.Programmer ||
-              checkRole?.value === Role.Designer ||
-              checkRole?.value === Role.PdO ||
-              checkRole?.value === Role.QA ? (
-                <Form.Item name="code" className={styles.formItem}>
-                  <Input type={'text'} placeholder={'Code'} />
-                </Form.Item>
-              ) : null}
+              <Form.Item name="code" className={styles.formItem}>
+                <Input type={'text'} placeholder={'Code'} disabled={!checkedCode} />
+              </Form.Item>
 
               <div className={styles.passwordContainer}>
                 <Form.Item

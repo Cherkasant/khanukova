@@ -1,7 +1,6 @@
 .container {
     box-sizing: border-box;
     width: 660px;
-    height: 785px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,7 +11,7 @@
 }
 
 .content {
-    padding: 60px 80px 40px 80px;
+    margin: 50px 80px;
     display: flex;
     flex-direction: column;
 }
