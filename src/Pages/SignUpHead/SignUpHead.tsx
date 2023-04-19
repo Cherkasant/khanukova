@@ -14,6 +14,7 @@ import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
 import Checkbox from '../../Components/Checkbox';
 import Input from '../../Components/Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
+import PuzzleCheckbox from '../../Components/PuzzleCheckbox';
 import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { registerUser } from '../../Redux/Reducers/authReducer';
@@ -124,6 +125,7 @@ const SignUpHead = () => {
         <div className={styles.content}>
           <div className={styles.titleBlock}>
             <Title name={'Sign up'} className={styles.title} />
+            <PuzzleCheckbox />
             <div className={styles.subtitle}>{'Let’s get started'}</div>
           </div>
           <div className={styles.checkboxChooseContainer}>

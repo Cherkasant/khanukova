@@ -13,7 +13,7 @@ const onChange = (e: CheckboxChangeEvent) => {
 const PuzzleCheckbox = () => {
   return (
     <div className={styles.container}>
-      <Checkbox onChange={onChange} />
+      <Checkbox onChange={onChange} style={{ color: 'red', backgroundColor: 'skyblue' }} />
     </div>
   );
 };
