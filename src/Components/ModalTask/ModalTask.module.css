@@ -307,7 +307,6 @@
 }
 
 .titleInput {
-  width: 130px;
   background-color: #ffffff;
   padding-left: 0;
   border: none;
@@ -316,10 +315,6 @@
   font-size: 20px;
   line-height: 24px;
   color: #1258ca;
-}
-
-.widthInput {
-  width: 500px;
 }
 
 .titleInput:hover,
@@ -449,4 +444,13 @@
   opacity: 1;
   visibility: visible;
   transition: all 0.7s;
+}
+
+.titleDiv {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #1258ca;
 }

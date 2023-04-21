@@ -1,5 +1,4 @@
 import type { DatePickerProps } from 'antd';
-
 import { Cascader, DatePicker, Upload } from 'antd';
 import 'antd/README.md';
 import classNames from 'classnames';
@@ -23,7 +22,6 @@ import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/consta
 import Input from '../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
-
 import styles from './ModalNewTask.module.css';
 
 const ModalNewTask = () => {
@@ -130,7 +128,7 @@ const ModalNewTask = () => {
             <Input
               value={title}
               onChange={(value) => setTitle(value)}
-              className={styles.titleInput}
+              className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
               placeholder={'New Task'}
               disabled={!edit}
             />
