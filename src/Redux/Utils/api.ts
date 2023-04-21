@@ -132,6 +132,27 @@ const deleteMilestone = (token: string, id: number) => {
 const getSingleMilestone = (token: string, id: number) => {
   return API.get(`/project/milestone/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
 };
+const patchSingleMilestone = (token: string, milestone: MilestoneModalType, id: number) => {
+  return API.patch(`/project/milestone/${id}/`, milestone, { headers: { Authorization: `JWT ${token}` } });
+};
+const getSingleTask = (token: string, id: number) => {
+  return API.get(`/project/task/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
+const patchSingleTask = (token: string, task: TaskModalType, id: number) => {
+  return API.patch(`/project/task/${id}/`, task, { headers: { Authorization: `JWT ${token}` } });
+};
+const deleteTask = (token: string, id: number) => {
+  return API.delete(`/project/task/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
+const getSingleSubTask = (token: string, id: number) => {
+  return API.get(`/project/sub-task/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
+const patchSingleSubTask = (token: string, subtask: SubTaskModalType, id: number) => {
+  return API.patch(`/project/sub-task/${id}/`, subtask, { headers: { Authorization: `JWT ${token}` } });
+};
+const deleteSubTask = (token: string, id: number) => {
+  return API.delete(`/project/sub-task/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
 
 export default {
   registerUser,
@@ -159,5 +180,12 @@ export default {
   postTask,
   postSubTask,
   deleteMilestone,
-  getSingleMilestone
+  getSingleMilestone,
+  patchSingleMilestone,
+  getSingleTask,
+  patchSingleTask,
+  deleteTask,
+  getSingleSubTask,
+  patchSingleSubTask,
+  deleteSubTask
 };

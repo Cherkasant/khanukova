@@ -169,7 +169,7 @@ export type SubTaskTypeTable = {
   status: string;
   payment_status: string;
   project: string;
-  milestone: number;
+  task: number;
   creator: number;
 };
 
@@ -196,3 +196,23 @@ export type ProjectDataPayload = BasePayload<ProjectData>;
 export type MilestoneDataPayload = BasePayload<MilestoneModalType>;
 export type TaskDataPayload = BasePayload<TaskModalType>;
 export type SubTaskDataPayload = BasePayload<SubTaskModalType>;
+
+export type PatchMilestoneType = {
+  id: number | undefined;
+  data: MilestoneModalType;
+  callback: () => void;
+};
+export type DeleteMilestoneType = {
+  id: number;
+  callback: () => void;
+};
+export type PatchTaskType = {
+  id: number | undefined;
+  data: TaskModalType;
+  callback: () => void;
+};
+export type PatchSubTaskType = {
+  id: number | undefined;
+  data: SubTaskModalType;
+  callback: () => void;
+};

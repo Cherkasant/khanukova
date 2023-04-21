@@ -1,9 +1,6 @@
 import classNames from 'classnames';
-
 import React, { useEffect, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { useParams } from 'react-router';
 
 import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
@@ -16,10 +13,13 @@ import Documents from '../../Components/Documents';
 import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 import Input from '../../Components/Input';
 import ModalEcase from '../../Components/ModalEcase';
+import ModalMilestone from '../../Components/ModalMilestone';
 import ModalNewMilestone from '../../Components/ModalNewMilestone';
 import ModalNewSubTask from '../../Components/ModalNewSubTask';
 import ModalNewTask from '../../Components/ModalNewTask';
 import ModalRequest from '../../Components/ModalRequest';
+import ModalSubTask from '../../Components/ModalSubTask';
+import ModalTask from '../../Components/ModalTask';
 import Resourses from '../../Components/Resourses';
 import Table from '../../Components/Table';
 import Tab from '../../Components/Tabs';
@@ -32,7 +32,6 @@ import {
   setSelectedModalVisible
 } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
-
 import styles from './SingleProject.module.css';
 
 const TABS_NAMES = [
@@ -137,7 +136,7 @@ const SingleProject = () => {
           </div>
         </div>
       ) : null}
-      {!isSaveClicked && activeTab === Tabs.Planning ? (
+      {singleProject?.milestone_data.length === 0 && activeTab === Tabs.Planning ? (
         <div className={styles.bottomContainer}>
           <div
             className={classNames(styles.milestoneButton, {
@@ -149,7 +148,7 @@ const SingleProject = () => {
           </div>
         </div>
       ) : null}
-      {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
+      {isSaveClicked && activeTab === Tabs.Planning && singleProject?.milestone_data.length !== 0 ? <Table /> : null}
       <FilterProjectScreen />
 
       {activeTab === Tabs.ClientsRequests ? (
@@ -173,6 +172,9 @@ const SingleProject = () => {
       <ModalNewSubTask />
       <ModalEcase />
       <ModalRequest />
+      <ModalMilestone />
+      <ModalTask />
+      <ModalSubTask />
     </div>
   );
 };

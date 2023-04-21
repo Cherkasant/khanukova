@@ -307,6 +307,7 @@
 }
 
 .titleInput {
+  width: 90px;
   background-color: #ffffff;
   padding-left: 0;
   border: none;
@@ -315,6 +316,10 @@
   font-size: 20px;
   line-height: 24px;
   color: #1258ca;
+}
+
+.widthInput {
+  width: 500px;
 }
 
 .titleInput:hover,
@@ -342,13 +347,10 @@
 
 .titleContainer {
   display: flex;
-  position: relative;
 }
 
 .editIcon {
-  position: absolute;
-  top: 25px;
-  left: 100px;
+  margin-top: 20px;
 }
 
 .editIcon:hover {

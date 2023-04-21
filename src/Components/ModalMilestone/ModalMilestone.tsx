@@ -16,57 +16,77 @@ import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
 import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
 import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
-import { getSingleProject, postMilestoneCard, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
+import { deleteMilestone, getSingleProject, patchMilestone, setModalMilestone } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
 import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
 import Input from '../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
-import styles from './ModalNewMilestone.module.css';
+import styles from './ModalMilestone.module.css';
 
-const ModalNewMilestone = () => {
+const ModalMilestone = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
-  const projectTitle = useSelector(postSelector.getProjectTitle);
   const singleProject = useSelector(postSelector.getSingleProject);
-  const isVisible = useSelector(postSelector.getModal);
+  const isVisible = useSelector(postSelector.getModalMilestone);
+  const singleMilestone = useSelector(postSelector.getSingleMilestone);
+
+  useEffect(() => {
+    if (singleMilestone) {
+      const progress = singleMilestone?.progress.toString();
+      setTitle(singleMilestone?.milestone_name);
+      setDescriptionValue(singleMilestone?.description);
+      setLaunchDate(singleMilestone?.start_date);
+      setDeadline(singleMilestone?.deadline);
+      setPriority(singleMilestone?.priority);
+      setDuration(singleMilestone?.duration);
+      setLabel(singleMilestone?.labels);
+      setColors(singleMilestone?.color_labels);
+      setProgress(progress);
+      setStatus(singleMilestone?.status);
+      setPaymentStatus(singleMilestone?.payment_status);
+    }
+  }, [singleMilestone]);
 
   const onSaveClick = () => {
-    dispatch(
-      postMilestoneCard({
-        data: {
-          milestone_name: title,
-          description: descriptionValue,
-          attachment: null,
-          responsible: [],
-          priority: priority.value,
-          start_date: launchDate,
-          deadline: deadline,
-          duration: duration,
-          labels: label,
-          color_labels: colors.value,
-          dependence: [],
-          progress: +progress.value,
-          status: status.value,
-          payment_status: paymentStatus.value,
-          project: singleProject?.id
-        },
-        callback: () => {
-          if (id) {
-            dispatch(getSingleProject(+id));
+    if (singleMilestone) {
+      dispatch(
+        patchMilestone({
+          id: singleMilestone?.id,
+          data: {
+            milestone_name: title,
+            description: descriptionValue,
+            attachment: null,
+            responsible: [],
+            priority: priority.value,
+            start_date: launchDate,
+            deadline: deadline,
+            duration: duration,
+            labels: label,
+            color_labels: colors.value,
+            dependence: [],
+            progress: +progress.value,
+            status: status.value,
+            payment_status: paymentStatus.value,
+            project: singleProject?.id
+          },
+          callback: () => {
+            if (id) {
+              dispatch(getSingleProject(+id));
+              dispatch(setModalMilestone(false));
+            }
           }
-        }
-      })
-    );
-    dispatch(setSelectedModalVisible(false));
+        })
+      );
+    }
   };
   const [attachment, setAttachment] = useState('');
   const [launchDate, setLaunchDate] = useState('');
-  const [deadline, setDeadline] = useState('');
-  const [label, setLabel] = useState('');
-  const [duration, setDuration] = useState('');
-  const [descriptionValue, setDescriptionValue] = useState('');
+  const [deadline, setDeadline] = useState<any>('');
+  const [label, setLabel] = useState<any>('');
+  const [duration, setDuration] = useState<any>('');
+  const [descriptionValue, setDescriptionValue] = useState<any>('');
 
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDescriptionValue(event.target.value);
@@ -87,7 +107,7 @@ const ModalNewMilestone = () => {
     setEdit(!edit);
   };
   const onCancelClick = () => {
-    dispatch(setSelectedModalVisible(false));
+    dispatch(setModalMilestone(false));
   };
   useEffect(() => {
     setEdit(false);
@@ -99,6 +119,21 @@ const ModalNewMilestone = () => {
   };
   const onChangeLaunch: DatePickerProps['onChange'] = (date, dateString) => {
     setLaunchDate(dateString);
+  };
+  const onDeleteMilestoneClick = () => {
+    if (singleMilestone) {
+      dispatch(
+        deleteMilestone({
+          id: singleMilestone?.id,
+          callback: () => {
+            if (id) {
+              dispatch(getSingleProject(+id));
+              dispatch(setModalMilestone(false));
+            }
+          }
+        })
+      );
+    }
   };
 
   return (
@@ -112,8 +147,8 @@ const ModalNewMilestone = () => {
         })}>
         <div className={styles.container}>
           <div className={styles.milestone}>
-            {projectTitle}
-            <div className={styles.deleteContainer}>
+            {singleProject?.project_name}
+            <div className={styles.deleteContainer} onClick={onDeleteMilestoneClick}>
               <DeleteIcon />
               {'Delete from project'}
             </div>
@@ -123,13 +158,17 @@ const ModalNewMilestone = () => {
             <CloseModalIcon />
           </div>
           <div className={styles.titleContainer}>
-            <Input
-              value={title}
-              onChange={(value) => setTitle(value)}
-              className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
-              placeholder={'New milestone'}
-              disabled={!edit}
-            />
+            {!edit ? (
+              <div className={styles.titleDiv}>{title}</div>
+            ) : (
+              <Input
+                value={title}
+                onChange={(value) => setTitle(value)}
+                className={styles.titleInput}
+                placeholder={'Title'}
+                disabled={!edit}
+              />
+            )}
             {!edit ? (
               <div className={styles.editIcon} onClick={onEditClick}>
                 <EditTitleIcon />
@@ -363,4 +402,4 @@ const ModalNewMilestone = () => {
   );
 };
 
-export default ModalNewMilestone;
+export default ModalMilestone;
