@@ -1,19 +1,17 @@
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import type { CheckboxProps } from 'antd/es/checkbox';
 
-import React from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import { Checkbox } from 'antd';
 
 import styles from './PuzzleCheckbox.module.css';
 
-const onChange = (e: CheckboxChangeEvent) => {
-  console.log(`checked = ${e.target.checked}`);
-};
+export type PuzzleCheckboxProps = PropsWithChildren<CheckboxProps>;
 
-const PuzzleCheckbox = () => {
+const PuzzleCheckbox: FC<PuzzleCheckboxProps> = ({ ...rest }: PuzzleCheckboxProps) => {
   return (
     <div className={styles.container}>
-      <Checkbox onChange={onChange} style={{ color: 'red', backgroundColor: 'skyblue' }} />
+      <Checkbox {...rest} />
     </div>
   );
 };

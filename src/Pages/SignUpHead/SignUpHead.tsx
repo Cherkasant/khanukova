@@ -125,7 +125,7 @@ const SignUpHead = () => {
         <div className={styles.content}>
           <div className={styles.titleBlock}>
             <Title name={'Sign up'} className={styles.title} />
-            <PuzzleCheckbox />
+            <PuzzleCheckbox disabled={true} />
             <div className={styles.subtitle}>{'Let’s get started'}</div>
           </div>
           <div className={styles.checkboxChooseContainer}>

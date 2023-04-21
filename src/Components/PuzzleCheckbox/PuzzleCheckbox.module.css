@@ -1,3 +1,18 @@
 .container{
 
 }
+.ant-checkbox-inner {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: red;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: blue;
+    border-color: blue;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+}
