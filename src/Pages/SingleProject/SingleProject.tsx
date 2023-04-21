@@ -32,6 +32,7 @@ import {
   setSelectedModalVisible
 } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
+
 import styles from './SingleProject.module.css';
 
 const TABS_NAMES = [
