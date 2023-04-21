@@ -24,6 +24,7 @@ import {
 import postSelector from '../../Redux/Selectors/postSelector';
 import { SubTaskTypeTable, TaskTypeTable } from '../../Redux/Types/tasks';
 import { TableColumns } from '../constants/Table/TableData';
+
 import styles from './Table.module.css';
 
 const Table = () => {
