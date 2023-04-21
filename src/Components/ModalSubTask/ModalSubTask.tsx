@@ -23,6 +23,7 @@ import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/consta
 import Input from '../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
+
 import styles from './ModalSubTask.module.css';
 
 const ModalSubTask = () => {
