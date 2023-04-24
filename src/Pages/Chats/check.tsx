@@ -11,6 +11,7 @@ import styles from './Chats.module.css';
 
 export const Check = () => {
   const [d, setD] = useState('');
+  const [f, setF] = useState('');
   return (
     <div className={classNames(styles.e)}>
       <Collapse />
