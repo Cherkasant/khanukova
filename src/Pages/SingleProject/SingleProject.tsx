@@ -1,6 +1,9 @@
 import classNames from 'classnames';
+
 import React, { useEffect, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
 import { useParams } from 'react-router';
 
 import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
@@ -78,6 +81,11 @@ const SingleProject = () => {
       dispatch(getAllMilestones(+id));
     }
   }, [id]);
+  useEffect(() => {
+    if (singleProject) {
+      setTitle(singleProject?.project_name);
+    }
+  }, [singleProject]);
 
   const [title, setTitle] = useState('');
   const [edit, setEdit] = useState(false);
@@ -104,7 +112,7 @@ const SingleProject = () => {
               {'Please enter a project name and press Enter to get started'}
             </div>
             <Input
-              value={singleProject?.project_name}
+              value={title}
               onChange={(value) => setTitle(value)}
               onKeyDown={onChangeKeyDown}
               className={styles.title}

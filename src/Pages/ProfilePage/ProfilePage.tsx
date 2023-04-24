@@ -1,6 +1,9 @@
 import { DatePickerProps } from 'antd';
+
 import classNames from 'classnames';
+
 import { useEffect, useMemo, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GenerateIcon } from '../../Assets/DevTeam/GenerateIcon';
@@ -39,13 +42,24 @@ const ProfilePage = () => {
     dispatch(getPersonalInfoReducer());
   }, []);
 
-  const [name, setName] = useState('Ivanova Irina');
+  const [name, setName] = useState('');
   const [nickName, setNickName] = useState('');
-  const [positions, setPositions] = useState('CEO');
-  const [email, setEmail] = useState('irina@gmail.com');
-  const [phone, setPhone] = useState('+375 (29) 758-78-47');
+  const [positions, setPositions] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [telegram, setTelegram] = useState('');
+  const [company, setCompany] = useState('');
 
+  useEffect(() => {
+    if (personalInfoList && companyList) {
+      setName(personalInfoList?.full_name);
+      setNickName(personalInfoList?.nickname);
+      setPositions(personalInfoList?.role);
+      setEmail(personalInfoList?.email);
+      setPhone(personalInfoList?.phone);
+      setCompany(companyList?.company_name);
+    }
+  });
   const levelOptions = [
     { value: 'Junior', label: 'Junior' },
     { value: 'Middle', label: 'Middle' },
@@ -265,7 +279,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Full name'}
                     type={'text'}
-                    value={personalInfoList?.full_name}
+                    value={name}
                     onChange={(value) => setName(value)}
                     placeholder={'Full name'}
                     className={styles.input}
@@ -274,7 +288,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Nick name'}
                     type={'text'}
-                    value={personalInfoList?.nickname}
+                    value={nickName}
                     onChange={(value) => setNickName(value)}
                     placeholder={'Nick name'}
                     className={styles.input}
@@ -282,8 +296,8 @@ const ProfilePage = () => {
                   <Input
                     title={'Company name'}
                     type={'text'}
-                    value={companyList?.company_name}
-                    onChange={(value) => setNickName(value)}
+                    value={company}
+                    onChange={(value) => setCompany(value)}
                     disabled
                     placeholder={'Company name'}
                     className={styles.input}
@@ -292,7 +306,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Positions'}
                     type={'text'}
-                    value={personalInfoList?.role}
+                    value={positions}
                     onChange={(value) => setPositions(value)}
                     placeholder={'Positions'}
                     disabled
@@ -305,7 +319,7 @@ const ProfilePage = () => {
                 <Input
                   title={'Email'}
                   type={'email'}
-                  value={personalInfoList?.email}
+                  value={email}
                   onChange={(value) => setEmail(value)}
                   placeholder={'Email'}
                   className={styles.input}
@@ -314,7 +328,7 @@ const ProfilePage = () => {
                 <Input
                   title={'Phone number '}
                   type={'tel'}
-                  value={personalInfoList?.phone}
+                  value={phone}
                   onChange={(value) => setPhone(value)}
                   placeholder={'Phone'}
                   className={styles.input}
