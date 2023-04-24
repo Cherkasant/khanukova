@@ -1,3 +1,11 @@
+import { DatePickerProps } from 'antd';
+
+import classNames from 'classnames';
+
+import { useEffect, useMemo, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import { GenerateIcon } from '../../Assets/DevTeam/GenerateIcon';
 import { PencilIcon } from '../../Assets/Profile/PencilIcon';
 import { DeleteProjectIcon } from '../../Assets/ProfilePage/DeleteProjectIcon';
@@ -16,11 +24,8 @@ import {
   getPersonalInfoReducer
 } from '../../Redux/Reducers/profileReducer';
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
+
 import styles from './ProfilePage.module.css';
-import { DatePickerProps } from 'antd';
-import classNames from 'classnames';
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
