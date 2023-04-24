@@ -89,9 +89,11 @@
   },
   "lint-staged": {
     "**/*.ts": [
+      "prettier --write --ignore-unknown",
       "eslint --fix"
     ],
     "**/*.tsx": [
+      "prettier --write --ignore-unknown",
       "eslint --fix"
     ]
   }
