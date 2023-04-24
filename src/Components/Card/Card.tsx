@@ -1,18 +1,22 @@
+import { EditProjectIcon } from '../../Assets/ProjectPage/EditProjectIcon';
+import { CardType } from '../constants/@types';
+import styles from './Card.module.css';
 import { FC } from 'react';
 
-import { CardType } from '../constants/@types';
-
-import styles from './Card.module.css';
-
 type CardProps = {
-  card: CardType
-}
+  card: CardType;
+};
 
 const Card: FC<CardProps> = ({ card }) => {
   const { projectName, tasks, deadline, budget, paid } = card;
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{projectName}</div>
+      <div className={styles.header}>
+        <div className={styles.title}>{projectName}</div>
+        <div className={styles.iconEdit}>
+          <EditProjectIcon />
+        </div>
+      </div>
       <div className={styles.projectContainer}>
         <div className={styles.task}>
           <div className={styles.taskName}>Tasks</div>
