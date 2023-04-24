@@ -6,7 +6,6 @@ import { FC } from 'react';
 type CardProps = {
   card: CardType;
 };
-console.log('test');
 
 const Card: FC<CardProps> = ({ card }) => {
   const { projectName, tasks, deadline, budget, paid } = card;
