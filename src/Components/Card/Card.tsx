@@ -8,7 +8,7 @@ import styles from './Card.module.css';
 type CardProps = {
   card: CardType;
 };
-
+console.log('t');
 const Card: FC<CardProps> = ({ card }) => {
   const { projectName, tasks, deadline, budget, paid } = card;
   return (

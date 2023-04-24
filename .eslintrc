@@ -1,8 +1,17 @@
 {
-  "extends": ["react-app", "react-app/jest", "prettier", "eslint:recommended"],
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "prettier",
+    "eslint:recommended",
+    "eslint-config-prettier"
+  ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
       "rules": {
         "quotes": [
           "error",
@@ -27,7 +36,10 @@
             "ignoreRestSiblings": false
           }
         ],
-        "jsx-quotes": ["error", "prefer-double"],
+        "jsx-quotes": [
+          "error",
+          "prefer-double"
+        ],
         "prefer-const": "error",
         "max-len": [
           "error",
@@ -47,7 +59,16 @@
         "import/order": [
           "error",
           {
-            "groups": ["type", "builtin", "external", "internal", "parent", "sibling", "index", "object"],
+            "groups": [
+              "type",
+              "builtin",
+              "external",
+              "internal",
+              "parent",
+              "sibling",
+              "index",
+              "object"
+            ],
             "newlines-between": "always-and-inside-groups"
           }
         ],
