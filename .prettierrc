@@ -6,11 +6,5 @@
   "bracketSpacing": true,
   "bracketSameLine": true,
   "printWidth": 120,
-  "jsxBracketSameLine": true,
-  "importOrder": [
-    "^components/(.*)$",
-    "^[./]"
-  ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "jsxBracketSameLine": true
 }
