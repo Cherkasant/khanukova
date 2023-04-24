@@ -1,13 +1,14 @@
+import { FC } from 'react';
+
 import { EditProjectIcon } from '../../Assets/ProjectPage/EditProjectIcon';
 import { CardType } from '../constants/@types';
+
 import styles from './Card.module.css';
-import { FC } from 'react';
 
 type CardProps = {
   card: CardType;
 };
 
-console.log('TEST');
 const Card: FC<CardProps> = ({ card }) => {
   const { projectName, tasks, deadline, budget, paid } = card;
   return (
