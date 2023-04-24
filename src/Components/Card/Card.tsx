@@ -7,6 +7,7 @@ type CardProps = {
   card: CardType;
 };
 
+console.log('TEST');
 const Card: FC<CardProps> = ({ card }) => {
   const { projectName, tasks, deadline, budget, paid } = card;
   return (
