@@ -1,6 +1,6 @@
 import { Form } from 'antd';
 import 'intl-tel-input/build/css/intlTelInput.css';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import PhoneInput from 'react-phone-number-input';
@@ -8,10 +8,10 @@ import 'react-phone-number-input/style.css';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon';
 import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
-import Checkbox from '../../Components/Checkbox';
 import Input from '../../Components/Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import PuzzleCheckbox from '../../Components/PuzzleCheckbox';
@@ -75,14 +75,14 @@ const SignUpHead = () => {
   const [checked, setChecked] = useState(false);
   const [checkedCode, setCheckedCode] = useState(false);
   const [checkedCompany, setCheckedCompany] = useState(false);
-  const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
+  const onChangeCheck = (e: CheckboxChangeEvent) => {
+    setChecked(e.target.checked);
   };
-  const onChangeCheckCode = (event: ChangeEvent<HTMLInputElement>) => {
-    setCheckedCode(event.target.checked);
+  const onChangeCheckCode = (e: CheckboxChangeEvent) => {
+    setCheckedCode(e.target.checked);
   };
-  const onChangeCheckCompany = (event: ChangeEvent<HTMLInputElement>) => {
-    setCheckedCompany(event.target.checked);
+  const onChangeCheckCompany = (e: CheckboxChangeEvent) => {
+    setCheckedCompany(e.target.checked);
   };
   const [value, setValue] = useState<any>();
 
@@ -125,15 +125,20 @@ const SignUpHead = () => {
         <div className={styles.content}>
           <div className={styles.titleBlock}>
             <Title name={'Sign up'} className={styles.title} />
-            <PuzzleCheckbox disabled={true} />
             <div className={styles.subtitle}>{'Let’s get started'}</div>
           </div>
           <div className={styles.checkboxChooseContainer}>
-            <Checkbox isChecked={checkedCode} handleChange={onChangeCheckCode} label={'Sign up with code'} />
-            <Checkbox
-              isChecked={checkedCompany}
-              handleChange={onChangeCheckCompany}
+            <PuzzleCheckbox
+              checked={checkedCode}
+              onChange={onChangeCheckCode}
+              label={'Sign up with code'}
+              disabled={checkedCompany}
+            />
+            <PuzzleCheckbox
+              checked={checkedCompany}
+              onChange={onChangeCheckCompany}
               label={'Sign up and create a company'}
+              disabled={checkedCode}
             />
           </div>
           <Form
@@ -232,7 +237,7 @@ const SignUpHead = () => {
               </div>
             </div>
             <div className={styles.checkboxContainer}>
-              <Checkbox isChecked={checked} handleChange={onChangeCheck} label={'I agree '} />
+              <PuzzleCheckbox checked={checked} onChange={onChangeCheck} label={'I agree '} />
 
               <div className={styles.linkRules}>Terms and Conditions</div>
             </div>
