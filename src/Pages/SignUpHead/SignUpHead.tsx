@@ -19,6 +19,7 @@ import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { registerUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
+import FormContainer from '../../Components/FormContainer';
 
 import styles from './SignUpHead.module.css';
 
@@ -120,154 +121,156 @@ const SignUpHead = () => {
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <div className={styles.titleBlock}>
-            <Title name={'Sign up'} className={styles.title} />
-            <div className={styles.subtitle}>{'Let’s get started'}</div>
-          </div>
-          <div className={styles.checkboxChooseContainer}>
-            <PuzzleCheckbox
-              checked={checkedCode}
-              onChange={onChangeCheckCode}
-              label={'Sign up with code'}
-              disabled={checkedCompany}
-            />
-            <PuzzleCheckbox
-              checked={checkedCompany}
-              onChange={onChangeCheckCompany}
-              label={'Sign up and create a company'}
-              disabled={checkedCode}
-            />
-          </div>
-          <Form
-            onFinish={onSignUp}
-            form={form}
-            className={styles.form}
-            initialValues={{
-              fullName: '',
-              email: '',
-              code: '',
-              password: '',
-              passwordConfirmation: ''
-            }}>
-            <div className={styles.inputs}>
-              <Form.Item
-                name="fullName"
-                className={styles.formItem}
-                rules={[{ required: true, message: 'Please input your full name!' }]}>
-                <Input type={'text'} placeholder={'Full name'} />
-              </Form.Item>
-              <Form.Item
-                name="email"
-                className={styles.formItem}
-                rules={[{ required: true, message: 'Please input your email!' }]}>
-                <Input type={'email'} placeholder={'Email'} />
-              </Form.Item>
-              <Form.Item
-                name="phone"
-                className={styles.formItem}
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your phone number!'
-                  }
-                ]}>
-                <PhoneInput
-                  placeholder="Enter phone number"
-                  value={value}
-                  onChange={setValue}
-                  className={styles.phoneInput}
-                />
-              </Form.Item>
-              <Form.Item
-                name="userStatus"
-                className={styles.formItem}
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please select users role in the project!'
-                  }
-                ]}>
-                <Dropdown
-                  options={!checkedCompany ? options : optionsHead}
-                  placeholder="Role in the project"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClassName={styles.dropdownArrow}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
-                  menuClassName={styles.dropdownMenu}
-                  value={checkRole}
-                />
-              </Form.Item>
-
-              <Form.Item name="code" className={styles.formItem}>
-                <Input type={'text'} placeholder={'Code'} disabled={!checkedCode} />
-              </Form.Item>
-
-              <div className={styles.passwordContainer}>
+    <FormContainer>
+      <>
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <div className={styles.titleBlock}>
+              <Title name={'Sign up'} className={styles.title} />
+              <div className={styles.subtitle}>{'Let’s get started'}</div>
+            </div>
+            <div className={styles.checkboxChooseContainer}>
+              <PuzzleCheckbox
+                checked={checkedCode}
+                onChange={onChangeCheckCode}
+                label={'Sign up with code'}
+                disabled={checkedCompany}
+              />
+              <PuzzleCheckbox
+                checked={checkedCompany}
+                onChange={onChangeCheckCompany}
+                label={'Sign up and create a company'}
+                disabled={checkedCode}
+              />
+            </div>
+            <Form
+              onFinish={onSignUp}
+              form={form}
+              className={styles.form}
+              initialValues={{
+                fullName: '',
+                email: '',
+                code: '',
+                password: '',
+                passwordConfirmation: ''
+              }}>
+              <div className={styles.inputs}>
                 <Form.Item
-                  name="password"
+                  name="fullName"
                   className={styles.formItem}
-                  rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input type={type} value={checkPassword} placeholder={'Password'} />
+                  rules={[{ required: true, message: 'Please input your full name!' }]}>
+                  <Input type={'text'} placeholder={'Full name'} />
                 </Form.Item>
-                <div className={styles.eyeIcon} onClick={onEyeClick}>
-                  {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
-                </div>
-              </div>
-              <div className={styles.passwordContainer}>
                 <Form.Item
-                  name="passwordConfirmation"
+                  name="email"
+                  className={styles.formItem}
+                  rules={[{ required: true, message: 'Please input your email!' }]}>
+                  <Input type={'email'} placeholder={'Email'} />
+                </Form.Item>
+                <Form.Item
+                  name="phone"
                   className={styles.formItem}
                   rules={[
                     {
                       required: true,
-                      message: 'Please confirm your password!'
+                      message: 'Please input your phone number!'
                     }
                   ]}>
-                  <Input type={typeConfirm} value={checkPasswordConfirm} placeholder={'Confirm password'} />
+                  <PhoneInput
+                    placeholder="Enter phone number"
+                    value={value}
+                    onChange={setValue}
+                    className={styles.phoneInput}
+                  />
                 </Form.Item>
-                <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
-                  {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                <Form.Item
+                  name="userStatus"
+                  className={styles.formItem}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please select users role in the project!'
+                    }
+                  ]}>
+                  <Dropdown
+                    options={!checkedCompany ? options : optionsHead}
+                    placeholder="Role in the project"
+                    className={styles.dropdownContainer}
+                    controlClassName={styles.dropdownControl}
+                    placeholderClassName={styles.dropdownPlaceholder}
+                    arrowClassName={styles.dropdownArrow}
+                    arrowClosed={<span className={styles.arrowClosed} />}
+                    arrowOpen={<span className={styles.arrowOpen} />}
+                    menuClassName={styles.dropdownMenu}
+                    value={checkRole}
+                  />
+                </Form.Item>
+
+                <Form.Item name="code" className={styles.formItem}>
+                  <Input type={'text'} placeholder={'Code'} disabled={!checkedCode} />
+                </Form.Item>
+
+                <div className={styles.passwordContainer}>
+                  <Form.Item
+                    name="password"
+                    className={styles.formItem}
+                    rules={[{ required: true, message: 'Please input your password!' }]}>
+                    <Input type={type} value={checkPassword} placeholder={'Password'} />
+                  </Form.Item>
+                  <div className={styles.eyeIcon} onClick={onEyeClick}>
+                    {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                  </div>
+                </div>
+                <div className={styles.passwordContainer}>
+                  <Form.Item
+                    name="passwordConfirmation"
+                    className={styles.formItem}
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please confirm your password!'
+                      }
+                    ]}>
+                    <Input type={typeConfirm} value={checkPasswordConfirm} placeholder={'Confirm password'} />
+                  </Form.Item>
+                  <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
+                    {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className={styles.checkboxContainer}>
-              <PuzzleCheckbox checked={checked} onChange={onChangeCheck} label={'I agree '} />
+              <div className={styles.checkboxContainer}>
+                <PuzzleCheckbox checked={checked} onChange={onChangeCheck} label={'I agree '} />
 
-              <div className={styles.linkRules}>Terms and Conditions</div>
+                <div className={styles.linkRules}>Terms and Conditions</div>
+              </div>
+              <Form.Item className={styles.formItem}>
+                <PuzzleButton
+                  htmlType="submit"
+                  btnTitle={
+                    checkedCode &&
+                    (checkRole?.value === Role.Designer ||
+                      checkRole?.value === Role.QA ||
+                      checkRole?.value === Role.PdO ||
+                      checkRole?.value === Role.Programmer)
+                      ? 'Create account'
+                      : 'Next step'
+                  }
+                  btnType={PuzzleButtonTypes.TextButton}
+                  btnClassName={styles.button}
+                  btnDisabled={checkPassword === '' || !(checkPassword === checkPasswordConfirm) || !checked}
+                />
+              </Form.Item>
+            </Form>
+            <div className={styles.info}>
+              {'Have an account?'}
+              <NavLink to={PathNames.SignIn} className={styles.link}>
+                <span>{'Sign in'}</span>
+              </NavLink>
             </div>
-            <Form.Item className={styles.formItem}>
-              <PuzzleButton
-                htmlType="submit"
-                btnTitle={
-                  checkedCode &&
-                  (checkRole?.value === Role.Designer ||
-                    checkRole?.value === Role.QA ||
-                    checkRole?.value === Role.PdO ||
-                    checkRole?.value === Role.Programmer)
-                    ? 'Create account'
-                    : 'Next step'
-                }
-                btnType={PuzzleButtonTypes.TextButton}
-                btnClassName={styles.button}
-                btnDisabled={checkPassword === '' || !(checkPassword === checkPasswordConfirm) || !checked}
-              />
-            </Form.Item>
-          </Form>
-          <div className={styles.info}>
-            {'Have an account?'}
-            <NavLink to={PathNames.SignIn} className={styles.link}>
-              <span>{'Sign in'}</span>
-            </NavLink>
           </div>
         </div>
-      </div>
-    </>
+      </>
+    </FormContainer>
   );
 };
 
