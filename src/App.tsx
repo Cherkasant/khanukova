@@ -12,11 +12,10 @@ const theme: ThemeConfig = {
       controlInteractiveSize: 18,
       borderRadiusSM: 3,
       colorBorder: '#9BACC9',
-      colorPrimary: '#1258CA',
-      colorWhite: '#fff',
-      colorPrimaryHover: '#1258CA',
-      colorPrimaryBorder: '#1258CA',
-      colorBgContainerDisabled: '#D9E1F0'
+      colorPrimary: '#fff',
+      colorWhite: '#1258CA',
+      colorPrimaryHover: 'rgba(18, 88, 202, 0.5)',
+      colorPrimaryBorder: '#ff0000'
     }
   }
 };

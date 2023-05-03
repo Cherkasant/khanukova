@@ -81,9 +81,11 @@ const SignUpHead = () => {
   };
   const onChangeCheckCode = (e: CheckboxChangeEvent) => {
     setCheckedCode(e.target.checked);
+    setCheckedCompany(!e.target.checked);
   };
   const onChangeCheckCompany = (e: CheckboxChangeEvent) => {
     setCheckedCompany(e.target.checked);
+    setCheckedCode(!e.target.checked);
   };
   const [value, setValue] = useState<any>();
 
@@ -119,7 +121,6 @@ const SignUpHead = () => {
       })
     );
   };
-
   return (
     <FormContainer>
       <>
@@ -130,17 +131,11 @@ const SignUpHead = () => {
               <div className={styles.subtitle}>{'Let’s get started'}</div>
             </div>
             <div className={styles.checkboxChooseContainer}>
-              <PuzzleCheckbox
-                checked={checkedCode}
-                onChange={onChangeCheckCode}
-                label={'Sign up with code'}
-                disabled={checkedCompany}
-              />
+              <PuzzleCheckbox checked={checkedCode} onChange={onChangeCheckCode} label={'Sign up with code'} />
               <PuzzleCheckbox
                 checked={checkedCompany}
                 onChange={onChangeCheckCompany}
                 label={'Sign up and create a company'}
-                disabled={checkedCode}
               />
             </div>
             <Form
