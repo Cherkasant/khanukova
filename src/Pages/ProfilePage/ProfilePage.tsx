@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { GenerateIcon } from '../../Assets/DevTeam/GenerateIcon';
 import { PencilIcon } from '../../Assets/Profile/PencilIcon';
-import { DeleteProjectIcon } from '../../Assets/ProfilePage/DeleteProjectIcon';
-import { PauseProjectIcon } from '../../Assets/ProfilePage/PauseProjectIcon';
 import CompanyProfile from '../../Components/CompanyProfile';
 import DevTeamTable from '../../Components/DevTeamTable';
 import Input from '../../Components/Input';
@@ -123,16 +121,6 @@ const ProfilePage = () => {
     []
   );
 
-  const [showClose, setShowClose] = useState(false);
-  const onCloseProjectClick = () => {
-    setShowClose(!showClose);
-  };
-
-  const ClOSEBUTTON_LIST = [
-    { value: 'Pause', label: 'Pause', icon: <DeleteProjectIcon /> },
-    { value: 'Delete', label: 'Delete', icon: <PauseProjectIcon /> }
-  ];
-
   const COMPANY_LIST = [
     {
       name: 'CompanyName',
@@ -239,23 +227,6 @@ const ProfilePage = () => {
         })}>
         <div className={styles.titleBlock}>
           <Title name={'My Profile'} className={styles.title} />
-          {isHead ? (
-            <div className={styles.dropdown_container}>
-              <div className={styles.btnProject} onClick={onCloseProjectClick}>
-                {'Close a project'}
-              </div>
-              {showClose ? (
-                <div className={styles.dropdown_menu}>
-                  {ClOSEBUTTON_LIST.map((el) => (
-                    <div key={el.value} className={styles.dropdown_item}>
-                      {el.icon}
-                      {el.label}
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          ) : null}
         </div>
         {isHead ? <TabsListProfile activeTab={activeTab} onSelectTab={onTabClick} tabsList={TABS_NAMES} /> : null}
       </div>

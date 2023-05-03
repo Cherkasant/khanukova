@@ -306,6 +306,15 @@
   color: #a3a3a3 !important;
 }
 
+.datepicker > div input[title] {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3 !important;
+}
+
 .titleInput {
   background-color: #ffffff;
   padding-left: 0;

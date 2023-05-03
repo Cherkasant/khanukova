@@ -1,0 +1,83 @@
+.wrap {
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  transition: all 0.7s;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 555px;
+  padding: 60px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  box-shadow: 0 4px 50px 10px rgba(18, 88, 202, 0.15);
+  border-radius: 30px;
+}
+
+.activeModal {
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+}
+
+.description {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #212121;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bold {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+  color: #212121;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #212121;
+}
+
+.cancelBtn {
+  width: 158px;
+  height: 54px;
+  background: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #1258ca;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1258ca;
+  border-radius: 10px;
+}
+
+.saveBtn {
+  width: 158px;
+  height: 54px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

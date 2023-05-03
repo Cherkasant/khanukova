@@ -13,6 +13,7 @@ import {
   getSingleTask,
   getTaskCard,
   patchMilestone,
+  patchProject,
   patchSubTask,
   patchTask,
   postMilestoneCard,
@@ -36,6 +37,7 @@ import {
   DeleteMilestoneType,
   MilestoneDataPayload,
   PatchMilestoneType,
+  PatchProjectType,
   PatchSubTaskType,
   PatchTaskType,
   ProjectDataPayload,
@@ -223,6 +225,16 @@ function* deleteSubTaskWorker(action: PayloadAction<DeleteMilestoneType>) {
   }
 }
 
+function* patchProjectWorker(action: PayloadAction<PatchProjectType>) {
+  const { id, data, callback } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.patchProject, data, id);
+  if (ok) {
+    callback();
+  } else {
+    console.warn('Error while patching project', problem);
+  }
+}
+
 export default function* postSaga() {
   yield all([
     takeLatest(getTaskCard, getTaskCardWorker),
@@ -241,6 +253,7 @@ export default function* postSaga() {
     takeLatest(deleteTask, deleteTaskWorker),
     takeLatest(getSingleSubTask, getSingleSubTaskWorker),
     takeLatest(patchSubTask, patchSubTaskWorker),
-    takeLatest(deleteSubTask, deleteSubTaskWorker)
+    takeLatest(deleteSubTask, deleteSubTaskWorker),
+    takeLatest(patchProject, patchProjectWorker)
   ]);
 }

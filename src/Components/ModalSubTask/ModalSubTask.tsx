@@ -10,6 +10,8 @@ import 'react-dropdown/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
+import dayjs, { Dayjs } from 'dayjs';
+
 import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
 import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
@@ -48,6 +50,9 @@ const ModalSubTask = () => {
       setProgress(progress);
       setStatus(singleSubTask?.status);
       setPaymentStatus(singleSubTask?.payment_status);
+      setLaunchDate(singleSubTask?.start_date);
+      setDeadline(singleSubTask?.deadline);
+      console.log(typeof progress);
     }
   }, [singleSubTask]);
 
@@ -68,7 +73,7 @@ const ModalSubTask = () => {
             labels: label,
             color_labels: colors.value,
             dependence: [],
-            progress: +progress.value,
+            progress: progress.value,
             status: status.value,
             payment_status: paymentStatus.value,
             project: singleProject?.id,
@@ -117,12 +122,23 @@ const ModalSubTask = () => {
     // setTitle('Title');
   }, []);
 
-  const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
-    setDeadline(dateString);
+  const onChangeDeadline: DatePickerProps['onChange'] = (date: Dayjs | null) => {
+    setFinishDate(date);
   };
-  const onChangeLaunch: DatePickerProps['onChange'] = (date, dateString) => {
-    setLaunchDate(dateString);
+  const onChangeLaunch: DatePickerProps['onChange'] = (date: Dayjs | null) => {
+    setStartDate(date);
   };
+  const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(new Date()));
+  const [finishDate, setFinishDate] = useState<Dayjs | null>(dayjs(new Date()));
+  useEffect(() => {
+    if (startDate) {
+      setLaunchDate(startDate?.format('DD.MM.YYYY'));
+    }
+    if (finishDate) {
+      setDeadline(finishDate?.format('DD.MM.YYYY'));
+    }
+  }, [startDate, finishDate]);
+
   const onDeleteTaskClick = () => {
     if (singleSubTask) {
       dispatch(
@@ -265,6 +281,7 @@ const ModalSubTask = () => {
               <div className={styles.startDateContainer}>
                 <div className={styles.title}>{'Start date'}</div>
                 <DatePicker
+                  value={dayjs(launchDate, 'DD.MM.YYYY')}
                   format="DD.MM.YYYY"
                   placeholder="Nothing selected"
                   suffixIcon={<CalendarIcon />}
@@ -277,6 +294,7 @@ const ModalSubTask = () => {
                 <div className={styles.startDateContainer}>
                   <div className={styles.title}>{'Deadline'}</div>
                   <DatePicker
+                    value={dayjs(deadline, 'DD.MM.YYYY')}
                     format="DD.MM.YYYY"
                     placeholder="Nothing selected"
                     suffixIcon={<CalendarIcon />}

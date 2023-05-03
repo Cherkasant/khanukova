@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+import classNames from 'classnames';
+
+import { useSelector } from 'react-redux';
+
 import { SearchIcon } from '../../Assets/icons/SearchIcon';
 import CardsList from '../../Components/CardsList';
 import Input from '../../Components/Input';
 import Title from '../../Components/Title';
 import { PathNames } from '../Router/Router';
+
+import ModalCloseProject from '../../Components/ModalCloseProject';
+
+import postSelector from '../../Redux/Selectors/postSelector';
 
 import styles from './Home.module.css';
 
@@ -28,6 +36,7 @@ const MOCK_CARDS_LIST = [
   }
 ];
 const Home = () => {
+  const activeModal = useSelector(postSelector.getCloseProjectModal);
   const navigate = useNavigate();
   const [inputSearch, setInputSearch] = useState('');
   const onChange = (value: string) => {
@@ -49,6 +58,12 @@ const Home = () => {
       </div>
 
       <CardsList cardsList={MOCK_CARDS_LIST} />
+      <div
+        className={classNames(styles.wrapModal, {
+          [styles.showModal]: activeModal
+        })}>
+        <ModalCloseProject modal={activeModal} />
+      </div>
     </div>
   );
 };

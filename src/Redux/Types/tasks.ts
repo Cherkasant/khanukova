@@ -216,3 +216,11 @@ export type PatchSubTaskType = {
   data: SubTaskModalType;
   callback: () => void;
 };
+export type PatchProjectType = {
+  id: number | undefined;
+  data: PatchProjectData;
+  callback: () => void;
+};
+export type PatchProjectData = {
+  project_name: string;
+};
