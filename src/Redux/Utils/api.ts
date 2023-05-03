@@ -153,6 +153,9 @@ const patchSingleSubTask = (token: string, subtask: SubTaskModalType, id: number
 const deleteSubTask = (token: string, id: number) => {
   return API.delete(`/project/sub-task/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
 };
+const patchProject = (token: string, project_name: string, id: number) => {
+  return API.patch(`/project/${id}/`, project_name, { headers: { Authorization: `JWT ${token}` } });
+};
 
 export default {
   registerUser,
@@ -187,5 +190,6 @@ export default {
   deleteTask,
   getSingleSubTask,
   patchSingleSubTask,
-  deleteSubTask
+  deleteSubTask,
+  patchProject
 };

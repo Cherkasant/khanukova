@@ -1,42 +1,46 @@
-import { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Column, useTable } from 'react-table';
 
 import { useNavigate } from 'react-router';
 
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
-import { TrashIcon } from '../../Assets/icons/TrashIcon';
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
-
 import { PathNames } from '../../Pages/Router/Router';
+
+import { EditIcon } from '../../Assets/ProfilePage/EditIcon';
+
+import { DeleteDevIcon } from '../../Assets/ProfilePage/DeleteDevIcon';
+
+import { SelectProjectIcon } from '../../Assets/ProfilePage/SelectProjectIcon';
 
 import styles from './DevTeamTable.module.css';
 
 const DevTeamTable = () => {
   const navigate = useNavigate();
+  const [showProjects, setShowProjects] = useState(false);
+  const onSelectProjectClick = () => {
+    setShowProjects(!showProjects);
+  };
+
   const data = useMemo(
     () => [
       {
         name: 'Pever Anna',
         position: 'Developer',
         email: 'anna@gmail.com',
-        project: 'Project name, Mobile App',
-        button: '',
+        project: ['Project name', 'Mobile App'],
         telegram: ''
       },
       {
         name: 'Noir Bella',
         position: 'QA Engineer ',
         email: 'bella@gmail.com',
-        project: 'Game',
-        button: '',
+        project: ['Game'],
         telegram: '@nov_bell'
       },
       {
         name: 'Irian Mihail',
         position: 'UX Designer',
         email: 'ir777@gmail.com',
-        project: 'Project name, Mobile App',
-        button: '',
+        project: ['Project name', 'Mobile App'],
         telegram: '@ir777'
       }
     ],
@@ -77,31 +81,23 @@ const DevTeamTable = () => {
       {
         Header: () => <div className={styles.headerName}>{'Project'}</div>,
         accessor: 'project',
-        Cell: ({ value }) => <div className={styles.headerName}>{value}</div>
-      },
-      {
-        Header: '',
-        accessor: 'button',
-        Cell: () => (
-          <div className={styles.buttonContainer}>
-            <div className={styles.btnBlock}>
-              <PuzzleButton
-                btnTitle={'Reject'}
-                btnType={PuzzleButtonTypes.TextButton}
-                btnClassName={styles.btn}
-                btnDisabled={true}
-              />
-              <PuzzleButton
-                btnTitle={'Approve'}
-                btnType={PuzzleButtonTypes.TextButton}
-                btnClassName={styles.btn}
-                btnDisabled={true}
-              />
-            </div>
+        Cell: (props) => (
+          <div className={styles.projectContainer}>
+            <div className={styles.icon} onClick={() => console.log(props)}>
+              <SelectProjectIcon />
+              {/*<div className={styles.dropdown}>*/}
+              {/*  {props.row.original.project.map((el: any) => (*/}
+              {/*    <div key={el} className={styles.dropdown_item}>*/}
+              {/*      {el}*/}
+              {/*    </div>*/}
+              {/*  ))}*/}
+              {/*</div>*/}
 
+              <div className={styles.headerName}>{props.value.toString()}</div>
+            </div>
             <div className={styles.iconContainer}>
-              <TrashIcon />
-              <EditTitleIcon />
+              <DeleteDevIcon />
+              <EditIcon />
             </div>
           </div>
         )

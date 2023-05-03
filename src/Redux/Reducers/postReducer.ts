@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   ArrayOfProjectType,
@@ -7,6 +7,7 @@ import {
   MilestoneDataPayload,
   MilestoneType,
   PatchMilestoneType,
+  PatchProjectType,
   PatchSubTaskType,
   PatchTaskType,
   ProjectData,
@@ -45,6 +46,7 @@ type PostReducerState = {
   modalTask: boolean;
   singleSubTask: SubTaskTypeTable | null;
   modalSubTask: boolean;
+  isCloseProjectModalOpened: boolean;
 };
 
 const initialState: PostReducerState = {
@@ -72,7 +74,8 @@ const initialState: PostReducerState = {
   singleTask: null,
   modalTask: false,
   singleSubTask: null,
-  modalSubTask: false
+  modalSubTask: false,
+  isCloseProjectModalOpened: false
 };
 
 const postsSlice = createSlice({
@@ -170,7 +173,11 @@ const postsSlice = createSlice({
       state.modalSubTask = action.payload;
     },
     patchSubTask: (state, action: PayloadAction<PatchSubTaskType>) => {},
-    deleteSubTask: (state, action: PayloadAction<DeleteMilestoneType>) => {}
+    deleteSubTask: (state, action: PayloadAction<DeleteMilestoneType>) => {},
+    setCloseProjectModal: (state, action: PayloadAction<boolean>) => {
+      state.isCloseProjectModalOpened = action.payload;
+    },
+    patchProject: (state, action: PayloadAction<PatchProjectType>) => {}
   }
 });
 
@@ -216,7 +223,9 @@ export const {
   setSingleSubTask,
   setModalSubTask,
   patchSubTask,
-  deleteSubTask
+  deleteSubTask,
+  setCloseProjectModal,
+  patchProject
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;

@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Column, useExpanded, useSortBy, useTable } from 'react-table';
@@ -230,16 +229,16 @@ const Table = () => {
       Header: TableColumns.launchDate,
       Footer: '',
       accessor: 'start_date',
-      Cell: (props) => {
-        return <>{moment(props.value).format('DD MMM YYYY')}</>;
+      Cell: ({ value }) => {
+        return <>{value}</>;
       }
     },
     {
       Header: TableColumns.deadline,
       Footer: '',
       accessor: 'deadline',
-      Cell: (props) => {
-        return <>{moment(props.value).format('DD MMM YYYY')}</>;
+      Cell: ({ value }) => {
+        return <>{value}</>;
       }
     },
     {

@@ -1,22 +1,73 @@
-import { FC } from 'react';
+import React, { FC, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import { EditProjectIcon } from '../../Assets/ProjectPage/EditProjectIcon';
-import { CardType } from '../constants/@types';
+import { CardType, Role } from '../constants/@types';
+
+import { DeleteProjectIcon } from '../../Assets/ProfilePage/DeleteProjectIcon';
+import { PauseProjectIcon } from '../../Assets/ProfilePage/PauseProjectIcon';
+
+import profileSelectors from '../../Redux/Selectors/profileSelectors';
+
+import { setCloseProjectModal } from '../../Redux/Reducers/postReducer';
 
 import styles from './Card.module.css';
 
 type CardProps = {
   card: CardType;
+  edit?: boolean;
 };
+const ClOSEBUTTON_LIST = [
+  { value: 'Pause', label: 'Pause', icon: <DeleteProjectIcon /> },
+  { value: 'Delete', label: 'Delete', icon: <PauseProjectIcon /> }
+];
 
-const Card: FC<CardProps> = ({ card }) => {
+const Card: FC<CardProps> = ({ card, edit }) => {
+  const dispatch = useDispatch();
+  const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
+  const isHead = personalInfoList?.role[0] === Role.Head;
+  const [showClose, setShowClose] = useState(false);
+  const [onOpenDropdown, setOnOpenDropdown] = useState(false);
+  const onEditProjectClick = () => {
+    setShowClose(!showClose);
+  };
+  const onCloseProjectClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setOnOpenDropdown(!onOpenDropdown);
+  };
+  const onDeleteClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    dispatch(setCloseProjectModal(true));
+    setShowClose(false);
+  };
+
   const { projectName, tasks, deadline, budget, paid } = card;
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.title}>{projectName}</div>
-        <div className={styles.iconEdit}>
+        <div className={styles.iconEdit} onClick={onEditProjectClick}>
           <EditProjectIcon />
+          {showClose && isHead ? (
+            <div className={styles.buttonContainer}>
+              <div className={styles.dropdown_container}>
+                <div className={styles.btnProject} onClick={onCloseProjectClick}>
+                  {'Close a project'}
+                </div>
+                {onOpenDropdown ? (
+                  <div className={styles.dropdown_menu}>
+                    {ClOSEBUTTON_LIST.map((el) => (
+                      <div key={el.value} className={styles.dropdown_item} onClick={onDeleteClick}>
+                        {el.icon}
+                        {el.label}
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className={styles.projectContainer}>

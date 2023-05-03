@@ -24,5 +24,6 @@ export default {
   getSingleTask: (state: RootState) => state.postsReducer.singleTask,
   getModalTask: (state: RootState) => state.postsReducer.modalTask,
   getSingleSubTask: (state: RootState) => state.postsReducer.singleSubTask,
-  getModalSubTask: (state: RootState) => state.postsReducer.modalSubTask
+  getModalSubTask: (state: RootState) => state.postsReducer.modalSubTask,
+  getCloseProjectModal: (state: RootState) => state.postsReducer.isCloseProjectModalOpened
 };

@@ -29,7 +29,9 @@ import Tab from '../../Components/Tabs';
 import { Tabs } from '../../Components/constants/@types';
 import {
   getAllMilestones,
+  getAllProjects,
   getSingleProject,
+  patchProject,
   setFilterVisible,
   setProjectTitle,
   setSelectedModalVisible
@@ -95,7 +97,18 @@ const SingleProject = () => {
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(setProjectTitle(title));
+      dispatch(
+        patchProject({
+          id: singleProject?.id,
+          data: { project_name: title },
+          callback: () => {
+            if (id) {
+              dispatch(getSingleProject(+id));
+              dispatch(getAllProjects());
+            }
+          }
+        })
+      );
       setEdit(!edit);
     }
   };
