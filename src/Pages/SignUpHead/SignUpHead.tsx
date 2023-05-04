@@ -159,7 +159,17 @@ const SignUpHead = () => {
                 <Form.Item
                   name="email"
                   className={styles.formItem}
-                  rules={[{ required: true, message: 'Please input your email!' }]}>
+                  // rules={[{ required: true, message: 'Please input your email!' }]}
+                  rules={[
+                    {
+                      type: 'email',
+                      message: 'The input is not valid E-mail!'
+                    },
+                    {
+                      required: true,
+                      message: 'Please input your E-mail!'
+                    }
+                  ]}>
                   <Input type={'email'} placeholder={'Email'} />
                 </Form.Item>
                 <Form.Item
@@ -209,7 +219,10 @@ const SignUpHead = () => {
                   <Form.Item
                     name="password"
                     className={styles.formItem}
-                    rules={[{ required: true, message: 'Please input your password!' }]}>
+                    rules={[
+                      { min: 8, message: 'Please input min 8 symbols!' },
+                      { required: true, message: 'Please input your password!' }
+                    ]}>
                     <Input type={type} value={checkPassword} placeholder={'Password'} />
                   </Form.Item>
                   <div className={styles.eyeIcon} onClick={onEyeClick}>
