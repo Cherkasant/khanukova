@@ -10,6 +10,8 @@ import 'react-dropdown/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
+import dayjs, { Dayjs } from 'dayjs';
+
 import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
 import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
@@ -17,58 +19,82 @@ import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
 import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
 import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
-import { getSingleProject, postMilestoneCard, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
+import { deleteTask, getSingleProject, patchTask, setModalTask } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
 import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
 import Input from '../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
 
-import styles from './ModalNewMilestone.module.css';
+import styles from './ModalTask.module.css';
 
-const ModalNewMilestone = () => {
+const ModalTask = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
-  const projectTitle = useSelector(postSelector.getProjectTitle);
   const singleProject = useSelector(postSelector.getSingleProject);
-  const isVisible = useSelector(postSelector.getModal);
+  const isVisible = useSelector(postSelector.getModalTask);
+  const singleTask = useSelector(postSelector.getSingleTask);
+
+  useEffect(() => {
+    if (singleTask) {
+      const progress = singleTask?.progress.toString();
+      setTitle(singleTask?.task_name);
+      setDescriptionValue(singleTask?.description);
+      setLaunchDate(singleTask?.start_date);
+      setDeadline(singleTask?.deadline);
+      setPriority(singleTask?.priority);
+      setDuration(singleTask?.duration);
+      setLabel(singleTask?.labels);
+      setColors(singleTask?.color_labels);
+      setProgress(progress);
+      setStatus(singleTask?.status);
+      setPaymentStatus(singleTask?.payment_status);
+      setLaunchDate(singleTask?.start_date);
+      setDeadline(singleTask?.deadline);
+    }
+  }, [singleTask]);
 
   const onSaveClick = () => {
-    dispatch(
-      postMilestoneCard({
-        data: {
-          milestone_name: title,
-          description: descriptionValue,
-          attachment: null,
-          responsible: [],
-          priority: priority.value,
-          start_date: launchDate,
-          deadline: deadline,
-          duration: duration,
-          labels: label,
-          color_labels: colors.value,
-          dependence: [],
-          progress: +progress.value,
-          status: status.value,
-          payment_status: paymentStatus.value,
-          project: singleProject?.id
-        },
-        callback: () => {
-          if (id) {
-            dispatch(getSingleProject(+id));
+    if (singleTask) {
+      dispatch(
+        patchTask({
+          id: singleTask?.id,
+          data: {
+            task_name: title,
+            description: descriptionValue,
+            attachment: null,
+            responsible: [],
+            priority: priority.value,
+            start_date: launchDate,
+            deadline: deadline,
+            duration: duration,
+            labels: label,
+            color_labels: colors.value,
+            dependence: [],
+            progress: progress.value,
+            status: status.value,
+            payment_status: paymentStatus.value,
+            project: singleProject?.id,
+            milestone: singleTask?.milestone
+          },
+          callback: () => {
+            if (id) {
+              dispatch(getSingleProject(+id));
+              dispatch(setModalTask(false));
+            }
           }
-        }
-      })
-    );
-    dispatch(setSelectedModalVisible(false));
+        })
+      );
+    }
   };
   const [attachment, setAttachment] = useState('');
   const [launchDate, setLaunchDate] = useState('');
-  const [deadline, setDeadline] = useState('');
-  const [label, setLabel] = useState('');
-  const [duration, setDuration] = useState('');
-  const [descriptionValue, setDescriptionValue] = useState('');
+  const [deadline, setDeadline] = useState<any>('');
+  const [label, setLabel] = useState<any>('');
+  const [duration, setDuration] = useState<any>('');
+  const [descriptionValue, setDescriptionValue] = useState<any>('');
 
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDescriptionValue(event.target.value);
@@ -89,18 +115,43 @@ const ModalNewMilestone = () => {
     setEdit(!edit);
   };
   const onCancelClick = () => {
-    dispatch(setSelectedModalVisible(false));
+    dispatch(setModalTask(false));
   };
   useEffect(() => {
     setEdit(false);
     // setTitle('Title');
   }, []);
 
-  const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
-    setDeadline(dateString);
+  const onChangeDeadline: DatePickerProps['onChange'] = (date: Dayjs | null) => {
+    setFinishDate(date);
   };
-  const onChangeLaunch: DatePickerProps['onChange'] = (date, dateString) => {
-    setLaunchDate(dateString);
+  const onChangeLaunch: DatePickerProps['onChange'] = (date: Dayjs | null) => {
+    setStartDate(date);
+  };
+  const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(new Date()));
+  const [finishDate, setFinishDate] = useState<Dayjs | null>(dayjs(new Date()));
+  useEffect(() => {
+    if (startDate) {
+      setLaunchDate(startDate?.format('DD.MM.YYYY'));
+    }
+    if (finishDate) {
+      setDeadline(finishDate?.format('DD.MM.YYYY'));
+    }
+  }, [startDate, finishDate]);
+  const onDeleteTaskClick = () => {
+    if (singleTask) {
+      dispatch(
+        deleteTask({
+          id: singleTask?.id,
+          callback: () => {
+            if (id) {
+              dispatch(getSingleProject(+id));
+              dispatch(setModalTask(false));
+            }
+          }
+        })
+      );
+    }
   };
 
   return (
@@ -114,8 +165,8 @@ const ModalNewMilestone = () => {
         })}>
         <div className={styles.container}>
           <div className={styles.milestone}>
-            {projectTitle}
-            <div className={styles.deleteContainer}>
+            {singleProject?.project_name}
+            <div className={styles.deleteContainer} onClick={onDeleteTaskClick}>
               <DeleteIcon />
               {'Delete from project'}
             </div>
@@ -125,13 +176,17 @@ const ModalNewMilestone = () => {
             <CloseModalIcon />
           </div>
           <div className={styles.titleContainer}>
-            <Input
-              value={title}
-              onChange={(value) => setTitle(value)}
-              className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
-              placeholder={'New milestone'}
-              disabled={!edit}
-            />
+            {!edit ? (
+              <div className={styles.titleDiv}>{title}</div>
+            ) : (
+              <Input
+                value={title}
+                onChange={(value) => setTitle(value)}
+                className={styles.titleInput}
+                placeholder={'Title'}
+                disabled={!edit}
+              />
+            )}
             {!edit ? (
               <div className={styles.editIcon} onClick={onEditClick}>
                 <EditTitleIcon />
@@ -225,6 +280,7 @@ const ModalNewMilestone = () => {
               <div className={styles.startDateContainer}>
                 <div className={styles.title}>{'Start date'}</div>
                 <DatePicker
+                  value={dayjs(launchDate, 'DD.MM.YYYY')}
                   format="DD.MM.YYYY"
                   placeholder="Nothing selected"
                   suffixIcon={<CalendarIcon />}
@@ -237,6 +293,7 @@ const ModalNewMilestone = () => {
                 <div className={styles.startDateContainer}>
                   <div className={styles.title}>{'Deadline'}</div>
                   <DatePicker
+                    value={dayjs(deadline, 'DD.MM.YYYY')}
                     format="DD.MM.YYYY"
                     placeholder="Nothing selected"
                     suffixIcon={<CalendarIcon />}
@@ -365,4 +422,4 @@ const ModalNewMilestone = () => {
   );
 };
 
-export default ModalNewMilestone;
+export default ModalTask;

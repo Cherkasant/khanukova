@@ -1,15 +1,22 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   ArrayOfProjectType,
   CardTaskType,
-  MilestoneModalType,
+  DeleteMilestoneType,
+  MilestoneDataPayload,
   MilestoneType,
+  PatchMilestoneType,
+  PatchProjectType,
+  PatchSubTaskType,
+  PatchTaskType,
   ProjectData,
   ProjectDataPayload,
   ProjectType,
   SubTaskDataPayload,
+  SubTaskTypeTable,
   TaskDataPayload,
+  TaskTypeTable,
   TaskTypeWithID
 } from '../Types/tasks';
 
@@ -34,6 +41,12 @@ type PostReducerState = {
   taskId: number;
   refreshTable: boolean;
   singleMilestone: MilestoneType | null;
+  modalMilestone: boolean;
+  singleTask: TaskTypeTable | null;
+  modalTask: boolean;
+  singleSubTask: SubTaskTypeTable | null;
+  modalSubTask: boolean;
+  isCloseProjectModalOpened: boolean;
 };
 
 const initialState: PostReducerState = {
@@ -56,7 +69,13 @@ const initialState: PostReducerState = {
   milestoneId: 0,
   taskId: 0,
   refreshTable: false,
-  singleMilestone: null
+  singleMilestone: null,
+  modalMilestone: false,
+  singleTask: null,
+  modalTask: false,
+  singleSubTask: null,
+  modalSubTask: false,
+  isCloseProjectModalOpened: false
 };
 
 const postsSlice = createSlice({
@@ -73,7 +92,7 @@ const postsSlice = createSlice({
       state.isNewSubTaskModalisOpened = action.payload;
     },
 
-    postMilestoneCard: (state, action: PayloadAction<MilestoneModalType>) => {},
+    postMilestoneCard: (state, action: PayloadAction<MilestoneDataPayload>) => {},
     getTaskCard: (state, action: PayloadAction<undefined>) => {},
     setTaskCard: (state, action: PayloadAction<TaskTypeWithID>) => {
       state.TaskForm = action.payload;
@@ -128,11 +147,37 @@ const postsSlice = createSlice({
     setRefreshTable: (state, action: PayloadAction<boolean>) => {
       state.refreshTable = action.payload;
     },
-    deleteMilestone: (state, action: PayloadAction<number>) => {},
+    deleteMilestone: (state, action: PayloadAction<DeleteMilestoneType>) => {},
     getSingleMilestone: (state, action: PayloadAction<number>) => {},
     setSingleMilestone: (state, action: PayloadAction<MilestoneType>) => {
       state.singleMilestone = action.payload;
-    }
+    },
+    setModalMilestone: (state, action: PayloadAction<boolean>) => {
+      state.modalMilestone = action.payload;
+    },
+    patchMilestone: (state, action: PayloadAction<PatchMilestoneType>) => {},
+    getSingleTask: (state, action: PayloadAction<number>) => {},
+    setSingleTask: (state, action: PayloadAction<TaskTypeTable>) => {
+      state.singleTask = action.payload;
+    },
+    setModalTask: (state, action: PayloadAction<boolean>) => {
+      state.modalTask = action.payload;
+    },
+    patchTask: (state, action: PayloadAction<PatchTaskType>) => {},
+    deleteTask: (state, action: PayloadAction<DeleteMilestoneType>) => {},
+    getSingleSubTask: (state, action: PayloadAction<number>) => {},
+    setSingleSubTask: (state, action: PayloadAction<SubTaskTypeTable>) => {
+      state.singleSubTask = action.payload;
+    },
+    setModalSubTask: (state, action: PayloadAction<boolean>) => {
+      state.modalSubTask = action.payload;
+    },
+    patchSubTask: (state, action: PayloadAction<PatchSubTaskType>) => {},
+    deleteSubTask: (state, action: PayloadAction<DeleteMilestoneType>) => {},
+    setCloseProjectModal: (state, action: PayloadAction<boolean>) => {
+      state.isCloseProjectModalOpened = action.payload;
+    },
+    patchProject: (state, action: PayloadAction<PatchProjectType>) => {}
   }
 });
 
@@ -166,7 +211,21 @@ export const {
   setRefreshTable,
   deleteMilestone,
   getSingleMilestone,
-  setSingleMilestone
+  setSingleMilestone,
+  setModalMilestone,
+  patchMilestone,
+  getSingleTask,
+  setSingleTask,
+  setModalTask,
+  patchTask,
+  deleteTask,
+  getSingleSubTask,
+  setSingleSubTask,
+  setModalSubTask,
+  patchSubTask,
+  deleteSubTask,
+  setCloseProjectModal,
+  patchProject
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;

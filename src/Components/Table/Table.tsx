@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Column, useExpanded, useSortBy, useTable } from 'react-table';
@@ -11,6 +10,8 @@ import { RotateSortIcon } from '../../Assets/icons/RotateSortIcon';
 import { SortIcon } from '../../Assets/icons/SortIcon';
 import {
   getSingleMilestone,
+  getSingleSubTask,
+  getSingleTask,
   setMilestoneId,
   setProjectTitle,
   setSelectedModalVisible,
@@ -20,15 +21,13 @@ import {
   setTaskTitle
 } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
-import { MilestoneCardType, SubTaskTypeTable, TaskTypeTable } from '../../Redux/Types/tasks';
+import { SubTaskTypeTable, TaskTypeTable } from '../../Redux/Types/tasks';
 import { TableColumns } from '../constants/Table/TableData';
 
 import styles from './Table.module.css';
 
 const Table = () => {
   const dispatch = useDispatch();
-
-  const DATA: MilestoneCardType = [];
 
   const singleProject = useSelector(postSelector.getSingleProject);
   const taskData = singleProject?.milestone_data.map((el) => {
@@ -100,13 +99,6 @@ const Table = () => {
     }
   }, [singleProject]);
 
-  const onAddMilestoneClick = () => {
-    if (singleProject) {
-      dispatch(setProjectTitle(singleProject?.project_name));
-      dispatch(setSelectedModalVisible(true));
-    }
-  };
-
   const COLUMNS: Array<Column> = [
     {
       Header: TableColumns.item,
@@ -115,7 +107,6 @@ const Table = () => {
           className={styles.footer}
           onClick={() => {
             if (singleProject) {
-              console.log(props);
               dispatch(setProjectTitle(singleProject?.project_name));
               dispatch(setSelectedModalVisible(true));
             }
@@ -146,6 +137,12 @@ const Table = () => {
               onClick={() => {
                 if (props.row.depth === 0) {
                   dispatch(getSingleMilestone(props.row.original.id));
+                }
+                if (props.row.depth === 1) {
+                  dispatch(getSingleTask(props.row.original.id));
+                }
+                if (props.row.depth === 2) {
+                  dispatch(getSingleSubTask(props.row.original.id));
                 }
               }}>
               {props.row.original.milestone_name}
@@ -232,16 +229,16 @@ const Table = () => {
       Header: TableColumns.launchDate,
       Footer: '',
       accessor: 'start_date',
-      Cell: (props) => {
-        return <>{moment(props.value).format('DD MMM YYYY')}</>;
+      Cell: ({ value }) => {
+        return <>{value}</>;
       }
     },
     {
       Header: TableColumns.deadline,
       Footer: '',
       accessor: 'deadline',
-      Cell: (props) => {
-        return <>{moment(props.value).format('DD MMM YYYY')}</>;
+      Cell: ({ value }) => {
+        return <>{value}</>;
       }
     },
     {

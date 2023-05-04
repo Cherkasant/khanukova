@@ -16,17 +16,22 @@ import Documents from '../../Components/Documents';
 import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 import Input from '../../Components/Input';
 import ModalEcase from '../../Components/ModalEcase';
+import ModalMilestone from '../../Components/ModalMilestone';
 import ModalNewMilestone from '../../Components/ModalNewMilestone';
 import ModalNewSubTask from '../../Components/ModalNewSubTask';
 import ModalNewTask from '../../Components/ModalNewTask';
 import ModalRequest from '../../Components/ModalRequest';
+import ModalSubTask from '../../Components/ModalSubTask';
+import ModalTask from '../../Components/ModalTask';
 import Resourses from '../../Components/Resourses';
 import Table from '../../Components/Table';
 import Tab from '../../Components/Tabs';
 import { Tabs } from '../../Components/constants/@types';
 import {
   getAllMilestones,
+  getAllProjects,
   getSingleProject,
+  patchProject,
   setFilterVisible,
   setProjectTitle,
   setSelectedModalVisible
@@ -78,6 +83,11 @@ const SingleProject = () => {
       dispatch(getAllMilestones(+id));
     }
   }, [id]);
+  useEffect(() => {
+    if (singleProject) {
+      setTitle(singleProject?.project_name);
+    }
+  }, [singleProject]);
 
   const [title, setTitle] = useState('');
   const [edit, setEdit] = useState(false);
@@ -87,7 +97,18 @@ const SingleProject = () => {
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(setProjectTitle(title));
+      dispatch(
+        patchProject({
+          id: singleProject?.id,
+          data: { project_name: title },
+          callback: () => {
+            if (id) {
+              dispatch(getSingleProject(+id));
+              dispatch(getAllProjects());
+            }
+          }
+        })
+      );
       setEdit(!edit);
     }
   };
@@ -104,7 +125,7 @@ const SingleProject = () => {
               {'Please enter a project name and press Enter to get started'}
             </div>
             <Input
-              value={singleProject?.project_name}
+              value={title}
               onChange={(value) => setTitle(value)}
               onKeyDown={onChangeKeyDown}
               className={styles.title}
@@ -137,7 +158,7 @@ const SingleProject = () => {
           </div>
         </div>
       ) : null}
-      {!isSaveClicked && activeTab === Tabs.Planning ? (
+      {singleProject?.milestone_data.length === 0 && activeTab === Tabs.Planning ? (
         <div className={styles.bottomContainer}>
           <div
             className={classNames(styles.milestoneButton, {
@@ -149,7 +170,7 @@ const SingleProject = () => {
           </div>
         </div>
       ) : null}
-      {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
+      {isSaveClicked && activeTab === Tabs.Planning && singleProject?.milestone_data.length !== 0 ? <Table /> : null}
       <FilterProjectScreen />
 
       {activeTab === Tabs.ClientsRequests ? (
@@ -173,6 +194,9 @@ const SingleProject = () => {
       <ModalNewSubTask />
       <ModalEcase />
       <ModalRequest />
+      <ModalMilestone />
+      <ModalTask />
+      <ModalSubTask />
     </div>
   );
 };

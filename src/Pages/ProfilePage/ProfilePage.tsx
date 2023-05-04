@@ -1,12 +1,13 @@
 import { DatePickerProps } from 'antd';
+
 import classNames from 'classnames';
+
 import { useEffect, useMemo, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { GenerateIcon } from '../../Assets/DevTeam/GenerateIcon';
 import { PencilIcon } from '../../Assets/Profile/PencilIcon';
-import { DeleteProjectIcon } from '../../Assets/ProfilePage/DeleteProjectIcon';
-import { PauseProjectIcon } from '../../Assets/ProfilePage/PauseProjectIcon';
 import CompanyProfile from '../../Components/CompanyProfile';
 import DevTeamTable from '../../Components/DevTeamTable';
 import Input from '../../Components/Input';
@@ -39,28 +40,24 @@ const ProfilePage = () => {
     dispatch(getPersonalInfoReducer());
   }, []);
 
-  const [name, setName] = useState('Ivanova Irina');
+  const [name, setName] = useState('');
   const [nickName, setNickName] = useState('');
-  const [positions, setPositions] = useState('CEO');
-  const [email, setEmail] = useState('irina@gmail.com');
-  const [phone, setPhone] = useState('+375 (29) 758-78-47');
+  const [positions, setPositions] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [telegram, setTelegram] = useState('');
+  const [company, setCompany] = useState('');
 
-  const levelOptions = [
-    { value: 'Junior', label: 'Junior' },
-    { value: 'Middle', label: 'Middle' },
-    { value: 'Senior', label: 'Senior' },
-    { value: 'Lead', label: 'Lead' }
-  ];
-
-  const [selectedLevelOptions, setSelectedLevelOptions] = useState<any>(null);
-  const [rate, setRate] = useState('');
-
-  const [projects, setProjects] = useState('');
-  const [stack, setStack] = useState('');
-  const [experience, setExperience] = useState('');
-
-  const [info, setInfo] = useState('');
+  useEffect(() => {
+    if (personalInfoList && companyList) {
+      setName(personalInfoList?.full_name);
+      setNickName(personalInfoList?.nickname);
+      setPositions(personalInfoList?.role);
+      setEmail(personalInfoList?.email);
+      setPhone(personalInfoList?.phone);
+      setCompany(companyList?.company_name);
+    }
+  });
 
   const [activeTab, setActiveTab] = useState(TabsProfile.PersonalInfo);
   const onTabClick = (tab: TabsProfile) => {
@@ -75,29 +72,6 @@ const ProfilePage = () => {
     setActiveModal(false);
   };
 
-  const currencyOptions = [
-    { value: 'EUR', label: 'EUR' },
-    { value: 'USD', label: 'USD' }
-  ];
-
-  const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null);
-
-  const languageOptions = [
-    { value: 'English', label: 'English' },
-    { value: 'French', label: 'French' },
-    { value: 'Hebrew', label: 'Hebrew' },
-    { value: 'Spanish', label: 'Spanish' },
-    { value: 'Russian', label: 'Russian' },
-    { value: 'Ukrainian', label: 'Ukrainian' },
-    { value: 'Arabic', label: 'Arabic' }
-  ];
-
-  const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null);
-
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
   const isHead = personalInfoList?.role[0] === Role.Head;
 
   const TABS_NAMES = useMemo(
@@ -108,16 +82,6 @@ const ProfilePage = () => {
     ],
     []
   );
-
-  const [showClose, setShowClose] = useState(false);
-  const onCloseProjectClick = () => {
-    setShowClose(!showClose);
-  };
-
-  const ClOSEBUTTON_LIST = [
-    { value: 'Pause', label: 'Pause', icon: <DeleteProjectIcon /> },
-    { value: 'Delete', label: 'Delete', icon: <PauseProjectIcon /> }
-  ];
 
   const COMPANY_LIST = [
     {
@@ -225,23 +189,6 @@ const ProfilePage = () => {
         })}>
         <div className={styles.titleBlock}>
           <Title name={'My Profile'} className={styles.title} />
-          {isHead ? (
-            <div className={styles.dropdown_container}>
-              <div className={styles.btnProject} onClick={onCloseProjectClick}>
-                {'Close a project'}
-              </div>
-              {showClose ? (
-                <div className={styles.dropdown_menu}>
-                  {ClOSEBUTTON_LIST.map((el) => (
-                    <div key={el.value} className={styles.dropdown_item}>
-                      {el.icon}
-                      {el.label}
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          ) : null}
         </div>
         {isHead ? <TabsListProfile activeTab={activeTab} onSelectTab={onTabClick} tabsList={TABS_NAMES} /> : null}
       </div>
@@ -265,7 +212,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Full name'}
                     type={'text'}
-                    value={personalInfoList?.full_name}
+                    value={name}
                     onChange={(value) => setName(value)}
                     placeholder={'Full name'}
                     className={styles.input}
@@ -274,7 +221,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Nick name'}
                     type={'text'}
-                    value={personalInfoList?.nickname}
+                    value={nickName}
                     onChange={(value) => setNickName(value)}
                     placeholder={'Nick name'}
                     className={styles.input}
@@ -282,8 +229,8 @@ const ProfilePage = () => {
                   <Input
                     title={'Company name'}
                     type={'text'}
-                    value={companyList?.company_name}
-                    onChange={(value) => setNickName(value)}
+                    value={company}
+                    onChange={(value) => setCompany(value)}
                     disabled
                     placeholder={'Company name'}
                     className={styles.input}
@@ -292,7 +239,7 @@ const ProfilePage = () => {
                   <Input
                     title={'Positions'}
                     type={'text'}
-                    value={personalInfoList?.role}
+                    value={positions}
                     onChange={(value) => setPositions(value)}
                     placeholder={'Positions'}
                     disabled
@@ -305,7 +252,7 @@ const ProfilePage = () => {
                 <Input
                   title={'Email'}
                   type={'email'}
-                  value={personalInfoList?.email}
+                  value={email}
                   onChange={(value) => setEmail(value)}
                   placeholder={'Email'}
                   className={styles.input}
@@ -314,7 +261,7 @@ const ProfilePage = () => {
                 <Input
                   title={'Phone number '}
                   type={'tel'}
-                  value={personalInfoList?.phone}
+                  value={phone}
                   onChange={(value) => setPhone(value)}
                   placeholder={'Phone'}
                   className={styles.input}

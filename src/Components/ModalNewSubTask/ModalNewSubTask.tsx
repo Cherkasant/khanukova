@@ -130,7 +130,7 @@ const ModalNewSubTask = () => {
             <Input
               value={title}
               onChange={(value) => setTitle(value)}
-              className={styles.titleInput}
+              className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
               placeholder={'New Task'}
               disabled={!edit}
             />

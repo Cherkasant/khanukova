@@ -19,5 +19,11 @@ export default {
   getMilestoneId: (state: RootState) => state.postsReducer.milestoneId,
   getTaskId: (state: RootState) => state.postsReducer.taskId,
   getRefreshTable: (state: RootState) => state.postsReducer.refreshTable,
-  getSingleMilestone: (state: RootState) => state.postsReducer.singleMilestone
+  getSingleMilestone: (state: RootState) => state.postsReducer.singleMilestone,
+  getModalMilestone: (state: RootState) => state.postsReducer.modalMilestone,
+  getSingleTask: (state: RootState) => state.postsReducer.singleTask,
+  getModalTask: (state: RootState) => state.postsReducer.modalTask,
+  getSingleSubTask: (state: RootState) => state.postsReducer.singleSubTask,
+  getModalSubTask: (state: RootState) => state.postsReducer.modalSubTask,
+  getCloseProjectModal: (state: RootState) => state.postsReducer.isCloseProjectModalOpened
 };
