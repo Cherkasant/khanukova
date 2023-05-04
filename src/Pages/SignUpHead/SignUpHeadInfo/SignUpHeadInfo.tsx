@@ -1,7 +1,8 @@
 import type { UploadProps } from 'antd';
 
+import { Button, Checkbox, DatePicker, Form, message, Upload } from 'antd';
+
 import { UploadOutlined } from '@ant-design/icons';
-import { Button, Checkbox, DatePicker, Form, Upload, message } from 'antd';
 import Dropdown from 'react-dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -13,8 +14,9 @@ import { registerHeadInfo } from '../../../Redux/Reducers/authReducer';
 import authSelectors from '../../../Redux/Selectors/authSelectors';
 import { PathNames } from '../../Router/Router';
 
-import styles from './SignUpHeadInfo.module.css';
+import PuzzleCheckbox from '../../../Components/PuzzleCheckbox';
 
+import styles from './SignUpHeadInfo.module.css';
 
 const SignUpHeadInfo = () => {
   const dispatch = useDispatch();
@@ -164,73 +166,73 @@ const SignUpHeadInfo = () => {
                   className={styles.formItem}
                   rules={[{ required: true, message: 'Please choose industry' }]}>
                   <Checkbox.Group className={styles.checkboxContainer}>
-                    <Checkbox value="Ecommerce">Ecommerce</Checkbox>
-                    <Checkbox value="AI and Machine Learning" style={{ margin: '0' }}>
+                    <PuzzleCheckbox value="Ecommerce">Ecommerce</PuzzleCheckbox>
+                    <PuzzleCheckbox value="AI and Machine Learning" style={{ margin: '0' }}>
                       AI and Machine Learning
-                    </Checkbox>
-                    <Checkbox value="Martech (Marketing Tech)" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Martech (Marketing Tech)" style={{ margin: '0' }}>
                       Martech (Marketing Tech)
-                    </Checkbox>
-                    <Checkbox value="Live Chat software" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Live Chat software" style={{ margin: '0' }}>
                       Live Chat software
-                    </Checkbox>
-                    <Checkbox value="Logistics" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Logistics" style={{ margin: '0' }}>
                       Logistics
-                    </Checkbox>
-                    <Checkbox value="Data Science" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Data Science" style={{ margin: '0' }}>
                       Data Science
-                    </Checkbox>
-                    <Checkbox value="HR Software" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="HR Software" style={{ margin: '0' }}>
                       HR Software
-                    </Checkbox>
-                    <Checkbox value="Webinar software" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Webinar software" style={{ margin: '0' }}>
                       Webinar software
-                    </Checkbox>
-                    <Checkbox value="eLearning" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="eLearning" style={{ margin: '0' }}>
                       eLearning
-                    </Checkbox>
-                    <Checkbox value="Cybersecurity" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Cybersecurity" style={{ margin: '0' }}>
                       Cybersecurity
-                    </Checkbox>
-                    <Checkbox value="Augmented Reality" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Augmented Reality" style={{ margin: '0' }}>
                       Augmented Reality
-                    </Checkbox>
-                    <Checkbox value="Project Management software" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Project Management software" style={{ margin: '0' }}>
                       Project Management software
-                    </Checkbox>
-                    <Checkbox value="Fintech" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Fintech" style={{ margin: '0' }}>
                       Fintech
-                    </Checkbox>
-                    <Checkbox value="Blockchain" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Blockchain" style={{ margin: '0' }}>
                       Blockchain
-                    </Checkbox>
-                    <Checkbox value="Marketplaces" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Marketplaces" style={{ margin: '0' }}>
                       Marketplaces
-                    </Checkbox>
-                    <Checkbox value="Point of sale software" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Point of sale software" style={{ margin: '0' }}>
                       Point of sale software
-                    </Checkbox>
-                    <Checkbox value="Mobile Development" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Mobile Development" style={{ margin: '0' }}>
                       Mobile Development
-                    </Checkbox>
-                    <Checkbox value="Voice recognition" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Voice recognition" style={{ margin: '0' }}>
                       Voice recognition
-                    </Checkbox>
-                    <Checkbox value="CRM software" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="CRM software" style={{ margin: '0' }}>
                       CRM software
-                    </Checkbox>
-                    <Checkbox value="Game Development" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Game Development" style={{ margin: '0' }}>
                       Game Development
-                    </Checkbox>
-                    <Checkbox value="Video (Face) recognition" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Video (Face) recognition" style={{ margin: '0' }}>
                       Video (Face) recognition
-                    </Checkbox>
-                    <Checkbox value="ERP software" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="ERP software" style={{ margin: '0' }}>
                       ERP software
-                    </Checkbox>
-                    <Checkbox value="Other" style={{ margin: '0' }}>
+                    </PuzzleCheckbox>
+                    <PuzzleCheckbox value="Other" style={{ margin: '0' }}>
                       Other
-                    </Checkbox>
+                    </PuzzleCheckbox>
                     <Input value={''} onChange={() => {}} className={styles.checkboxInput} />
                   </Checkbox.Group>
                 </Form.Item>
