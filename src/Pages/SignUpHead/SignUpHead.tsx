@@ -219,10 +219,7 @@ const SignUpHead = () => {
                   <Form.Item
                     name="password"
                     className={styles.formItem}
-                    rules={[
-                      { min: 8, message: 'Please input min 8 symbols!' },
-                      { required: true, message: 'Please input your password!' }
-                    ]}>
+                    rules={[{ min: 8, message: 'Please input min 8 symbols!!!' }]}>
                     <Input type={type} value={checkPassword} placeholder={'Password'} />
                   </Form.Item>
                   <div className={styles.eyeIcon} onClick={onEyeClick}>
