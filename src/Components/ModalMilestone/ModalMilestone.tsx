@@ -19,7 +19,6 @@ import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
 import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
 import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
 import { deleteMilestone, getSingleProject, patchMilestone, setModalMilestone } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
@@ -27,6 +26,8 @@ import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/consta
 import Input from '../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
+
+import { DownloadAllIcon } from '../../Assets/Milestone/DownloadAllIcon';
 
 import styles from './ModalMilestone.module.css';
 
@@ -228,11 +229,20 @@ const ModalMilestone = () => {
             <div className={styles.blockDownload}>
               <div className={styles.downloadBtn}>
                 {'Download all'}
-                <DownloadIcon />
+                <DownloadAllIcon />
               </div>
             </div>
             <div className={styles.commentContainer}>
               <div className={styles.title}>{'Comments'}</div>
+              <div className={styles.commentBlock}>
+                <div className={styles.commentHeader}>
+                  <div className={styles.commentAvatar}>{'NB'}</div>
+                  <div className={styles.commentOwner}>{'Nina Beta'}</div>
+                </div>
+                <div className={styles.textComment}>
+                  {'Не хватает всех документов. Просьба прикрепить еще документы'}
+                </div>
+              </div>
               <textarea
                 className={styles.commentInput}
                 placeholder={'Write comment'}
@@ -240,10 +250,9 @@ const ModalMilestone = () => {
                 onChange={onChangeComment}
               />
               <PuzzleButton
-                title={'Comment'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!comment}
+                btnTitle={'Comment'}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.submitBtn}
               />
             </div>
           </div>
