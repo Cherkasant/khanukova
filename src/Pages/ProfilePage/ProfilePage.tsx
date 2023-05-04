@@ -58,21 +58,6 @@ const ProfilePage = () => {
       setCompany(companyList?.company_name);
     }
   });
-  const levelOptions = [
-    { value: 'Junior', label: 'Junior' },
-    { value: 'Middle', label: 'Middle' },
-    { value: 'Senior', label: 'Senior' },
-    { value: 'Lead', label: 'Lead' }
-  ];
-
-  const [selectedLevelOptions, setSelectedLevelOptions] = useState<any>(null);
-  const [rate, setRate] = useState('');
-
-  const [projects, setProjects] = useState('');
-  const [stack, setStack] = useState('');
-  const [experience, setExperience] = useState('');
-
-  const [info, setInfo] = useState('');
 
   const [activeTab, setActiveTab] = useState(TabsProfile.PersonalInfo);
   const onTabClick = (tab: TabsProfile) => {
@@ -85,29 +70,6 @@ const ProfilePage = () => {
   };
   const onScreenClick = () => {
     setActiveModal(false);
-  };
-
-  const currencyOptions = [
-    { value: 'EUR', label: 'EUR' },
-    { value: 'USD', label: 'USD' }
-  ];
-
-  const [selectedCurrencyOptions, setSelectedCurrencyOptions] = useState<any>(null);
-
-  const languageOptions = [
-    { value: 'English', label: 'English' },
-    { value: 'French', label: 'French' },
-    { value: 'Hebrew', label: 'Hebrew' },
-    { value: 'Spanish', label: 'Spanish' },
-    { value: 'Russian', label: 'Russian' },
-    { value: 'Ukrainian', label: 'Ukrainian' },
-    { value: 'Arabic', label: 'Arabic' }
-  ];
-
-  const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null);
-
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString);
   };
 
   const isHead = personalInfoList?.role[0] === Role.Head;

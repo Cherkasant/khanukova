@@ -20,7 +20,15 @@ const ProfileDev = () => {
   const [phone, setPhone] = useState('+375 (29) 758-78-47');
   const [telegram, setTelegram] = useState('');
 
-  const [level, setLevel] = useState('');
+  const levelOptions = [
+    { value: 'Junior', label: 'Junior' },
+    { value: 'Middle', label: 'Middle' },
+    { value: 'Senior', label: 'Senior' },
+    { value: 'Lead', label: 'Lead' }
+  ];
+
+  const [selectedLevelOptions, setSelectedLevelOptions] = useState<any>(null);
+
   const [rate, setRate] = useState('');
 
   const [projects, setProjects] = useState('');
@@ -38,7 +46,12 @@ const ProfileDev = () => {
 
   const languageOptions = [
     { value: 'English', label: 'English' },
-    { value: 'Russian', label: 'Russian' }
+    { value: 'French', label: 'French' },
+    { value: 'Hebrew', label: 'Hebrew' },
+    { value: 'Spanish', label: 'Spanish' },
+    { value: 'Russian', label: 'Russian' },
+    { value: 'Ukrainian', label: 'Ukrainian' },
+    { value: 'Arabic', label: 'Arabic' }
   ];
 
   const [selectedLanguageOptions, setSelectedLanguageOptions] = useState<any>(null);
@@ -147,14 +160,22 @@ const ProfileDev = () => {
 
           <div className={styles.blockHead}>
             <div className={styles.containerInputHead}>
-              <Input
-                title={'Position Level'}
-                type={'text'}
-                value={level}
-                onChange={(value) => setLevel(value)}
-                placeholder={'Select position'}
-                className={styles.input}
-              />
+              <div>
+                <div className={styles.inputTitle}>Position Level</div>
+
+                <Dropdown
+                  options={levelOptions}
+                  onChange={setSelectedLevelOptions}
+                  value={selectedLevelOptions}
+                  placeholder="Select position"
+                  className={styles.dropdownContainer}
+                  controlClassName={styles.dropdownControl}
+                  placeholderClassName={styles.dropdownPlaceholder}
+                  arrowClosed={<span className={styles.arrowClosed} />}
+                  arrowOpen={<span className={styles.arrowOpen} />}
+                  menuClassName={styles.dropdownMenu}
+                />
+              </div>
 
               <div className={styles.containerRate}>
                 <Input
