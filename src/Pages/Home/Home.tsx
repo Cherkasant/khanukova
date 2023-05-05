@@ -11,7 +11,7 @@ import Input from '../../Components/Input';
 import Title from '../../Components/Title';
 import { PathNames } from '../Router/Router';
 
-import ModalCloseProject from '../../Components/ModalCloseProject';
+import ModalCloseProject from '../../Components/Modals/ModalCloseProject';
 
 import postSelector from '../../Redux/Selectors/postSelector';
 

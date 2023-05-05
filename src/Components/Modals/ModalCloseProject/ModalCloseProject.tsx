@@ -3,9 +3,9 @@ import React, { FC } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 
-import { setCloseProjectModal } from '../../Redux/Reducers/postReducer';
+import { setCloseProjectModal } from '../../../Redux/Reducers/postReducer';
 
 import styles from './ModalCloseProject.module.css';
 

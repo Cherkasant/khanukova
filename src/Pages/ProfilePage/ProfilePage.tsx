@@ -11,7 +11,7 @@ import { PencilIcon } from '../../Assets/Profile/PencilIcon';
 import CompanyProfile from '../../Components/CompanyProfile';
 import DevTeamTable from '../../Components/DevTeamTable';
 import Input from '../../Components/Input';
-import ModalGeneratePassword from '../../Components/ModalGeneratePassword';
+import ModalGeneratePassword from '../../Components/Modals/ModalGeneratePassword';
 import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import TabsListProfile from '../../Components/TabsListProfile';
 import Title from '../../Components/Title';

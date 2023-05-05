@@ -12,19 +12,19 @@ import { useParams } from 'react-router';
 
 import dayjs, { Dayjs } from 'dayjs';
 
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
-import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
-import { deleteTask, getSingleProject, patchSubTask, setModalSubTask } from '../../Redux/Reducers/postReducer';
-import postSelector from '../../Redux/Selectors/postSelector';
-import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
-import Input from '../Input';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
-import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
+import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
+import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
+import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
+import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
+import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
+import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
+import { deleteTask, getSingleProject, patchSubTask, setModalSubTask } from '../../../Redux/Reducers/postReducer';
+import postSelector from '../../../Redux/Selectors/postSelector';
+import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
+import Input from '../../Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
+import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../../constants/Modal/ModalData';
 
 import styles from './ModalSubTask.module.css';
 

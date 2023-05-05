@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Input from '../Input';
 import { SearchIcon } from '../../Assets/icons/SearchIcon';
 import AccordionDoc from '../AccordionDoc';
-import ModalDocuments from '../ModalDocuments';
+import ModalDocuments from '../Modals/ModalDocuments';
 
 import styles from './Documents.module.css';
 

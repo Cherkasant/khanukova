@@ -7,19 +7,19 @@ import classNames from 'classnames';
 import { Cascader, List, Upload } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
+import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
-import { setEcaseModalVisible } from '../../Redux/Reducers/postReducer';
-import { ClientsRequestStatus, Priority } from '../constants/Modal/ModalData';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
-import profileSelectors from '../../Redux/Selectors/profileSelectors';
-import { getECaseListReducer } from '../../Redux/Reducers/profileReducer';
-import postSelector from '../../Redux/Selectors/postSelector';
-import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
+import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
+import { setEcaseModalVisible } from '../../../Redux/Reducers/postReducer';
+import { ClientsRequestStatus, Priority } from '../../constants/Modal/ModalData';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
+import profileSelectors from '../../../Redux/Selectors/profileSelectors';
+import { getECaseListReducer } from '../../../Redux/Reducers/profileReducer';
+import postSelector from '../../../Redux/Selectors/postSelector';
+import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
+import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
 
 import styles from './ModalEcase.module.css';
 

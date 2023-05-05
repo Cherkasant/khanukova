@@ -3,13 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 import 'react-dropdown/style.css';
 import Dropdown from 'react-dropdown';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import DocumentIcon from '../../Assets/icons/DocumentIcon';
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
-import ProfileDocIcons from '../../Assets/icons/ProfileDocIcon';
-import { dataFn } from '../../utils';
-import Input from '../Input';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import DocumentIcon from '../../../Assets/icons/DocumentIcon';
+import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
+import ProfileDocIcons from '../../../Assets/icons/ProfileDocIcon';
+import { dataFn } from '../../../utils';
+import Input from '../../Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 
 import styles from './ModalDocuments.module.css';
 import { Colors } from './Colors';
@@ -108,7 +108,6 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
             {!files.length
               ? '+ Add new documents'
               : files.map((value, index) => (
-
                   <div key={index} className={styles.doc}>
                     {value.name}
                     <span
@@ -118,9 +117,9 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
                       }}
                       className={styles.deleteDoc}>
                       x
-                  </span>
-                </div>
-              ))}
+                    </span>
+                  </div>
+                ))}
           </div>
           <input
             ref={inputRef}

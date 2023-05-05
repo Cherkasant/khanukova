@@ -10,49 +10,51 @@ import 'react-dropdown/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
-import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
-import { getSingleProject, postMilestoneCard, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
-import postSelector from '../../Redux/Selectors/postSelector';
-import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
-import Input from '../Input';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
-import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
+import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
+import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
+import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
+import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
+import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
+import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
+import { getSingleProject, postSubTask, setSubTaskModalVisible } from '../../../Redux/Reducers/postReducer';
+import postSelector from '../../../Redux/Selectors/postSelector';
+import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
+import Input from '../../Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
+import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../../constants/Modal/ModalData';
 
-import styles from './ModalNewMilestone.module.css';
+import styles from './ModalNewSubTask.module.css';
 
-const ModalNewMilestone = () => {
+const ModalNewSubTask = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
-  const projectTitle = useSelector(postSelector.getProjectTitle);
+  const TaskTitle = useSelector(postSelector.getTaskTitle);
   const singleProject = useSelector(postSelector.getSingleProject);
-  const isVisible = useSelector(postSelector.getModal);
+  const isVisible = useSelector(postSelector.getNewSubTaskModal);
+  const taskId = useSelector(postSelector.getTaskId);
 
   const onSaveClick = () => {
     dispatch(
-      postMilestoneCard({
+      postSubTask({
         data: {
-          milestone_name: title,
+          sub_task_name: title,
           description: descriptionValue,
           attachment: null,
           responsible: [],
           priority: priority.value,
           start_date: launchDate,
           deadline: deadline,
-          duration: duration,
+          duration: +duration,
           labels: label,
           color_labels: colors.value,
           dependence: [],
           progress: +progress.value,
           status: status.value,
           payment_status: paymentStatus.value,
-          project: singleProject?.id
+          project: singleProject?.id,
+          task: taskId
         },
         callback: () => {
           if (id) {
@@ -61,7 +63,7 @@ const ModalNewMilestone = () => {
         }
       })
     );
-    dispatch(setSelectedModalVisible(false));
+    dispatch(setSubTaskModalVisible(false));
   };
   const [attachment, setAttachment] = useState('');
   const [launchDate, setLaunchDate] = useState('');
@@ -89,11 +91,11 @@ const ModalNewMilestone = () => {
     setEdit(!edit);
   };
   const onCancelClick = () => {
-    dispatch(setSelectedModalVisible(false));
+    dispatch(setSubTaskModalVisible(false));
   };
   useEffect(() => {
     setEdit(false);
-    // setTitle('Title');
+    setTitle('New sub-task');
   }, []);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
@@ -114,7 +116,7 @@ const ModalNewMilestone = () => {
         })}>
         <div className={styles.container}>
           <div className={styles.milestone}>
-            {projectTitle}
+            {TaskTitle}
             <div className={styles.deleteContainer}>
               <DeleteIcon />
               {'Delete from project'}
@@ -129,7 +131,7 @@ const ModalNewMilestone = () => {
               value={title}
               onChange={(value) => setTitle(value)}
               className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
-              placeholder={'New milestone'}
+              placeholder={'New Task'}
               disabled={!edit}
             />
             {!edit ? (
@@ -365,4 +367,4 @@ const ModalNewMilestone = () => {
   );
 };
 
-export default ModalNewMilestone;
+export default ModalNewSubTask;
