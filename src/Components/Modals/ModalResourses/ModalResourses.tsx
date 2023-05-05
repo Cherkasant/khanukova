@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 
 import styles from './ModalResourses.module.css';
 

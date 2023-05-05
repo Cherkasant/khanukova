@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 
 import { Edit } from '../../Assets/icons/Edit';
-import ModalResourses from '../ModalResourses';
+import ModalResourses from '../Modals/ModalResourses';
 
 import styles from './Resourses.module.css';
 

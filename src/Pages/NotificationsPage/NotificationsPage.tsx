@@ -8,7 +8,7 @@ import { TabsNotifications } from '../../Components/constants/@types';
 import TabsListNotifications from '../../Components/TabsListNotifications';
 import CardsListNotifications from '../../Components/CardsListNotifications';
 
-import ModalNotifications from '../../Components/ModalNotifications';
+import ModalNotifications from '../../Components/Modals/ModalNotifications';
 
 import styles from './NotificationsPage.module.css';
 

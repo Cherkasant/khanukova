@@ -6,16 +6,16 @@ import { Cascader, Upload } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
-import { DownloadIcon } from '../../Assets/icons/DownloadIcon';
+import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
+import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import 'react-datepicker/dist/react-datepicker.css';
-import { setRequestModalVisible } from '../../Redux/Reducers/postReducer';
-import { ClientsRequestStatus, Priority } from '../constants/Modal/ModalData';
-import postSelector from '../../Redux/Selectors/postSelector';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
-import { LabelCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
+import { setRequestModalVisible } from '../../../Redux/Reducers/postReducer';
+import { ClientsRequestStatus, Priority } from '../../constants/Modal/ModalData';
+import postSelector from '../../../Redux/Selectors/postSelector';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
+import { LabelCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
+import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
 
 import styles from './ModalRequest.module.css';
 

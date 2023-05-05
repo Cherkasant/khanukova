@@ -2,12 +2,11 @@ import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { CopyIcon } from '../../Assets/DevTeam/CopyIcon';
-import { TelegramIcon } from '../../Assets/DevTeam/TelegramIcon';
-import { ViberIcon } from '../../Assets/DevTeam/ViberIcon';
-import { WhatsappIcon } from '../../Assets/DevTeam/WhatsappIcon';
+import { CopyIcon } from '../../../Assets/DevTeam/CopyIcon';
+import { TelegramIcon } from '../../../Assets/DevTeam/TelegramIcon';
+import { ViberIcon } from '../../../Assets/DevTeam/ViberIcon';
+import { WhatsappIcon } from '../../../Assets/DevTeam/WhatsappIcon';
 import styles from '../ModalGeneratePassword/ModalGeneratePassword.module.css';
-
 
 type ModalGeneratePasswordProps = {
   modal: boolean;

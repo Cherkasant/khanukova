@@ -10,92 +10,65 @@ import 'react-dropdown/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
-import dayjs, { Dayjs } from 'dayjs';
+import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
+import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
+import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
+import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
+import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
+import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
+import { getSingleProject, postMilestoneCard, setSelectedModalVisible } from '../../../Redux/Reducers/postReducer';
+import postSelector from '../../../Redux/Selectors/postSelector';
+import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
+import Input from '../../Input';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
+import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../../constants/Modal/ModalData';
 
-import 'moment/locale/en-gb';
+import styles from './ModalNewMilestone.module.css';
 
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
-import { AttachmentIcon } from '../../Assets/icons/AttachmentIcon';
-import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import { DeleteIcon } from '../../Assets/icons/DeleteIcon';
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
-import { deleteMilestone, getSingleProject, patchMilestone, setModalMilestone } from '../../Redux/Reducers/postReducer';
-import postSelector from '../../Redux/Selectors/postSelector';
-import { ResponsibleCheckbox } from '../FilteresPanel/FilterProjectScreen/constants';
-import Input from '../Input';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
-import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../constants/Modal/ModalData';
-
-import { DownloadAllIcon } from '../../Assets/Milestone/DownloadAllIcon';
-
-import styles from './ModalMilestone.module.css';
-
-const ModalMilestone = () => {
+const ModalNewMilestone = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
+  const projectTitle = useSelector(postSelector.getProjectTitle);
   const singleProject = useSelector(postSelector.getSingleProject);
-  const isVisible = useSelector(postSelector.getModalMilestone);
-  const singleMilestone = useSelector(postSelector.getSingleMilestone);
-
-  useEffect(() => {
-    if (singleMilestone) {
-      const progress = singleMilestone?.progress.toString();
-      setTitle(singleMilestone?.milestone_name);
-      setDescriptionValue(singleMilestone?.description);
-      setLaunchDate(singleMilestone?.start_date);
-      setDeadline(singleMilestone?.deadline);
-      setPriority(singleMilestone?.priority);
-      setDuration(singleMilestone?.duration);
-      setLabel(singleMilestone?.labels);
-      setColors(singleMilestone?.color_labels);
-      setProgress(progress);
-      setStatus(singleMilestone?.status);
-      setPaymentStatus(singleMilestone?.payment_status);
-      setLaunchDate(singleMilestone?.start_date);
-      setDeadline(singleMilestone?.deadline);
-    }
-  }, [singleMilestone]);
+  const isVisible = useSelector(postSelector.getModal);
 
   const onSaveClick = () => {
-    if (singleMilestone) {
-      dispatch(
-        patchMilestone({
-          id: singleMilestone?.id,
-          data: {
-            milestone_name: title,
-            description: descriptionValue,
-            attachment: null,
-            responsible: [],
-            priority: priority.value,
-            start_date: launchDate,
-            deadline: deadline,
-            duration: duration,
-            labels: label,
-            color_labels: colors.value,
-            dependence: [],
-            progress: progress.value,
-            status: status.value,
-            payment_status: paymentStatus.value,
-            project: singleProject?.id
-          },
-          callback: () => {
-            if (id) {
-              dispatch(getSingleProject(+id));
-              dispatch(setModalMilestone(false));
-            }
+    dispatch(
+      postMilestoneCard({
+        data: {
+          milestone_name: title,
+          description: descriptionValue,
+          attachment: null,
+          responsible: [],
+          priority: priority.value,
+          start_date: launchDate,
+          deadline: deadline,
+          duration: duration,
+          labels: label,
+          color_labels: colors.value,
+          dependence: [],
+          progress: +progress.value,
+          status: status.value,
+          payment_status: paymentStatus.value,
+          project: singleProject?.id
+        },
+        callback: () => {
+          if (id) {
+            dispatch(getSingleProject(+id));
           }
-        })
-      );
-    }
+        }
+      })
+    );
+    dispatch(setSelectedModalVisible(false));
   };
   const [attachment, setAttachment] = useState('');
-  const [launchDate, setLaunchDate] = useState<any>('');
-  const [deadline, setDeadline] = useState<any>('');
-  const [label, setLabel] = useState<any>('');
-  const [duration, setDuration] = useState<any>('');
-  const [descriptionValue, setDescriptionValue] = useState<any>('');
+  const [launchDate, setLaunchDate] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [label, setLabel] = useState('');
+  const [duration, setDuration] = useState('');
+  const [descriptionValue, setDescriptionValue] = useState('');
 
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setDescriptionValue(event.target.value);
@@ -116,45 +89,18 @@ const ModalMilestone = () => {
     setEdit(!edit);
   };
   const onCancelClick = () => {
-    dispatch(setModalMilestone(false));
+    dispatch(setSelectedModalVisible(false));
   };
   useEffect(() => {
     setEdit(false);
     // setTitle('Title');
   }, []);
 
-  const onChangeDeadline: DatePickerProps['onChange'] = (date: Dayjs | null) => {
-    setFinishDate(date);
+  const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
+    setDeadline(dateString);
   };
-  const onChangeLaunch: DatePickerProps['onChange'] = (date: Dayjs | null) => {
-    setStartDate(date);
-  };
-
-  const [startDate, setStartDate] = useState<Dayjs | null>(dayjs(new Date()));
-  const [finishDate, setFinishDate] = useState<Dayjs | null>(dayjs(new Date()));
-  useEffect(() => {
-    if (startDate) {
-      setLaunchDate(startDate?.format('DD.MM.YYYY'));
-    }
-    if (finishDate) {
-      setDeadline(finishDate?.format('DD.MM.YYYY'));
-    }
-  }, [startDate, finishDate]);
-
-  const onDeleteMilestoneClick = () => {
-    if (singleMilestone) {
-      dispatch(
-        deleteMilestone({
-          id: singleMilestone?.id,
-          callback: () => {
-            if (id) {
-              dispatch(getSingleProject(+id));
-              dispatch(setModalMilestone(false));
-            }
-          }
-        })
-      );
-    }
+  const onChangeLaunch: DatePickerProps['onChange'] = (date, dateString) => {
+    setLaunchDate(dateString);
   };
 
   return (
@@ -168,27 +114,24 @@ const ModalMilestone = () => {
         })}>
         <div className={styles.container}>
           <div className={styles.milestone}>
-            {singleProject?.project_name}
-            <div className={styles.deleteContainer} onClick={onDeleteMilestoneClick}>
+            {projectTitle}
+            <div className={styles.deleteContainer}>
               <DeleteIcon />
               {'Delete from project'}
             </div>
           </div>
+
           <div className={styles.icon} onClick={onCancelClick}>
             <CloseModalIcon />
           </div>
           <div className={styles.titleContainer}>
-            {!edit ? (
-              <div className={styles.titleDiv}>{title}</div>
-            ) : (
-              <Input
-                value={title}
-                onChange={(value) => setTitle(value)}
-                className={styles.titleInput}
-                placeholder={'Title'}
-                disabled={!edit}
-              />
-            )}
+            <Input
+              value={title}
+              onChange={(value) => setTitle(value)}
+              className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
+              placeholder={'New milestone'}
+              disabled={!edit}
+            />
             {!edit ? (
               <div className={styles.editIcon} onClick={onEditClick}>
                 <EditTitleIcon />
@@ -229,20 +172,11 @@ const ModalMilestone = () => {
             <div className={styles.blockDownload}>
               <div className={styles.downloadBtn}>
                 {'Download all'}
-                <DownloadAllIcon />
+                <DownloadIcon />
               </div>
             </div>
             <div className={styles.commentContainer}>
               <div className={styles.title}>{'Comments'}</div>
-              <div className={styles.commentBlock}>
-                <div className={styles.commentHeader}>
-                  <div className={styles.commentAvatar}>{'NB'}</div>
-                  <div className={styles.commentOwner}>{'Nina Beta'}</div>
-                </div>
-                <div className={styles.textComment}>
-                  {'Не хватает всех документов. Просьба прикрепить еще документы'}
-                </div>
-              </div>
               <textarea
                 className={styles.commentInput}
                 placeholder={'Write comment'}
@@ -250,9 +184,10 @@ const ModalMilestone = () => {
                 onChange={onChangeComment}
               />
               <PuzzleButton
-                btnTitle={'Comment'}
-                btnType={PuzzleButtonTypes.TextButton}
-                btnClassName={styles.submitBtn}
+                title={'Comment'}
+                type={PuzzleButtonTypes.TextButton}
+                className={styles.submitBtn}
+                disabled={!comment}
               />
             </div>
           </div>
@@ -290,7 +225,6 @@ const ModalMilestone = () => {
               <div className={styles.startDateContainer}>
                 <div className={styles.title}>{'Start date'}</div>
                 <DatePicker
-                  value={dayjs(launchDate, 'DD.MM.YYYY')}
                   format="DD.MM.YYYY"
                   placeholder="Nothing selected"
                   suffixIcon={<CalendarIcon />}
@@ -303,7 +237,6 @@ const ModalMilestone = () => {
                 <div className={styles.startDateContainer}>
                   <div className={styles.title}>{'Deadline'}</div>
                   <DatePicker
-                    value={dayjs(deadline, 'DD.MM.YYYY')}
                     format="DD.MM.YYYY"
                     placeholder="Nothing selected"
                     suffixIcon={<CalendarIcon />}
@@ -432,4 +365,4 @@ const ModalMilestone = () => {
   );
 };
 
-export default ModalMilestone;
+export default ModalNewMilestone;

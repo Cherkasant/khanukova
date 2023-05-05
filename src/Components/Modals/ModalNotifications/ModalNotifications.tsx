@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 
-import Checkbox from '../Checkbox';
+import Checkbox from '../../Checkbox';
 
 import styles from '../ModalNotifications/ModalNotifications.module.css';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 
 type ModalNotificationsProps = {
   modal: boolean;
