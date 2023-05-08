@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux';
 
 import classNames from 'classnames';
 
-import { editResourses, getResourses, postResourses } from '../../Redux/Reducers/ResoursesReducer';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 
-import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
-import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
+import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import { editResourses, postResourses } from '../../../Redux/Reducers/ResoursesReducer';
 
 import styles from './ModalResourses.module.css';
 

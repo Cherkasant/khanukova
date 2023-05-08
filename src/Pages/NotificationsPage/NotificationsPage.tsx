@@ -1,10 +1,14 @@
 import { useState } from 'react';
 
+import classNames from 'classnames';
+
 import { SettingsIcon } from '../../Assets/Notification/SettingsIcon';
 import Title from '../../Components/Title';
 import { TabsNotifications } from '../../Components/constants/@types';
 import TabsListNotifications from '../../Components/TabsListNotifications';
 import CardsListNotifications from '../../Components/CardsListNotifications';
+
+import ModalNotifications from '../../Components/Modals/ModalNotifications';
 
 import styles from './NotificationsPage.module.css';
 
@@ -44,11 +48,20 @@ const NotificationsPage = () => {
     setActiveTab(tab);
   };
 
+  const [activeModal, setActiveModal] = useState(false);
+  const onSettingsClick = () => {
+    setActiveModal(true);
+  };
+
+  const onScreenClick = () => {
+    setActiveModal(false);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <Title name={'Notifications'} className={styles.title} />
-        <div className={styles.icon}>
+        <div className={styles.icon} onClick={onSettingsClick}>
           <SettingsIcon />
         </div>
       </div>
@@ -58,6 +71,14 @@ const NotificationsPage = () => {
 
       <div>
         <CardsListNotifications CardsListNotifications={MOCK_CARDSLISTNOTIFICATIONS} />
+      </div>
+
+      <div
+        className={classNames(styles.wrapModal, {
+          [styles.showModal]: activeModal
+        })}
+        onClick={onScreenClick}>
+        <ModalNotifications modal={activeModal} />
       </div>
     </div>
   );

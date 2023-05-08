@@ -306,6 +306,15 @@
     color: #a3a3a3 !important;
 }
 
+.datepicker > div input[title] {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #a3a3a3 !important;
+}
+
 .titleInput {
     background-color: #ffffff;
     padding-left: 0;
@@ -342,13 +351,10 @@
 
 .titleContainer {
     display: flex;
-    position: relative;
 }
 
 .editIcon {
-    position: absolute;
-    top: 25px;
-    left: 45px;
+    margin-top: 20px;
 }
 
 .editIcon:hover {
@@ -447,4 +453,13 @@
     opacity: 1;
     visibility: visible;
     transition: all 0.7s;
+}
+
+.titleDiv {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1258ca;
 }

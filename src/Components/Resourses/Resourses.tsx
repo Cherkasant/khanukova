@@ -10,13 +10,13 @@ import {
   setstatusDeleteResourses,
   setstatusEditResourses
 } from '../../Redux/Reducers/ResoursesReducer';
+
 import resoursesSelectors from '../../Redux/Selectors/resoursesSelectors';
 import { ResoursesDataType } from '../../Redux/Types/Resourses';
 import { DeleteResoursesIcon } from '../../Assets/icons/DeleteResoursesIcon';
-
 import { Edit } from '../../Assets/icons/Edit';
-import ModalResourses from '../ModalResourses';
 import Loader from '../Loader';
+import ModalResourses from '../Modals/ModalResourses';
 
 import styles from './Resourses.module.css';
 

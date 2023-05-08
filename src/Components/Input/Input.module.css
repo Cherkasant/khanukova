@@ -5,10 +5,9 @@
 }
 .input {
     width: 500px;
-    height: 60px;
+    height: 54px;
     border: 1px solid #d0d0d0;
     border-radius: 10px;
-    font-family: 'Inter';
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -49,7 +48,6 @@
 .input:focus::placeholder {
     position: absolute;
     top: 2px;
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -58,7 +56,6 @@
 }
 
 .input::placeholder {
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;

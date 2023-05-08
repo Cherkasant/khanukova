@@ -1,6 +1,9 @@
 import classNames from 'classnames';
+
 import React, { useEffect, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
 import { useParams } from 'react-router';
 
 import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
@@ -12,25 +15,30 @@ import { requestInProgressArray, requestOpenedArray } from '../../Components/Cli
 import Documents from '../../Components/Documents';
 import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 import Input from '../../Components/Input';
-import ModalEcase from '../../Components/ModalEcase';
-import NewTask from '../../Components/ModalNewTask';
-import ModalRequest from '../../Components/ModalRequest';
+import ModalEcase from '../../Components/Modals/ModalEcase';
+import ModalMilestone from '../../Components/Modals/ModalMilestone';
+import ModalNewMilestone from '../../Components/Modals/ModalNewMilestone';
+import ModalNewSubTask from '../../Components/Modals/ModalNewSubTask';
+import ModalNewTask from '../../Components/Modals/ModalNewTask';
+import ModalRequest from '../../Components/Modals/ModalRequest';
+import ModalSubTask from '../../Components/Modals/ModalSubTask';
+import ModalTask from '../../Components/Modals/ModalTask';
 import Resourses from '../../Components/Resourses';
 import Table from '../../Components/Table';
 import Tab from '../../Components/Tabs';
 import { Tabs } from '../../Components/constants/@types';
 import {
   getAllMilestones,
-  getAllTasks,
+  getAllProjects,
   getSingleProject,
+  patchProject,
   setFilterVisible,
-  setSelectedModalVisible,
-  setTitleTask
+  setProjectTitle,
+  setSelectedModalVisible
 } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
 
 import styles from './SingleProject.module.css';
-
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
@@ -57,7 +65,7 @@ const SingleProject = () => {
   const [addItem, setAddItem] = useState(false);
   const onAddItemClick = () => {
     if (singleProject) {
-      dispatch(setTitleTask(singleProject.project_name));
+      dispatch(setProjectTitle(singleProject.project_name));
       setAddItem(!addItem);
       dispatch(setSelectedModalVisible(true));
     }
@@ -73,9 +81,13 @@ const SingleProject = () => {
     if (id) {
       dispatch(getSingleProject(+id));
       dispatch(getAllMilestones(+id));
-      dispatch(getAllTasks(1));
     }
   }, [id]);
+  useEffect(() => {
+    if (singleProject) {
+      setTitle(singleProject?.project_name);
+    }
+  }, [singleProject]);
 
   const [title, setTitle] = useState('');
   const [edit, setEdit] = useState(false);
@@ -85,7 +97,18 @@ const SingleProject = () => {
 
   const onChangeKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      dispatch(setTitleTask(title));
+      dispatch(
+        patchProject({
+          id: singleProject?.id,
+          data: { project_name: title },
+          callback: () => {
+            if (id) {
+              dispatch(getSingleProject(+id));
+              dispatch(getAllProjects());
+            }
+          }
+        })
+      );
       setEdit(!edit);
     }
   };
@@ -102,7 +125,7 @@ const SingleProject = () => {
               {'Please enter a project name and press Enter to get started'}
             </div>
             <Input
-              value={singleProject?.project_name}
+              value={title}
               onChange={(value) => setTitle(value)}
               onKeyDown={onChangeKeyDown}
               className={styles.title}
@@ -135,7 +158,7 @@ const SingleProject = () => {
           </div>
         </div>
       ) : null}
-      {!isSaveClicked && activeTab === Tabs.Planning ? (
+      {singleProject?.milestone_data.length === 0 && activeTab === Tabs.Planning ? (
         <div className={styles.bottomContainer}>
           <div
             className={classNames(styles.milestoneButton, {
@@ -147,7 +170,7 @@ const SingleProject = () => {
           </div>
         </div>
       ) : null}
-      {isSaveClicked && activeTab === Tabs.Planning ? <Table /> : null}
+      {isSaveClicked && activeTab === Tabs.Planning && singleProject?.milestone_data.length !== 0 ? <Table /> : null}
       <FilterProjectScreen />
 
       {activeTab === Tabs.ClientsRequests ? (
@@ -166,9 +189,14 @@ const SingleProject = () => {
       ) : null}
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
       {activeTab === Tabs.Documents ? <Documents /> : null}
-      <NewTask />
+      <ModalNewMilestone />
+      <ModalNewTask />
+      <ModalNewSubTask />
       <ModalEcase />
       <ModalRequest />
+      <ModalMilestone />
+      <ModalTask />
+      <ModalSubTask />
     </div>
   );
 };

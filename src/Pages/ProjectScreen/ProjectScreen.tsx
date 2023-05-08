@@ -13,9 +13,10 @@ import Documents from '../../Components/Documents';
 import Events from '../../Components/Events';
 import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 import Input from '../../Components/Input';
-import ModalEcase from '../../Components/ModalEcase';
-import NewTask from '../../Components/ModalNewTask';
-import ModalRequest from '../../Components/ModalRequest';
+import ModalEcase from '../../Components/Modals/ModalEcase';
+import ModalNewMilestone from '../../Components/Modals/ModalNewMilestone';
+import ModalNewTask from '../../Components/Modals/ModalNewTask';
+import ModalRequest from '../../Components/Modals/ModalRequest';
 import Resourses from '../../Components/Resourses';
 import Table from '../../Components/Table';
 import Tab from '../../Components/Tabs';
@@ -24,7 +25,6 @@ import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Re
 import postSelector from '../../Redux/Selectors/postSelector';
 
 import styles from './ProjectScreen.module.css';
-
 
 const TABS_NAMES = [
   { name: 'Planning', key: Tabs.Planning },
@@ -41,7 +41,7 @@ const ProjectScreen = () => {
     dispatch(setFilterVisible(true));
   };
   const isSaveClicked = useSelector(postSelector.getTask);
-  const projectTitle = useSelector(postSelector.getTitleMilestone);
+  const projectTitle = useSelector(postSelector.getProjectTitle);
   const projectId = useSelector(postSelector.getProjectId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -162,7 +162,8 @@ const ProjectScreen = () => {
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
       {activeTab === Tabs.Documents ? <Documents /> : null}
       {activeTab === Tabs.Events ? <Events /> : null}
-      <NewTask />
+      <ModalNewMilestone />
+      <ModalNewTask />
       <ModalEcase />
       <ModalRequest />
     </div>

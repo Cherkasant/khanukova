@@ -1,0 +1,49 @@
+.container {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.label {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #212121;
+}
+
+.icon {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.blue {
+    background-color: #1258ca;
+}
+
+.lime {
+    background-color: #16ca12;
+}
+
+.green {
+    background-color: #0f8622;
+}
+
+.orange {
+    background-color: #ca8012;
+}
+
+.pink {
+    background-color: #ca12c3;
+}
+
+.purple {
+    background-color: #a27cf2;
+}
+
+.yellow {
+    background-color: #ddd625;
+}

@@ -1,58 +1,128 @@
 .container {
-    width: 400px;
-    height: 350px;
-    background: #ffffff;
-    box-shadow: 0 5px 20px rgba(182, 191, 208, 0.15);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
+  box-sizing: border-box;
+  width: 360px;
+  background: #ffffff;
+  box-shadow: 0 5px 20px rgba(182, 191, 208, 0.15);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
 .title {
-    width: 330px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 31px;
-    color: #0E4298;
-    margin: 35px 130px 0 35px;
-    padding-bottom: 20px;
-    display: flex;
-    align-items: flex-start;
-    border-bottom: 1px solid #1258CA;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 31px;
+  color: #0e4298;
+  display: flex;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #1258ca;
+  justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 .projectContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin: 30px 35px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+  justify-content: center;
 }
 
 .task {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .taskName {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #212121;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #212121;
 }
 
 .taskProgress {
-    width: 150px;
-    height: 50px;
-    background: #f3f3f3;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 29px;
-    color: #212121;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 150px;
+  height: 50px;
+  background: #f3f3f3;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #212121;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconEdit {
+  position: relative;
+}
+
+.iconEdit:hover {
+  cursor: pointer;
+}
+
+.buttonContainer {
+  position: absolute;
+  transform: translate(-120px, -2px);
+  background: #ecf0f8;
+  backdrop-filter: blur(2px);
+  border-radius: 6px;
+}
+
+.dropdown_container {
+  position: relative;
+}
+
+.dropdown_menu {
+  position: absolute;
+  transform: translateY(-2px);
+  width: 100%;
+  background: #ecf0f8;
+}
+
+.dropdown_item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 13px;
+  cursor: pointer;
+}
+
+.dropdown_item:hover {
+  background: #cfd9ef;
+}
+
+.dropdown_item:focus {
+  background: #cfd9ef;
+}
+
+.dropdown_item:active {
+  background: #b0c0e0;
+}
+
+.btnProject {
+  box-sizing: border-box;
+  width: 146px;
+  height: 40px;
+  padding: 8px 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #212121;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnProject:hover {
+  cursor: pointer;
+  background: #b0c0e0;
 }
