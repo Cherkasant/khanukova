@@ -9,6 +9,7 @@ import {
   SignInUserData
 } from '../Types/auth';
 import { CompanyListData } from '../Types/profile';
+import { ResoursesType, ResoursesTypePayload } from '../Types/Resourses';
 import { MilestoneModalType, ProjectData, SubTaskModalType, TaskModalType } from '../Types/tasks';
 
 const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' });
@@ -88,6 +89,7 @@ const getECaseList = (token: string) => {
     }
   );
 };
+
 const getUserName = (token: string) => {
   return API.get(
     '/auth/users/me/',
@@ -123,6 +125,37 @@ const getGeneratePassword = (token: string) => {
   return API.get('/code/', {}, { headers: { Authorization: `JWT ${token}` } });
 };
 
+const postResourses = (token: string, data: ResoursesType, id: string) => {
+  return API.post(`/project/resource/?project=${id}`, data, {
+    headers: { Authorization: `JWT ${token}` }
+  });
+};
+
+const getResourses = (token: string, id: string) => {
+  return API.get(
+    `/project/resource/?project=${id}`,
+    {},
+    {
+      headers: { Authorization: `JWT ${token}` }
+    }
+  );
+};
+
+const editResourses = (token: string, data: ResoursesType, id: string, idResourses: string) => {
+  return API.patch(`/project/resource/${idResourses}/?project=${id}`, data, {
+    headers: { Authorization: `JWT ${token}` }
+  });
+};
+
+const deleteResourses = (token: string, id: string, idResourses: string) => {
+  return API.delete(
+    `/project/resource/${idResourses}/?project=${id}`,
+    {},
+    {
+      headers: { Authorization: `JWT ${token}` }
+    }
+  );
+};
 const postSubTask = (token: string, subTask: SubTaskModalType) => {
   return API.post('/project/sub-task/', subTask, { headers: { Authorization: `JWT ${token}` } });
 };
@@ -180,6 +213,10 @@ export default {
   getAllMilestones,
   getAllTasks,
   getGeneratePassword,
+  postResourses,
+  getResourses,
+  editResourses,
+  deleteResourses,
   postTask,
   postSubTask,
   deleteMilestone,

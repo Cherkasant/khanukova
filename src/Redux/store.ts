@@ -5,11 +5,12 @@ import authReducer from './Reducers/authReducer';
 import postsReducer from './Reducers/postReducer';
 import profileReducer from './Reducers/profileReducer';
 import { rootSaga } from './Sagas/rootSaga';
+import resoursesReducer from './Reducers/ResoursesReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: { authReducer, postsReducer, profileReducer },
+  reducer: { authReducer, postsReducer, profileReducer, resoursesReducer },
   middleware: [sagaMiddleware]
 });
 sagaMiddleware.run(rootSaga);

@@ -1,7 +1,27 @@
-.wrap {
+.wrapTitle {
   padding-top: 40px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+}
+
+.wrapTotal {
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 52vh;
+  overflow: auto;
+}
+
+.loaderWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 52vh;
 }
 
 .wrapModal {
@@ -33,7 +53,7 @@
 }
 
 .inner {
-  margin-bottom: 60px;
+  height: fit-content;
 }
 
 .bodyItem {
@@ -52,7 +72,6 @@
   color: #a3a3a3;
   margin-bottom: 20px;
   cursor: pointer;
-  position: absolute;
 }
 
 .total {
@@ -62,6 +81,18 @@
   font-size: 20px;
   line-height: 24px;
   color: #212121;
+}
+
+.iconsDelete {
+  position: absolute;
+  left: 75%;
+  top: 0;
+  cursor: pointer;
+}
+
+.iconsDelete svg {
+  width: 24px;
+  height: 24px;
 }
 
 .iconsEdit {
