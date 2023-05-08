@@ -7,10 +7,7 @@
   "bracketSameLine": true,
   "printWidth": 120,
   "jsxBracketSameLine": true,
-  "importOrder": [
-    "^components/(.*)$",
-    "^[./]"
-  ],
+  "importOrder": ["^components/(.*)$", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

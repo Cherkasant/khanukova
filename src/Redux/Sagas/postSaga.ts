@@ -55,7 +55,7 @@ function* postProjectTitleWorker(action: PayloadAction<ProjectDataPayload>) {
 function* getAllProjectsWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getAllProjects);
   if (ok && data) {
-    yield put(setAllProjects(data.results));
+    yield put(setAllProjects(data));
   } else {
     console.warn('Error while getting all projects', problem);
   }
@@ -73,7 +73,7 @@ function* getSingleProjectWorker(action: PayloadAction<number>) {
 function* getAllMilestonesWorker(action: PayloadAction<number>) {
   const { ok, data, problem } = yield callCheckingAuth(API.getAllMilestones, action.payload);
   if (ok && data) {
-    yield put(setAllMilestones(data.results));
+    yield put(setAllMilestones(data));
   } else {
     console.warn('Error while getting all projects', problem);
   }
@@ -82,7 +82,7 @@ function* getAllMilestonesWorker(action: PayloadAction<number>) {
 function* getAllTasksWorker(action: PayloadAction<number>) {
   const { ok, data, problem } = yield callCheckingAuth(API.getAllTasks, action.payload);
   if (ok && data) {
-    console.log(data.results);
+    console.log(data);
   } else {
     console.warn('Error while getting all projects', problem);
   }

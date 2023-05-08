@@ -1,85 +1,99 @@
 .wrap {
-    transform: translateX(1500px);
-    transition: all 0.7s;
-    position: absolute;
-    top: 54px;
-    right: 0;
-    width: 380px;
-    height: calc(100vh - 150px);
-    background-color: #ffffff;
-    padding: 65px 37px 30px 30px;
-    text-align: start;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  transform: translateX(1500px);
+  transition: all 0.7s;
+  position: absolute;
+  top: 54px;
+  right: 0;
+  width: 380px;
+  height: calc(100vh - 150px);
+  background-color: #ffffff;
+  padding: 65px 37px 30px 30px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .item {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .title {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 140%;
-    color: #212121;
-    margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  color: #212121;
+  margin-bottom: 10px;
 }
 
 .input {
-    outline: none;
-    width: 89%;
-    padding: 11px 20px;
-    background-color: transparent;
-    border: 1px solid #4270a7;
-    border-radius: 10px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 140%;
-    color: #212121;
+  outline: none;
+  width: 89%;
+  padding: 11px 20px;
+  background-color: transparent;
+  border: 1px solid #4270a7;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #212121;
 }
 
 .input:focus {
-    background-color: #f4f8fe;
+  background-color: #f4f8fe;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 .buttonsContainer {
-    display: flex;
-    justify-content: end;
-    gap: 9px;
+  display: flex;
+  justify-content: end;
+  gap: 9px;
 }
 
 .cancelBtn {
-    width: 147px;
-    height: 40px;
-    background: none;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #a3a3a3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 147px;
+  height: 40px;
+  background: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #a3a3a3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .saveBtn {
-    width: 147px;
-    height: 40px;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 147px;
+  height: 40px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon {
-    cursor: pointer;
-    position: absolute;
-    top: 32px;
-    right: 28px;
+  cursor: pointer;
+  position: absolute;
+  top: 32px;
+  right: 28px;
 }
 
 .activeModal {
-    transform: translateY(0);
-    transition: all 0.7s;
+  transform: translateY(0);
+  transition: all 0.7s;
 }
 
+.disabled {
+  background-color: #f4f8fe;
+  color: #a3a3a3;
+}

@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 import classNames from 'classnames';
+
+import { editResourses, getResourses, postResourses } from '../../Redux/Reducers/ResoursesReducer';
 
 import { CloseModalIcon } from '../../Assets/icons/CloseModalIcon';
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
@@ -26,28 +30,52 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
   btnAddNewRef,
   btnEditRef
 }) => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement>(null);
   const [positionsValue, setPositionsValue] = useState('');
   const [projectHoursValue, setProjectHoursValue] = useState('');
   const [rateHourValue, setRateHourValue] = useState('');
-  const [budgetValue, setBudgetValue] = useState('');
   const closeModal = () => {
     setPositionsValue('');
     setProjectHoursValue('');
     setRateHourValue('');
-    setBudgetValue('');
   };
+  const saveResoursesHandler = () => {
+    id &&
+      dispatch(
+        postResourses({
+          data: { position: positionsValue, time: Number(projectHoursValue), rate: Number(rateHourValue) },
+          id
+        })
+      );
+    setModal(false);
+    closeModal();
+  };
+
+  const editResoursesHandler = () => {
+    id &&
+      dispatch(
+        editResourses({
+          data: { position: positionsValue, time: Number(projectHoursValue), rate: Number(rateHourValue) },
+          id,
+          idResourses: data.id
+        })
+      );
+    setEditClick(false);
+    setModal(false);
+    closeModal();
+  };
+
   useEffect(() => {
     if (editClick) {
-      setPositionsValue(data.positions);
-      setProjectHoursValue(data.projecthours);
-      setRateHourValue(data.rateHour);
-      setBudgetValue(data.budget);
+      setPositionsValue(data.position);
+      setProjectHoursValue(data.time);
+      setRateHourValue(data.rate);
     } else {
       setPositionsValue('');
       setProjectHoursValue('');
       setRateHourValue('');
-      setBudgetValue('');
     }
   }, [editClick]);
 
@@ -86,8 +114,9 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
         <div className={styles.item}>
           <div className={styles.title}>Project involment-hours,h</div>
           <input
+            min="1"
             value={projectHoursValue}
-            type="text"
+            type="number"
             className={styles.input}
             onChange={(e) => setProjectHoursValue(e.target.value)}
           />
@@ -95,8 +124,10 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
         <div className={styles.item}>
           <div className={styles.title}>Rate per hour, h</div>
           <input
+            max="999999"
+            min="1"
             value={rateHourValue}
-            type="text"
+            type="number"
             className={styles.input}
             onChange={(e) => setRateHourValue(e.target.value)}
           />
@@ -104,10 +135,10 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
         <div className={styles.item}>
           <div className={styles.title}>Budget</div>
           <input
-            value={budgetValue}
-            type="text"
-            className={styles.input}
-            onChange={(e) => setBudgetValue(e.target.value)}
+            disabled
+            value={projectHoursValue && rateHourValue ? +projectHoursValue * +rateHourValue : ''}
+            type="string"
+            className={classNames(styles.input, { [styles.disabled]: true })}
           />
         </div>
       </div>
@@ -126,7 +157,7 @@ const ModalResourses: React.FC<ModalResoursesProps> = ({
           btnTitle={'Save'}
           btnType={PuzzleButtonTypes.TextButton}
           btnClassName={styles.saveBtn}
-          onClick={() => {}}
+          onClick={editClick ? editResoursesHandler : saveResoursesHandler}
         />
       </div>
       <div
