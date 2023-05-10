@@ -85,7 +85,7 @@ function* postProjectTitleWorker(action: PayloadAction<ProjectDataPayload>) {
 function* getAllProjectsWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getAllProjects);
   if (ok && data) {
-    yield put(setAllProjects(data));
+    yield put(setAllProjects(data.results));
   } else {
     console.warn('Error while getting all projects', problem);
   }
@@ -116,7 +116,6 @@ function* postTaskWorker(action: PayloadAction<TaskDataPayload>) {
   } = action.payload;
   const { ok, data, problem } = yield callCheckingAuth(API.postTask, task);
   if (ok && data) {
-    console.log(data);
     callback();
   } else {
     console.warn('Error while posting task', problem);

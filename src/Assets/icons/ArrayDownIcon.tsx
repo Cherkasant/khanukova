@@ -1,7 +1,7 @@
-export const ArrayDownIcon = ({ width = '10', height = '7' }) => {
+export const ArrayDownIcon = () => {
   return (
-    <svg width={width} height={height} viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 0.5L5 5.5L1 0.5" stroke="#4270A7" strokeLinecap="round" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 9L12 15L6 9" stroke="#1258CA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };

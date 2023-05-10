@@ -2,14 +2,14 @@ import React from 'react';
 
 export const PaymentIcon = () => {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M5 18.333H35V27.6663C35 29.552 35 30.4948 34.4142 31.0806C33.8284 31.6663 32.8856 31.6663 31 31.6663H9C7.11438 31.6663 6.17157 31.6663 5.58579 31.0806C5 30.4948 5 29.552 5 27.6663V18.333Z"
-        fill="#F4F8FE"
+        d="M3.9986 12.3999H27.9986M6.39922 6.80005H25.5987C27.366 6.80005 28.7986 8.23162 28.7987 9.99889L28.7991 22.0014C28.7991 23.7687 27.3664 25.2 25.5991 25.2L6.39953 25.1998C4.63227 25.1998 3.19961 23.7672 3.19956 21.9999L3.19922 10.0001C3.19917 8.23279 4.63187 6.80005 6.39922 6.80005Z"
+        stroke="#1258CA"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <rect x="5" y="10" width="30" height="21.6667" rx="2" stroke="#1258CA" strokeWidth="1.2" />
-      <path d="M11.666 25H11.6827" stroke="#F4F8FE" strokeWidth="1.2" strokeLinecap="round" />
-      <path d="M5 18.333L35 18.333" stroke="#1258CA" strokeWidth="1.2" strokeLinecap="round" />
     </svg>
   );
 };

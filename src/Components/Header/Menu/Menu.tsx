@@ -18,14 +18,18 @@ import { PaymentIcon } from '../../../Assets/Header/Menu/PaymentIcon';
 import { ProjectIcon } from '../../../Assets/Header/Menu/ProjectIcon';
 import { AddNewProjectIcon } from '../../../Assets/icons/AddNewProjectIcon';
 import { ArrayDownIcon } from '../../../Assets/icons/ArrayDownIcon';
-import { LogOutIcon } from '../../../Assets/icons/LogOutIcon';
-import { ProjectFile } from '../../../Assets/icons/ProjectFile';
+import { LogOutIcon } from '../../../Assets/Header/Menu/LogOutIcon';
 import { PathNames } from '../../../Pages/Router/Router';
 import { logoutUser } from '../../../Redux/Reducers/authReducer';
 import { getAllProjects } from '../../../Redux/Reducers/postReducer';
 import authSelectors from '../../../Redux/Selectors/authSelectors';
 import postSelector from '../../../Redux/Selectors/postSelector';
 import { ProjectType } from '../../../Redux/Types/tasks';
+import { ActiveArrow } from '../../../Assets/Header/Menu/ActiveIcons/ActiveArrow';
+import { AddNewProjectActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/AddNewProjectActiveIcon';
+import { ProjectFileIcon } from '../../../Assets/Header/Menu/ProjectFileIcon';
+
+import { ActiveProjectFile } from '../../../Assets/Header/Menu/ActiveIcons/ActiveProjectFile';
 
 import styles from './Menu.module.css';
 
@@ -35,6 +39,9 @@ const UserMenu = () => {
   const navigate = useNavigate();
   const isLoggedIn = useSelector(authSelectors.getLoggedIn);
   const allProjects = useSelector(postSelector.getAllProjects);
+
+  const [isActiveProject, setIsActiveProject] = useState('');
+
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getAllProjects());
@@ -65,6 +72,7 @@ const UserMenu = () => {
       icon: <ProjectIcon />,
       link: PathNames.Home,
       button: <ArrayDownIcon />,
+      activeArrow: <ActiveArrow />,
       active: true,
       activeIcon: <ProjectActiveIcon />
     },
@@ -74,7 +82,7 @@ const UserMenu = () => {
       link: PathNames.ProjectScreen,
       active: isOpened,
       projects: allProjects,
-      activeIcon: <AddNewProjectIcon />
+      activeIcon: <AddNewProjectActiveIcon />
     },
     { name: 'Library', icon: <LibraryIcon />, link: '', activeIcon: <LibraryActiveIcon /> },
     { name: 'Payments', icon: <PaymentIcon />, link: PathNames.Payments, activeIcon: <PaymentsActiveIcon /> },
@@ -90,25 +98,38 @@ const UserMenu = () => {
     <>
       <div className={styles.container}>
         <div>
-          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon }) => (
+          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon, activeArrow }) => (
             <NavLink
               key={name}
               to={link}
               className={classNames(
                 styles.navButton,
                 {
-                  [styles.activeNavButton]: pathname === link
+                  [styles.activeNavButton]: pathname === link && pathname !== PathNames.ProjectScreen
                 },
+                { [styles.addProject]: name === 'New project' },
+                { [styles.activeAddProject]: name === 'New project' && pathname === PathNames.ProjectScreen },
                 { [styles.list]: active === false },
                 {
                   [styles.projectsMargin]: name === 'Projects' && isOpened
                 }
               )}>
-              <div>
-                <div className={classNames(styles.div)}>
+              <div className={styles.position}>
+                <div
+                  className={classNames(
+                    styles.div,
+                    {
+                      [styles.activeColor]: pathname === link && pathname !== PathNames.ProjectScreen
+                    },
+                    {
+                      [styles.hoverAddProject]: name === 'New project'
+                    }
+                  )}>
                   {pathname === link ? activeIcon : icon}
                   {name}
-                  <div onClick={onArrowClick}>{button}</div>
+                  <div onClick={onArrowClick} className={styles.arrowContainer}>
+                    {pathname === link ? activeArrow : button}
+                  </div>
                 </div>
                 {projects ? (
                   <div className={styles.projectList}>
@@ -116,12 +137,15 @@ const UserMenu = () => {
                       return (
                         <div
                           key={project.id}
-                          className={styles.projectBlock}
+                          className={classNames(styles.projectBlock, {
+                            [styles.activeProject]: isActiveProject === project.project_name
+                          })}
                           onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                             e.preventDefault();
                             navigate(`/project/${project.id}`);
+                            setIsActiveProject(project.project_name);
                           }}>
-                          <ProjectFile />
+                          {isActiveProject === project.project_name ? <ActiveProjectFile /> : <ProjectFileIcon />}
                           {project.project_name}
                         </div>
                       );
