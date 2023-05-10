@@ -58,7 +58,7 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
         <div className={styles.containerCategory}>
           {CATEGORIES.map(({ name, icon, description, isHead }) => {
             return (
-              <div className={styles.categories}>
+              <div key={name} className={styles.categories}>
                 {isHead ? (
                   <div className={styles.category}>
                     <div className={styles.checkbox}>{icon}</div>

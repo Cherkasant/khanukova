@@ -21,7 +21,7 @@ function* getHeadCompanyListWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getHeadCompanyList);
   if (ok && data) {
     console.log(data);
-    // yield put(setHeadCompanyListReducer(data.results[0]));
+    yield put(setHeadCompanyListReducer(data));
   } else {
     console.warn('Authentication credentials were not provided', problem);
   }
@@ -39,8 +39,7 @@ function* getPersonalInfoListWorker() {
 function* getECaseListWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getECaseList);
   if (ok && data) {
-    console.log(data);
-    // yield put(setECaseListReducer(data.results[0]));
+    yield put(setECaseListReducer(data));
   } else {
     console.warn('Authentication credentials were not provided', problem);
   }

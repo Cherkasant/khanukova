@@ -32,8 +32,10 @@ const ModalEcase = () => {
   const ECaseList = useSelector(profileSelectors.getECaseList);
 
   useEffect(() => {
-    dispatch(getECaseListReducer());
-  });
+    if (!ECaseList) {
+      dispatch(getECaseListReducer());
+    }
+  }, [ECaseList]);
 
   const [descriptionValue, setDescriptionValue] = useState('');
   const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {

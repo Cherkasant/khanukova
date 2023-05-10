@@ -1,16 +1,18 @@
 .container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 222px;
-  background-color: white;
-  height: calc(100vh - 100px);
+  background: #ffffff;
+  height: calc(100vh - 54px);
   padding: 30px 20px 40px 20px;
   justify-content: space-between;
 }
 
 .navButton {
+  position: relative;
   display: flex;
-  margin-bottom: 41px;
+  margin-bottom: 15px;
   text-decoration: none;
   align-items: center;
   font-family: 'Inter';
@@ -22,57 +24,54 @@
   gap: 25px;
 }
 
-/*.navButton:hover {*/
-/*    color: #0E4298;*/
-/*}*/
+.navButton:hover,
+.navButton:focus {
+  background: #eef5ff;
+  border-radius: 10px;
+}
 
 .navButton:active {
   color: #727171;
 }
 
-/*.activeNavButton > div > div:nth-child(1) path {*/
-/*  stroke: #f4f8fe;*/
-/*}*/
+.arrowContainer {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
 
-/*.activeNavButton path {*/
-/*  fill: #1258ca;*/
-/*}*/
+.activeNavButton,
+.activeNavButton:hover,
+.activeNavButton:focus {
+  background: #1258ca;
+  border-radius: 10px;
+}
 
-/*.activeNavButton circle {*/
-/*  fill: #1258ca;*/
-/*}*/
+.addProject {
+  color: #a3a3a3;
+  background: #ffffff;
+}
 
-/*.activeNavButton rect {*/
-/*  stroke: #1258ca;*/
-/*}*/
+.addProject:hover,
+.addProject:focus {
+  background: #ffffff;
+}
+
+.activeColor {
+  color: #ffffff;
+}
 
 .div {
+  padding: 10px;
   display: flex;
   justify-content: start;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
-  color: #212121;
   font-family: 'Inter';
   font-style: normal;
-}
-
-/*.div:hover path {*/
-/*  stroke: #1258ca;*/
-/*}*/
-
-.div:hover rect {
-  stroke: #1258ca;
-}
-
-.div:hover circle {
-  stroke: #1258ca;
-}
-
-.div:hover {
-  color: #0e4298;
 }
 
 .list {
@@ -107,12 +106,17 @@
 
 .logoutContainer {
   display: flex;
-  gap: 28px;
+  gap: 15px;
+  justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
-.logoutContainer:hover {
+.logoutContainer:hover,
+.logoutContainer:focus {
   cursor: pointer;
+  background: #eef5ff;
+  border-radius: 10px;
 }
 
 .logout {
@@ -135,16 +139,30 @@
 }
 
 .projectBlock {
+  padding-left: 10px;
   display: flex;
   justify-content: start;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
 }
 
+.projectBlock:hover,
 .projectBlock:hover path {
-  stroke: #1258ca;
+  color: #879fd0;
+  stroke: #879fd0;
 }
 
-.projectBlock:hover {
-  color: #0e4298;
+.activeProject {
+  color: #1258ca;
+}
+
+.activeAddProject,
+.activeAddProject:hover path {
+  color: #1258ca;
+}
+
+.hoverAddProject:hover,
+.hoverAddProject:hover path {
+  color: #879fd0;
+  stroke: #879fd0;
 }
