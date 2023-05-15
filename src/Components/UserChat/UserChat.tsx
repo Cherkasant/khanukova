@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { AvatarIcon } from '../../Assets/Header/AvatarIcon';
+import { AvatarIcon } from '../../Assets/Chat/AvatarIcon';
 
 import styles from './UserChat.module.css';
 
