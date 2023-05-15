@@ -1,5 +1,5 @@
 .container {
-  padding: 15px 34px 10px 53px;
+  padding: 15px 30px 10px 30px;
   background: #f4f8fe;
   height: 100%;
   width: 100%;
@@ -8,11 +8,9 @@
 .widgets {
   padding: 15px 34px 10px 53px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: start;
 }
 
-.btnAdd,
 .searchContainer {
   font-family: 'Inter';
   font-style: normal;
@@ -24,14 +22,15 @@
 
 .btnAdd {
   display: flex;
-  justify-content: start;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #1258ca;
+  justify-content: space-between;
   cursor: pointer;
   margin-bottom: 25px;
   padding-left: 53px;
-}
-
-.btnAdd:hover {
-  opacity: 0.8;
 }
 
 .searchContainer {
@@ -39,10 +38,17 @@
   position: relative;
 }
 
+.searchInput:hover,
+.searchInput:focus {
+  border: none;
+}
+
 .searchInput {
-  width: 270px;
+  width: 365px;
   height: 40px;
-  border-color: #1258ca;
+  background: #ffffff;
+  box-shadow: 0 0 30px rgba(18, 88, 202, 0.05);
+  border: none;
   border-radius: 25px;
 }
 
@@ -70,7 +76,7 @@
 
 .icon {
   position: absolute;
-  top: 13px;
+  top: 10px;
   right: 22px;
   cursor: pointer;
 }
@@ -93,4 +99,75 @@
   opacity: 1;
   visibility: visible;
   transition: all 0.7s;
+}
+
+.addNewContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sortContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rootSelect {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #212121;
+  background: #cfd9ef;
+}
+
+.sortSelector {
+  box-sizing: border-box;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  width: 215px;
+  height: 40px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #212121;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.sortDropDown {
+  position: absolute;
+  transform: translate(-10px, 35px);
+  width: 215px;
+  background: #cfd9ef;
+  box-shadow: 0 0 30px rgba(18, 88, 202, 0.05);
+  border-radius: 10px;
+}
+
+.sortItem {
+  display: flex;
+  gap: 8px;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 12px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #212121;
+}
+
+.sortItem:hover {
+  cursor: pointer;
+  background: #eef5ff;
+}
+
+.sortTitle {
+  position: absolute;
+  transform: translate(0, -30px);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #212121;
 }

@@ -1,12 +1,44 @@
 export const AvatarIcon = () => {
   return (
-    <svg width="36" height="37" viewBox="0 0 36 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="18" cy="18.9297" r="17.8248" fill="white" stroke="#1258CA" strokeWidth="0.350421" />
+    <svg width="144" height="154" viewBox="0 0 144 154" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g filter="url(#filter0_d_6234_15334)">
+        <circle cx="72" cy="72" r="52" fill="white" />
+        <circle cx="72" cy="72" r="50.5" stroke="#1258CA" strokeWidth="6" />
+      </g>
       <path
-        d="M20.6993 15.61C20.6993 17.1321 19.4666 18.3647 17.9445 18.3647C16.4224 18.3647 15.1898 17.1321 15.1898 15.61C15.1898 14.0878 16.4224 12.8552 17.9445 12.8552C19.4666 12.8552 20.6993 14.0878 20.6993 15.61ZM11.9255 23.7706C11.9255 23.415 12.0996 23.0659 12.4752 22.7192C12.8544 22.3693 13.4039 22.0573 14.0527 21.7974C15.351 21.2773 16.9188 21.0158 17.9445 21.0158C18.9703 21.0158 20.538 21.2773 21.8364 21.7974C22.4852 22.0573 23.0347 22.3693 23.4138 22.7192C23.7895 23.0659 23.9635 23.415 23.9635 23.7706V24.8932H11.9255V23.7706Z"
-        stroke="#4270A7"
-        strokeWidth="1.01899"
+        d="M48.8008 92.5715C48.8008 83.4472 56.4236 76.0506 72.0008 76.0506C87.5779 76.0506 95.2008 83.4472 95.2008 92.5715C95.2008 94.0231 94.1417 95.1998 92.8353 95.1998H51.1663C49.8598 95.1998 48.8008 94.0231 48.8008 92.5715Z"
+        stroke="#1258CA"
+        strokeWidth="6"
       />
+      <path
+        d="M80.7008 57.4998C80.7008 62.3047 76.8057 66.1998 72.0008 66.1998C67.1959 66.1998 63.3008 62.3047 63.3008 57.4998C63.3008 52.6949 67.1959 48.7998 72.0008 48.7998C76.8057 48.7998 80.7008 52.6949 80.7008 57.4998Z"
+        stroke="#1258CA"
+        strokeWidth="6"
+      />
+      <defs>
+        <filter
+          id="filter0_d_6234_15334"
+          x="-10"
+          y="-10"
+          width="164"
+          height="164"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset />
+          <feGaussianBlur stdDeviation="15" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.0705882 0 0 0 0 0.345098 0 0 0 0 0.792157 0 0 0 0.05 0" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_6234_15334" />
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_6234_15334" result="shape" />
+        </filter>
+      </defs>
     </svg>
   );
 };

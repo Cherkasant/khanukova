@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import classNames from 'classnames';
 
 import { useSelector } from 'react-redux';
 
-import { SearchIcon } from '../../Assets/icons/SearchIcon';
+import { SearchIcon } from '../../Assets/Home/SearchIcon';
 import CardsList from '../../Components/CardsList';
 import Input from '../../Components/Input';
 import Title from '../../Components/Title';
@@ -14,6 +14,14 @@ import { PathNames } from '../Router/Router';
 import ModalCloseProject from '../../Components/Modals/ModalCloseProject';
 
 import postSelector from '../../Redux/Selectors/postSelector';
+
+import { AddNewProjectIcon } from '../../Assets/Home/AddNewProjectIcon';
+
+import { ArrowDropDownIcon } from '../../Assets/Table/ArrowDropDownIcon';
+
+import { Close } from '../../Assets/Table/Close';
+
+import { SortIcon } from '../../Assets/Home/SortIcon';
 
 import styles from './Home.module.css';
 
@@ -35,6 +43,12 @@ const MOCK_CARDS_LIST = [
     paid: '12500$'
   }
 ];
+
+const SORT_LIST = [
+  { value: 'Alphabetical', label: 'Alphabetical', icon: <SortIcon /> },
+  { value: 'Date created', label: 'Date created', icon: <SortIcon /> },
+  { value: 'Status', label: 'Status', icon: <SortIcon /> }
+];
 const Home = () => {
   const activeModal = useSelector(postSelector.getCloseProjectModal);
   const navigate = useNavigate();
@@ -42,19 +56,55 @@ const Home = () => {
   const onChange = (value: string) => {
     setInputSearch(value);
   };
+  const [sort, setSort] = useState(false);
+  const [typeSort, setTypeSort] = useState('Alphabetical');
+  const [clicked, setClicked] = useState(false);
+  const onSortSelectClick = () => {
+    setSort(!sort);
+  };
+  const onSortItemClick = (value: string) => {
+    setTypeSort(value);
+    setClicked(true);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.widgets}>
         <Title name={'Projects'} className={styles.title} />
-        <div className={styles.searchContainer}>
-          <Input value={inputSearch} onChange={onChange} placeholder={'Project name'} className={styles.searchInput} />
-          <div className={styles.icon}>
-            <SearchIcon />
+      </div>
+      <div className={styles.btnAdd}>
+        <div className={styles.addNewContainer} onClick={() => navigate(PathNames.ProjectScreen)}>
+          <AddNewProjectIcon />
+          {'Add new'}
+        </div>
+        <div className={styles.sortContainer}>
+          <div className={styles.sortTitle}>{'Sort'}</div>
+          <div className={styles.sortSelector} onClick={onSortSelectClick}>
+            {typeSort}
+            {sort ? <Close /> : <ArrowDropDownIcon />}
+            {sort ? (
+              <div className={styles.sortDropDown}>
+                {SORT_LIST.map((el) => (
+                  <div key={el.value} className={styles.sortItem} onClick={() => onSortItemClick(el.value)}>
+                    {typeSort === el.value ? el.icon : null}
+                    {el.value}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          <div className={styles.searchContainer}>
+            <Input
+              value={inputSearch}
+              onChange={onChange}
+              placeholder={'Project name'}
+              className={styles.searchInput}
+            />
+            <div className={styles.icon}>
+              <SearchIcon />
+            </div>
           </div>
         </div>
-      </div>
-      <div className={styles.btnAdd} onClick={() => navigate(PathNames.ProjectScreen)}>
-        {'+Add new'}
       </div>
 
       <CardsList cardsList={MOCK_CARDS_LIST} />

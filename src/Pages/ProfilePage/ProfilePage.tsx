@@ -1,5 +1,3 @@
-import { DatePickerProps } from 'antd';
-
 import classNames from 'classnames';
 
 import { useEffect, useMemo, useState } from 'react';
@@ -198,9 +196,11 @@ const ProfilePage = () => {
           <div className={styles.containerInfo}>
             <div className={styles.containerPhoto}>
               <h2 className={styles.subTitle}>Account photo</h2>
-              <img className={styles.photo} src={personalInfoList?.account_photo} alt={''} />
-              <div className={styles.description}>
-                Edit photo <PencilIcon />
+              <div className={styles.editContainer}>
+                <img className={styles.photo} src={personalInfoList?.account_photo} alt={''} />
+                <div className={styles.editIcon}>
+                  <PencilIcon />
+                </div>
               </div>
             </div>
 
