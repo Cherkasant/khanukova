@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
 
 import styles from '../CompanyProfile/CompanyProfile.module.css';
-import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
 import { CompanyList } from '../constants/@types';
+import { PencilIcon } from '../../Assets/Profile/PencilIcon';
 
 type CompanyProfileCardProps = {
-  CardType: { name: string; key: CompanyList; answers: string | undefined }
-}
+  CardType: { name: string; key: CompanyList; answers: string | undefined };
+};
 
 const CompanyProfileCard: FC<CompanyProfileCardProps> = ({ CardType }) => {
   const { key, answers } = CardType;
@@ -19,7 +19,7 @@ const CompanyProfileCard: FC<CompanyProfileCardProps> = ({ CardType }) => {
       {key}
       <textarea name={'text'} wrap={'soft'} className={styles.input} defaultValue={answers} disabled={edit} />
       <div className={styles.icon} onClick={onEditClick}>
-        <EditTitleIcon />
+        <PencilIcon />
       </div>
     </div>
   );

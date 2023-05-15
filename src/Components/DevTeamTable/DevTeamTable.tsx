@@ -121,7 +121,7 @@ const DevTeamTable = () => {
           </tr>
         ))}
       </thead>
-      <tbody {...getTableBodyProps()}>
+      <tbody {...getTableBodyProps()} className={styles.border}>
         {rows.map((row) => {
           prepareRow(row);
           return (

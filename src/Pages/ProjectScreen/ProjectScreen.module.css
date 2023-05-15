@@ -128,7 +128,16 @@
 }
 
 .icon {
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  padding: 4px;
   justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  box-shadow: 0 0 30px rgba(18, 88, 202, 0.05);
+  border-radius: 6px;
 }
 
 .button {

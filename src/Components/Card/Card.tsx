@@ -47,28 +47,30 @@ const Card: FC<CardProps> = ({ card, edit }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.title}>{projectName}</div>
-        <div className={styles.iconEdit} onClick={onEditProjectClick}>
-          <EditProjectIcon />
-          {showClose && isHead ? (
-            <div className={styles.buttonContainer}>
-              <div className={styles.dropdown_container}>
-                <div className={styles.btnProject} onClick={onCloseProjectClick}>
-                  {'Close a project'}
-                </div>
-                {onOpenDropdown ? (
-                  <div className={styles.dropdown_menu}>
-                    {ClOSEBUTTON_LIST.map((el) => (
-                      <div key={el.value} className={styles.dropdown_item} onClick={onDeleteClick}>
-                        {el.icon}
-                        {el.label}
-                      </div>
-                    ))}
+        {isHead ? (
+          <div className={styles.iconEdit} onClick={onEditProjectClick}>
+            <EditProjectIcon />
+            {showClose && isHead ? (
+              <div className={styles.buttonContainer}>
+                <div className={styles.dropdown_container}>
+                  <div className={styles.btnProject} onClick={onCloseProjectClick}>
+                    {'Close a project'}
                   </div>
-                ) : null}
+                  {onOpenDropdown ? (
+                    <div className={styles.dropdown_menu}>
+                      {ClOSEBUTTON_LIST.map((el) => (
+                        <div key={el.value} className={styles.dropdown_item} onClick={onDeleteClick}>
+                          {el.icon}
+                          {el.label}
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
-            </div>
-          ) : null}
-        </div>
+            ) : null}
+          </div>
+        ) : null}
       </div>
       <div className={styles.projectContainer}>
         <div className={styles.task}>

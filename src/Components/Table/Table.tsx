@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Column, useExpanded, useSortBy, useTable } from 'react-table';
 
 import { Close } from '../../Assets/Table/Close';
-import { AddNewTaskIcon } from '../../Assets/icons/AddNewTaskIcon';
-import { ArrowDropDownIcon } from '../../Assets/icons/ArrowDropDownIcon';
+import { AddNewTaskIcon } from '../../Assets/Table/AddNewTaskIcon';
+import { ArrowDropDownIcon } from '../../Assets/Table/ArrowDropDownIcon';
 import { RotateSortIcon } from '../../Assets/icons/RotateSortIcon';
 import { SortIcon } from '../../Assets/icons/SortIcon';
 import {
@@ -23,6 +23,10 @@ import {
 import postSelector from '../../Redux/Selectors/postSelector';
 import { SubTaskTypeTable, TaskTypeTable } from '../../Redux/Types/tasks';
 import { TableColumns } from '../constants/Table/TableData';
+import { AddNewSubTaskIcon } from '../../Assets/Table/AddNewSubTaskIcon';
+
+import { ArrowDropDownTaskIcon } from '../../Assets/Table/ArrowDropDownTaskIcon';
+import { CloseTask } from '../../Assets/Table/CloseTask';
 
 import styles from './Table.module.css';
 
@@ -128,9 +132,14 @@ const Table = () => {
                 [styles.paddingLeftSecond]: props.row.depth === 2
               }
             )}>
-            {props.row.canExpand ? (
+            {props.row.canExpand && props.row.depth === 0 ? (
               <span {...props.row.getToggleRowExpandedProps()}>
                 {props.row.isExpanded ? <Close /> : <ArrowDropDownIcon />}
+              </span>
+            ) : null}
+            {props.row.canExpand && props.row.depth === 1 ? (
+              <span {...props.row.getToggleRowExpandedProps()}>
+                {props.row.isExpanded ? <CloseTask /> : <ArrowDropDownTaskIcon />}
               </span>
             ) : null}
             <div
@@ -171,7 +180,7 @@ const Table = () => {
                   dispatch(setSubTaskModalVisible(true));
                 }
               }}>
-              <AddNewTaskIcon />
+              <AddNewSubTaskIcon />
             </div>
           ) : null}
         </div>

@@ -1,8 +1,10 @@
 .tableContainer {
-  border: 1px solid #c8c8c8;
   border-right: none;
   border-spacing: 0;
   width: 100%;
+  filter: drop-shadow(0px 4px 50px rgba(18, 88, 202, 0.08));
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .tableHeader {
@@ -16,7 +18,7 @@
   border-left: none;
   border-bottom: none;
   border-top: none;
-  background: #ffffff;
+  background: #7aa8f3;
   text-align: center;
   padding: 5px;
 }
@@ -30,9 +32,10 @@
   line-height: 17px;
   color: #000000;
   outline: none;
-  border: 1px solid #c8c8c8;
+  border: 1px solid #cfd9ef;
   border-left: none;
   border-bottom: none;
+  background: #ffffff;
 }
 
 .border {
@@ -140,14 +143,14 @@
 }
 
 .footer {
+  padding: 6px;
   display: flex;
-  justify-content: start;
+  gap: 4px;
   align-items: center;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: right;
-  color: #a3a3a3;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #1258ca;
 }
 
 .footer:hover {

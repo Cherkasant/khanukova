@@ -1,9 +1,11 @@
 .tableContainer {
-  border: 1px solid #c8c8c8;
   border-bottom: none;
   outline: none;
   border-spacing: 0;
   width: 100%;
+  filter: drop-shadow(0px 4px 50px rgba(18, 88, 202, 0.08));
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .tableHeader {
@@ -14,7 +16,7 @@
   color: #212121;
   border: none;
   border-bottom: 1px solid #c8c8c8;
-  background: #ffffff;
+  background: #7aa8f3;
 }
 
 .tableCell {
@@ -24,7 +26,8 @@
   line-height: 17px;
   color: #000000;
   border: none;
-  border-bottom: 1px solid #c8c8c8;
+  border-bottom: 0.5px solid #b0c0e0;
+  background: #ffffff;
 }
 
 .nameContainer {
