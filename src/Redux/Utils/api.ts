@@ -9,7 +9,7 @@ import {
   SignInUserData
 } from '../Types/auth';
 import { CompanyListData } from '../Types/profile';
-import { ResoursesType, ResoursesTypePayload } from '../Types/Resourses';
+import { ResoursesType } from '../Types/Resourses';
 import { MilestoneModalType, ProjectData, SubTaskModalType, TaskModalType } from '../Types/tasks';
 
 const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' });
@@ -190,6 +190,22 @@ const patchProject = (token: string, project_name: string, id: number) => {
   return API.patch(`/project/${id}/`, project_name, { headers: { Authorization: `JWT ${token}` } });
 };
 
+const getProjectComments = (token: string, id: number) => {
+  return API.get(`/project/comments/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
+
+const patchComment = (token: string, comment: string, id: number) => {
+  return API.patch(`/project/comments/${id}/`, comment, { headers: { Authorization: `JWT ${token}` } });
+};
+
+const deleteComment = (token: string, id: number) => {
+  return API.delete(`/project/comments/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
+
+const getAllProjectComments = (token: string) => {
+  return API.get('/project/comments/', {}, { headers: { Authorization: `JWT ${token}` } });
+};
+
 export default {
   registerUser,
   sendResetEmail,
@@ -228,5 +244,9 @@ export default {
   getSingleSubTask,
   patchSingleSubTask,
   deleteSubTask,
-  patchProject
+  patchProject,
+  getProjectComments,
+  patchComment,
+  deleteComment,
+  getAllProjectComments
 };

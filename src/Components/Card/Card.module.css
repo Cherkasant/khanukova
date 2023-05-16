@@ -82,7 +82,12 @@
   position: relative;
 }
 
+.dropdown_container:hover .dropdown_menu {
+  display: block;
+}
+
 .dropdown_menu {
+  display: none;
   position: absolute;
   transform: translateY(-2px);
   width: 100%;

@@ -56,16 +56,15 @@ const Card: FC<CardProps> = ({ card, edit }) => {
                   <div className={styles.btnProject} onClick={onCloseProjectClick}>
                     {'Close a project'}
                   </div>
-                  {onOpenDropdown ? (
-                    <div className={styles.dropdown_menu}>
-                      {ClOSEBUTTON_LIST.map((el) => (
-                        <div key={el.value} className={styles.dropdown_item} onClick={onDeleteClick}>
-                          {el.icon}
-                          {el.label}
-                        </div>
-                      ))}
-                    </div>
-                  ) : null}
+
+                  <div className={styles.dropdown_menu}>
+                    {ClOSEBUTTON_LIST.map((el) => (
+                      <div key={el.value} className={styles.dropdown_item} onClick={onDeleteClick}>
+                        {el.icon}
+                        {el.label}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ) : null}

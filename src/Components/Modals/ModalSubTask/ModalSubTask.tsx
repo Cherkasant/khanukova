@@ -3,7 +3,7 @@ import type { DatePickerProps } from 'antd';
 import { Cascader, DatePicker, Upload } from 'antd';
 import 'antd/README.md';
 import classNames from 'classnames';
-import { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -12,7 +12,7 @@ import { useParams } from 'react-router';
 
 import dayjs, { Dayjs } from 'dayjs';
 
-import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
+import { ArrowDropDownIcon } from '../../../Assets/Table/ArrowDropDownIcon';
 import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
@@ -25,6 +25,8 @@ import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/con
 import Input from '../../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../../constants/Modal/ModalData';
+
+import { Close } from '../../../Assets/Table/Close';
 
 import styles from './ModalSubTask.module.css';
 
@@ -273,8 +275,8 @@ const ModalSubTask = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -334,8 +336,8 @@ const ModalSubTask = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -349,8 +351,8 @@ const ModalSubTask = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -364,8 +366,8 @@ const ModalSubTask = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -379,8 +381,8 @@ const ModalSubTask = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   // menuClassName={styles.dropdownMenuStatus}
                 />
               </div>
@@ -394,8 +396,8 @@ const ModalSubTask = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                 />
               </div>
             </div>

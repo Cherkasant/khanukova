@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Dropdown from 'react-dropdown';
-import { Avatar, DatePickerProps } from 'antd';
-import { DatePicker, Space } from 'antd';
+import { DatePicker, DatePickerProps, Space } from 'antd';
 
 import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import Input from '../../Components/Input';
@@ -70,12 +69,10 @@ const ProfileDev = () => {
       <div className={styles.containerBlockWithBtn}>
         <div className={styles.containerInfo}>
           <div className={styles.containerPhoto}>
-            <h2 className={styles.subTitle}>Account photo</h2>
-            <div className={styles.photo}>
-              <Avatar />
-            </div>
-            <div className={styles.description}>
-              Edit photo <PencilIcon />
+            <h2 className={styles.subTitle}>{'Account photo'}</h2>
+            <div className={styles.photo}></div>
+            <div className={styles.editIcon}>
+              <PencilIcon />
             </div>
           </div>
 
