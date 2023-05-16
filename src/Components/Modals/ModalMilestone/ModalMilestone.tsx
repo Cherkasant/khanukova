@@ -1,9 +1,10 @@
 import type { DatePickerProps } from 'antd';
 
 import { Cascader, DatePicker, Upload } from 'antd';
+
 import 'antd/README.md';
 import classNames from 'classnames';
-import { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -12,9 +13,11 @@ import { useParams } from 'react-router';
 
 import dayjs, { Dayjs } from 'dayjs';
 
+import { Close } from '../../../Assets/Table/Close';
+
 import 'moment/locale/en-gb';
 
-import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
+import { ArrowDropDownIcon } from '../../../Assets/Table/ArrowDropDownIcon';
 import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
@@ -287,8 +290,8 @@ const ModalMilestone = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -348,8 +351,8 @@ const ModalMilestone = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -363,8 +366,8 @@ const ModalMilestone = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -378,8 +381,8 @@ const ModalMilestone = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -393,8 +396,8 @@ const ModalMilestone = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   // menuClassName={styles.dropdownMenuStatus}
                 />
               </div>
@@ -408,8 +411,8 @@ const ModalMilestone = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                 />
               </div>
             </div>

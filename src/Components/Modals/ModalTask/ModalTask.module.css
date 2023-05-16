@@ -146,6 +146,7 @@
 }
 
 .dropdownControl {
+    padding: 8px 10px;
     box-sizing: border-box;
     width: 305px;
     height: 40px;
@@ -159,8 +160,7 @@
     cursor: pointer;
     outline: none;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .dropdownPlaceholder {
