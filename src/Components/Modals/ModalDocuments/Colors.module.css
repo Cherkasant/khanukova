@@ -7,8 +7,8 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  top: 0;
   right: 0;
+  top: 4px;
 }
 
 .labelRed {

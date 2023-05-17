@@ -4,9 +4,19 @@
 }
 
 .addDoc {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  color: #a3a3a3;
+  background-color: #ffff;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #1258ca;
   cursor: pointer;
+  height: 56px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 4px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-left: 16px;
 }

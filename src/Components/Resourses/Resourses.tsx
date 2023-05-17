@@ -17,6 +17,7 @@ import { DeleteResoursesIcon } from '../../Assets/icons/DeleteResoursesIcon';
 import { Edit } from '../../Assets/icons/Edit';
 import Loader from '../Loader';
 import ModalResourses from '../Modals/ModalResourses';
+import Plas from '../../Assets/icons/Plas';
 
 import styles from './Resourses.module.css';
 
@@ -72,7 +73,12 @@ const Resourses = () => {
     <>
       <div className={styles.wrapTitle}>
         {titleResourses.map((value, index) => (
-          <div key={index} className={classNames(styles.title, { [styles.positions]: value === 'Positions' })}>
+          <div
+            key={index}
+            className={classNames(styles.title, {
+              [styles.positions]: value === 'Positions',
+              [styles.budget]: value === 'Budget'
+            })}>
             {value}
           </div>
         ))}
@@ -91,7 +97,7 @@ const Resourses = () => {
                 </div>
               ))}
               <div ref={btnAddNewRef} className={styles.addNew} onClick={() => setModal(true)}>
-                + Add new
+                Add new <Plas />
               </div>
             </div>
           </div>

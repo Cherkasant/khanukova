@@ -15,27 +15,26 @@ type TableDocType = {
   docArr: any;
 };
 
-
-const titleDoc = ['Title', 'Create by', 'Created time', 'Label'];
+const titleDoc = ['Positions', 'Create by', 'Created time', 'Label'];
 const TableDoc: React.FC<TableDocType> = ({ docArr }) => {
   return (
-    <TableContainer sx={{ marginBottom: '12px' }}>
-      <Table sx={{ minWidth: 650, backgroundColor: 'transparent' }} aria-label="a dense table">
+    <TableContainer sx={{}}>
+      <Table
+        sx={{ minWidth: 650, backgroundColor: '#7AA8F3', borderTopLeftRadius: '5px', borderTopRightRadius: '5px' }}
+        aria-label="a dense table">
         <TableHead>
           <TableRow>
             {titleDoc.map((value, index) => (
               <TableCell
                 key={index}
                 sx={{
-                  fontWeight: 500,
+                  fontWeight: 600,
                   fontSize: '14px',
                   lineHeight: '17px',
-                  color: '#A3A3A3',
-                  borderBottom: '1px solid #A3A3A3',
-                  paddingBottom: '8px',
-                  '&::first-of-type': { paddingLeft: '70px' }
+                  color: '#FFFFFF',
+                  padding: '8.5px 10px 8.5px 20px'
                 }}
-                align={value === 'Title' ? 'left' : 'center'}>
+                align={'left'}>
                 {value}
               </TableCell>
             ))}
@@ -48,11 +47,12 @@ const TableDoc: React.FC<TableDocType> = ({ docArr }) => {
                 component="th"
                 scope="row"
                 sx={{
-                  padding: '11px 0 11px 42px',
-                  borderBottom: '1px solid #A3A3A3',
+                  padding: '15px 10px 15px 15px',
                   fontWeight: 400,
                   fontSize: '16px',
-                  lineHeight: '19px'
+                  lineHeight: '24px',
+                  backgroundColor: 'white',
+                  borderBottom: 'none'
                 }}>
                 <div className={styles.innerTitleDoc}>
                   <DocumentIcon width={'20'} height={'24'} />
@@ -60,25 +60,39 @@ const TableDoc: React.FC<TableDocType> = ({ docArr }) => {
                 </div>
               </TableCell>
               <TableCell
-                sx={{ padding: '11px 0 11px 6px', borderBottom: '1px solid #A3A3A3', fontSize: '14px' }}
-                align="center">
+                sx={{
+                  borderBottom: 'none',
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  lineHeight: '16px',
+                  backgroundColor: 'white'
+                }}
+                align="left">
                 <div className={styles.innerCreatedDoc}>
                   <ProfileDocIcons />
                   {value.created}
                 </div>
               </TableCell>
               <TableCell
-                sx={{ padding: '11px 0 11px 6px', borderBottom: '1px solid #A3A3A3', fontSize: '14px' }}
-                align="center">
+                sx={{
+                  borderBottom: 'none',
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  lineHeight: '16px',
+                  backgroundColor: 'white'
+                }}
+                align="left">
                 {value.data}
               </TableCell>
               <TableCell
                 sx={{
-                  padding: '11px 0 11px 6px',
-                  borderBottom: '1px solid #A3A3A3',
-                  fontSize: '14px'
+                  borderBottom: 'none',
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  lineHeight: '16px',
+                  backgroundColor: 'white'
                 }}
-                align="center">
+                align="left">
                 <div className={classNames(styles.label)}> {value.label}</div>
               </TableCell>
             </TableRow>
