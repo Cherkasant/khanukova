@@ -5,16 +5,21 @@
 }
 
 .wrapTotal {
-  padding-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  border-top: 0.5px solid #9bacc9;
+  background-color: #ffffff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .wrap {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  height: 52vh;
   overflow: auto;
+  text-align: start;
+  background-color: #ffffff;
+  padding-top: 20px;
 }
 
 .loaderWrap {
@@ -39,17 +44,26 @@
 }
 
 .title {
+  font-style: normal;
   font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: #212121;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #c8c8c8;
-  margin-bottom: 21px;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  height: 33px;
+  background-color: #7aa8f3;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-left: -1px;
 }
 
 .positions {
-  text-align: start;
+  padding-left: 20px;
+  border-top-left-radius: 5px;
+}
+
+.budget {
+  border-top-right-radius: 5px;
 }
 
 .inner {
@@ -62,25 +76,36 @@
   font-size: 18px;
   line-height: 22px;
   color: #212121;
-  margin-bottom: 22px;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 .addNew {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  color: #a3a3a3;
-  margin-bottom: 20px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #1258ca;
   cursor: pointer;
+  height: 56px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 4px;
 }
 
 .total {
-  border-top: 1px solid #c8c8c8;
-  padding-top: 15px;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
   color: #212121;
+  height: 56px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 .iconsDelete {

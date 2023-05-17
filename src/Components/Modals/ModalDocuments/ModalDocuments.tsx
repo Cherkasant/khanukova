@@ -4,15 +4,20 @@ import 'react-dropdown/style.css';
 import Dropdown from 'react-dropdown';
 
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
+import { AddDocRes } from '../../../Assets/icons/AddDocRes';
+import AddDocIcon from '../../../Assets/icons/AddDocIcon';
 import DocumentIcon from '../../../Assets/icons/DocumentIcon';
+import Plas from '../../../Assets/icons/Plas';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import ProfileDocIcons from '../../../Assets/icons/ProfileDocIcon';
 import { dataFn } from '../../../utils';
 import Input from '../../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 
-import styles from './ModalDocuments.module.css';
 import { Colors } from './Colors';
+import EditorHtml from './EditorHtml';
+
+import styles from './ModalDocuments.module.css';
 
 type ModalDocumentsProps = {
   addDocRef: React.RefObject<HTMLDivElement>;
@@ -21,13 +26,14 @@ type ModalDocumentsProps = {
 };
 
 const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDocRef }) => {
+  const [valueEditor, setValueEditor] = useState('');
   const [title, setTitle] = useState('');
   const [titleDown, setTitleDown] = useState('');
   const [priority, setPriority] = useState<any>(null);
   const [labels, setLabels] = useState('');
-  const [desc, setDesc] = useState('');
   const [edit, setEdit] = useState(false);
   const [fileInput, setFileInput] = useState<FileList | null>(null);
+  const [link, setLink] = useState('');
   const inputRef = useRef<any>(null);
   const [files, setFiles] = useState<File[]>([]);
   const filesList = fileInput ? [...fileInput] : [];
@@ -50,7 +56,8 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
     setLabels('');
     setPriority(null);
     setModal(false);
-    setDesc('');
+    setValueEditor('');
+    setLink('');
     setTitle('');
     setTitleDown('');
     setFileInput(null);
@@ -103,33 +110,17 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
     {
       title: 'Link documents',
       content: (
-        <div>
-          <div className={styles.label} onClick={() => (!files.length ? inputRef.current.click() : null)}>
-            {!files.length
-              ? '+ Add new documents'
-              : files.map((value, index) => (
-                  <div key={index} className={styles.doc}>
-                    {value.name}
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        deleteDocumetsHandler(value.name);
-                      }}
-                      className={styles.deleteDoc}>
-                      x
-                    </span>
-                  </div>
-                ))}
+        <div className={styles.inputWrap}>
+          <input className={styles.inputLink} value={link} onChange={(e) => setLink(e.target.value)} type="text" />
+          <div className={styles.addLink}>
+            {link ? (
+              <div style={{ color: '#212121', fontWeight: 400, fontSize: '14px', lineHeight: '17px' }}> {link}</div>
+            ) : (
+              <>
+                <Plas className={styles.plas} /> Add link
+              </>
+            )}
           </div>
-          <input
-            ref={inputRef}
-            onChange={(e) => setFileInput(e.target.files)}
-            type="file"
-            className={styles.inputFile}
-            id="myfile"
-            name="myfile"
-            multiple
-          />
         </div>
       )
     }
@@ -152,7 +143,6 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
         !titleModalRef.current?.contains(_e.target)
       ) {
         setModal(false);
-        closeModal();
       }
     };
     document.body.addEventListener('click', eventModal);
@@ -197,16 +187,44 @@ const ModalDocuments: React.FC<ModalDocumentsProps> = ({ modal, setModal, addDoc
             </div>
           ))}
         </div>
-        <div className={styles.desc}>Discription documents</div>
-        <textarea
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          className={styles.textarea}
-          placeholder={'Write'}
-          readOnly={false}
-        />
+        <div className={styles.desc}>
+          Discription documents
+          <div>
+            <EditorHtml valueEditor={valueEditor} onChange={setValueEditor} />
+          </div>
+        </div>
+        <div className={styles.attanchment}>
+          Attanchment
+          <div className={styles.label} onClick={() => inputRef.current.click()}>
+            <AddDocIcon />
+          </div>
+          <input
+            ref={inputRef}
+            onChange={(e) => setFileInput(e.target.files)}
+            type="file"
+            className={styles.inputFile}
+            id="myfile"
+            name="myfile"
+            multiple
+          />
+        </div>
+        <div className={styles.documents}>
+          {files.map((value, index) => (
+            <div key={index} className={styles.document}>
+              <AddDocRes />
+              <div
+                className={styles.close}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteDocumetsHandler(value.name);
+                }}>
+                <CloseModalIcon />
+              </div>
+              <div> {value.name.length < 21 ? value.name : `${value.name.slice(0, 15)} ...`}</div>
+            </div>
+          ))}
+        </div>
       </div>
-
       <div className={styles.buttonsContainer}>
         <PuzzleButton
           btnTitle={'Cancel'}

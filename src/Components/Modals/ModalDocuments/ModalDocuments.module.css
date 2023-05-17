@@ -155,11 +155,12 @@
 }
 
 .desc {
+  position: relative;
+  max-width: 670px;
   font-weight: 500;
   font-size: 14px;
   line-height: 140%;
   color: #212121;
-  margin-bottom: 5px;
 }
 
 .textarea {
@@ -301,6 +302,49 @@
   z-index: -1;
 }
 
+.inputWrap {
+  position: relative;
+}
+
+.addLink {
+  position: absolute;
+  top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #b0c0e0;
+  cursor: pointer;
+  z-index: -1;
+}
+
+.plas path {
+  stroke: #b0c0e0;
+}
+
+.inputLink {
+  color: transparent;
+  width: 220px;
+  height: 36px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.inputLink:focus {
+  border: 1px solid #4270a7;
+  color: #212121;
+}
+
+.inputLink:focus + .addLink {
+  display: none;
+}
+
 .doc {
   margin-bottom: 5px;
 }
@@ -311,5 +355,45 @@
   right: -3px;
   color: red;
   font-size: 10px;
+  cursor: pointer;
+}
+
+.attanchment {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+.attanchment svg {
+  cursor: pointer;
+}
+
+.documents {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.document {
+  position: relative;
+  width: 100px;
+  height: 88px;
+  border: 1px solid #9bacc9;
+  border-radius: 10px;
+  padding: 16px 11px 10px 13px;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.close svg {
+  width: 10px;
+  height: 10px;
   cursor: pointer;
 }

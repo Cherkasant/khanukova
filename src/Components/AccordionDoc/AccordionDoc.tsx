@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import ArrowDocIcon from '../../Assets/icons/ArrowDocIcon';
 import TableDoc from '../TableDoc';
 import postSelector from '../../Redux/Selectors/postSelector';
+import Plas from '../../Assets/icons/Plas';
 
 import styles from './AccordionDoc.module.css';
 
@@ -68,7 +69,7 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
   }));
 
   const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-    padding: '14px 0 12px',
+    padding: '15px 30px 40px 0',
     textAlign: 'start'
   }));
 
@@ -83,7 +84,12 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
             <Typography>{value.milestone_name}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <TableDoc docArr={[]} />
+            <TableDoc
+              docArr={[
+                { nameDoc: 'The one', created: 'Irina', data: '12.02.2023', label: 'BA' },
+                { nameDoc: 'The two', created: 'Irina', data: '12.02.2023', label: 'BA' }
+              ]}
+            />
             {/* тут потом вставить документы */}
             <div>
               <div
@@ -93,7 +99,7 @@ const AccordionDoc: React.FC<AccordionDocProps> = ({ setModal, addDocRef }) => {
                   setModal(true);
                 }}
                 className={styles.addDoc}>
-                + Add new documents
+                <Plas /> Add new documents
               </div>
             </div>
           </AccordionDetails>
