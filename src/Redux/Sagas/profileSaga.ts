@@ -20,8 +20,7 @@ import callCheckingAuth from './callCheckingAuth';
 function* getHeadCompanyListWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getHeadCompanyList);
   if (ok && data) {
-    console.log(data);
-    yield put(setHeadCompanyListReducer(data));
+    yield put(setHeadCompanyListReducer(data[0]));
   } else {
     console.warn('Authentication credentials were not provided', problem);
   }
@@ -39,7 +38,8 @@ function* getPersonalInfoListWorker() {
 function* getECaseListWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getECaseList);
   if (ok && data) {
-    yield put(setECaseListReducer(data));
+    yield put(setECaseListReducer(data[0]));
+    console.log(data);
   } else {
     console.warn('Authentication credentials were not provided', problem);
   }
