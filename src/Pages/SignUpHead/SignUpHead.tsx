@@ -219,8 +219,8 @@ const SignUpHead = () => {
                   <Form.Item
                     name="password"
                     className={styles.formItem}
-                    rules={[{ min: 8, message: 'Please input min 8 symbols!!!' }]}>
-                    <Input type={type} value={checkPassword} placeholder={'Password'} />
+                    rules={[{ min: 9, message: 'Please input min 9 symbols!!!' }]}>
+                    <Input type={type} value={checkPassword} placeholder={'Password'} minLength={9} maxLength={128} />
                   </Form.Item>
                   <div className={styles.eyeIcon} onClick={onEyeClick}>
                     {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
@@ -236,7 +236,13 @@ const SignUpHead = () => {
                         message: 'Please confirm your password!'
                       }
                     ]}>
-                    <Input type={typeConfirm} value={checkPasswordConfirm} placeholder={'Confirm password'} />
+                    <Input
+                      type={typeConfirm}
+                      value={checkPasswordConfirm}
+                      placeholder={'Confirm password'}
+                      minLength={9}
+                      maxLength={128}
+                    />
                   </Form.Item>
                   <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
                     {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}

@@ -29,20 +29,36 @@
 }
 
 .input:focus {
-    border: 1px solid #4270A7;
+    border: 1px solid #1258CA;
+    box-shadow: 0 0 4px rgba(18, 88, 202, 0.75);
+
 }
 
 .input:active {
     color: #313037;
 }
 
-
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type="password"] {
+        font-family: Verdana, Geneva, sans-serif;
+        letter-spacing: -.5px;
+        font-weight: 600;
+    }
+}
 .disabled {
     color: #CDCDCD;
 }
 
 .error {
-    color: #fd3419;
+    border: 8px solid #BF3535;
+    box-shadow: 0 0 4px rgba(191, 53, 53, 0.75)
+
+}
+.error input:focus {
+
+    border: 5px solid #BF3535;
+    box-shadow: 0 0 4px rgba(191, 53, 53, 0.75)
+
 }
 
 .input:focus::placeholder {
@@ -51,8 +67,8 @@
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 140%;
-    color: #898B9B;
+    line-height: 14px;
+    color: #A3A3A3;
 }
 
 .input::placeholder {

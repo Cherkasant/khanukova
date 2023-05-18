@@ -14,6 +14,8 @@ type InputProps = {
   required?: boolean;
   title?: string;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  minLength?: number;
+  maxLength?: number;
 };
 
 const Input: FC<InputProps> = ({
@@ -26,7 +28,9 @@ const Input: FC<InputProps> = ({
   type,
   required,
   title,
-  onKeyDown
+  onKeyDown,
+  minLength,
+  maxLength
 }) => {
   const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     onChange?.(event.target.value);
@@ -44,9 +48,12 @@ const Input: FC<InputProps> = ({
         placeholder={placeholder}
         disabled={disabled}
         className={classnames(className, styles.input, {
-          [styles.disabled]: !!disabled
+          [styles.disabled]: !!disabled,
+          [styles.error]: error
         })}
         title={title}
+        minLength={minLength}
+        maxLength={maxLength}
       />
       {error && <div className={styles.error}>{error}</div>}
     </div>

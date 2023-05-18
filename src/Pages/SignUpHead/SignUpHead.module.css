@@ -60,16 +60,15 @@
 
 .info {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: center;
     padding-left: 30px;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 16px;
     text-align: right;
-    color: #808080;
-    margin-bottom: 20px;
+    color: #A3A3A3;
 }
 
 .subtitle {
@@ -86,8 +85,8 @@
 .link {
     font-weight: 600;
     font-size: 14px;
-    line-height: 17px;
-    color: #4270a7;
+    line-height: 16px;
+    color: #1258CA;
     text-decoration: none;
 }
 
@@ -109,7 +108,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 16px;
     text-align: right;
     color: #1258CA;
     cursor: pointer;
@@ -166,21 +165,21 @@
 
 .arrowClosed,
 .arrowOpen {
-    top: 25px;
-    border-color: #1258ca transparent transparent;
-    border-style: solid;
-    border-width: 5px 5px 0;
+    top: 20px;
+    position: absolute;
     content: " ";
     display: block;
-    height: 0;
-    position: absolute;
-    right: 10px;
-    width: 0;
+    width: 10px;
+    height: 10px;
+    right: 20px;
+    border-top: 2px solid #1258ca;
+    border-right: 2px solid #1258ca;
+    transform: rotate(135deg);
 }
 
 .arrowOpen {
-    border-color: transparent transparent #1258ca;
-    border-width: 0 5px 5px;
+    top: 25px;
+    transform: rotate(-45deg);
 }
 
 .phoneInput {
