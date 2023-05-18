@@ -51,7 +51,7 @@
 .containerAnswer {
   display: flex;
   gap: 22px;
-  border-bottom: 0.5px solid rgba(162, 209, 238, 0.484);
+  border-bottom: 0.5px solid #D9E1F0;
 }
 
 .name {
