@@ -42,7 +42,6 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
 
   const onScreenClick = () => {
     setActiveModal(!activeModal);
-    console.log('bye');
   };
 
   return (
