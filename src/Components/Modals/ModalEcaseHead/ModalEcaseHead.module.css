@@ -1,0 +1,74 @@
+.wrap {
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  transition: all 0.7s;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 770px;
+  padding: 30px 30px 50px 80px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  box-shadow: 0 4px 50px 10px rgba(18, 88, 202, 0.15);
+  border-radius: 30px;
+}
+
+.closeIcon {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 6px;
+  
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.containerTitle {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 39px;
+  color: #212121;
+}
+
+.containerEcaseData {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.containerAnswer {
+  display: flex;
+  gap: 22px;
+  border-bottom: 0.5px solid #D9E1F0;
+}
+
+.name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #212121;
+  width: 313px;
+}
+
+.answer {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #212121;
+}
