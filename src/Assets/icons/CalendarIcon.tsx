@@ -1,12 +1,12 @@
 export const CalendarIcon = () => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M3.875 8.57139H19.625M5.91071 2V3.71449M17.375 2V3.71428M20.75 6.71428L20.75 19C20.75 20.6569 19.4069 22 17.75 22H5.75C4.09315 22 2.75 20.6569 2.75 19V6.71428C2.75 5.05742 4.09315 3.71428 5.75 3.71428H17.75C19.4069 3.71428 20.75 5.05742 20.75 6.71428Z"
+        d="M2.875 7.57139H18.625M4.91071 1V2.71449M16.375 1V2.71428M19.75 5.71428L19.75 18C19.75 19.6569 18.4069 21 16.75 21H4.75C3.09315 21 1.75 19.6569 1.75 18V5.71428C1.75 4.05742 3.09315 2.71428 4.75 2.71428H16.75C18.4069 2.71428 19.75 4.05742 19.75 5.71428Z"
         stroke="#1258CA"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );

@@ -1,26 +1,19 @@
 export const DownloadIcon = () => {
   return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clipPath="url(#clip0_1947_3629)">
-        <path
-          d="M0 9.23047V10.1535C0 10.6432 0.194505 11.1128 0.540726 11.459C0.886947 11.8052 1.35652 11.9997 1.84615 11.9997H10.1538C10.6435 11.9997 11.1131 11.8052 11.4593 11.459C11.8055 11.1128 12 10.6432 12 10.1535V9.23047"
-          stroke="#A3A3A3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M3.23047 3.23077L5.9997 0L8.76893 3.23077"
-          stroke="#A3A3A3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="M6 0V8.30769" stroke="#A3A3A3" strokeLinecap="round" strokeLinejoin="round" />
-      </g>
-      <defs>
-        <clipPath id="clip0_1947_3629">
-          <rect width="12" height="12" fill="white" />
-        </clipPath>
-      </defs>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M1 10.2305V11.1535C1 11.6432 1.1945 12.1128 1.54073 12.459C1.88695 12.8052 2.35652 12.9997 2.84615 12.9997H11.1538C11.6435 12.9997 12.1131 12.8052 12.4593 12.459C12.8055 12.1128 13 11.6432 13 11.1535V10.2305"
+        stroke="#A3A3A3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M4.23047 4.23077L6.9997 1L9.76893 4.23077"
+        stroke="#A3A3A3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path d="M7 1V9.30769" stroke="#A3A3A3" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
   );
 };
