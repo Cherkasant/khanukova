@@ -50,16 +50,18 @@
 }
 
 .error {
-    border: 8px solid #BF3535;
-    box-shadow: 0 0 4px rgba(191, 53, 53, 0.75)
-
+    color: #BF3535;
 }
-.error input:focus {
 
-    border: 5px solid #BF3535;
-    box-shadow: 0 0 4px rgba(191, 53, 53, 0.75)
-
+input:invalid {
+    border: 1px solid #BF3535;
 }
+
+.input:focus:invalid {
+    border: 1px solid #BF3535;
+    box-shadow: 0 0 4px rgba(191, 53, 53, 0.75)
+}
+
 
 .input:focus::placeholder {
     position: absolute;
@@ -77,10 +79,6 @@
     font-size: 16px;
     line-height: 19px;
     color: #A3A3A3;
-}
-
-.input:focus:invalid {
-    border: 1px solid #BF3535;
 }
 
 .title {
