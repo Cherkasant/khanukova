@@ -11,6 +11,7 @@ import {
 import { CompanyListData } from '../Types/profile';
 import { ResoursesType } from '../Types/Resourses';
 import { MilestoneModalType, ProjectData, SubTaskModalType, TaskModalType } from '../Types/tasks';
+import { PostMilestoneCommentType } from '../Types/comments';
 
 const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' });
 
@@ -202,8 +203,11 @@ const deleteComment = (token: string, id: number) => {
   return API.delete(`/project/comments/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
 };
 
-const getAllProjectComments = (token: string) => {
-  return API.get('/project/comments/', {}, { headers: { Authorization: `JWT ${token}` } });
+const getAllMilestoneComments = (token: string, id: number) => {
+  return API.get(`/project/comments/?milestone_id=${id}`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
+const postMilestoneComment = (token: string, comment: PostMilestoneCommentType) => {
+  return API.post('/project/comments/', comment, { headers: { Authorization: `JWT ${token}` } });
 };
 
 export default {
@@ -248,5 +252,6 @@ export default {
   getProjectComments,
   patchComment,
   deleteComment,
-  getAllProjectComments
+  getAllMilestoneComments,
+  postMilestoneComment
 };

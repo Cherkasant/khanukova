@@ -37,6 +37,10 @@ import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '.
 
 import { DownloadAllIcon } from '../../../Assets/Milestone/DownloadAllIcon';
 
+import { getAllMilestoneComments, postMilestoneComment } from '../../../Redux/Reducers/commentReducer';
+
+import commentsSelector from '../../../Redux/Selectors/commentsSelector';
+
 import styles from './ModalMilestone.module.css';
 
 const ModalMilestone = () => {
@@ -46,6 +50,8 @@ const ModalMilestone = () => {
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getModalMilestone);
   const singleMilestone = useSelector(postSelector.getSingleMilestone);
+  const commentsMilestone = useSelector(commentsSelector.getAllMilestoneComments);
+  const COMMENTS_LIST = commentsMilestone.map((el) => el.comment);
 
   useEffect(() => {
     if (singleMilestone) {
@@ -63,6 +69,7 @@ const ModalMilestone = () => {
       setPaymentStatus(singleMilestone?.payment_status);
       setLaunchDate(singleMilestone?.start_date);
       setDeadline(singleMilestone?.deadline);
+      dispatch(getAllMilestoneComments(singleMilestone?.id));
     }
   }, [singleMilestone]);
 
@@ -111,6 +118,12 @@ const ModalMilestone = () => {
   const [comment, setComment] = useState('');
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
+  };
+  const onCommentClick = () => {
+    if (singleMilestone) {
+      dispatch(postMilestoneComment({ comment: comment, milestone: singleMilestone?.id }));
+      dispatch(getAllMilestoneComments(singleMilestone?.id));
+    }
   };
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
@@ -247,9 +260,11 @@ const ModalMilestone = () => {
                   <div className={styles.commentAvatar}>{'NB'}</div>
                   <div className={styles.commentOwner}>{'Nina Beta'}</div>
                 </div>
-                <div className={styles.textComment}>
-                  {'Не хватает всех документов. Просьба прикрепить еще документы'}
-                </div>
+                {COMMENTS_LIST.map((el) => (
+                  <div key={el} className={styles.textComment}>
+                    {el}
+                  </div>
+                ))}
               </div>
               <textarea
                 className={styles.commentInput}
@@ -261,6 +276,7 @@ const ModalMilestone = () => {
                 btnTitle={'Comment'}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.submitBtn}
+                onClick={onCommentClick}
               />
             </div>
           </div>
