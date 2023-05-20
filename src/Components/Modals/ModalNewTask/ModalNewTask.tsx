@@ -97,7 +97,7 @@ const ModalNewTask = () => {
   };
   useEffect(() => {
     setEdit(false);
-    setTitle('New Task');
+    setTitle('Title new task');
   }, []);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
@@ -117,249 +117,251 @@ const ModalNewTask = () => {
           [styles.activeModal]: isVisible
         })}>
         <div className={styles.container}>
-          <div className={styles.milestone}>
-            {milestone}
-            <div className={styles.deleteContainer}>
-              <DeleteIcon />
-              {'Delete from project'}
-            </div>
-          </div>
-
           <div className={styles.icon} onClick={onCancelClick}>
             <CloseModalIcon />
           </div>
-          <div className={styles.titleContainer}>
-            <Input
-              value={title}
-              onChange={(value) => setTitle(value)}
-              className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
-              placeholder={'New Task'}
-              disabled={!edit}
-            />
-            {!edit ? (
-              <div className={styles.editIcon} onClick={onEditClick}>
-                <EditTitleIcon />
-              </div>
-            ) : null}
-          </div>
-        </div>
-        <div className={styles.mainBlock}>
-          <div className={styles.leftBlock}>
-            <div className={styles.descriptionContainer}>
-              <div className={styles.title}>{'Description'}</div>
-              <textarea
-                className={styles.descriptionInput}
-                placeholder={'Write'}
-                value={descriptionValue}
-                onChange={onChangeDescription}
-              />
-              {/*<PuzzleButton*/}
-              {/*  title={"Submit new"}*/}
-              {/*  type={PuzzleButtonTypes.TextButton}*/}
-              {/*  className={styles.submitBtn}*/}
-              {/*  disabled={!descriptionValue}*/}
-              {/*/>*/}
-            </div>
 
-            <div className={styles.attachmentContainer}>
-              <Upload
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                listType="picture"
-                className="upload-list-inline"
-                onChange={(info) => setAttachment(info.file.name)}>
-                <div className={styles.attachmentBlock}>
-                  <div className={styles.title}>{'Attachment'}</div>
-                  <AttachmentIcon />
+          <div className={styles.mainBlock}>
+            <div className={styles.leftBlock}>
+              <div className={styles.milestone}>{milestone}</div>
+
+              <div className={styles.titleContainer}>
+                <Input
+                  value={title}
+                  onChange={(value) => setTitle(value)}
+                  className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
+                  placeholder={'Title new task'}
+                  disabled={!edit}
+                />
+                {!edit ? (
+                  <div className={styles.editIcon} onClick={onEditClick}>
+                    <EditTitleIcon />
+                  </div>
+                ) : null}
+              </div>
+
+              <div className={styles.descriptionContainer}>
+                <div className={styles.title}>{'Description'}</div>
+                <textarea
+                  className={styles.descriptionInput}
+                  placeholder={'Write'}
+                  value={descriptionValue}
+                  onChange={onChangeDescription}
+                />
+                {/*<PuzzleButton*/}
+                {/*  title={"Submit new"}*/}
+                {/*  type={PuzzleButtonTypes.TextButton}*/}
+                {/*  className={styles.submitBtn}*/}
+                {/*  disabled={!descriptionValue}*/}
+                {/*/>*/}
+              </div>
+
+              <div className={styles.attachmentContainer}>
+                <Upload
+                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  listType="picture"
+                  className="upload-list-inline"
+                  onChange={(info) => setAttachment(info.file.name)}>
+                  <div className={styles.attachmentBlock}>
+                    <div className={styles.title}>{'Attachment'}</div>
+                    <AttachmentIcon />
+                  </div>
+                </Upload>
+              </div>
+              <div className={styles.blockDownload}>
+                <div className={styles.downloadBtn}>
+                  {'Download all'}
+                  <DownloadIcon />
                 </div>
-              </Upload>
-            </div>
-            <div className={styles.blockDownload}>
-              <div className={styles.downloadBtn}>
-                {'Download all'}
-                <DownloadIcon />
+              </div>
+              <div className={styles.commentContainer}>
+                <div className={styles.title}>{'Comments'}</div>
+                <textarea
+                  className={styles.commentInput}
+                  placeholder={'Write a comment'}
+                  value={comment}
+                  onChange={onChangeComment}
+                />
+                <PuzzleButton
+                  title={'Comment'}
+                  type={PuzzleButtonTypes.TextButton}
+                  className={styles.submitBtn}
+                  disabled={!comment}
+                />
               </div>
             </div>
-            <div className={styles.commentContainer}>
-              <div className={styles.title}>{'Comments'}</div>
-              <textarea
-                className={styles.commentInput}
-                placeholder={'Write comment'}
-                value={comment}
-                onChange={onChangeComment}
-              />
-              <PuzzleButton
-                title={'Comment'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!comment}
-              />
-            </div>
-          </div>
 
-          <div className={styles.rightBlock}>
-            <div className={styles.title}>{'Responsible'}</div>
-            <div className={styles.inputsBlock}>
-              <div>
-                <Cascader
-                  options={ResponsibleCheckbox}
-                  multiple={true}
-                  className={styles.cascader}
-                  popupClassName={styles.popup}
-                  placeholder={'Add responsible'}
-                  maxTagCount={'responsive'}
-                  showArrow={true}
-                  suffixIcon={<ArrowDropDownIcon />}
-                />
-              </div>
-              <div>
-                <div className={styles.title}>{'Priority'}</div>
-                <Dropdown
-                  options={Priority}
-                  onChange={setPriority}
-                  value={priority}
-                  placeholder="Nothing selected"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
-                />
-              </div>
-              <div className={styles.startDateContainer}>
-                <div className={styles.title}>{'Start date'}</div>
-                <DatePicker
-                  format="DD.MM.YYYY"
-                  placeholder="Nothing selected"
-                  suffixIcon={<CalendarIcon />}
-                  className={styles.datepicker}
-                  onChange={onChangeLaunch}
-                />
+            <div className={styles.rightBlock}>
+              <div className={styles.deleteContainer}>
+                <DeleteIcon />
+                {'Delete from project'}
               </div>
 
-              <div className={styles.startDateContainer}>
+              <div className={styles.title}>{'Responsible'}</div>
+
+              <div className={styles.inputsBlock}>
+                <div>
+                  <Cascader
+                    options={ResponsibleCheckbox}
+                    multiple={true}
+                    className={styles.cascader}
+                    popupClassName={styles.popup}
+                    placeholder={'Add responsible'}
+                    maxTagCount={'responsive'}
+                    showArrow={true}
+                    suffixIcon={<ArrowDropDownIcon />}
+                  />
+                </div>
+                <div>
+                  <div className={styles.title}>{'Priority'}</div>
+                  <Dropdown
+                    options={Priority}
+                    onChange={setPriority}
+                    value={priority}
+                    placeholder="Select priority"
+                    className={styles.dropdownContainer}
+                    controlClassName={styles.dropdownControl}
+                    placeholderClassName={styles.dropdownPlaceholder}
+                    arrowClosed={<ArrowDropDownIcon />}
+                    arrowOpen={<Close />}
+                    menuClassName={styles.dropdownMenu}
+                  />
+                </div>
                 <div className={styles.startDateContainer}>
-                  <div className={styles.title}>{'Deadline'}</div>
+                  <div className={styles.title}>{'Start date'}</div>
                   <DatePicker
                     format="DD.MM.YYYY"
-                    placeholder="Nothing selected"
+                    placeholder="None"
                     suffixIcon={<CalendarIcon />}
                     className={styles.datepicker}
-                    onChange={onChangeDeadline}
+                    onChange={onChangeLaunch}
+                  />
+                </div>
+
+                <div className={styles.startDateContainer}>
+                  <div className={styles.startDateContainer}>
+                    <div className={styles.title}>{'Deadline'}</div>
+                    <DatePicker
+                      format="DD.MM.YYYY"
+                      placeholder="None"
+                      suffixIcon={<CalendarIcon />}
+                      className={styles.datepicker}
+                      onChange={onChangeDeadline}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className={styles.title}>{'Duration'}</div>
+                  <Input
+                    value={duration}
+                    onChange={(value) => setDuration(value)}
+                    type={'text'}
+                    className={styles.label}
+                    placeholder={'Enter duration, h'}
+                  />
+                </div>
+                <div>
+                  <div className={styles.title}>{'Labels'}</div>
+                  <Input
+                    value={label}
+                    onChange={(value) => setLabel(value)}
+                    type={'text'}
+                    className={styles.label}
+                    placeholder={'Enter labels'}
+                  />
+                </div>
+                <div>
+                  <div className={styles.title}>{'Color labels'}</div>
+
+                  <Dropdown
+                    options={Colors}
+                    onChange={setColors}
+                    value={colors}
+                    placeholder="Select color"
+                    className={styles.dropdownContainer}
+                    controlClassName={styles.dropdownControl}
+                    placeholderClassName={styles.dropdownPlaceholder}
+                    arrowClosed={<ArrowDropDownIcon />}
+                    arrowOpen={<Close />}
+                    menuClassName={styles.dropdownMenu}
+                  />
+                </div>
+                <div>
+                  <div className={styles.title}>{'Dependence'}</div>
+                  <Dropdown
+                    options={Dependence}
+                    onChange={setDependence}
+                    value={dependence}
+                    placeholder="Select"
+                    className={styles.dropdownContainer}
+                    controlClassName={styles.dropdownControl}
+                    placeholderClassName={styles.dropdownPlaceholder}
+                    arrowClosed={<ArrowDropDownIcon />}
+                    arrowOpen={<Close />}
+                    menuClassName={styles.dropdownMenu}
+                  />
+                </div>
+                <div>
+                  <div className={styles.title}>{'Progress'}</div>
+                  <Dropdown
+                    options={Progress}
+                    onChange={setProgress}
+                    value={progress}
+                    placeholder="Select progress"
+                    className={styles.dropdownContainer}
+                    controlClassName={styles.dropdownControl}
+                    placeholderClassName={styles.dropdownPlaceholder}
+                    arrowClosed={<ArrowDropDownIcon />}
+                    arrowOpen={<Close />}
+                    menuClassName={styles.dropdownMenu}
+                  />
+                </div>
+                <div>
+                  <div className={styles.title}>{'Status'}</div>
+                  <Dropdown
+                    options={Status}
+                    onChange={setStatus}
+                    value={status}
+                    placeholder="Select status"
+                    className={styles.dropdownContainer}
+                    controlClassName={styles.dropdownControl}
+                    placeholderClassName={styles.dropdownPlaceholder}
+                    arrowClosed={<ArrowDropDownIcon />}
+                    arrowOpen={<Close />}
+                    // menuClassName={styles.dropdownMenuStatus}
+                  />
+                </div>
+                <div>
+                  <div className={styles.title}>{'Payment status'}</div>
+                  <Dropdown
+                    options={PaymentStatus}
+                    onChange={setPaymentStatus}
+                    value={paymentStatus}
+                    placeholder="Select status"
+                    className={styles.dropdownContainer}
+                    controlClassName={styles.dropdownControl}
+                    placeholderClassName={styles.dropdownPlaceholder}
+                    arrowClosed={<ArrowDropDownIcon />}
+                    arrowOpen={<Close />}
                   />
                 </div>
               </div>
-              <div>
-                <div className={styles.title}>{'Duration'}</div>
-                <Input
-                  value={duration}
-                  onChange={(value) => setDuration(value)}
-                  type={'text'}
-                  className={styles.label}
-                  placeholder={'Enter duration'}
-                />
-              </div>
-              <div>
-                <div className={styles.title}>{'Labels'}</div>
-                <Input
-                  value={label}
-                  onChange={(value) => setLabel(value)}
-                  type={'text'}
-                  className={styles.label}
-                  placeholder={'Enter labels'}
-                />
-              </div>
-              <div>
-                <div className={styles.title}>{'Color labels'}</div>
 
-                <Dropdown
-                  options={Colors}
-                  onChange={setColors}
-                  value={colors}
-                  placeholder="Nothing selected"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
-                />
-              </div>
               <div>
-                <div className={styles.title}>{'Dependence'}</div>
-                <Dropdown
-                  options={Dependence}
-                  onChange={setDependence}
-                  value={dependence}
-                  placeholder="Nothing selected"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
-                />
-              </div>
-              <div>
-                <div className={styles.title}>{'Progress'}</div>
-                <Dropdown
-                  options={Progress}
-                  onChange={setProgress}
-                  value={progress}
-                  placeholder="Nothing selected"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
-                />
-              </div>
-              <div>
-                <div className={styles.title}>{'Status'}</div>
-                <Dropdown
-                  options={Status}
-                  onChange={setStatus}
-                  value={status}
-                  placeholder="Nothing selected"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  // menuClassName={styles.dropdownMenuStatus}
-                />
-              </div>
-              <div>
-                <div className={styles.title}>{'Payment status'}</div>
-                <Dropdown
-                  options={PaymentStatus}
-                  onChange={setPaymentStatus}
-                  value={paymentStatus}
-                  placeholder="Select status"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className={styles.buttonsContainer}>
-                <PuzzleButton
-                  btnTitle={'Cancel'}
-                  btnType={PuzzleButtonTypes.TextButton}
-                  btnClassName={styles.cancelBtn}
-                  onClick={onCancelClick}
-                />
-                <PuzzleButton
-                  btnTitle={'Save'}
-                  btnType={PuzzleButtonTypes.TextButton}
-                  btnClassName={styles.saveBtn}
-                  onClick={onSaveClick}
-                />
+                <div className={styles.buttonsContainer}>
+                  <PuzzleButton
+                    btnTitle={'Cancel'}
+                    btnType={PuzzleButtonTypes.TextButton}
+                    btnClassName={styles.cancelBtn}
+                    onClick={onCancelClick}
+                  />
+                  <PuzzleButton
+                    btnTitle={'Save'}
+                    btnType={PuzzleButtonTypes.TextButton}
+                    btnClassName={styles.saveBtn}
+                    onClick={onSaveClick}
+                  />
+                </div>
               </div>
             </div>
           </div>
