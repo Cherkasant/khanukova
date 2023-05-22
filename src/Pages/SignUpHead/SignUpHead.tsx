@@ -21,6 +21,8 @@ import { registerUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
 import FormContainer from '../../Components/FormContainer';
 
+import { EMAIL_REGEX, FULL_NAME_REGEX } from '../../Components/constants/regexp.constants';
+
 import styles from './SignUpHead.module.css';
 
 export enum Role {
@@ -153,22 +155,33 @@ const SignUpHead = () => {
                 <Form.Item
                   name="fullName"
                   className={styles.formItem}
-                  rules={[{ required: true, message: 'Please input your full name!' }]}>
+                  rules={[
+                    {
+                      pattern: FULL_NAME_REGEX,
+                      message: 'Well'
+                    },
+                    {
+                      required: true,
+                      message: 'Please input your full name!',
+                      validateTrigger: 'onSignUp'
+                    }
+                  ]}>
                   <Input type={'text'} placeholder={'Full name'} />
                 </Form.Item>
                 <Form.Item
                   name="email"
                   className={styles.formItem}
-                  // rules={[{ required: true, message: 'Please input your email!' }]}
                   rules={[
                     {
-                      type: 'email',
+                      pattern: EMAIL_REGEX,
                       message: 'The input is not valid E-mail!'
                     },
                     {
                       required: true,
-                      message: 'Please input your E-mail!'
-                    }
+                      message: 'Please input your E-mail!',
+                      validateTrigger: 'onSignUp'
+                    },
+                    {}
                   ]}>
                   <Input type={'email'} placeholder={'Email'} />
                 </Form.Item>
