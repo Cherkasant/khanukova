@@ -8,6 +8,7 @@
 
 .containerHelp {
   display: flex;
+  gap: 12.4px;
 }
 
 .textHelp {
@@ -19,6 +20,7 @@
   font-size: 18px;
   line-height: 22px;
   color: #62666b;
+  text-align: left;
 }
 
 .containerCards {
