@@ -1,118 +1,118 @@
 .wrap {
-   box-sizing: border-box;
-   transform: translate(-50%, -50%);
-   transition: all 0.7s;
-   position: absolute;
-   left: 50%;
-   top: 50%;
-   width: 555px;
-   padding: 60px 80px;
-   text-align: start;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   background: #ffffff;
-   box-shadow: 0 4px 50px 10px rgba(18, 88, 202, 0.15);
-   border-radius: 30px;
-   background: #F4F8FE;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  transition: all 0.7s;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 555px;
+  padding: 60px 80px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #ffffff;
+  box-shadow: 0 4px 50px 10px rgba(18, 88, 202, 0.15);
+  border-radius: 30px;
+  background: #f4f8fe;
 }
 
 .activeModal {
-   transform: translate(-50%, -50%);
-   transition: all 0.5s;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
 }
 
 .container {
-   display: flex;
-   flex-direction: column;
-   gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .containerTitle {
-   display: flex;
-   flex-direction: column;
-   gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .title {
-   font-family: 'Inter';
-   font-style: normal;
-   font-weight: 500;
-   font-size: 32px;
-   line-height: 40px;
-   color: #212121;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 40px;
+  color: #212121;
 }
 
 .subTitle {
-   font-family: 'Inter';
-   font-style: normal;
-   font-weight: 600;
-   font-size: 14px;
-   line-height: 16px;
-   color: #A3A3A3;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #a3a3a3;
 }
 
 .containerCategory {
-   display: flex;
-   flex-direction: column;
-   gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .categories {
-   padding: 23.5px 20px;
-   background: #FFFFFF;
-   box-shadow: 0px 4px 10px rgba(190, 190, 190, 0.25);
-   border-radius: 10px;
+  padding: 10px 23px;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(190, 190, 190, 0.25);
+  border-radius: 10px;
 }
 
 .category {
-   display: flex;
+  display: flex;
 }
 
 .checkbox {
-   display: flex;
+  display: flex;
 }
 
 .options {
-   display: flex;
-   flex-direction: column;
-   gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .name {
-   font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 24px;
-color: #212121;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #212121;
 }
 
 .description {
-   font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 16px;
-color: #A3A3A3;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #a3a3a3;
 }
 
 .containerSettings {
-   display: flex;
-   justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .setting {
-   font-family: 'Inter';
-   font-style: normal;
-   font-weight: 400;
-   font-size: 14px;
-   line-height: 16px;
-   color: #212121;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #212121;
 }
 
 .buttonSave {
-   width: 100%;
-   height: 54px;
-   padding: 16px;
+  width: 100%;
+  height: 54px;
+  padding: 16px;
 }

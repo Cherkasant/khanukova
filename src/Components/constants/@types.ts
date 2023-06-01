@@ -9,12 +9,16 @@ export type CardType = {
 };
 
 export type CardNotificationsType = {
+  isRequest: boolean;
   id: number;
-  avatar: string;
-  userName: string;
-  status: string;
-  location: string;
-  date: string;
+  avatar?: string;
+  userName?: string;
+  status?: string;
+  location?: string;
+  date?: string;
+  position?: string;
+  email?: string;
+  projectName?: string;
 };
 
 export type CardsListNotificationsType = Array<CardNotificationsType>;
