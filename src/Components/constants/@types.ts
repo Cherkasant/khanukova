@@ -23,6 +23,14 @@ export type CardNotificationsType = {
 
 export type CardsListNotificationsType = Array<CardNotificationsType>;
 
+export type CardExternalSourcesType = {
+  id: number;
+  icon: any;
+  name: string;
+};
+
+export type CardsListExternalSourcesType = Array<CardExternalSourcesType>;
+
 export enum Role {
   PO = 'PO',
   Head = 'HEAD',

@@ -11,6 +11,7 @@ import ClientsRequestCard from '../../Components/ClientsRequestCard';
 import { requestInProgressArray, requestOpenedArray } from '../../Components/ClientsRequestCard/constantsRequest';
 import Documents from '../../Components/Documents';
 import Events from '../../Components/Events';
+import ExternalSources from '../../Components/ExternalSources';
 import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 import Input from '../../Components/Input';
 import ModalEcase from '../../Components/Modals/ModalEcase';
@@ -162,6 +163,7 @@ const ProjectScreen = () => {
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
       {activeTab === Tabs.Documents ? <Documents /> : null}
       {activeTab === Tabs.Events ? <Events /> : null}
+      {!isSaveClicked && activeTab === Tabs.ExternalSources ? <ExternalSources /> : null}
       <ModalNewMilestone />
       <ModalNewTask />
       <ModalEcase />
