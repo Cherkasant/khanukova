@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 111px;
+  background: #ffffff;
+  box-shadow: 0px 0px 30px rgba(18, 88, 202, 0.05);
+  border-radius: 10px;
+}
+
+.name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #212121;
+}
+
+.container:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: all 0.5s;
+}

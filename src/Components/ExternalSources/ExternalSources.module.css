@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 83px;
+  width: 1040px;
+  padding-top: 45px;
+}
+
+.containerHelp {
+  display: flex;
+}
+
+.textHelp {
+  width: 632px;
+  height: 66px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #62666b;
+}
+
+.containerCards {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 60px;
+}
