@@ -21,16 +21,18 @@ const TABS_NOTIFICATION_NAMES = [
 ];
 
 const CARD_MOCK = {
+  isRequest: true,
   id: 1,
   avatar: 'string',
-  userName: 'Developer 1',
-  status: 'Updated status',
-  location: 'In Task 1',
-  date: '4 min ago'
+  userName: 'Pever Anna',
+  position: 'Developer',
+  email: 'anna@gmail.com',
+  projectName: 'Project name, Mobile App'
 };
 
 const CARD_MOCK_TWO = {
-  id: 1,
+  isRequest: false,
+  id: 2,
   avatar: 'string',
   userName: 'Developer 2',
   status: 'Added attachment',
@@ -38,7 +40,7 @@ const CARD_MOCK_TWO = {
   date: '4 min ago'
 };
 
-const MOCK_CARDSLISTNOTIFICATIONS = [CARD_MOCK, CARD_MOCK, CARD_MOCK, CARD_MOCK, CARD_MOCK_TWO];
+const MOCK_CARDSLISTNOTIFICATIONS = [CARD_MOCK, CARD_MOCK, CARD_MOCK_TWO, CARD_MOCK_TWO];
 
 const NotificationsPage = () => {
   const isNotification = true;
@@ -69,9 +71,15 @@ const NotificationsPage = () => {
       <TabsListNotifications activeTab={activeTab} onClickedTab={onTabClick} TabsList={TABS_NOTIFICATION_NAMES} />
       <div className={styles.blueLine}>{''}</div>
 
-      <div>
-        <CardsListNotifications CardsListNotifications={MOCK_CARDSLISTNOTIFICATIONS} />
-      </div>
+      {isNotification ? (
+        <div>
+          <CardsListNotifications CardsListNotifications={MOCK_CARDSLISTNOTIFICATIONS} />
+        </div>
+      ) : (
+        <div className={styles.empty}>
+          Notifications will appear here when someone mentions you, creates an event, or changes settings
+        </div>
+      )}
 
       <div
         className={classNames(styles.wrapModal, {
