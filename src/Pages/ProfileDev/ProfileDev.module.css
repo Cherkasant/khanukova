@@ -126,20 +126,26 @@
 }
 
 .dropdownControl {
-  height: 44px;
-  border: 1px solid #a3a3a3;
+  padding: 12px;
+  box-sizing: border-box;
+  height: 48px;
+  border: 1px solid #4270a7;
   border-radius: 10px;
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 140%;
+  line-height: 19px;
   color: #a3a3a3;
   cursor: pointer;
   outline: none;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.dropdownControl > div,
+.dropdownControlCurrency > div {
+  display: flex;
+  align-items: center;
 }
 
 .dropdownPlaceholder {
@@ -192,9 +198,10 @@
 
 .inputDatePicker {
   width: 100%;
-  height: 40px;
+  height: 48px;
   border: 1px solid #a3a3a3;
   border-radius: 10px;
+  padding: 12px;
 }
 
 .inputDatePicker:hover {
@@ -263,4 +270,21 @@
 
 .editIcon:hover {
   cursor: pointer;
+}
+
+.dropdownControlCurrency {
+  padding: 12px;
+  box-sizing: border-box;
+  height: 48px;
+  border: 1px solid #4270a7;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #a3a3a3;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  gap: 8px;
 }

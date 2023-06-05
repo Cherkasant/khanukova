@@ -4,5 +4,6 @@ export default {
   getECaseList: (state: RootState) => state.profileReducer.ECaseList,
   getCompanyList: (state: RootState) => state.profileReducer.CompanyList,
   getPersonalInfo: (state: RootState) => state.profileReducer.PersonalInfoList,
-  getGeneratePassword: (state: RootState) => state.profileReducer.password
+  getGeneratePassword: (state: RootState) => state.profileReducer.password,
+  getAllDevTeamEmplyees: (state: RootState) => state.profileReducer.employees
 };

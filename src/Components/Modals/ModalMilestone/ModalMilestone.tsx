@@ -37,7 +37,13 @@ import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '.
 
 import { DownloadAllIcon } from '../../../Assets/Milestone/DownloadAllIcon';
 
-import { getAllMilestoneComments, postMilestoneComment } from '../../../Redux/Reducers/commentReducer';
+import {
+  deleteMilestoneComment,
+  getAllMilestoneComments,
+  getSingleMilestoneComment,
+  patchMilestoneComment,
+  postMilestoneComment
+} from '../../../Redux/Reducers/commentReducer';
 
 import commentsSelector from '../../../Redux/Selectors/commentsSelector';
 
@@ -47,12 +53,26 @@ const ModalMilestone = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
+  const singleMilestoneComment = useSelector(commentsSelector.getSingleMilestoneComment);
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getModalMilestone);
   const singleMilestone = useSelector(postSelector.getSingleMilestone);
   const commentsMilestone = useSelector(commentsSelector.getAllMilestoneComments);
-  const COMMENTS_LIST = commentsMilestone.map((el) => el.comment);
+  const COMMENTS_LIST = commentsMilestone.filter((el) => el.task === null);
+  const [refreshComments, setRefreshComments] = useState(false);
+  const [editButton, setEditButton] = useState(false);
 
+  useEffect(() => {
+    if (refreshComments && singleMilestone) {
+      dispatch(getAllMilestoneComments(singleMilestone?.id));
+    }
+  }, [refreshComments]);
+  useEffect(() => {
+    if (singleMilestoneComment) {
+      setComment(singleMilestoneComment?.comment);
+      setEditButton(true);
+    }
+  }, [singleMilestoneComment]);
   useEffect(() => {
     if (singleMilestone) {
       const progress = singleMilestone?.progress.toString();
@@ -82,7 +102,7 @@ const ModalMilestone = () => {
             milestone_name: title,
             description: descriptionValue,
             attachment: null,
-            responsible: [],
+            responsible: ['3'],
             priority: priority.value,
             start_date: launchDate,
             deadline: deadline,
@@ -123,7 +143,41 @@ const ModalMilestone = () => {
     if (singleMilestone) {
       dispatch(postMilestoneComment({ comment: comment, milestone: singleMilestone?.id }));
       dispatch(getAllMilestoneComments(singleMilestone?.id));
+      setComment('');
     }
+  };
+  const onDeleteCommentClick = (id: number) => {
+    if (singleMilestone) {
+      dispatch(
+        deleteMilestoneComment({
+          id: id,
+          idMilestone: singleMilestone?.id,
+          callback: () => {
+            dispatch(getAllMilestoneComments(singleMilestone?.id));
+          }
+        })
+      );
+    }
+  };
+  const onEditCommentClick = (id: number) => {
+    if (singleMilestone) {
+      dispatch(getSingleMilestoneComment({ id: id, idMilestone: singleMilestone?.id }));
+    }
+  };
+  const onEditButtonClick = () => {
+    if (singleMilestone && singleMilestoneComment) {
+      dispatch(
+        patchMilestoneComment({
+          id: singleMilestoneComment?.id,
+          idMilestone: singleMilestone?.id,
+          data: { comment: comment, milestone: singleMilestone?.id },
+          callback: () => {
+            dispatch(getAllMilestoneComments(singleMilestone?.id));
+          }
+        })
+      );
+    }
+    setComment('');
   };
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
@@ -255,14 +309,24 @@ const ModalMilestone = () => {
             </div>
             <div className={styles.commentContainer}>
               <div className={styles.title}>{'Comments'}</div>
-              <div className={styles.commentBlock}>
-                <div className={styles.commentHeader}>
-                  <div className={styles.commentAvatar}>{'NB'}</div>
-                  <div className={styles.commentOwner}>{'Nina Beta'}</div>
-                </div>
+              <div className={styles.commentList}>
                 {COMMENTS_LIST.map((el) => (
-                  <div key={el} className={styles.textComment}>
-                    {el}
+                  <div key={el.id} className={styles.commentBlock}>
+                    <div className={styles.commentHeader}>
+                      <div className={styles.avatarContainer}>
+                        <div className={styles.commentAvatar}>{'NB'}</div>
+                        <div className={styles.commentOwner}>{'Nina Beta'}</div>
+                      </div>
+                      <div className={styles.editContainer}>
+                        <div className={styles.editButton} onClick={() => onEditCommentClick(el.id)}>
+                          {'Edit'}
+                        </div>
+                        <div className={styles.editButton} onClick={() => onDeleteCommentClick(el.id)}>
+                          {'Delete'}
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.textComment}>{el.comment}</div>
                   </div>
                 ))}
               </div>
@@ -272,12 +336,22 @@ const ModalMilestone = () => {
                 value={comment}
                 onChange={onChangeComment}
               />
-              <PuzzleButton
-                btnTitle={'Comment'}
-                btnType={PuzzleButtonTypes.TextButton}
-                btnClassName={styles.submitBtn}
-                onClick={onCommentClick}
-              />
+              <div className={styles.commentsButton}>
+                {editButton ? (
+                  <PuzzleButton
+                    btnTitle={'Edit'}
+                    btnType={PuzzleButtonTypes.TextButton}
+                    btnClassName={styles.submitBtn}
+                    onClick={onEditButtonClick}
+                  />
+                ) : null}
+                <PuzzleButton
+                  btnTitle={'Comment'}
+                  btnType={PuzzleButtonTypes.TextButton}
+                  btnClassName={styles.submitBtn}
+                  onClick={onCommentClick}
+                />
+              </div>
             </div>
           </div>
 

@@ -179,21 +179,6 @@ const ModalNewSubTask = () => {
                 <DownloadIcon />
               </div>
             </div>
-            <div className={styles.commentContainer}>
-              <div className={styles.title}>{'Comments'}</div>
-              <textarea
-                className={styles.commentInput}
-                placeholder={'Write comment'}
-                value={comment}
-                onChange={onChangeComment}
-              />
-              <PuzzleButton
-                title={'Comment'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!comment}
-              />
-            </div>
           </div>
 
           <div className={styles.rightBlock}>

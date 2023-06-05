@@ -1,7 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+
 import { Column, useTable } from 'react-table';
 
 import { useNavigate } from 'react-router';
+
+import { useSelector } from 'react-redux';
 
 import { PathNames } from '../../Pages/Router/Router';
 
@@ -11,58 +14,44 @@ import { DeleteDevIcon } from '../../Assets/ProfilePage/DeleteDevIcon';
 
 import { SelectProjectIcon } from '../../Assets/ProfilePage/SelectProjectIcon';
 
+import profileSelectors from '../../Redux/Selectors/profileSelectors';
+
+import { ArrayOfEmployees } from '../../Redux/Types/profile';
+
 import styles from './DevTeamTable.module.css';
 
 const DevTeamTable = () => {
+  const allDevTeamEmployees = useSelector(profileSelectors.getAllDevTeamEmplyees);
   const navigate = useNavigate();
   const [showProjects, setShowProjects] = useState(false);
   const onSelectProjectClick = () => {
     setShowProjects(!showProjects);
   };
-
-  const data = useMemo(
-    () => [
-      {
-        name: 'Pever Anna',
-        position: 'Developer',
-        email: 'anna@gmail.com',
-        project: ['Project name', 'Mobile App'],
-        telegram: ''
-      },
-      {
-        name: 'Noir Bella',
-        position: 'QA Engineer ',
-        email: 'bella@gmail.com',
-        project: ['Game'],
-        telegram: '@nov_bell'
-      },
-      {
-        name: 'Irian Mihail',
-        position: 'UX Designer',
-        email: 'ir777@gmail.com',
-        project: ['Project name', 'Mobile App'],
-        telegram: '@ir777'
-      }
-    ],
-    []
-  );
+  const [devTeam, setDevTeam] = useState<ArrayOfEmployees>([]);
+  useEffect(() => {
+    if (allDevTeamEmployees) {
+      setDevTeam(allDevTeamEmployees);
+    }
+  }, [allDevTeamEmployees]);
+  const data = useMemo(() => devTeam, [devTeam]);
 
   const columns: Array<Column> = useMemo(
     () => [
       {
         Header: () => <div className={styles.headerName}>{'Name'}</div>,
-        accessor: 'name',
+        accessor: 'full_name',
         Cell: (props: any) => (
           <div className={styles.nameContainer}>
             <div className={styles.avatar}>
-              {props.row.original.name.split(' ')[0][0]}
-              {props.row.original.name.split(' ')[1][0]}
+              <img src={props.row.original.account_photo} alt={''} />
+              {/*{props.row.original.full_name.split(' ')[0][0]}*/}
+              {/*{props.row.original.full_name.split(' ')[1][0]}*/}
             </div>
             <div className={styles.infoContainer}>
               <div className={styles.name} onClick={() => navigate(PathNames.ProfileDevTeam)}>
-                {props.row.original.name}{' '}
+                {props.row.original.full_name}{' '}
               </div>
-              <div className={styles.telegram}>{props.row.original.telegram}</div>
+              <div className={styles.telegram}>{'telegram'}</div>
             </div>
           </div>
         )
@@ -83,7 +72,7 @@ const DevTeamTable = () => {
         accessor: 'project',
         Cell: (props) => (
           <div className={styles.projectContainer}>
-            <div className={styles.icon} onClick={() => console.log(props)}>
+            <div className={styles.icon} onClick={() => {}}>
               <SelectProjectIcon />
               {/*<div className={styles.dropdown}>*/}
               {/*  {props.row.original.project.map((el: any) => (*/}
@@ -93,7 +82,9 @@ const DevTeamTable = () => {
               {/*  ))}*/}
               {/*</div>*/}
 
-              <div className={styles.headerName}>{props.value.toString()}</div>
+              <div className={styles.headerName}>
+                {props.row.original.project.map((el: any) => el.project_name).join()}
+              </div>
             </div>
             <div className={styles.iconContainer}>
               <DeleteDevIcon />

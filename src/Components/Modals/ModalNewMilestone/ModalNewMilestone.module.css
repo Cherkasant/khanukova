@@ -163,6 +163,11 @@
     justify-content: space-between;
 }
 
+.dropdownControl > div {
+    display: flex;
+    align-items: center;
+}
+
 .dropdownPlaceholder {
     text-align: start;
 }
