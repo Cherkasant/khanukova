@@ -28,18 +28,38 @@ import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '.
 
 import { Close } from '../../../Assets/Table/Close';
 
+import {
+  deleteSubTaskComment,
+  getAllMilestoneComments,
+  getSingleMilestoneComment,
+  patchSubTaskComment,
+  postMilestoneComment
+} from '../../../Redux/Reducers/commentReducer';
+import commentsSelector from '../../../Redux/Selectors/commentsSelector';
+
 import styles from './ModalSubTask.module.css';
 
 const ModalSubTask = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
+  const singleMilestoneComment = useSelector(commentsSelector.getSingleMilestoneComment);
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getModalSubTask);
   const singleSubTask = useSelector(postSelector.getSingleSubTask);
-
+  const singleMilestone = useSelector(postSelector.getSingleMilestone);
+  const singleTask = useSelector(postSelector.getSingleTask);
+  const commentsMilestone = useSelector(commentsSelector.getAllMilestoneComments);
+  const SUBTASK_COMMENTS = commentsMilestone.filter((el) => el.subtask === singleSubTask?.id);
+  const [editButton, setEditButton] = useState(false);
   useEffect(() => {
-    if (singleSubTask) {
+    if (singleMilestoneComment) {
+      setComment(singleMilestoneComment?.comment);
+      setEditButton(true);
+    }
+  }, [singleMilestoneComment]);
+  useEffect(() => {
+    if (singleSubTask && singleMilestone) {
       const progress = singleSubTask?.progress.toString();
       setTitle(singleSubTask?.sub_task_name);
       setDescriptionValue(singleSubTask?.description);
@@ -54,9 +74,9 @@ const ModalSubTask = () => {
       setPaymentStatus(singleSubTask?.payment_status);
       setLaunchDate(singleSubTask?.start_date);
       setDeadline(singleSubTask?.deadline);
-      console.log(typeof progress);
+      dispatch(getAllMilestoneComments(singleMilestone?.id));
     }
-  }, [singleSubTask]);
+  }, [singleSubTask, singleMilestone]);
 
   const onSaveClick = () => {
     if (singleSubTask) {
@@ -104,6 +124,53 @@ const ModalSubTask = () => {
   const [comment, setComment] = useState('');
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
+  };
+  const onCommentClick = () => {
+    if (singleTask && singleMilestone && singleSubTask) {
+      dispatch(
+        postMilestoneComment({
+          comment: comment,
+          milestone: singleMilestone?.id,
+          task: singleTask?.id,
+          subtask: singleSubTask?.id
+        })
+      );
+      dispatch(getAllMilestoneComments(singleMilestone?.id));
+      setComment('');
+    }
+  };
+  const onDeleteCommentClick = (id: number) => {
+    if (singleSubTask && singleMilestone) {
+      dispatch(
+        deleteSubTaskComment({
+          id: id,
+          idSubTask: singleSubTask?.id,
+          callback: () => {
+            dispatch(getAllMilestoneComments(singleMilestone?.id));
+          }
+        })
+      );
+    }
+  };
+  const onEditCommentClick = (id: number) => {
+    if (singleMilestone) {
+      dispatch(getSingleMilestoneComment({ id: id, idMilestone: singleMilestone?.id }));
+    }
+  };
+  const onEditButtonClick = () => {
+    if (singleMilestone && singleMilestoneComment && singleTask && singleSubTask) {
+      dispatch(
+        patchSubTaskComment({
+          id: singleMilestoneComment?.id,
+          idSubTask: singleTask?.id,
+          data: { comment: comment, milestone: singleMilestone?.id, task: singleTask?.id, subtask: singleSubTask?.id },
+          callback: () => {
+            dispatch(getAllMilestoneComments(singleMilestone?.id));
+          }
+        })
+      );
+    }
+    setComment('');
   };
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
@@ -235,18 +302,49 @@ const ModalSubTask = () => {
             </div>
             <div className={styles.commentContainer}>
               <div className={styles.title}>{'Comments'}</div>
+              <div className={styles.commentList}>
+                {SUBTASK_COMMENTS.map((el) => (
+                  <div key={el.id} className={styles.commentBlock}>
+                    <div className={styles.commentHeader}>
+                      <div className={styles.avatarContainer}>
+                        <div className={styles.commentAvatar}>{'NB'}</div>
+                        <div className={styles.commentOwner}>{'Nina Beta'}</div>
+                      </div>
+                      <div className={styles.editContainer}>
+                        <div className={styles.editButton} onClick={() => onEditCommentClick(el.id)}>
+                          {'Edit'}
+                        </div>
+                        <div className={styles.editButton} onClick={() => onDeleteCommentClick(el.id)}>
+                          {'Delete'}
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.textComment}>{el.comment}</div>
+                  </div>
+                ))}
+              </div>
               <textarea
                 className={styles.commentInput}
                 placeholder={'Write comment'}
                 value={comment}
                 onChange={onChangeComment}
               />
-              <PuzzleButton
-                title={'Comment'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!comment}
-              />
+              <div className={styles.commentsButton}>
+                {editButton ? (
+                  <PuzzleButton
+                    btnTitle={'Edit'}
+                    btnType={PuzzleButtonTypes.TextButton}
+                    btnClassName={styles.submitBtn}
+                    onClick={onEditButtonClick}
+                  />
+                ) : null}
+                <PuzzleButton
+                  btnTitle={'Comment'}
+                  btnType={PuzzleButtonTypes.TextButton}
+                  btnClassName={styles.submitBtn}
+                  onClick={onCommentClick}
+                />
+              </div>
             </div>
           </div>
 

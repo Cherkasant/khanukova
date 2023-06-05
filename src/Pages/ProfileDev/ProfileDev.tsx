@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Dropdown from 'react-dropdown';
 import { DatePicker, DatePickerProps, Space } from 'antd';
 
@@ -7,6 +7,9 @@ import Input from '../../Components/Input';
 import Title from '../../Components/Title';
 import { PencilIcon } from '../../Assets/Profile/PencilIcon';
 import { CalendarIcon } from '../../Assets/icons/CalendarIcon';
+
+import { ArrowDropDownIcon } from '../../Assets/Table/ArrowDropDownIcon';
+import { Close } from '../../Assets/Table/Close';
 
 import styles from './ProfileDev.module.css';
 
@@ -168,8 +171,8 @@ const ProfileDev = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
@@ -190,11 +193,12 @@ const ProfileDev = () => {
                   value={selectedCurrencyOptions}
                   placeholder="USD"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={styles.dropdownControlCurrency}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
+                  arrowClassName={styles.arrow}
                 />
               </div>
 
@@ -209,8 +213,8 @@ const ProfileDev = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>

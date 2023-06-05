@@ -29,18 +29,38 @@ import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '.
 
 import { Close } from '../../../Assets/Table/Close';
 
+import {
+  deleteTaskComment,
+  getAllMilestoneComments,
+  getSingleMilestoneComment,
+  patchTaskComment,
+  postMilestoneComment
+} from '../../../Redux/Reducers/commentReducer';
+
+import commentsSelector from '../../../Redux/Selectors/commentsSelector';
+
 import styles from './ModalTask.module.css';
 
 const ModalTask = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
+  const singleMilestoneComment = useSelector(commentsSelector.getSingleMilestoneComment);
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getModalTask);
+  const singleMilestone = useSelector(postSelector.getSingleMilestone);
   const singleTask = useSelector(postSelector.getSingleTask);
-
+  const commentsMilestone = useSelector(commentsSelector.getAllMilestoneComments);
+  const TASK_COMMENTS = commentsMilestone.filter((el) => el.task === singleTask?.id && el.subtask === null);
+  const [editButton, setEditButton] = useState(false);
   useEffect(() => {
-    if (singleTask) {
+    if (singleMilestoneComment) {
+      setComment(singleMilestoneComment?.comment);
+      setEditButton(true);
+    }
+  }, [singleMilestoneComment]);
+  useEffect(() => {
+    if (singleTask && singleMilestone) {
       const progress = singleTask?.progress.toString();
       setTitle(singleTask?.task_name);
       setDescriptionValue(singleTask?.description);
@@ -55,8 +75,9 @@ const ModalTask = () => {
       setPaymentStatus(singleTask?.payment_status);
       setLaunchDate(singleTask?.start_date);
       setDeadline(singleTask?.deadline);
+      dispatch(getAllMilestoneComments(singleMilestone?.id));
     }
-  }, [singleTask]);
+  }, [singleTask, singleMilestone]);
 
   const onSaveClick = () => {
     if (singleTask) {
@@ -105,6 +126,47 @@ const ModalTask = () => {
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
   };
+  const onCommentClick = () => {
+    if (singleTask && singleMilestone) {
+      dispatch(postMilestoneComment({ comment: comment, milestone: singleMilestone?.id, task: singleTask?.id }));
+      dispatch(getAllMilestoneComments(singleMilestone?.id));
+      setComment('');
+    }
+  };
+  const onDeleteCommentClick = (id: number) => {
+    if (singleTask && singleMilestone) {
+      dispatch(
+        deleteTaskComment({
+          id: id,
+          idTask: singleTask?.id,
+          callback: () => {
+            dispatch(getAllMilestoneComments(singleMilestone?.id));
+          }
+        })
+      );
+    }
+  };
+  const onEditCommentClick = (id: number) => {
+    if (singleMilestone) {
+      dispatch(getSingleMilestoneComment({ id: id, idMilestone: singleMilestone?.id }));
+    }
+  };
+  const onEditButtonClick = () => {
+    if (singleMilestone && singleMilestoneComment && singleTask) {
+      dispatch(
+        patchTaskComment({
+          id: singleMilestoneComment?.id,
+          idTask: singleTask?.id,
+          data: { comment: comment, milestone: singleMilestone?.id, task: singleTask?.id },
+          callback: () => {
+            dispatch(getAllMilestoneComments(singleMilestone?.id));
+          }
+        })
+      );
+    }
+    setComment('');
+  };
+
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
@@ -234,18 +296,49 @@ const ModalTask = () => {
             </div>
             <div className={styles.commentContainer}>
               <div className={styles.title}>{'Comments'}</div>
+              <div className={styles.commentList}>
+                {TASK_COMMENTS.map((el) => (
+                  <div key={el.id} className={styles.commentBlock}>
+                    <div className={styles.commentHeader}>
+                      <div className={styles.avatarContainer}>
+                        <div className={styles.commentAvatar}>{'NB'}</div>
+                        <div className={styles.commentOwner}>{'Nina Beta'}</div>
+                      </div>
+                      <div className={styles.editContainer}>
+                        <div className={styles.editButton} onClick={() => onEditCommentClick(el.id)}>
+                          {'Edit'}
+                        </div>
+                        <div className={styles.editButton} onClick={() => onDeleteCommentClick(el.id)}>
+                          {'Delete'}
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.textComment}>{el.comment}</div>
+                  </div>
+                ))}
+              </div>
               <textarea
                 className={styles.commentInput}
                 placeholder={'Write comment'}
                 value={comment}
                 onChange={onChangeComment}
               />
-              <PuzzleButton
-                title={'Comment'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!comment}
-              />
+              <div className={styles.commentsButton}>
+                {editButton ? (
+                  <PuzzleButton
+                    btnTitle={'Edit'}
+                    btnType={PuzzleButtonTypes.TextButton}
+                    btnClassName={styles.submitBtn}
+                    onClick={onEditButtonClick}
+                  />
+                ) : null}
+                <PuzzleButton
+                  btnTitle={'Comment'}
+                  btnType={PuzzleButtonTypes.TextButton}
+                  btnClassName={styles.submitBtn}
+                  onClick={onCommentClick}
+                />
+              </div>
             </div>
           </div>
 

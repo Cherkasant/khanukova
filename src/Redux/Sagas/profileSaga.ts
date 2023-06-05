@@ -3,10 +3,12 @@ import { all, put, takeLatest } from 'redux-saga/effects';
 
 import {
   editHeadCompanyListReducer,
+  getAllDevTeamEmployees,
   getECaseListReducer,
   getGeneratePassword,
   getHeadCompanyListReducer,
   getPersonalInfoReducer,
+  setAllDevTeamEmployees,
   setECaseListReducer,
   setGeneratePassword,
   setHeadCompanyListReducer,
@@ -64,12 +66,22 @@ function* getGeneratePasswordWorker() {
   }
 }
 
+function* getAllDevTeamEmployeesWorker() {
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllDevTeamEmployees);
+  if (ok && data) {
+    yield put(setAllDevTeamEmployees(data));
+  } else {
+    console.warn('Error while getting employees', problem);
+  }
+}
+
 export default function* profileSaga() {
   yield all([
     takeLatest(getHeadCompanyListReducer, getHeadCompanyListWorker),
     takeLatest(getECaseListReducer, getECaseListWorker),
     takeLatest(editHeadCompanyListReducer, editHeadCompanyListWorker),
     takeLatest(getPersonalInfoReducer, getPersonalInfoListWorker),
-    takeLatest(getGeneratePassword, getGeneratePasswordWorker)
+    takeLatest(getGeneratePassword, getGeneratePasswordWorker),
+    takeLatest(getAllDevTeamEmployees, getAllDevTeamEmployeesWorker)
   ]);
 }

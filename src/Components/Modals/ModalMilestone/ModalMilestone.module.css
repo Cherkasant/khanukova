@@ -108,6 +108,7 @@
   line-height: 140%;
   color: #212121;
   text-align: start;
+  margin-bottom: 4px;
 }
 
 .attachmentContainer {
@@ -163,6 +164,11 @@
   justify-content: space-between;
 }
 
+.dropdownControl > div {
+  display: flex;
+  align-items: center;
+}
+
 .dropdownPlaceholder {
   text-align: start;
 }
@@ -174,7 +180,6 @@
 .rightBlock {
   display: flex;
   flex-direction: column;
-  gap: 15px;
 }
 
 .label {
@@ -362,7 +367,6 @@
 }
 
 .commentInput {
-  height: 100px;
   border: 1px solid #4270a7;
   border-radius: 10px;
   padding: 20px;
@@ -466,7 +470,7 @@
 }
 
 .commentBlock {
-  padding: 5px 9px;
+  padding: 15px;
   display: flex;
   gap: 10px;
   flex-direction: column;
@@ -477,7 +481,7 @@
 
 .commentHeader {
   display: flex;
-  gap: 7px;
+  justify-content: space-between;
 }
 
 .commentOwner {
@@ -511,4 +515,40 @@
   align-items: center;
   text-align: center;
   color: #ffffff;
+}
+
+.commentList {
+  padding-right: 10px;
+  max-height: 180px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+.avatarContainer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.editContainer {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #a3a3a3;
+}
+
+.editButton {
+  cursor: pointer;
+}
+
+.editButton:hover {
+  color: #1258ca;
+}
+
+.commentsButton {
+  display: flex;
+  justify-content: flex-end;
 }

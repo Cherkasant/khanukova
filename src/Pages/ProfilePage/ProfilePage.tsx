@@ -15,6 +15,7 @@ import TabsListProfile from '../../Components/TabsListProfile';
 import Title from '../../Components/Title';
 import { CompanyList, Role, TabsProfile } from '../../Components/constants/@types';
 import {
+  getAllDevTeamEmployees,
   getGeneratePassword,
   getHeadCompanyListReducer,
   getPersonalInfoReducer
@@ -36,6 +37,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     dispatch(getPersonalInfoReducer());
+    dispatch(getAllDevTeamEmployees());
   }, []);
 
   const [name, setName] = useState('');

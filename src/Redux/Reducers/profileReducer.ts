@@ -1,20 +1,22 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ECaseListData } from '../../Components/constants/Modal/EcaseData';
-import { CompanyListData, EditCompanyListPayload, PersonalInfoData } from '../Types/profile';
+import { ArrayOfEmployees, CompanyListData, EditCompanyListPayload, PersonalInfoData } from '../Types/profile';
 
 type ProfileReducerState = {
   CompanyList: CompanyListData | null;
   ECaseList: ECaseListData | null;
   PersonalInfoList: PersonalInfoData | null;
   password: string;
+  employees: ArrayOfEmployees | [];
 };
 
 const initialState: ProfileReducerState = {
   CompanyList: null,
   ECaseList: null,
   PersonalInfoList: null,
-  password: ''
+  password: '',
+  employees: []
 };
 
 const profileSlice = createSlice({
@@ -40,6 +42,10 @@ const profileSlice = createSlice({
     getGeneratePassword: (state, action: PayloadAction<undefined>) => {},
     setGeneratePassword: (state, action: PayloadAction<string>) => {
       state.password = action.payload;
+    },
+    getAllDevTeamEmployees: (state, action: PayloadAction<undefined>) => {},
+    setAllDevTeamEmployees: (state, action: PayloadAction<ArrayOfEmployees>) => {
+      state.employees = action.payload;
     }
   }
 });
@@ -53,7 +59,9 @@ export const {
   getPersonalInfoReducer,
   setPersonalInfoReducer,
   getGeneratePassword,
-  setGeneratePassword
+  setGeneratePassword,
+  getAllDevTeamEmployees,
+  setAllDevTeamEmployees
 } = profileSlice.actions;
 
 const profileReducer = profileSlice.reducer;
