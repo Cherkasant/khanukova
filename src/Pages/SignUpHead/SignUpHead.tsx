@@ -1,7 +1,6 @@
 import { Form } from 'antd';
 import 'intl-tel-input/build/css/intlTelInput.css';
 import { useState } from 'react';
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
@@ -15,11 +14,14 @@ import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
 import Input from '../../Components/Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import PuzzleCheckbox from '../../Components/PuzzleCheckbox';
+import PuzzleDropdown from '../../Components/PuzzleDropdown';
 import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { registerUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
 import FormContainer from '../../Components/FormContainer';
+
+import { EMAIL_REGEX, FULL_NAME_REGEX, WITHOUT_SPACE } from '../../Components/constants/regexp.constants';
 
 import styles from './SignUpHead.module.css';
 
@@ -153,22 +155,33 @@ const SignUpHead = () => {
                 <Form.Item
                   name="fullName"
                   className={styles.formItem}
-                  rules={[{ required: true, message: 'Please input your full name!' }]}>
+                  rules={[
+                    {
+                      pattern: FULL_NAME_REGEX && WITHOUT_SPACE,
+                      message: 'Alphabetics (Latin) only are allowed, Maximum – 160 symbols'
+                    },
+                    {
+                      required: true,
+                      message: 'Please input your full name!',
+                      validateTrigger: 'onSignUp'
+                    }
+                  ]}>
                   <Input type={'text'} placeholder={'Full name'} />
                 </Form.Item>
                 <Form.Item
                   name="email"
                   className={styles.formItem}
-                  // rules={[{ required: true, message: 'Please input your email!' }]}
                   rules={[
                     {
-                      type: 'email',
+                      pattern: EMAIL_REGEX,
                       message: 'The input is not valid E-mail!'
                     },
                     {
                       required: true,
-                      message: 'Please input your E-mail!'
-                    }
+                      message: 'Please input your E-mail!',
+                      validateTrigger: 'onSignUp'
+                    },
+                    {}
                   ]}>
                   <Input type={'email'} placeholder={'Email'} />
                 </Form.Item>
@@ -178,7 +191,8 @@ const SignUpHead = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Please input your phone number!'
+                      message: 'Please input your phone number!',
+                      validateTrigger: 'onSignUp'
                     }
                   ]}>
                   <PhoneInput
@@ -194,19 +208,13 @@ const SignUpHead = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Please select users role in the project!'
+                      message: 'Please select users role in the project!',
+                      validateTrigger: 'onSignUp'
                     }
                   ]}>
-                  <Dropdown
+                  <PuzzleDropdown
                     options={!checkedCompany ? options : optionsHead}
                     placeholder="Role in the project"
-                    className={styles.dropdownContainer}
-                    controlClassName={styles.dropdownControl}
-                    placeholderClassName={styles.dropdownPlaceholder}
-                    arrowClassName={styles.dropdownArrow}
-                    arrowClosed={<span className={styles.arrowClosed} />}
-                    arrowOpen={<span className={styles.arrowOpen} />}
-                    menuClassName={styles.dropdownMenu}
                     value={checkRole}
                   />
                 </Form.Item>
@@ -219,8 +227,15 @@ const SignUpHead = () => {
                   <Form.Item
                     name="password"
                     className={styles.formItem}
-                    rules={[{ min: 8, message: 'Please input min 8 symbols!!!' }]}>
-                    <Input type={type} value={checkPassword} placeholder={'Password'} />
+                    rules={[
+                      { min: 9, message: 'Please input min 9 symbols!!!' },
+                      {
+                        required: true,
+                        message: 'Please confirm your password!',
+                        validateTrigger: 'onSignUp'
+                      }
+                    ]}>
+                    <Input type={type} value={checkPassword} placeholder={'Password'} minLength={9} maxLength={128} />
                   </Form.Item>
                   <div className={styles.eyeIcon} onClick={onEyeClick}>
                     {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
@@ -231,12 +246,20 @@ const SignUpHead = () => {
                     name="passwordConfirmation"
                     className={styles.formItem}
                     rules={[
+                      { min: 9, message: 'Please input min 9 symbols!!!' },
                       {
                         required: true,
-                        message: 'Please confirm your password!'
+                        message: 'Please confirm your password!',
+                        validateTrigger: 'onSignUp'
                       }
                     ]}>
-                    <Input type={typeConfirm} value={checkPasswordConfirm} placeholder={'Confirm password'} />
+                    <Input
+                      type={typeConfirm}
+                      value={checkPasswordConfirm}
+                      placeholder={'Confirm password'}
+                      minLength={9}
+                      maxLength={128}
+                    />
                   </Form.Item>
                   <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
                     {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
