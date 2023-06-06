@@ -162,7 +162,7 @@ const ModalSubTask = () => {
       dispatch(
         patchSubTaskComment({
           id: singleMilestoneComment?.id,
-          idSubTask: singleTask?.id,
+          idSubTask: singleMilestone?.id,
           data: { comment: comment, milestone: singleMilestone?.id, task: singleTask?.id, subtask: singleSubTask?.id },
           callback: () => {
             dispatch(getAllMilestoneComments(singleMilestone?.id));
