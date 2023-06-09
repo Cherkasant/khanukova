@@ -310,7 +310,6 @@ const Table = () => {
                   );
                 })}
               </tr>
-              {/*//   {row.isExpanded ? <tr></tr> : null}*/}
             </React.Fragment>
           );
         })}
