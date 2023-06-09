@@ -223,4 +223,23 @@ export type PatchProjectType = {
 };
 export type PatchProjectData = {
   project_name: string;
+  user_add?: Array<string>;
+  user_remove?: Array<string>;
 };
+
+export type ResponsibleType = {
+  id: number;
+  nickname: string;
+  account_photo: string;
+};
+
+export type AllResponsibleType = Array<ResponsibleType>;
+export type DependeciesMilestone = {
+  id: number;
+  milestoneId: number;
+};
+export type MilestoneDependence = {
+  id: number;
+  milestone_name: string;
+};
+export type ArrayMilestoneDependencies = Array<MilestoneDependence>;

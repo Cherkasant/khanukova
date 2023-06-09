@@ -19,7 +19,6 @@ import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import { getSingleProject, postMilestoneCard, setSelectedModalVisible } from '../../../Redux/Reducers/postReducer';
 import postSelector from '../../../Redux/Selectors/postSelector';
-import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
 import Input from '../../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../../constants/Modal/ModalData';
@@ -32,6 +31,10 @@ const ModalNewMilestone = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
+  const allResponsible = useSelector(postSelector.getAllResponsible);
+  const checkbox = allResponsible.map((el) => {
+    return { value: el.nickname, label: el.nickname };
+  });
   const projectTitle = useSelector(postSelector.getProjectTitle);
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getModal);
@@ -79,6 +82,7 @@ const ModalNewMilestone = () => {
   const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
   };
+  const [responsible, setResponsible] = useState<any>(null);
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
@@ -184,8 +188,10 @@ const ModalNewMilestone = () => {
             <div className={styles.inputsBlock}>
               <div>
                 <Cascader
-                  options={ResponsibleCheckbox}
+                  options={checkbox}
                   multiple={true}
+                  onChange={setResponsible}
+                  value={responsible}
                   className={styles.cascader}
                   popupClassName={styles.popup}
                   placeholder={'Add responsible'}

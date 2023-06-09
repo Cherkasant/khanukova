@@ -5,8 +5,10 @@ import {
   deleteMilestone,
   deleteSubTask,
   deleteTask,
+  getAllMilestoneDependencies,
   getAllMilestones,
   getAllProjects,
+  getAllResponsible,
   getSingleMilestone,
   getSingleProject,
   getSingleSubTask,
@@ -20,8 +22,10 @@ import {
   postProject,
   postSubTask,
   postTask,
+  setAllMilestoneDependencies,
   setAllMilestones,
   setAllProjects,
+  setAllResponsible,
   setModalMilestone,
   setModalSubTask,
   setModalTask,
@@ -35,6 +39,7 @@ import {
 } from '../Reducers/postReducer';
 import {
   DeleteMilestoneType,
+  DependeciesMilestone,
   MilestoneDataPayload,
   PatchMilestoneType,
   PatchProjectType,
@@ -235,6 +240,25 @@ function* patchProjectWorker(action: PayloadAction<PatchProjectType>) {
   }
 }
 
+function* getAllResponsibleWorker(action: PayloadAction<number>) {
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllResponsible, action.payload);
+  if (ok && data) {
+    yield put(setAllResponsible(data));
+  } else {
+    console.warn('Error while getting responsible', problem);
+  }
+}
+
+function* getAllMilestoneDependenciesWorker(action: PayloadAction<DependeciesMilestone>) {
+  const { id, milestoneId } = action.payload;
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllDependencies, id, milestoneId);
+  if (ok && data) {
+    yield put(setAllMilestoneDependencies(data));
+  } else {
+    console.warn('Error while getting milestone dependencies', problem);
+  }
+}
+
 export default function* postSaga() {
   yield all([
     takeLatest(getTaskCard, getTaskCardWorker),
@@ -254,6 +278,8 @@ export default function* postSaga() {
     takeLatest(getSingleSubTask, getSingleSubTaskWorker),
     takeLatest(patchSubTask, patchSubTaskWorker),
     takeLatest(deleteSubTask, deleteSubTaskWorker),
-    takeLatest(patchProject, patchProjectWorker)
+    takeLatest(patchProject, patchProjectWorker),
+    takeLatest(getAllResponsible, getAllResponsibleWorker),
+    takeLatest(getAllMilestoneDependencies, getAllMilestoneDependenciesWorker)
   ]);
 }

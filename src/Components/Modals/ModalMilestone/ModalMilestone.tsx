@@ -25,12 +25,13 @@ import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import {
   deleteMilestone,
+  getAllMilestoneDependencies,
+  getAllResponsible,
   getSingleProject,
   patchMilestone,
   setModalMilestone
 } from '../../../Redux/Reducers/postReducer';
 import postSelector from '../../../Redux/Selectors/postSelector';
-import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
 import Input from '../../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 import { Colors, Dependence, PaymentStatus, Priority, Progress, Status } from '../../constants/Modal/ModalData';
@@ -53,6 +54,14 @@ const ModalMilestone = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
+  const allDependencies = useSelector(postSelector.getAllMilestoneDependencies);
+  const ArrayOfDependencies = allDependencies.map((el) => {
+    return { value: el.id.toString(), label: el.milestone_name };
+  });
+  const allResponsible = useSelector(postSelector.getAllResponsible);
+  const checkbox = allResponsible.map((el) => {
+    return { value: el.nickname, label: el.nickname };
+  });
   const singleMilestoneComment = useSelector(commentsSelector.getSingleMilestoneComment);
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getModalMilestone);
@@ -85,6 +94,7 @@ const ModalMilestone = () => {
       setLabel(singleMilestone?.labels);
       setColors(singleMilestone?.color_labels);
       setProgress(progress);
+      setResponsible(singleMilestone?.responsible);
       setStatus(singleMilestone?.status);
       setPaymentStatus(singleMilestone?.payment_status);
       setLaunchDate(singleMilestone?.start_date);
@@ -102,14 +112,14 @@ const ModalMilestone = () => {
             milestone_name: title,
             description: descriptionValue,
             attachment: null,
-            responsible: ['3'],
+            responsible: responsible.label,
             priority: priority.value,
             start_date: launchDate,
             deadline: deadline,
             duration: duration,
             labels: label,
             color_labels: colors.value,
-            dependence: [],
+            dependence: [dependence.value],
             progress: progress.value,
             status: status.value,
             payment_status: paymentStatus.value,
@@ -179,6 +189,7 @@ const ModalMilestone = () => {
     }
     setComment('');
   };
+  const [responsible, setResponsible] = useState<any>(null);
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
@@ -195,8 +206,11 @@ const ModalMilestone = () => {
   };
   useEffect(() => {
     setEdit(false);
-    // setTitle('Title');
-  }, []);
+    if (singleProject && singleMilestone) {
+      dispatch(getAllResponsible(singleProject?.id));
+      dispatch(getAllMilestoneDependencies({ id: singleProject?.id, milestoneId: singleMilestone?.id }));
+    }
+  }, [singleProject, singleMilestone]);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date: Dayjs | null) => {
     setFinishDate(date);
@@ -360,8 +374,10 @@ const ModalMilestone = () => {
             <div className={styles.inputsBlock}>
               <div>
                 <Cascader
-                  options={ResponsibleCheckbox}
+                  options={checkbox}
                   multiple={true}
+                  onChange={setResponsible}
+                  value={responsible}
                   className={styles.cascader}
                   popupClassName={styles.popup}
                   placeholder={'Add responsible'}
@@ -449,7 +465,7 @@ const ModalMilestone = () => {
               <div>
                 <div className={styles.title}>{'Dependence'}</div>
                 <Dropdown
-                  options={Dependence}
+                  options={ArrayOfDependencies}
                   onChange={setDependence}
                   value={dependence}
                   placeholder="Nothing selected"

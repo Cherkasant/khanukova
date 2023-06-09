@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -86,12 +86,17 @@ const SingleProject = () => {
   useEffect(() => {
     if (singleProject) {
       setTitle(singleProject?.project_name);
+      setTitleDown(title);
     }
   }, [singleProject]);
 
   const [title, setTitle] = useState('');
+  const [titleDown, setTitleDown] = useState('');
   const [edit, setEdit] = useState(false);
-  const onEditClick = () => {
+  const titleModalRef = useRef<HTMLDivElement>(null);
+  const onEditClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    setTitleDown('');
     setEdit(!edit);
   };
 
@@ -117,23 +122,30 @@ const SingleProject = () => {
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <div className={styles.widgets}>
-          <div className={styles.titleContainer}>
+          <div className={classNames(styles.titleContainer, { [styles.titleContainerDiv]: titleDown })}>
             <div
               className={classNames(styles.popoverTitle, {
                 [styles.hide]: singleProject
               })}>
               {'Please enter a project name and press Enter to get started'}
             </div>
-            <Input
-              value={title}
-              onChange={(value) => setTitle(value)}
-              onKeyDown={onChangeKeyDown}
-              className={styles.title}
-              placeholder={'New project'}
-              disabled={!edit}
-            />
+            {!titleDown ? (
+              <Input
+                value={title}
+                onChange={(value) => setTitle(value)}
+                onKeyDown={onChangeKeyDown}
+                className={styles.title}
+                placeholder={'New project'}
+                disabled={!edit}
+              />
+            ) : (
+              <div className={styles.titleDiv}>{title}</div>
+            )}
             {!edit ? (
-              <div className={styles.edit} onClick={onEditClick}>
+              <div
+                ref={titleModalRef}
+                className={classNames(styles.edit, { [styles.editDiv]: titleDown })}
+                onClick={onEditClick}>
                 <EditTitleIcon />
               </div>
             ) : null}
