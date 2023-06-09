@@ -192,7 +192,7 @@ const deleteSubTask = (token: string, id: number) => {
   return API.delete(`/project-planning/sub-task/${id}/`, {}, { headers: { Authorization: `JWT ${token}` } });
 };
 const patchProject = (token: string, project_name: string, id: number) => {
-  return API.patch(`/project-planning/${id}/`, project_name, { headers: { Authorization: `JWT ${token}` } });
+  return API.patch(`/project-planning/project/${id}/`, project_name, { headers: { Authorization: `JWT ${token}` } });
 };
 
 const getProjectComments = (token: string, id: number) => {
@@ -269,6 +269,17 @@ const getAllDevTeamEmployees = (token: string) => {
   );
 };
 
+const getAllResponsible = (token: string, id: number) => {
+  return API.get(`/project-planning/responsible/?project=${id}`, {}, { headers: { Authorization: `JWT ${token}` } });
+};
+const getAllDependencies = (token: string, id: number, idMilestone: number) => {
+  return API.get(
+    `/project-planning/dependencies/?project=${id}&milestone=${idMilestone}`,
+    {},
+    { headers: { Authorization: `JWT ${token}` } }
+  );
+};
+
 export default {
   registerUser,
   sendResetEmail,
@@ -320,5 +331,7 @@ export default {
   patchTaskComment,
   getAllSubTaskComments,
   deleteSubTaskComment,
-  patchSubTaskComment
+  patchSubTaskComment,
+  getAllResponsible,
+  getAllDependencies
 };

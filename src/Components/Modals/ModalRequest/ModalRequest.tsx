@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import 'react-dropdown/style.css';
 import Dropdown from 'react-dropdown';
 import classNames from 'classnames';
@@ -15,7 +15,9 @@ import { ClientsRequestStatus, Priority } from '../../constants/Modal/ModalData'
 import postSelector from '../../../Redux/Selectors/postSelector';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 import { LabelCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
-import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
+import { ArrowDropDownIcon } from '../../../Assets/Table/ArrowDropDownIcon';
+
+import { Close } from '../../../Assets/Table/Close';
 
 import styles from './ModalRequest.module.css';
 
@@ -68,10 +70,9 @@ const ModalRequest = () => {
                 onChange={onChangeDescription}
               />
               <PuzzleButton
-                title={'Submit new'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!descriptionValue}
+                btnTitle={'Submit new'}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.submitBtn}
               />
             </div>
 
@@ -101,16 +102,15 @@ const ModalRequest = () => {
                 onChange={onChangeComment}
               />
               <PuzzleButton
-                title={'Comment'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!comment}
+                btnTitle={'Comment'}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.submitBtn}
               />
             </div>
           </div>
           <div className={styles.rightBlock}>
             <div className={styles.inputsBlock}>
-              <div>
+              <div className={styles.titleBox}>
                 <div className={styles.title}>{'Responsible'}</div>
                 <Cascader
                   options={LabelCheckbox}
@@ -123,7 +123,7 @@ const ModalRequest = () => {
                   suffixIcon={<ArrowDropDownIcon />}
                 />
               </div>
-              <div>
+              <div className={styles.titleBox}>
                 <div className={styles.title}>{'Priority'}</div>
                 <Dropdown
                   options={Priority}
@@ -133,12 +133,12 @@ const ModalRequest = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
-              <div>
+              <div className={styles.titleBox}>
                 <div className={styles.title}>{'Status'}</div>
                 <Dropdown
                   options={ClientsRequestStatus}
@@ -148,8 +148,8 @@ const ModalRequest = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>

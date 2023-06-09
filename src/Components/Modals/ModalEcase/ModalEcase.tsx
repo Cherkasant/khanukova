@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import 'react-dropdown/style.css';
 import Dropdown from 'react-dropdown';
@@ -19,7 +19,9 @@ import profileSelectors from '../../../Redux/Selectors/profileSelectors';
 import { getECaseListReducer } from '../../../Redux/Reducers/profileReducer';
 import postSelector from '../../../Redux/Selectors/postSelector';
 import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
-import { ArrowDropDownIcon } from '../../../Assets/icons/ArrowDropDownIcon';
+import { ArrowDropDownIcon } from '../../../Assets/Table/ArrowDropDownIcon';
+
+import { Close } from '../../../Assets/Table/Close';
 
 import styles from './ModalEcase.module.css';
 
@@ -123,12 +125,12 @@ const ModalEcase = () => {
                 value={descriptionValue}
                 onChange={onChangeDescription}
               />
-              <PuzzleButton
-                title={'Submit new'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!descriptionValue}
-              />
+              {/*<PuzzleButton*/}
+              {/*  btnTitle={'Submit new'}*/}
+              {/*  btnType={PuzzleButtonTypes.TextButton}*/}
+              {/*  btnClassName={styles.submitBtn}*/}
+              {/*  disabled={!descriptionValue}*/}
+              {/*/>*/}
             </div>
 
             <div className={styles.attachmentContainer}>
@@ -157,17 +159,16 @@ const ModalEcase = () => {
                 onChange={onChangeComment}
               />
               <PuzzleButton
-                title={'Comment'}
-                type={PuzzleButtonTypes.TextButton}
-                className={styles.submitBtn}
-                disabled={!comment}
+                btnTitle={'Comment'}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.submitBtn}
               />
             </div>
           </div>
 
           <div className={styles.rightBlock}>
             <div className={styles.inputsBlock}>
-              <div>
+              <div className={styles.titleContainer}>
                 <div className={styles.title}>{'Responsible'}</div>
                 <Cascader
                   options={ResponsibleCheckbox}
@@ -180,7 +181,7 @@ const ModalEcase = () => {
                   suffixIcon={<ArrowDropDownIcon />}
                 />
               </div>
-              <div>
+              <div className={styles.titleContainer}>
                 <div className={styles.title}>{'Priority'}</div>
                 <Dropdown
                   options={Priority}
@@ -190,12 +191,12 @@ const ModalEcase = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>
-              <div>
+              <div className={styles.titleContainer}>
                 <div className={styles.title}>{'Status'}</div>
                 <Dropdown
                   options={ClientsRequestStatus}
@@ -205,8 +206,8 @@ const ModalEcase = () => {
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<span className={styles.arrowClosed} />}
-                  arrowOpen={<span className={styles.arrowOpen} />}
+                  arrowClosed={<ArrowDropDownIcon />}
+                  arrowOpen={<Close />}
                   menuClassName={styles.dropdownMenu}
                 />
               </div>

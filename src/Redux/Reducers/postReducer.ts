@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
+  AllResponsibleType,
+  ArrayMilestoneDependencies,
   ArrayOfProjectType,
   CardTaskType,
   DeleteMilestoneType,
+  DependeciesMilestone,
   MilestoneDataPayload,
   MilestoneType,
   PatchMilestoneType,
@@ -47,6 +50,8 @@ type PostReducerState = {
   singleSubTask: SubTaskTypeTable | null;
   modalSubTask: boolean;
   isCloseProjectModalOpened: boolean;
+  allResponsible: AllResponsibleType | [];
+  milestoneDependencies: ArrayMilestoneDependencies | [];
 };
 
 const initialState: PostReducerState = {
@@ -75,7 +80,9 @@ const initialState: PostReducerState = {
   modalTask: false,
   singleSubTask: null,
   modalSubTask: false,
-  isCloseProjectModalOpened: false
+  isCloseProjectModalOpened: false,
+  allResponsible: [],
+  milestoneDependencies: []
 };
 
 const postsSlice = createSlice({
@@ -177,7 +184,15 @@ const postsSlice = createSlice({
     setCloseProjectModal: (state, action: PayloadAction<boolean>) => {
       state.isCloseProjectModalOpened = action.payload;
     },
-    patchProject: (state, action: PayloadAction<PatchProjectType>) => {}
+    patchProject: (state, action: PayloadAction<PatchProjectType>) => {},
+    getAllResponsible: (state, action: PayloadAction<number>) => {},
+    setAllResponsible: (state, action: PayloadAction<AllResponsibleType>) => {
+      state.allResponsible = action.payload;
+    },
+    getAllMilestoneDependencies: (state, action: PayloadAction<DependeciesMilestone>) => {},
+    setAllMilestoneDependencies: (state, action: PayloadAction<ArrayMilestoneDependencies>) => {
+      state.milestoneDependencies = action.payload;
+    }
   }
 });
 
@@ -225,7 +240,11 @@ export const {
   patchSubTask,
   deleteSubTask,
   setCloseProjectModal,
-  patchProject
+  patchProject,
+  getAllResponsible,
+  setAllResponsible,
+  getAllMilestoneDependencies,
+  setAllMilestoneDependencies
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;

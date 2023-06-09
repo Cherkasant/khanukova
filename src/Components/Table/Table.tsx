@@ -9,6 +9,7 @@ import { ArrowDropDownIcon } from '../../Assets/Table/ArrowDropDownIcon';
 import { RotateSortIcon } from '../../Assets/icons/RotateSortIcon';
 import { SortIcon } from '../../Assets/icons/SortIcon';
 import {
+  getAllResponsible,
   getSingleMilestone,
   getSingleSubTask,
   getSingleTask,
@@ -112,6 +113,7 @@ const Table = () => {
           onClick={() => {
             if (singleProject) {
               dispatch(setProjectTitle(singleProject?.project_name));
+              dispatch(getAllResponsible(singleProject?.id));
               dispatch(setSelectedModalVisible(true));
             }
           }}>
@@ -224,7 +226,9 @@ const Table = () => {
       accessor: 'responsible',
       Cell: (props) => (
         <div className={styles.responsibleContainer}>
-          <div className={styles.responsibleCell}>{props.value}</div>
+          <div className={styles.responsibleCell} onClick={() => console.log(props)}>
+            {props.value}
+          </div>
         </div>
       )
     },
