@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
+  addResponsibleType,
   AllResponsibleType,
   ArrayMilestoneDependencies,
   ArrayOfProjectType,
@@ -16,12 +17,14 @@ import {
   ProjectData,
   ProjectDataPayload,
   ProjectType,
+  removeResponsibleType,
   SubTaskDataPayload,
   SubTaskTypeTable,
   TaskDataPayload,
   TaskTypeTable,
   TaskTypeWithID
 } from '../Types/tasks';
+import { CardsListType } from '../../Components/constants/@types';
 
 type PostReducerState = {
   isSelectedImageModalIsOpened: boolean;
@@ -52,6 +55,7 @@ type PostReducerState = {
   isCloseProjectModalOpened: boolean;
   allResponsible: AllResponsibleType | [];
   milestoneDependencies: ArrayMilestoneDependencies | [];
+  allHomeScreenProjects: CardsListType | [];
 };
 
 const initialState: PostReducerState = {
@@ -82,7 +86,8 @@ const initialState: PostReducerState = {
   modalSubTask: false,
   isCloseProjectModalOpened: false,
   allResponsible: [],
-  milestoneDependencies: []
+  milestoneDependencies: [],
+  allHomeScreenProjects: []
 };
 
 const postsSlice = createSlice({
@@ -192,6 +197,12 @@ const postsSlice = createSlice({
     getAllMilestoneDependencies: (state, action: PayloadAction<DependeciesMilestone>) => {},
     setAllMilestoneDependencies: (state, action: PayloadAction<ArrayMilestoneDependencies>) => {
       state.milestoneDependencies = action.payload;
+    },
+    addResponsible: (state, action: PayloadAction<addResponsibleType>) => {},
+    removeResponsible: (state, action: PayloadAction<removeResponsibleType>) => {},
+    getHomeScreenProjects: (state, action: PayloadAction<undefined>) => {},
+    setHomeScreenProjects: (state, action: PayloadAction<CardsListType>) => {
+      state.allHomeScreenProjects = action.payload;
     }
   }
 });
@@ -244,7 +255,11 @@ export const {
   getAllResponsible,
   setAllResponsible,
   getAllMilestoneDependencies,
-  setAllMilestoneDependencies
+  setAllMilestoneDependencies,
+  addResponsible,
+  removeResponsible,
+  getHomeScreenProjects,
+  setHomeScreenProjects
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;

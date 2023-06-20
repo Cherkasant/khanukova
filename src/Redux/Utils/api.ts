@@ -8,9 +8,16 @@ import {
   ResetPasswordData,
   SignInUserData
 } from '../Types/auth';
-import { CompanyListData } from '../Types/profile';
+import { CompanyListData, PatchPersonalData } from '../Types/profile';
 import { ResoursesType } from '../Types/Resourses';
-import { MilestoneModalType, ProjectData, SubTaskModalType, TaskModalType } from '../Types/tasks';
+import {
+  addResponsibleType,
+  MilestoneModalType,
+  ProjectData,
+  removeResponsibleType,
+  SubTaskModalType,
+  TaskModalType
+} from '../Types/tasks';
 import { PostMilestoneCommentType } from '../Types/comments';
 
 const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' });
@@ -280,6 +287,26 @@ const getAllDependencies = (token: string, id: number, idMilestone: number) => {
   );
 };
 
+const addResponsible = (token: string, id: number, data: addResponsibleType) => {
+  return API.patch(`/project-planning/milestone/${id}/`, data, {
+    headers: { Authorization: `JWT ${token}` }
+  });
+};
+const removeResponsible = (token: string, id: number, data: removeResponsibleType) => {
+  return API.patch(`/project-planning/milestone/${id}/`, data, {
+    headers: { Authorization: `JWT ${token}` }
+  });
+};
+
+const patchUserInfo = (token: string, data: PatchPersonalData) => {
+  return API.patch('/auth/users/me/', data, {
+    headers: { Authorization: `JWT ${token}` }
+  });
+};
+const getHomeScreenProjects = (token: string) => {
+  return API.get('/project-planning/home-screen/', {}, { headers: { Authorization: `JWT ${token}` } });
+};
+
 export default {
   registerUser,
   sendResetEmail,
@@ -333,5 +360,9 @@ export default {
   deleteSubTaskComment,
   patchSubTaskComment,
   getAllResponsible,
-  getAllDependencies
+  getAllDependencies,
+  addResponsible,
+  removeResponsible,
+  patchUserInfo,
+  getHomeScreenProjects
 };

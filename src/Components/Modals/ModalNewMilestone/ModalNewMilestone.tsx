@@ -46,7 +46,7 @@ const ModalNewMilestone = () => {
           milestone_name: title,
           description: descriptionValue,
           attachment: null,
-          responsible: [],
+          responsible_data: [],
           priority: priority.value,
           start_date: launchDate,
           deadline: deadline,
@@ -276,17 +276,17 @@ const ModalNewMilestone = () => {
               </div>
               <div>
                 <div className={styles.title}>{'Dependence'}</div>
-                <Dropdown
-                  options={Dependence}
+                <Cascader
+                  options={checkbox}
+                  multiple={true}
                   onChange={setDependence}
                   value={dependence}
-                  placeholder="Nothing selected"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
+                  className={styles.cascader}
+                  popupClassName={styles.popup}
+                  placeholder={'Add responsible'}
+                  maxTagCount={'responsive'}
+                  showArrow={true}
+                  suffixIcon={<ArrowDropDownIcon />}
                 />
               </div>
               <div>

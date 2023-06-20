@@ -27,5 +27,6 @@ export default {
   getModalSubTask: (state: RootState) => state.postsReducer.modalSubTask,
   getCloseProjectModal: (state: RootState) => state.postsReducer.isCloseProjectModalOpened,
   getAllResponsible: (state: RootState) => state.postsReducer.allResponsible,
-  getAllMilestoneDependencies: (state: RootState) => state.postsReducer.milestoneDependencies
+  getAllMilestoneDependencies: (state: RootState) => state.postsReducer.milestoneDependencies,
+  getAllHomeScreenProjects: (state: RootState) => state.postsReducer.allHomeScreenProjects
 };
