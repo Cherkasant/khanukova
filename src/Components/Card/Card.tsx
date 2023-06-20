@@ -42,11 +42,11 @@ const Card: FC<CardProps> = ({ card, edit }) => {
     setShowClose(false);
   };
 
-  const { projectName, tasks, deadline, budget, paid } = card;
+  const { project_name, payments, deadline, progress } = card;
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.title}>{projectName}</div>
+        <div className={styles.title}>{project_name}</div>
         {isHead ? (
           <div className={styles.iconEdit} onClick={onEditProjectClick}>
             <EditProjectIcon />
@@ -74,7 +74,7 @@ const Card: FC<CardProps> = ({ card, edit }) => {
       <div className={styles.projectContainer}>
         <div className={styles.task}>
           <div className={styles.taskName}>Tasks</div>
-          <div className={styles.taskProgress}>{tasks}</div>
+          <div className={styles.taskProgress}>{progress}</div>
         </div>
         <div className={styles.task}>
           <div className={styles.taskName}>Deadline</div>
@@ -82,11 +82,11 @@ const Card: FC<CardProps> = ({ card, edit }) => {
         </div>
         <div className={styles.task}>
           <div className={styles.taskName}>Budget</div>
-          <div className={styles.taskProgress}>{budget}</div>
+          <div className={styles.taskProgress}>{''}</div>
         </div>
         <div className={styles.task}>
           <div className={styles.taskName}>Paid</div>
-          <div className={styles.taskProgress}>{paid}</div>
+          <div className={styles.taskProgress}>{payments}</div>
         </div>
       </div>
     </div>

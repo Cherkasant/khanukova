@@ -21,8 +21,10 @@
 }
 
 .containerBlockWithBtn {
+  height: 75%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .containerInfo {
@@ -81,9 +83,53 @@
 }
 
 .input {
-  width: 320px;
-  height: 40px;
+  box-sizing: border-box;
+  padding: 12px;
   border: 1px solid #a3a3a3;
+  width: 320px;
+  height: 48px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.input:hover {
+  border: 1px solid #4270a7;
+}
+
+.input:focus {
+  border: 1px solid #1258ca;
+  box-shadow: 0 0 4px rgba(18, 88, 202, 0.75);
+}
+
+.input:active {
+  color: #313037;
+}
+
+.input::placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3;
+}
+
+.input:focus::placeholder {
+  position: absolute;
+  top: 2px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #a3a3a3;
+}
+
+input:invalid {
+  border: 1px solid #bf3535;
+}
+
+.input:focus:invalid {
+  border: 1px solid #bf3535;
+  box-shadow: 0 0 4px rgba(191, 53, 53, 0.75);
 }
 
 .inputBig {
@@ -226,13 +272,11 @@
   display: flex;
   justify-content: end;
   gap: 20px;
-  position: absolute;
-  bottom: 100px;
-  right: 35px;
 }
 
 .buttonCancel {
   width: 147px;
+  height: 40px;
   background: transparent;
   border-radius: 10px;
   border: 1px solid #0e4298;
@@ -250,6 +294,7 @@
 
 .buttonSave {
   width: 147px;
+  height: 40px;
   border-radius: 10px;
   color: #ffffff;
   font-family: 'Inter';
@@ -350,4 +395,31 @@
 
 .editIcon:hover {
   cursor: pointer;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mainBlock {
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.titleInput {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #212121;
+}
+
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }

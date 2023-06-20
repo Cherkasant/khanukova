@@ -24,6 +24,7 @@ import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
 import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import {
+  addResponsible,
   deleteMilestone,
   getAllMilestoneDependencies,
   getAllResponsible,
@@ -60,8 +61,9 @@ const ModalMilestone = () => {
   });
   const allResponsible = useSelector(postSelector.getAllResponsible);
   const checkbox = allResponsible.map((el) => {
-    return { value: el.nickname, label: el.nickname };
+    return { value: el.id, label: el.nickname };
   });
+
   const singleMilestoneComment = useSelector(commentsSelector.getSingleMilestoneComment);
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getModalMilestone);
@@ -70,7 +72,10 @@ const ModalMilestone = () => {
   const COMMENTS_LIST = commentsMilestone.filter((el) => el.task === null);
   const [refreshComments, setRefreshComments] = useState(false);
   const [editButton, setEditButton] = useState(false);
-
+  const defaultResponsible = singleMilestone?.responsible_data.map((el) => {
+    return el.id;
+  });
+  console.log(defaultResponsible);
   useEffect(() => {
     if (refreshComments && singleMilestone) {
       dispatch(getAllMilestoneComments(singleMilestone?.id));
@@ -94,11 +99,12 @@ const ModalMilestone = () => {
       setLabel(singleMilestone?.labels);
       setColors(singleMilestone?.color_labels);
       setProgress(progress);
-      setResponsible(singleMilestone?.responsible);
+      setResponsible(singleMilestone?.responsible_data.map((el) => el.nickname));
       setStatus(singleMilestone?.status);
       setPaymentStatus(singleMilestone?.payment_status);
       setLaunchDate(singleMilestone?.start_date);
       setDeadline(singleMilestone?.deadline);
+      setDependence(singleMilestone?.dependence);
       dispatch(getAllMilestoneComments(singleMilestone?.id));
     }
   }, [singleMilestone]);
@@ -112,7 +118,7 @@ const ModalMilestone = () => {
             milestone_name: title,
             description: descriptionValue,
             attachment: null,
-            responsible: responsible.label,
+            responsible_data: responsible.label,
             priority: priority.value,
             start_date: launchDate,
             deadline: deadline,
@@ -378,6 +384,20 @@ const ModalMilestone = () => {
                   multiple={true}
                   onChange={setResponsible}
                   value={responsible}
+                  defaultValue={responsible}
+                  onDropdownVisibleChange={(open: boolean) =>
+                    open === false
+                      ? dispatch(
+                          addResponsible({
+                            id: singleMilestone?.id,
+                            data: { responsible_add: [] },
+                            callback: () => {
+                              console.log('check');
+                            }
+                          })
+                        )
+                      : null
+                  }
                   className={styles.cascader}
                   popupClassName={styles.popup}
                   placeholder={'Add responsible'}
@@ -464,17 +484,17 @@ const ModalMilestone = () => {
               </div>
               <div>
                 <div className={styles.title}>{'Dependence'}</div>
-                <Dropdown
+                <Cascader
                   options={ArrayOfDependencies}
+                  multiple={true}
                   onChange={setDependence}
                   value={dependence}
-                  placeholder="Nothing selected"
-                  className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
+                  className={styles.cascader}
+                  popupClassName={styles.popup}
+                  placeholder={'Add dependence'}
+                  maxTagCount={'responsive'}
+                  showArrow={true}
+                  suffixIcon={<ArrowDropDownIcon />}
                 />
               </div>
               <div>

@@ -2,7 +2,7 @@ export type MilestoneModalType = {
   milestone_name: string | undefined;
   description: string;
   attachment: string | null;
-  responsible: Array<string>;
+  responsible_data: AllResponsibleType | [];
   priority: string;
   start_date: string;
   deadline: string;
@@ -97,7 +97,7 @@ export type MilestoneType = {
   milestone_name: string;
   description: string;
   attachment: string | null;
-  responsible: Array<string> | [];
+  responsible_data: AllResponsibleType | [];
   priority: string;
   start_date: string;
   deadline: string;
@@ -117,7 +117,7 @@ export type MilestoneTableType = {
   milestone_name: string;
   description: string;
   attachment: string | null;
-  responsible: Array<string> | [];
+  responsible_data: AllResponsibleType | [];
   priority: string;
   start_date: string;
   deadline: string;
@@ -243,3 +243,17 @@ export type MilestoneDependence = {
   milestone_name: string;
 };
 export type ArrayMilestoneDependencies = Array<MilestoneDependence>;
+
+export type addResponsibleType = {
+  id: number | undefined;
+  data: responsibleType;
+  callback: () => void;
+};
+export type responsibleType = {
+  responsible_add: Array<number>;
+};
+export type removeResponsibleType = {
+  id: number | undefined;
+  responsible_remove: Array<number>;
+  callback: () => void;
+};

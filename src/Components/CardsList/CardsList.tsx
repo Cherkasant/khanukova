@@ -6,15 +6,15 @@ import Card from '../Card';
 import styles from './CardsLisrs.module.css';
 
 type CardsListProps = {
-  cardsList: CardsListType | null
-}
+  cardsList: CardsListType | null;
+};
 
 const CardsList: FC<CardsListProps> = ({ cardsList }) => {
   return cardsList?.length ? (
     <div className={styles.container}>
       <div className={styles.cardsContainer}>
         {cardsList.map((card, index) => {
-          return <Card key={index} card={card} />;
+          return <Card key={card.id} card={card} />;
         })}
       </div>
     </div>

@@ -3,7 +3,6 @@
   box-shadow: 0 4px 50px 10px rgba(18, 88, 202, 0.08);
   border-radius: 10px;
   overflow: auto;
-  height: 70%;
 }
 
 .listContainer div:nth-child(2n) {
@@ -48,4 +47,21 @@
 ::-webkit-scrollbar {
   width: 5px;
   background: #1258ca;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mainBlock {
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.buttonSave {
+  width: 147px;
+  height: 40px;
 }

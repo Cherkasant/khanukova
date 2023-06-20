@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import classNames from 'classnames';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { SearchIcon } from '../../Assets/Home/SearchIcon';
 import CardsList from '../../Components/CardsList';
@@ -22,6 +22,8 @@ import { ArrowDropDownIcon } from '../../Assets/Table/ArrowDropDownIcon';
 import { Close } from '../../Assets/Table/Close';
 
 import { SortIcon } from '../../Assets/Home/SortIcon';
+
+import { getHomeScreenProjects } from '../../Redux/Reducers/postReducer';
 
 import styles from './Home.module.css';
 
@@ -50,6 +52,12 @@ const SORT_LIST = [
   { value: 'Status', label: 'Status', icon: <SortIcon /> }
 ];
 const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getHomeScreenProjects());
+  });
+
+  const AllProjects = useSelector(postSelector.getAllHomeScreenProjects);
   const activeModal = useSelector(postSelector.getCloseProjectModal);
   const navigate = useNavigate();
   const [inputSearch, setInputSearch] = useState('');
@@ -107,7 +115,7 @@ const Home = () => {
         </div>
       </div>
 
-      <CardsList cardsList={MOCK_CARDS_LIST} />
+      <CardsList cardsList={AllProjects} />
       <div
         className={classNames(styles.wrapModal, {
           [styles.showModal]: activeModal

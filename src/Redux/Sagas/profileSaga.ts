@@ -3,6 +3,7 @@ import { all, put, takeLatest } from 'redux-saga/effects';
 
 import {
   editHeadCompanyListReducer,
+  editPersonalInfo,
   getAllDevTeamEmployees,
   getECaseListReducer,
   getGeneratePassword,
@@ -14,7 +15,7 @@ import {
   setHeadCompanyListReducer,
   setPersonalInfoReducer
 } from '../Reducers/profileReducer';
-import { EditCompanyListPayload } from '../Types/profile';
+import { EditCompanyListPayload, EditPersonalType } from '../Types/profile';
 import API from '../Utils/api';
 
 import callCheckingAuth from './callCheckingAuth';
@@ -48,8 +49,8 @@ function* getECaseListWorker() {
 }
 
 function* editHeadCompanyListWorker(action: PayloadAction<EditCompanyListPayload>) {
-  const { callback, id } = action.payload;
-  const { ok, problem } = yield callCheckingAuth(API.editHeadCompanyList, id);
+  const { data, callback, id } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.editHeadCompanyList, id, data);
   if (ok) {
     callback();
   } else {
@@ -75,6 +76,16 @@ function* getAllDevTeamEmployeesWorker() {
   }
 }
 
+function* editPersonalInfoWorker(action: PayloadAction<EditPersonalType>) {
+  const { data, callback } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.patchUserInfo, data);
+  if (ok) {
+    callback();
+  } else {
+    console.warn('Error editing personal info', problem);
+  }
+}
+
 export default function* profileSaga() {
   yield all([
     takeLatest(getHeadCompanyListReducer, getHeadCompanyListWorker),
@@ -82,6 +93,7 @@ export default function* profileSaga() {
     takeLatest(editHeadCompanyListReducer, editHeadCompanyListWorker),
     takeLatest(getPersonalInfoReducer, getPersonalInfoListWorker),
     takeLatest(getGeneratePassword, getGeneratePasswordWorker),
-    takeLatest(getAllDevTeamEmployees, getAllDevTeamEmployeesWorker)
+    takeLatest(getAllDevTeamEmployees, getAllDevTeamEmployeesWorker),
+    takeLatest(editPersonalInfo, editPersonalInfoWorker)
   ]);
 }

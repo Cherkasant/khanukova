@@ -1,11 +1,10 @@
 //todo уточнить со стороны бэкенда
 export type CardType = {
   id: number;
-  projectName: string;
-  tasks: string;
+  project_name: string;
+  progress: string;
   deadline: string;
-  budget: string;
-  paid: string;
+  payments: string;
 };
 
 export type CardNotificationsType = {

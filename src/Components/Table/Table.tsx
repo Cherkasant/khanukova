@@ -41,7 +41,7 @@ const Table = () => {
       milestone_name: el.milestone_name,
       description: el.description,
       attachment: el.attachment,
-      responsible: el.responsible,
+      responsible: el.responsible_data,
       priority: el.priority,
       start_date: el.start_date,
       deadline: el.deadline,

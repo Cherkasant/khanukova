@@ -2,6 +2,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { all, put, takeLatest } from 'redux-saga/effects';
 
 import {
+  addResponsible,
   deleteMilestone,
   deleteSubTask,
   deleteTask,
@@ -9,6 +10,7 @@ import {
   getAllMilestones,
   getAllProjects,
   getAllResponsible,
+  getHomeScreenProjects,
   getSingleMilestone,
   getSingleProject,
   getSingleSubTask,
@@ -22,10 +24,12 @@ import {
   postProject,
   postSubTask,
   postTask,
+  removeResponsible,
   setAllMilestoneDependencies,
   setAllMilestones,
   setAllProjects,
   setAllResponsible,
+  setHomeScreenProjects,
   setModalMilestone,
   setModalSubTask,
   setModalTask,
@@ -38,6 +42,7 @@ import {
   setTaskCard
 } from '../Reducers/postReducer';
 import {
+  addResponsibleType,
   DeleteMilestoneType,
   DependeciesMilestone,
   MilestoneDataPayload,
@@ -46,6 +51,7 @@ import {
   PatchSubTaskType,
   PatchTaskType,
   ProjectDataPayload,
+  removeResponsibleType,
   SubTaskDataPayload,
   TaskDataPayload
 } from '../Types/tasks';
@@ -259,6 +265,35 @@ function* getAllMilestoneDependenciesWorker(action: PayloadAction<DependeciesMil
   }
 }
 
+function* addResponsibleWorker(action: PayloadAction<addResponsibleType>) {
+  const { id, data, callback } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.addResponsible, id, data);
+  if (ok) {
+    callback();
+  } else {
+    console.warn('Error while adding responsible ', problem);
+  }
+}
+
+function* removeResponsibleWorker(action: PayloadAction<removeResponsibleType>) {
+  const { id, responsible_remove, callback } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.removeResponsible, id, responsible_remove);
+  if (ok) {
+    callback();
+  } else {
+    console.warn('Error while removing responsible ', problem);
+  }
+}
+
+function* getAllHomeScreenProjectsWorker() {
+  const { ok, data, problem } = yield callCheckingAuth(API.getHomeScreenProjects);
+  if (ok && data) {
+    yield put(setHomeScreenProjects(data));
+  } else {
+    console.warn('Error while getting homescreen projects', problem);
+  }
+}
+
 export default function* postSaga() {
   yield all([
     takeLatest(getTaskCard, getTaskCardWorker),
@@ -280,6 +315,9 @@ export default function* postSaga() {
     takeLatest(deleteSubTask, deleteSubTaskWorker),
     takeLatest(patchProject, patchProjectWorker),
     takeLatest(getAllResponsible, getAllResponsibleWorker),
-    takeLatest(getAllMilestoneDependencies, getAllMilestoneDependenciesWorker)
+    takeLatest(getAllMilestoneDependencies, getAllMilestoneDependenciesWorker),
+    takeLatest(addResponsible, addResponsibleWorker),
+    takeLatest(removeResponsible, removeResponsibleWorker),
+    takeLatest(getHomeScreenProjects, getAllHomeScreenProjectsWorker)
   ]);
 }
