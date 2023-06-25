@@ -6,7 +6,6 @@
 }
 
 .widgets {
-  padding: 15px 34px 10px 53px;
   display: flex;
   justify-content: start;
 }
@@ -30,7 +29,6 @@
   justify-content: space-between;
   cursor: pointer;
   margin-bottom: 25px;
-  padding-left: 53px;
 }
 
 .searchContainer {
@@ -141,9 +139,10 @@
   position: absolute;
   transform: translate(-10px, 35px);
   width: 215px;
-  background: #cfd9ef;
+  background: #ffffff;
   box-shadow: 0 0 30px rgba(18, 88, 202, 0.05);
   border-radius: 10px;
+  z-index: 9999;
 }
 
 .sortItem {

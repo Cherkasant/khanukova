@@ -37,9 +37,7 @@ export const Colors = [
   { value: 'Red', label: 'Red' },
   { value: 'Blue', label: 'Blue' },
   { value: 'Yellow', label: 'Yellow' },
-  { value: 'Darkgreen', label: 'Darkgreen' },
   { value: 'Green', label: 'Green' },
-  { value: 'Brown', label: 'Brown' },
   { value: 'Fiolet', label: 'Fiolet' }
 ];
 

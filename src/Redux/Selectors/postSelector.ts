@@ -6,6 +6,7 @@ export default {
   getMilestoneTitle: (state: RootState) => state.postsReducer.TaskTitle,
   getFilter: (state: RootState) => state.postsReducer.isFilterVisible,
   getEcaseModal: (state: RootState) => state.postsReducer.isEcaseModalOpened,
+  getEcaseHeadModal: (state: RootState) => state.postsReducer.isEcaseHeadModalOpened,
   getRequestModal: (state: RootState) => state.postsReducer.isRequestModalOpened,
   getRequestTitle: (state: RootState) => state.postsReducer.titleRequest,
   getAllProjects: (state: RootState) => state.postsReducer.allProjects,

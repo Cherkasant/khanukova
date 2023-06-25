@@ -38,6 +38,8 @@ import {
 } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
 
+import ModalEcaseHead from '../../Components/Modals/ModalEcaseHead';
+
 import styles from './SingleProject.module.css';
 
 const TABS_NAMES = [
@@ -205,6 +207,7 @@ const SingleProject = () => {
       <ModalNewTask />
       <ModalNewSubTask />
       <ModalEcase />
+      <ModalEcaseHead />
       <ModalRequest />
       <ModalMilestone />
       <ModalTask />

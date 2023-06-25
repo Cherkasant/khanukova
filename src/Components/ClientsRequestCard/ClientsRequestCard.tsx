@@ -1,12 +1,16 @@
 import { FC } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { CommentIcon } from '../../Assets/icons/CommentIcon';
 import { FilesIcon } from '../../Assets/icons/FilesIcon';
 import { PinnedIcon } from '../../Assets/icons/PinnedIcon';
 import { EcaseIcon } from '../../Assets/icons/EcaseIcon';
-import { setEcaseModalVisible, setTitleRequest } from '../../Redux/Reducers/postReducer';
+import { setEcaseHeadModalVisible, setEcaseModalVisible, setTitleRequest } from '../../Redux/Reducers/postReducer';
+
+import profileSelectors from '../../Redux/Selectors/profileSelectors';
+
+import { Role } from '../constants/@types';
 
 import styles from './ClientsRequestCard.module.css';
 
@@ -21,8 +25,16 @@ type ClientsRequestCardProps = {
 
 const ClientsRequestCard: FC<ClientsRequestCardProps> = ({ openedArray, nameOfArray }) => {
   const dispatch = useDispatch();
+  const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
+  const isHead = personalInfoList?.role[0] === Role.Head;
+  const isPO = personalInfoList?.role[0] === Role.PO;
   const onPinnedIconClick = () => {
-    dispatch(setEcaseModalVisible(true));
+    if (isHead) {
+      dispatch(setEcaseHeadModalVisible(true));
+    }
+    if (isPO) {
+      dispatch(setEcaseModalVisible(true));
+    }
   };
   const onPinnedIconRequestClick = (title: string) => () => {
     dispatch(setTitleRequest(title));
