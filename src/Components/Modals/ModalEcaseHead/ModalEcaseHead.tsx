@@ -1,26 +1,31 @@
-import classNames from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+
+import classNames from 'classnames';
 
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
 
 import profileSelectors from '../../../Redux/Selectors/profileSelectors';
 import { getECaseListReducer } from '../../../Redux/Reducers/profileReducer';
 
+import { setEcaseHeadModalVisible } from '../../../Redux/Reducers/postReducer';
+
+import postSelector from '../../../Redux/Selectors/postSelector';
+
 import styles from './ModalEcaseHead.module.css';
 
 type ModalEcaseHeadProps = {
-  modal: boolean;
+  modal?: boolean;
 };
 
 const ModalEcaseHead: FC<ModalEcaseHeadProps> = ({ modal }) => {
-  const [activeModal, setActiveModal] = useState(true);
+  const dispatch = useDispatch();
+  const isModalHeadEcaseVisible = useSelector(postSelector.getEcaseHeadModal);
 
   const onCloseClick = () => {
-    setActiveModal(!activeModal);
+    dispatch(setEcaseHeadModalVisible(false));
   };
-  const dispatch = useDispatch();
 
   const ECaseList = useSelector(profileSelectors.getECaseList);
 
@@ -29,6 +34,12 @@ const ModalEcaseHead: FC<ModalEcaseHeadProps> = ({ modal }) => {
       dispatch(getECaseListReducer());
     }
   }, [ECaseList]);
+
+  const [activeModal, setActiveModal] = useState(false);
+
+  const onScreenClick = () => {
+    setActiveModal(false);
+  };
 
   const EcaseData = [
     { name: '1. Company name', answer: ECaseList?.company_name },
@@ -63,24 +74,36 @@ const ModalEcaseHead: FC<ModalEcaseHeadProps> = ({ modal }) => {
   ];
 
   return (
-    <div className={styles.wrap}>
-      <div className={styles.closeIcon}>
-        <div className={styles.icon} onClick={onCloseClick}>
-          <CloseModalIcon />
-        </div>
-      </div>
+    <div
+      className={classNames(styles.wrapModal, {
+        [styles.showModal]: isModalHeadEcaseVisible
+      })}
+      onClick={onCloseClick}>
+      <div
+        className={classNames(styles.modal, {
+          [styles.activeModal]: isModalHeadEcaseVisible
+        })}
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+        <div className={styles.wrap}>
+          <div className={styles.closeIcon}>
+            <div className={styles.icon} onClick={onCloseClick}>
+              <CloseModalIcon />
+            </div>
+          </div>
 
-      <div className={styles.container}>
-        <div className={styles.containerTitle}>E-case details</div>
-        <div className={styles.containerEcaseData}>
-          {EcaseData.map(({ name, answer }) => {
-            return (
-              <div key={name} className={styles.containerAnswer}>
-                <div className={styles.name}>{name}</div>
-                <div className={styles.answer}>{answer}</div>
-              </div>
-            );
-          })}
+          <div className={styles.container}>
+            <div className={styles.containerTitle}>E-case details</div>
+            <div className={styles.containerEcaseData}>
+              {EcaseData.map(({ name, answer }) => {
+                return (
+                  <div key={name} className={styles.containerAnswer}>
+                    <div className={styles.name}>{name}</div>
+                    <div className={styles.answer}>{answer}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </div>

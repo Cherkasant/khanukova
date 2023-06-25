@@ -211,8 +211,6 @@ const Table = () => {
             [styles.blue]: props.row.original.color_labels === 'Blue',
             [styles.red]: props.row.original.color_labels === 'Red',
             [styles.green]: props.row.original.color_labels === 'Green',
-            [styles.darkgreen]: props.row.original.color_labels === 'Darkgreen',
-            [styles.brown]: props.row.original.color_labels === 'Brown',
             [styles.ultraviolet]: props.row.original.color_labels === 'Fiolet',
             [styles.yellow]: props.row.original.color_labels === 'Yellow'
           })}>

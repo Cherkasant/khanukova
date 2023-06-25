@@ -32,6 +32,7 @@ type PostReducerState = {
   MilestoneTitle: string;
   isFilterVisible: boolean;
   isEcaseModalOpened: boolean;
+  isEcaseHeadModalOpened: boolean;
   isRequestModalOpened: boolean;
   titleRequest: string;
   allProjects: ArrayOfProjectType;
@@ -64,6 +65,7 @@ const initialState: PostReducerState = {
   MilestoneTitle: '',
   isFilterVisible: false,
   isEcaseModalOpened: false,
+  isEcaseHeadModalOpened: false,
   isRequestModalOpened: false,
   titleRequest: '',
   allProjects: [],
@@ -123,6 +125,9 @@ const postsSlice = createSlice({
     },
     setEcaseModalVisible: (state, action: PayloadAction<boolean>) => {
       state.isEcaseModalOpened = action.payload;
+    },
+    setEcaseHeadModalVisible: (state, action: PayloadAction<boolean>) => {
+      state.isEcaseHeadModalOpened = action.payload;
     },
     setRequestModalVisible: (state, action: PayloadAction<boolean>) => {
       state.isRequestModalOpened = action.payload;
@@ -259,7 +264,8 @@ export const {
   addResponsible,
   removeResponsible,
   getHomeScreenProjects,
-  setHomeScreenProjects
+  setHomeScreenProjects,
+  setEcaseHeadModalVisible
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;

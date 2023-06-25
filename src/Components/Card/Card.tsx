@@ -2,6 +2,8 @@ import React, { FC, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useNavigate } from 'react-router';
+
 import { EditProjectIcon } from '../../Assets/ProjectPage/EditProjectIcon';
 import { CardType, Role } from '../constants/@types';
 
@@ -25,6 +27,7 @@ const ClOSEBUTTON_LIST = [
 
 const Card: FC<CardProps> = ({ card, edit }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
   const isHead = personalInfoList?.role[0] === Role.Head;
   const [showClose, setShowClose] = useState(false);
@@ -42,11 +45,17 @@ const Card: FC<CardProps> = ({ card, edit }) => {
     setShowClose(false);
   };
 
-  const { project_name, payments, deadline, progress } = card;
+  const { id, project_name, payments, deadline, progress } = card;
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.title}>{project_name}</div>
+        <div
+          className={styles.title}
+          onClick={() => {
+            navigate(`/project/${id}`);
+          }}>
+          {project_name}
+        </div>
         {isHead ? (
           <div className={styles.iconEdit} onClick={onEditProjectClick}>
             <EditProjectIcon />

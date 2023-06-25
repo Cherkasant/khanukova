@@ -53,9 +53,10 @@ const SORT_LIST = [
 ];
 const Home = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getHomeScreenProjects());
-  });
+  }, []);
 
   const AllProjects = useSelector(postSelector.getAllHomeScreenProjects);
   const activeModal = useSelector(postSelector.getCloseProjectModal);

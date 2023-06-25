@@ -16,11 +16,30 @@
   border-radius: 30px;
 }
 
+.wrapModal {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(155, 172, 201, 0.3);
+  transition: all 0.7s;
+  position: fixed;
+}
+
+.showModal {
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.7s;
+}
+
 .closeIcon {
   display: flex;
   justify-content: end;
   margin-bottom: 6px;
-  
 }
 
 .icon {
@@ -51,7 +70,7 @@
 .containerAnswer {
   display: flex;
   gap: 22px;
-  border-bottom: 0.5px solid #D9E1F0;
+  border-bottom: 0.5px solid #d9e1f0;
 }
 
 .name {

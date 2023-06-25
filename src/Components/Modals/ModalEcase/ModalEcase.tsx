@@ -1,17 +1,14 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import 'react-dropdown/style.css';
 import Dropdown from 'react-dropdown';
 
 import classNames from 'classnames';
-import { Cascader, List, Upload } from 'antd';
+import { Cascader, List } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
-import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
 import 'react-datepicker/dist/react-datepicker.css';
-
-import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { setEcaseModalVisible } from '../../../Redux/Reducers/postReducer';
 import { ClientsRequestStatus, Priority } from '../../constants/Modal/ModalData';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
@@ -38,15 +35,6 @@ const ModalEcase = () => {
       dispatch(getECaseListReducer());
     }
   }, [ECaseList]);
-
-  const [descriptionValue, setDescriptionValue] = useState('');
-  const onChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setDescriptionValue(event.target.value);
-  };
-  const [comment, setComment] = useState('');
-  const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.target.value);
-  };
 
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
@@ -101,7 +89,7 @@ const ModalEcase = () => {
           <div className={styles.icon} onClick={onCancelClick}>
             <CloseModalIcon />
           </div>
-          <div className={styles.titleContainer}>{'opened 08/02/2023 '}</div>
+          <div className={styles.titleDate}>{'opened 08/02/2023 '}</div>
         </div>
         <div className={styles.mainBlock}>
           <div className={styles.leftBlock}>
@@ -115,53 +103,6 @@ const ModalEcase = () => {
                     <div className={styles.answerList}>{item.answer}</div>
                   </List.Item>
                 )}
-              />
-            </div>
-            <div className={styles.descriptionContainer}>
-              <div className={styles.title}>{'Description'}</div>
-              <textarea
-                className={styles.descriptionInput}
-                placeholder={'Write'}
-                value={descriptionValue}
-                onChange={onChangeDescription}
-              />
-              {/*<PuzzleButton*/}
-              {/*  btnTitle={'Submit new'}*/}
-              {/*  btnType={PuzzleButtonTypes.TextButton}*/}
-              {/*  btnClassName={styles.submitBtn}*/}
-              {/*  disabled={!descriptionValue}*/}
-              {/*/>*/}
-            </div>
-
-            <div className={styles.attachmentContainer}>
-              <Upload
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                listType="picture"
-                className="upload-list-inline">
-                <div className={styles.attachmentBlock}>
-                  <div className={styles.title}>{'Attachment'}</div>
-                  <AttachmentIcon />
-                </div>
-              </Upload>
-            </div>
-            <div className={styles.blockDownload}>
-              <div className={styles.downloadBtn}>
-                {'Download all'}
-                <DownloadIcon />
-              </div>
-            </div>
-            <div className={styles.commentContainer}>
-              <div className={styles.title}>{'Comments'}</div>
-              <textarea
-                className={styles.commentInput}
-                placeholder={'Write comment'}
-                value={comment}
-                onChange={onChangeComment}
-              />
-              <PuzzleButton
-                btnTitle={'Comment'}
-                btnType={PuzzleButtonTypes.TextButton}
-                btnClassName={styles.submitBtn}
               />
             </div>
           </div>

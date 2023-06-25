@@ -6,7 +6,7 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 20px 29px 20px;
 }
 
 .title {
@@ -16,6 +16,10 @@
   line-height: 31px;
   color: #0e4298;
   display: flex;
+}
+
+.title:hover {
+  cursor: pointer;
 }
 
 .header {
@@ -29,8 +33,9 @@
 .projectContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 40px;
+  column-gap: 20px;
+  row-gap: 55px;
+  margin-top: 30px;
   justify-content: center;
 }
 
