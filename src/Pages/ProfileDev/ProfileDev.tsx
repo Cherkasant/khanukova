@@ -66,9 +66,7 @@ const ProfileDev = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <Title name={'My Profile'} className={styles.title} />
-      </div>
+      <Title name={'My Profile'} className={styles.title} />
       <div className={styles.containerBlockWithBtn}>
         <div className={styles.containerInfo}>
           <div className={styles.containerPhoto}>

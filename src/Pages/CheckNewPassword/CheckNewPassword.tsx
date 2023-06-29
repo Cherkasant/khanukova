@@ -2,12 +2,13 @@ import { NavLink } from 'react-router-dom';
 
 import Title from '../../Components/Title';
 import { PathNames } from '../Router/Router';
+import FormContainer from '../../Components/FormContainer/FormContainer';
 
 import styles from './CheckNewPassword.module.css';
 
 const CheckNewPassword = () => {
   return (
-    <>
+    <FormContainer>
       <div className={styles.container}>
         <Title name={'Check your email'} className={styles.title} />
         <div className={styles.subTitle}>
@@ -21,7 +22,7 @@ const CheckNewPassword = () => {
           </NavLink>
         </div>
       </div>
-    </>
+    </FormContainer>
   );
 };
 

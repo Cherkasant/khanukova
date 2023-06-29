@@ -20,6 +20,7 @@
   text-align: start;
   background-color: #ffffff;
   padding-top: 20px;
+  max-height: 46vh;
 }
 
 .loaderWrap {
@@ -95,6 +96,8 @@
   justify-content: start;
   align-items: center;
   gap: 4px;
+  background-color: #ffffff;
+  padding-left: 20px;
 }
 
 .total {
@@ -111,7 +114,7 @@
 .iconsDelete {
   position: absolute;
   left: 75%;
-  top: 0;
+  top: 15px;
   cursor: pointer;
 }
 
@@ -123,7 +126,7 @@
 .iconsEdit {
   position: absolute;
   left: 90%;
-  top: 0;
+  top: 15px;
   cursor: pointer;
 }
 

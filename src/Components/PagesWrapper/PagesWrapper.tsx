@@ -16,7 +16,7 @@ const PagesWrapper = () => {
         <Header />
         <div className={styles.menuContainer}>
           <UserMenu />
-          {pathname === PathNames.Home ? <Home /> : <Outlet />}
+          <div className={styles.main}>{pathname === PathNames.Home ? <Home /> : <Outlet />}</div>
         </div>
       </div>
     </ProSidebarProvider>

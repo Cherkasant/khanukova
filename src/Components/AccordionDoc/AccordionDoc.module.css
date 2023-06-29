@@ -1,5 +1,5 @@
 .accordionWrap {
-  height: calc(72vh - 100px);
+  height: 53vh;
   overflow-y: scroll;
 }
 

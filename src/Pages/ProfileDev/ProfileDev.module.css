@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  height: 100vh;
   position: relative;
   padding: 22px 30px 45px 30px;
 }
@@ -13,6 +12,7 @@
   line-height: 39px;
   color: #0e4298;
   text-align: start;
+  margin-bottom: 30px;
 }
 
 .containerBlockWithBtn {
@@ -229,9 +229,6 @@
   display: flex;
   justify-content: end;
   gap: 20px;
-  position: absolute;
-  bottom: 140px;
-  right: 35px;
 }
 
 .buttonCancel {

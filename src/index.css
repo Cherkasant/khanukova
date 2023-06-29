@@ -1,64 +1,91 @@
-body {
-	box-sizing: border-box;
-	margin: 0;
-	display: flex;
-	height: 100%;
-	flex: 1;
-	font-family: 'Inter', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	overflow: hidden;
-}
-
 html {
-	display: flex;
-	flex: 1;
-	height: 100%;
-	/*overflow: hidden;*/
+  box-sizing: border-box;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
 }
 
-#root {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
+ul,
+ol {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 ::-webkit-scrollbar {
-	width: 8px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-	background: #9bacc9;
+  background: #9bacc9;
 }
 
 ::-webkit-scrollbar-thumb {
-	min-height: 40px;
-	background: #0e4298;
-	border-radius: 10px;
+  min-height: 40px;
+  background: #0e4298;
+  border-radius: 10px;
 }
 
 .ant-checkbox-checked .ant-checkbox-inner {
-		border-color: #1258CA;}
-
-.ant-checkbox-disabled{
-	border-radius: 3px;
-
+  border-color: #1258ca;
 }
 
+.ant-checkbox-disabled {
+  border-radius: 3px;
+}
 
 .ant-checkbox:hover {
-	filter: drop-shadow(0px 0px 4px rgba(18, 88, 202, 0.5));
-	border-radius: 3px;}
+  filter: drop-shadow(0px 0px 4px rgba(18, 88, 202, 0.5));
+  border-radius: 3px;
+}
 
 .Dropdown-control .is-selected {
-	color: #212121;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 24px;
+  color: #212121;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 }

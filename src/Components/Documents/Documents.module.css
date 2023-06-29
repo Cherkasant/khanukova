@@ -25,6 +25,7 @@
   height: 40px;
   border-color: #1258ca;
   border-radius: 25px;
+  padding: 0 50px 0 19px;
 }
 
 .searchInput::placeholder {

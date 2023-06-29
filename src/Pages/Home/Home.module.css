@@ -48,6 +48,7 @@
   box-shadow: 0 0 30px rgba(18, 88, 202, 0.05);
   border: none;
   border-radius: 25px;
+  padding: 0 50px 0 19px;
 }
 
 .searchInput::placeholder {
