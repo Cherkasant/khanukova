@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink, useLocation } from 'react-router-dom';
+import io from 'socket.io-client';
 
 import { ChatActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ChatActiveIcon';
 import { LibraryActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/LibraryActiveIcon';
@@ -39,14 +40,15 @@ const UserMenu = () => {
   const navigate = useNavigate();
   const isLoggedIn = useSelector(authSelectors.getLoggedIn);
   const allProjects = useSelector(postSelector.getAllProjects);
-
   const [isActiveProject, setIsActiveProject] = useState('');
+  const [isOpened, setOpened] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getAllProjects());
     }
   }, [dispatch, isLoggedIn]);
+
   const onLogOutClick = () => {
     if (isLoggedIn) {
       dispatch(logoutUser());
@@ -55,10 +57,14 @@ const UserMenu = () => {
       navigate(PathNames.SignIn);
     }
   };
-  const [isOpened, setOpened] = useState(false);
   const onArrowClick = () => {
     setOpened(!isOpened);
   };
+
+  const connectionSocketHandler = () => {
+    io('ws://agile-dreamers-chat-be.herokuapp.com/:5000/websocket/ws/1');
+  };
+
   const navButtons = [
     {
       name: 'My profile',
@@ -66,7 +72,13 @@ const UserMenu = () => {
       link: PathNames.Profile,
       activeIcon: <MyProfileActive />
     },
-    { name: 'Chats', icon: <ChatIcon />, link: PathNames.Chats, activeIcon: <ChatActiveIcon /> },
+    {
+      name: 'Chats',
+      icon: <ChatIcon />,
+      link: PathNames.Chats,
+      activeIcon: <ChatActiveIcon />,
+      onClick: connectionSocketHandler
+    },
     {
       name: 'Projects',
       icon: <ProjectIcon />,
@@ -98,8 +110,9 @@ const UserMenu = () => {
     <>
       <div className={styles.container}>
         <div>
-          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon, activeArrow }) => (
+          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon, activeArrow, onClick }) => (
             <NavLink
+              onClick={onClick}
               key={name}
               to={link}
               className={classNames(

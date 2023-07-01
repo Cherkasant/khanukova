@@ -96,9 +96,6 @@ const Resourses = () => {
                   {value.position}
                 </div>
               ))}
-              <div ref={btnAddNewRef} className={styles.addNew} onClick={() => setModal(true)}>
-                Add new <Plas />
-              </div>
             </div>
           </div>
           <div>
@@ -155,6 +152,9 @@ const Resourses = () => {
           </div>
         </div>
       )}
+      <div ref={btnAddNewRef} className={styles.addNew} onClick={() => setModal(true)}>
+        Add new <Plas />
+      </div>
       <div className={styles.wrapTotal}>
         {totalResourses.map((value, index) => (
           <div key={index} className={classNames(styles.total, { [styles.positions]: value === 'Total' })}>

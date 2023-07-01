@@ -70,7 +70,6 @@ const Router = () => {
           <Route path={PathNames.Notifications} element={<NotificationsPage />} />
           <Route path={PathNames.Chats} element={<Chats />} />
         </Route>
-
         <Route path={PathNames.SignIn} element={<SignIn />} />
         <Route path={PathNames.SignUp} element={<SignUpHead />} />
         <Route path={PathNames.CheckYourEmail} element={<CheckEmailPage />} />

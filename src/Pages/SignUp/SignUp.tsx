@@ -14,9 +14,9 @@ import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { PathNames } from '../Router/Router';
+import FormContainer from '../../Components/FormContainer/FormContainer';
 
 import styles from './SignUp.module.css';
-
 
 const options = [
   { value: 'productOwner', label: 'Product Owner' },
@@ -72,7 +72,7 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <FormContainer>
       <div className={styles.container}>
         <div className={styles.test}>
           <div className={styles.titleBlock}>
@@ -132,7 +132,6 @@ const SignUp = () => {
           </div>
           <div className={styles.checkboxContainer}>
             <Checkbox isChecked={checked} handleChange={onChangeCheck} label={'I agree '} />
-
             <div className={styles.line}>Terms and Conditions</div>
           </div>
           <PuzzleButton
@@ -142,7 +141,6 @@ const SignUp = () => {
             onClick={onSignUp}
             btnDisabled={!(password !== '' && password === passwordConfirmation) || !checked}
           />
-
           <div className={styles.info}>
             {'Have an account?'}
             <NavLink to={PathNames.SignIn} className={styles.link}>
@@ -151,7 +149,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-    </>
+    </FormContainer>
   );
 };
 

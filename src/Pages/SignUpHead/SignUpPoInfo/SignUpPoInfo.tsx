@@ -43,8 +43,8 @@ const SignUpPoInfo = () => {
     );
   };
   return (
-    <>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div className={styles.inner}>
         <div className={styles.wrapper}>
           <div className={styles.titleBlock}>
             <Title name={'Sign up'} className={styles.title} />
@@ -258,7 +258,7 @@ const SignUpPoInfo = () => {
           </Form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

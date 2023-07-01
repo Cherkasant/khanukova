@@ -5,13 +5,14 @@
   top: 54px;
   right: 0;
   width: 742px;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 50px);
   background-color: #ffffff;
   padding: 53px 30px 40px 53px;
   text-align: start;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  overflow: auto;
 }
 
 .activeModal {
