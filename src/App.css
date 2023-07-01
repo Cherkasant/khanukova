@@ -1,15 +1,13 @@
-.App {
-    text-align: center;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    background: #F6F8FC;
-    box-sizing: border-box;
-    overflow: auto;
+html {
+  box-sizing: border-box;
+  height: 100%;
 }
 
-
-
-
-
+body {
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  background-color: #f4f8fe;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

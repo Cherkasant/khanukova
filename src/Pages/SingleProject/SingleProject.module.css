@@ -14,8 +14,9 @@
 
 .container {
   width: 100%;
+  height: 93vh;
   padding: 15px 30px 10px 30px;
-  /*position: relative;*/
+  position: relative;
   overflow: hidden;
 }
 
@@ -299,7 +300,8 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 27px;
+  height: 68vh;
 }
 
 .closedRequest > div > div {
