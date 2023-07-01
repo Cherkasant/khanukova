@@ -27,25 +27,6 @@ import { getHomeScreenProjects } from '../../Redux/Reducers/postReducer';
 
 import styles from './Home.module.css';
 
-const MOCK_CARDS_LIST = [
-  {
-    id: 1,
-    projectName: 'Yandex',
-    tasks: '20%',
-    deadline: '16.02.2222',
-    budget: '1000000$',
-    paid: '12500$'
-  },
-  {
-    id: 2,
-    projectName: 'Google',
-    tasks: '20%',
-    deadline: '16.02.2222',
-    budget: '1000000$',
-    paid: '12500$'
-  }
-];
-
 const SORT_LIST = [
   { value: 'Alphabetical', label: 'Alphabetical', icon: <SortIcon /> },
   { value: 'Date created', label: 'Date created', icon: <SortIcon /> },

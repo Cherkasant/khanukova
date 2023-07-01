@@ -6,10 +6,8 @@ import styles from './Checkbox.module.css';
 
 export enum IconColor {
   Blue = 'blue',
-  Lime = 'lime',
   Green = 'green',
-  Orange = 'orange',
-  Pink = 'pink',
+  Red = 'red',
   Purple = 'purple',
   Yellow = 'yellow'
 }

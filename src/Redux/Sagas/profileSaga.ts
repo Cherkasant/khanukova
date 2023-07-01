@@ -77,8 +77,8 @@ function* getAllDevTeamEmployeesWorker() {
 }
 
 function* editPersonalInfoWorker(action: PayloadAction<EditPersonalType>) {
-  const { data, callback } = action.payload;
-  const { ok, problem } = yield callCheckingAuth(API.patchUserInfo, data);
+  const { formData, callback } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.patchUserInfo, formData);
   if (ok) {
     callback();
   } else {

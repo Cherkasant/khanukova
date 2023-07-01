@@ -257,3 +257,11 @@ export type removeResponsibleType = {
   responsible_remove: Array<number>;
   callback: () => void;
 };
+export type DeleteProject = {
+  id: number;
+  callback: () => void;
+};
+export type CloseModalType = {
+  activeModal: boolean;
+  idProject: number;
+};
