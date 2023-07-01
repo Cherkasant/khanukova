@@ -58,10 +58,10 @@ export type PatchPersonalData = {
   full_name: string | undefined;
   phone: string | undefined;
   position: string | undefined;
-  account_photo?: string | undefined;
+  account_photo?: FileList | null;
   role?: string | undefined;
 };
 export type EditPersonalType = {
-  data: PatchPersonalData;
+  formData: any;
   callback: () => void;
 };

@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 
-import { setCloseProjectModal } from '../../../Redux/Reducers/postReducer';
+import { deleteProject, getHomeScreenProjects, setCloseProjectModal } from '../../../Redux/Reducers/postReducer';
+
+import postSelector from '../../../Redux/Selectors/postSelector';
 
 import styles from './ModalCloseProject.module.css';
 
@@ -15,8 +17,22 @@ type ModalCloseProjectProps = {
 
 const ModalCloseProject: FC<ModalCloseProjectProps> = ({ modal }) => {
   const dispatch = useDispatch();
+  const idProject = useSelector(postSelector.getDeletedProjectId);
   const onCancelClick = () => {
     dispatch(setCloseProjectModal(false));
+  };
+  const onCloseProjectClick = () => {
+    if (idProject) {
+      dispatch(
+        deleteProject({
+          id: idProject,
+          callback: () => {
+            dispatch(getHomeScreenProjects());
+            dispatch(setCloseProjectModal(false));
+          }
+        })
+      );
+    }
   };
   return (
     <div
@@ -34,7 +50,12 @@ const ModalCloseProject: FC<ModalCloseProjectProps> = ({ modal }) => {
             btnClassName={styles.cancelBtn}
             onClick={onCancelClick}
           />
-          <PuzzleButton btnTitle={'Close'} btnType={PuzzleButtonTypes.TextButton} btnClassName={styles.saveBtn} />
+          <PuzzleButton
+            btnTitle={'Close'}
+            btnType={PuzzleButtonTypes.TextButton}
+            btnClassName={styles.saveBtn}
+            onClick={onCloseProjectClick}
+          />
         </div>
       </div>
     </div>

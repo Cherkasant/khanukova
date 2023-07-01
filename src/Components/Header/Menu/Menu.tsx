@@ -6,16 +6,12 @@ import { NavLink, useLocation } from 'react-router-dom';
 import io from 'socket.io-client';
 
 import { ChatActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ChatActiveIcon';
-import { LibraryActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/LibraryActiveIcon';
 import { MyProfileActive } from '../../../Assets/Header/Menu/ActiveIcons/MyProfileActive';
 import { NotificationActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/NotificationActiveIcon';
-import { PaymentsActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/PaymentsActiveIcon';
 import { ProjectActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ProjectActiveIcon';
 import { ChatIcon } from '../../../Assets/Header/Menu/ChatIcon';
-import { LibraryIcon } from '../../../Assets/Header/Menu/LibraryIcon';
 import { MyProfileIcon } from '../../../Assets/Header/Menu/MyProfileIcon';
 import { NotificationIcon } from '../../../Assets/Header/Menu/NotificationIcon';
-import { PaymentIcon } from '../../../Assets/Header/Menu/PaymentIcon';
 import { ProjectIcon } from '../../../Assets/Header/Menu/ProjectIcon';
 import { AddNewProjectIcon } from '../../../Assets/icons/AddNewProjectIcon';
 import { ArrayDownIcon } from '../../../Assets/icons/ArrayDownIcon';
@@ -96,8 +92,8 @@ const UserMenu = () => {
       projects: allProjects,
       activeIcon: <AddNewProjectActiveIcon />
     },
-    { name: 'Library', icon: <LibraryIcon />, link: '', activeIcon: <LibraryActiveIcon /> },
-    { name: 'Payments', icon: <PaymentIcon />, link: PathNames.Payments, activeIcon: <PaymentsActiveIcon /> },
+    // { name: 'Library', icon: <LibraryIcon />, link: '', activeIcon: <LibraryActiveIcon /> },
+    // { name: 'Payments', icon: <PaymentIcon />, link: PathNames.Payments, activeIcon: <PaymentsActiveIcon /> },
     {
       name: 'Notifications',
       icon: <NotificationIcon />,

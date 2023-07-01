@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -37,30 +36,61 @@ const ProfilePage = () => {
     dispatch(getAllDevTeamEmployees());
   }, []);
 
-  const initialValues = {
-    name: personalInfoList?.full_name,
-    nickName: personalInfoList?.nickname,
-    position: personalInfoList?.position,
-    email: personalInfoList?.email,
-    phone: personalInfoList?.phone,
-    company: companyList?.company_name,
-    telegram: ''
+  const [name, setName] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [position, setPosition] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState<any>('');
+  const [telegram, setTelegram] = useState('');
+
+  useEffect(() => {
+    if (personalInfoList && companyList) {
+      setName(personalInfoList?.full_name);
+      setNickname(personalInfoList?.nickname);
+      setPosition(personalInfoList?.position);
+      setEmail(personalInfoList?.email);
+      setPhone(personalInfoList?.phone);
+      setCompany(companyList?.company_name);
+      setTelegram('');
+      const avatar = new File([personalInfoList?.account_photo], personalInfoList?.account_photo, {
+        type: 'image/png'
+      });
+      setFile(avatar);
+    }
+  }, [personalInfoList, companyList]);
+
+  const inputFile = useRef<any>(null);
+
+  const [file, setFile] = useState<any>(null);
+
+  const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+      const fd = new FormData();
+      fd.append('account_photo', event.target.files[0]);
+      dispatch(
+        editPersonalInfo({
+          formData: fd,
+          callback: () => {
+            dispatch(getPersonalInfoReducer());
+          }
+        })
+      );
+    }
   };
-  const [values, setValues] = useState(initialValues);
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
+
   const onSaveBtnClick = () => {
+    const formData = new FormData();
+    formData.append('full_name', name);
+    formData.append('phone', phone);
+    formData.append(' position', position);
+
     dispatch(
       editPersonalInfo({
-        data: {
-          full_name: values?.name,
-          phone: values?.phone,
-          position: values?.position
-        },
+        formData,
         callback: () => {
-          console.log('test');
+          dispatch(getPersonalInfoReducer());
         }
       })
     );
@@ -89,6 +119,7 @@ const ProfilePage = () => {
     []
   );
 
+  // @ts-ignore
   return (
     <div className={styles.container}>
       <div
@@ -108,8 +139,9 @@ const ProfilePage = () => {
               <h2 className={styles.subTitle}>Account photo</h2>
               <div className={styles.editContainer}>
                 <img className={styles.photo} src={personalInfoList?.account_photo} alt={''} />
-                <div className={styles.editIcon}>
+                <div className={styles.editIcon} onClick={() => inputFile.current.click()}>
                   <PencilIcon />
+                  <input type={'file'} className={styles.inputFile} onChange={onChangeFile} ref={inputFile} />
                 </div>
               </div>
             </div>
@@ -124,8 +156,8 @@ const ProfilePage = () => {
                     <input
                       type={'text'}
                       name={'name'}
-                      defaultValue={values.name}
-                      onChange={handleInputChange}
+                      value={name}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                       placeholder={'Full name'}
                       className={styles.input}
                     />
@@ -135,8 +167,8 @@ const ProfilePage = () => {
                     <input
                       type={'text'}
                       name={'nickName'}
-                      value={values.nickName}
-                      onChange={handleInputChange}
+                      value={nickname}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}
                       placeholder={'Nick name'}
                       className={styles.input}
                     />
@@ -146,8 +178,8 @@ const ProfilePage = () => {
                     <input
                       type={'text'}
                       name={'company'}
-                      defaultValue={values.company}
-                      onChange={handleInputChange}
+                      value={company}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setCompany(e.target.value)}
                       placeholder={'Company name'}
                       className={styles.input}
                       disabled
@@ -158,8 +190,8 @@ const ProfilePage = () => {
                     <input
                       type={'text'}
                       name={'positions'}
-                      defaultValue={values.position}
-                      onChange={handleInputChange}
+                      value={position}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setPosition(e.target.value)}
                       placeholder={'Positions'}
                       className={styles.input}
                       disabled
@@ -174,8 +206,8 @@ const ProfilePage = () => {
                   <input
                     type={'email'}
                     name={'email'}
-                    defaultValue={values.email}
-                    onChange={handleInputChange}
+                    value={email}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                     placeholder={'Enter Email'}
                     className={styles.input}
                   />
@@ -185,8 +217,8 @@ const ProfilePage = () => {
                   <input
                     type={'tel'}
                     name={'phone'}
-                    defaultValue={values.phone}
-                    onChange={handleInputChange}
+                    value={phone}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
                     placeholder={'Enter Phone'}
                     className={styles.input}
                   />
@@ -197,7 +229,7 @@ const ProfilePage = () => {
                     title={'Telegram'}
                     type={'text'}
                     name={'telegram'}
-                    defaultValue={values.telegram}
+                    value={telegram}
                     placeholder={'Enter the profile link telegram'}
                     className={styles.input}
                   />
@@ -207,13 +239,6 @@ const ProfilePage = () => {
           </div>
 
           <div className={styles.buttonsBlock}>
-            <PuzzleButton
-              btnTitle={'Cancel'}
-              btnType={PuzzleButtonTypes.TextButton}
-              onClick={() => {}}
-              btnClassName={styles.buttonCancel}
-            />
-
             <PuzzleButton
               btnTitle={'Save'}
               btnType={PuzzleButtonTypes.TextButton}

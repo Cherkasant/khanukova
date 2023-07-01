@@ -8,7 +8,7 @@ import {
   ResetPasswordData,
   SignInUserData
 } from '../Types/auth';
-import { CompanyListData, PatchPersonalData } from '../Types/profile';
+import { CompanyListData } from '../Types/profile';
 import { ResoursesType } from '../Types/Resourses';
 import {
   addResponsibleType,
@@ -294,13 +294,16 @@ const removeResponsible = (token: string, id: number, data: removeResponsibleTyp
   });
 };
 
-const patchUserInfo = (token: string, data: PatchPersonalData) => {
-  return API.patch('/auth/users/me/', data, {
-    headers: { Authorization: `JWT ${token}` }
+const patchUserInfo = (token: string, formData: any) => {
+  return API.patch('/auth/users/me/', formData, {
+    headers: { Authorization: `JWT ${token}`, 'Content-Type': 'multipart/form-data' }
   });
 };
 const getHomeScreenProjects = (token: string) => {
   return API.get('/project-subdiv/home-screen/', {}, { headers: { Authorization: `JWT ${token}` } });
+};
+const deleteProject = (token: string, idProject: number) => {
+  return API.delete(`/project-subdiv/project/${idProject}/`, {}, { headers: { Authorization: `JWT ${token}` } });
 };
 
 export default {
@@ -360,5 +363,6 @@ export default {
   addResponsible,
   removeResponsible,
   patchUserInfo,
-  getHomeScreenProjects
+  getHomeScreenProjects,
+  deleteProject
 };

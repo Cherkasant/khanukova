@@ -12,7 +12,7 @@ import { PauseProjectIcon } from '../../Assets/ProfilePage/PauseProjectIcon';
 
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
 
-import { setCloseProjectModal } from '../../Redux/Reducers/postReducer';
+import { setCloseProjectModal, setDeletedProjectId } from '../../Redux/Reducers/postReducer';
 
 import styles from './Card.module.css';
 
@@ -42,6 +42,7 @@ const Card: FC<CardProps> = ({ card, edit }) => {
   const onDeleteClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     dispatch(setCloseProjectModal(true));
+    dispatch(setDeletedProjectId(id));
     setShowClose(false);
   };
 

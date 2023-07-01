@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux';
 
 import { PathNames } from '../../Pages/Router/Router';
 
-import { EditIcon } from '../../Assets/ProfilePage/EditIcon';
-
 import { DeleteDevIcon } from '../../Assets/ProfilePage/DeleteDevIcon';
 
 import { SelectProjectIcon } from '../../Assets/ProfilePage/SelectProjectIcon';
@@ -88,7 +86,6 @@ const DevTeamTable = () => {
             </div>
             <div className={styles.iconContainer}>
               <DeleteDevIcon />
-              <EditIcon />
             </div>
           </div>
         )

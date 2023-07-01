@@ -29,5 +29,6 @@ export default {
   getCloseProjectModal: (state: RootState) => state.postsReducer.isCloseProjectModalOpened,
   getAllResponsible: (state: RootState) => state.postsReducer.allResponsible,
   getAllMilestoneDependencies: (state: RootState) => state.postsReducer.milestoneDependencies,
-  getAllHomeScreenProjects: (state: RootState) => state.postsReducer.allHomeScreenProjects
+  getAllHomeScreenProjects: (state: RootState) => state.postsReducer.allHomeScreenProjects,
+  getDeletedProjectId: (state: RootState) => state.postsReducer.deletedProjectId
 };
