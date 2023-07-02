@@ -1,8 +1,9 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     gap: 7px;
 }
+
 .input {
     width: 500px;
     height: 54px;
@@ -13,9 +14,11 @@
     line-height: 22px;
     color: #0e0e0e;
     padding: 0 19px;
-    outline: none
+    outline: none;
+    background: #FFFFFF;
 }
-.title{
+
+.title {
     align-self: flex-start;
     font-weight: 500;
     font-size: 14px;
@@ -38,13 +41,14 @@
     color: #313037;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
     input[type="password"] {
         font-family: Verdana, Geneva, sans-serif;
         letter-spacing: -.5px;
         font-weight: 600;
     }
 }
+
 .disabled {
     color: #CDCDCD;
 }

@@ -76,77 +76,77 @@ const ProfileDev = () => {
               <PencilIcon />
             </div>
           </div>
+          <div>
+            <h2 className={styles.subTitle}>Contact info</h2>
+            <div className={styles.containerContactInfo}>
+              <div>
+                <div className={styles.containerInput}>
+                  <Input
+                    title={'Full name'}
+                    type={'text'}
+                    value={name}
+                    onChange={(value) => setName(value)}
+                    placeholder={'Full name'}
+                    className={styles.input}
+                  />
 
-          <div className={styles.containerContactInfo}>
-            <div>
-              <h2 className={styles.subTitle}>Contact info</h2>
+                  <Input
+                    title={'Nick name'}
+                    type={'text'}
+                    value={nickName}
+                    onChange={(value) => setNickName(value)}
+                    placeholder={'Nick name'}
+                    className={styles.input}
+                  />
 
+                  <Input
+                    title={'Company'}
+                    type={'text'}
+                    value={company}
+                    onChange={(value) => setCompany(value)}
+                    placeholder={'Company'}
+                    disabled
+                    className={styles.input}
+                  />
+                  <Input
+                    title={'Positions'}
+                    type={'text'}
+                    value={positions}
+                    onChange={(value) => setPositions(value)}
+                    placeholder={'Positions'}
+                    disabled
+                    className={styles.input}
+                  />
+                </div>
+              </div>
               <div className={styles.containerInput}>
                 <Input
-                  title={'Full name'}
-                  type={'text'}
-                  value={name}
-                  onChange={(value) => setName(value)}
-                  placeholder={'Full name'}
+                  title={'Email'}
+                  type={'email'}
+                  value={email}
+                  onChange={(value) => setEmail(value)}
+                  placeholder={'Email'}
                   className={styles.input}
                 />
 
                 <Input
-                  title={'Nick name'}
-                  type={'text'}
-                  value={nickName}
-                  onChange={(value) => setNickName(value)}
-                  placeholder={'Nick name'}
+                  title={'Phone number '}
+                  type={'tel'}
+                  value={phone}
+                  onChange={(value) => setPhone(value)}
+                  placeholder={'Phone'}
                   className={styles.input}
                 />
 
                 <Input
-                  title={'Company'}
+                  title={'Telegram'}
                   type={'text'}
-                  value={company}
-                  onChange={(value) => setCompany(value)}
-                  placeholder={'Company'}
-                  disabled
-                  className={styles.input}
-                />
-                <Input
-                  title={'Positions'}
-                  type={'text'}
-                  value={positions}
-                  onChange={(value) => setPositions(value)}
-                  placeholder={'Positions'}
-                  disabled
+                  value={telegram}
+                  onChange={(value) => setTelegram(value)}
+                  placeholder={'Enter the profile link telegram'}
                   className={styles.input}
                 />
               </div>
-            </div>
-            <div className={styles.containerInput}>
-              <Input
-                title={'Email'}
-                type={'email'}
-                value={email}
-                onChange={(value) => setEmail(value)}
-                placeholder={'Email'}
-                className={styles.input}
-              />
-
-              <Input
-                title={'Phone number '}
-                type={'tel'}
-                value={phone}
-                onChange={(value) => setPhone(value)}
-                placeholder={'Phone'}
-                className={styles.input}
-              />
-
-              <Input
-                title={'Telegram'}
-                type={'text'}
-                value={telegram}
-                onChange={(value) => setTelegram(value)}
-                placeholder={'Enter the profile link telegram'}
-                className={styles.input}
-              />
             </div>
           </div>
         </div>
