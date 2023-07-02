@@ -16,10 +16,17 @@ const events = [
   },
   {
     title: 'Another event',
-    start: new Date(2023, 6, 17, 14, 30),
-    end: new Date(2023, 6, 17, 16, 30)
+    start: new Date(2023, 6, 17, 14, 0),
+    end: new Date(2023, 6, 17, 16, 0)
   }
 ];
+
+const Event = ({ event }: any) => (
+  <>
+    <span className={styles.eventDot} />
+    {moment(event.start).format('hA')} <strong>{event.title}</strong>
+  </>
+);
 
 const Events = () => {
   return (
@@ -31,11 +38,16 @@ const Events = () => {
         startAccessor="start"
         endAccessor="end"
         components={{
-          toolbar: CustomToolbar
+          toolbar: CustomToolbar,
+          event: Event
         }}
         formats={{
-          dateFormat: 'D'
+          dateFormat: 'D',
+          dayFormat: 'dddd MMM D',
+          timeGutterFormat: 'h a'
         }}
+        step={60}
+        timeslots={1}
       />
     </div>
   );

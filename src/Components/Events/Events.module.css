@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  height: 100%;
+  height: 500px;
 }
 
 .calendar {
@@ -16,7 +16,8 @@
   text-align: left;
 }
 
-:global(.rbc-day-bg) {
+:global(.rbc-day-bg),
+:global(.rbc-today) {
   background-color: #ffffff;
 }
 
@@ -36,11 +37,12 @@
 }
 
 :global(.rbc-date-cell) {
-  padding: 5px 0;
+  padding-top: 5px;
   text-align: center;
 }
 
 :global(.rbc-month-view .rbc-now .rbc-button-link) {
+  font-size: 12px;
   position: relative;
   color: #ffffff;
 }
@@ -57,3 +59,60 @@
   border-radius: 50%;
   z-index: -1;
 }
+
+:global(.rbc-event) {
+  font-size: 12px;
+}
+:global(.rbc-allday-cell),
+:global(.rbc-current-time-indicator) {
+  display: none;
+}
+:global(.rbc-time-header-content) {
+  margin-bottom: -2px;
+}
+:global(.rbc-time-slot) {
+  flex: auto;
+  height: 60px;
+}
+:global(.rbc-event) {
+  background-color: #d4e5ff;
+}
+
+:global(.rbc-event-content) {
+  color: #212121;
+}
+
+.eventDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #9bacc9;
+  border-radius: 50%;
+  margin-right: 3px;
+}
+
+/* .addEventBlock {
+  width: 100%;
+  height: calc(100% - 30px);
+  align-self: flex-end;
+  z-index: 5;
+}
+
+.addEventBlock:hover .addEvent {
+  opacity: 1;
+}
+
+.addEvent {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s;
+  opacity: 0;
+  background-color: #f4f8fe;
+  color: #a3a3a3;
+  border: none;
+  border-radius: 5px;
+} */
