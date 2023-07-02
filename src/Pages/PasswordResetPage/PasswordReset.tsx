@@ -12,9 +12,9 @@ import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { resetPasswordConfirm } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
+import FormContainer from '../../Components/FormContainer/FormContainer';
 
 import styles from './PasswordReset.module.css';
-
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -52,60 +52,62 @@ const ResetPassword = () => {
   };
 
   return (
-    <>
+    <FormContainer>
       <div className={styles.container}>
-        <div className={styles.title}>
-          <Title name={'Reset password'} />
-          <div className={styles.description}>{'Please enter your new password'}</div>
-        </div>
-        <Form
-          onFinish={onSetPassword}
-          className={styles.form}
-          form={form}
-          initialValues={{ password: '', passwordNew: '' }}>
-          <div className={styles.inputsContainer}>
-            <div className={styles.passwordContainer}>
-              <Form.Item
-                name="password"
-                className={styles.formItem}
-                rules={[{ required: true, message: 'Please input your new password!' }]}>
-                <Input type={type} placeholder={'New password '} value={checkPassword} />
-              </Form.Item>
-              <div className={styles.eyeIcon} onClick={onEyeClick}>
-                {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
-              </div>
-            </div>
-
-            <div className={styles.passwordContainer}>
-              <Form.Item
-                name="passwordNew"
-                className={styles.formItem}
-                rules={[{ required: true, message: 'Please repeat your new password!' }]}>
-                <Input type={typeConfirm} placeholder={'Confirm Password '} value={checkPasswordConfirm} />
-              </Form.Item>
-              <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
-                {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
-              </div>
-            </div>
-            <Form.Item className={styles.formItem}>
-              <PuzzleButton
-                htmlType="submit"
-                btnTitle={'Save new password'}
-                btnType={PuzzleButtonTypes.TextButton}
-                btnClassName={styles.button}
-                btnDisabled={!(checkPassword && checkPasswordConfirm) || !(checkPassword === checkPasswordConfirm)}
-              />
-            </Form.Item>
+        <div className={styles.inner}>
+          <div className={styles.title}>
+            <Title name={'Reset password'} />
+            <div className={styles.description}>{'Please enter your new password'}</div>
           </div>
-        </Form>
-        <div className={styles.info}>
-          {'Have an account?'}
-          <NavLink to={PathNames.SignIn} className={styles.link}>
-            <span>{'Sign in'}</span>
-          </NavLink>
+          <Form
+            onFinish={onSetPassword}
+            className={styles.form}
+            form={form}
+            initialValues={{ password: '', passwordNew: '' }}>
+            <div className={styles.inputsContainer}>
+              <div className={styles.passwordContainer}>
+                <Form.Item
+                  name="password"
+                  className={styles.formItem}
+                  rules={[{ required: true, message: 'Please input your new password!' }]}>
+                  <Input type={type} placeholder={'New password '} value={checkPassword} />
+                </Form.Item>
+                <div className={styles.eyeIcon} onClick={onEyeClick}>
+                  {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                </div>
+              </div>
+
+              <div className={styles.passwordContainer}>
+                <Form.Item
+                  name="passwordNew"
+                  className={styles.formItem}
+                  rules={[{ required: true, message: 'Please repeat your new password!' }]}>
+                  <Input type={typeConfirm} placeholder={'Confirm Password '} value={checkPasswordConfirm} />
+                </Form.Item>
+                <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
+                  {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                </div>
+              </div>
+              <Form.Item className={styles.formItem}>
+                <PuzzleButton
+                  htmlType="submit"
+                  btnTitle={'Save new password'}
+                  btnType={PuzzleButtonTypes.TextButton}
+                  btnClassName={styles.button}
+                  btnDisabled={!(checkPassword && checkPasswordConfirm) || !(checkPassword === checkPasswordConfirm)}
+                />
+              </Form.Item>
+            </div>
+          </Form>
+          <div className={styles.info}>
+            {'Have an account?'}
+            <NavLink to={PathNames.SignIn} className={styles.link}>
+              <span>{'Sign in'}</span>
+            </NavLink>
+          </div>
         </div>
       </div>
-    </>
+    </FormContainer>
   );
 };
 

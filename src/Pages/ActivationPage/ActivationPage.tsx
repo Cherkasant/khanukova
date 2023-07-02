@@ -5,6 +5,7 @@ import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import { activateUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
 import Title from '../../Components/Title';
+import FormContainer from '../../Components/FormContainer/FormContainer';
 
 import styles from './ActivationPage.module.css';
 
@@ -26,7 +27,7 @@ const ActivationPage = () => {
   };
 
   return (
-    <>
+    <FormContainer>
       <div className={styles.container}>
         <Title name={'Activate your account'} className={styles.title} />
         <div className={styles.subTitle}>{'You need to confirm your email'}</div>
@@ -37,7 +38,7 @@ const ActivationPage = () => {
           onClick={onConfirm}
         />
       </div>
-    </>
+    </FormContainer>
   );
 };
 

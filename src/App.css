@@ -1,15 +1,27 @@
-.App {
-    text-align: center;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    background: #F6F8FC;
+html {
     box-sizing: border-box;
-    overflow: auto;
+    height: 100%;
 }
 
+body {
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    background-color: #f4f8fe;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-
-
-
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-gantt/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-grids/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-layouts/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-treegrid/styles/material.css';

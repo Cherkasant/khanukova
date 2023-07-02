@@ -261,7 +261,7 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    height: 75%;
+    height: 55%;
     overflow: auto;
     padding-right: 10px;
 }

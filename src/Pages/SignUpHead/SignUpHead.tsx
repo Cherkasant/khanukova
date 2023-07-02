@@ -124,181 +124,176 @@ const SignUpHead = () => {
     );
   };
   return (
-    <FormContainer>
-      <>
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <div className={styles.titleBlock}>
-              <Title name={'Sign up'} className={styles.title} />
-              <div className={styles.subtitle}>{'Let’s get started'}</div>
-            </div>
-            <div className={styles.checkboxChooseContainer}>
-              <PuzzleCheckbox checked={checkedCode} onChange={onChangeCheckCode} label={'Sign up with code'} />
-              <PuzzleCheckbox
-                checked={checkedCompany}
-                onChange={onChangeCheckCompany}
-                label={'Sign up and create a company'}
+    <div className={styles.container}>
+      <div className={styles.inner}>
+        <div className={styles.titleBlock}>
+          <Title name={'Sign up'} className={styles.title} />
+          <div className={styles.subtitle}>{'Let’s get started'}</div>
+        </div>
+        <div className={styles.checkboxChooseContainer}>
+          <PuzzleCheckbox checked={checkedCode} onChange={onChangeCheckCode} label={'Sign up with code'} />
+          <PuzzleCheckbox
+            checked={checkedCompany}
+            onChange={onChangeCheckCompany}
+            label={'Sign up and create a company'}
+          />
+        </div>
+        <Form
+          onFinish={onSignUp}
+          form={form}
+          className={styles.form}
+          initialValues={{
+            fullName: '',
+            email: '',
+            code: '',
+            password: '',
+            passwordConfirmation: ''
+          }}>
+          <div className={styles.inputs}>
+            <Form.Item
+              name="fullName"
+              className={styles.formItem}
+              rules={[
+                {
+                  pattern: FULL_NAME_REGEX && WITHOUT_SPACE,
+                  message: 'Alphabetics (Latin) only are allowed, Maximum – 160 symbols'
+                },
+                {
+                  required: true,
+                  message: 'Please input your full name!',
+                  validateTrigger: 'onSignUp'
+                }
+              ]}>
+              <Input type={'text'} placeholder={'Full name'} />
+            </Form.Item>
+            <Form.Item
+              name="email"
+              className={styles.formItem}
+              rules={[
+                {
+                  pattern: EMAIL_REGEX,
+                  message: 'The input is not valid E-mail!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!',
+                  validateTrigger: 'onSignUp'
+                },
+                {}
+              ]}>
+              <Input type={'email'} placeholder={'Email'} />
+            </Form.Item>
+            <Form.Item
+              name="phone"
+              className={styles.formItem}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your phone number!',
+                  validateTrigger: 'onSignUp'
+                }
+              ]}>
+              <PhoneInput
+                placeholder="Enter phone number"
+                value={value}
+                onChange={setValue}
+                className={styles.phoneInput}
               />
-            </div>
-            <Form
-              onFinish={onSignUp}
-              form={form}
-              className={styles.form}
-              initialValues={{
-                fullName: '',
-                email: '',
-                code: '',
-                password: '',
-                passwordConfirmation: ''
-              }}>
-              <div className={styles.inputs}>
-                <Form.Item
-                  name="fullName"
-                  className={styles.formItem}
-                  rules={[
-                    {
-                      pattern: FULL_NAME_REGEX && WITHOUT_SPACE,
-                      message: 'Alphabetics (Latin) only are allowed, Maximum – 160 symbols'
-                    },
-                    {
-                      required: true,
-                      message: 'Please input your full name!',
-                      validateTrigger: 'onSignUp'
-                    }
-                  ]}>
-                  <Input type={'text'} placeholder={'Full name'} />
-                </Form.Item>
-                <Form.Item
-                  name="email"
-                  className={styles.formItem}
-                  rules={[
-                    {
-                      pattern: EMAIL_REGEX,
-                      message: 'The input is not valid E-mail!'
-                    },
-                    {
-                      required: true,
-                      message: 'Please input your E-mail!',
-                      validateTrigger: 'onSignUp'
-                    },
-                    {}
-                  ]}>
-                  <Input type={'email'} placeholder={'Email'} />
-                </Form.Item>
-                <Form.Item
-                  name="phone"
-                  className={styles.formItem}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your phone number!',
-                      validateTrigger: 'onSignUp'
-                    }
-                  ]}>
-                  <PhoneInput
-                    placeholder="Enter phone number"
-                    value={value}
-                    onChange={setValue}
-                    className={styles.phoneInput}
-                  />
-                </Form.Item>
-                <Form.Item
-                  name="userStatus"
-                  className={styles.formItem}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please select users role in the project!',
-                      validateTrigger: 'onSignUp'
-                    }
-                  ]}>
-                  <PuzzleDropdown
-                    options={!checkedCompany ? options : optionsHead}
-                    placeholder="Role in the project"
-                    value={checkRole}
-                  />
-                </Form.Item>
+            </Form.Item>
+            <Form.Item
+              name="userStatus"
+              className={styles.formItem}
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select users role in the project!',
+                  validateTrigger: 'onSignUp'
+                }
+              ]}>
+              <PuzzleDropdown
+                options={!checkedCompany ? options : optionsHead}
+                placeholder="Role in the project"
+                value={checkRole}
+              />
+            </Form.Item>
 
-                <Form.Item name="code" className={styles.formItem}>
-                  <Input type={'text'} placeholder={'Code'} disabled={!checkedCode} />
-                </Form.Item>
+            <Form.Item name="code" className={styles.formItem}>
+              <Input type={'text'} placeholder={'Code'} disabled={!checkedCode} />
+            </Form.Item>
 
-                <div className={styles.passwordContainer}>
-                  <Form.Item
-                    name="password"
-                    className={styles.formItem}
-                    rules={[
-                      { min: 9, message: 'Please input min 9 symbols!!!' },
-                      {
-                        required: true,
-                        message: 'Please confirm your password!',
-                        validateTrigger: 'onSignUp'
-                      }
-                    ]}>
-                    <Input type={type} value={checkPassword} placeholder={'Password'} minLength={9} maxLength={128} />
-                  </Form.Item>
-                  <div className={styles.eyeIcon} onClick={onEyeClick}>
-                    {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
-                  </div>
-                </div>
-                <div className={styles.passwordContainer}>
-                  <Form.Item
-                    name="passwordConfirmation"
-                    className={styles.formItem}
-                    rules={[
-                      { min: 9, message: 'Please input min 9 symbols!!!' },
-                      {
-                        required: true,
-                        message: 'Please confirm your password!',
-                        validateTrigger: 'onSignUp'
-                      }
-                    ]}>
-                    <Input
-                      type={typeConfirm}
-                      value={checkPasswordConfirm}
-                      placeholder={'Confirm password'}
-                      minLength={9}
-                      maxLength={128}
-                    />
-                  </Form.Item>
-                  <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
-                    {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
-                  </div>
-                </div>
-              </div>
-              <div className={styles.checkboxContainer}>
-                <PuzzleCheckbox checked={checked} onChange={onChangeCheck} label={'I agree '} />
-
-                <div className={styles.linkRules}>Terms and Conditions</div>
-              </div>
-              <Form.Item className={styles.formItem}>
-                <PuzzleButton
-                  htmlType="submit"
-                  btnTitle={
-                    checkedCode &&
-                    (checkRole?.value === Role.Designer ||
-                      checkRole?.value === Role.QA ||
-                      checkRole?.value === Role.PdO ||
-                      checkRole?.value === Role.Programmer)
-                      ? 'Create account'
-                      : 'Next step'
+            <div className={styles.passwordContainer}>
+              <Form.Item
+                name="password"
+                className={styles.formItem}
+                rules={[
+                  { min: 9, message: 'Please input min 9 symbols!!!' },
+                  {
+                    required: true,
+                    message: 'Please confirm your password!',
+                    validateTrigger: 'onSignUp'
                   }
-                  btnType={PuzzleButtonTypes.TextButton}
-                  btnClassName={styles.button}
-                  btnDisabled={checkPassword === '' || !(checkPassword === checkPasswordConfirm) || !checked}
+                ]}>
+                <Input type={type} value={checkPassword} placeholder={'Password'} minLength={9} maxLength={128} />
+              </Form.Item>
+              <div className={styles.eyeIcon} onClick={onEyeClick}>
+                {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+              </div>
+            </div>
+            <div className={styles.passwordContainer}>
+              <Form.Item
+                name="passwordConfirmation"
+                className={styles.formItem}
+                rules={[
+                  { min: 9, message: 'Please input min 9 symbols!!!' },
+                  {
+                    required: true,
+                    message: 'Please confirm your password!',
+                    validateTrigger: 'onSignUp'
+                  }
+                ]}>
+                <Input
+                  type={typeConfirm}
+                  value={checkPasswordConfirm}
+                  placeholder={'Confirm password'}
+                  minLength={9}
+                  maxLength={128}
                 />
               </Form.Item>
-            </Form>
-            <div className={styles.info}>
-              {'Have an account?'}
-              <NavLink to={PathNames.SignIn} className={styles.link}>
-                <span>{'Sign in'}</span>
-              </NavLink>
+              <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
+                {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+              </div>
             </div>
           </div>
+          <div className={styles.checkboxContainer}>
+            <PuzzleCheckbox checked={checked} onChange={onChangeCheck} label={'I agree '} />
+            <div className={styles.linkRules}>Terms and Conditions</div>
+          </div>
+          <Form.Item className={styles.formItem}>
+            <PuzzleButton
+              htmlType="submit"
+              btnTitle={
+                checkedCode &&
+                (checkRole?.value === Role.Designer ||
+                  checkRole?.value === Role.QA ||
+                  checkRole?.value === Role.PdO ||
+                  checkRole?.value === Role.Programmer)
+                  ? 'Create account'
+                  : 'Next step'
+              }
+              btnType={PuzzleButtonTypes.TextButton}
+              btnClassName={styles.button}
+              btnDisabled={checkPassword === '' || !(checkPassword === checkPasswordConfirm) || !checked}
+            />
+          </Form.Item>
+        </Form>
+        <div className={styles.info}>
+          {'Have an account?'}
+          <NavLink to={PathNames.SignIn} className={styles.link}>
+            <span>{'Sign in'}</span>
+          </NavLink>
         </div>
-      </>
-    </FormContainer>
+      </div>
+    </div>
   );
 };
 

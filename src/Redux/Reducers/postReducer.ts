@@ -7,6 +7,7 @@ import {
   ArrayOfProjectType,
   CardTaskType,
   DeleteMilestoneType,
+  DeleteProject,
   DependeciesMilestone,
   MilestoneDataPayload,
   MilestoneType,
@@ -57,6 +58,7 @@ type PostReducerState = {
   allResponsible: AllResponsibleType | [];
   milestoneDependencies: ArrayMilestoneDependencies | [];
   allHomeScreenProjects: CardsListType | [];
+  deletedProjectId: number;
 };
 
 const initialState: PostReducerState = {
@@ -89,7 +91,8 @@ const initialState: PostReducerState = {
   isCloseProjectModalOpened: false,
   allResponsible: [],
   milestoneDependencies: [],
-  allHomeScreenProjects: []
+  allHomeScreenProjects: [],
+  deletedProjectId: 0
 };
 
 const postsSlice = createSlice({
@@ -208,6 +211,10 @@ const postsSlice = createSlice({
     getHomeScreenProjects: (state, action: PayloadAction<undefined>) => {},
     setHomeScreenProjects: (state, action: PayloadAction<CardsListType>) => {
       state.allHomeScreenProjects = action.payload;
+    },
+    deleteProject: (state, action: PayloadAction<DeleteProject>) => {},
+    setDeletedProjectId: (state, action: PayloadAction<number>) => {
+      state.deletedProjectId = action.payload;
     }
   }
 });
@@ -265,7 +272,9 @@ export const {
   removeResponsible,
   getHomeScreenProjects,
   setHomeScreenProjects,
-  setEcaseHeadModalVisible
+  setEcaseHeadModalVisible,
+  deleteProject,
+  setDeletedProjectId
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;

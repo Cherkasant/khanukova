@@ -2,10 +2,8 @@ import { IconColor } from '../../Checkbox/Checkbox';
 
 export const LabelCheckbox = [
   { label: 'Project', icon: true, color: IconColor.Blue },
-  { label: 'Sidebar', icon: true, color: IconColor.Lime },
   { label: 'Label 1', icon: true, color: IconColor.Green },
-  { label: 'Label 2', icon: true, color: IconColor.Orange },
-  { label: 'Label 3', icon: true, color: IconColor.Pink },
+  { label: 'Label 3', icon: true, color: IconColor.Red },
   { label: 'Label 4', icon: true, color: IconColor.Purple },
   { label: 'Label 5', icon: true, color: IconColor.Yellow }
 ];

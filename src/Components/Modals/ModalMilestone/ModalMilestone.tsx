@@ -59,6 +59,7 @@ const ModalMilestone = () => {
   const ArrayOfDependencies = allDependencies.map((el) => {
     return { value: el.id.toString(), label: el.milestone_name };
   });
+  console.log(ArrayOfDependencies);
   const allResponsible = useSelector(postSelector.getAllResponsible);
   const checkbox = allResponsible.map((el) => {
     return { value: el.id, label: el.nickname };
@@ -75,7 +76,6 @@ const ModalMilestone = () => {
   const defaultResponsible = singleMilestone?.responsible_data.map((el) => {
     return el.id;
   });
-  console.log(defaultResponsible);
   useEffect(() => {
     if (refreshComments && singleMilestone) {
       dispatch(getAllMilestoneComments(singleMilestone?.id));
@@ -110,6 +110,7 @@ const ModalMilestone = () => {
   }, [singleMilestone]);
 
   const onSaveClick = () => {
+    console.log('clicked');
     if (singleMilestone) {
       dispatch(
         patchMilestone({
@@ -125,7 +126,7 @@ const ModalMilestone = () => {
             duration: duration,
             labels: label,
             color_labels: colors.value,
-            dependence: [dependence.value],
+            dependence: dependence.value,
             progress: progress.value,
             status: status.value,
             payment_status: paymentStatus.value,
@@ -204,6 +205,7 @@ const ModalMilestone = () => {
   const [colors, setColors] = useState<any>(null);
   const [title, setTitle] = useState('');
   const [edit, setEdit] = useState(false);
+  console.log(dependence);
   const onEditClick = () => {
     setEdit(!edit);
   };
@@ -301,12 +303,6 @@ const ModalMilestone = () => {
                 value={descriptionValue}
                 onChange={onChangeDescription}
               />
-              {/*<PuzzleButton*/}
-              {/*  title={"Submit new"}*/}
-              {/*  type={PuzzleButtonTypes.TextButton}*/}
-              {/*  className={styles.submitBtn}*/}
-              {/*  disabled={!descriptionValue}*/}
-              {/*/>*/}
             </div>
 
             <div className={styles.attachmentContainer}>

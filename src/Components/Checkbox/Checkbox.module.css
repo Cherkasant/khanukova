@@ -1,63 +1,63 @@
 .container {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .input {
-    width: 17px;
-    height: 17px;
-    background: none;
-    border: 1px solid #9bacc9;
-    border-radius: 3px;
+  width: 17px;
+  height: 17px;
+  background: none;
+  border: 1px solid #9bacc9;
+  border-radius: 3px;
 }
 
 input[type='checkbox']:checked:before {
-    border: 1px solid #1258ca;
-    border-radius: 3px;
-    text-align: center;
+  border: 1px solid #1258ca;
+  border-radius: 3px;
+  text-align: center;
 }
 
 .label {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: #212121;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #212121;
 }
 
 .icon {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
 }
 
 .blue {
-    background-color: #1258ca;
+  background-color: #579bfc;
 }
 
 .lime {
-    background-color: #16ca12;
+  background-color: #16ca12;
 }
 
 .green {
-    background-color: #0f8622;
+  background-color: #00c875;
 }
 
 .orange {
-    background-color: #ca8012;
+  background-color: #ca8012;
 }
 
-.pink {
-    background-color: #ca12c3;
+.red {
+  background-color: #e98274;
 }
 
 .purple {
-    background-color: #a27cf2;
+  background-color: #a25ddc;
 }
 
 .yellow {
-    background-color: #ddd625;
+  background-color: #ffd166;
 }

@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,6 +21,10 @@ import {
 } from '../../Redux/Reducers/profileReducer';
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
 
+import { getUserName } from '../../Redux/Reducers/authReducer';
+
+import Input from '../../Components/Input';
+
 import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
@@ -37,30 +40,62 @@ const ProfilePage = () => {
     dispatch(getAllDevTeamEmployees());
   }, []);
 
-  const initialValues = {
-    name: personalInfoList?.full_name,
-    nickName: personalInfoList?.nickname,
-    position: personalInfoList?.position,
-    email: personalInfoList?.email,
-    phone: personalInfoList?.phone,
-    company: companyList?.company_name,
-    telegram: ''
+  const [name, setName] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [position, setPosition] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState<any>('');
+  const [telegram, setTelegram] = useState('');
+
+  useEffect(() => {
+    if (personalInfoList && companyList) {
+      setName(personalInfoList?.full_name);
+      setNickname(personalInfoList?.nickname);
+      setPosition(personalInfoList?.position);
+      setEmail(personalInfoList?.email);
+      setPhone(personalInfoList?.phone);
+      setCompany(companyList?.company_name);
+      setTelegram('');
+      const avatar = new File([personalInfoList?.account_photo], personalInfoList?.account_photo, {
+        type: 'image/png'
+      });
+      setFile(avatar);
+    }
+  }, [personalInfoList, companyList]);
+
+  const inputFile = useRef<any>(null);
+
+  const [file, setFile] = useState<any>(null);
+
+  const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+      const fd = new FormData();
+      fd.append('account_photo', event.target.files[0]);
+      dispatch(
+        editPersonalInfo({
+          formData: fd,
+          callback: () => {
+            dispatch(getPersonalInfoReducer());
+          }
+        })
+      );
+    }
   };
-  const [values, setValues] = useState(initialValues);
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
+
   const onSaveBtnClick = () => {
+    const formData = new FormData();
+    formData.append('full_name', name);
+    formData.append('phone', phone);
+    formData.append(' position', position);
+
     dispatch(
       editPersonalInfo({
-        data: {
-          full_name: values?.name,
-          phone: values?.phone,
-          position: values?.position
-        },
+        formData,
         callback: () => {
-          console.log('test');
+          dispatch(getPersonalInfoReducer());
+          dispatch(getUserName());
         }
       })
     );
@@ -89,6 +124,7 @@ const ProfilePage = () => {
     []
   );
 
+  // @ts-ignore
   return (
     <div className={styles.container}>
       <div
@@ -108,112 +144,99 @@ const ProfilePage = () => {
               <h2 className={styles.subTitle}>Account photo</h2>
               <div className={styles.editContainer}>
                 <img className={styles.photo} src={personalInfoList?.account_photo} alt={''} />
-                <div className={styles.editIcon}>
+                <div className={styles.editIcon} onClick={() => inputFile.current.click()}>
                   <PencilIcon />
+                  <input type={'file'} className={styles.inputFile} onChange={onChangeFile} ref={inputFile} />
                 </div>
               </div>
             </div>
-
-            <div className={styles.containerContactInfo}>
-              <div>
-                <h2 className={styles.subTitle}>Contact info</h2>
+            <div>
+              <h2 className={styles.subTitle}>Contact info</h2>
+              <div className={styles.containerContactInfo}>
+                <div>
+                  <div className={styles.containerInput}>
+                    <div className={styles.inputBlock}>
+                      <Input
+                        title={'Full name'}
+                        type={'text'}
+                        value={name}
+                        onChange={(value) => setName(value)}
+                        placeholder={'Full name'}
+                        className={styles.input}
+                      />
+                    </div>
+                    <div className={styles.inputBlock}>
+                      <Input
+                        title={'Nick name'}
+                        type={'text'}
+                        value={nickname}
+                        onChange={(value) => setNickname(value)}
+                        placeholder={'Nick name'}
+                        className={styles.input}
+                      />
+                    </div>
+                    <div className={styles.inputBlock}>
+                      <Input
+                        title={'Company'}
+                        type={'text'}
+                        value={company}
+                        onChange={(value) => setCompany(value)}
+                        placeholder={'Company'}
+                        disabled
+                        className={styles.input}
+                      />
+                    </div>
+                    <div className={styles.inputBlock}>
+                      <Input
+                        title={'Position'}
+                        type={'text'}
+                        value={position}
+                        onChange={(value) => setPosition(value)}
+                        placeholder={'Positions'}
+                        disabled
+                        className={styles.input}
+                      />
+                    </div>
+                  </div>
+                </div>
 
                 <div className={styles.containerInput}>
                   <div className={styles.inputBlock}>
-                    <div className={styles.titleInput}>{'Full name'}</div>
-                    <input
-                      type={'text'}
-                      name={'name'}
-                      defaultValue={values.name}
-                      onChange={handleInputChange}
-                      placeholder={'Full name'}
+                    <Input
+                      title={'Email'}
+                      type={'email'}
+                      value={email}
+                      onChange={(value) => setEmail(value)}
+                      placeholder={'Email'}
                       className={styles.input}
                     />
                   </div>
                   <div className={styles.inputBlock}>
-                    <div className={styles.titleInput}>{'Nick name'}</div>
-                    <input
-                      type={'text'}
-                      name={'nickName'}
-                      value={values.nickName}
-                      onChange={handleInputChange}
-                      placeholder={'Nick name'}
+                    <Input
+                      title={'Phone number '}
+                      type={'tel'}
+                      value={phone}
+                      onChange={(value) => setPhone(value)}
+                      placeholder={'Phone'}
                       className={styles.input}
                     />
                   </div>
                   <div className={styles.inputBlock}>
-                    <div className={styles.titleInput}>{'Company name'}</div>
-                    <input
+                    <Input
+                      title={'Telegram'}
                       type={'text'}
-                      name={'company'}
-                      defaultValue={values.company}
-                      onChange={handleInputChange}
-                      placeholder={'Company name'}
+                      value={telegram}
+                      onChange={(value) => setTelegram(value)}
+                      placeholder={'Enter the profile link telegram'}
                       className={styles.input}
-                      disabled
                     />
                   </div>
-                  <div className={styles.inputBlock}>
-                    <div className={styles.titleInput}>{'Position'}</div>
-                    <input
-                      type={'text'}
-                      name={'positions'}
-                      defaultValue={values.position}
-                      onChange={handleInputChange}
-                      placeholder={'Positions'}
-                      className={styles.input}
-                      disabled
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.containerInput}>
-                <div className={styles.inputBlock}>
-                  <div className={styles.titleInput}>{'Email'}</div>
-                  <input
-                    type={'email'}
-                    name={'email'}
-                    defaultValue={values.email}
-                    onChange={handleInputChange}
-                    placeholder={'Enter Email'}
-                    className={styles.input}
-                  />
-                </div>
-                <div className={styles.inputBlock}>
-                  <div className={styles.titleInput}>{'Phone number '}</div>
-                  <input
-                    type={'tel'}
-                    name={'phone'}
-                    defaultValue={values.phone}
-                    onChange={handleInputChange}
-                    placeholder={'Enter Phone'}
-                    className={styles.input}
-                  />
-                </div>
-                <div className={styles.inputBlock}>
-                  <div className={styles.titleInput}>{'Telegram'}</div>
-                  <input
-                    title={'Telegram'}
-                    type={'text'}
-                    name={'telegram'}
-                    defaultValue={values.telegram}
-                    placeholder={'Enter the profile link telegram'}
-                    className={styles.input}
-                  />
                 </div>
               </div>
             </div>
           </div>
 
           <div className={styles.buttonsBlock}>
-            <PuzzleButton
-              btnTitle={'Cancel'}
-              btnType={PuzzleButtonTypes.TextButton}
-              onClick={() => {}}
-              btnClassName={styles.buttonCancel}
-            />
-
             <PuzzleButton
               btnTitle={'Save'}
               btnType={PuzzleButtonTypes.TextButton}

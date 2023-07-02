@@ -12,7 +12,7 @@ import { PauseProjectIcon } from '../../Assets/ProfilePage/PauseProjectIcon';
 
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
 
-import { setCloseProjectModal } from '../../Redux/Reducers/postReducer';
+import { setCloseProjectModal, setDeletedProjectId } from '../../Redux/Reducers/postReducer';
 
 import styles from './Card.module.css';
 
@@ -42,6 +42,7 @@ const Card: FC<CardProps> = ({ card, edit }) => {
   const onDeleteClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     dispatch(setCloseProjectModal(true));
+    dispatch(setDeletedProjectId(id));
     setShowClose(false);
   };
 
@@ -81,22 +82,25 @@ const Card: FC<CardProps> = ({ card, edit }) => {
         ) : null}
       </div>
       <div className={styles.projectContainer}>
-        <div className={styles.task}>
-          <div className={styles.taskName}>Tasks</div>
-          <div className={styles.taskProgress}>{progress}</div>
+        <div>
+          <div className={styles.task}>
+            <div className={styles.taskName}>Tasks</div>
+            <div className={styles.taskProgress}>{progress}</div>
+          </div>
+          <div className={styles.task}>
+            <div className={styles.taskName}>Budget</div>
+            <div className={styles.taskProgress}>{''}</div>
+          </div>
         </div>
+
         <div className={styles.task}>
           <div className={styles.taskName}>Deadline</div>
           <div className={styles.taskProgress}>{deadline}</div>
         </div>
-        <div className={styles.task}>
-          <div className={styles.taskName}>Budget</div>
-          <div className={styles.taskProgress}>{''}</div>
-        </div>
-        <div className={styles.task}>
-          <div className={styles.taskName}>Paid</div>
-          <div className={styles.taskProgress}>{payments}</div>
-        </div>
+        {/*<div className={styles.task}>*/}
+        {/*  <div className={styles.taskName}>Paid</div>*/}
+        {/*  <div className={styles.taskProgress}>{payments}</div>*/}
+        {/*</div>*/}
       </div>
     </div>
   );

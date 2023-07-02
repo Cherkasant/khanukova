@@ -40,6 +40,8 @@ import postSelector from '../../Redux/Selectors/postSelector';
 
 import ModalEcaseHead from '../../Components/Modals/ModalEcaseHead';
 
+import Gantt from '../../Components/Gantt/Gantt';
+
 import styles from './SingleProject.module.css';
 
 const TABS_NAMES = [
@@ -203,6 +205,7 @@ const SingleProject = () => {
       ) : null}
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
       {activeTab === Tabs.Documents ? <Documents /> : null}
+      {activeTab === Tabs.Gantt ? <Gantt /> : null}
       <ModalNewMilestone />
       <ModalNewTask />
       <ModalNewSubTask />

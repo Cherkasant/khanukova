@@ -3,18 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink, useLocation } from 'react-router-dom';
+import io from 'socket.io-client';
 
 import { ChatActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ChatActiveIcon';
-import { LibraryActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/LibraryActiveIcon';
 import { MyProfileActive } from '../../../Assets/Header/Menu/ActiveIcons/MyProfileActive';
 import { NotificationActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/NotificationActiveIcon';
-import { PaymentsActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/PaymentsActiveIcon';
 import { ProjectActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ProjectActiveIcon';
 import { ChatIcon } from '../../../Assets/Header/Menu/ChatIcon';
-import { LibraryIcon } from '../../../Assets/Header/Menu/LibraryIcon';
 import { MyProfileIcon } from '../../../Assets/Header/Menu/MyProfileIcon';
 import { NotificationIcon } from '../../../Assets/Header/Menu/NotificationIcon';
-import { PaymentIcon } from '../../../Assets/Header/Menu/PaymentIcon';
 import { ProjectIcon } from '../../../Assets/Header/Menu/ProjectIcon';
 import { AddNewProjectIcon } from '../../../Assets/icons/AddNewProjectIcon';
 import { ArrayDownIcon } from '../../../Assets/icons/ArrayDownIcon';
@@ -39,14 +36,15 @@ const UserMenu = () => {
   const navigate = useNavigate();
   const isLoggedIn = useSelector(authSelectors.getLoggedIn);
   const allProjects = useSelector(postSelector.getAllProjects);
-
   const [isActiveProject, setIsActiveProject] = useState('');
+  const [isOpened, setOpened] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getAllProjects());
     }
   }, [dispatch, isLoggedIn]);
+
   const onLogOutClick = () => {
     if (isLoggedIn) {
       dispatch(logoutUser());
@@ -55,10 +53,14 @@ const UserMenu = () => {
       navigate(PathNames.SignIn);
     }
   };
-  const [isOpened, setOpened] = useState(false);
   const onArrowClick = () => {
     setOpened(!isOpened);
   };
+
+  const connectionSocketHandler = () => {
+    io('ws://agile-dreamers-chat-be.herokuapp.com/:5000/websocket/ws/1');
+  };
+
   const navButtons = [
     {
       name: 'My profile',
@@ -66,7 +68,13 @@ const UserMenu = () => {
       link: PathNames.Profile,
       activeIcon: <MyProfileActive />
     },
-    { name: 'Chats', icon: <ChatIcon />, link: PathNames.Chats, activeIcon: <ChatActiveIcon /> },
+    {
+      name: 'Chats',
+      icon: <ChatIcon />,
+      link: PathNames.Chats,
+      activeIcon: <ChatActiveIcon />,
+      onClick: connectionSocketHandler
+    },
     {
       name: 'Projects',
       icon: <ProjectIcon />,
@@ -84,8 +92,8 @@ const UserMenu = () => {
       projects: allProjects,
       activeIcon: <AddNewProjectActiveIcon />
     },
-    { name: 'Library', icon: <LibraryIcon />, link: '', activeIcon: <LibraryActiveIcon /> },
-    { name: 'Payments', icon: <PaymentIcon />, link: PathNames.Payments, activeIcon: <PaymentsActiveIcon /> },
+    // { name: 'Library', icon: <LibraryIcon />, link: '', activeIcon: <LibraryActiveIcon /> },
+    // { name: 'Payments', icon: <PaymentIcon />, link: PathNames.Payments, activeIcon: <PaymentsActiveIcon /> },
     {
       name: 'Notifications',
       icon: <NotificationIcon />,
@@ -98,8 +106,9 @@ const UserMenu = () => {
     <>
       <div className={styles.container}>
         <div>
-          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon, activeArrow }) => (
+          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon, activeArrow, onClick }) => (
             <NavLink
+              onClick={onClick}
               key={name}
               to={link}
               className={classNames(

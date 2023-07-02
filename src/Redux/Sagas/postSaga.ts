@@ -4,6 +4,7 @@ import { all, put, takeLatest } from 'redux-saga/effects';
 import {
   addResponsible,
   deleteMilestone,
+  deleteProject,
   deleteSubTask,
   deleteTask,
   getAllMilestoneDependencies,
@@ -44,6 +45,7 @@ import {
 import {
   addResponsibleType,
   DeleteMilestoneType,
+  DeleteProject,
   DependeciesMilestone,
   MilestoneDataPayload,
   PatchMilestoneType,
@@ -288,9 +290,19 @@ function* removeResponsibleWorker(action: PayloadAction<removeResponsibleType>) 
 function* getAllHomeScreenProjectsWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getHomeScreenProjects);
   if (ok && data) {
-    yield put(setHomeScreenProjects(data));
+    yield put(setHomeScreenProjects(data.slice(0, 8)));
   } else {
     console.warn('Error while getting homescreen projects', problem);
+  }
+}
+
+function* deleteProjectWorker(action: PayloadAction<DeleteProject>) {
+  const { id, callback } = action.payload;
+  const { ok, problem } = yield callCheckingAuth(API.deleteProject, id);
+  if (ok) {
+    callback();
+  } else {
+    console.warn('Error while deleting project', problem);
   }
 }
 
@@ -318,6 +330,7 @@ export default function* postSaga() {
     takeLatest(getAllMilestoneDependencies, getAllMilestoneDependenciesWorker),
     takeLatest(addResponsible, addResponsibleWorker),
     takeLatest(removeResponsible, removeResponsibleWorker),
-    takeLatest(getHomeScreenProjects, getAllHomeScreenProjectsWorker)
+    takeLatest(getHomeScreenProjects, getAllHomeScreenProjectsWorker),
+    takeLatest(deleteProject, deleteProjectWorker)
   ]);
 }

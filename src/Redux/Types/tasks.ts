@@ -105,6 +105,7 @@ export type MilestoneType = {
   labels: string;
   color_labels: string;
   dependence: Array<string> | [];
+  dependence_name: Array<string> | [];
   progress: number;
   status: string;
   payment_status: string;
@@ -256,4 +257,12 @@ export type removeResponsibleType = {
   id: number | undefined;
   responsible_remove: Array<number>;
   callback: () => void;
+};
+export type DeleteProject = {
+  id: number;
+  callback: () => void;
+};
+export type CloseModalType = {
+  activeModal: boolean;
+  idProject: number;
 };
