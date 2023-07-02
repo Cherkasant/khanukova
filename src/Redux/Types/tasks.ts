@@ -105,6 +105,7 @@ export type MilestoneType = {
   labels: string;
   color_labels: string;
   dependence: Array<string> | [];
+  dependence_name: Array<string> | [];
   progress: number;
   status: string;
   payment_status: string;

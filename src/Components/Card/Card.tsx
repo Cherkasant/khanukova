@@ -82,22 +82,25 @@ const Card: FC<CardProps> = ({ card, edit }) => {
         ) : null}
       </div>
       <div className={styles.projectContainer}>
-        <div className={styles.task}>
-          <div className={styles.taskName}>Tasks</div>
-          <div className={styles.taskProgress}>{progress}</div>
+        <div>
+          <div className={styles.task}>
+            <div className={styles.taskName}>Tasks</div>
+            <div className={styles.taskProgress}>{progress}</div>
+          </div>
+          <div className={styles.task}>
+            <div className={styles.taskName}>Budget</div>
+            <div className={styles.taskProgress}>{''}</div>
+          </div>
         </div>
+
         <div className={styles.task}>
           <div className={styles.taskName}>Deadline</div>
           <div className={styles.taskProgress}>{deadline}</div>
         </div>
-        <div className={styles.task}>
-          <div className={styles.taskName}>Budget</div>
-          <div className={styles.taskProgress}>{''}</div>
-        </div>
-        <div className={styles.task}>
-          <div className={styles.taskName}>Paid</div>
-          <div className={styles.taskProgress}>{payments}</div>
-        </div>
+        {/*<div className={styles.task}>*/}
+        {/*  <div className={styles.taskName}>Paid</div>*/}
+        {/*  <div className={styles.taskProgress}>{payments}</div>*/}
+        {/*</div>*/}
       </div>
     </div>
   );

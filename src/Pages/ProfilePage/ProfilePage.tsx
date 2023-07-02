@@ -21,6 +21,8 @@ import {
 } from '../../Redux/Reducers/profileReducer';
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
 
+import { getUserName } from '../../Redux/Reducers/authReducer';
+
 import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
@@ -91,6 +93,7 @@ const ProfilePage = () => {
         formData,
         callback: () => {
           dispatch(getPersonalInfoReducer());
+          dispatch(getUserName());
         }
       })
     );
@@ -145,94 +148,94 @@ const ProfilePage = () => {
                 </div>
               </div>
             </div>
-
-            <div className={styles.containerContactInfo}>
-              <div>
-                <h2 className={styles.subTitle}>Contact info</h2>
+            <div>
+              <h2 className={styles.subTitle}>Contact info</h2>
+              <div className={styles.containerContactInfo}>
+                <div>
+                  <div className={styles.containerInput}>
+                    <div className={styles.inputBlock}>
+                      <div className={styles.titleInput}>{'Full name'}</div>
+                      <input
+                        type={'text'}
+                        name={'name'}
+                        value={name}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                        placeholder={'Full name'}
+                        className={styles.input}
+                      />
+                    </div>
+                    <div className={styles.inputBlock}>
+                      <div className={styles.titleInput}>{'Nick name'}</div>
+                      <input
+                        type={'text'}
+                        name={'nickName'}
+                        value={nickname}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}
+                        placeholder={'Nick name'}
+                        className={styles.input}
+                      />
+                    </div>
+                    <div className={styles.inputBlock}>
+                      <div className={styles.titleInput}>{'Company name'}</div>
+                      <input
+                        type={'text'}
+                        name={'company'}
+                        value={company}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setCompany(e.target.value)}
+                        placeholder={'Company name'}
+                        className={styles.input}
+                        disabled
+                      />
+                    </div>
+                    <div className={styles.inputBlock}>
+                      <div className={styles.titleInput}>{'Position'}</div>
+                      <input
+                        type={'text'}
+                        name={'positions'}
+                        value={position}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) => setPosition(e.target.value)}
+                        placeholder={'Positions'}
+                        className={styles.input}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
 
                 <div className={styles.containerInput}>
                   <div className={styles.inputBlock}>
-                    <div className={styles.titleInput}>{'Full name'}</div>
+                    <div className={styles.titleInput}>{'Email'}</div>
                     <input
-                      type={'text'}
-                      name={'name'}
-                      value={name}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-                      placeholder={'Full name'}
+                      type={'email'}
+                      name={'email'}
+                      value={email}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                      placeholder={'Enter Email'}
                       className={styles.input}
                     />
                   </div>
                   <div className={styles.inputBlock}>
-                    <div className={styles.titleInput}>{'Nick name'}</div>
+                    <div className={styles.titleInput}>{'Phone number '}</div>
                     <input
-                      type={'text'}
-                      name={'nickName'}
-                      value={nickname}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => setNickname(e.target.value)}
-                      placeholder={'Nick name'}
+                      type={'tel'}
+                      name={'phone'}
+                      value={phone}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+                      placeholder={'Enter Phone'}
                       className={styles.input}
                     />
                   </div>
                   <div className={styles.inputBlock}>
-                    <div className={styles.titleInput}>{'Company name'}</div>
+                    <div className={styles.titleInput}>{'Telegram'}</div>
                     <input
+                      title={'Telegram'}
                       type={'text'}
-                      name={'company'}
-                      value={company}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => setCompany(e.target.value)}
-                      placeholder={'Company name'}
+                      name={'telegram'}
+                      value={telegram}
+                      placeholder={'Enter the profile link telegram'}
                       className={styles.input}
-                      disabled
                     />
                   </div>
-                  <div className={styles.inputBlock}>
-                    <div className={styles.titleInput}>{'Position'}</div>
-                    <input
-                      type={'text'}
-                      name={'positions'}
-                      value={position}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => setPosition(e.target.value)}
-                      placeholder={'Positions'}
-                      className={styles.input}
-                      disabled
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.containerInput}>
-                <div className={styles.inputBlock}>
-                  <div className={styles.titleInput}>{'Email'}</div>
-                  <input
-                    type={'email'}
-                    name={'email'}
-                    value={email}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                    placeholder={'Enter Email'}
-                    className={styles.input}
-                  />
-                </div>
-                <div className={styles.inputBlock}>
-                  <div className={styles.titleInput}>{'Phone number '}</div>
-                  <input
-                    type={'tel'}
-                    name={'phone'}
-                    value={phone}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
-                    placeholder={'Enter Phone'}
-                    className={styles.input}
-                  />
-                </div>
-                <div className={styles.inputBlock}>
-                  <div className={styles.titleInput}>{'Telegram'}</div>
-                  <input
-                    title={'Telegram'}
-                    type={'text'}
-                    name={'telegram'}
-                    value={telegram}
-                    placeholder={'Enter the profile link telegram'}
-                    className={styles.input}
-                  />
                 </div>
               </div>
             </div>
