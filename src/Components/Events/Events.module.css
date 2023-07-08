@@ -1,14 +1,16 @@
 .container {
   width: 100%;
-  height: 500px;
+  height: 80%;
 }
 
 .calendar {
   font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 .calendar button {
   font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
 :global(.rbc-toolbar) {
@@ -29,11 +31,30 @@
   padding: 7px;
 }
 
-:global(.rbc-header) {
+:global(.rbc-month-view .rbc-header) {
   font-weight: normal;
   color: #a3a3a3;
   text-transform: uppercase;
   padding: 5px 0;
+}
+
+:global(.rbc-time-view .rbc-header) {
+  font-weight: normal;
+  padding: 7px 0;
+}
+
+:global(.rbc-time-view .rbc-today) .dayOfMonth {
+  color: #1258ca;
+}
+
+:global(.rbc-time-view .rbc-header .rbc-button-link) {
+  text-align: left;
+}
+
+.weekDay {
+  color: #a3a3a3;
+  text-align: left;
+  text-transform: uppercase;
 }
 
 :global(.rbc-date-cell) {
@@ -64,15 +85,16 @@
   font-size: 12px;
 }
 :global(.rbc-allday-cell),
-:global(.rbc-current-time-indicator) {
+:global(.rbc-event-label) {
   display: none;
 }
 :global(.rbc-time-header-content) {
   margin-bottom: -2px;
 }
 :global(.rbc-time-slot) {
+  border-top: none !important;
   flex: auto;
-  height: 60px;
+  height: 30px;
 }
 :global(.rbc-event) {
   background-color: #d4e5ff;
@@ -82,13 +104,9 @@
   color: #212121;
 }
 
-.eventDot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: #9bacc9;
-  border-radius: 50%;
-  margin-right: 3px;
+:global(.rbc-current-time-indicator) {
+  height: 2px;
+  background-color: #1258ca;
 }
 
 /* .addEventBlock {
