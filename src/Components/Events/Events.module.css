@@ -43,23 +43,17 @@
   padding: 7px 0;
 }
 
-:global(.rbc-time-view .rbc-today) .dayOfMonth {
-  color: #1258ca;
-}
-
 :global(.rbc-time-view .rbc-header .rbc-button-link) {
   text-align: left;
-}
-
-.weekDay {
-  color: #a3a3a3;
-  text-align: left;
-  text-transform: uppercase;
 }
 
 :global(.rbc-date-cell) {
   padding-top: 5px;
   text-align: center;
+}
+
+:global(.rbc-date-cell .rbc-button-link) {
+  font-size: 12px;
 }
 
 :global(.rbc-month-view .rbc-now .rbc-button-link) {
@@ -81,9 +75,6 @@
   z-index: -1;
 }
 
-:global(.rbc-event) {
-  font-size: 12px;
-}
 :global(.rbc-allday-cell),
 :global(.rbc-event-label) {
   display: none;
@@ -96,7 +87,18 @@
   flex: auto;
   height: 30px;
 }
+
 :global(.rbc-event) {
+  font-size: 12px;
+  background-color: inherit;
+  z-index: 10;
+}
+
+:global(.rbc-event:hover),
+:global(.rbc-event:focus) {
+  background-color: #f4f8fe;
+}
+:global(.rbc-event.rbc-selected) {
   background-color: #d4e5ff;
 }
 
@@ -104,9 +106,17 @@
   color: #212121;
 }
 
+:global(.rbc-day-slot .rbc-event) {
+  border: none;
+}
+
 :global(.rbc-current-time-indicator) {
   height: 2px;
   background-color: #1258ca;
+}
+
+:global(.rbc-label) {
+  font-size: 14px;
 }
 
 /* .addEventBlock {

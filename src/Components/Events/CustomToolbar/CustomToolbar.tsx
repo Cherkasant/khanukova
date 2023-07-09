@@ -8,12 +8,12 @@ import NextIcon from '../../../Assets/icons/NextIcon';
 
 import styles from './CustomToolbar.module.css';
 
-type CustomToolbarProps = {
+interface CustomToolbarProps {
   onNavigate: (navigate: 'PREV' | 'NEXT' | 'TODAY') => void;
   label: string;
   activeView: View;
   onView: (view: View) => void;
-};
+}
 
 const CustomToolbar = ({ onNavigate, label, activeView, onView }: CustomToolbarProps) => {
   const [currentView, setCurrentView] = useState<View>(activeView);
