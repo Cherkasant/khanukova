@@ -64,6 +64,7 @@
   line-height: 16px;
   text-align: right;
   color: #a3a3a3;
+  margin-top: 30px;
 }
 
 .subtitle {
@@ -145,6 +146,17 @@
   outline: none;
 }
 
+.inputError,
+.inputError:hover,
+.inputError:focus,
+.inputError:active {
+  border: 1px solid #bf3535;
+}
+
+.inputError:focus {
+  box-shadow: 0 0 4px rgba(191, 53, 53, 0.75);
+}
+
 .passwordContainer {
   position: relative;
   width: 100%;
@@ -167,4 +179,9 @@
 
 .formItem {
   margin-bottom: 0;
+}
+
+.error {
+  color: #bf3535;
+  font-size: 12px;
 }

@@ -8,11 +8,12 @@ import { rootSaga } from './Sagas/rootSaga';
 import resoursesReducer from './Reducers/ResoursesReducer';
 import calendarReducer from './Reducers/calendarReducer';
 import commentReducer from './Reducers/commentReducer';
+import statusApi from './Reducers/statusApi';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: { authReducer, postsReducer, profileReducer, resoursesReducer, calendarReducer, commentReducer },
+  reducer: { authReducer, postsReducer, profileReducer, resoursesReducer, calendarReducer, commentReducer, statusApi },
   middleware: [sagaMiddleware]
 });
 sagaMiddleware.run(rootSaga);

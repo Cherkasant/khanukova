@@ -1,7 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../Components/constants/consts';
+import { setSignInStatusUser, setStatusRequestPassword } from '../Reducers/statusApi';
+
 import {
   activateUser,
   getUserName,
@@ -61,12 +64,15 @@ function* registerPoInfoWorker(action: PayloadAction<RegisterPoPayload>) {
 }
 
 function* sendResetEmailWorker(action: PayloadAction<SendResetEmailPayload>) {
+  yield put(setStatusRequestPassword('pending'));
   const { email, callback } = action.payload;
-  const { ok, problem } = yield call(API.sendResetEmail, email);
+  const { ok, data } = yield call(API.sendResetEmail, email);
   if (ok) {
     callback();
+    yield put(setStatusRequestPassword('fullfilled'));
   } else {
-    console.warn('Error while sending reset email', problem);
+    data ? toast.error(data[0]) : toast.error('Error while sending reset email');
+    yield put(setStatusRequestPassword('regected'));
   }
 }
 
@@ -91,15 +97,22 @@ function* activateUserWorker(action: PayloadAction<ActivateUserPayload>) {
 }
 
 function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
-  const { data: SignInUserData, callback } = action.payload;
-  const { ok, problem, data } = yield call(API.signInUser, SignInUserData);
+  yield put(setSignInStatusUser('pending'));
+  const { data: SignInUserData, callback, rememberPassword } = action.payload;
+  const { ok, data } = yield call(API.signInUser, SignInUserData);
   if (ok) {
-    localStorage.setItem(ACCESS_TOKEN_KEY, data?.access);
-    localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh);
+    rememberPassword
+      ? localStorage.setItem(ACCESS_TOKEN_KEY, data?.access)
+      : sessionStorage.setItem(ACCESS_TOKEN_KEY, data?.access);
+    rememberPassword
+      ? localStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh)
+      : sessionStorage.setItem(REFRESH_TOKEN_KEY, data?.refresh);
     yield put(setLoggedIn(true));
     callback();
+    yield put(setSignInStatusUser('fullfilled'));
   } else {
-    console.warn('Error while sign in user', problem);
+    yield put(setSignInStatusUser('regected'));
+    data.detail ? toast.error(data.detail) : toast.error('Error while sign in user');
   }
 }
 
@@ -107,6 +120,8 @@ function* logOutUserWorker() {
   yield put(setLoggedIn(false));
   localStorage.removeItem(ACCESS_TOKEN_KEY);
   localStorage.removeItem(REFRESH_TOKEN_KEY);
+  sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+  sessionStorage.removeItem(REFRESH_TOKEN_KEY);
 }
 
 function* getUserNameWorker() {

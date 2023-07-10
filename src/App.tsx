@@ -1,10 +1,12 @@
 import './App.css';
 import { Provider } from 'react-redux';
-
+import { ToastContainer } from 'react-toastify';
 import { ConfigProvider, ThemeConfig } from 'antd';
 
 import Router from './Pages/Router';
 import { store } from './Redux/store';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme: ThemeConfig = {
   components: {
@@ -23,6 +25,7 @@ function App() {
   return (
     <div className="App">
       <Router />
+      <ToastContainer position="bottom-right" autoClose={7000} />
     </div>
   );
 }

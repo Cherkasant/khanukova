@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import classNames from 'classnames';
 
 import { ClosedEyeIcon } from '../../Assets/icons/ClosedEyeIcon';
 import { OpenEyeIcon } from '../../Assets/icons/OpenEyeIcon';
@@ -19,9 +21,8 @@ import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { registerUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
-import FormContainer from '../../Components/FormContainer';
-
-import { EMAIL_REGEX, FULL_NAME_REGEX, WITHOUT_SPACE } from '../../Components/constants/regexp.constants';
+import { SignInType, SignUpType } from '../../Components/constants/@auth';
+import { validationRules } from '../validationRules';
 
 import styles from './SignUpHead.module.css';
 
@@ -58,26 +59,44 @@ const optionsHead = [
 const SignUpHead = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [form] = Form.useForm();
-  const checkPassword = Form.useWatch('password', form);
-  const checkPasswordConfirm = Form.useWatch('passwordConfirmation', form);
   const checkRole = Form.useWatch('userStatus', form);
-
   const [type, setType] = useState(PasswordTypes.Password);
+  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
+  const [checked, setChecked] = useState(false);
+  const [checkedCode, setCheckedCode] = useState(false);
+  const [checkedCompany, setCheckedCompany] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    clearErrors,
+    reset,
+    watch,
+    getValues,
+    formState: { errors }
+  } = useForm<SignUpType>({
+    defaultValues: {
+      email: '',
+      password: '',
+      fullName: '',
+      phone: '',
+      position: '',
+      code: '',
+      passwordConfirmation: ''
+    },
+    mode: 'onSubmit'
+  });
+
   const onEyeClick = () => {
     type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password);
   };
-  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
   const onEyeClickConfirm = () => {
     typeConfirm === PasswordTypes.Password
       ? setTypeConfirm(PasswordTypes.Text)
       : setTypeConfirm(PasswordTypes.Password);
   };
 
-  const [checked, setChecked] = useState(false);
-  const [checkedCode, setCheckedCode] = useState(false);
-  const [checkedCompany, setCheckedCompany] = useState(false);
   const onChangeCheck = (e: CheckboxChangeEvent) => {
     setChecked(e.target.checked);
   };
@@ -89,40 +108,48 @@ const SignUpHead = () => {
     setCheckedCompany(e.target.checked);
     setCheckedCode(!e.target.checked);
   };
-  const [value, setValue] = useState<any>();
 
-  const onSignUp = (values: any) => {
+  const getValueCauntry = (value: string) => (value ? options.find((opt) => opt.value === value) : '');
+
+  const onSubmit: SubmitHandler<SignUpType> = (userInfo) => {
+    console.log(userInfo.fullName);
+    console.log(userInfo.email);
+    console.log(userInfo.phone);
+    console.log(userInfo.position);
+    console.log(userInfo.code);
+    console.log(userInfo.password);
+    console.log(userInfo.passwordConfirmation);
     dispatch(
       registerUser({
         data: {
-          full_name: values.fullName,
-          email: values.email,
-          phone: values.phone,
-          position: values.userStatus.label,
-          code: values.code || null,
-          password: values.password,
-          re_password: values.passwordConfirmation
+          full_name: userInfo.fullName,
+          email: userInfo.email,
+          phone: userInfo.phone,
+          position: userInfo.position,
+          code: userInfo.code || null,
+          password: userInfo.password,
+          re_password: userInfo.passwordConfirmation
         },
         callback: () => {
           switch (checkRole.value) {
             case Role.PjO:
               navigate(PathNames.SignUpPoInfo);
               break;
-
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
             case Role.PdO:
               navigate(PathNames.CheckYourEmail);
               break;
-
             default:
               navigate(PathNames.SignUpHeadInfo);
           }
+          reset();
         }
       })
     );
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
@@ -138,129 +165,122 @@ const SignUpHead = () => {
             label={'Sign up and create a company'}
           />
         </div>
-        <Form
-          onFinish={onSignUp}
-          form={form}
-          className={styles.form}
-          initialValues={{
-            fullName: '',
-            email: '',
-            code: '',
-            password: '',
-            passwordConfirmation: ''
-          }}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.inputs}>
-            <Form.Item
+            <Controller
+              control={control}
               name="fullName"
-              className={styles.formItem}
-              rules={[
-                {
-                  pattern: FULL_NAME_REGEX && WITHOUT_SPACE,
-                  message: 'Alphabetics (Latin) only are allowed, Maximum – 160 symbols'
-                },
-                {
-                  required: true,
-                  message: 'Please input your full name!',
-                  validateTrigger: 'onSignUp'
-                }
-              ]}>
-              <Input type={'text'} placeholder={'Full name'} />
-            </Form.Item>
-            <Form.Item
+              rules={validationRules.fullName}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  type={'text'}
+                  placeholder={'Full name'}
+                  onChange={onChange}
+                  value={value}
+                  error={errors.fullName?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
               name="email"
-              className={styles.formItem}
-              rules={[
-                {
-                  pattern: EMAIL_REGEX,
-                  message: 'The input is not valid E-mail!'
-                },
-                {
-                  required: true,
-                  message: 'Please input your E-mail!',
-                  validateTrigger: 'onSignUp'
-                },
-                {}
-              ]}>
-              <Input type={'email'} placeholder={'Email'} />
-            </Form.Item>
-            <Form.Item
+              rules={validationRules.emailSign}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  type={'email'}
+                  placeholder={'Email'}
+                  onChange={onChange}
+                  value={value}
+                  error={errors.email?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
               name="phone"
-              className={styles.formItem}
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your phone number!',
-                  validateTrigger: 'onSignUp'
-                }
-              ]}>
-              <PhoneInput
-                placeholder="Enter phone number"
-                value={value}
-                onChange={setValue}
-                className={styles.phoneInput}
-              />
-            </Form.Item>
-            <Form.Item
-              name="userStatus"
-              className={styles.formItem}
-              rules={[
-                {
-                  required: true,
-                  message: 'Please select users role in the project!',
-                  validateTrigger: 'onSignUp'
-                }
-              ]}>
-              <PuzzleDropdown
-                options={!checkedCompany ? options : optionsHead}
-                placeholder="Role in the project"
-                value={checkRole}
-              />
-            </Form.Item>
-
-            <Form.Item name="code" className={styles.formItem}>
-              <Input type={'text'} placeholder={'Code'} disabled={!checkedCode} />
-            </Form.Item>
-
+              rules={validationRules.phone}
+              render={({ field: { onChange, value }, fieldState: { error } }) => (
+                <>
+                  <PhoneInput
+                    //@ts-ignore
+                    onChange={onChange}
+                    className={classNames(styles.phoneInput, { [styles.inputError]: error })}
+                    placeholder={'Enter phone number'}
+                    value={value}
+                  />
+                  <div className={styles.error}>{error?.message}</div>
+                </>
+              )}
+            />
+            <Controller
+              control={control}
+              name="position"
+              rules={validationRules.position}
+              render={({ field: { value, onChange }, fieldState: { error } }) => (
+                <PuzzleDropdown
+                  options={!checkedCompany ? options : optionsHead}
+                  className={styles.phoneInput}
+                  placeholder={'Role in the project'}
+                  value={getValueCauntry(value)}
+                  onChange={(newValue) => onChange(newValue.value)}
+                  error={error?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              rules={checkedCode ? validationRules.code : undefined}
+              name="code"
+              render={({ field: { onChange, value } }) => (
+                <Input onChange={onChange} value={value ? value : ''} placeholder={'Code'} disabled={!checkedCode} />
+              )}
+            />
             <div className={styles.passwordContainer}>
-              <Form.Item
+              <Controller
+                control={control}
                 name="password"
-                className={styles.formItem}
-                rules={[
-                  { min: 9, message: 'Please input min 9 symbols!!!' },
-                  {
-                    required: true,
-                    message: 'Please confirm your password!',
-                    validateTrigger: 'onSignUp'
-                  }
-                ]}>
-                <Input type={type} value={checkPassword} placeholder={'Password'} minLength={9} maxLength={128} />
-              </Form.Item>
+                rules={validationRules.passwordSignUp}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    onChange={onChange}
+                    onFocus={() => {
+                      clearErrors('password');
+                    }}
+                    value={value}
+                    type={type}
+                    placeholder="Password"
+                    error={errors.password?.message}
+                  />
+                )}
+              />
               <div className={styles.eyeIcon} onClick={onEyeClick}>
-                {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                {type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
               </div>
             </div>
             <div className={styles.passwordContainer}>
-              <Form.Item
+              <Controller
+                control={control}
                 name="passwordConfirmation"
-                className={styles.formItem}
-                rules={[
-                  { min: 9, message: 'Please input min 9 symbols!!!' },
-                  {
-                    required: true,
-                    message: 'Please confirm your password!',
-                    validateTrigger: 'onSignUp'
-                  }
-                ]}>
-                <Input
-                  type={typeConfirm}
-                  value={checkPasswordConfirm}
-                  placeholder={'Confirm password'}
-                  minLength={9}
-                  maxLength={128}
-                />
-              </Form.Item>
+                rules={validationRules.passwordConfirmation}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    onChange={onChange}
+                    onFocus={() => {
+                      clearErrors('passwordConfirmation');
+                    }}
+                    value={value}
+                    type={typeConfirm}
+                    placeholder="Confirm password"
+                    error={
+                      watch('passwordConfirmation') !== watch('password') && getValues('passwordConfirmation')
+                        ? "Password doesn't match"
+                        : ''
+                    }
+                  />
+                )}
+              />
               <div className={styles.eyeIcon} onClick={onEyeClickConfirm}>
-                {checkPasswordConfirm && typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                {typeConfirm !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
               </div>
             </div>
           </div>
@@ -268,24 +288,29 @@ const SignUpHead = () => {
             <PuzzleCheckbox checked={checked} onChange={onChangeCheck} label={'I agree '} />
             <div className={styles.linkRules}>Terms and Conditions</div>
           </div>
-          <Form.Item className={styles.formItem}>
-            <PuzzleButton
-              htmlType="submit"
-              btnTitle={
-                checkedCode &&
-                (checkRole?.value === Role.Designer ||
-                  checkRole?.value === Role.QA ||
-                  checkRole?.value === Role.PdO ||
-                  checkRole?.value === Role.Programmer)
-                  ? 'Create account'
-                  : 'Next step'
-              }
-              btnType={PuzzleButtonTypes.TextButton}
-              btnClassName={styles.button}
-              btnDisabled={checkPassword === '' || !(checkPassword === checkPasswordConfirm) || !checked}
-            />
-          </Form.Item>
-        </Form>
+          <PuzzleButton
+            htmlType="submit"
+            btnTitle={
+              checkedCode &&
+              (checkRole?.value === Role.Designer ||
+                checkRole?.value === Role.QA ||
+                checkRole?.value === Role.PdO ||
+                checkRole?.value === Role.Programmer)
+                ? 'Create account'
+                : 'Next step'
+            }
+            btnType={PuzzleButtonTypes.TextButton}
+            btnClassName={styles.button}
+            btnDisabled={
+              !!errors.email ||
+              !!errors.password ||
+              !!errors.fullName ||
+              !!errors.position ||
+              !!errors.passwordConfirmation ||
+              !!errors.code
+            }
+          />
+        </form>
         <div className={styles.info}>
           {'Have an account?'}
           <NavLink to={PathNames.SignIn} className={styles.link}>
