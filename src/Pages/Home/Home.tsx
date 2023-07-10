@@ -25,6 +25,8 @@ import { SortIcon } from '../../Assets/Home/SortIcon';
 
 import { getHomeScreenProjects } from '../../Redux/Reducers/postReducer';
 
+import LottieLoader from '../../Components/LottieLoader';
+
 import styles from './Home.module.css';
 
 const SORT_LIST = [
@@ -38,7 +40,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getHomeScreenProjects());
   }, []);
-
+  const isLoading = useSelector(postSelector.getLoader);
   const AllProjects = useSelector(postSelector.getAllHomeScreenProjects);
   const activeModal = useSelector(postSelector.getCloseProjectModal);
   const navigate = useNavigate();
@@ -97,7 +99,13 @@ const Home = () => {
         </div>
       </div>
 
-      <CardsList cardsList={AllProjects} />
+      {isLoading ? (
+        <div className={styles.loader}>
+          <LottieLoader />
+        </div>
+      ) : (
+        <CardsList cardsList={AllProjects} />
+      )}
       <div
         className={classNames(styles.wrapModal, {
           [styles.showModal]: activeModal

@@ -11,6 +11,8 @@ import {
   getAllMilestones,
   getAllProjects,
   getAllResponsible,
+  getAllSubtaskDependencies,
+  getAllTaskDependencies,
   getHomeScreenProjects,
   getSingleMilestone,
   getSingleProject,
@@ -30,6 +32,9 @@ import {
   setAllMilestones,
   setAllProjects,
   setAllResponsible,
+  setAllSubtaskDependencies,
+  setAllTaskDependencies,
+  setCardsLoading,
   setHomeScreenProjects,
   setModalMilestone,
   setModalSubTask,
@@ -47,6 +52,8 @@ import {
   DeleteMilestoneType,
   DeleteProject,
   DependeciesMilestone,
+  DependeciesSubtask,
+  DependeciesTask,
   MilestoneDataPayload,
   PatchMilestoneType,
   PatchProjectType,
@@ -288,12 +295,14 @@ function* removeResponsibleWorker(action: PayloadAction<removeResponsibleType>) 
 }
 
 function* getAllHomeScreenProjectsWorker() {
+  yield put(setCardsLoading(true));
   const { ok, data, problem } = yield callCheckingAuth(API.getHomeScreenProjects);
   if (ok && data) {
     yield put(setHomeScreenProjects(data.slice(0, 8)));
   } else {
     console.warn('Error while getting homescreen projects', problem);
   }
+  yield put(setCardsLoading(false));
 }
 
 function* deleteProjectWorker(action: PayloadAction<DeleteProject>) {
@@ -303,6 +312,26 @@ function* deleteProjectWorker(action: PayloadAction<DeleteProject>) {
     callback();
   } else {
     console.warn('Error while deleting project', problem);
+  }
+}
+
+function* getAllTaskDependenciesWorker(action: PayloadAction<DependeciesTask>) {
+  const { id, TaskId } = action.payload;
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllTaskDependencies, id, TaskId);
+  if (ok && data) {
+    yield put(setAllTaskDependencies(data));
+  } else {
+    console.warn('Error while getting task dependencies', problem);
+  }
+}
+
+function* getAllSubtaskDependenciesWorker(action: PayloadAction<DependeciesSubtask>) {
+  const { id, SubtaskId } = action.payload;
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllSubtaskDependencies, id, SubtaskId);
+  if (ok && data) {
+    yield put(setAllSubtaskDependencies(data));
+  } else {
+    console.warn('Error while getting subtask dependencies', problem);
   }
 }
 
@@ -331,6 +360,8 @@ export default function* postSaga() {
     takeLatest(addResponsible, addResponsibleWorker),
     takeLatest(removeResponsible, removeResponsibleWorker),
     takeLatest(getHomeScreenProjects, getAllHomeScreenProjectsWorker),
-    takeLatest(deleteProject, deleteProjectWorker)
+    takeLatest(deleteProject, deleteProjectWorker),
+    takeLatest(getAllTaskDependencies, getAllTaskDependenciesWorker),
+    takeLatest(getAllSubtaskDependencies, getAllSubtaskDependenciesWorker)
   ]);
 }

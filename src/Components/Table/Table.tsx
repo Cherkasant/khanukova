@@ -35,6 +35,7 @@ const Table = () => {
   const dispatch = useDispatch();
 
   const singleProject = useSelector(postSelector.getSingleProject);
+
   const taskData = singleProject?.milestone_data.map((el) => {
     return {
       id: el.id,
@@ -48,7 +49,7 @@ const Table = () => {
       duration: el.duration,
       labels: el.labels,
       color_labels: el.color_labels,
-      dependence: el.dependence,
+      dependence: el.dependence_name,
       progress: el.progress,
       status: el.status,
       payment_status: el.payment_status,
@@ -67,7 +68,7 @@ const Table = () => {
               duration: elem.duration,
               labels: elem.labels,
               color_labels: elem.color_labels,
-              dependence: elem.dependence,
+              dependence: elem.dependence_name,
               progress: elem.progress,
               status: elem.status,
               payment_status: elem.payment_status,
@@ -86,7 +87,7 @@ const Table = () => {
                       duration: element.duration,
                       labels: element.labels,
                       color_labels: element.color_labels,
-                      dependence: element.dependence,
+                      dependence: element.dependence_name,
                       progress: element.progress,
                       status: element.status,
                       payment_status: element.payment_status
@@ -193,7 +194,7 @@ const Table = () => {
       Header: TableColumns.dependence,
       Footer: '',
       accessor: 'dependence',
-      Cell: ({ value }) => <div className={styles.dependence}>{value}</div>
+      Cell: ({ value }) => <div className={styles.dependence}>{value.toString()}</div>
     },
     {
       Header: TableColumns.status,

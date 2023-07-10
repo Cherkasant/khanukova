@@ -145,6 +145,7 @@ export type TaskTypeTable = {
   labels: string;
   color_labels: string;
   dependence: Array<string> | [];
+  dependence_name: Array<string> | [];
   progress: number;
   status: string;
   payment_status: string;
@@ -166,6 +167,7 @@ export type SubTaskTypeTable = {
   labels: string;
   color_labels: string;
   dependence: Array<string> | [];
+  dependence_name: Array<string> | [];
   progress: number;
   status: string;
   payment_status: string;
@@ -266,3 +268,14 @@ export type CloseModalType = {
   activeModal: boolean;
   idProject: number;
 };
+export type DependeciesTask = {
+  id: number;
+  TaskId: number;
+};
+export type ArrayTaskDependencies = Array<DependeciesTask>;
+
+export type DependeciesSubtask = {
+  id: number;
+  SubtaskId: number;
+};
+export type ArraySubtaskDependencies = Array<DependeciesSubtask>;

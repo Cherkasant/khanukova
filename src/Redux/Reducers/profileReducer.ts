@@ -15,6 +15,7 @@ type ProfileReducerState = {
   PersonalInfoList: PersonalInfoData | null;
   password: string;
   employees: ArrayOfEmployees | [];
+  isInfoLoading: boolean;
 };
 
 const initialState: ProfileReducerState = {
@@ -22,7 +23,8 @@ const initialState: ProfileReducerState = {
   ECaseList: null,
   PersonalInfoList: null,
   password: '',
-  employees: []
+  employees: [],
+  isInfoLoading: false
 };
 
 const profileSlice = createSlice({
@@ -53,7 +55,10 @@ const profileSlice = createSlice({
     setAllDevTeamEmployees: (state, action: PayloadAction<ArrayOfEmployees>) => {
       state.employees = action.payload;
     },
-    editPersonalInfo: (state, action: PayloadAction<EditPersonalType>) => {}
+    editPersonalInfo: (state, action: PayloadAction<EditPersonalType>) => {},
+    setInfoLoader: (state, action: PayloadAction<boolean>) => {
+      state.isInfoLoading = action.payload;
+    }
   }
 });
 
@@ -69,7 +74,8 @@ export const {
   setGeneratePassword,
   getAllDevTeamEmployees,
   setAllDevTeamEmployees,
-  editPersonalInfo
+  editPersonalInfo,
+  setInfoLoader
 } = profileSlice.actions;
 
 const profileReducer = profileSlice.reducer;
