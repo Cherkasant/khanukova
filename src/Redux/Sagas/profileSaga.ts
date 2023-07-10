@@ -13,6 +13,7 @@ import {
   setECaseListReducer,
   setGeneratePassword,
   setHeadCompanyListReducer,
+  setInfoLoader,
   setPersonalInfoReducer
 } from '../Reducers/profileReducer';
 import { EditCompanyListPayload, EditPersonalType } from '../Types/profile';
@@ -30,19 +31,20 @@ function* getHeadCompanyListWorker() {
 }
 
 function* getPersonalInfoListWorker() {
+  yield put(setInfoLoader(true));
   const { ok, data, problem } = yield callCheckingAuth(API.getUserName);
   if (ok && data) {
     yield put(setPersonalInfoReducer(data));
   } else {
     console.warn('Authentication credentials were not provided', problem);
   }
+  yield put(setInfoLoader(false));
 }
 
 function* getECaseListWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getECaseList);
   if (ok && data) {
     yield put(setECaseListReducer(data[0]));
-    console.log(data);
   } else {
     console.warn('Authentication credentials were not provided', problem);
   }

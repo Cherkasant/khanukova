@@ -305,7 +305,20 @@ const getHomeScreenProjects = (token: string) => {
 const deleteProject = (token: string, idProject: number) => {
   return API.delete(`/project-subdiv/project/${idProject}/`, {}, { headers: { Authorization: `JWT ${token}` } });
 };
-
+const getAllTaskDependencies = (token: string, id: number, idTask: number) => {
+  return API.get(
+    `/project-subdiv/dependencies/?project=${id}&task=${idTask}`,
+    {},
+    { headers: { Authorization: `JWT ${token}` } }
+  );
+};
+const getAllSubtaskDependencies = (token: string, id: number, idSubtask: number) => {
+  return API.get(
+    `/project-subdiv/dependencies/?project=${id}&subtask=${idSubtask}`,
+    {},
+    { headers: { Authorization: `JWT ${token}` } }
+  );
+};
 export default {
   registerUser,
   sendResetEmail,
@@ -364,5 +377,7 @@ export default {
   removeResponsible,
   patchUserInfo,
   getHomeScreenProjects,
-  deleteProject
+  deleteProject,
+  getAllTaskDependencies,
+  getAllSubtaskDependencies
 };
