@@ -25,10 +25,11 @@ const PasswordRequestPage = () => {
     handleSubmit,
     clearErrors,
     reset,
+    watch,
     formState: { errors }
   } = useForm<SignInType>({
     defaultValues: { email: '' },
-    mode: 'onChange'
+    mode: 'onSubmit'
   });
 
   const onSubmit: SubmitHandler<SignInType> = (userInfo) => {
@@ -63,7 +64,7 @@ const PasswordRequestPage = () => {
               rules={validationRules.emailSign}
               render={({ field: { onChange, value } }) => (
                 <Input
-                  type={'email'}
+                  type={'text'}
                   placeholder={'Email'}
                   onChange={onChange}
                   value={value}
@@ -79,7 +80,7 @@ const PasswordRequestPage = () => {
               btnTitle={'Continue'}
               btnType={PuzzleButtonTypes.TextButton}
               btnClassName={styles.button}
-              btnDisabled={!!errors.email || !!errors.password}
+              btnDisabled={!watch('email')}
             />
           </form>
         </div>

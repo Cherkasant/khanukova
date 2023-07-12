@@ -34,10 +34,11 @@ const SignIn = () => {
     handleSubmit,
     clearErrors,
     reset,
+    watch,
     formState: { errors }
   } = useForm<SignInType>({
     defaultValues: { email: '', password: '' },
-    mode: 'onChange'
+    mode: 'onSubmit'
   });
   const onSubmit: SubmitHandler<SignInType> = (userInfo) => {
     dispatch(
@@ -77,7 +78,7 @@ const SignIn = () => {
               rules={validationRules.emailSign}
               render={({ field: { onChange, value } }) => (
                 <Input
-                  type={'email'}
+                  type={'text'}
                   placeholder={'Email'}
                   onChange={onChange}
                   value={value}
@@ -122,7 +123,7 @@ const SignIn = () => {
             btnTitle={'Login'}
             btnType={PuzzleButtonTypes.TextButton}
             btnClassName={styles.button}
-            btnDisabled={!!errors.email || !!errors.password}
+            btnDisabled={!watch('email') || !watch('password')}
           />
         </form>
         <div className={styles.info}>

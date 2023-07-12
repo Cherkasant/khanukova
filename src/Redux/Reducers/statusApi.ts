@@ -16,7 +16,7 @@ const statusSlice = createSlice({
   name: 'statusApi',
   initialState,
   reducers: {
-    setStatusUser: (state, actions) => {
+    setSignUpStatusUser: (state, actions) => {
       state.statusRegisterUser = actions.payload;
     },
 
@@ -30,6 +30,6 @@ const statusSlice = createSlice({
   }
 });
 
-export const { setStatusUser, setSignInStatusUser, setStatusRequestPassword } = statusSlice.actions;
+export const { setSignUpStatusUser, setSignInStatusUser, setStatusRequestPassword } = statusSlice.actions;
 
 export default statusSlice.reducer;

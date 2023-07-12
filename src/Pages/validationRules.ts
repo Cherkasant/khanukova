@@ -13,7 +13,7 @@ export const validationRules = {
     required: 'Please input your email!',
     pattern: {
       value: /^[A-Z0-9._-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-      message: 'Digits, alphabetics, symbols “.”, “-”, “_” are allowed.'
+      message: 'Digits, alphabetics, symbols “.”, “-”, “_”, "@" are allowed.'
     }
   },
   passwordSignUp: {
@@ -33,7 +33,7 @@ export const validationRules = {
     required: 'Please input your full name!',
     pattern: {
       // eslint-disable-next-line no-useless-escape
-      value: /^([a-zA-Z\-]{2,160})+([-]?[a-zA-Z\-]{1,160})*$/gm,
+      value: /^([a-zA-Z\-]{1,160})+([-]?[a-zA-Z\-]{1,160})*$/gm,
       message: 'Alphabetics (Latin) only are allowed (both capital and low case).'
     }
   },

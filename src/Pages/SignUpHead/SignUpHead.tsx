@@ -1,10 +1,8 @@
-import { Form } from 'antd';
-import 'intl-tel-input/build/css/intlTelInput.css';
 import { useState } from 'react';
 import 'react-dropdown/style.css';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
@@ -21,20 +19,23 @@ import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { registerUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
-import { SignInType, SignUpType } from '../../Components/constants/@auth';
+import { SignUpType } from '../../Components/constants/@auth';
 import { validationRules } from '../validationRules';
+import statusSelectors from '../../Redux/Selectors/statusSelectors';
+import Loader from '../../Components/Loader';
 
+import 'intl-tel-input/build/css/intlTelInput.css';
 import styles from './SignUpHead.module.css';
 
 export enum Role {
-  PjO = 'projectOwner',
-  CEO = 'ceo',
-  CTO = 'cto',
-  PM = 'projectManger',
-  Designer = 'designer',
-  QA = 'qa',
-  Programmer = 'programmer',
-  PdO = 'productOwner'
+  PjO = 'Project Owner',
+  CEO = 'CEO',
+  CTO = 'CTO',
+  PM = 'Project Manager',
+  Designer = 'Designer',
+  QA = 'QA',
+  Programmer = 'Programmer',
+  PdO = 'Product Owner'
 }
 
 const options = [
@@ -59,21 +60,12 @@ const optionsHead = [
 const SignUpHead = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [form] = Form.useForm();
-  const checkRole = Form.useWatch('userStatus', form);
-  const [type, setType] = useState(PasswordTypes.Password);
-  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
-  const [checked, setChecked] = useState(false);
-  const [checkedCode, setCheckedCode] = useState(false);
-  const [checkedCompany, setCheckedCompany] = useState(false);
-
   const {
     control,
     handleSubmit,
     clearErrors,
     reset,
     watch,
-    getValues,
     formState: { errors }
   } = useForm<SignUpType>({
     defaultValues: {
@@ -87,6 +79,13 @@ const SignUpHead = () => {
     },
     mode: 'onSubmit'
   });
+  const checkRole = watch('position');
+  const [type, setType] = useState(PasswordTypes.Password);
+  const [typeConfirm, setTypeConfirm] = useState(PasswordTypes.Password);
+  const [checked, setChecked] = useState(false);
+  const [checkedCode, setCheckedCode] = useState(false);
+  const [checkedCompany, setCheckedCompany] = useState(false);
+  const status = useSelector(statusSelectors.statusSignUp);
 
   const onEyeClick = () => {
     type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password);
@@ -110,15 +109,12 @@ const SignUpHead = () => {
   };
 
   const getValueCauntry = (value: string) => (value ? options.find((opt) => opt.value === value) : '');
+  const handleValidate = (value: string) => {
+    const isValid = isValidPhoneNumber(value);
+    return isValid;
+  };
 
   const onSubmit: SubmitHandler<SignUpType> = (userInfo) => {
-    console.log(userInfo.fullName);
-    console.log(userInfo.email);
-    console.log(userInfo.phone);
-    console.log(userInfo.position);
-    console.log(userInfo.code);
-    console.log(userInfo.password);
-    console.log(userInfo.passwordConfirmation);
     dispatch(
       registerUser({
         data: {
@@ -131,7 +127,7 @@ const SignUpHead = () => {
           re_password: userInfo.passwordConfirmation
         },
         callback: () => {
-          switch (checkRole.value) {
+          switch (checkRole) {
             case Role.PjO:
               navigate(PathNames.SignUpPoInfo);
               break;
@@ -150,7 +146,9 @@ const SignUpHead = () => {
     );
   };
 
-  return (
+  return status === 'pending' ? (
+    <Loader className={styles.loader} />
+  ) : (
     <div className={styles.container}>
       <div className={styles.inner}>
         <div className={styles.titleBlock}>
@@ -187,7 +185,7 @@ const SignUpHead = () => {
               rules={validationRules.emailSign}
               render={({ field: { onChange, value } }) => (
                 <Input
-                  type={'email'}
+                  type={'text'}
                   placeholder={'Email'}
                   onChange={onChange}
                   value={value}
@@ -198,7 +196,10 @@ const SignUpHead = () => {
             <Controller
               control={control}
               name="phone"
-              rules={validationRules.phone}
+              rules={{
+                required: 'Please input your phone number!',
+                validate: (value) => handleValidate(value)
+              }}
               render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <>
                   <PhoneInput
@@ -250,6 +251,7 @@ const SignUpHead = () => {
                     type={type}
                     placeholder="Password"
                     error={errors.password?.message}
+                    className={styles.inputPass}
                   />
                 )}
               />
@@ -261,7 +263,10 @@ const SignUpHead = () => {
               <Controller
                 control={control}
                 name="passwordConfirmation"
-                rules={validationRules.passwordConfirmation}
+                rules={{
+                  required: 'Please input min 9 symbols!',
+                  validate: (value) => value === watch('password') || 'Passwords do not match'
+                }}
                 render={({ field: { onChange, value } }) => (
                   <Input
                     onChange={onChange}
@@ -271,11 +276,7 @@ const SignUpHead = () => {
                     value={value}
                     type={typeConfirm}
                     placeholder="Confirm password"
-                    error={
-                      watch('passwordConfirmation') !== watch('password') && getValues('passwordConfirmation')
-                        ? "Password doesn't match"
-                        : ''
-                    }
+                    error={errors.passwordConfirmation && errors.passwordConfirmation?.message}
                   />
                 )}
               />
@@ -292,22 +293,23 @@ const SignUpHead = () => {
             htmlType="submit"
             btnTitle={
               checkedCode &&
-              (checkRole?.value === Role.Designer ||
-                checkRole?.value === Role.QA ||
-                checkRole?.value === Role.PdO ||
-                checkRole?.value === Role.Programmer)
+              (checkRole === Role.Designer ||
+                checkRole === Role.QA ||
+                checkRole === Role.PdO ||
+                checkRole === Role.Programmer)
                 ? 'Create account'
                 : 'Next step'
             }
             btnType={PuzzleButtonTypes.TextButton}
             btnClassName={styles.button}
             btnDisabled={
-              !!errors.email ||
-              !!errors.password ||
-              !!errors.fullName ||
-              !!errors.position ||
-              !!errors.passwordConfirmation ||
-              !!errors.code
+              !watch('fullName') ||
+              !watch('email') ||
+              !watch('phone') ||
+              !watch('position') ||
+              !watch('password') ||
+              !watch('passwordConfirmation') ||
+              (checkedCode ? !watch('code') : undefined)
             }
           />
         </form>

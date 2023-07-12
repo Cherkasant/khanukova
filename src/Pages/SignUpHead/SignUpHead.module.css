@@ -134,6 +134,7 @@
   font-size: 16px;
   line-height: 19px;
   color: #212121;
+  padding: 0 19px !important;
 }
 .phoneInput > input::placeholder {
   font-style: normal;
@@ -144,6 +145,10 @@
 }
 .phoneInput > input:focus {
   outline: none;
+}
+
+.inputPass {
+  padding: 0 40px 0 19px !important;
 }
 
 .inputError,
@@ -165,7 +170,7 @@
 .eyeIcon {
   position: absolute;
   top: 18px;
-  right: 20px;
+  right: 12px;
   cursor: pointer;
 }
 .eyeIcon:hover {
@@ -184,4 +189,11 @@
 .error {
   color: #bf3535;
   font-size: 12px;
+}
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

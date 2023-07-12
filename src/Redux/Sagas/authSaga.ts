@@ -3,7 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../Components/constants/consts';
-import { setSignInStatusUser, setStatusRequestPassword } from '../Reducers/statusApi';
+import { setSignInStatusUser, setSignUpStatusUser, setStatusRequestPassword } from '../Reducers/statusApi';
 
 import {
   activateUser,
@@ -33,13 +33,16 @@ import API from '../Utils/api';
 import callCheckingAuth from './callCheckingAuth';
 
 function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
+  yield put(setSignUpStatusUser('pending'));
   const { data: registerData, callback } = action.payload;
-  const { ok, data, problem } = yield call(API.registerUser, registerData);
+  const { ok, data } = yield call(API.registerUser, registerData);
   if (ok && data) {
     callback();
     yield put(setIdUser(data.id));
+    yield put(setSignUpStatusUser('fullfilled'));
   } else {
-    console.warn('Error while registering user', problem);
+    toast.error(`${data?.code[0]} code`);
+    yield put(setSignUpStatusUser('regected'));
   }
 }
 
