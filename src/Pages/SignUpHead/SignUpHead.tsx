@@ -145,7 +145,7 @@ const SignUpHead = () => {
       })
     );
   };
-
+  console.log(errors.phone);
   return status === 'pending' ? (
     <Loader className={styles.loader} />
   ) : (
@@ -209,7 +209,7 @@ const SignUpHead = () => {
                     placeholder={'Enter phone number'}
                     value={value}
                   />
-                  <div className={styles.error}>{error?.message}</div>
+                  <div className={styles.error}>{error ? 'Phone entered incorrectly' : ''}</div>
                 </>
               )}
             />
