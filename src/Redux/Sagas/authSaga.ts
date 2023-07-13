@@ -3,7 +3,13 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '../../Components/constants/consts';
-import { setSignInStatusUser, setSignUpStatusUser, setStatusRequestPassword } from '../Reducers/statusApi';
+import {
+  setSignInStatusUser,
+  setSignUpStatusUser,
+  setStatusRequestPassword,
+  setStatusSignUpHeadInfo,
+  setStatusSignUpPoInfo
+} from '../Reducers/statusApi';
 
 import {
   activateUser,
@@ -47,22 +53,28 @@ function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
 }
 
 function* registerHeadInfoWorker(action: PayloadAction<RegisterHeadPayload>) {
+  yield put(setStatusSignUpHeadInfo('pending'));
   const { data: registerHeadData, callback } = action.payload;
-  const { ok, problem } = yield call(API.registerHeadInfo, registerHeadData);
+  const { ok } = yield call(API.registerHeadInfo, registerHeadData);
   if (ok) {
     callback();
+    yield put(setStatusSignUpHeadInfo('fullfilled'));
   } else {
-    console.warn('Error while registering Head info', problem);
+    yield put(setStatusSignUpHeadInfo('regected'));
+    toast.error('Error while registering Head info');
   }
 }
 
 function* registerPoInfoWorker(action: PayloadAction<RegisterPoPayload>) {
+  yield put(setStatusSignUpPoInfo('pending'));
   const { data: registerPoData, callback } = action.payload;
-  const { ok, problem } = yield call(API.registerPoInfo, registerPoData);
+  const { ok } = yield call(API.registerPoInfo, registerPoData);
+  yield put(setStatusSignUpPoInfo('fullfilled'));
   if (ok) {
     callback();
   } else {
-    console.warn('Error while registering PO info', problem);
+    toast.error('Error while registering PO info');
+    yield put(setStatusSignUpPoInfo('regected'));
   }
 }
 

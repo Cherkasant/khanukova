@@ -145,7 +145,6 @@ const SignUpHead = () => {
       })
     );
   };
-  console.log(errors.phone);
   return status === 'pending' ? (
     <Loader className={styles.loader} />
   ) : (

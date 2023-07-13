@@ -13,8 +13,10 @@ import Title from '../../../Components/Title';
 import { registerHeadInfo } from '../../../Redux/Reducers/authReducer';
 import authSelectors from '../../../Redux/Selectors/authSelectors';
 import { PathNames } from '../../Router/Router';
+import statusSelectors from '../../../Redux/Selectors/statusSelectors';
 
 import PuzzleCheckbox from '../../../Components/PuzzleCheckbox';
+import Loader from '../../../Components/Loader';
 
 import styles from './SignUpHeadInfo.module.css';
 
@@ -27,7 +29,7 @@ const SignUpHeadInfo = () => {
   ];
   const defaultCurrencyOption = currencyOptions[1].value;
   const idUser = useSelector(authSelectors.getUserId);
-
+  const status = useSelector(statusSelectors.statusSignUpHeadInfo);
   const onSignUpHeadInfo = (values: any) => {
     dispatch(
       registerHeadInfo({
@@ -76,7 +78,9 @@ const SignUpHeadInfo = () => {
       console.log(info.fileList);
     }
   };
-  return (
+  return status === 'pending' ? (
+    <Loader className={styles.loader} />
+  ) : (
     <div className={styles.container}>
       <div className={styles.inner}>
         <div className={styles.wrapper}>
