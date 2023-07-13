@@ -14,7 +14,6 @@ import { ArrowDropDownIcon } from '../../../Assets/Table/ArrowDropDownIcon';
 import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
-import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
 import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import { getSingleProject, postTask, setTaskModalVisible } from '../../../Redux/Reducers/postReducer';
@@ -117,29 +116,29 @@ const ModalNewTask = () => {
           [styles.activeModal]: isVisible
         })}>
         <div className={styles.container}>
-          <div className={styles.icon} onClick={onCancelClick}>
-            <CloseModalIcon />
+          <div className={styles.milestone}>
+            {milestone}
+            <div className={styles.icon} onClick={onCancelClick}>
+              <CloseModalIcon />
+            </div>
+          </div>
+          <div className={styles.titleContainer}>
+            <Input
+              value={title}
+              onChange={(value) => setTitle(value)}
+              className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
+              placeholder={'Title new task'}
+              disabled={!edit}
+            />
+            {!edit ? (
+              <div className={styles.editIcon} onClick={onEditClick}>
+                <EditTitleIcon />
+              </div>
+            ) : null}
           </div>
 
           <div className={styles.mainBlock}>
             <div className={styles.leftBlock}>
-              <div className={styles.milestone}>{milestone}</div>
-
-              <div className={styles.titleContainer}>
-                <Input
-                  value={title}
-                  onChange={(value) => setTitle(value)}
-                  className={classNames(styles.titleInput, { [styles.widthInput]: edit })}
-                  placeholder={'Title new task'}
-                  disabled={!edit}
-                />
-                {!edit ? (
-                  <div className={styles.editIcon} onClick={onEditClick}>
-                    <EditTitleIcon />
-                  </div>
-                ) : null}
-              </div>
-
               <div className={styles.descriptionContainer}>
                 <div className={styles.title}>{'Description'}</div>
                 <textarea
@@ -177,11 +176,6 @@ const ModalNewTask = () => {
             </div>
 
             <div className={styles.rightBlock}>
-              <div className={styles.deleteContainer}>
-                <DeleteIcon />
-                {'Delete from project'}
-              </div>
-
               <div className={styles.title}>{'Responsible'}</div>
 
               <div className={styles.inputsBlock}>
@@ -313,7 +307,6 @@ const ModalNewTask = () => {
                     placeholderClassName={styles.dropdownPlaceholder}
                     arrowClosed={<ArrowDropDownIcon />}
                     arrowOpen={<Close />}
-                    // menuClassName={styles.dropdownMenuStatus}
                   />
                 </div>
                 <div>

@@ -1,489 +1,492 @@
 .modal {
-    transform: translateX(1500px);
-    transition: all 0.7s;
-    position: absolute;
-    background: #ffffff;
-    padding: 30px;
-    top: 54px;
-    width: 1000px;
-    right: 0;
-    bottom: 0;
-    outline: none;
+  transform: translateX(1500px);
+  transition: all 0.7s;
+  position: absolute;
+  background: #ffffff;
+  padding: 30px;
+  top: 54px;
+  width: 1000px;
+  right: 0;
+  bottom: 0;
+  outline: none;
 }
 
 .activeModal {
-    transform: translateY(0);
-    transition: all 0.7s;
+  transform: translateY(0);
+  transition: all 0.7s;
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(38, 34, 47, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(38, 34, 47, 0.5);
 }
 
 .container {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .icon {
-    position: absolute;
-    top: 35px;
-    right: 35px;
-    cursor: pointer;
-    z-index: 999;
+  display: flex;
+  cursor: pointer;
 }
 
 .mainBlock {
-    display: flex;
-    gap: 44px;
+  display: flex;
+  gap: 44px;
 }
 
 .leftBlock {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .milestone {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Inter';
-    font-style: normal;
-    font-size: 14px;
-    line-height: 16px;
-    color: #a3a3a3;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #a3a3a3;
+  margin-bottom: 10px;
 }
 
 .titleContainer {
-    display: flex;
-    height: 24px;
-    margin-bottom: 24px;
+  display: flex;
+  height: 24px;
+  margin-bottom: 15px;
 }
 
 .titleInput {
-    width: 140px;
-    background-color: #ffffff;
-    padding-left: 0;
-    border: none;
-    outline: none;
-    font-family: 'Inter';
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #1258ca;
+  width: 140px;
+  background-color: #ffffff;
+  padding-left: 0;
+  border: none;
+  outline: none;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #1258ca;
 }
 
 .widthInput {
-    width: 500px;
+  width: 500px;
 }
 
 .titleInput:hover,
 .titleInput:focus {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
 
 .titleInput:focus::placeholder {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 140%;
-    color: #898b9b;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 140%;
+  color: #898b9b;
 }
 
 .titleInput::placeholder {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #1258ca;
-    margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #1258ca;
+  margin-bottom: 16px;
 }
 
 .editIcon {
-    display: flex;
-    align-items: flex-end;
+  display: flex;
+  align-items: flex-end;
 }
 
 .editIcon:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .descriptionContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 72px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
-    color: #212121;
-    text-align: start;
-    margin-bottom: 4px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #212121;
+  text-align: start;
+  margin-bottom: 4px;
 }
 
 .descriptionInput {
-    box-sizing: border-box;
-    padding: 12px;
-    width: 565px;
-    height: 200px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #a3a3a3;
-    border: 1px solid #a3a3a3;
-    border-radius: 8px;
-    outline: none;
-    margin-bottom: 5px;
+  resize: none;
+  box-sizing: border-box;
+  padding: 12px;
+  width: 565px;
+  height: 200px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #212121;
+  border: 1px solid #a3a3a3;
+  border-radius: 10px;
+  outline: none;
+  margin-bottom: 5px;
 }
 
 .descriptionInput:hover {
-    border: 1px solid #a3a3a3;
+  border: 1px solid #a3a3a3;
 }
 
 .descriptionInput:focus {
-    border: 1px solid #a3a3a3;
+  border: 1px solid #a3a3a3;
 }
 
 .descriptionInput:active {
-    color: #313037;
+  color: #313037;
 }
 
 .attachmentContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .attachmentBlock {
-    display: flex;
-    gap: 8.21px;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  gap: 8.21px;
+  align-items: center;
+  cursor: pointer;
 }
 
 .blockDownload {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .downloadBtn {
-    cursor: pointer;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    width: 120px;
-    height: 40px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #a3a3a3;
-    border: 1px solid #9bacc9;
-    border-radius: 10px;
-    margin-top: 90px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #a3a3a3;
+  border: 1px solid #9bacc9;
+  border-radius: 10px;
+  margin-top: 90px;
 }
 
 .downloadBtn:hover {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .commentContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
 }
 
 .commentInput {
-    height: 100px;
-    border: 1px solid #a3a3a3;
-    border-radius: 8px;
-    font-family: 'Inter';
-    padding: 12px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #212121;
-    outline: none;
-    margin-bottom: 5px;
-    color: #a3a3a3;
+  height: 100px;
+  border: 1px solid #a3a3a3;
+  border-radius: 8px;
+  font-family: 'Inter';
+  padding: 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #212121;
+  outline: none;
+  margin-bottom: 5px;
+  color: #a3a3a3;
 }
 
 .submitBtn {
-    padding: 6px 11px;
-    width: 90px;
-    height: 28px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #ffffff;
-    border-radius: 5px;
-    align-self: end;
-    margin-right: 10px;
+  padding: 6px 11px;
+  width: 90px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+  border-radius: 5px;
+  align-self: end;
+  margin-right: 10px;
 }
 
 .rightBlock {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .deleteContainer {
-    display: flex;
-    align-items: center;
-    gap: 10.4px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #9bacc9;
-    margin-bottom: 49px;
+  display: flex;
+  align-items: center;
+  gap: 10.4px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #9bacc9;
+  margin-bottom: 49px;
 }
 
 .deleteContainer:hover {
-    cursor: pointer;
-    opacity: 0.8;
-    color: #0e4298;
+  cursor: pointer;
+  opacity: 0.8;
+  color: #0e4298;
 }
 
 .deleteContainer:hover path {
-    opacity: 0.8;
-    stroke: #0e4298;
+  opacity: 0.8;
+  stroke: #0e4298;
 }
 
 .inputsBlock {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    height: 75%;
-    overflow: auto;
-    padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 75%;
+  overflow: auto;
+  padding-right: 10px;
 }
 
 .cascader {
-    box-sizing: border-box;
-    background: #ffffff;
-    border-radius: 8px 8px 0 0;
-    width: 100%;
-    text-align: start;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: #a3a3a3;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 8px 8px 0 0;
+  width: 100%;
+  text-align: start;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #a3a3a3;
 }
 
 .cascader > div {
-    height: 40px;
-    outline: none;
-    background: #ffffff;
-    border: 1px solid #a3a3a3;
+  height: 40px;
+  outline: none;
+  background: #ffffff;
+  border: 1px solid #a3a3a3 !important;
+}
+
+.cascader > div:hover {
+  border: 1px solid #1258ca !important;
 }
 
 .cascader > div span {
-    font-weight: 400 !important;
-    font-size: 16px !important;
-    line-height: 19px !important;
-    color: #a3a3a3 !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  color: #a3a3a3 !important;
+  font-family: 'Inter' !important;
 }
 
 .popup {
-    padding-top: 5px;
-    width: 305px;
-    background: #ffffff;
-    border: 1px solid #a3a3a3;
-    border-radius: 0 0 8px 8px;
+  padding-top: 5px;
+  width: 305px;
+  background: #ffffff;
+  border: 1px solid #a3a3a3;
+  border-radius: 0 0 8px 8px;
 }
 
 .dropdownControl {
-    padding: 8px 10px;
-    box-sizing: border-box;
-    width: 305px;
-    height: 40px;
-    border: 1px solid #a3a3a3;
-    border-radius: 8px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #a3a3a3;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    justify-content: space-between;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  width: 305px;
+  height: 40px;
+  border: 1px solid #a3a3a3;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: space-between;
 }
 
 .dropdownControl > div {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .dropdownPlaceholder {
-    text-align: start;
+  text-align: start;
 }
 
 .dropdownControl:hover {
-    border: 1px solid #4270a7;
+  border: 1px solid #1258ca;
 }
 
-
 .titleTask {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #1258ca;
-    margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #1258ca;
+  margin-bottom: 16px;
 }
 
 .arrowOpen {
-    border-color: transparent transparent #1258ca;
-    border-width: 0 5px 5px;
+  border-color: transparent transparent #1258ca;
+  border-width: 0 5px 5px;
 }
 
 .arrowClosed,
 .arrowOpen {
-    top: 16px;
-    border-color: #1258ca transparent transparent;
-    border-style: solid;
-    border-width: 5px 5px 0;
-    content: ' ';
-    display: block;
-    height: 0;
-    position: absolute;
-    right: 15px;
-    width: 0;
+  top: 16px;
+  border-color: #1258ca transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  content: ' ';
+  display: block;
+  height: 0;
+  position: absolute;
+  right: 15px;
+  width: 0;
 }
 
 .label {
-    box-sizing: border-box;
-    width: 305px;
-    height: 40px;
-    border: 1px solid #4270a7;
-    border-radius: 10px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #a3a3a3;
-    cursor: pointer;
-    outline: none;
-    padding-left: 8px;
+  box-sizing: border-box;
+  width: 305px;
+  height: 40px;
+  border: 1px solid #a3a3a3;
+  border-radius: 10px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3;
+  cursor: pointer;
+  outline: none;
+  padding-left: 8px;
 }
 
 .deadline {
-    height: 40px;
-    border: 1px solid #a3a3a3;
-    border-radius: 10px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 140%;
-    color: #a3a3a3;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    justify-content: space-between;
+  height: 40px;
+  border: 1px solid #a3a3a3;
+  border-radius: 10px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #a3a3a3;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: space-between;
 }
 
 .calendarIcon {
-    position: absolute;
-    top: 30px;
-    right: 12px;
-    cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 12px;
+  cursor: pointer;
 }
 
 .startDateContainer {
-    box-sizing: border-box;
-    width: 305px;
-    display: flex;
-    flex-direction: column;
+  box-sizing: border-box;
+  width: 305px;
+  display: flex;
+  flex-direction: column;
 }
 
 .buttonsContainer {
-    margin-top: 30px;
-    display: flex;
-    gap: 11px;
+  margin-top: 50px;
+  display: flex;
+  gap: 11px;
 }
 
 .cancelBtn {
-    width: 147px;
-    height: 40px;
-    background: none;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #a3a3a3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 147px;
+  height: 40px;
+  background: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #a3a3a3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .saveBtn {
-    width: 147px;
-    height: 40px;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 147px;
+  height: 40px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .datepicker {
-    height: 40px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #a3a3a3;
-    border: 1px solid #A3A3A3
+  height: 40px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3;
+  border: 1px solid #a3a3a3;
+}
+
+.datepicker:hover {
+  border: 1px solid #1258ca;
 }
 
 .datepicker > div input::placeholder {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #a3a3a3 !important;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #a3a3a3 !important;
 }
 
 .dropdownMenuStatus {
-    margin-top: -234px;
+  margin-top: -234px;
 }
 
 .wrapModal {
-    opacity: 0;
-    visibility: hidden;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: rgba(155, 172, 201, 0.3);
-    transition: all 0.7s;
-    position: fixed;
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(155, 172, 201, 0.3);
+  transition: all 0.7s;
+  position: fixed;
 }
 
 .showModal {
-    opacity: 1;
-    visibility: visible;
-    transition: all 0.7s;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.7s;
 }

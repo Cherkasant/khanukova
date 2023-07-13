@@ -74,15 +74,16 @@
 }
 
 .descriptionInput {
+  resize: none;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 12px;
   width: 565px;
   height: 200px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #212121;
-  border: 1px solid #4270a7;
+  border: 1px solid #a3a3a3;
   border-radius: 10px;
   outline: none;
   margin-bottom: 5px;
@@ -105,7 +106,7 @@
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
-  line-height: 140%;
+  line-height: 16px;
   color: #212121;
   text-align: start;
   margin-bottom: 4px;
@@ -151,7 +152,7 @@
   box-sizing: border-box;
   width: 305px;
   height: 40px;
-  border: 1px solid #4270a7;
+  border: 1px solid #a3a3a3;
   border-radius: 10px;
   font-style: normal;
   font-weight: 400;
@@ -174,7 +175,7 @@
 }
 
 .dropdownControl:hover {
-  border: 1px solid #4270a7;
+  border: 1px solid #1258ca;
 }
 
 .rightBlock {
@@ -186,7 +187,7 @@
   box-sizing: border-box;
   width: 305px;
   height: 40px;
-  border: 1px solid #4270a7;
+  border: 1px solid #a3a3a3;
   border-radius: 10px;
   font-family: 'Inter';
   font-style: normal;
@@ -230,7 +231,7 @@
 }
 
 .buttonsContainer {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   gap: 11px;
 }
@@ -299,7 +300,11 @@
   font-size: 16px;
   line-height: 19px;
   color: #a3a3a3;
-  border: 1px solid #4270a7;
+  border: 1px solid #a3a3a3;
+}
+
+.datepicker:hover {
+  border: 1px solid #1258ca;
 }
 
 .datepicker > div input::placeholder {
@@ -418,14 +423,19 @@
   height: 40px;
   outline: none;
   background: #ffffff;
-  border: 1px solid #4270a7 !important;
+  border: 1px solid #a3a3a3 !important;
+}
+
+.cascader > div:hover {
+  border: 1px solid #1258ca !important;
 }
 
 .cascader > div span {
   font-weight: 400 !important;
   font-size: 16px !important;
-  line-height: 19px !important;
+  line-height: 24px !important;
   color: #a3a3a3 !important;
+  font-family: 'Inter' !important;
 }
 
 .popup {

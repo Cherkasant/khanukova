@@ -37,6 +37,7 @@ export enum Role {
 }
 
 export enum Roles {
+  ProjectOwner = 'Project Owner',
   ProductOwner = 'Product Owner',
   CEO = 'CEO',
   CTO = 'CTO',

@@ -19,9 +19,8 @@ import Title from '../../Components/Title';
 import { PasswordTypes } from '../../Components/constants/@types';
 import { registerUser } from '../../Redux/Reducers/authReducer';
 import { PathNames } from '../Router/Router';
-import FormContainer from '../../Components/FormContainer';
 
-import { EMAIL_REGEX, FULL_NAME_REGEX, WITHOUT_SPACE } from '../../Components/constants/regexp.constants';
+import { EMAIL_REGEX } from '../../Components/constants/regexp.constants';
 
 import styles from './SignUpHead.module.css';
 
@@ -92,6 +91,7 @@ const SignUpHead = () => {
   const [value, setValue] = useState<any>();
 
   const onSignUp = (values: any) => {
+    console.log(values);
     dispatch(
       registerUser({
         data: {
@@ -155,7 +155,7 @@ const SignUpHead = () => {
               className={styles.formItem}
               rules={[
                 {
-                  pattern: FULL_NAME_REGEX && WITHOUT_SPACE,
+                  // pattern: FULL_NAME_REGEX && WITHOUT_SPACE,
                   message: 'Alphabetics (Latin) only are allowed, Maximum – 160 symbols'
                 },
                 {
@@ -206,8 +206,8 @@ const SignUpHead = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Please select users role in the project!',
-                  validateTrigger: 'onSignUp'
+                  message: 'Please select users role in the project!'
+                  //  validateTrigger: 'onSignUp'
                 }
               ]}>
               <PuzzleDropdown
@@ -270,6 +270,7 @@ const SignUpHead = () => {
           </div>
           <Form.Item className={styles.formItem}>
             <PuzzleButton
+              onClick={() => console.log('clicked')}
               htmlType="submit"
               btnTitle={
                 checkedCode &&

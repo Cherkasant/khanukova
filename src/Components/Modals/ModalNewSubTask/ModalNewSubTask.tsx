@@ -14,7 +14,6 @@ import { ArrowDropDownIcon } from '../../../Assets/Table/ArrowDropDownIcon';
 import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
-import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
 import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import { getSingleProject, postSubTask, setSubTaskModalVisible } from '../../../Redux/Reducers/postReducer';
@@ -119,15 +118,11 @@ const ModalNewSubTask = () => {
         <div className={styles.container}>
           <div className={styles.milestone}>
             {TaskTitle}
-            <div className={styles.deleteContainer}>
-              <DeleteIcon />
-              {'Delete from project'}
+            <div className={styles.icon} onClick={onCancelClick}>
+              <CloseModalIcon />
             </div>
           </div>
 
-          <div className={styles.icon} onClick={onCancelClick}>
-            <CloseModalIcon />
-          </div>
           <div className={styles.titleContainer}>
             <Input
               value={title}
@@ -202,7 +197,7 @@ const ModalNewSubTask = () => {
                   options={Priority}
                   onChange={setPriority}
                   value={priority}
-                  placeholder="Nothing selected"
+                  placeholder={'Select priority'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
@@ -215,7 +210,7 @@ const ModalNewSubTask = () => {
                 <div className={styles.title}>{'Start date'}</div>
                 <DatePicker
                   format="DD.MM.YYYY"
-                  placeholder="Nothing selected"
+                  placeholder="None"
                   suffixIcon={<CalendarIcon />}
                   className={styles.datepicker}
                   onChange={onChangeLaunch}
@@ -227,7 +222,7 @@ const ModalNewSubTask = () => {
                   <div className={styles.title}>{'Deadline'}</div>
                   <DatePicker
                     format="DD.MM.YYYY"
-                    placeholder="Nothing selected"
+                    placeholder="None"
                     suffixIcon={<CalendarIcon />}
                     className={styles.datepicker}
                     onChange={onChangeDeadline}
@@ -241,7 +236,7 @@ const ModalNewSubTask = () => {
                   onChange={(value) => setDuration(value)}
                   type={'text'}
                   className={styles.label}
-                  placeholder={'Enter duration'}
+                  placeholder={'Enter duration,h'}
                 />
               </div>
               <div>
@@ -261,7 +256,7 @@ const ModalNewSubTask = () => {
                   options={Colors}
                   onChange={setColors}
                   value={colors}
-                  placeholder="Nothing selected"
+                  placeholder={'Select colors'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
@@ -276,7 +271,7 @@ const ModalNewSubTask = () => {
                   options={Dependence}
                   onChange={setDependence}
                   value={dependence}
-                  placeholder="Nothing selected"
+                  placeholder={'Select'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
@@ -291,7 +286,7 @@ const ModalNewSubTask = () => {
                   options={Progress}
                   onChange={setProgress}
                   value={progress}
-                  placeholder="Nothing selected"
+                  placeholder={'Select progress'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
@@ -306,13 +301,12 @@ const ModalNewSubTask = () => {
                   options={Status}
                   onChange={setStatus}
                   value={status}
-                  placeholder="Nothing selected"
+                  placeholder={'Select status'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
                   arrowClosed={<ArrowDropDownIcon />}
                   arrowOpen={<Close />}
-                  // menuClassName={styles.dropdownMenuStatus}
                 />
               </div>
               <div>
@@ -321,7 +315,7 @@ const ModalNewSubTask = () => {
                   options={PaymentStatus}
                   onChange={setPaymentStatus}
                   value={paymentStatus}
-                  placeholder="Select status"
+                  placeholder={'Select status'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}

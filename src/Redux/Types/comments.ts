@@ -57,3 +57,7 @@ export type PatchSubTaskCommentType = {
   data?: PostMilestoneCommentType;
   callback: () => void;
 };
+export type SingleTaskComment = {
+  id: number;
+  idTask: number;
+};

@@ -37,6 +37,9 @@ import {
 } from '../../../Redux/Reducers/commentReducer';
 import commentsSelector from '../../../Redux/Selectors/commentsSelector';
 
+import profileSelectors from '../../../Redux/Selectors/profileSelectors';
+import { Role } from '../../constants/@types';
+
 import styles from './ModalSubTask.module.css';
 
 const ModalSubTask = () => {
@@ -59,7 +62,7 @@ const ModalSubTask = () => {
     }
   }, [singleMilestoneComment]);
   useEffect(() => {
-    if (singleSubTask && singleMilestone) {
+    if (singleSubTask) {
       const progress = singleSubTask?.progress.toString();
       setTitle(singleSubTask?.sub_task_name);
       setDescriptionValue(singleSubTask?.description);
@@ -74,9 +77,9 @@ const ModalSubTask = () => {
       setPaymentStatus(singleSubTask?.payment_status);
       setLaunchDate(singleSubTask?.start_date);
       setDeadline(singleSubTask?.deadline);
-      dispatch(getAllMilestoneComments(singleMilestone?.id));
+      // dispatch(getAllMilestoneComments(singleMilestone?.id));
     }
-  }, [singleSubTask, singleMilestone]);
+  }, [singleSubTask]);
 
   const onSaveClick = () => {
     if (singleSubTask) {
@@ -172,6 +175,10 @@ const ModalSubTask = () => {
     }
     setComment('');
   };
+
+  const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
+  const isDevTeam = personalInfoList?.role[0] === Role.DevTeam;
+
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
@@ -208,7 +215,7 @@ const ModalSubTask = () => {
     }
   }, [startDate, finishDate]);
 
-  const onDeleteTaskClick = () => {
+  const onDeleteSubTaskClick = () => {
     if (singleSubTask) {
       dispatch(
         deleteTask({
@@ -235,15 +242,16 @@ const ModalSubTask = () => {
         })}>
         <div className={styles.container}>
           <div className={styles.milestone}>
-            {singleProject?.project_name}
-            <div className={styles.deleteContainer} onClick={onDeleteTaskClick}>
-              <DeleteIcon />
-              {'Delete from project'}
+            <div className={styles.projectTitleBlock}>
+              {singleProject?.project_name}
+              <div className={styles.deleteContainer} onClick={onDeleteSubTaskClick}>
+                <DeleteIcon />
+                {'Delete from project'}
+              </div>
             </div>
-          </div>
-
-          <div className={styles.icon} onClick={onCancelClick}>
-            <CloseModalIcon />
+            <div className={styles.icon} onClick={onCancelClick}>
+              <CloseModalIcon />
+            </div>
           </div>
           <div className={styles.titleContainer}>
             {!edit ? (
@@ -269,10 +277,13 @@ const ModalSubTask = () => {
             <div className={styles.descriptionContainer}>
               <div className={styles.title}>{'Description'}</div>
               <textarea
-                className={styles.descriptionInput}
+                className={classNames(styles.descriptionInput, {
+                  [styles.disabled]: isDevTeam
+                })}
                 placeholder={'Write'}
                 value={descriptionValue}
                 onChange={onChangeDescription}
+                disabled={isDevTeam}
               />
               {/*<PuzzleButton*/}
               {/*  title={"Submit new"}*/}
@@ -355,12 +366,13 @@ const ModalSubTask = () => {
                 <Cascader
                   options={ResponsibleCheckbox}
                   multiple={true}
-                  className={styles.cascader}
+                  className={classNames(styles.cascader, { [styles.disabledCascader]: isDevTeam })}
                   popupClassName={styles.popup}
                   placeholder={'Add responsible'}
                   maxTagCount={'responsive'}
                   showArrow={true}
-                  suffixIcon={<ArrowDropDownIcon />}
+                  suffixIcon={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -371,11 +383,12 @@ const ModalSubTask = () => {
                   value={priority}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
                   menuClassName={styles.dropdownMenu}
+                  disabled={isDevTeam}
                 />
               </div>
               <div className={styles.startDateContainer}>
@@ -384,9 +397,10 @@ const ModalSubTask = () => {
                   value={dayjs(launchDate, 'DD.MM.YYYY')}
                   format="DD.MM.YYYY"
                   placeholder="Nothing selected"
-                  suffixIcon={<CalendarIcon />}
-                  className={styles.datepicker}
+                  suffixIcon={!isDevTeam ? <CalendarIcon /> : null}
+                  className={classNames(styles.datepicker, { [styles.disabledDatepicker]: isDevTeam })}
                   onChange={onChangeLaunch}
+                  disabled={isDevTeam}
                 />
               </div>
 
@@ -397,9 +411,10 @@ const ModalSubTask = () => {
                     value={dayjs(deadline, 'DD.MM.YYYY')}
                     format="DD.MM.YYYY"
                     placeholder="Nothing selected"
-                    suffixIcon={<CalendarIcon />}
-                    className={styles.datepicker}
+                    suffixIcon={!isDevTeam ? <CalendarIcon /> : null}
+                    className={classNames(styles.datepicker, { [styles.disabledDatepicker]: isDevTeam })}
                     onChange={onChangeDeadline}
+                    disabled={isDevTeam}
                   />
                 </div>
               </div>
@@ -409,8 +424,9 @@ const ModalSubTask = () => {
                   value={duration}
                   onChange={(value) => setDuration(value)}
                   type={'text'}
-                  className={styles.label}
+                  className={classNames(styles.label, { [styles.disabledSelect]: isDevTeam })}
                   placeholder={'Enter duration'}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -419,8 +435,9 @@ const ModalSubTask = () => {
                   value={label}
                   onChange={(value) => setLabel(value)}
                   type={'text'}
-                  className={styles.label}
+                  className={classNames(styles.label, { [styles.disabledSelect]: isDevTeam })}
                   placeholder={'Enter labels'}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -432,11 +449,12 @@ const ModalSubTask = () => {
                   value={colors}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
                   menuClassName={styles.dropdownMenu}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -447,11 +465,12 @@ const ModalSubTask = () => {
                   value={dependence}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
                   menuClassName={styles.dropdownMenu}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -462,11 +481,11 @@ const ModalSubTask = () => {
                   value={progress}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -477,11 +496,11 @@ const ModalSubTask = () => {
                   value={status}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  // menuClassName={styles.dropdownMenuStatus}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -492,10 +511,11 @@ const ModalSubTask = () => {
                   value={paymentStatus}
                   placeholder="Select status"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
+                  disabled={isDevTeam}
                 />
               </div>
             </div>

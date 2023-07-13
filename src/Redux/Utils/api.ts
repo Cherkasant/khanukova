@@ -234,6 +234,14 @@ const postMilestoneComment = (token: string, comment: PostMilestoneCommentType) 
 const getAllTaskComments = (token: string, id: number) => {
   return API.get(`/project-subdiv/comments/?task_id=${id}`, {}, { headers: { Authorization: `JWT ${token}` } });
 };
+
+const getSingleTaskComment = (token: string, taskId: number, id: number) => {
+  return API.get(
+    `/project-subdiv/comments/${id}/?task_id=${taskId}`,
+    {},
+    { headers: { Authorization: `JWT ${token}` } }
+  );
+};
 const deleteTaskComment = (token: string, id: number, idTask: number) => {
   return API.delete(
     `/project-subdiv/comments/${id}/?task_id=${idTask}`,

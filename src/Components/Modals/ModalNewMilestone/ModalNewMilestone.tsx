@@ -192,20 +192,19 @@ const ModalNewMilestone = () => {
                   options={Priority}
                   onChange={setPriority}
                   value={priority}
-                  placeholder="Nothing selected"
+                  placeholder="Select priority"
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
                   arrowClosed={<ArrowDropDownIcon />}
                   arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
                 />
               </div>
               <div className={styles.startDateContainer}>
                 <div className={styles.title}>{'Start date'}</div>
                 <DatePicker
                   format="DD.MM.YYYY"
-                  placeholder="Nothing selected"
+                  placeholder="None"
                   suffixIcon={<CalendarIcon />}
                   className={styles.datepicker}
                   onChange={onChangeLaunch}
@@ -217,7 +216,7 @@ const ModalNewMilestone = () => {
                   <div className={styles.title}>{'Deadline'}</div>
                   <DatePicker
                     format="DD.MM.YYYY"
-                    placeholder="Nothing selected"
+                    placeholder="None"
                     suffixIcon={<CalendarIcon />}
                     className={styles.datepicker}
                     onChange={onChangeDeadline}
@@ -231,7 +230,7 @@ const ModalNewMilestone = () => {
                   onChange={(value) => setDuration(value)}
                   type={'text'}
                   className={styles.label}
-                  placeholder={'Enter duration'}
+                  placeholder={'Enter duration,h'}
                 />
               </div>
               <div>
@@ -246,18 +245,16 @@ const ModalNewMilestone = () => {
               </div>
               <div>
                 <div className={styles.title}>{'Color labels'}</div>
-
                 <Dropdown
                   options={Colors}
                   onChange={setColors}
                   value={colors}
-                  placeholder="Nothing selected"
+                  placeholder="Select color"
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
                   arrowClosed={<ArrowDropDownIcon />}
                   arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
                 />
               </div>
               <div>
@@ -269,7 +266,7 @@ const ModalNewMilestone = () => {
                   value={dependence}
                   className={styles.cascader}
                   popupClassName={styles.popup}
-                  placeholder={'Add dependence'}
+                  placeholder={'Select'}
                   maxTagCount={'responsive'}
                   showArrow={true}
                   suffixIcon={<ArrowDropDownIcon />}
@@ -281,13 +278,12 @@ const ModalNewMilestone = () => {
                   options={Progress}
                   onChange={setProgress}
                   value={progress}
-                  placeholder="Nothing selected"
+                  placeholder={'Select progress'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
                   arrowClosed={<ArrowDropDownIcon />}
                   arrowOpen={<Close />}
-                  menuClassName={styles.dropdownMenu}
                 />
               </div>
               <div>
@@ -296,13 +292,12 @@ const ModalNewMilestone = () => {
                   options={Status}
                   onChange={setStatus}
                   value={status}
-                  placeholder="Nothing selected"
+                  placeholder={'Select status'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
                   arrowClosed={<ArrowDropDownIcon />}
                   arrowOpen={<Close />}
-                  // menuClassName={styles.dropdownMenuStatus}
                 />
               </div>
               <div>
@@ -311,7 +306,7 @@ const ModalNewMilestone = () => {
                   options={PaymentStatus}
                   onChange={setPaymentStatus}
                   value={paymentStatus}
-                  placeholder="Select status"
+                  placeholder={'Select status'}
                   className={styles.dropdownContainer}
                   controlClassName={styles.dropdownControl}
                   placeholderClassName={styles.dropdownPlaceholder}
