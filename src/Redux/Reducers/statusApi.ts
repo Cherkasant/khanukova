@@ -4,12 +4,16 @@ type initialStateType = {
   statusRegisterUser: string;
   statusSignIn: string;
   statusRequestPassword: string;
+  statusSignUpPoInfo: string;
+  statusSignUpHeadInfo: string;
 };
 
 const initialState: initialStateType = {
   statusRegisterUser: '',
   statusSignIn: '',
-  statusRequestPassword: ''
+  statusRequestPassword: '',
+  statusSignUpPoInfo: '',
+  statusSignUpHeadInfo: ''
 };
 
 const statusSlice = createSlice({
@@ -26,10 +30,22 @@ const statusSlice = createSlice({
 
     setStatusRequestPassword: (state, actions) => {
       state.statusRequestPassword = actions.payload;
+    },
+    setStatusSignUpPoInfo: (state, actions) => {
+      state.statusSignUpPoInfo = actions.payload;
+    },
+    setStatusSignUpHeadInfo: (state, actions) => {
+      state.statusSignUpHeadInfo = actions.payload;
     }
   }
 });
 
-export const { setSignUpStatusUser, setSignInStatusUser, setStatusRequestPassword } = statusSlice.actions;
+export const {
+  setSignUpStatusUser,
+  setSignInStatusUser,
+  setStatusRequestPassword,
+  setStatusSignUpPoInfo,
+  setStatusSignUpHeadInfo
+} = statusSlice.actions;
 
 export default statusSlice.reducer;

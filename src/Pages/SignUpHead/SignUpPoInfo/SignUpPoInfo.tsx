@@ -9,14 +9,16 @@ import { registerPoInfo } from '../../../Redux/Reducers/authReducer';
 import PuzzleButton, { PuzzleButtonTypes } from '../../../Components/PuzzleButton';
 import Title from '../../../Components/Title';
 import authSelectors from '../../../Redux/Selectors/authSelectors';
+import Loader from '../../../Components/Loader';
+import statusSelectors from '../../../Redux/Selectors/statusSelectors';
 
 import styles from './SignUpPoInfo.module.css';
 
 const SignUpPoInfo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const idUser = useSelector(authSelectors.getUserId);
+  const status = useSelector(statusSelectors.statusSignUpPoInfo);
 
   const onSignUpPoInfo = (values: any) => {
     dispatch(
@@ -42,7 +44,9 @@ const SignUpPoInfo = () => {
       })
     );
   };
-  return (
+  return status === 'pending' ? (
+    <Loader className={styles.loader} />
+  ) : (
     <div className={styles.container}>
       <div className={styles.inner}>
         <div className={styles.wrapper}>
