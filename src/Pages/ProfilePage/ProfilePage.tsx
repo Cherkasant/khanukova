@@ -36,6 +36,7 @@ const ProfilePage = () => {
 
   const isHead = personalInfoList?.role[0] === Role.Head;
   const isDevTeam = personalInfoList?.role[0] === Role.DevTeam;
+  const isPO = personalInfoList?.role[0] === Role.PO;
 
   useEffect(() => {
     dispatch(getHeadCompanyListReducer());
@@ -64,7 +65,7 @@ const ProfilePage = () => {
   }, [personalInfoList, companyList]);
 
   useEffect(() => {
-    if (personalInfoList && isDevTeam) {
+    if ((personalInfoList && isDevTeam) || isPO) {
       setName(personalInfoList?.full_name);
       setNickname(personalInfoList?.nickname);
       setPosition(personalInfoList?.position);
