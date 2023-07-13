@@ -34,6 +34,7 @@
     "intl-tel-input": "^17.0.19",
     "jspdf": "^2.5.1",
     "jspdf-html2canvas": "^1.4.9",
+    "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
     "multiselect-react-dropdown": "^2.0.25",
     "react": "^18.2.0",

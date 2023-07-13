@@ -29,7 +29,7 @@ import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-
+  const isInfoLoading = useSelector(profileSelectors.getInfoLoader);
   const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
   const companyList = useSelector(profileSelectors.getCompanyList);
   const password = useSelector(profileSelectors.getGeneratePassword);
@@ -124,7 +124,6 @@ const ProfilePage = () => {
     []
   );
 
-  // @ts-ignore
   return (
     <div className={styles.container}>
       <div

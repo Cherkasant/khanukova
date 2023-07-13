@@ -14,7 +14,6 @@ import { ArrowDropDownIcon } from '../../../Assets/Table/ArrowDropDownIcon';
 import { AttachmentIcon } from '../../../Assets/icons/AttachmentIcon';
 import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
-import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
 import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import { getSingleProject, postMilestoneCard, setSelectedModalVisible } from '../../../Redux/Reducers/postReducer';
@@ -99,7 +98,6 @@ const ModalNewMilestone = () => {
   };
   useEffect(() => {
     setEdit(false);
-    // setTitle('Title');
   }, []);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
@@ -119,13 +117,7 @@ const ModalNewMilestone = () => {
           [styles.activeModal]: isVisible
         })}>
         <div className={styles.container}>
-          <div className={styles.milestone}>
-            {projectTitle}
-            <div className={styles.deleteContainer}>
-              <DeleteIcon />
-              {'Delete from project'}
-            </div>
-          </div>
+          <div className={styles.milestone}>{projectTitle}</div>
 
           <div className={styles.icon} onClick={onCancelClick}>
             <CloseModalIcon />
@@ -155,12 +147,6 @@ const ModalNewMilestone = () => {
                 value={descriptionValue}
                 onChange={onChangeDescription}
               />
-              {/*<PuzzleButton*/}
-              {/*  title={"Submit new"}*/}
-              {/*  type={PuzzleButtonTypes.TextButton}*/}
-              {/*  className={styles.submitBtn}*/}
-              {/*  disabled={!descriptionValue}*/}
-              {/*/>*/}
             </div>
 
             <div className={styles.attachmentContainer}>
@@ -283,7 +269,7 @@ const ModalNewMilestone = () => {
                   value={dependence}
                   className={styles.cascader}
                   popupClassName={styles.popup}
-                  placeholder={'Add responsible'}
+                  placeholder={'Add dependence'}
                   maxTagCount={'responsive'}
                   showArrow={true}
                   suffixIcon={<ArrowDropDownIcon />}
