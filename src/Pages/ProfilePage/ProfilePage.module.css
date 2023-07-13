@@ -123,9 +123,13 @@
   color: #a3a3a3;
 }
 
-input:invalid {
-  border: 1px solid #bf3535;
-}
+
+/* input:invalid {
+    border: 1px solid #bf3535;
+} */
+
+/* Не нужно так писать стилт!!!!! */
+
 
 .input:focus:invalid {
   border: 1px solid #bf3535;
