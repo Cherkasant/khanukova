@@ -25,7 +25,7 @@ import { SortIcon } from '../../Assets/Home/SortIcon';
 
 import { getHomeScreenProjects } from '../../Redux/Reducers/postReducer';
 
-import LottieLoader from '../../Components/LottieLoader';
+import Loader from '../../Components/Loader';
 
 import styles from './Home.module.css';
 
@@ -99,13 +99,7 @@ const Home = () => {
         </div>
       </div>
 
-      {isLoading ? (
-        <div className={styles.loader}>
-          <LottieLoader />
-        </div>
-      ) : (
-        <CardsList cardsList={AllProjects} />
-      )}
+      {isLoading ? <Loader className={styles.loader} /> : <CardsList cardsList={AllProjects} />}
       <div
         className={classNames(styles.wrapModal, {
           [styles.showModal]: activeModal
