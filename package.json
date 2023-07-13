@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bryntum/gantt": "npm:@bryntum/gantt-trial@^5.4.0",
-    "@bryntum/gantt-react": "^5.4.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
