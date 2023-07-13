@@ -49,6 +49,9 @@ import {
 
 import commentsSelector from '../../../Redux/Selectors/commentsSelector';
 
+import profileSelectors from '../../../Redux/Selectors/profileSelectors';
+import { Role } from '../../constants/@types';
+
 import styles from './ModalMilestone.module.css';
 
 const ModalMilestone = () => {
@@ -63,6 +66,8 @@ const ModalMilestone = () => {
   const checkbox = allResponsible.map((el) => {
     return { value: el.id, label: el.nickname };
   });
+  const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
+  const isDevTeam = personalInfoList?.role[0] === Role.DevTeam;
 
   const singleMilestoneComment = useSelector(commentsSelector.getSingleMilestoneComment);
   const singleProject = useSelector(postSelector.getSingleProject);
@@ -267,15 +272,18 @@ const ModalMilestone = () => {
         })}>
         <div className={styles.container}>
           <div className={styles.milestone}>
-            {singleProject?.project_name}
-            <div className={styles.deleteContainer} onClick={onDeleteMilestoneClick}>
-              <DeleteIcon />
-              {'Delete from project'}
+            <div className={styles.projectTitleBlock}>
+              {singleProject?.project_name}
+              <div className={styles.deleteContainer} onClick={onDeleteMilestoneClick}>
+                <DeleteIcon />
+                {'Delete from project'}
+              </div>
+            </div>
+            <div className={styles.icon} onClick={onCancelClick}>
+              <CloseModalIcon />
             </div>
           </div>
-          <div className={styles.icon} onClick={onCancelClick}>
-            <CloseModalIcon />
-          </div>
+
           <div className={styles.titleContainer}>
             {!edit ? (
               <div className={styles.titleDiv}>{title}</div>
@@ -300,10 +308,13 @@ const ModalMilestone = () => {
             <div className={styles.descriptionContainer}>
               <div className={styles.title}>{'Description'}</div>
               <textarea
-                className={styles.descriptionInput}
+                className={classNames(styles.descriptionInput, {
+                  [styles.disabled]: isDevTeam
+                })}
                 placeholder={'Write'}
                 value={descriptionValue}
                 onChange={onChangeDescription}
+                disabled={isDevTeam}
               />
             </div>
 
@@ -396,12 +407,13 @@ const ModalMilestone = () => {
                         )
                       : null
                   }
-                  className={styles.cascader}
+                  className={classNames(styles.cascader, { [styles.disabledCascader]: isDevTeam })}
                   popupClassName={styles.popup}
                   placeholder={'Add responsible'}
                   maxTagCount={'responsive'}
                   showArrow={true}
-                  suffixIcon={<ArrowDropDownIcon />}
+                  suffixIcon={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -412,11 +424,12 @@ const ModalMilestone = () => {
                   value={priority}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
                   menuClassName={styles.dropdownMenu}
+                  disabled={isDevTeam}
                 />
               </div>
               <div className={styles.startDateContainer}>
@@ -425,9 +438,10 @@ const ModalMilestone = () => {
                   value={dayjs(launchDate, 'DD.MM.YYYY')}
                   format="DD.MM.YYYY"
                   placeholder="Nothing selected"
-                  suffixIcon={<CalendarIcon />}
-                  className={styles.datepicker}
+                  suffixIcon={!isDevTeam ? <CalendarIcon /> : null}
+                  className={classNames(styles.datepicker, { [styles.disabledDatepicker]: isDevTeam })}
                   onChange={onChangeLaunch}
+                  disabled={isDevTeam}
                 />
               </div>
 
@@ -438,9 +452,10 @@ const ModalMilestone = () => {
                     value={dayjs(deadline, 'DD.MM.YYYY')}
                     format="DD.MM.YYYY"
                     placeholder="Nothing selected"
-                    suffixIcon={<CalendarIcon />}
-                    className={styles.datepicker}
+                    suffixIcon={!isDevTeam ? <CalendarIcon /> : null}
+                    className={classNames(styles.datepicker, { [styles.disabledDatepicker]: isDevTeam })}
                     onChange={onChangeDeadline}
+                    disabled={isDevTeam}
                   />
                 </div>
               </div>
@@ -450,8 +465,9 @@ const ModalMilestone = () => {
                   value={duration}
                   onChange={(value) => setDuration(value)}
                   type={'text'}
-                  className={styles.label}
+                  className={classNames(styles.label, { [styles.disabledSelect]: isDevTeam })}
                   placeholder={'Enter duration'}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -460,24 +476,25 @@ const ModalMilestone = () => {
                   value={label}
                   onChange={(value) => setLabel(value)}
                   type={'text'}
-                  className={styles.label}
+                  className={classNames(styles.label, { [styles.disabledSelect]: isDevTeam })}
                   placeholder={'Enter labels'}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
                 <div className={styles.title}>{'Color labels'}</div>
-
                 <Dropdown
                   options={Colors}
                   onChange={setColors}
                   value={colors}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
                   menuClassName={styles.dropdownMenu}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -488,12 +505,13 @@ const ModalMilestone = () => {
                   onChange={setDependence}
                   defaultValue={dependence}
                   value={dependence}
-                  className={styles.cascader}
+                  className={classNames(styles.cascader, { [styles.disabledCascader]: isDevTeam })}
                   popupClassName={styles.popup}
                   placeholder={'Add dependence'}
                   maxTagCount={'responsive'}
                   showArrow={true}
-                  suffixIcon={<ArrowDropDownIcon />}
+                  suffixIcon={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -504,11 +522,12 @@ const ModalMilestone = () => {
                   value={progress}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
                   menuClassName={styles.dropdownMenu}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -519,11 +538,11 @@ const ModalMilestone = () => {
                   value={status}
                   placeholder="Nothing selected"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
-                  // menuClassName={styles.dropdownMenuStatus}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
+                  disabled={isDevTeam}
                 />
               </div>
               <div>
@@ -534,10 +553,11 @@ const ModalMilestone = () => {
                   value={paymentStatus}
                   placeholder="Select status"
                   className={styles.dropdownContainer}
-                  controlClassName={styles.dropdownControl}
+                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
                   placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={<ArrowDropDownIcon />}
-                  arrowOpen={<Close />}
+                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
+                  arrowOpen={!isDevTeam ? <Close /> : null}
+                  disabled={isDevTeam}
                 />
               </div>
             </div>

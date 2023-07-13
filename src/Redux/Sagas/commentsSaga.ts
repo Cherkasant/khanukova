@@ -8,12 +8,14 @@ import {
   deleteSubTaskComment,
   deleteTaskComment,
   getAllMilestoneComments,
+  getAllTaskComments,
   getSingleMilestoneComment,
   patchMilestoneComment,
   patchSubTaskComment,
   patchTaskComment,
   postMilestoneComment,
   setAllMilestoneComments,
+  setAllTaskComments,
   setSingleMilestoneComment
 } from '../Reducers/commentReducer';
 
@@ -36,6 +38,15 @@ function* getAllMilestoneCommentsWorker(actions: PayloadAction<number>) {
     yield put(setAllMilestoneComments(data));
   } else {
     console.warn('Error while getting milestone comments', problem);
+  }
+}
+
+function* getAllTaskCommentsWorker(actions: PayloadAction<number>) {
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllTaskComments, actions.payload);
+  if (ok && data) {
+    yield put(setAllTaskComments(data));
+  } else {
+    console.warn('Error while getting task comments', problem);
   }
 }
 
@@ -130,6 +141,7 @@ export default function* commentsSaga() {
     takeLatest(deleteTaskComment, deleteTaskCommentWorker),
     takeLatest(patchTaskComment, patchTaskCommentWorker),
     takeLatest(deleteSubTaskComment, deleteSubTaskCommentWorker),
-    takeLatest(patchSubTaskComment, patchSubTaskCommentWorker)
+    takeLatest(patchSubTaskComment, patchSubTaskCommentWorker),
+    takeLatest(getAllTaskComments, getAllTaskCommentsWorker)
   ]);
 }

@@ -34,6 +34,9 @@ const ProfilePage = () => {
   const companyList = useSelector(profileSelectors.getCompanyList);
   const password = useSelector(profileSelectors.getGeneratePassword);
 
+  const isHead = personalInfoList?.role[0] === Role.Head;
+  const isDevTeam = personalInfoList?.role[0] === Role.DevTeam;
+
   useEffect(() => {
     dispatch(getHeadCompanyListReducer());
     dispatch(getPersonalInfoReducer());
@@ -57,13 +60,19 @@ const ProfilePage = () => {
       setPhone(personalInfoList?.phone);
       setCompany(companyList?.company_name);
       setTelegram('');
-      const avatar = new File([personalInfoList?.account_photo], personalInfoList?.account_photo, {
-        type: 'image/png'
-      });
-      setFile(avatar);
     }
   }, [personalInfoList, companyList]);
 
+  useEffect(() => {
+    if (personalInfoList && isDevTeam) {
+      setName(personalInfoList?.full_name);
+      setNickname(personalInfoList?.nickname);
+      setPosition(personalInfoList?.position);
+      setEmail(personalInfoList?.email);
+      setPhone(personalInfoList?.phone);
+      setTelegram('');
+    }
+  }, [personalInfoList]);
   const inputFile = useRef<any>(null);
 
   const [file, setFile] = useState<any>(null);
@@ -112,8 +121,6 @@ const ProfilePage = () => {
   const onScreenClick = () => {
     setActiveModal(false);
   };
-
-  const isHead = personalInfoList?.role[0] === Role.Head;
 
   const TABS_NAMES = useMemo(
     () => [
@@ -174,17 +181,17 @@ const ProfilePage = () => {
                         className={styles.input}
                       />
                     </div>
-                    <div className={styles.inputBlock}>
-                      <Input
-                        title={'Company'}
-                        type={'text'}
-                        value={company}
-                        onChange={(value) => setCompany(value)}
-                        placeholder={'Company'}
-                        disabled
-                        className={styles.input}
-                      />
-                    </div>
+                    {/*<div className={styles.inputBlock}>*/}
+                    {/*  <Input*/}
+                    {/*    title={'Company'}*/}
+                    {/*    type={'text'}*/}
+                    {/*    value={company}*/}
+                    {/*    onChange={(value) => setCompany(value)}*/}
+                    {/*    placeholder={'Company'}*/}
+                    {/*    disabled*/}
+                    {/*    className={styles.input}*/}
+                    {/*  />*/}
+                    {/*</div>*/}
                     <div className={styles.inputBlock}>
                       <Input
                         title={'Position'}

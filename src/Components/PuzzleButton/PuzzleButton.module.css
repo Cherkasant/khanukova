@@ -25,6 +25,7 @@
 
 .text:hover {
   background: #0e4298;
+  color: #ffffff !important;
 }
 
 .icon {

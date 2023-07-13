@@ -10,18 +10,21 @@ import {
   PatchSubTaskCommentType,
   PatchTaskCommentType,
   PostMilestoneCommentType,
-  SingleMilestoneComment
+  SingleMilestoneComment,
+  SingleTaskComment
 } from '../Types/comments';
 
 type CommentReducerState = {
   comments: ArrayOfComments;
   taskComments: ArrayOfComments;
   singleComment: CommentType | null;
+  singleTaskComment: CommentType | null;
 };
 const initialState: CommentReducerState = {
   comments: [],
   taskComments: [],
-  singleComment: null
+  singleComment: null,
+  singleTaskComment: null
 };
 
 const CommentSlice = createSlice({
@@ -36,6 +39,10 @@ const CommentSlice = createSlice({
     getAllTaskComments: (state, action: PayloadAction<number>) => {},
     setAllTaskComments: (state, action: PayloadAction<ArrayOfComments>) => {
       state.taskComments = action.payload;
+    },
+    getSingleTaskComment: (state, action: PayloadAction<SingleTaskComment>) => {},
+    setSingleTaskComment: (state, action: PayloadAction<CommentType>) => {
+      state.singleComment = action.payload;
     },
     patchMilestoneComment: (state, action: PayloadAction<PatchMilestoneCommentType>) => {},
     deleteMilestoneComment: (state, action: PayloadAction<DeleteMilestoneCommentType>) => {},

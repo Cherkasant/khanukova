@@ -24,6 +24,7 @@ import { validationRules } from '../validationRules';
 import statusSelectors from '../../Redux/Selectors/statusSelectors';
 import Loader from '../../Components/Loader';
 
+
 import 'intl-tel-input/build/css/intlTelInput.css';
 import styles from './SignUpHead.module.css';
 
@@ -115,6 +116,7 @@ const SignUpHead = () => {
   };
 
   const onSubmit: SubmitHandler<SignUpType> = (userInfo) => {
+
     dispatch(
       registerUser({
         data: {
