@@ -17,7 +17,7 @@ type authReducerState = {
   userName: string;
 };
 const initialState: authReducerState = {
-  isLoggedIn: !!localStorage.getItem(ACCESS_TOKEN_KEY),
+  isLoggedIn: !!localStorage.getItem(ACCESS_TOKEN_KEY) || !!sessionStorage.getItem(ACCESS_TOKEN_KEY),
   userName: '',
   idUser: 0
 };

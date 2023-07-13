@@ -11,6 +11,12 @@
   cursor: pointer;
 }
 
+.button:disabled {
+  background: #d9e1f0;
+  color: #9bacc9;
+  pointer-events: none;
+}
+
 .text {
   background: #1258ca;
   border: 1px solid #d0d0d0;
@@ -31,10 +37,4 @@
 
 .icon:hover {
   background-color: #dadada;
-}
-
-.disabled {
-  background: #d9e1f0;
-  color: #9bacc9;
-  pointer-events: none;
 }

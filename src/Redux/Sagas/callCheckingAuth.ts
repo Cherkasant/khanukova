@@ -8,8 +8,8 @@ import API from '../Utils/api';
 type AnyResponse = ApiResponse<any>;
 
 export default function* callCheckingAuth(api: any, ...rest: any) {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY) || '';
-  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY) || '';
+  const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY) || sessionStorage.getItem(ACCESS_TOKEN_KEY) || '';
+  const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY) || sessionStorage.getItem(REFRESH_TOKEN_KEY) || '';
   const response: AnyResponse = yield call(api, accessToken, ...rest);
   if (response.status === 401) {
     const { status: accessStatus } = yield call(API.verifyToken, accessToken);

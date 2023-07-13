@@ -28,12 +28,10 @@ const PuzzleButton: FC<PuzzleButtonProps> = ({
   ...rest
 }: PuzzleButtonProps) => {
   const buttonClassName = btnType && styles[btnType];
-
   return (
     <Button
-      className={classNames(styles.button, buttonClassName, btnClassName, {
-        [styles.disabled]: !!btnDisabled
-      })}
+      disabled={btnDisabled}
+      className={classNames(styles.button, buttonClassName, btnClassName)}
       onClick={onClick}
       {...rest}>
       {btnTitle}

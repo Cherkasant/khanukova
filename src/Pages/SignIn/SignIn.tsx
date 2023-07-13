@@ -1,10 +1,9 @@
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import { useDispatch } from 'react-redux';
-
-import { Form } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Input from '../../Components/Input';
 import Title from '../../Components/Title';
@@ -16,77 +15,117 @@ import { PasswordTypes } from '../../Components/constants/@types';
 import { signInUser } from '../../Redux/Reducers/authReducer';
 import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import FormContainer from '../../Components/FormContainer/FormContainer';
+import { SignInType } from '../../Components/constants/@auth';
+import { validationRules } from '../validationRules';
+import statusSelectors from '../../Redux/Selectors/statusSelectors';
+import Loader from '../../Components/Loader';
 
 import styles from './SignIn.module.css';
 
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const onSignIn = (values: any) => {
+  const [type, setType] = useState(PasswordTypes.Password);
+  const [rememberPassword, setRememberPassword] = useState(false);
+  const status = useSelector(statusSelectors.statusSignIn);
+
+  const {
+    control,
+    handleSubmit,
+    clearErrors,
+    reset,
+    watch,
+    formState: { errors }
+  } = useForm<SignInType>({
+    defaultValues: { email: '', password: '' },
+    mode: 'onSubmit'
+  });
+  const onSubmit: SubmitHandler<SignInType> = (userInfo) => {
     dispatch(
       signInUser({
-        data: { email: values.email, password: values.password },
+        data: userInfo,
+        rememberPassword,
         callback: () => {
           navigate(PathNames.Home);
+          reset();
         }
       })
     );
   };
-  const [form] = Form.useForm();
-  const checkEmail = Form.useWatch('email', form);
-  const checkPassword = Form.useWatch('password', form);
-  const [checked, setChecked] = useState(false);
-  const [type, setType] = useState(PasswordTypes.Password);
+
   const onEyeClick = () => {
     type === PasswordTypes.Password ? setType(PasswordTypes.Text) : setType(PasswordTypes.Password);
   };
+
   const onChangeCheck = (event: ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
+    setRememberPassword(event.target.checked);
   };
-  return (
+
+  return status === 'pending' ? (
+    <Loader className={styles.loader} />
+  ) : (
     <FormContainer>
       <div className={styles.inner}>
         <div className={styles.titleBlock}>
           <Title name={'Login to account'} className={styles.title} />
           <div className={styles.subtitle}>{'Please enter your login details to sign in'}</div>
         </div>
-        <Form onFinish={onSignIn} className={styles.form} form={form} initialValues={{ email: '', password: '' }}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.inputs}>
-            <Form.Item
+            <Controller
+              control={control}
               name="email"
-              rules={[{ required: true, message: 'Please input your email!' }]}
-              className={styles.formItem}>
-              <Input type={'email'} placeholder={'Email'} />
-            </Form.Item>
+              rules={validationRules.emailSign}
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  type={'text'}
+                  placeholder={'Email'}
+                  onChange={onChange}
+                  value={value}
+                  error={errors.email?.message}
+                  onFocus={() => {
+                    clearErrors('email');
+                  }}
+                />
+              )}
+            />
             <div className={styles.passwordContainer}>
-              <Form.Item
+              <Controller
+                control={control}
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-                className={styles.formItem}>
-                <Input type={type} value={checkPassword} placeholder={'Password'} />
-              </Form.Item>
+                rules={validationRules.passwordSignIn}
+                render={({ field: { onChange, value } }) => (
+                  <Input
+                    onChange={onChange}
+                    onFocus={() => {
+                      clearErrors('password');
+                    }}
+                    value={value}
+                    type={type}
+                    placeholder="Password"
+                    error={errors.password?.message}
+                  />
+                )}
+              />
               <div className={styles.eyeIcon} onClick={onEyeClick}>
-                {checkPassword && type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
+                {type !== 'password' ? <ClosedEyeIcon /> : <OpenEyeIcon />}
               </div>
             </div>
           </div>
-
           <div className={styles.checkboxContainer}>
-            <Checkbox isChecked={checked} handleChange={onChangeCheck} label={'Remember me'} />
+            <Checkbox isChecked={rememberPassword} handleChange={onChangeCheck} label={'Remember me'} />
             <div className={styles.line} onClick={() => navigate(PathNames.PasswordRequestPage)}>
               Forgot your password?
             </div>
           </div>
-          <Form.Item className={styles.formItem}>
-            <PuzzleButton
-              htmlType="submit"
-              btnTitle={'Login'}
-              btnType={PuzzleButtonTypes.TextButton}
-              btnClassName={styles.button}
-              btnDisabled={!(checkEmail && checkPassword)}
-            />
-          </Form.Item>
-        </Form>
+          <PuzzleButton
+            htmlType="submit"
+            btnTitle={'Login'}
+            btnType={PuzzleButtonTypes.TextButton}
+            btnClassName={styles.button}
+            btnDisabled={!watch('email') || !watch('password')}
+          />
+        </form>
         <div className={styles.info}>
           {'Don`t have an account?'}
           <NavLink to={PathNames.SignUp} className={styles.link}>

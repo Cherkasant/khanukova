@@ -64,6 +64,7 @@
   line-height: 16px;
   text-align: right;
   color: #a3a3a3;
+  margin-top: 30px;
 }
 
 .subtitle {
@@ -133,6 +134,7 @@
   font-size: 16px;
   line-height: 19px;
   color: #212121;
+  padding: 0 19px !important;
 }
 .phoneInput > input::placeholder {
   font-style: normal;
@@ -145,6 +147,21 @@
   outline: none;
 }
 
+.inputPass {
+  padding: 0 40px 0 19px !important;
+}
+
+.inputError,
+.inputError:hover,
+.inputError:focus,
+.inputError:active {
+  border: 1px solid #bf3535;
+}
+
+.inputError:focus {
+  box-shadow: 0 0 4px rgba(191, 53, 53, 0.75);
+}
+
 .passwordContainer {
   position: relative;
   width: 100%;
@@ -153,7 +170,7 @@
 .eyeIcon {
   position: absolute;
   top: 18px;
-  right: 20px;
+  right: 12px;
   cursor: pointer;
 }
 .eyeIcon:hover {
@@ -167,4 +184,16 @@
 
 .formItem {
   margin-bottom: 0;
+}
+
+.error {
+  color: #bf3535;
+  font-size: 12px;
+}
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

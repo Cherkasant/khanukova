@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './Loader.module.css';
 
 type LoaderType = {
-  className: string;
+  className?: string;
 };
 const Loader: React.FC<LoaderType> = ({ className }) => {
   return (
