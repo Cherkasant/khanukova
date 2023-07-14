@@ -9,7 +9,7 @@ export type MilestoneModalType = {
   duration: string | undefined;
   labels: string;
   color_labels: string;
-  dependence: Array<string>;
+  dependence: Array<number>;
   progress: number;
   status: string;
   payment_status: string;
@@ -27,7 +27,7 @@ export type TaskModalType = {
   duration: number;
   labels: string;
   color_labels: string;
-  dependence: Array<string>;
+  dependence: Array<string> | string;
   progress: number;
   status: string;
   payment_status: string;
@@ -239,7 +239,7 @@ export type ResponsibleType = {
 export type AllResponsibleType = Array<ResponsibleType>;
 export type DependeciesMilestone = {
   id: number;
-  milestoneId: number;
+  milestoneId?: number;
 };
 export type MilestoneDependence = {
   id: number;
@@ -270,12 +270,20 @@ export type CloseModalType = {
 };
 export type DependeciesTask = {
   id: number;
-  TaskId: number;
+  TaskId?: number;
 };
-export type ArrayTaskDependencies = Array<DependeciesTask>;
+export type ArrayTaskDependencies = Array<TaskDependence>;
 
 export type DependeciesSubtask = {
   id: number;
-  SubtaskId: number;
+  SubtaskId?: number;
 };
-export type ArraySubtaskDependencies = Array<DependeciesSubtask>;
+export type ArraySubtaskDependencies = Array<SubTaskDependence>;
+export type TaskDependence = {
+  id: number;
+  task_name: string;
+};
+export type SubTaskDependence = {
+  id: number;
+  sub_task_name: string;
+};

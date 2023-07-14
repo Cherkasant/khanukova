@@ -145,7 +145,7 @@ const ProfilePage = () => {
       </div>
 
       {activeTab === TabsProfile.PersonalInfo ? (
-        <div className={styles.containerBlockWithBtn}>
+        <div className={classNames(styles.containerBlockWithBtn, { [styles.devHeight]: !isHead })}>
           <div className={styles.containerInfo}>
             <div className={styles.containerPhoto}>
               <h2 className={styles.subTitle}>Account photo</h2>

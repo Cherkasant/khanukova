@@ -322,7 +322,28 @@ const getAllTaskDependencies = (token: string, id: number, idTask: number) => {
 };
 const getAllSubtaskDependencies = (token: string, id: number, idSubtask: number) => {
   return API.get(
-    `/project-subdiv/dependencies/?project=${id}&subtask=${idSubtask}`,
+    `/project-subdiv/dependencies/?project=${id}&sub-task=${idSubtask}`,
+    {},
+    { headers: { Authorization: `JWT ${token}` } }
+  );
+};
+const getAllNotCreatedMilestoneDependencies = (token: string, id: number) => {
+  return API.get(
+    `/project-subdiv/dependencies/?project=${id}&milestone=0`,
+    {},
+    { headers: { Authorization: `JWT ${token}` } }
+  );
+};
+const getAllNotCreatedTaskDependencies = (token: string, id: number) => {
+  return API.get(
+    `/project-subdiv/dependencies/?project=${id}&task=0`,
+    {},
+    { headers: { Authorization: `JWT ${token}` } }
+  );
+};
+const getAllNotCreatedSubTaskDependencies = (token: string, id: number) => {
+  return API.get(
+    `/project-subdiv/dependencies/?project=${id}&sub-task=0`,
     {},
     { headers: { Authorization: `JWT ${token}` } }
   );
@@ -387,5 +408,8 @@ export default {
   getHomeScreenProjects,
   deleteProject,
   getAllTaskDependencies,
-  getAllSubtaskDependencies
+  getAllSubtaskDependencies,
+  getAllNotCreatedMilestoneDependencies,
+  getAllNotCreatedTaskDependencies,
+  getAllNotCreatedSubTaskDependencies
 };
