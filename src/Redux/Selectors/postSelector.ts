@@ -32,5 +32,9 @@ export default {
   getAllHomeScreenProjects: (state: RootState) => state.postsReducer.allHomeScreenProjects,
   getDeletedProjectId: (state: RootState) => state.postsReducer.deletedProjectId,
   getLoader: (state: RootState) => state.postsReducer.isCardsLoading,
-  getAllTaskDependencies: (state: RootState) => state.postsReducer.taskDependencies
+  getAllTaskDependencies: (state: RootState) => state.postsReducer.taskDependencies,
+  getAllSubTaskDependencies: (state: RootState) => state.postsReducer.subTaskDependencies,
+  getAllNotCreatedMilestoneDependencies: (state: RootState) => state.postsReducer.allNotCreatedMilestoneDependencies,
+  getAllNotCreatedTaskDependencies: (state: RootState) => state.postsReducer.allNotCreatedTaskDependencies,
+  getAllNotCreatedSubtaskDependencies: (state: RootState) => state.postsReducer.allNotCreatedSubTaskDependencies
 };

@@ -16,7 +16,12 @@ import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
 import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
-import { getSingleProject, postTask, setTaskModalVisible } from '../../../Redux/Reducers/postReducer';
+import {
+  getAllNotCreatedTaskDependencies,
+  getSingleProject,
+  postTask,
+  setTaskModalVisible
+} from '../../../Redux/Reducers/postReducer';
 import postSelector from '../../../Redux/Selectors/postSelector';
 import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
 import Input from '../../Input';
@@ -35,6 +40,10 @@ const ModalNewTask = () => {
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getNewTaskModal);
   const milestoneId = useSelector(postSelector.getMilestoneId);
+  const allTaskDependencies = useSelector(postSelector.getAllNotCreatedTaskDependencies);
+  const ArrayOfDependencies = allTaskDependencies.map((el) => {
+    return { value: el.id, label: el.task_name };
+  });
 
   const onSaveClick = () => {
     dispatch(
@@ -50,7 +59,13 @@ const ModalNewTask = () => {
           duration: +duration,
           labels: label,
           color_labels: colors.value,
-          dependence: [],
+          dependence:
+            dependence.length === 0
+              ? []
+              : dependence
+                  .toString()
+                  .split(',')
+                  .map((el: string) => parseInt(el)),
           progress: +progress.value,
           status: status.value,
           payment_status: paymentStatus.value,
@@ -83,7 +98,7 @@ const ModalNewTask = () => {
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
-  const [dependence, setDependence] = useState<any>(null);
+  const [dependence, setDependence] = useState<any>([]);
   const [progress, setProgress] = useState<any>(null);
   const [colors, setColors] = useState<any>(null);
   const [title, setTitle] = useState('');
@@ -97,7 +112,10 @@ const ModalNewTask = () => {
   useEffect(() => {
     setEdit(false);
     setTitle('Title new task');
-  }, []);
+    if (singleProject) {
+      dispatch(getAllNotCreatedTaskDependencies({ id: singleProject?.id }));
+    }
+  }, [singleProject]);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
     setDeadline(dateString);
@@ -267,17 +285,18 @@ const ModalNewTask = () => {
                 </div>
                 <div>
                   <div className={styles.title}>{'Dependence'}</div>
-                  <Dropdown
-                    options={Dependence}
+                  <Cascader
+                    options={ArrayOfDependencies}
+                    multiple={true}
                     onChange={setDependence}
+                    defaultValue={[]}
                     value={dependence}
-                    placeholder="Select"
-                    className={styles.dropdownContainer}
-                    controlClassName={styles.dropdownControl}
-                    placeholderClassName={styles.dropdownPlaceholder}
-                    arrowClosed={<ArrowDropDownIcon />}
-                    arrowOpen={<Close />}
-                    menuClassName={styles.dropdownMenu}
+                    className={styles.cascader}
+                    popupClassName={styles.popup}
+                    placeholder={'Select'}
+                    maxTagCount={'responsive'}
+                    showArrow={true}
+                    suffixIcon={<ArrowDropDownIcon />}
                   />
                 </div>
                 <div>

@@ -9,6 +9,9 @@ import {
   deleteTask,
   getAllMilestoneDependencies,
   getAllMilestones,
+  getAllNotCreatedMilestoneDependencies,
+  getAllNotCreatedSubTaskDependencies,
+  getAllNotCreatedTaskDependencies,
   getAllProjects,
   getAllResponsible,
   getAllSubtaskDependencies,
@@ -30,6 +33,9 @@ import {
   removeResponsible,
   setAllMilestoneDependencies,
   setAllMilestones,
+  setAllNotCreatedMilestoneDependencies,
+  setAllNotCreatedSubTaskDependencies,
+  setAllNotCreatedTaskDependencies,
   setAllProjects,
   setAllResponsible,
   setAllSubtaskDependencies,
@@ -335,6 +341,36 @@ function* getAllSubtaskDependenciesWorker(action: PayloadAction<DependeciesSubta
   }
 }
 
+function* getAllNotCreatedMilestoneDependenciesWorker(action: PayloadAction<DependeciesMilestone>) {
+  const { id } = action.payload;
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllNotCreatedMilestoneDependencies, id);
+  if (ok && data) {
+    yield put(setAllNotCreatedMilestoneDependencies(data));
+  } else {
+    console.warn('Error while getting all milestone dependencies', problem);
+  }
+}
+
+function* getAllNotCreatedTaskDependenciesWorker(action: PayloadAction<DependeciesTask>) {
+  const { id } = action.payload;
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllNotCreatedTaskDependencies, id);
+  if (ok && data) {
+    yield put(setAllNotCreatedTaskDependencies(data));
+  } else {
+    console.warn('Error while getting all task dependencies', problem);
+  }
+}
+
+function* getAllNotCreatedSubTaskDependenciesWorker(action: PayloadAction<DependeciesSubtask>) {
+  const { id } = action.payload;
+  const { ok, data, problem } = yield callCheckingAuth(API.getAllNotCreatedSubTaskDependencies, id);
+  if (ok && data) {
+    yield put(setAllNotCreatedSubTaskDependencies(data));
+  } else {
+    console.warn('Error while getting all subtask dependencies', problem);
+  }
+}
+
 export default function* postSaga() {
   yield all([
     takeLatest(getTaskCard, getTaskCardWorker),
@@ -362,6 +398,9 @@ export default function* postSaga() {
     takeLatest(getHomeScreenProjects, getAllHomeScreenProjectsWorker),
     takeLatest(deleteProject, deleteProjectWorker),
     takeLatest(getAllTaskDependencies, getAllTaskDependenciesWorker),
-    takeLatest(getAllSubtaskDependencies, getAllSubtaskDependenciesWorker)
+    takeLatest(getAllSubtaskDependencies, getAllSubtaskDependenciesWorker),
+    takeLatest(getAllNotCreatedMilestoneDependencies, getAllNotCreatedMilestoneDependenciesWorker),
+    takeLatest(getAllNotCreatedTaskDependencies, getAllNotCreatedTaskDependenciesWorker),
+    takeLatest(getAllNotCreatedSubTaskDependencies, getAllNotCreatedSubTaskDependenciesWorker)
   ]);
 }

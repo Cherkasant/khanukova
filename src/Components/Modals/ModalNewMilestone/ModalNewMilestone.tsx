@@ -16,7 +16,12 @@ import { CalendarIcon } from '../../../Assets/icons/CalendarIcon';
 import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
 import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
-import { getSingleProject, postMilestoneCard, setSelectedModalVisible } from '../../../Redux/Reducers/postReducer';
+import {
+  getAllNotCreatedMilestoneDependencies,
+  getSingleProject,
+  postMilestoneCard,
+  setSelectedModalVisible
+} from '../../../Redux/Reducers/postReducer';
 import postSelector from '../../../Redux/Selectors/postSelector';
 import Input from '../../Input';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
@@ -37,6 +42,10 @@ const ModalNewMilestone = () => {
   const projectTitle = useSelector(postSelector.getProjectTitle);
   const singleProject = useSelector(postSelector.getSingleProject);
   const isVisible = useSelector(postSelector.getModal);
+  const allMilestoneDependencies = useSelector(postSelector.getAllNotCreatedMilestoneDependencies);
+  const ArrayOfDependencies = allMilestoneDependencies.map((el) => {
+    return { value: el.id, label: el.milestone_name };
+  });
 
   const onSaveClick = () => {
     dispatch(
@@ -52,7 +61,13 @@ const ModalNewMilestone = () => {
           duration: duration,
           labels: label,
           color_labels: colors.value,
-          dependence: [],
+          dependence:
+            dependence.length === 0
+              ? []
+              : dependence
+                  .toString()
+                  .split(',')
+                  .map((el: string) => parseInt(el)),
           progress: +progress.value,
           status: status.value,
           payment_status: paymentStatus.value,
@@ -85,11 +100,12 @@ const ModalNewMilestone = () => {
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
-  const [dependence, setDependence] = useState<any>(null);
+  const [dependence, setDependence] = useState<any>([]);
   const [progress, setProgress] = useState<any>(null);
   const [colors, setColors] = useState<any>(null);
   const [title, setTitle] = useState('');
   const [edit, setEdit] = useState(false);
+
   const onEditClick = () => {
     setEdit(!edit);
   };
@@ -98,7 +114,10 @@ const ModalNewMilestone = () => {
   };
   useEffect(() => {
     setEdit(false);
-  }, []);
+    if (singleProject) {
+      dispatch(getAllNotCreatedMilestoneDependencies({ id: singleProject?.id }));
+    }
+  }, [singleProject]);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date, dateString) => {
     setDeadline(dateString);
@@ -260,9 +279,10 @@ const ModalNewMilestone = () => {
               <div>
                 <div className={styles.title}>{'Dependence'}</div>
                 <Cascader
-                  options={checkbox}
+                  options={ArrayOfDependencies}
                   multiple={true}
                   onChange={setDependence}
+                  defaultValue={[]}
                   value={dependence}
                   className={styles.cascader}
                   popupClassName={styles.popup}

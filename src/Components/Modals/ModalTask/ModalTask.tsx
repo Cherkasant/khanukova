@@ -19,7 +19,13 @@ import { CloseModalIcon } from '../../../Assets/icons/CloseModalIcon';
 import { DeleteIcon } from '../../../Assets/icons/DeleteIcon';
 import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
-import { deleteTask, getSingleProject, patchTask, setModalTask } from '../../../Redux/Reducers/postReducer';
+import {
+  deleteTask,
+  getAllTaskDependencies,
+  getSingleProject,
+  patchTask,
+  setModalTask
+} from '../../../Redux/Reducers/postReducer';
 import postSelector from '../../../Redux/Selectors/postSelector';
 import { ResponsibleCheckbox } from '../../FilteresPanel/FilterProjectScreen/constants';
 import Input from '../../Input';
@@ -61,6 +67,12 @@ const ModalTask = () => {
   const commentsMilestone = useSelector(commentsSelector.getAllMilestoneComments);
   const TASK_COMMENTS = commentsMilestone.filter((el) => el.task === singleTask?.id && el.subtask === null);
   const [editButton, setEditButton] = useState(false);
+
+  const allTaskDependencies = useSelector(postSelector.getAllTaskDependencies);
+  const ArrayOfDependencies = allTaskDependencies.map((el) => {
+    return { value: el.id, label: el.task_name };
+  });
+
   useEffect(() => {
     if (singleMilestoneComment) {
       setComment(singleMilestoneComment?.comment);
@@ -103,7 +115,13 @@ const ModalTask = () => {
             duration: duration,
             labels: label,
             color_labels: colors.value,
-            dependence: [],
+            dependence:
+              dependence.length === 0
+                ? []
+                : dependence
+                    .toString()
+                    .split(',')
+                    .map((el: string) => parseInt(el)),
             progress: progress.value,
             status: status.value,
             payment_status: paymentStatus.value,
@@ -178,7 +196,7 @@ const ModalTask = () => {
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
-  const [dependence, setDependence] = useState<any>(null);
+  const [dependence, setDependence] = useState<any>([]);
   const [progress, setProgress] = useState<any>(null);
   const [colors, setColors] = useState<any>(null);
   const [title, setTitle] = useState('');
@@ -191,8 +209,10 @@ const ModalTask = () => {
   };
   useEffect(() => {
     setEdit(false);
-    // setTitle('Title');
-  }, []);
+    if (singleProject && singleTask) {
+      dispatch(getAllTaskDependencies({ id: singleProject?.id, TaskId: singleTask?.id }));
+    }
+  }, [singleProject, singleTask]);
 
   const onChangeDeadline: DatePickerProps['onChange'] = (date: Dayjs | null) => {
     setFinishDate(date);
@@ -452,16 +472,18 @@ const ModalTask = () => {
               </div>
               <div>
                 <div className={styles.title}>{'Dependence'}</div>
-                <Dropdown
-                  options={Dependence}
+                <Cascader
+                  options={ArrayOfDependencies}
+                  multiple={true}
                   onChange={setDependence}
+                  defaultValue={[]}
                   value={dependence}
-                  placeholder="Nothing selected"
-                  className={styles.dropdownContainer}
-                  controlClassName={classNames(styles.dropdownControl, { [styles.disabledInput]: isDevTeam })}
-                  placeholderClassName={styles.dropdownPlaceholder}
-                  arrowClosed={!isDevTeam ? <ArrowDropDownIcon /> : null}
-                  arrowOpen={!isDevTeam ? <Close /> : null}
+                  className={classNames(styles.cascader, { [styles.disabledCascader]: isDevTeam })}
+                  popupClassName={styles.popup}
+                  placeholder={'Add dependence'}
+                  maxTagCount={'responsive'}
+                  showArrow={true}
+                  suffixIcon={!isDevTeam ? <ArrowDropDownIcon /> : null}
                   disabled={isDevTeam}
                 />
               </div>

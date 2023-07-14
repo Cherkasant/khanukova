@@ -129,12 +129,13 @@ const ModalMilestone = () => {
             duration: duration,
             labels: label,
             color_labels: colors.value,
-            dependence: dependence
-              ? dependence
-                  .toString()
-                  .split(',')
-                  .map((el: string) => parseInt(el))
-              : [],
+            dependence:
+              dependence.length === 0
+                ? []
+                : dependence
+                    .toString()
+                    .split(',')
+                    .map((el: string) => parseInt(el)),
             progress: progress.value,
             status: status.value,
             payment_status: paymentStatus.value,
@@ -208,7 +209,7 @@ const ModalMilestone = () => {
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
-  const [dependence, setDependence] = useState<any>(null);
+  const [dependence, setDependence] = useState<any>([]);
   const [progress, setProgress] = useState<any>(null);
   const [colors, setColors] = useState<any>(null);
   const [title, setTitle] = useState('');
@@ -503,7 +504,7 @@ const ModalMilestone = () => {
                   options={ArrayOfDependencies}
                   multiple={true}
                   onChange={setDependence}
-                  defaultValue={dependence}
+                  defaultValue={[]}
                   value={dependence}
                   className={classNames(styles.cascader, { [styles.disabledCascader]: isDevTeam })}
                   popupClassName={styles.popup}

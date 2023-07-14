@@ -66,6 +66,9 @@ type PostReducerState = {
   isCardsLoading: boolean;
   taskDependencies: ArrayTaskDependencies | [];
   subTaskDependencies: ArraySubtaskDependencies | [];
+  allNotCreatedMilestoneDependencies: ArrayMilestoneDependencies | [];
+  allNotCreatedTaskDependencies: ArrayTaskDependencies | [];
+  allNotCreatedSubTaskDependencies: ArraySubtaskDependencies | [];
 };
 
 const initialState: PostReducerState = {
@@ -102,7 +105,10 @@ const initialState: PostReducerState = {
   deletedProjectId: 0,
   isCardsLoading: false,
   taskDependencies: [],
-  subTaskDependencies: []
+  subTaskDependencies: [],
+  allNotCreatedMilestoneDependencies: [],
+  allNotCreatedTaskDependencies: [],
+  allNotCreatedSubTaskDependencies: []
 };
 
 const postsSlice = createSlice({
@@ -236,6 +242,18 @@ const postsSlice = createSlice({
     getAllSubtaskDependencies: (state, action: PayloadAction<DependeciesSubtask>) => {},
     setAllSubtaskDependencies: (state, action: PayloadAction<ArraySubtaskDependencies>) => {
       state.subTaskDependencies = action.payload;
+    },
+    getAllNotCreatedMilestoneDependencies: (state, action: PayloadAction<DependeciesMilestone>) => {},
+    setAllNotCreatedMilestoneDependencies: (state, action: PayloadAction<ArrayMilestoneDependencies>) => {
+      state.allNotCreatedMilestoneDependencies = action.payload;
+    },
+    getAllNotCreatedTaskDependencies: (state, action: PayloadAction<DependeciesTask>) => {},
+    setAllNotCreatedTaskDependencies: (state, action: PayloadAction<ArrayTaskDependencies>) => {
+      state.allNotCreatedTaskDependencies = action.payload;
+    },
+    getAllNotCreatedSubTaskDependencies: (state, action: PayloadAction<DependeciesSubtask>) => {},
+    setAllNotCreatedSubTaskDependencies: (state, action: PayloadAction<ArraySubtaskDependencies>) => {
+      state.allNotCreatedSubTaskDependencies = action.payload;
     }
   }
 });
@@ -300,7 +318,13 @@ export const {
   getAllTaskDependencies,
   setAllTaskDependencies,
   getAllSubtaskDependencies,
-  setAllSubtaskDependencies
+  setAllSubtaskDependencies,
+  getAllNotCreatedMilestoneDependencies,
+  setAllNotCreatedMilestoneDependencies,
+  getAllNotCreatedTaskDependencies,
+  setAllNotCreatedTaskDependencies,
+  getAllNotCreatedSubTaskDependencies,
+  setAllNotCreatedSubTaskDependencies
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;
