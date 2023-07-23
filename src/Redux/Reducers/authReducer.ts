@@ -10,16 +10,19 @@ import {
   SendResetEmailPayload,
   SignInUserPayload
 } from '../Types/auth';
+import { PersonalInfoData } from '../Types/profile';
 
 type authReducerState = {
   idUser: number;
   isLoggedIn: boolean;
   userName: string;
+  userInfo: PersonalInfoData | null;
 };
 const initialState: authReducerState = {
   isLoggedIn: !!localStorage.getItem(ACCESS_TOKEN_KEY) || !!sessionStorage.getItem(ACCESS_TOKEN_KEY),
   userName: '',
-  idUser: 0
+  idUser: 0,
+  userInfo: null
 };
 
 const authSlice = createSlice({
@@ -43,7 +46,11 @@ const authSlice = createSlice({
     },
     logoutUser: (state, action: PayloadAction<undefined>) => {},
     sendResetEmail: (state, action: PayloadAction<SendResetEmailPayload>) => {},
-    resetPasswordConfirm: (state, action: PayloadAction<ResetPasswordConfirmPayload>) => {}
+    resetPasswordConfirm: (state, action: PayloadAction<ResetPasswordConfirmPayload>) => {},
+    getUserInfoWithId: (state, action: PayloadAction<number>) => {},
+    setUserInfoWithId: (state, action: PayloadAction<PersonalInfoData>) => {
+      state.userInfo = action.payload;
+    }
   }
 });
 export const {
@@ -58,7 +65,9 @@ export const {
   activateUser,
   logoutUser,
   getUserName,
-  setUserName
+  setUserName,
+  getUserInfoWithId,
+  setUserInfoWithId
 } = authSlice.actions;
 const authReducer = authSlice.reducer;
 

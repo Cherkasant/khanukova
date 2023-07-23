@@ -13,6 +13,7 @@ import {
 
 import {
   activateUser,
+  getUserInfoWithId,
   getUserName,
   logoutUser,
   registerHeadInfo,
@@ -22,6 +23,7 @@ import {
   sendResetEmail,
   setIdUser,
   setLoggedIn,
+  setUserInfoWithId,
   setUserName,
   signInUser
 } from '../Reducers/authReducer';
@@ -148,6 +150,15 @@ function* getUserNameWorker() {
   }
 }
 
+function* getUserInfoWithIdWorker(action: PayloadAction<number>) {
+  const { ok, data, problem } = yield callCheckingAuth(API.getUserInfoWithID, action.payload);
+  if (ok && data) {
+    yield put(setUserInfoWithId(data));
+  } else {
+    console.warn('Error while fetching userInfo ', problem);
+  }
+}
+
 export default function* authSagaWatcher() {
   yield all([
     takeLatest(registerUser, registerUserWorker),
@@ -158,6 +169,7 @@ export default function* authSagaWatcher() {
     takeLatest(signInUser, signInUserWorker),
     takeLatest(activateUser, activateUserWorker),
     takeLatest(logoutUser, logOutUserWorker),
-    takeLatest(getUserName, getUserNameWorker)
+    takeLatest(getUserName, getUserNameWorker),
+    takeLatest(getUserInfoWithId, getUserInfoWithIdWorker)
   ]);
 }

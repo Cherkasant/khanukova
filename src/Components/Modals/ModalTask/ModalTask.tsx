@@ -300,12 +300,12 @@ const ModalTask = () => {
                 onChange={onChangeDescription}
                 disabled={isDevTeam}
               />
-              {/*<PuzzleButton*/}
-              {/*  title={"Submit new"}*/}
-              {/*  type={PuzzleButtonTypes.TextButton}*/}
-              {/*  className={styles.submitBtn}*/}
-              {/*  disabled={!descriptionValue}*/}
-              {/*/>*/}
+              <PuzzleButton
+                btnTitle={'Submit new'}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.submitBtn}
+                disabled={!descriptionValue}
+              />
             </div>
 
             <div className={styles.attachmentContainer}>

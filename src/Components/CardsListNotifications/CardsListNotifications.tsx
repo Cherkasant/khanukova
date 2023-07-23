@@ -1,13 +1,14 @@
 import { FC, useState } from 'react';
 
-import { CardsListNotificationsType } from '../constants/@types';
 import CardNotifications from '../CardNotifications';
+
+import { ArrayOfNotificationType } from '../../Redux/Types/notification';
 
 import styles from './CardsListNotifications.module.css';
 
 type CardsListNotificationsProps = {
-  CardsListNotifications: CardsListNotificationsType | null
-}
+  CardsListNotifications: ArrayOfNotificationType | null;
+};
 
 const CardsListNotifications: FC<CardsListNotificationsProps> = ({ CardsListNotifications }) => {
   const [isReading, setIsReading] = useState(false);

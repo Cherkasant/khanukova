@@ -1,69 +1,86 @@
 .container {
-    margin: 0;
-    display: flex;
-    background-color: #f4f8fe;
-    padding: 0 35px 0 0;
-    box-sizing: border-box;
-    width: 100%;
-    height: 54px;
-    border-bottom: 1px solid #4270a7;
+  margin: 0;
+  display: flex;
+  background-color: #f4f8fe;
+  padding: 0 35px 0 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 54px;
+  border-bottom: 1px solid #4270a7;
 }
 
 .headerLine {
-    display: flex;
-    justify-content: space-between;
-    line-height: 54px;
-    align-items: center;
-    width: 100%;
-    height: 54px;
+  display: flex;
+  justify-content: space-between;
+  line-height: 54px;
+  align-items: center;
+  width: 100%;
+  height: 54px;
 }
 
 .title {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #000000;
-    padding-left: 28px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+  padding-left: 28px;
 }
 
 .iconsContainer {
-    display: flex;
-    height: 100%;
-    align-items: center;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 5px;
 }
 
 .iconBell {
-    border-radius: 5px;
-    border: none;
-    background: none;
+  border-radius: 5px;
+  border: none;
+  background: none;
 }
 
 .iconBell:hover {
-    background: none;
+  background: none;
 }
 
 .notificationContainer {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .notificationCount {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background-color: #1258ca;
-    position: relative;
-    top: -7px;
-    left: -32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #1258ca;
+  position: absolute;
+  top: 0;
+  left: 25px;
+}
+
+.notificationContainer:hover {
+  cursor: pointer;
 }
 
 .iconUser {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 }
 
 .iconUser:hover {
-    background: none;
+  background: none;
+}
+
+.count {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 12px;
+  letter-spacing: 0;
+  color: #ffffff;
 }

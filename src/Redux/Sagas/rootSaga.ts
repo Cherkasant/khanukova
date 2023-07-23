@@ -5,7 +5,8 @@ import postSaga from './postSaga';
 import profileSaga from './profileSaga';
 import resoursesSaga from './resoursesSaga';
 import commentsSaga from './commentsSaga';
+import notificationSaga from './notificationSaga';
 
 export function* rootSaga() {
-  yield all([authSagaWatcher(), profileSaga(), postSaga(), resoursesSaga(), commentsSaga()]);
+  yield all([authSagaWatcher(), profileSaga(), postSaga(), resoursesSaga(), commentsSaga(), notificationSaga()]);
 }

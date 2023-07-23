@@ -24,6 +24,7 @@ import authSelectors from '../../Redux/Selectors/authSelectors';
 import SingleProject from '../SingleProject/SingleProject';
 import Chats from '../Chats';
 import { getPersonalInfoReducer } from '../../Redux/Reducers/profileReducer';
+import { getAllNotifications, startListening } from '../../Redux/Reducers/notificationReducer';
 
 export enum PathNames {
   Home = '/',
@@ -50,10 +51,13 @@ export enum PathNames {
 const Router = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(authSelectors.getLoggedIn);
+
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getUserName());
       dispatch(getPersonalInfoReducer());
+      dispatch(getAllNotifications());
+      dispatch(startListening());
     }
   }, [isLoggedIn]);
 

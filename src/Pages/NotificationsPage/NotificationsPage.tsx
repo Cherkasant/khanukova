@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import { SettingsIcon } from '../../Assets/Notification/SettingsIcon';
 import Title from '../../Components/Title';
@@ -9,6 +11,10 @@ import TabsListNotifications from '../../Components/TabsListNotifications';
 import CardsListNotifications from '../../Components/CardsListNotifications';
 
 import ModalNotifications from '../../Components/Modals/ModalNotifications';
+
+import notificationSelector from '../../Redux/Selectors/notificationSelector';
+
+import { getAllNotifications, setNotificationModalVisible } from '../../Redux/Reducers/notificationReducer';
 
 import styles from './NotificationsPage.module.css';
 
@@ -20,43 +26,30 @@ const TABS_NOTIFICATION_NAMES = [
   { name: 'Payments', key: TabsNotifications.Payments }
 ];
 
-const CARD_MOCK = {
-  isRequest: true,
-  id: 1,
-  avatar: 'string',
-  userName: 'Pever Anna',
-  position: 'Developer',
-  email: 'anna@gmail.com',
-  projectName: 'Project name, Mobile App'
-};
-
-const CARD_MOCK_TWO = {
-  isRequest: false,
-  id: 2,
-  avatar: 'string',
-  userName: 'Developer 2',
-  status: 'Added attachment',
-  location: 'In Task 1',
-  date: '4 min ago'
-};
-
-const MOCK_CARDSLISTNOTIFICATIONS = [CARD_MOCK, CARD_MOCK, CARD_MOCK_TWO, CARD_MOCK_TWO];
-
 const NotificationsPage = () => {
-  const isNotification = true;
+  const dispatch = useDispatch();
+  const notifications = useSelector(notificationSelector.getAllNotifications);
+  const isNotificationModalVisible = useSelector(notificationSelector.getNotficationModalVisible);
+  useEffect(() => {
+    dispatch(getAllNotifications());
+    const socket = new WebSocket('wss://apipuzzle-be.herokuapp.com/ws/');
+    socket.addEventListener('open', () => {
+      socket.send('Hello Server!');
+    });
+  }, [dispatch]);
+
   const [activeTab, setActiveTab] = useState(TabsNotifications.All);
 
   const onTabClick = (tab: TabsNotifications) => {
     setActiveTab(tab);
   };
 
-  const [activeModal, setActiveModal] = useState(false);
   const onSettingsClick = () => {
-    setActiveModal(true);
+    dispatch(setNotificationModalVisible(true));
   };
 
   const onScreenClick = () => {
-    setActiveModal(false);
+    dispatch(setNotificationModalVisible(false));
   };
 
   return (
@@ -71,9 +64,9 @@ const NotificationsPage = () => {
       <TabsListNotifications activeTab={activeTab} onClickedTab={onTabClick} TabsList={TABS_NOTIFICATION_NAMES} />
       <div className={styles.blueLine}>{''}</div>
 
-      {isNotification ? (
+      {notifications ? (
         <div>
-          <CardsListNotifications CardsListNotifications={MOCK_CARDSLISTNOTIFICATIONS} />
+          <CardsListNotifications CardsListNotifications={notifications} />
         </div>
       ) : (
         <div className={styles.empty}>
@@ -83,10 +76,10 @@ const NotificationsPage = () => {
 
       <div
         className={classNames(styles.wrapModal, {
-          [styles.showModal]: activeModal
+          [styles.showModal]: isNotificationModalVisible
         })}
         onClick={onScreenClick}>
-        <ModalNotifications modal={activeModal} />
+        <ModalNotifications modal={isNotificationModalVisible} />
       </div>
     </div>
   );
