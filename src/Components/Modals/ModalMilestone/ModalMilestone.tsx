@@ -262,6 +262,12 @@ const ModalMilestone = () => {
     }
   };
 
+  const [submit, setSubmit] = useState(false);
+
+  const onSubmitNewClick = () => {
+    setSubmit(!submit);
+  };
+
   return (
     <div
       className={classNames(styles.wrapModal, {
@@ -310,12 +316,19 @@ const ModalMilestone = () => {
               <div className={styles.title}>{'Description'}</div>
               <textarea
                 className={classNames(styles.descriptionInput, {
-                  [styles.disabled]: isDevTeam
+                  [styles.disabled]: isDevTeam || submit
                 })}
                 placeholder={'Write'}
                 value={descriptionValue}
                 onChange={onChangeDescription}
-                disabled={isDevTeam}
+                disabled={isDevTeam || submit}
+              />
+              <PuzzleButton
+                btnTitle={'Submit new'}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.submitBtn}
+                disabled={!descriptionValue}
+                onClick={onSubmitNewClick}
               />
             </div>
 

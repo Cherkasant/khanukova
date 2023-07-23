@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink, useLocation } from 'react-router-dom';
-import io from 'socket.io-client';
 
 import { ChatActiveIcon } from '../../../Assets/Header/Menu/ActiveIcons/ChatActiveIcon';
 import { MyProfileActive } from '../../../Assets/Header/Menu/ActiveIcons/MyProfileActive';
@@ -58,7 +57,7 @@ const UserMenu = () => {
   };
 
   const connectionSocketHandler = () => {
-    io('ws://agile-dreamers-chat-be.herokuapp.com/:5000/websocket/ws/1');
+    //   io('ws://agile-dreamers-chat-be.herokuapp.com/:5000/websocket/ws/1');
   };
 
   const navButtons = [
