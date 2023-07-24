@@ -1,6 +1,7 @@
 .container {
+  margin-top: 10px;
   width: 100%;
-  height: 80%;
+  height: 70%;
 }
 
 .calendar {
@@ -48,7 +49,7 @@
 }
 
 :global(.rbc-date-cell) {
-  padding-top: 5px;
+  padding: 3px 0;
   text-align: center;
 }
 
@@ -75,9 +76,12 @@
   z-index: -1;
 }
 
-:global(.rbc-allday-cell),
 :global(.rbc-event-label) {
   display: none;
+}
+
+:global(.rbc-time-view .rbc-allday-cell) {
+  height: auto;
 }
 :global(.rbc-time-header-content) {
   margin-bottom: -2px;
@@ -111,12 +115,17 @@
 }
 
 :global(.rbc-current-time-indicator) {
+  z-index: 10;
   height: 2px;
   background-color: #1258ca;
 }
 
 :global(.rbc-label) {
   font-size: 14px;
+}
+
+:global(.rbc-show-more) {
+  color: #1258ca;
 }
 
 /* .addEventBlock {
