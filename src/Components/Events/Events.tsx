@@ -1,7 +1,7 @@
-import { Calendar, DateLocalizer, SlotInfo, View, momentLocalizer } from 'react-big-calendar';
+import { Calendar, SlotInfo, View, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './Events.module.css';
 import CustomToolbar from './CustomToolbar/CustomToolbar';
@@ -10,7 +10,6 @@ import Event from './Event/Event';
 import EventSearch from './EventSearch/EventSearch';
 
 const localizer = momentLocalizer(moment);
-moment.updateLocale('en', { week: { dow: 0 } });
 
 export interface IEvent {
   title: string;
@@ -21,19 +20,28 @@ export interface IEvent {
 const initialEvents: Array<IEvent> = [
   {
     title: 'An important event',
-    start: new Date(2023, 6, 15, 10, 0),
-    end: new Date(2023, 6, 15, 12, 0)
+    start: new Date(2023, 6, 24, 10, 0),
+    end: new Date(2023, 6, 24, 12, 0)
   },
   {
     title: 'Another event',
-    start: new Date(2023, 6, 17, 14, 0),
-    end: new Date(2023, 6, 17, 16, 0)
+    start: new Date(2023, 6, 24, 14, 0),
+    end: new Date(2023, 6, 24, 15, 0)
+  },
+  {
+    title: 'Another event',
+    start: new Date(2023, 6, 24, 16, 0),
+    end: new Date(2023, 6, 24, 17, 0)
   }
 ];
 
 const Events = () => {
   const [activeView, setActiveView] = useState<View>('month');
   const [events, setEvents] = useState<Array<IEvent>>(initialEvents);
+
+  useEffect(() => {
+    moment.updateLocale('en', { week: { dow: 0 } });
+  }, []);
 
   const handleViewChange = (view: View) => {
     setActiveView(view);
