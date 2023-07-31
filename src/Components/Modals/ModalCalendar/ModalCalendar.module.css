@@ -1,0 +1,77 @@
+.modalContainer {
+  position: fixed;
+  background-color: white;
+  bottom: 0;
+  right: 0;
+  height: calc(100% - 54px);
+  width: 50%;
+  padding: 10px;
+  z-index: 100;
+}
+
+.modalContainer.opened {
+  animation: openAnimation 0.3s ease-in;
+}
+
+@keyframes openAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.closeModal {
+  text-align: right;
+}
+
+.eventTitle {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #1258ca;
+  font-weight: 600;
+  height: 28px;
+  padding: 3px;
+}
+
+.eventTitle input {
+  height: 100%;
+  padding: 0;
+  color: #1258ca;
+  outline: none;
+}
+
+.editTitle {
+  padding: 5px !important;
+}
+
+.buttonsContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  display: flex;
+  gap: 11px;
+}
+
+.cancelBtn {
+  width: 147px;
+  height: 40px;
+  background: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #a3a3a3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.saveBtn {
+  width: 147px;
+  height: 40px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

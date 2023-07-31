@@ -1,0 +1,28 @@
+.eventTime {
+  margin-bottom: 20px;
+}
+
+.timeItem {
+  padding: 7px;
+  border-radius: 20px;
+  border: 1px solid #d9e1f0;
+}
+
+.timeItem:nth-child(odd) {
+  margin-right: 10px;
+}
+
+.timeItem:nth-child(2) {
+  position: relative;
+  margin-right: 50px;
+}
+
+.timeItem:nth-child(2)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -43px;
+  width: 36px;
+  height: 1px;
+  background-color: #d9e1f0;
+}

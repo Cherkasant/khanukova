@@ -6,16 +6,16 @@ import { Navigate, View } from 'react-big-calendar';
 import PrevIcon from '../../../Assets/icons/PrevIcon';
 import NextIcon from '../../../Assets/icons/NextIcon';
 
-import styles from './CustomToolbar.module.css';
+import styles from './SmallCalendarToolbar.module.css';
 
-interface CustomToolbarProps {
+interface SmallCalendarToolbarProps {
   onNavigate: (navigate: 'PREV' | 'NEXT' | 'TODAY') => void;
   label: string;
   activeView: View;
   onView: (view: View) => void;
 }
 
-const CustomToolbar = ({ onNavigate, label, activeView, onView }: CustomToolbarProps) => {
+const SmallCalendarToolbar = ({ onNavigate, label, activeView, onView }: SmallCalendarToolbarProps) => {
   const [currentView, setCurrentView] = useState<View>(activeView);
 
   useEffect(() => {
@@ -46,9 +46,6 @@ const CustomToolbar = ({ onNavigate, label, activeView, onView }: CustomToolbarP
         <strong>{formattedLabel}</strong>
       </span>
       <div className={styles.viewButtons}>
-        <button onClick={() => handleViewChange('month')} className={currentView === 'month' ? styles.active : ''}>
-          Month
-        </button>
         <button onClick={() => handleViewChange('week')} className={currentView === 'week' ? styles.active : ''}>
           Week
         </button>
@@ -60,4 +57,4 @@ const CustomToolbar = ({ onNavigate, label, activeView, onView }: CustomToolbarP
   );
 };
 
-export default CustomToolbar;
+export default SmallCalendarToolbar;
