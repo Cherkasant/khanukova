@@ -1,3 +1,7 @@
+.container {
+  /* width: 100%; */
+}
+
 .dropdownControl {
   height: 54px;
   border: 1px solid #d0d0d0;

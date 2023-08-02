@@ -13,7 +13,7 @@
 }
 
 .main {
-  height: 93vh;
+  height: calc(100vh - 55px);
   width: 100%;
   overflow: auto;
 }
