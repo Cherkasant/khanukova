@@ -34,6 +34,7 @@ export type PersonalInfoData = {
   role: string;
   is_active: boolean;
   account_photo: string;
+  notification: Array<number>;
 };
 
 export type EditCompanyListPayload = {

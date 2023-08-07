@@ -23,6 +23,7 @@ import {
   ProjectDataPayload,
   ProjectType,
   removeResponsibleType,
+  SingleProjectDataType,
   SubTaskDataPayload,
   SubTaskTypeTable,
   TaskDataPayload,
@@ -69,6 +70,7 @@ type PostReducerState = {
   allNotCreatedMilestoneDependencies: ArrayMilestoneDependencies | [];
   allNotCreatedTaskDependencies: ArrayTaskDependencies | [];
   allNotCreatedSubTaskDependencies: ArraySubtaskDependencies | [];
+  singleProjectData: SingleProjectDataType | null;
 };
 
 const initialState: PostReducerState = {
@@ -108,7 +110,8 @@ const initialState: PostReducerState = {
   subTaskDependencies: [],
   allNotCreatedMilestoneDependencies: [],
   allNotCreatedTaskDependencies: [],
-  allNotCreatedSubTaskDependencies: []
+  allNotCreatedSubTaskDependencies: [],
+  singleProjectData: null
 };
 
 const postsSlice = createSlice({
@@ -254,6 +257,10 @@ const postsSlice = createSlice({
     getAllNotCreatedSubTaskDependencies: (state, action: PayloadAction<DependeciesSubtask>) => {},
     setAllNotCreatedSubTaskDependencies: (state, action: PayloadAction<ArraySubtaskDependencies>) => {
       state.allNotCreatedSubTaskDependencies = action.payload;
+    },
+    getSingleProjectData: (state, action: PayloadAction<number>) => {},
+    setSingleProjectData: (state, action: PayloadAction<SingleProjectDataType>) => {
+      state.singleProjectData = action.payload;
     }
   }
 });
@@ -324,7 +331,9 @@ export const {
   getAllNotCreatedTaskDependencies,
   setAllNotCreatedTaskDependencies,
   getAllNotCreatedSubTaskDependencies,
-  setAllNotCreatedSubTaskDependencies
+  setAllNotCreatedSubTaskDependencies,
+  getSingleProjectData,
+  setSingleProjectData
 } = postsSlice.actions;
 const postsReducer = postsSlice.reducer;
 export default postsReducer;

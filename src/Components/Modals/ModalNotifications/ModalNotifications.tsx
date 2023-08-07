@@ -121,8 +121,8 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
               </div>
             </div>
           </div>
-          <div className={styles.categories}>
-            {isHead ? (
+          {isHead ? (
+            <div className={styles.categories}>
               <div className={styles.category}>
                 <div className={styles.checkbox}>
                   <Checkbox isChecked={payments} handleChange={handleChangePayments} label={''} />
@@ -132,8 +132,8 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
                   <div className={styles.description}>{'Some description about this option'}</div>
                 </div>
               </div>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </div>
 
         <div className={styles.containerSettings}>
