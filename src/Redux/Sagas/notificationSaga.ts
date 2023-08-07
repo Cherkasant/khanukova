@@ -15,19 +15,14 @@ import API from '../Utils/api';
 
 import { PatchNotifyOptionsType } from '../Types/notification';
 
+import { ACCESS_TOKEN_KEY } from '../../Components/constants/consts';
+
 import callCheckingAuth from './callCheckingAuth';
 
-export const CONNECT_SOCKET = 'CONNECT_SOCKET';
-export const DISCONNECT_SOCKET = 'DISCONNECT_SOCKET';
-export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+export const socket = new WebSocket('wss://apipuzzle-be.herokuapp.com/ws/');
+export const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY) || sessionStorage.getItem(ACCESS_TOKEN_KEY) || '';
 
-export const connectSocket = () => ({
-  type: CONNECT_SOCKET
-});
-
-function* startListeningNotificationWorker() {
-  yield put(connectSocket());
-}
+function* startListeningNotificationWorker() {}
 
 function* getAllNotificationsWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getAllNotifications);

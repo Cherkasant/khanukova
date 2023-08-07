@@ -7,13 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 import { AddNewUser } from '../../Assets/ProjectPage/AddNewUser';
-import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon';
 import { EditTitleIcon } from '../../Assets/icons/EditTitleIcon';
 import { FilterIcon } from '../../Assets/icons/FilterIcon';
 import ClientsRequestCard from '../../Components/ClientsRequestCard';
 import { requestInProgressArray, requestOpenedArray } from '../../Components/ClientsRequestCard/constantsRequest';
 import Documents from '../../Components/Documents';
-import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 import Input from '../../Components/Input';
 import ModalEcase from '../../Components/Modals/ModalEcase';
 import ModalMilestone from '../../Components/Modals/ModalMilestone';
@@ -24,13 +22,14 @@ import ModalRequest from '../../Components/Modals/ModalRequest';
 import ModalSubTask from '../../Components/Modals/ModalSubTask';
 import ModalTask from '../../Components/Modals/ModalTask';
 import Resourses from '../../Components/Resourses';
-import Table from '../../Components/Table';
 import Tab from '../../Components/Tabs';
 import { Tabs } from '../../Components/constants/@types';
+import Table from '../../Components/Table';
 import {
   getAllMilestones,
   getAllProjects,
   getSingleProject,
+  getSingleProjectData,
   patchProject,
   setFilterVisible,
   setProjectTitle,
@@ -41,6 +40,10 @@ import postSelector from '../../Redux/Selectors/postSelector';
 import ModalEcaseHead from '../../Components/Modals/ModalEcaseHead';
 
 import Gantt from '../../Components/Gantt/Gantt';
+
+import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon';
+
+import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 
 import styles from './SingleProject.module.css';
 
@@ -63,6 +66,7 @@ const SingleProject = () => {
   };
   const isSaveClicked = useSelector(postSelector.getAllMilestones);
   const singleProject = useSelector(postSelector.getSingleProject);
+  const singleProjectData = useSelector(postSelector.getSingleProjectData);
 
   const dispatch = useDispatch();
 
@@ -84,6 +88,7 @@ const SingleProject = () => {
   useEffect(() => {
     if (id) {
       dispatch(getSingleProject(+id));
+      dispatch(getSingleProjectData(+id));
       dispatch(getAllMilestones(+id));
     }
   }, [id]);
@@ -112,7 +117,7 @@ const SingleProject = () => {
           data: { project_name: title },
           callback: () => {
             if (id) {
-              dispatch(getSingleProject(+id));
+              dispatch(getSingleProjectData(+id));
               dispatch(getAllProjects());
             }
           }
@@ -174,7 +179,7 @@ const SingleProject = () => {
           </div>
         </div>
       ) : null}
-      {singleProject?.milestone_data.length === 0 && activeTab === Tabs.Planning ? (
+      {singleProjectData?.milestone_data.length === 0 && activeTab === Tabs.Planning ? (
         <div className={styles.bottomContainer}>
           <div
             className={classNames(styles.milestoneButton, {
@@ -186,9 +191,10 @@ const SingleProject = () => {
           </div>
         </div>
       ) : null}
-      {isSaveClicked && activeTab === Tabs.Planning && singleProject?.milestone_data.length !== 0 ? <Table /> : null}
+      {isSaveClicked && activeTab === Tabs.Planning && singleProjectData?.milestone_data.length !== 0 ? (
+        <Table />
+      ) : null}
       <FilterProjectScreen />
-
       {activeTab === Tabs.ClientsRequests ? (
         <div className={styles.clientRequestContainer}>
           <div className={styles.openedRequest}>

@@ -1,16 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ArrayOfNotificationType, NotifyOptionsType, PatchNotifyOptionsType } from '../Types/notification';
+import {
+  ArrayOfNotificationType,
+  ArrayOfWebSocket,
+  NotifyOptionsType,
+  PatchNotifyOptionsType,
+  WebSocketType
+} from '../Types/notification';
 
 type NotificationReducerState = {
   notifications: ArrayOfNotificationType;
   notifyOptions: NotifyOptionsType | null;
   isNotificationModalIsOpened: boolean;
+  webSocketNotification: WebSocketType | null;
+  webSocketArray: ArrayOfWebSocket;
+  profileNotification: Array<number>;
 };
 const initialState: NotificationReducerState = {
   notifications: [],
   notifyOptions: null,
-  isNotificationModalIsOpened: false
+  isNotificationModalIsOpened: false,
+  webSocketNotification: null,
+  webSocketArray: [],
+  profileNotification: []
 };
 
 const NotificationSlice = createSlice({
@@ -29,6 +41,17 @@ const NotificationSlice = createSlice({
     patchNotifyOptions: (state, action: PayloadAction<PatchNotifyOptionsType>) => {},
     setNotificationModalVisible: (state, action: PayloadAction<boolean>) => {
       state.isNotificationModalIsOpened = action.payload;
+    },
+    getWebsocket: (state, action: PayloadAction<undefined>) => {},
+    setNotificationFromSocket: (state, action: PayloadAction<WebSocketType>) => {
+      state.webSocketNotification = action.payload;
+      state.webSocketArray.push(state.webSocketNotification);
+    },
+    setProfileNotification: (state, action: PayloadAction<Array<number>>) => {
+      state.profileNotification = action.payload;
+    },
+    clearNotification: (state, action: PayloadAction<undefined>) => {
+      state.webSocketArray.length = 0;
     }
   }
 });
@@ -40,7 +63,11 @@ export const {
   getNotifyOptions,
   setNotifyOptions,
   patchNotifyOptions,
-  setNotificationModalVisible
+  setNotificationModalVisible,
+  getWebsocket,
+  setNotificationFromSocket,
+  setProfileNotification,
+  clearNotification
 } = NotificationSlice.actions;
 const notificationReducer = NotificationSlice.reducer;
 

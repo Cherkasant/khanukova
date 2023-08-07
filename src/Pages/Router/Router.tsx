@@ -24,7 +24,12 @@ import authSelectors from '../../Redux/Selectors/authSelectors';
 import SingleProject from '../SingleProject/SingleProject';
 import Chats from '../Chats';
 import { getPersonalInfoReducer } from '../../Redux/Reducers/profileReducer';
-import { getAllNotifications, startListening } from '../../Redux/Reducers/notificationReducer';
+import {
+  getAllNotifications,
+  setNotificationFromSocket,
+  startListening
+} from '../../Redux/Reducers/notificationReducer';
+import { accessToken, socket } from '../../Redux/Sagas/notificationSaga';
 
 export enum PathNames {
   Home = '/',
@@ -58,6 +63,19 @@ const Router = () => {
       dispatch(getPersonalInfoReducer());
       dispatch(getAllNotifications());
       dispatch(startListening());
+      socket.addEventListener('error', (e) => {
+        console.log(e);
+      });
+      socket.addEventListener('open', () => {
+        socket.send(JSON.stringify({ JWT: accessToken }));
+      });
+      socket.addEventListener('message', (e) => {
+        dispatch(setNotificationFromSocket(JSON.parse(e.data)));
+      });
+    } else {
+      socket.addEventListener('close', () => {
+        console.log('WEBSOCKET CLOSED');
+      });
     }
   }, [isLoggedIn]);
 

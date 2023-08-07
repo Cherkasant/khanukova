@@ -21,7 +21,7 @@ import {
 import { PostMilestoneCommentType } from '../Types/comments';
 import { NotifyOptionsType } from '../Types/notification';
 
-const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' });
+const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com/' });
 
 const registerUser = (data: RegisterUserData) => {
   return API.post('/auth/users/', data);
@@ -378,6 +378,16 @@ const patchNotifyOptions = (token: string, options: NotifyOptionsType) => {
   });
 };
 
+const getSingleProjectData = (token: string, id: number) => {
+  return API.get(
+    `/project-subdiv/project-hierarchy/?project=${id}`,
+    {},
+    {
+      headers: { Authorization: `JWT ${token}` }
+    }
+  );
+};
+
 export default {
   registerUser,
   sendResetEmail,
@@ -445,5 +455,6 @@ export default {
   getAllNotifications,
   getUserInfoWithID,
   getNotifyOptions,
-  patchNotifyOptions
+  patchNotifyOptions,
+  getSingleProjectData
 };

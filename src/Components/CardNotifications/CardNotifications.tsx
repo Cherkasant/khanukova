@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -35,7 +35,7 @@ const CardNotifications: FC<CardNotificationsProps> = ({ card }) => {
               <div className={styles.avatar}>
                 <Avatar />
               </div>
-              <div className={styles.userName}>{card?.editor}</div>
+              <div className={styles.userName}>{card?.editor?.full_name}</div>
             </div>
             <div className={styles.position}>{card?.project}</div>
             <div className={styles.email}>{card?.project}</div>
@@ -62,16 +62,14 @@ const CardNotifications: FC<CardNotificationsProps> = ({ card }) => {
         <div className={styles.containerCard}>
           <div className={styles.info}>
             <div className={styles.sectionInfo}>
-              <div className={styles.avatar}>
-                <Avatar />
-              </div>
-              <div className={styles.userName}>{card?.editor}</div>
+              <img className={styles.avatar} src={card?.editor?.account_photo} alt={''} />
+              <div className={styles.userName}>{card?.editor?.full_name}</div>
             </div>
             <div className={styles.status}>{card?.action}</div>
-            <div className={styles.location}>{card?.project}</div>
+            <div className={styles.location}>{card?.milestone?.milestone_name}</div>
           </div>
 
-          <div className={styles.date}>{card?.date_created}</div>
+          <div className={styles.date}>{card?.receiving_time}</div>
         </div>
       )}
     </div>

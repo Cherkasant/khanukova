@@ -14,7 +14,17 @@ import ModalNotifications from '../../Components/Modals/ModalNotifications';
 
 import notificationSelector from '../../Redux/Selectors/notificationSelector';
 
-import { getAllNotifications, setNotificationModalVisible } from '../../Redux/Reducers/notificationReducer';
+import {
+  clearNotification,
+  getAllNotifications,
+  setNotificationModalVisible
+} from '../../Redux/Reducers/notificationReducer';
+
+import { socket } from '../../Redux/Sagas/notificationSaga';
+
+import { getPersonalInfoReducer } from '../../Redux/Reducers/profileReducer';
+
+import authSelectors from '../../Redux/Selectors/authSelectors';
 
 import styles from './NotificationsPage.module.css';
 
@@ -30,13 +40,15 @@ const NotificationsPage = () => {
   const dispatch = useDispatch();
   const notifications = useSelector(notificationSelector.getAllNotifications);
   const isNotificationModalVisible = useSelector(notificationSelector.getNotficationModalVisible);
+  const isLoggedIn = useSelector(authSelectors.getLoggedIn);
   useEffect(() => {
-    dispatch(getAllNotifications());
-    const socket = new WebSocket('wss://apipuzzle-be.herokuapp.com/ws/');
-    socket.addEventListener('open', () => {
-      socket.send('Hello Server!');
-    });
-  }, [dispatch]);
+    if (isLoggedIn) {
+      dispatch(getAllNotifications());
+      socket.send(JSON.stringify('Hello'));
+      dispatch(clearNotification());
+      dispatch(getPersonalInfoReducer());
+    }
+  }, [isLoggedIn]);
 
   const [activeTab, setActiveTab] = useState(TabsNotifications.All);
 
