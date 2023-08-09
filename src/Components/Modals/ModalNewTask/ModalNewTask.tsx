@@ -18,7 +18,7 @@ import { DownloadIcon } from '../../../Assets/icons/DownloadIcon';
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import {
   getAllNotCreatedTaskDependencies,
-  getSingleProject,
+  getSingleProjectData,
   postTask,
   setTaskModalVisible
 } from '../../../Redux/Reducers/postReducer';
@@ -74,7 +74,7 @@ const ModalNewTask = () => {
         },
         callback: () => {
           if (id) {
-            dispatch(getSingleProject(+id));
+            dispatch(getSingleProjectData(+id));
           }
         }
       })

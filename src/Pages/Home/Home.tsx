@@ -34,6 +34,7 @@ const SORT_LIST = [
   { value: 'Date created', label: 'Date created', icon: <SortIcon /> },
   { value: 'Status', label: 'Status', icon: <SortIcon /> }
 ];
+
 const Home = () => {
   const dispatch = useDispatch();
 

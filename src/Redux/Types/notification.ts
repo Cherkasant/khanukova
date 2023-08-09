@@ -1,12 +1,20 @@
 export type NotificationType = {
   id: number;
-  date_created: string;
+  receiving_time: string;
   action: string;
-  editor: number;
+  editor: editorNotificationType | null;
   project: number;
-  milestone: number | null;
+  milestone: milestoneNotificationType | null;
   task: number | null;
   sub_task: number | null;
+};
+
+export type milestoneNotificationType = {
+  milestone_name: string;
+};
+export type editorNotificationType = {
+  full_name: string;
+  account_photo: string;
 };
 
 export type ArrayOfNotificationType = Array<NotificationType>;
@@ -25,3 +33,14 @@ export type PatchNotifyOptionsType = {
   data: NotifyOptionsType;
   callback: () => void;
 };
+export type WebSocketType = {
+  type: string;
+  payload: PayloadWebSocket;
+};
+export type PayloadWebSocket = {
+  milestone_id: number;
+  editor: string;
+  action: string;
+  project: number;
+};
+export type ArrayOfWebSocket = Array<WebSocketType>;

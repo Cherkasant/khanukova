@@ -36,5 +36,6 @@ export default {
   getAllSubTaskDependencies: (state: RootState) => state.postsReducer.subTaskDependencies,
   getAllNotCreatedMilestoneDependencies: (state: RootState) => state.postsReducer.allNotCreatedMilestoneDependencies,
   getAllNotCreatedTaskDependencies: (state: RootState) => state.postsReducer.allNotCreatedTaskDependencies,
-  getAllNotCreatedSubtaskDependencies: (state: RootState) => state.postsReducer.allNotCreatedSubTaskDependencies
+  getAllNotCreatedSubtaskDependencies: (state: RootState) => state.postsReducer.allNotCreatedSubTaskDependencies,
+  getSingleProjectData: (state: RootState) => state.postsReducer.singleProjectData
 };

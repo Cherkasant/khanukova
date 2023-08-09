@@ -19,6 +19,7 @@ import {
   getHomeScreenProjects,
   getSingleMilestone,
   getSingleProject,
+  getSingleProjectData,
   getSingleSubTask,
   getSingleTask,
   getTaskCard,
@@ -49,6 +50,7 @@ import {
   setProjectTitle,
   setSingleMilestone,
   setSingleProject,
+  setSingleProjectData,
   setSingleSubTask,
   setSingleTask,
   setTaskCard
@@ -371,6 +373,15 @@ function* getAllNotCreatedSubTaskDependenciesWorker(action: PayloadAction<Depend
   }
 }
 
+function* getSingleProjectDataWorker(action: PayloadAction<number>) {
+  const { ok, data, problem } = yield callCheckingAuth(API.getSingleProjectData, action.payload);
+  if (ok && data) {
+    yield put(setSingleProjectData(data[0]));
+  } else {
+    console.warn('Error while getting all subtask dependencies', problem);
+  }
+}
+
 export default function* postSaga() {
   yield all([
     takeLatest(getTaskCard, getTaskCardWorker),
@@ -401,6 +412,7 @@ export default function* postSaga() {
     takeLatest(getAllSubtaskDependencies, getAllSubtaskDependenciesWorker),
     takeLatest(getAllNotCreatedMilestoneDependencies, getAllNotCreatedMilestoneDependenciesWorker),
     takeLatest(getAllNotCreatedTaskDependencies, getAllNotCreatedTaskDependenciesWorker),
-    takeLatest(getAllNotCreatedSubTaskDependencies, getAllNotCreatedSubTaskDependenciesWorker)
+    takeLatest(getAllNotCreatedSubTaskDependencies, getAllNotCreatedSubTaskDependenciesWorker),
+    takeLatest(getSingleProjectData, getSingleProjectDataWorker)
   ]);
 }

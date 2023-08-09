@@ -29,6 +29,7 @@ import {
   getAllMilestoneDependencies,
   getAllResponsible,
   getSingleProject,
+  getSingleProjectData,
   patchMilestone,
   setModalMilestone
 } from '../../../Redux/Reducers/postReducer';
@@ -66,6 +67,7 @@ const ModalMilestone = () => {
   const checkbox = allResponsible.map((el) => {
     return { value: el.id, label: el.nickname };
   });
+
   const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
   const isDevTeam = personalInfoList?.role[0] === Role.DevTeam;
 
@@ -103,7 +105,11 @@ const ModalMilestone = () => {
       setLabel(singleMilestone?.labels);
       setColors(singleMilestone?.color_labels);
       setProgress(progress);
-      setResponsible(singleMilestone?.responsible_data.map((el) => el.nickname));
+      //  setResponsible(
+      //    singleMilestone?.responsible_data.map((el) => {
+      //      return { value: el.id, label: el.nickname };
+      //    })
+      //  );
       setStatus(singleMilestone?.status);
       setPaymentStatus(singleMilestone?.payment_status);
       setLaunchDate(singleMilestone?.start_date);
@@ -122,7 +128,10 @@ const ModalMilestone = () => {
             milestone_name: title,
             description: descriptionValue,
             attachment: null,
-            responsible_data: responsible.label,
+            responsible_data: responsible
+              .toString()
+              .split(',')
+              .map((el: string) => parseInt(el)),
             priority: priority.value,
             start_date: launchDate,
             deadline: deadline,
@@ -143,7 +152,7 @@ const ModalMilestone = () => {
           },
           callback: () => {
             if (id) {
-              dispatch(getSingleProject(+id));
+              dispatch(getSingleProjectData(+id));
               dispatch(setModalMilestone(false));
             }
           }
@@ -151,6 +160,7 @@ const ModalMilestone = () => {
       );
     }
   };
+
   const [attachment, setAttachment] = useState('');
   const [launchDate, setLaunchDate] = useState<any>('');
   const [deadline, setDeadline] = useState<any>('');
@@ -205,7 +215,7 @@ const ModalMilestone = () => {
     }
     setComment('');
   };
-  const [responsible, setResponsible] = useState<any>(null);
+  const [responsible, setResponsible] = useState<any>([]);
   const [priority, setPriority] = useState<any>(null);
   const [status, setStatus] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<any>(null);
@@ -253,7 +263,7 @@ const ModalMilestone = () => {
           id: singleMilestone?.id,
           callback: () => {
             if (id) {
-              dispatch(getSingleProject(+id));
+              dispatch(getSingleProjectData(+id));
               dispatch(setModalMilestone(false));
             }
           }
@@ -324,7 +334,7 @@ const ModalMilestone = () => {
                 disabled={isDevTeam || submit}
               />
               <PuzzleButton
-                btnTitle={'Submit new'}
+                btnTitle={!submit ? 'Submit new' : 'Edit'}
                 btnType={PuzzleButtonTypes.TextButton}
                 btnClassName={styles.submitBtn}
                 disabled={!descriptionValue}
@@ -407,15 +417,23 @@ const ModalMilestone = () => {
                   multiple={true}
                   onChange={setResponsible}
                   value={responsible}
-                  defaultValue={responsible}
+                  defaultValue={[]}
                   onDropdownVisibleChange={(open: boolean) =>
                     open === false
                       ? dispatch(
                           addResponsible({
                             id: singleMilestone?.id,
-                            data: { responsible_add: [] },
+                            data: {
+                              responsible_add: responsible
+                                .toString()
+                                .split(',')
+                                .map((el: string) => parseInt(el))
+                            },
                             callback: () => {
-                              console.log('check');
+                              if (id) {
+                                dispatch(getSingleProject(+id));
+                                dispatch(setModalMilestone(false));
+                              }
                             }
                           })
                         )

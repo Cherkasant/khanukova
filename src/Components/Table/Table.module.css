@@ -98,23 +98,22 @@
 }
 
 .responsibleCell {
-  width: 30px;
+  border: none;
+  width: 36px;
   height: 36px;
-  border-radius: 50%;
   background: #9bacc9;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  font-family: 'Poppins';
-  font-style: normal;
+  box-shadow: 0 0 30px 0 #1258ca0d;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 140%;
+  letter-spacing: 0;
 }
 
 .responsibleCell:hover {
   background: #0e4298;
+  cursor: pointer;
 }
 
 .dependence {
