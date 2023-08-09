@@ -22,18 +22,18 @@ export interface IEvent {
 const initialEvents: Array<IEvent> = [
   {
     title: 'An important event',
-    start: new Date(2023, 6, 24, 10, 0),
-    end: new Date(2023, 6, 24, 12, 0)
+    start: new Date(2023, 7, 9, 10, 0),
+    end: new Date(2023, 7, 9, 12, 0)
   },
   {
     title: 'Another event',
-    start: new Date(2023, 6, 24, 14, 0),
-    end: new Date(2023, 6, 24, 15, 0)
+    start: new Date(2023, 7, 9, 14, 0),
+    end: new Date(2023, 7, 9, 15, 0)
   },
   {
     title: 'Another event',
-    start: new Date(2023, 6, 24, 16, 0),
-    end: new Date(2023, 6, 24, 17, 0)
+    start: new Date(2023, 7, 9, 16, 0),
+    end: new Date(2023, 7, 9, 17, 0)
   }
 ];
 
@@ -41,6 +41,7 @@ const Events = () => {
   const [activeView, setActiveView] = useState<View>('month');
   const [events, setEvents] = useState<Array<IEvent>>(initialEvents);
   const [selectedSlot, setSelectedSlot] = useState<SlotInfo | null>(null);
+  const [isModalClosed, setIsModalClosed] = useState(true);
 
   useEffect(() => {
     moment.updateLocale('en', { week: { dow: 0 } });
@@ -52,10 +53,12 @@ const Events = () => {
 
   const handleSlotSelect = (slotInfo: SlotInfo) => {
     setSelectedSlot(slotInfo);
+    setIsModalClosed(false);
   };
 
   const handleModalClose = () => {
-    setSelectedSlot(null);
+    setIsModalClosed(true);
+    setTimeout(() => setSelectedSlot(null), 300);
   };
 
   const addEvent = (title: string) => {
@@ -73,7 +76,14 @@ const Events = () => {
 
   return (
     <>
-      {selectedSlot && <ModalCalendar selectedSlot={selectedSlot} onClose={handleModalClose} onAddEvent={addEvent} />}
+      {selectedSlot && (
+        <ModalCalendar
+          selectedSlot={selectedSlot}
+          onClose={handleModalClose}
+          onAddEvent={addEvent}
+          isClosed={isModalClosed}
+        />
+      )}
       <div className={styles.container}>
         <EventSearch events={events} />
         <Calendar
