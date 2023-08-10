@@ -56,8 +56,6 @@ const UserMenu = () => {
     setOpened(!isOpened);
   };
 
-  const connectionSocketHandler = () => {};
-
   const navButtons = [
     {
       name: 'My profile',

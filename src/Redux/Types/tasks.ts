@@ -137,7 +137,7 @@ export type TaskTypeTable = {
   task_name: string;
   description: string;
   attachment: string | null;
-  responsible: Array<string> | [];
+  responsible_data: AllResponsibleType | [];
   priority: string;
   start_date: string;
   deadline: string;
@@ -159,7 +159,7 @@ export type SubTaskTypeTable = {
   sub_task_name: string;
   description: string;
   attachment: string | null;
-  responsible: Array<string> | [];
+  responsible_data: AllResponsibleType | [];
   priority: string;
   start_date: string;
   deadline: string;
@@ -184,8 +184,14 @@ export type ProjectType = {
   company_po: number;
   user: Array<number> | [];
   creator: number;
+};
+export type SingleProjectDataType = {
+  id: number;
+  project_name: string;
   milestone_data: Array<MilestoneType> | [];
 };
+export type ArrayOfSingleProjectDataType = Array<SingleProjectDataType>;
+
 export type ArrayOfProjectType = Array<ProjectType>;
 
 export type ProjectData = {

@@ -1,21 +1,22 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import classNames from 'classnames';
 
-import { CardNotificationsType } from '../constants/@types';
 import { Avatar } from '../../Assets/Notification/Avatar';
 
 import PuzzleButton, { PuzzleButtonTypes } from '../PuzzleButton';
 
+import { NotificationType } from '../../Redux/Types/notification';
+
 import styles from './CardNotifications.module.css';
 
 type CardNotificationsProps = {
-  card: CardNotificationsType;
+  card: NotificationType;
   onClick?: () => void;
   className?: string;
 };
 const CardNotifications: FC<CardNotificationsProps> = ({ card }) => {
-  const isRequest = card.isRequest;
+  const isRequest = false;
   const [isReading, setIsReading] = useState(false);
 
   const onNotificationClick = () => {
@@ -34,11 +35,11 @@ const CardNotifications: FC<CardNotificationsProps> = ({ card }) => {
               <div className={styles.avatar}>
                 <Avatar />
               </div>
-              <div className={styles.userName}>{card?.userName}</div>
+              <div className={styles.userName}>{card?.editor?.full_name}</div>
             </div>
-            <div className={styles.position}>{card?.position}</div>
-            <div className={styles.email}>{card?.email}</div>
-            <div className={styles.projectName}>{card?.projectName}</div>
+            <div className={styles.position}>{card?.project}</div>
+            <div className={styles.email}>{card?.project}</div>
+            <div className={styles.projectName}>{card?.project}</div>
           </div>
 
           <div className={styles.containerButtons}>
@@ -61,16 +62,14 @@ const CardNotifications: FC<CardNotificationsProps> = ({ card }) => {
         <div className={styles.containerCard}>
           <div className={styles.info}>
             <div className={styles.sectionInfo}>
-              <div className={styles.avatar}>
-                <Avatar />
-              </div>
-              <div className={styles.userName}>{card?.userName}</div>
+              <img className={styles.avatar} src={card?.editor?.account_photo} alt={''} />
+              <div className={styles.userName}>{card?.editor?.full_name}</div>
             </div>
-            <div className={styles.status}>{card?.status}</div>
-            <div className={styles.location}>{card?.location}</div>
+            <div className={styles.status}>{card?.action}</div>
+            <div className={styles.location}>{card?.milestone?.milestone_name}</div>
           </div>
 
-          <div className={styles.date}>{card?.date}</div>
+          <div className={styles.date}>{card?.receiving_time}</div>
         </div>
       )}
     </div>

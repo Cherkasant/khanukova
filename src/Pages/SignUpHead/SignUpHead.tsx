@@ -24,7 +24,6 @@ import { validationRules } from '../validationRules';
 import statusSelectors from '../../Redux/Selectors/statusSelectors';
 import Loader from '../../Components/Loader';
 
-
 import 'intl-tel-input/build/css/intlTelInput.css';
 import styles from './SignUpHead.module.css';
 
@@ -116,7 +115,6 @@ const SignUpHead = () => {
   };
 
   const onSubmit: SubmitHandler<SignUpType> = (userInfo) => {
-
     dispatch(
       registerUser({
         data: {
@@ -131,12 +129,12 @@ const SignUpHead = () => {
         callback: () => {
           switch (checkRole) {
             case Role.PjO:
+            case Role.PdO:
               navigate(PathNames.SignUpPoInfo);
               break;
             case Role.Designer:
             case Role.QA:
             case Role.Programmer:
-            case Role.PdO:
               navigate(PathNames.CheckYourEmail);
               break;
             default:

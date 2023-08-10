@@ -12,7 +12,6 @@ import { requestInProgressArray, requestOpenedArray } from '../../Components/Cli
 import Documents from '../../Components/Documents';
 import Events from '../../Components/Events';
 import ExternalSources from '../../Components/ExternalSources';
-import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 import Input from '../../Components/Input';
 import ModalEcase from '../../Components/Modals/ModalEcase';
 import ModalNewMilestone from '../../Components/Modals/ModalNewMilestone';
@@ -23,7 +22,10 @@ import Table from '../../Components/Table';
 import Tab from '../../Components/Tabs';
 import { Tabs } from '../../Components/constants/@types';
 import { postProject, setFilterVisible, setSelectedModalVisible } from '../../Redux/Reducers/postReducer';
+
 import postSelector from '../../Redux/Selectors/postSelector';
+
+import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
 
 import styles from './ProjectScreen.module.css';
 
