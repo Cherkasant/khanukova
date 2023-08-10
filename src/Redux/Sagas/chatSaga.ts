@@ -54,7 +54,6 @@ function* getChatWorker(action: PayloadAction<number>) {
 
 function* getMessagesChatWorker(action: PayloadAction<AllMessagesChatPayload>) {
   const { data: dataMessages, isOwervrite } = action.payload;
-  console.log(dataMessages);
   const { ok, data } = yield callCheckingAuth(API_CHAT.getMessagesChat, dataMessages);
   if (ok && data) {
     yield put(setMessagesChat({ data: data.pagination, isOwervrite }));

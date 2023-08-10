@@ -47,9 +47,11 @@ const chatSlice = createSlice({
     },
     getMessagesChat: (state, actions: PayloadAction<AllMessagesChatPayload>) => {},
     setMessagesChat: (state, actions) => {
-      const { isOwervrite, data } = actions.payload;
+      const { isOwervrite, data, isMessage } = actions.payload;
       if (isOwervrite) {
         state.messagesChat = [...state.messagesChat, ...data];
+      } else if (isMessage) {
+        state.messagesChat = [...data, ...state.messagesChat];
       } else {
         state.messagesChat = data;
       }

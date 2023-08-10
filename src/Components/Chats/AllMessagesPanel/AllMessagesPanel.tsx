@@ -54,9 +54,9 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
       const data = JSON.parse(event.data);
       const text = data.text;
       const userId = Number(data.user_id);
-      // dispatch(setMessagesChat([{ text, user_id: userId }]));
+      dispatch(setMessagesChat({ data: [{ text, user_id: userId }], isOwervrite: false, isMessage: true }));
     });
-  }, [cursor]);
+  }, [cursor, chatId]);
 
   useEffect(() => {
     if (!isOwervriteMessages) {

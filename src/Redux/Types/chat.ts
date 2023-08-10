@@ -31,6 +31,7 @@ export type AllMessagesChat = {
 export type AllMessagesChatPayload = {
   data: AllMessagesChat;
   isOwervrite: boolean;
+  isMessage?: boolean;
 };
 
 export type AllMessagesData = {
