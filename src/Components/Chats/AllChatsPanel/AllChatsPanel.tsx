@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 
 import chatSelectors from '../../../Redux/Selectors/chatSelectors';
 import profileSelectors from '../../../Redux/Selectors/profileSelectors';
-import { Role } from '../../../Components/constants/@types';
-import UserChat from '../../../Components/UserChat';
+import { Role } from '../../constants/@types';
+import UserChat from '../../UserChat';
 import { getAllChat } from '../../../Redux/Reducers/chatReducer';
 
 import styles from './AllChatsPanel.module.css';
@@ -19,6 +19,7 @@ type AllChatsPanelType = {
 const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandler }) => {
   const dispatch = useDispatch();
   const allChats = useSelector(chatSelectors.getAllChats);
+  const qauntityAllChat = useSelector(chatSelectors.getQauntityAllChat);
   const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
   const [page, setPage] = useState(1);
 
@@ -26,16 +27,12 @@ const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandl
     setPage(page + 1);
   };
 
-  // const hasMore = () => {
-  //   if (valueCategories === 2 || cardsArray.length === 0 || searchValue) {
-  //     return false;
-  //   } else {
-  //     return cardsArray.length < totalCaunt;
-  //   }
-  // };
+  const hasMore = () => {
+    return allChats.length < qauntityAllChat;
+  };
 
   useEffect(() => {
-    dispatch(getAllChat({ page_size: 10, page_num: 1 }));
+    dispatch(getAllChat({ page_size: 10, page_num: page }));
   }, [page]);
   return (
     <div className={styles.panelChatsInner}>
@@ -46,15 +43,14 @@ const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandl
         })}>
         <InfiniteScroll
           next={onScroll}
-          hasMore={true}
-          loader={<div>Loading...</div>}
+          hasMore={hasMore()}
+          loader={''}
           dataLength={allChats.length}
           scrollableTarget="parentScrollDiv">
-          pul
-          {allChats.map((value) => (
+          {allChats.map((value, index) => (
             <UserChat
+              key={index}
               onClick={() => clickUserChatHandler(value.id)}
-              key={value.id}
               name={value.title}
               team={''}
               className={classNames(styles.wrapUserChat, {

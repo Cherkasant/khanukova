@@ -3,7 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { toast } from 'react-toastify';
 
-import { AllChat, AllChatFilter, AllMessagesChat, CreateChat } from '../Types/chat';
+import { AllChat, AllChatFilter, AllMessagesChat, AllMessagesChatPayload, CreateChat } from '../Types/chat';
 
 import API_CHAT from '../Utils/apiChat';
 import {
@@ -16,7 +16,9 @@ import {
   setAllChat,
   setAllChatFilter,
   setChat,
-  setMessagesChat
+  setMessagesChat,
+  setQauntityAllChat,
+  setQauntityAllMessages
 } from '../Reducers/chatReducer';
 
 import callCheckingAuth from './callCheckingAuth';
@@ -25,8 +27,8 @@ function* getAllChatWorker(action: PayloadAction<AllChat>) {
   const { page_size, page_num } = action.payload;
   const { ok, data } = yield callCheckingAuth(API_CHAT.getAllChat, page_size, page_num);
   if (ok && data) {
-    yield put(setAllChat(data));
-    console.log(data);
+    yield put(setAllChat(data.info_all_chats));
+    yield put(setQauntityAllChat(data.count_all_chats));
   } else {
     console.log(data);
   }
@@ -50,10 +52,13 @@ function* getChatWorker(action: PayloadAction<number>) {
   }
 }
 
-function* getMessagesChatWorker(action: PayloadAction<AllMessagesChat>) {
-  const { ok, data } = yield callCheckingAuth(API_CHAT.getMessagesChat, action.payload);
+function* getMessagesChatWorker(action: PayloadAction<AllMessagesChatPayload>) {
+  const { data: dataMessages, isOwervrite } = action.payload;
+  console.log(dataMessages);
+  const { ok, data } = yield callCheckingAuth(API_CHAT.getMessagesChat, dataMessages);
   if (ok && data) {
-    yield put(setMessagesChat(data));
+    yield put(setMessagesChat({ data: data.pagination, isOwervrite }));
+    yield put(setQauntityAllMessages(data.all_message));
   } else {
     console.log(data);
   }

@@ -1,21 +1,32 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { AllChat, AllChatData, AllChatFilter, AllMessagesChat, AllMessagesData, CreateChat } from '../Types/chat';
+import {
+  AllChat,
+  AllChatData,
+  AllChatFilter,
+  AllMessagesChatPayload,
+  AllMessagesData,
+  CreateChat
+} from '../Types/chat';
 
 type initialStateType = {
   allChats: AllChatData[];
   chat: AllChatData | undefined;
   messagesChat: AllMessagesData[];
+  messagesChatRender: AllMessagesData[];
   allChatsFilter: AllChatData[];
-  isChangeChat: boolean;
+  qauntityAllChat: number;
+  qauntityAllMessages: number;
 };
 
 const initialState: initialStateType = {
   allChats: [],
   chat: undefined,
   messagesChat: [],
+  messagesChatRender: [],
   allChatsFilter: [],
-  isChangeChat: false
+  qauntityAllChat: 0,
+  qauntityAllMessages: 0
 };
 
 const chatSlice = createSlice({
@@ -24,7 +35,7 @@ const chatSlice = createSlice({
   reducers: {
     getAllChat: (state, actions: PayloadAction<AllChat>) => {},
     setAllChat: (state, actions) => {
-      state.allChats = actions.payload;
+      state.allChats = [...state.allChats, ...actions.payload];
     },
     getChat: (state, actions: PayloadAction<number>) => {},
     setChat: (state, actions) => {
@@ -34,21 +45,22 @@ const chatSlice = createSlice({
     setAllChatFilter: (state, actions) => {
       state.allChatsFilter = actions.payload;
     },
-    getMessagesChat: (state, actions: PayloadAction<AllMessagesChat>) => {},
+    getMessagesChat: (state, actions: PayloadAction<AllMessagesChatPayload>) => {},
     setMessagesChat: (state, actions) => {
-      if (state.isChangeChat) {
-        console.log('true');
-        state.messagesChat = actions.payload;
-        state.isChangeChat = false;
+      const { isOwervrite, data } = actions.payload;
+      if (isOwervrite) {
+        state.messagesChat = [...state.messagesChat, ...data];
       } else {
-        console.log('false');
-        state.messagesChat = [...state.messagesChat, actions.payload];
+        state.messagesChat = data;
       }
     },
     createChat: (state, actions: PayloadAction<CreateChat>) => {},
     addNewUserChat: (state, actions: PayloadAction<{ chat_id: number; user_id: number }>) => {},
-    setIsChangeChat: (state, actions) => {
-      state.isChangeChat = actions.payload;
+    setQauntityAllChat: (state, actions) => {
+      state.qauntityAllChat = actions.payload;
+    },
+    setQauntityAllMessages: (state, actions) => {
+      state.qauntityAllMessages = actions.payload;
     }
   }
 });
@@ -64,7 +76,8 @@ export const {
   getAllChatFilter,
   setAllChatFilter,
   addNewUserChat,
-  setIsChangeChat
+  setQauntityAllChat,
+  setQauntityAllMessages
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

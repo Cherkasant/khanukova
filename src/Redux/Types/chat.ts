@@ -25,7 +25,12 @@ export type CreateChat = {
 export type AllMessagesChat = {
   id: number;
   page_size: number;
-  page_num: number;
+  cursor: number;
+};
+
+export type AllMessagesChatPayload = {
+  data: AllMessagesChat;
+  isOwervrite: boolean;
 };
 
 export type AllMessagesData = {

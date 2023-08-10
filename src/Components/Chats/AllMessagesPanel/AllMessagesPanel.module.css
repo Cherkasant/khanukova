@@ -1,0 +1,23 @@
+.chatsMain {
+  display: flex;
+  flex-direction: column-reverse;
+  background-color: #ffffff;
+  height: 100vh;
+  padding: 40px 11px;
+  overflow: auto;
+}
+
+.message {
+  align-self: flex-start;
+  padding: 15px;
+  background-color: #f4f8fe;
+  border-radius: 10px;
+  max-width: 406px;
+  margin-bottom: 20px;
+  word-break: break-all;
+}
+
+.messageMe {
+  background-color: #bcd4f9;
+  align-self: flex-end;
+}

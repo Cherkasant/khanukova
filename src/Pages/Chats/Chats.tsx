@@ -10,26 +10,23 @@ import UserChat from '../../Components/UserChat/UserChat';
 import Quote from '../../Assets/Chat/Quote';
 import More from '../../Assets/Chat/More';
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
-import authSelectors from '../../Redux/Selectors/authSelectors';
 import { Role } from '../../Components/constants/@types';
-import { ACCESS_TOKEN_KEY } from '../../Components/constants/consts';
 import {
   addNewUserChat,
   createChat,
-  getAllChat,
   getAllChatFilter,
   getChat,
-  getMessagesChat,
-  setIsChangeChat,
-  setMessagesChat
+  getMessagesChat
 } from '../../Redux/Reducers/chatReducer';
 import chatSelectors from '../../Redux/Selectors/chatSelectors';
 import FilterChat from '../../Components/Chats/FilterChat';
 
-import styles from './Chats.module.css';
-import AllChatsPanel from './AllChatsPanel';
+import AllChatsPanel from '../../Components/Chats/AllChatsPanel';
+import AllMessagesPanel from '../../Components/Chats/AllMessagesPanel';
 
-let socket: WebSocket;
+import styles from './Chats.module.css';
+
+export let socket: WebSocket;
 
 const conectSoket = (id: number) => {
   socket = new WebSocket(`wss://agile-dreamers-chat-be.herokuapp.com/websocket/ws/${id}`);
@@ -37,20 +34,17 @@ const conectSoket = (id: number) => {
 
 const Chats = () => {
   const dispatch = useDispatch();
+  const [isOwervriteMessages, setIsOwervriteMessages] = useState(false);
   const [chatId, setChatId] = useState(0);
   const [messagesValue, setMessages] = useState('');
   const [inputSearch, setInputSearch] = useState('');
   const [industry, setIndustry] = useState('');
   const [language, setLanguage] = useState('');
   const [company, setCompany] = useState('');
-  const refMessages = useRef<HTMLDivElement>(null);
+  const [cursor, setCursor] = useState(1);
 
   const chat = useSelector(chatSelectors.getChats);
-
-  const messages = useSelector(chatSelectors.getMessages);
   const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
-  const userId = useSelector(authSelectors.getUserId);
-  const token = localStorage.getItem(ACCESS_TOKEN_KEY) || sessionStorage.getItem(ACCESS_TOKEN_KEY) || '';
 
   const onChange = (value: string) => {
     setInputSearch(value);
@@ -67,7 +61,7 @@ const Chats = () => {
   const createChatHandler = () => {
     dispatch(
       createChat({
-        title: 'test chat 10'
+        title: '40'
       })
     );
   };
@@ -82,9 +76,11 @@ const Chats = () => {
   };
 
   const clickUserChatHandler = (id: number) => {
-    dispatch(setIsChangeChat(true));
+    dispatch(getMessagesChat({ data: { id, page_size: 30, cursor: 1 }, isOwervrite: false }));
     dispatch(getChat(id));
     setChatId(id);
+    setIsOwervriteMessages(false);
+    setCursor(1);
   };
 
   const onSubmitEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -94,29 +90,10 @@ const Chats = () => {
   };
 
   useEffect(() => {
-    dispatch(getMessagesChat({ id: chatId, page_size: 1000, page_num: 1 }));
-    conectSoket(chatId);
-    socket.onopen = () => socket.send(token);
-  }, [chatId]);
-
-  useEffect(() => {
     if (personalInfoList?.role[0] === Role.PO) {
       dispatch(getAllChatFilter({ clients_industry: industry, software_stack: language, industry_choice: company }));
     }
   }, [industry, language, company]);
-
-  useEffect(() => {
-    socket.addEventListener('message', (event) => {
-      const data = JSON.parse(event.data);
-      const text = data.text;
-      const userId = Number(data.user_id);
-      dispatch(setMessagesChat({ text, user_id: userId }));
-    });
-  }, [chatId]);
-
-  useEffect(() => {
-    refMessages.current?.scrollTo(0, 99999);
-  }, [messages, chatId]);
 
   return (
     <div className={styles.wrapChats}>
@@ -171,17 +148,14 @@ const Chats = () => {
             <More className={styles.more} />
           </div>
         </div>
-        <div ref={refMessages} className={classNames(styles.chatsMain)}>
-          {messages.map((value, index) => (
-            <div
-              key={index}
-              className={classNames(styles.message, {
-                [styles.messageMe]: userId === value.user_id
-              })}>
-              {value.text}
-            </div>
-          ))}
-        </div>
+        <AllMessagesPanel
+          chatId={chatId}
+          conectSoket={conectSoket}
+          isOwervriteMessages={isOwervriteMessages}
+          setIsOwervriteMessages={setIsOwervriteMessages}
+          cursor={cursor}
+          setCursor={setCursor}
+        />
         <div className={styles.chatsFooter} onKeyUp={(e) => onSubmitEnter(e)}>
           <InputChat disabled={!chatId} setMessages={setMessages} messagesValue={messagesValue} />
           <PuzzleButton

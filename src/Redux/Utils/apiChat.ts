@@ -48,10 +48,10 @@ const createChat = (token: string, data: CreateChat) => {
 };
 
 const getMessagesChat = (token: string, data: AllMessagesChat) => {
-  const { id, page_size, page_num } = data;
+  const { id, page_size, cursor } = data;
   return API.get(
     `/message/message-show/${id}`,
-    { page_size, page_num },
+    { page_size, cursor },
     {
       headers: {
         Authorization: `bearer ${token}`
