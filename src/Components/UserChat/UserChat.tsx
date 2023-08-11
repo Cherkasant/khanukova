@@ -16,7 +16,7 @@ const UserChat: React.FC<UserChatType> = ({ className, name, team, onClick }) =>
     <div onClick={onClick} className={classNames(styles.wrapUserChat, className)}>
       <AvatarIcon />
       <div className={styles.inner}>
-        <div className={classNames(styles.user, className)}>{name}</div>
+        <div className={classNames(styles.user)}>{name}</div>
         <div className={styles.team}>{team}</div>
       </div>
     </div>

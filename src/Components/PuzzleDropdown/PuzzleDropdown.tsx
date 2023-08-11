@@ -11,18 +11,19 @@ export type PuzzleDropdownProps = PropsWithChildren<ReactDropdownProps> & {
 };
 
 const PuzzleDropdown: FC<PuzzleDropdownProps> = ({ options, error, ...rest }: PuzzleDropdownProps) => {
+  const { placeholderClassName, controlClassName, className, menuClassName } = rest;
   return (
     <div className={styles.container}>
       <Dropdown
         options={options}
         {...rest}
         className={styles.dropdownContainer}
-        controlClassName={classNames(styles.dropdownControl, { [styles.inputError]: error })}
-        placeholderClassName={styles.dropdownPlaceholder}
+        controlClassName={classNames(styles.dropdownControl, controlClassName, { [styles.inputError]: error })}
+        placeholderClassName={classNames(styles.dropdownPlaceholder, placeholderClassName)}
         arrowClassName={styles.dropdownArrow}
-        arrowClosed={<span className={styles.arrowClosed} />}
-        arrowOpen={<span className={styles.arrowOpen} />}
-        menuClassName={styles.dropdownMenu}
+        arrowClosed={<span className={classNames(styles.arrowClosed, className)} />}
+        arrowOpen={<span className={classNames(styles.arrowOpen, className)} />}
+        menuClassName={classNames(styles.dropdownMenu, menuClassName)}
       />
       <div className={styles.error}>{error}</div>
     </div>

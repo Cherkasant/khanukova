@@ -1,0 +1,33 @@
+.panelChatsInner {
+  padding: 0 13px 5px 17px;
+}
+
+.panelChatsUsers {
+  width: 100%;
+  height: calc(100vh - 275px);
+  background-color: #ffff;
+  border-radius: 20px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.panelChatsUsers::-webkit-scrollbar {
+  display: none;
+}
+
+.panelChatsUsersNoHead {
+  height: calc(100vh - 210px);
+}
+
+.active {
+  background-color: #1258ca;
+  pointer-events: none;
+  &:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+}
+
+.wrapUserChat:hover .activeTitle {
+  color: #ffff;
+}

@@ -127,9 +127,12 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
     yield put(setLoggedIn(true));
     callback();
     yield put(setSignInStatusUser('fullfilled'));
-  } else {
+  } else if (data) {
     yield put(setSignInStatusUser('regected'));
     data.detail ? toast.error(data.detail) : toast.error('Error while sign in user');
+  } else {
+    yield put(setSignInStatusUser('regected'));
+    toast.error('Error while sign in user');
   }
 }
 
@@ -145,6 +148,7 @@ function* getUserNameWorker() {
   const { ok, data, problem } = yield callCheckingAuth(API.getUserName);
   if (ok && data) {
     yield put(setUserName(data.full_name));
+    yield put(setIdUser(data.id));
   } else {
     console.warn('Error while fetching username: ', problem);
   }

@@ -9,6 +9,7 @@ import resoursesReducer from './Reducers/ResoursesReducer';
 import calendarReducer from './Reducers/calendarReducer';
 import commentReducer from './Reducers/commentReducer';
 import statusApi from './Reducers/statusApi';
+import chatReducer from './Reducers/chatReducer';
 import notificationReducer from './Reducers/notificationReducer';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -22,6 +23,7 @@ export const store = configureStore({
     calendarReducer,
     commentReducer,
     statusApi,
+    chatReducer,
     notificationReducer
   },
   middleware: [sagaMiddleware]

@@ -56,10 +56,6 @@ const UserMenu = () => {
     setOpened(!isOpened);
   };
 
-  const connectionSocketHandler = () => {
-    //   io('ws://agile-dreamers-chat-be.herokuapp.com/:5000/websocket/ws/1');
-  };
-
   const navButtons = [
     {
       name: 'My profile',
