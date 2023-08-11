@@ -89,15 +89,15 @@ const FilterProjectScreen = () => {
                 <Checkbox isChecked={false} handleChange={() => {}} label={label} key={label} />
               ))}
             </div>
+            <RangePicker
+              format="DD.MM.YYYY"
+              suffixIcon={<CalendarIcon />}
+              separator={'-'}
+              key="7"
+              className={styles.rangePicker}
+            />
           </Panel>
         </Collapse>
-        <RangePicker
-          format="DD.MM.YYYY"
-          suffixIcon={<CalendarIcon />}
-          separator={'-'}
-          key="7"
-          className={styles.rangePicker}
-        />
       </>
     </FiltersPanel>
   );
