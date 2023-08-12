@@ -3,7 +3,14 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { toast } from 'react-toastify';
 
-import { AllChat, AllChatFilter, AllMessagesChat, AllMessagesChatPayload, CreateChat } from '../Types/chat';
+import {
+  AllChat,
+  AllChatFilter,
+  AllChatPayload,
+  AllMessagesChat,
+  AllMessagesChatPayload,
+  CreateChat
+} from '../Types/chat';
 
 import API_CHAT from '../Utils/apiChat';
 import {
@@ -23,11 +30,11 @@ import {
 
 import callCheckingAuth from './callCheckingAuth';
 
-function* getAllChatWorker(action: PayloadAction<AllChat>) {
-  const { page_size, page_num } = action.payload;
-  const { ok, data } = yield callCheckingAuth(API_CHAT.getAllChat, page_size, page_num);
+function* getAllChatWorker(action: PayloadAction<AllChatPayload>) {
+  const { data: dataChat, isOwervrite } = action.payload;
+  const { ok, data } = yield callCheckingAuth(API_CHAT.getAllChat, dataChat);
   if (ok && data) {
-    yield put(setAllChat(data.info_all_chats));
+    yield put(setAllChat({ data: data.info_all_chats, isOwervrite }));
     yield put(setQauntityAllChat(data.count_all_chats));
   } else {
     console.log(data);

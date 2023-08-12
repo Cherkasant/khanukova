@@ -1,9 +1,10 @@
 import { create } from 'apisauce';
 
-import { AllChatFilter, AllMessagesChat, CreateChat } from '../Types/chat';
+import { AllChat, AllChatFilter, AllMessagesChat, CreateChat } from '../Types/chat';
 const API = create({ baseURL: 'https://agile-dreamers-chat-be.herokuapp.com' });
 
-const getAllChat = (token: string, page_size: number, page_num: number) => {
+const getAllChat = (token: string, data: AllChat) => {
+  const { page_size, page_num } = data;
   return API.get(
     '/chat/all-chats',
     { page_size, page_num },

@@ -18,6 +18,7 @@ type AllChatsPanelType = {
 
 const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandler }) => {
   const dispatch = useDispatch();
+  const [isOwervrite, setIsOwervrite] = useState(false);
   const allChats = useSelector(chatSelectors.getAllChats);
   const qauntityAllChat = useSelector(chatSelectors.getQauntityAllChat);
   const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
@@ -25,6 +26,7 @@ const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandl
 
   const onScroll = () => {
     setPage(page + 1);
+    setIsOwervrite(true);
   };
 
   const hasMore = () => {
@@ -32,7 +34,7 @@ const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandl
   };
 
   useEffect(() => {
-    dispatch(getAllChat({ page_size: 10, page_num: page }));
+    dispatch(getAllChat({ data: { page_size: 10, page_num: page }, isOwervrite }));
   }, [page]);
   return (
     <div className={styles.panelChatsInner}>

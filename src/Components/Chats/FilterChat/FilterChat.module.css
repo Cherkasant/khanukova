@@ -11,6 +11,26 @@
   line-height: 24px;
 }
 
+.inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reset {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  color: #1258ca;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.reset:hover {
+  opacity: 80%;
+  transition: all 0.5s;
+}
+
 .innerFilters {
   display: flex;
   justify-content: space-between;
