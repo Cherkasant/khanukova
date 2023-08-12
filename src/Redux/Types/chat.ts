@@ -12,6 +12,11 @@ export type AllChat = {
   page_num: number;
 };
 
+export type AllChatPayload = {
+  data: AllChat;
+  isOwervrite: boolean;
+};
+
 export type AllChatFilter = {
   clients_industry: string;
   software_stack: string;

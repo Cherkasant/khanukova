@@ -4,6 +4,7 @@ import {
   AllChat,
   AllChatData,
   AllChatFilter,
+  AllChatPayload,
   AllMessagesChatPayload,
   AllMessagesData,
   CreateChat
@@ -33,9 +34,14 @@ const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
-    getAllChat: (state, actions: PayloadAction<AllChat>) => {},
+    getAllChat: (state, actions: PayloadAction<AllChatPayload>) => {},
     setAllChat: (state, actions) => {
-      state.allChats = [...state.allChats, ...actions.payload];
+      const { data, isOwervrite } = actions.payload;
+      if (isOwervrite) {
+        state.allChats = [...state.allChats, ...data];
+      } else {
+        state.allChats = data;
+      }
     },
     getChat: (state, actions: PayloadAction<number>) => {},
     setChat: (state, actions) => {

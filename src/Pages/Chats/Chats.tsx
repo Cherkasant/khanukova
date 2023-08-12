@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,13 +11,7 @@ import Quote from '../../Assets/Chat/Quote';
 import More from '../../Assets/Chat/More';
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
 import { Role } from '../../Components/constants/@types';
-import {
-  addNewUserChat,
-  createChat,
-  getAllChatFilter,
-  getChat,
-  getMessagesChat
-} from '../../Redux/Reducers/chatReducer';
+import { addNewUserChat, createChat, getChat, getMessagesChat } from '../../Redux/Reducers/chatReducer';
 import chatSelectors from '../../Redux/Selectors/chatSelectors';
 import FilterChat from '../../Components/Chats/FilterChat';
 
@@ -38,9 +32,6 @@ const Chats = () => {
   const [chatId, setChatId] = useState(0);
   const [messagesValue, setMessages] = useState('');
   const [inputSearch, setInputSearch] = useState('');
-  const [industry, setIndustry] = useState('');
-  const [language, setLanguage] = useState('');
-  const [company, setCompany] = useState('');
   const [cursor, setCursor] = useState(1);
 
   const chat = useSelector(chatSelectors.getChats);
@@ -56,6 +47,20 @@ const Chats = () => {
     }
     socket.send(messagesValue);
     setMessages('');
+  };
+
+  const clickUserChatHandler = (id: number) => {
+    dispatch(getMessagesChat({ data: { id, page_size: 30, cursor: 1 }, isOwervrite: false }));
+    dispatch(getChat(id));
+    setChatId(id);
+    setIsOwervriteMessages(false);
+    setCursor(1);
+  };
+
+  const onSubmitEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      onSendMessage();
+    }
   };
 
   const createChatHandler = () => {
@@ -75,26 +80,6 @@ const Chats = () => {
     );
   };
 
-  const clickUserChatHandler = (id: number) => {
-    dispatch(getMessagesChat({ data: { id, page_size: 30, cursor: 1 }, isOwervrite: false }));
-    dispatch(getChat(id));
-    setChatId(id);
-    setIsOwervriteMessages(false);
-    setCursor(1);
-  };
-
-  const onSubmitEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter') {
-      onSendMessage();
-    }
-  };
-
-  useEffect(() => {
-    if (personalInfoList?.role[0] === Role.PO) {
-      dispatch(getAllChatFilter({ clients_industry: industry, software_stack: language, industry_choice: company }));
-    }
-  }, [industry, language, company]);
-
   return (
     <div className={styles.wrapChats}>
       <div
@@ -104,16 +89,7 @@ const Chats = () => {
         <h3 className={classNames(styles.title, { [styles.titleNotHead]: personalInfoList?.role[0] !== Role.PO })}>
           {'Chats'}
         </h3>
-        {personalInfoList?.role[0] === Role.PO ? (
-          <FilterChat
-            industry={industry}
-            language={language}
-            company={company}
-            setIndustry={setIndustry}
-            setLanguage={setLanguage}
-            setCompany={setCompany}
-          />
-        ) : null}
+        {personalInfoList?.role[0] === Role.PO ? <FilterChat /> : null}
         <div className={styles.searchContainer}>
           <div className={styles.icon}>
             <SearchIcon />
