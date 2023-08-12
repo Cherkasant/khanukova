@@ -87,6 +87,13 @@
   border-bottom: 3px solid #1258ca;
 }
 
+.eventInfo {
+  display: flex;
+  flex-direction: column;
+  height: 67%;
+  overflow-y: scroll;
+}
+
 .createdBy {
   margin-bottom: 20px;
   font-size: 14px;
@@ -238,6 +245,7 @@
 }
 
 .addNotificationBlockBtn {
+  margin-bottom: 15px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -246,11 +254,35 @@
   font-size: 14px;
 }
 
-.buttonsContainer {
-  position: absolute;
-  bottom: 20px;
-  right: 40px;
+.descriptionTextarea {
+  margin-bottom: 10px;
+  width: 70%;
+  min-height: 120px;
+  resize: none;
+  padding: 10px;
+  border: 1px solid #a3a3a3;
+  border-radius: 5px;
+}
+
+.descriptionTextarea::placeholder {
+  color: #a3a3a3;
+}
+
+.attachmentBlock {
   display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.titleWithoutMargin {
+  margin: 0;
+}
+
+.buttonsContainer {
+  margin-top: auto;
+  padding-right: 30px;
+  display: flex;
+  justify-content: right;
   gap: 11px;
 }
 

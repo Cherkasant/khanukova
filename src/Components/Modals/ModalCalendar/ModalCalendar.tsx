@@ -70,6 +70,7 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
   const [members, setMembers] = useState(initialMembers);
   const [selectedMembers, setSelectedMembers] = useState<Array<IOption>>([]);
   const [notifications, setNotifications] = useState<Array<INotification>>(initialNotifications);
+  const [description, setDescription] = useState('');
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEventTitle(event.target.value);
@@ -154,6 +155,11 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
   const removeNotification = (idToRemove: number) => {
     setNotifications((prevNotifications) => prevNotifications.filter((notification) => notification.id !== idToRemove));
   };
+
+  const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(event.target.value);
+  };
+
   return (
     <Modal open={true} onClose={onClose}>
       <div className={`${styles.modalContainer} ${isClosed ? styles.closed : styles.opened}`}>
@@ -214,7 +220,7 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
           Take the time
         </button>
         {isEventInfo ? (
-          <>
+          <div className={styles.eventInfo}>
             <div className={styles.createdBy}>Created by</div>
             <h3 className={styles.infoTitle}>Select members</h3>
             <div className={styles.selectMembers}>
@@ -261,6 +267,17 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
             <button className={styles.addNotificationBlockBtn} onClick={addNotification}>
               <AddNotificationIcon /> Add notification
             </button>
+            <h3 className={styles.infoTitle}>Description</h3>
+            <textarea
+              className={styles.descriptionTextarea}
+              value={description}
+              onChange={handleDescriptionChange}
+              placeholder="Add a description"
+            />
+            <div className={styles.attachmentBlock}>
+              <h3 className={`${styles.infoTitle} ${styles.titleWithoutMargin}`}>Attachment</h3>
+              <AddDocIcon />
+            </div>
             <div className={styles.buttonsContainer}>
               <PuzzleButton
                 btnTitle={'Cancel'}
@@ -275,7 +292,7 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
                 onClick={addEvent}
               />
             </div>
-          </>
+          </div>
         ) : (
           <SmallCalendar />
         )}
