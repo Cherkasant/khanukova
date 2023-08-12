@@ -1,0 +1,46 @@
+.toolbar {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.today {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #d9e1f0;
+  border: none;
+  margin-right: 20px;
+}
+.navigation {
+  margin-right: 20px;
+}
+
+.data {
+  text-align: left;
+}
+
+.viewButtons {
+  margin-left: auto;
+}
+
+.viewButtons button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.viewButtons button:not(:last-child) {
+  margin-right: 30px;
+}
+
+.viewButtons button:hover {
+  background-color: #d9e1f0;
+  color: #1258ca;
+}
+
+.viewButtons button.active {
+  background-color: #b8d1f5;
+  color: #1258ca;
+}

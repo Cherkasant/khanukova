@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import { Calendar, SlotInfo, View, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+
+import ModalCalendar from '../Modals/ModalCalendar/ModalCalendar';
 
 import styles from './Events.module.css';
 import CustomToolbar from './CustomToolbar/CustomToolbar';
@@ -20,24 +22,26 @@ export interface IEvent {
 const initialEvents: Array<IEvent> = [
   {
     title: 'An important event',
-    start: new Date(2023, 6, 24, 10, 0),
-    end: new Date(2023, 6, 24, 12, 0)
+    start: new Date(2023, 7, 9, 10, 0),
+    end: new Date(2023, 7, 9, 12, 0)
   },
   {
     title: 'Another event',
-    start: new Date(2023, 6, 24, 14, 0),
-    end: new Date(2023, 6, 24, 15, 0)
+    start: new Date(2023, 7, 9, 14, 0),
+    end: new Date(2023, 7, 9, 15, 0)
   },
   {
     title: 'Another event',
-    start: new Date(2023, 6, 24, 16, 0),
-    end: new Date(2023, 6, 24, 17, 0)
+    start: new Date(2023, 7, 9, 16, 0),
+    end: new Date(2023, 7, 9, 17, 0)
   }
 ];
 
 const Events = () => {
   const [activeView, setActiveView] = useState<View>('month');
   const [events, setEvents] = useState<Array<IEvent>>(initialEvents);
+  const [selectedSlot, setSelectedSlot] = useState<SlotInfo | null>(null);
+  const [isModalClosed, setIsModalClosed] = useState(true);
 
   useEffect(() => {
     moment.updateLocale('en', { week: { dow: 0 } });
@@ -48,44 +52,64 @@ const Events = () => {
   };
 
   const handleSlotSelect = (slotInfo: SlotInfo) => {
-    const title = window.prompt('Enter event title:');
-    if (title) {
-      const newEvent = {
+    setSelectedSlot(slotInfo);
+    setIsModalClosed(false);
+  };
+
+  const handleModalClose = () => {
+    setIsModalClosed(true);
+    setTimeout(() => setSelectedSlot(null), 300);
+  };
+
+  const addEvent = (title: string) => {
+    if (selectedSlot && title) {
+      const newEvent: IEvent = {
         title,
-        start: slotInfo.start,
-        end: slotInfo.end
+        start: selectedSlot.start,
+        end: selectedSlot.end
       };
       const updatedEvents = [...events, newEvent];
       setEvents(updatedEvents);
+      setSelectedSlot(null);
     }
   };
 
   return (
-    <div className={styles.container}>
-      <EventSearch events={events} />
-      <Calendar
-        className={styles.calendar}
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        components={{
-          toolbar: (props) => <CustomToolbar activeView={activeView} {...props} />,
-          event: Event,
-          week: {
-            header: CustomHeader
-          }
-        }}
-        onView={handleViewChange}
-        formats={{
-          dateFormat: 'D',
-          dayFormat: 'dddd MMM D',
-          timeGutterFormat: 'h a'
-        }}
-        selectable={true}
-        onSelectSlot={handleSlotSelect}
-      />
-    </div>
+    <>
+      {selectedSlot && (
+        <ModalCalendar
+          selectedSlot={selectedSlot}
+          onClose={handleModalClose}
+          onAddEvent={addEvent}
+          isClosed={isModalClosed}
+        />
+      )}
+      <div className={styles.container}>
+        <EventSearch events={events} />
+        <Calendar
+          className={styles.calendar}
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          components={{
+            toolbar: (props) => <CustomToolbar activeView={activeView} {...props} />,
+            event: Event,
+            week: {
+              header: CustomHeader
+            }
+          }}
+          onView={handleViewChange}
+          formats={{
+            dateFormat: 'D',
+            dayFormat: 'dddd MMM D',
+            timeGutterFormat: 'h a'
+          }}
+          selectable={true}
+          onSelectSlot={handleSlotSelect}
+        />
+      </div>
+    </>
   );
 };
 
