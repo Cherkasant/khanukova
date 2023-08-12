@@ -38,7 +38,6 @@
   height: 100%;
   padding: 0;
   color: #1258ca;
-  outline: none;
 }
 
 .editTitle {
@@ -95,6 +94,12 @@
 }
 
 .selectMembers {
+  margin-bottom: 10px;
+  position: relative;
+  width: 50%;
+}
+
+.infoTitle {
   margin-bottom: 5px;
   font-size: 14px;
   font-weight: 600;
@@ -102,27 +107,142 @@
 }
 
 .selectMembersBtn {
-  margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  width: 50%;
+  width: 100%;
   border: 1px solid #a3a3a3;
-  color: #a3a3a3;
   border-radius: 5px;
   text-align: left;
 }
 
+.selected {
+  color: #212121;
+}
+
+.notSelected {
+  color: #a3a3a3;
+}
+
 .membersList {
-  width: 50%;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
   border-radius: 10px;
   max-height: 150px;
   overflow-y: scroll;
   z-index: 100;
+  box-shadow: 0px 0px 30px 0px #1258ca0d;
 }
 
-.memberName {
+.listItemName {
+  font-size: 14px;
+}
+
+.notification {
+  position: relative;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.selectNotificationTypeBtn {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  width: 160px;
+  border: 1px solid #a3a3a3;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.selectedNotificationTypes {
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+
+.notificationTypeList {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 160px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 0px 0px 30px 0px #1258ca0d;
+}
+
+.notificationTimeOut {
+  padding: 10px;
+  width: 90px;
+  border: 1px solid #a3a3a3;
+  border-radius: 5px;
+}
+
+.timeUnitBlock {
+  position: relative;
+  width: 100px;
+}
+
+.timeUnitBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #a3a3a3;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.timeUnitList {
+  position: absolute;
+  top: calc(100% + 5px);
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 0px 0px 30px 0px #1258ca0d;
+}
+
+.timeUnitList li {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.timeUnitList li:first-child {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.timeUnitList li:last-child {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.timeUnitList li:hover {
+  background-color: #9bacc9;
+}
+
+.removeNotificationBtn {
+  height: 20px;
+  padding: 0;
+}
+
+.addNotificationBlockBtn {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #b0c0e0;
   font-size: 14px;
 }
 

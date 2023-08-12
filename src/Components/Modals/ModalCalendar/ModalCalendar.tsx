@@ -10,9 +10,12 @@ import SmallCalendar from '../../SmallCalendar/SmallCalendar';
 import { CheckedIcon } from '../../../Assets/icons/CheckedIcon';
 import DownArrowIcon from '../../../Assets/icons/DownArrowIcon';
 import UpArrowIcon from '../../../Assets/icons/UpArrowIcon';
+import AddDocIcon from '../../../Assets/icons/AddDocIcon';
+import { AddNotificationIcon } from '../../../Assets/icons/AddNotificationIcon';
 
 import styles from './ModalCalendar.module.css';
 import EventTime from './EventTime/EventTime';
+import NotificationBlock from './NotificationBlock/NotificationBlock';
 
 interface ModalCalendarProps {
   selectedSlot: SlotInfo;
@@ -21,18 +24,39 @@ interface ModalCalendarProps {
   isClosed: boolean;
 }
 
-type MemberType = {
+export interface IOption {
   id: number;
   name: string;
   isChecked: boolean;
-};
+}
 
-const initialMembers: Array<MemberType> = [
+export interface INotification {
+  id: number;
+  notificationType: IOption;
+  notificationTimeout: string;
+  timeUnit: string;
+}
+
+const initialMembers: Array<IOption> = [
   { id: 1, name: 'Dev 1', isChecked: false },
   { id: 2, name: 'Dev 2', isChecked: false },
   { id: 3, name: 'Dev 3', isChecked: false },
   { id: 4, name: 'Dev 4', isChecked: false },
   { id: 5, name: 'Dev 5', isChecked: false }
+];
+
+export const initialNotificationTypes: Array<IOption> = [
+  { id: 1, name: 'Notification', isChecked: true },
+  { id: 2, name: 'Email', isChecked: false }
+];
+
+const initialNotifications: Array<INotification> = [
+  {
+    id: Date.now(),
+    notificationType: initialNotificationTypes[0],
+    notificationTimeout: '30',
+    timeUnit: 'Min'
+  }
 ];
 
 const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCalendarProps) => {
@@ -44,7 +68,8 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
   const [isEventInfo, setIsEventInfo] = useState(true);
   const [isMemberListVisible, setIsMemberListVisible] = useState(false);
   const [members, setMembers] = useState(initialMembers);
-  const [selectedMembers, setSelectedMembers] = useState<Array<MemberType>>([]);
+  const [selectedMembers, setSelectedMembers] = useState<Array<IOption>>([]);
+  const [notifications, setNotifications] = useState<Array<INotification>>(initialNotifications);
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEventTitle(event.target.value);
@@ -84,33 +109,51 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
     setIsEventInfo(false);
   };
 
-  const toggleMemberList = () => {
-    setIsMemberListVisible(!isMemberListVisible);
+  const toggleList = (
+    isOptionListVisible: boolean,
+    setIsOptionListVisible: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    setIsOptionListVisible(!isOptionListVisible);
   };
 
-  const handleMemberCheckboxChange = (memberId: number) => {
-    setMembers((prevMembers) =>
-      prevMembers.map((member) => {
-        if (member.id === memberId) {
-          const updatedMember = { ...member, isChecked: !member.isChecked };
-          if (updatedMember.isChecked) {
-            setSelectedMembers((prevSelected) => [...prevSelected, updatedMember]);
+  const handleCheckboxChange = (
+    setOptions: React.Dispatch<React.SetStateAction<Array<IOption>>>,
+    setSelectedOptions: React.Dispatch<React.SetStateAction<Array<IOption>>>,
+    id: number
+  ) => {
+    setOptions((prevOptions) =>
+      prevOptions.map((option) => {
+        if (option.id === id) {
+          const updatedOption = { ...option, isChecked: !option.isChecked };
+          if (updatedOption.isChecked) {
+            setSelectedOptions((prevSelected) => [...prevSelected, updatedOption]);
           } else {
-            setSelectedMembers((prevSelected) =>
-              prevSelected.filter((selectedMember) => selectedMember.id !== memberId)
-            );
+            setSelectedOptions((prevSelected) => prevSelected.filter((selectedOption) => selectedOption.id !== id));
           }
-          return updatedMember;
+          return updatedOption;
         }
-        return member;
+        return option;
       })
     );
   };
 
-  const getSelectedMemberNames = () => {
-    return selectedMembers.map((member) => member.name).join(', ');
+  const getSelectedOptionNames = (selectedOptions: Array<IOption>) => {
+    return selectedOptions.map((option) => option.name).join(', ');
   };
 
+  const addNotification = () => {
+    const newNotification = {
+      id: Date.now(),
+      notificationType: initialNotificationTypes[0],
+      notificationTimeout: '30',
+      timeUnit: 'Min'
+    };
+    setNotifications((prevNotifications) => [...prevNotifications, newNotification]);
+  };
+
+  const removeNotification = (idToRemove: number) => {
+    setNotifications((prevNotifications) => prevNotifications.filter((notification) => notification.id !== idToRemove));
+  };
   return (
     <Modal open={true} onClose={onClose}>
       <div className={`${styles.modalContainer} ${isClosed ? styles.closed : styles.opened}`}>
@@ -173,31 +216,51 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
         {isEventInfo ? (
           <>
             <div className={styles.createdBy}>Created by</div>
-            <div className={styles.selectMembers}>Select members</div>
-            <button className={styles.selectMembersBtn} onClick={toggleMemberList}>
-              <span>{selectedMembers.length > 0 ? getSelectedMemberNames() : 'Select members'}</span>
-              {isMemberListVisible ? <UpArrowIcon /> : <DownArrowIcon />}
+            <h3 className={styles.infoTitle}>Select members</h3>
+            <div className={styles.selectMembers}>
+              <button
+                className={styles.selectMembersBtn}
+                onClick={() => toggleList(isMemberListVisible, setIsMemberListVisible)}>
+                {selectedMembers.length > 0 ? (
+                  <span className={styles.selected}>{getSelectedOptionNames(selectedMembers)}</span>
+                ) : (
+                  <span className={styles.notSelected}>Select members</span>
+                )}
+                {isMemberListVisible ? <UpArrowIcon /> : <DownArrowIcon />}
+              </button>
+              {isMemberListVisible && (
+                <ul className={styles.membersList}>
+                  {members.map((member) => (
+                    <li key={member.id}>
+                      <Checkbox
+                        checked={member.isChecked}
+                        onChange={() => handleCheckboxChange(setMembers, setSelectedMembers, member.id)}
+                        icon={<span className={styles.checkboxIcon} />}
+                        checkedIcon={
+                          <span className={`${styles.checkboxIcon} ${styles.checkedboxIcon}`}>
+                            <CheckedIcon />
+                          </span>
+                        }
+                      />
+                      <span className={styles.listItemName}>{member.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <h3 className={styles.infoTitle}>Notification</h3>
+            {notifications.map((notification) => (
+              <NotificationBlock
+                key={notification.id}
+                notification={notification}
+                toggleList={toggleList}
+                onNotificationTypeChange={handleCheckboxChange}
+                onRemoveNotification={(id) => removeNotification(id)}
+              />
+            ))}
+            <button className={styles.addNotificationBlockBtn} onClick={addNotification}>
+              <AddNotificationIcon /> Add notification
             </button>
-            {isMemberListVisible && (
-              <div className={styles.membersList}>
-                {members.map((member) => (
-                  <div key={member.id} className={styles.member}>
-                    <Checkbox
-                      checked={member.isChecked}
-                      onChange={() => handleMemberCheckboxChange(member.id)}
-                      className={styles.memberCheckbox}
-                      icon={<span className={styles.checkboxIcon} />}
-                      checkedIcon={
-                        <span className={`${styles.checkboxIcon} ${styles.checkedboxIcon}`}>
-                          <CheckedIcon />
-                        </span>
-                      }
-                    />
-                    <span className={styles.memberName}>{member.name}</span>
-                  </div>
-                ))}
-              </div>
-            )}
             <div className={styles.buttonsContainer}>
               <PuzzleButton
                 btnTitle={'Cancel'}
