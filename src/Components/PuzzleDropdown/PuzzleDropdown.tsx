@@ -3,6 +3,10 @@ import classNames from 'classnames';
 
 import Dropdown, { Group, Option, ReactDropdownProps } from 'react-dropdown';
 
+import { ClosedIcon } from '../../Assets/SignUpHead/ClosedIcon';
+
+import { OpenIcon } from '../../Assets/SignUpHead/OpenIcon';
+
 import styles from './PuzzleDropdown.module.css';
 
 export type PuzzleDropdownProps = PropsWithChildren<ReactDropdownProps> & {
@@ -21,8 +25,8 @@ const PuzzleDropdown: FC<PuzzleDropdownProps> = ({ options, error, ...rest }: Pu
         controlClassName={classNames(styles.dropdownControl, controlClassName, { [styles.inputError]: error })}
         placeholderClassName={classNames(styles.dropdownPlaceholder, placeholderClassName)}
         arrowClassName={styles.dropdownArrow}
-        arrowClosed={<span className={classNames(styles.arrowClosed, className)} />}
-        arrowOpen={<span className={classNames(styles.arrowOpen, className)} />}
+        arrowClosed={<ClosedIcon />}
+        arrowOpen={<OpenIcon />}
         menuClassName={classNames(styles.dropdownMenu, menuClassName)}
       />
       <div className={styles.error}>{error}</div>
