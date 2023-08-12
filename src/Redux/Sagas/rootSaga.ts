@@ -9,5 +9,13 @@ import chatSaga from './chatSaga';
 import notificationSaga from './notificationSaga';
 
 export function* rootSaga() {
-  yield all([authSagaWatcher(), profileSaga(), postSaga(), resoursesSaga(), commentsSaga(),chatSaga(), notificationSaga()]);
+  yield all([
+    authSagaWatcher(),
+    profileSaga(),
+    postSaga(),
+    resoursesSaga(),
+    commentsSaga(),
+    chatSaga(),
+    notificationSaga()
+  ]);
 }

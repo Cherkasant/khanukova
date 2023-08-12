@@ -4,6 +4,7 @@
 
 .dropdownControl {
   height: 54px;
+  width: 100%;
   border: 1px solid #d0d0d0;
   border-radius: 10px;
   text-align: start;
@@ -15,8 +16,10 @@
   cursor: pointer;
   outline: none;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 8px 12px 8px 10px;
+  /*flex-direction: column;*/
+  justify-content: space-between;
+  align-items: center;
 }
 
 .inputError,
@@ -51,9 +54,11 @@
   color: #212121;
   margin-top: 5px;
 }
+
 .dropdownMenu > div {
   margin-left: 5px;
 }
+
 .dropdownMenu > div:hover {
   background: #1258ca;
   border-radius: 10px;
@@ -68,10 +73,10 @@
   content: ' ';
   display: block;
   width: 10px;
-  height: 10px;
+  height: 10px !important;
   right: 20px;
-  border-top: 2px solid #1258ca;
-  border-right: 2px solid #1258ca;
+  border-top: 2px solid #1258ca !important;
+  border-right: 2px solid #1258ca !important;
   transform: rotate(135deg);
 }
 
