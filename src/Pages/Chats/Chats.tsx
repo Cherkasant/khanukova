@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Input from '../../Components/Input';
-import InputChat from '../../Components/Chats/InputChat';
 import PuzzleButton, { PuzzleButtonTypes } from '../../Components/PuzzleButton';
 import { SearchIcon } from '../../Assets/icons/SearchIcon';
 import UserChat from '../../Components/UserChat/UserChat';
@@ -21,7 +20,6 @@ import AllMessagesPanel from '../../Components/Chats/AllMessagesPanel';
 import styles from './Chats.module.css';
 
 export let socket: WebSocket;
-
 const conectSoket = (id: number) => {
   socket = new WebSocket(`wss://agile-dreamers-chat-be.herokuapp.com/websocket/ws/${id}`);
 };
@@ -30,7 +28,6 @@ const Chats = () => {
   const dispatch = useDispatch();
   const [isOwervriteMessages, setIsOwervriteMessages] = useState(false);
   const [chatId, setChatId] = useState(0);
-  const [messagesValue, setMessages] = useState('');
   const [inputSearch, setInputSearch] = useState('');
   const [cursor, setCursor] = useState(1);
 
@@ -41,26 +38,12 @@ const Chats = () => {
     setInputSearch(value);
   };
 
-  const onSendMessage = () => {
-    if (!messagesValue) {
-      return;
-    }
-    socket.send(messagesValue);
-    setMessages('');
-  };
-
   const clickUserChatHandler = (id: number) => {
     dispatch(getMessagesChat({ data: { id, page_size: 30, cursor: 1 }, isOwervrite: false }));
     dispatch(getChat(id));
     setChatId(id);
     setIsOwervriteMessages(false);
     setCursor(1);
-  };
-
-  const onSubmitEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter') {
-      onSendMessage();
-    }
   };
 
   const createChatHandler = () => {
@@ -99,31 +82,33 @@ const Chats = () => {
         <AllChatsPanel chatId={chatId} clickUserChatHandler={(id: number) => clickUserChatHandler(id)} />
       </div>
       <div className={styles.chats}>
-        <div className={styles.chatsHeader}>
-          <UserChat name={chat?.title ? `${chat?.title}` : ''} team={'CAPIX'} className={styles.userChat} />
-          <div className={styles.chatsPanel}>
-            {personalInfoList?.role[0] === Role.PO ? (
-              <>
-                <div className={styles.quote}>
-                  <Quote /> {'Request a quote'}
-                </div>
-                <PuzzleButton
-                  disabled={!chatId}
-                  btnClassName={styles.btn}
-                  btnTitle={'Launch a project'}
-                  btnType={PuzzleButtonTypes.TextButton}
-                />
-              </>
-            ) : null}
-            <PuzzleButton
-              disabled={!chatId}
-              btnClassName={styles.btn}
-              btnTitle={'Create a Meeting'}
-              btnType={PuzzleButtonTypes.TextButton}
-            />
-            <More className={styles.more} />
+        {chatId ? (
+          <div className={styles.chatsHeader}>
+            <UserChat name={chat?.title ? `${chat?.title}` : ''} team={'CAPIX'} className={styles.userChat} />
+            <div className={styles.chatsPanel}>
+              {personalInfoList?.role[0] === Role.PO ? (
+                <>
+                  <div className={styles.quote}>
+                    <Quote /> {'Request a quote'}
+                  </div>
+                  <PuzzleButton
+                    disabled={!chatId}
+                    btnClassName={styles.btn}
+                    btnTitle={'Launch a project'}
+                    btnType={PuzzleButtonTypes.TextButton}
+                  />
+                </>
+              ) : null}
+              <PuzzleButton
+                disabled={!chatId}
+                btnClassName={styles.btn}
+                btnTitle={'Create a Meeting'}
+                btnType={PuzzleButtonTypes.TextButton}
+              />
+              <More className={styles.more} />
+            </div>
           </div>
-        </div>
+        ) : null}
         <AllMessagesPanel
           chatId={chatId}
           conectSoket={conectSoket}
@@ -132,18 +117,6 @@ const Chats = () => {
           cursor={cursor}
           setCursor={setCursor}
         />
-        <div className={styles.chatsFooter} onKeyUp={(e) => onSubmitEnter(e)}>
-          <InputChat disabled={!chatId} setMessages={setMessages} messagesValue={messagesValue} />
-          <PuzzleButton
-            disabled={!chatId}
-            onClick={onSendMessage}
-            btnTitle={'Send'}
-            btnType={PuzzleButtonTypes.TextButton}
-          />
-        </div>
-      </div>
-      <div onClick={createChatHandler} style={{ color: 'red' }}>
-        Кликни
       </div>
     </div>
   );

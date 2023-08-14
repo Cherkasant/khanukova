@@ -21,3 +21,11 @@
   background-color: #bcd4f9;
   align-self: flex-end;
 }
+
+.chatsFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px 30px 18px 15px;
+}

@@ -8,6 +8,7 @@ import profileSelectors from '../../../Redux/Selectors/profileSelectors';
 import { Role } from '../../constants/@types';
 import UserChat from '../../UserChat';
 import { getAllChat } from '../../../Redux/Reducers/chatReducer';
+import socket from '../../../socket';
 
 import styles from './AllChatsPanel.module.css';
 
@@ -36,6 +37,7 @@ const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandl
   useEffect(() => {
     dispatch(getAllChat({ data: { page_size: 10, page_num: page }, isOwervrite }));
   }, [page]);
+
   return (
     <div className={styles.panelChatsInner}>
       <div
