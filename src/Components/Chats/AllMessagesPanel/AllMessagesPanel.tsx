@@ -8,6 +8,8 @@ import authSelectors from '../../../Redux/Selectors/authSelectors';
 import { getMessagesChat, setMessagesChat } from '../../../Redux/Reducers/chatReducer';
 import { ACCESS_TOKEN_KEY } from '../../constants/consts';
 import { socket } from '../../../Pages/Chats/Chats';
+import InputChat from '../InputChat';
+import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
 
 import styles from './AllMessagesPanel.module.css';
 
@@ -30,6 +32,7 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
 }) => {
   const dispatch = useDispatch();
   const refMessages = useRef<HTMLDivElement>(null);
+  const [messagesValue, setMessages] = useState('');
   const qauntityAllMessages = useSelector(chatSelectors.getQauntityAllMessages);
   const messages = useSelector(chatSelectors.getMessages);
   const userId = useSelector(authSelectors.getUserId);
@@ -44,6 +47,21 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
     return messages.length < qauntityAllMessages;
   };
 
+  const onSendMessage = () => {
+    if (!messagesValue) {
+      return;
+    }
+    socket.send(messagesValue);
+    setMessages('');
+    refMessages.current?.scrollTo(0, 99999);
+  };
+
+  const onSubmitEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      onSendMessage();
+    }
+  };
+
   useEffect(() => {
     if (isOwervriteMessages) {
       dispatch(getMessagesChat({ data: { id: chatId, page_size: 30, cursor }, isOwervrite: true }));
@@ -56,6 +74,10 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
       const userId = Number(data.user_id);
       dispatch(setMessagesChat({ data: [{ text, user_id: userId }], isOwervrite: false, isMessage: true }));
     });
+    return () => {
+      socket.removeEventListener('close', () => {});
+      socket.close();
+    };
   }, [cursor, chatId]);
 
   useEffect(() => {
@@ -63,29 +85,39 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
       refMessages.current?.scrollTo(0, 99999);
     }
   }, [messages]);
-
   return (
-    <div ref={refMessages} id="scrollableDiv" className={classNames(styles.chatsMain)}>
-      <InfiniteScroll
-        style={{ display: 'flex', flexDirection: 'column-reverse' }}
-        pullDownToRefreshThreshold={500}
-        inverse={true}
-        next={onScroll}
-        hasMore={hasMore()}
-        loader={''}
-        dataLength={messages.length}
-        scrollableTarget="scrollableDiv">
-        {messages.map((value, index) => (
-          <div
-            key={index}
-            className={classNames(styles.message, {
-              [styles.messageMe]: userId === value.user_id
-            })}>
-            {value.text}
-          </div>
-        ))}
-      </InfiniteScroll>
-    </div>
+    <>
+      <div ref={refMessages} id="scrollableDiv" className={classNames(styles.chatsMain)}>
+        <InfiniteScroll
+          style={{ display: 'flex', flexDirection: 'column-reverse' }}
+          pullDownToRefreshThreshold={500}
+          inverse={true}
+          next={onScroll}
+          hasMore={hasMore()}
+          loader={''}
+          dataLength={messages.length}
+          scrollableTarget="scrollableDiv">
+          {messages.map((value, index) => (
+            <div
+              key={index}
+              className={classNames(styles.message, {
+                [styles.messageMe]: userId === value.user_id
+              })}>
+              {value.text}
+            </div>
+          ))}
+        </InfiniteScroll>
+      </div>
+      <div className={styles.chatsFooter} onKeyUp={(e) => onSubmitEnter(e)}>
+        <InputChat disabled={!chatId} setMessages={setMessages} messagesValue={messagesValue} />
+        <PuzzleButton
+          disabled={!chatId}
+          onClick={onSendMessage}
+          btnTitle={'Send'}
+          btnType={PuzzleButtonTypes.TextButton}
+        />
+      </div>
+    </>
   );
 };
 
