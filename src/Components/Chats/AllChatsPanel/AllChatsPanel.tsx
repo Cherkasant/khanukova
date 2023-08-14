@@ -8,7 +8,6 @@ import profileSelectors from '../../../Redux/Selectors/profileSelectors';
 import { Role } from '../../constants/@types';
 import UserChat from '../../UserChat';
 import { getAllChat } from '../../../Redux/Reducers/chatReducer';
-import socket from '../../../socket';
 
 import styles from './AllChatsPanel.module.css';
 
