@@ -1,19 +1,24 @@
 import moment from 'moment';
 import DatePicker, { ReactDatePickerCustomHeaderProps } from 'react-datepicker';
 import { IconButton } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { SlotInfo } from 'react-big-calendar';
 
 import UpArrowIcon from '../../../../Assets/icons/UpArrowIcon';
 import DownArrowIcon from '../../../../Assets/icons/DownArrowIcon';
+import slotSelectors from '../../../../Redux/Selectors/slotSelectors';
+import { setSelectedSlot } from '../../../../Redux/Reducers/slotReducer';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './EventTime.module.css';
 
-interface EventTimeProps {
-  start: Date;
-  end: Date;
-}
+const EventTime = () => {
+  const selectedSlot = useSelector(slotSelectors.getSelectedSlot);
+  const dispatch = useDispatch();
 
-const EventTime = ({ start, end }: EventTimeProps) => {
+  const start = selectedSlot!.start;
+  const end = selectedSlot!.end;
+
   const formatTime = (date: Date, format: string) => {
     return moment(date).format(format);
   };
@@ -22,6 +27,22 @@ const EventTime = ({ start, end }: EventTimeProps) => {
   const endDate = formatTime(end, 'YYYY, MMM D');
   const startTime = formatTime(start, moment(start).minutes() === 0 ? 'h A' : 'h:mm A');
   const endTime = formatTime(end, moment(end).minutes() === 0 ? 'h A' : 'h:mm A');
+
+  const handleStartDateChange = (newDate: Date) => {
+    if (selectedSlot) {
+      const adjustedEndDate = moment(newDate).isAfter(end) ? moment(newDate).add(1, 'day').toDate() : end;
+      const newSlotInfo: SlotInfo = { ...selectedSlot, start: newDate, end: adjustedEndDate };
+      dispatch(setSelectedSlot(newSlotInfo));
+    }
+  };
+
+  const handleEndDateChange = (newDate: Date) => {
+    if (selectedSlot) {
+      const adjustedStartDate = moment(newDate).isBefore(start) ? moment(newDate).subtract(1, 'day').toDate() : start;
+      const newSlotInfo: SlotInfo = { ...selectedSlot, start: adjustedStartDate, end: newDate };
+      dispatch(setSelectedSlot(newSlotInfo));
+    }
+  };
 
   const CustomHeader = ({ date, decreaseMonth, increaseMonth }: ReactDatePickerCustomHeaderProps) => {
     const formattedDate = moment(date).format('MMM YYYY');
@@ -45,7 +66,7 @@ const EventTime = ({ start, end }: EventTimeProps) => {
     <div className={styles.eventTime}>
       <div className={styles.datePickerContainer}>
         <DatePicker
-          onChange={(date) => {}}
+          onChange={handleStartDateChange}
           customInput={<span className={styles.timeItem}>{startDate}</span>}
           renderCustomHeader={CustomHeader}
         />
@@ -55,7 +76,7 @@ const EventTime = ({ start, end }: EventTimeProps) => {
       {startDate !== endDate && (
         <div className={styles.datePickerContainer}>
           <DatePicker
-            onChange={(date) => {}}
+            onChange={handleEndDateChange}
             customInput={<span className={styles.timeItem}>{endDate}</span>}
             renderCustomHeader={CustomHeader}
           />

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SlotInfo } from 'react-big-calendar';
 import { Modal, IconButton, Checkbox } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { useSelector } from 'react-redux';
 
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
@@ -12,13 +13,13 @@ import DownArrowIcon from '../../../Assets/icons/DownArrowIcon';
 import UpArrowIcon from '../../../Assets/icons/UpArrowIcon';
 import AddDocIcon from '../../../Assets/icons/AddDocIcon';
 import { AddNotificationIcon } from '../../../Assets/icons/AddNotificationIcon';
+import slotSelectors from '../../../Redux/Selectors/slotSelectors';
 
 import styles from './ModalCalendar.module.css';
 import EventTime from './EventTime/EventTime';
 import NotificationBlock from './NotificationBlock/NotificationBlock';
 
 interface ModalCalendarProps {
-  selectedSlot: SlotInfo;
   onClose: () => void;
   onAddEvent: (title: string) => void;
   isClosed: boolean;
@@ -59,7 +60,7 @@ const initialNotifications: Array<INotification> = [
   }
 ];
 
-const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCalendarProps) => {
+const ModalCalendar = ({ onClose, onAddEvent, isClosed }: ModalCalendarProps) => {
   const [eventTitle, setEventTitle] = useState('Title new event');
   const [isEditable, setIsEditable] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -71,6 +72,8 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
   const [selectedMembers, setSelectedMembers] = useState<Array<IOption>>([]);
   const [notifications, setNotifications] = useState<Array<INotification>>(initialNotifications);
   const [description, setDescription] = useState('');
+
+  const selectedSlot = useSelector(slotSelectors.getSelectedSlot);
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEventTitle(event.target.value);
@@ -186,7 +189,7 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
             </div>
           )}
         </div>
-        <EventTime start={selectedSlot.start} end={selectedSlot.end} />
+        <EventTime />
         <div className={styles.checkboxContainer}>
           <Checkbox
             checked={repeatEveryWeek}
