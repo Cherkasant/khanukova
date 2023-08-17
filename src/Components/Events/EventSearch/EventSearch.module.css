@@ -6,6 +6,8 @@
 
 .searchIcon {
   position: absolute;
+  display: flex;
+  align-items: center;
   height: 20px;
   top: 50%;
   transform: translateY(-50%);

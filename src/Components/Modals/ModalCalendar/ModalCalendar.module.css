@@ -50,6 +50,10 @@
   align-items: center;
 }
 
+.checkbox {
+  z-index: 0;
+}
+
 .checkboxLabel {
   font-size: 14px;
 }
