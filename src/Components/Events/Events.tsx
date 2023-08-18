@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import { Calendar, SlotInfo, View, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ModalCalendar from '../Modals/ModalCalendar/ModalCalendar';
+import { setSelectedSlot } from '../../Redux/Reducers/slotReducer';
+import slotSelectors from '../../Redux/Selectors/slotSelectors';
 
 import styles from './Events.module.css';
 import CustomToolbar from './CustomToolbar/CustomToolbar';
@@ -40,8 +43,11 @@ const initialEvents: Array<IEvent> = [
 const Events = () => {
   const [activeView, setActiveView] = useState<View>('month');
   const [events, setEvents] = useState<Array<IEvent>>(initialEvents);
-  const [selectedSlot, setSelectedSlot] = useState<SlotInfo | null>(null);
   const [isModalClosed, setIsModalClosed] = useState(true);
+
+  const selectedSlot = useSelector(slotSelectors.getSelectedSlot);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     moment.updateLocale('en', { week: { dow: 0 } });
@@ -52,13 +58,13 @@ const Events = () => {
   };
 
   const handleSlotSelect = (slotInfo: SlotInfo) => {
-    setSelectedSlot(slotInfo);
+    setTimeout(() => dispatch(setSelectedSlot(slotInfo)), 1);
     setIsModalClosed(false);
   };
 
   const handleModalClose = () => {
     setIsModalClosed(true);
-    setTimeout(() => setSelectedSlot(null), 300);
+    setTimeout(() => dispatch(setSelectedSlot(null)), 300);
   };
 
   const addEvent = (title: string) => {
@@ -70,20 +76,13 @@ const Events = () => {
       };
       const updatedEvents = [...events, newEvent];
       setEvents(updatedEvents);
-      setSelectedSlot(null);
+      dispatch(setSelectedSlot(null));
     }
   };
 
   return (
     <>
-      {selectedSlot && (
-        <ModalCalendar
-          selectedSlot={selectedSlot}
-          onClose={handleModalClose}
-          onAddEvent={addEvent}
-          isClosed={isModalClosed}
-        />
-      )}
+      {selectedSlot && <ModalCalendar onClose={handleModalClose} onAddEvent={addEvent} isClosed={isModalClosed} />}
       <div className={styles.container}>
         <EventSearch events={events} />
         <Calendar
