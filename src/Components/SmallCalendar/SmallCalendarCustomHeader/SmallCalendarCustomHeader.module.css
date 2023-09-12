@@ -1,0 +1,9 @@
+.weekDay {
+  color: #a3a3a3;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+:global(.rbc-time-view .rbc-today) .dayOfMonth {
+  color: #1258ca;
+}

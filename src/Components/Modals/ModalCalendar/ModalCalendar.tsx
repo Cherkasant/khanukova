@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+
 import { SlotInfo } from 'react-big-calendar';
 import { Checkbox, IconButton, Modal } from '@mui/material';
+
 import CloseIcon from '@mui/icons-material/Close';
 
 import { useDispatch } from 'react-redux';
@@ -22,7 +24,6 @@ import EventTime from './EventTime/EventTime';
 import NotificationBlock from './NotificationBlock/NotificationBlock';
 
 interface ModalCalendarProps {
-  selectedSlot: SlotInfo;
   onClose: () => void;
   onAddEvent: (title: string) => void;
   isClosed: boolean;
@@ -63,8 +64,10 @@ const initialNotifications: Array<INotification> = [
   }
 ];
 
+
 const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCalendarProps) => {
   const dispatch = useDispatch();
+
 
   const [eventTitle, setEventTitle] = useState('Title new event');
   const [isEditable, setIsEditable] = useState(false);
@@ -213,7 +216,7 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
             </div>
           )}
         </div>
-        <EventTime start={selectedSlot.start} end={selectedSlot.end} />
+        <EventTime />
         <div className={styles.checkboxContainer}>
           <Checkbox
             checked={repeatEveryWeek}
