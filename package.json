@@ -19,7 +19,6 @@
     "@types/node": "^16.18.9",
     "@types/react": "^18.2.6",
     "@types/react-big-calendar": "^1.6.4",
-    "@types/react-datepicker": "^4.15.0",
     "@types/react-dom": "^18.0.9",
     "antd": "^5.4.6",
     "apisauce": "^2.1.6",
@@ -100,6 +99,7 @@
   },
   "devDependencies": {
     "@types/react-copy-to-clipboard": "^5.0.4",
+    "@types/react-datepicker": "^4.15.0",
     "@types/react-draft-wysiwyg": "^1.13.4",
     "@types/react-modal": "^3.13.1",
     "@types/react-table": "^7.7.14",
