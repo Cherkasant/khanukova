@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Calendar, SlotInfo, View, momentLocalizer } from 'react-big-calendar';
+import { Calendar, momentLocalizer, SlotInfo, View } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
@@ -82,7 +82,14 @@ const Events = () => {
 
   return (
     <>
-      {selectedSlot && <ModalCalendar onClose={handleModalClose} onAddEvent={addEvent} isClosed={isModalClosed} />}
+      {selectedSlot && (
+        <ModalCalendar
+          selectedSlot={selectedSlot}
+          onClose={handleModalClose}
+          onAddEvent={addEvent}
+          isClosed={isModalClosed}
+        />
+      )}
       <div className={styles.container}>
         <EventSearch events={events} />
         <Calendar
