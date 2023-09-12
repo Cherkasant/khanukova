@@ -7,6 +7,7 @@ import resoursesSaga from './resoursesSaga';
 import commentsSaga from './commentsSaga';
 import chatSaga from './chatSaga';
 import notificationSaga from './notificationSaga';
+import eventsSaga from './eventsSaga';
 
 export function* rootSaga() {
   yield all([
@@ -16,6 +17,7 @@ export function* rootSaga() {
     resoursesSaga(),
     commentsSaga(),
     chatSaga(),
-    notificationSaga()
+    notificationSaga(),
+    eventsSaga()
   ]);
 }

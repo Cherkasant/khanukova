@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { SlotInfo } from 'react-big-calendar';
-import { Modal, IconButton, Checkbox } from '@mui/material';
+import { Checkbox, IconButton, Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+
+import { useDispatch } from 'react-redux';
 
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
@@ -12,6 +14,8 @@ import DownArrowIcon from '../../../Assets/icons/DownArrowIcon';
 import UpArrowIcon from '../../../Assets/icons/UpArrowIcon';
 import AddDocIcon from '../../../Assets/icons/AddDocIcon';
 import { AddNotificationIcon } from '../../../Assets/icons/AddNotificationIcon';
+
+import { postEvent } from '../../../Redux/Reducers/calendarReducer';
 
 import styles from './ModalCalendar.module.css';
 import EventTime from './EventTime/EventTime';
@@ -60,6 +64,8 @@ const initialNotifications: Array<INotification> = [
 ];
 
 const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCalendarProps) => {
+  const dispatch = useDispatch();
+
   const [eventTitle, setEventTitle] = useState('Title new event');
   const [isEditable, setIsEditable] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -76,8 +82,29 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
     setEventTitle(event.target.value);
   };
 
+  function padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
+
+  function formatDate(date: Date) {
+    return (
+      [date.getFullYear(), padTo2Digits(date.getMonth() + 1), padTo2Digits(date.getDate())].join('-') +
+      ' ' +
+      [padTo2Digits(date.getHours()), padTo2Digits(date.getMinutes()), padTo2Digits(date.getSeconds())].join(':')
+    );
+  }
+
   const addEvent = () => {
     onAddEvent(eventTitle);
+    const formattedStart = formatDate(selectedSlot.start).toString();
+    const formattedEnd = formatDate(selectedSlot.start).toString();
+    dispatch(
+      postEvent({
+        calendarId: 'p4iqrab23kupukrlg2rrhvahgs@group.calendar.google.com',
+        data: { summary: '2', description: description, start: formattedStart, end: formattedEnd },
+        callback: () => {}
+      })
+    );
   };
 
   const handleEditTitle = () => {

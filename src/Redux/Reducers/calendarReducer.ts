@@ -1,7 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 
-import { CalendarTab } from '../Types/calendar';
+import { CalendarTab, PostEventType } from '../Types/calendar';
 
 type CalendarReducerState = {
   monthIndex: number;
@@ -13,6 +13,7 @@ type CalendarReducerState = {
   labels: [];
   filteredEvents: [];
   currentCalendarTab: CalendarTab;
+  calendarId: string;
 };
 
 const initialState: CalendarReducerState = {
@@ -24,7 +25,8 @@ const initialState: CalendarReducerState = {
   selectedEvent: null,
   labels: [],
   filteredEvents: [],
-  currentCalendarTab: 'month'
+  currentCalendarTab: 'month',
+  calendarId: ''
 };
 
 const calendarSlice = createSlice({
@@ -50,7 +52,9 @@ const calendarSlice = createSlice({
     getCurrentCalendarTabReducer: (state, action: PayloadAction<undefined>) => {},
     setCurrentCalendarTabReducer: (state, action: PayloadAction<CalendarTab>) => {
       state.currentCalendarTab = action.payload;
-    }
+    },
+    postEvent: (state, action: PayloadAction<PostEventType>) => {},
+    postCalendar: (state, action: PayloadAction<number>) => {}
   }
 });
 
@@ -59,7 +63,9 @@ export const {
   setSmallCalendarReducer,
   setDaySelected,
   setShowEventModalReducer,
-  setCurrentCalendarTabReducer
+  setCurrentCalendarTabReducer,
+  postEvent,
+  postCalendar
 } = calendarSlice.actions;
 
 const calendarReducer = calendarSlice.reducer;

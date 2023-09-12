@@ -1,1 +1,1 @@
-export { default } from './Gantt';
+export { default } from './GanttTable';

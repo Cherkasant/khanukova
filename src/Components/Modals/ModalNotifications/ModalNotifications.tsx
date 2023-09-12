@@ -30,29 +30,21 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
   const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
   const isHead = personalInfoList?.role[0] === Role.Head;
 
-  const [actions, setActions] = useState(true);
-  const [deadline, setDeadline] = useState(true);
-  const [events, setEvents] = useState(true);
-  const [payments, setPayments] = useState(true);
-  const [clientsRequest, setClientRequest] = useState(true);
-  const [chat, setChat] = useState(true);
-  const handleChangeAction = () => {
-    setActions(!actions);
+  const initialState = {
+    actions: true,
+    deadline: true,
+    events: true,
+    payments: true,
+    email: true,
+    chat: true,
+    request: true
   };
-  const handleChangeDeadline = () => {
-    setDeadline(!deadline);
-  };
-  const handleChangeEvent = () => {
-    setEvents(!events);
-  };
-  const handleChangePayments = () => {
-    setPayments(!payments);
-  };
-  const handleChangeClientRequest = () => {
-    setClientRequest(!clientsRequest);
-  };
-  const handleChangeChat = () => {
-    setChat(!chat);
+  const [inputs, setInputs] = useState(initialState);
+
+  const checkboxChangeHandler = (inputIdentifier: string, value: boolean) => {
+    setInputs((prev) => {
+      return { ...prev, [inputIdentifier]: value };
+    });
   };
 
   const onSaveClick = () => {
@@ -61,10 +53,10 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
         patchNotifyOptions({
           data: {
             id: notifyOptions.id,
-            actions: actions ? 'actions' : '',
-            deadline: deadline ? 'deadline' : '',
-            events: events ? 'events' : '',
-            payments: payments ? 'payments' : '',
+            actions: inputs.actions ? 'actions' : '',
+            deadline: inputs.deadline ? 'deadline' : '',
+            events: inputs.events ? 'events' : '',
+            payments: inputs.payments ? 'payments' : '',
             client_requests: '',
             chat: ''
           },
@@ -91,7 +83,11 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
           <div className={styles.categories}>
             <div className={styles.category}>
               <div className={styles.checkbox}>
-                <Checkbox isChecked={actions} handleChange={handleChangeAction} label={''} />
+                <Checkbox
+                  isChecked={inputs.actions}
+                  handleChange={() => checkboxChangeHandler('actions', !inputs.actions)}
+                  label={''}
+                />
               </div>
               <div className={styles.options}>
                 <div className={styles.name}>{'Actions'}</div>
@@ -102,7 +98,11 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
           <div className={styles.categories}>
             <div className={styles.category}>
               <div className={styles.checkbox}>
-                <Checkbox isChecked={deadline} handleChange={handleChangeDeadline} label={''} />
+                <Checkbox
+                  isChecked={inputs.deadline}
+                  handleChange={() => checkboxChangeHandler('deadline', !inputs.deadline)}
+                  label={''}
+                />
               </div>
               <div className={styles.options}>
                 <div className={styles.name}>{'Deadline'}</div>
@@ -113,7 +113,11 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
           <div className={styles.categories}>
             <div className={styles.category}>
               <div className={styles.checkbox}>
-                <Checkbox isChecked={events} handleChange={handleChangeEvent} label={''} />
+                <Checkbox
+                  isChecked={inputs.events}
+                  handleChange={() => checkboxChangeHandler('events', !inputs.events)}
+                  label={''}
+                />
               </div>
               <div className={styles.options}>
                 <div className={styles.name}>{'Events'}</div>
@@ -125,7 +129,11 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
             <div className={styles.categories}>
               <div className={styles.category}>
                 <div className={styles.checkbox}>
-                  <Checkbox isChecked={payments} handleChange={handleChangePayments} label={''} />
+                  <Checkbox
+                    isChecked={inputs.payments}
+                    handleChange={() => checkboxChangeHandler('payments', !inputs.payments)}
+                    label={''}
+                  />
                 </div>
                 <div className={styles.options}>
                   <div className={styles.name}>{'Payments'}</div>
@@ -134,18 +142,37 @@ const ModalNotifications: FC<ModalNotificationsProps> = ({ modal }) => {
               </div>
             </div>
           ) : null}
+          <div className={styles.categories}>
+            <div className={styles.category}>
+              <div className={styles.checkbox}>
+                <Checkbox
+                  isChecked={inputs.request}
+                  handleChange={() => checkboxChangeHandler('request', !inputs.request)}
+                  label={''}
+                />
+              </div>
+              <div className={styles.options}>
+                <div className={styles.name}>{'Clients request'}</div>
+                <div className={styles.description}>{'Some description about this option'}</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className={styles.containerSettings}>
           <div className={styles.setting}>
             <Checkbox
-              isChecked={clientsRequest}
-              handleChange={handleChangeClientRequest}
+              isChecked={inputs.email}
+              handleChange={() => checkboxChangeHandler('email', !inputs.email)}
               label={'Email notifications'}
             />
           </div>
           <div className={styles.setting}>
-            <Checkbox isChecked={chat} handleChange={handleChangeChat} label={'In-account notifications'} />
+            <Checkbox
+              isChecked={inputs.chat}
+              handleChange={() => checkboxChangeHandler('chat', !inputs.chat)}
+              label={'In-account notifications'}
+            />
           </div>
         </div>
 
