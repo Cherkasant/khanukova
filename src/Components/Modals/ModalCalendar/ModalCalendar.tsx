@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-
 import { SlotInfo } from 'react-big-calendar';
 import { Checkbox, IconButton, Modal } from '@mui/material';
 
@@ -24,6 +23,7 @@ import EventTime from './EventTime/EventTime';
 import NotificationBlock from './NotificationBlock/NotificationBlock';
 
 interface ModalCalendarProps {
+  selectedSlot: SlotInfo;
   onClose: () => void;
   onAddEvent: (title: string) => void;
   isClosed: boolean;
@@ -64,10 +64,8 @@ const initialNotifications: Array<INotification> = [
   }
 ];
 
-
 const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCalendarProps) => {
   const dispatch = useDispatch();
-
 
   const [eventTitle, setEventTitle] = useState('Title new event');
   const [isEditable, setIsEditable] = useState(false);
