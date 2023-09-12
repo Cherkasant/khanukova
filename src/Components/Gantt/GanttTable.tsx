@@ -1,21 +1,23 @@
+import 'gantt-task-react-pro/dist/index.css';
 import { GanttComponent, TaskFieldsModel } from '@syncfusion/ej2-react-gantt';
 
 import { GanttData } from './data';
 
-const Gantt = () => {
+const GanttTable = () => {
   const taskValues: TaskFieldsModel = {
     id: 'TaskID',
-    name: 'TaskName',
+    name: 'Tasks',
     duration: 'Duration',
     progress: 'Progress',
-    child: 'subtasks',
-    dependency: 'Predeceesor'
+    child: 'subtasks'
   };
+
   return (
     <GanttComponent
       dataSource={GanttData}
       taskFields={taskValues}
-      timelineSettings={{ timelineViewMode: 'Week' }}></GanttComponent>
+      timelineSettings={{ timelineViewMode: 'Week' }}
+      showColumnMenu={true}></GanttComponent>
   );
 };
-export default Gantt;
+export default GanttTable;

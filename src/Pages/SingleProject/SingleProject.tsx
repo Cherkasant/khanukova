@@ -39,11 +39,13 @@ import postSelector from '../../Redux/Selectors/postSelector';
 
 import ModalEcaseHead from '../../Components/Modals/ModalEcaseHead';
 
-import Gantt from '../../Components/Gantt/Gantt';
+import GanttTable from '../../Components/Gantt/GanttTable';
 
 import { AddRoundIcon } from '../../Assets/icons/AddRoundIcon';
 
 import FilterProjectScreen from '../../Components/FilteresPanel/FilterProjectScreen';
+
+import Events from '../../Components/Events';
 
 import styles from './SingleProject.module.css';
 
@@ -211,7 +213,8 @@ const SingleProject = () => {
       ) : null}
       {activeTab === Tabs.Resourses ? <Resourses /> : null}
       {activeTab === Tabs.Documents ? <Documents /> : null}
-      {activeTab === Tabs.Gantt ? <Gantt /> : null}
+      {activeTab === Tabs.Gantt ? <GanttTable /> : null}
+      {activeTab === Tabs.Events ? <Events /> : null}
       <ModalNewMilestone />
       <ModalNewTask />
       <ModalNewSubTask />
