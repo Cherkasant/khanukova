@@ -1,7 +1,7 @@
 import { create } from 'apisauce';
 
 import { AllChat, AllChatFilter, AllMessagesChat, CreateChat } from '../Types/chat';
-const API = create({ baseURL: 'https://agile-dreamers-chat-be.herokuapp.com' });
+const API = create({ baseURL: 'https://chat.agiledreamers.com' });
 
 const getAllChat = (token: string, data: AllChat) => {
   const { page_size, page_num } = data;
@@ -17,9 +17,10 @@ const getAllChat = (token: string, data: AllChat) => {
 };
 
 const getAllChatFilter = (token: string, data: AllChatFilter) => {
+  const { clients_industry, software_stack, industry_choice } = data;
   return API.get(
     '/chat/chat-filter',
-    { data },
+    { clients_industry, software_stack, industry_choice },
     {
       headers: {
         Authorization: `bearer ${token}`
@@ -62,9 +63,10 @@ const getMessagesChat = (token: string, data: AllMessagesChat) => {
 };
 
 const addUserChat = (token: string, chat_id: number, user_id: number) => {
+  const user_idd = [91];
   return API.post(
-    `/chat/add/${40}/${3}`,
-    {},
+    `/chat/add/${40}`,
+    { all_users_id: user_idd },
     {
       headers: {
         Authorization: `bearer ${token}`

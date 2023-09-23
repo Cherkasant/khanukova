@@ -3,14 +3,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { toast } from 'react-toastify';
 
-import {
-  AllChat,
-  AllChatFilter,
-  AllChatPayload,
-  AllMessagesChat,
-  AllMessagesChatPayload,
-  CreateChat
-} from '../Types/chat';
+import { AllChatFilter, AllChatPayload, AllMessagesChatPayload, CreateChat } from '../Types/chat';
 
 import API_CHAT from '../Utils/apiChat';
 import {
@@ -44,7 +37,7 @@ function* getAllChatWorker(action: PayloadAction<AllChatPayload>) {
 function* getAllChatFilterWorker(action: PayloadAction<AllChatFilter>) {
   const { ok, data } = yield callCheckingAuth(API_CHAT.getAllChatFilter, action.payload);
   if (ok && data) {
-    yield put(setAllChatFilter(data));
+    yield put(setAllChatFilter(data.chat_filter));
   } else {
     console.log(data);
   }

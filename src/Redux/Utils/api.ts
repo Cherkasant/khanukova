@@ -20,7 +20,7 @@ import {
 } from '../Types/tasks';
 import { PostMilestoneCommentType } from '../Types/comments';
 
-const API = create({ baseURL: ' https://apipuzzle-be.herokuapp.com' });
+const API = create({ baseURL: ' https://api.agiledreamers.com' });
 
 const registerUser = (data: RegisterUserData) => {
   return API.post('/auth/users/', data);

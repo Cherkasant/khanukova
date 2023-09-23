@@ -13,6 +13,8 @@ import { Role } from '../../Components/constants/@types';
 import { addNewUserChat, createChat, getChat, getMessagesChat } from '../../Redux/Reducers/chatReducer';
 import chatSelectors from '../../Redux/Selectors/chatSelectors';
 import FilterChat from '../../Components/Chats/FilterChat';
+import ModalChat from '../../Components/Chats/ModalChat';
+import { ModalDeclined } from '../../Components/Chats/ModalChat/ModalDeclined';
 
 import AllChatsPanel from '../../Components/Chats/AllChatsPanel';
 import AllMessagesPanel from '../../Components/Chats/AllMessagesPanel';
@@ -21,13 +23,13 @@ import styles from './Chats.module.css';
 
 export let socket: WebSocket;
 const conectSoket = (id: number) => {
-  socket = new WebSocket(`wss://agile-dreamers-chat-be.herokuapp.com/websocket/ws/${id}`);
+  socket = new WebSocket(`wss://chat.agiledreamers.com/websocket/ws/${id}`);
 };
 
 const Chats = () => {
   const dispatch = useDispatch();
   const [isOwervriteMessages, setIsOwervriteMessages] = useState(false);
-  const [chatId, setChatId] = useState(0);
+  const [chatId, setChatId] = useState(1);
   const [inputSearch, setInputSearch] = useState('');
   const [cursor, setCursor] = useState(1);
 
@@ -47,9 +49,11 @@ const Chats = () => {
   };
 
   const createChatHandler = () => {
+    const fd = new FormData();
     dispatch(
       createChat({
-        title: '40'
+        title: 'test chat_new2',
+        logo: fd
       })
     );
   };
@@ -58,7 +62,7 @@ const Chats = () => {
     dispatch(
       addNewUserChat({
         chat_id: 40,
-        user_id: 3
+        user_id: 58
       })
     );
   };
@@ -69,7 +73,9 @@ const Chats = () => {
         className={classNames(styles.panelChats, {
           [styles.panelChatsNoHead]: personalInfoList?.role[0] !== Role.PO
         })}>
-        <h3 className={classNames(styles.title, { [styles.titleNotHead]: personalInfoList?.role[0] !== Role.PO })}>
+        <h3
+          onClick={addNewUserHandler}
+          className={classNames(styles.title, { [styles.titleNotHead]: personalInfoList?.role[0] !== Role.PO })}>
           {'Chats'}
         </h3>
         {personalInfoList?.role[0] === Role.PO ? <FilterChat /> : null}
@@ -109,14 +115,21 @@ const Chats = () => {
             </div>
           </div>
         ) : null}
-        <AllMessagesPanel
-          chatId={chatId}
-          conectSoket={conectSoket}
-          isOwervriteMessages={isOwervriteMessages}
-          setIsOwervriteMessages={setIsOwervriteMessages}
-          cursor={cursor}
-          setCursor={setCursor}
-        />
+        {chatId ? (
+          <AllMessagesPanel
+            chatId={chatId}
+            conectSoket={conectSoket}
+            isOwervriteMessages={isOwervriteMessages}
+            setIsOwervriteMessages={setIsOwervriteMessages}
+            cursor={cursor}
+            setCursor={setCursor}
+          />
+        ) : (
+          <div className={styles.noChat}>Choose a chat</div>
+        )}
+      </div>
+      <div style={{ color: 'red' }} onClick={createChatHandler}>
+        кликни
       </div>
     </div>
   );

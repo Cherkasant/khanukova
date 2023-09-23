@@ -34,39 +34,7 @@
 .innerFilters {
   display: flex;
   justify-content: space-between;
-  gap: 11px;
+  gap: 9px;
 }
 
-.placeholder {
-  color: #212121;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
-  margin-left: 0;
-}
 
-.dropdownControl {
-  height: 40px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  padding: 8px 40px 8px 12px;
-}
-
-.menuClassName {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
-}
-
-.arrowFilter {
-  top: 13px;
-  right: 13px;
-}
-
-/* .arrowFilter {
-  top: 18px;
-  right: 13px;
-} */

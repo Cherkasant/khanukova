@@ -10,6 +10,11 @@ import { ACCESS_TOKEN_KEY } from '../../constants/consts';
 import { socket } from '../../../Pages/Chats/Chats';
 import InputChat from '../InputChat';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
+import { ModalDeclined } from '../ModalChat/ModalDeclined';
+import ModalChat from '../ModalChat';
+import { Role } from '../../constants/@types';
+import profileSelectors from '../../../Redux/Selectors/profileSelectors';
+import { mocMessages } from '../messages';
 
 import styles from './AllMessagesPanel.module.css';
 
@@ -33,7 +38,9 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
   const dispatch = useDispatch();
   const refMessages = useRef<HTMLDivElement>(null);
   const [messagesValue, setMessages] = useState('');
+  const [approve, setApprove] = useState(false);
   const qauntityAllMessages = useSelector(chatSelectors.getQauntityAllMessages);
+  const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
   const messages = useSelector(chatSelectors.getMessages);
   const userId = useSelector(authSelectors.getUserId);
   const token = localStorage.getItem(ACCESS_TOKEN_KEY) || sessionStorage.getItem(ACCESS_TOKEN_KEY) || '';
@@ -47,18 +54,18 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
     return messages.length < qauntityAllMessages;
   };
 
-  const onSendMessage = () => {
+  const onSendMessage = (messages: string) => {
     if (!messagesValue) {
       return;
     }
-    socket.send(messagesValue);
+    socket.send(messages);
     setMessages('');
     refMessages.current?.scrollTo(0, 99999);
   };
 
   const onSubmitEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
-      onSendMessage();
+      onSendMessage(messagesValue);
     }
   };
 
@@ -72,7 +79,15 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
       const data = JSON.parse(event.data);
       const text = data.text;
       const userId = Number(data.user_id);
-      dispatch(setMessagesChat({ data: [{ text, user_id: userId }], isOwervrite: false, isMessage: true }));
+      const account_photo = data.account_photo;
+      const full_name = data.username;
+      dispatch(
+        setMessagesChat({
+          data: [{ text, user_id: userId, full_name, account_photo }],
+          isOwervrite: false,
+          isMessage: true
+        })
+      );
     });
     return () => {
       socket.removeEventListener('close', () => {});
@@ -85,6 +100,7 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
       refMessages.current?.scrollTo(0, 99999);
     }
   }, [messages]);
+
   return (
     <>
       <div ref={refMessages} id="scrollableDiv" className={classNames(styles.chatsMain)}>
@@ -99,20 +115,51 @@ const AllMessagesPanel: React.FC<AllMessagesPanelType> = ({
           scrollableTarget="scrollableDiv">
           {messages.map((value, index) => (
             <div
-              key={index}
-              className={classNames(styles.message, {
-                [styles.messageMe]: userId === value.user_id
-              })}>
-              {value.text}
+              key={value.id}
+              className={classNames(styles.wrapMessages, { [styles.wrapMessagesMe]: userId === value.user_id })}>
+              {value?.account_photo ? (
+                <div className={styles.avatar}>
+                  <img
+                    className={styles.avatarPhoto}
+                    src="https://www.vokrug.tv/pic/person/e/e/5/4/ee54d6e76295bf9d955c93fdd9e2285a.jpeg"
+                    alt="avatar"
+                  />
+                </div>
+              ) : (
+                <div className={styles.avatar}>{value?.full_name ? value?.full_name[0].toLocaleUpperCase() : null}</div>
+              )}
+              <div
+                key={index}
+                className={classNames(styles.message, {
+                  [styles.messageMe]: userId === value.user_id
+                })}>
+                {value.text}
+              </div>
             </div>
           ))}
+          {personalInfoList?.role[0] === Role.Head ? (
+            <div className={styles.innerBtn}>
+              <button onClick={() => setApprove(true)}>Approve</button>
+              <button onClick={() => setApprove(false)}>Decline</button>
+            </div>
+          ) : null}
         </InfiniteScroll>
+        {personalInfoList?.role[0] === Role.PO ? (
+          !messages.length ? (
+            <ModalChat onSendMessages={() => onSendMessage(mocMessages)} />
+          ) : null
+        ) : null}
+        {personalInfoList?.role[0] === Role.PO ? (
+          approve ? (
+            <ModalDeclined onClose={() => setApprove(false)} />
+          ) : null
+        ) : null}
       </div>
       <div className={styles.chatsFooter} onKeyUp={(e) => onSubmitEnter(e)}>
         <InputChat disabled={!chatId} setMessages={setMessages} messagesValue={messagesValue} />
         <PuzzleButton
           disabled={!chatId}
-          onClick={onSendMessage}
+          onClick={() => onSendMessage(messagesValue)}
           btnTitle={'Send'}
           btnType={PuzzleButtonTypes.TextButton}
         />
