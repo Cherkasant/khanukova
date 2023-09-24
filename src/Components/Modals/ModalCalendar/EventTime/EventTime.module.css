@@ -1,0 +1,124 @@
+.eventTime {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.datePickerContainer {
+  position: relative;
+}
+
+.datePickerContainer:nth-child(2) {
+  position: relative;
+  margin-right: 46px;
+}
+
+.datePickerContainer:nth-child(2)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -46px;
+  width: 36px;
+  height: 1px;
+  background-color: #d9e1f0;
+}
+
+.timeItem {
+  padding: 7px;
+  border-radius: 20px;
+  border: 1px solid #d9e1f0;
+}
+
+:global(.react-datepicker-popper) {
+  padding: 0 !important;
+  inset: 0 !important;
+  transform: none !important;
+  top: calc(100% + 10px) !important;
+}
+
+:global(.react-datepicker-ignore-onclickoutside) {
+  background-color: #d9e1f0;
+}
+
+:global(.react-datepicker__triangle) {
+  display: none;
+}
+
+:global(.react-datepicker) {
+  border: 1px solid #e5e0eb;
+  padding: 10px;
+  z-index: 100;
+}
+
+:global(.react-datepicker__header) {
+  padding-top: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e0eb;
+}
+
+.customHeader {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  display: flex;
+  padding: 0 7px 0 13px;
+  margin-bottom: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.customHeader button {
+  width: 25px;
+  height: 25px;
+  padding: 0;
+}
+
+.customHeader button:not(:last-child) {
+  margin-right: 5px;
+}
+
+:global(.react-datepicker__day-name),
+:global(.react-datepicker__day--outside-month) {
+  color: #a3a3a3;
+}
+
+:global(.react-datepicker__day),
+:global(.react-datepicker__day-name) {
+  margin: 0 !important;
+  width: 27px;
+}
+
+:global(.react-datepicker__day-name) {
+  font-size: 12px;
+}
+
+:global(.react-datepicker__day) {
+  font-size: 10px;
+}
+
+:global(.react-datepicker__day--today) {
+  font-weight: 700;
+}
+
+:global(.react-datepicker__day--selected) {
+  background-color: #1258ca;
+}
+
+:global(.react-datepicker__day--keyboard-selected:not(.react-datepicker__day--today)) {
+  background-color: #ffffff;
+}
+
+:global(.react-datepicker__header--time) {
+  display: none;
+}
+
+:global(.react-datepicker__time-list-item) {
+  padding: 10px 0 !important;
+  height: auto !important;
+  font-size: 10px;
+}
+
+:global(.react-datepicker__time-list-item--selected) {
+  background-color: #1258ca !important;
+  font-weight: 400 !important;
+}

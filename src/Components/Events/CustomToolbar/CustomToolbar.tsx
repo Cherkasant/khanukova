@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 
 import { Navigate, View } from 'react-big-calendar';
@@ -17,6 +17,10 @@ interface CustomToolbarProps {
 
 const CustomToolbar = ({ onNavigate, label, activeView, onView }: CustomToolbarProps) => {
   const [currentView, setCurrentView] = useState<View>(activeView);
+
+  useEffect(() => {
+    onView(currentView);
+  }, []);
 
   const handleViewChange = (view: View) => {
     onView(view);

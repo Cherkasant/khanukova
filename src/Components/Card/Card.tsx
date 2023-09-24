@@ -12,7 +12,7 @@ import { PauseProjectIcon } from '../../Assets/ProfilePage/PauseProjectIcon';
 
 import profileSelectors from '../../Redux/Selectors/profileSelectors';
 
-import { setCloseProjectModal, setDeletedProjectId } from '../../Redux/Reducers/postReducer';
+import { getSingleProjectData, setCloseProjectModal, setDeletedProjectId } from '../../Redux/Reducers/postReducer';
 
 import styles from './Card.module.css';
 
@@ -53,6 +53,7 @@ const Card: FC<CardProps> = ({ card, edit }) => {
         <div
           className={styles.title}
           onClick={() => {
+            dispatch(getSingleProjectData(id));
             navigate(`/project/${id}`);
           }}>
           {project_name}

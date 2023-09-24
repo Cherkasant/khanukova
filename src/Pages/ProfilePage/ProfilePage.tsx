@@ -125,7 +125,14 @@ const ProfilePage = () => {
     () => [
       { name: 'Personal Info', key: TabsProfile.PersonalInfo },
       { name: 'Company Profile', key: TabsProfile.CompanyProfile },
-      { name: 'Dev Team', key: TabsProfile.DevTeam }
+      { name: 'Team', key: TabsProfile.DevTeam }
+    ],
+    []
+  );
+  const TABS_NAMES_PO = useMemo(
+    () => [
+      { name: 'Personal Info', key: TabsProfile.PersonalInfo },
+      { name: 'Team', key: TabsProfile.DevTeam }
     ],
     []
   );
@@ -134,12 +141,19 @@ const ProfilePage = () => {
     <div className={styles.container}>
       <div
         className={classNames({
-          [styles.header]: isHead
+          [styles.header]: isHead || isPO
         })}>
         <div className={styles.titleBlock}>
           <Title name={'My Profile'} className={styles.title} />
         </div>
-        {isHead ? <TabsListProfile activeTab={activeTab} onSelectTab={onTabClick} tabsList={TABS_NAMES} /> : null}
+        {isHead || isPO ? (
+          <TabsListProfile
+            activeTab={activeTab}
+            onSelectTab={onTabClick}
+            tabsList={!isPO ? TABS_NAMES : TABS_NAMES_PO}
+            isPo={isPO}
+          />
+        ) : null}
       </div>
 
       {activeTab === TabsProfile.PersonalInfo ? (

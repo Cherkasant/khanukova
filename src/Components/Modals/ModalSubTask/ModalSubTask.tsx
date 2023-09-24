@@ -22,7 +22,7 @@ import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import {
   deleteTask,
   getAllSubtaskDependencies,
-  getSingleProject,
+  getSingleProjectData,
   patchSubTask,
   setModalSubTask
 } from '../../../Redux/Reducers/postReducer';
@@ -123,7 +123,7 @@ const ModalSubTask = () => {
           },
           callback: () => {
             if (id) {
-              dispatch(getSingleProject(+id));
+              dispatch(getSingleProjectData(+id));
               dispatch(setModalSubTask(false));
             }
           }
@@ -241,13 +241,19 @@ const ModalSubTask = () => {
           id: singleSubTask?.id,
           callback: () => {
             if (id) {
-              dispatch(getSingleProject(+id));
+              dispatch(getSingleProjectData(+id));
               dispatch(setModalSubTask(false));
             }
           }
         })
       );
     }
+  };
+
+  const [submit, setSubmit] = useState(false);
+
+  const onSubmitNewClick = () => {
+    setSubmit(!submit);
   };
 
   return (
@@ -297,19 +303,20 @@ const ModalSubTask = () => {
               <div className={styles.title}>{'Description'}</div>
               <textarea
                 className={classNames(styles.descriptionInput, {
-                  [styles.disabled]: isDevTeam
+                  [styles.disabled]: isDevTeam || submit
                 })}
                 placeholder={'Write'}
                 value={descriptionValue}
                 onChange={onChangeDescription}
-                disabled={isDevTeam}
+                disabled={isDevTeam || submit}
               />
-              {/*<PuzzleButton*/}
-              {/*  title={"Submit new"}*/}
-              {/*  type={PuzzleButtonTypes.TextButton}*/}
-              {/*  className={styles.submitBtn}*/}
-              {/*  disabled={!descriptionValue}*/}
-              {/*/>*/}
+              <PuzzleButton
+                btnTitle={!submit ? 'Submit new' : 'Edit'}
+                btnType={PuzzleButtonTypes.TextButton}
+                btnClassName={styles.submitBtn}
+                disabled={!descriptionValue}
+                onClick={onSubmitNewClick}
+              />
             </div>
 
             <div className={styles.attachmentContainer}>

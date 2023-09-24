@@ -10,6 +10,8 @@ import calendarReducer from './Reducers/calendarReducer';
 import commentReducer from './Reducers/commentReducer';
 import statusApi from './Reducers/statusApi';
 import chatReducer from './Reducers/chatReducer';
+import notificationReducer from './Reducers/notificationReducer';
+import slotReducer from './Reducers/slotReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -22,7 +24,9 @@ export const store = configureStore({
     calendarReducer,
     commentReducer,
     statusApi,
-    chatReducer
+    chatReducer,
+    notificationReducer,
+    slotReducer
   },
   middleware: [sagaMiddleware]
 });

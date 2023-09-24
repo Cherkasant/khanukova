@@ -16,7 +16,7 @@
   width: 100%;
   height: 93vh;
   padding: 15px 30px 10px 30px;
-  position: relative;
+  /*position: relative;*/
   overflow: hidden;
 }
 
@@ -330,7 +330,7 @@
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  left: 30px;
+  left: 480px;
   transform: translate(0, 10px);
   background: rgba(183, 210, 254, 0.6);
   padding: 10px;

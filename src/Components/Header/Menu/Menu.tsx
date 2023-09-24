@@ -56,8 +56,6 @@ const UserMenu = () => {
     setOpened(!isOpened);
   };
 
-  const connectionSocketHandler = () => {};
-
   const navButtons = [
     {
       name: 'My profile',
@@ -69,8 +67,8 @@ const UserMenu = () => {
       name: 'Chats',
       icon: <ChatIcon />,
       link: PathNames.Chats,
-      activeIcon: <ChatActiveIcon />,
-      onClick: connectionSocketHandler
+      activeIcon: <ChatActiveIcon />
+      //  onClick: connectionSocketHandler
     },
     {
       name: 'Projects',
@@ -103,9 +101,9 @@ const UserMenu = () => {
     <>
       <div className={styles.container}>
         <div>
-          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon, activeArrow, onClick }) => (
+          {navButtons.map(({ link, name, icon, button, active, projects, activeIcon, activeArrow }) => (
             <NavLink
-              onClick={onClick}
+              // onClick={onClick}
               key={name}
               to={link}
               className={classNames(

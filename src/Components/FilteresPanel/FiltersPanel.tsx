@@ -34,7 +34,12 @@ const FiltersPanel: FC<FiltersPanelProps> = ({ children }) => {
       <div className={styles.children}>{children}</div>
 
       <div className={styles.btnContainer}>
-        <PuzzleButton btnTitle={'Apply'} btnType={PuzzleButtonTypes.TextButton} btnClassName={styles.applyBtn} />
+        <PuzzleButton
+          btnTitle={'Apply'}
+          btnType={PuzzleButtonTypes.TextButton}
+          btnClassName={styles.applyBtn}
+          btnDisabled={true}
+        />
         <div className={styles.clearBtn}>{'Clear the filter'}</div>
       </div>
     </div>
@@ -42,4 +47,3 @@ const FiltersPanel: FC<FiltersPanelProps> = ({ children }) => {
 };
 
 export default FiltersPanel;
-

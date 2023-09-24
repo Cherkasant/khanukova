@@ -19,8 +19,11 @@ import {
   TaskModalType
 } from '../Types/tasks';
 import { PostMilestoneCommentType } from '../Types/comments';
+import { NotifyOptionsType } from '../Types/notification';
 
-const API = create({ baseURL: ' https://api.agiledreamers.com' });
+
+const API = create({ baseURL: 'https://api.agiledreamers.com/' });
+
 
 const registerUser = (data: RegisterUserData) => {
   return API.post('/auth/users/', data);
@@ -348,6 +351,45 @@ const getAllNotCreatedSubTaskDependencies = (token: string, id: number) => {
     { headers: { Authorization: `JWT ${token}` } }
   );
 };
+
+const getAllNotifications = (token: string) => {
+  return API.get('/notifications/', {}, { headers: { Authorization: `JWT ${token}` } });
+};
+const getUserInfoWithID = (token: string, id: number) => {
+  return API.get(
+    `/auth/users/${id}/`,
+    {},
+    {
+      headers: { Authorization: `JWT ${token}` }
+    }
+  );
+};
+
+const getNotifyOptions = (token: string) => {
+  return API.get(
+    '/auth/notify-options/',
+    {},
+    {
+      headers: { Authorization: `JWT ${token}` }
+    }
+  );
+};
+const patchNotifyOptions = (token: string, options: NotifyOptionsType) => {
+  return API.patch('/auth/notify-options/', options, {
+    headers: { Authorization: `JWT ${token}` }
+  });
+};
+
+const getSingleProjectData = (token: string, id: number) => {
+  return API.get(
+    `/project-subdiv/project-hierarchy/?project=${id}`,
+    {},
+    {
+      headers: { Authorization: `JWT ${token}` }
+    }
+  );
+};
+
 export default {
   registerUser,
   sendResetEmail,
@@ -411,5 +453,10 @@ export default {
   getAllSubtaskDependencies,
   getAllNotCreatedMilestoneDependencies,
   getAllNotCreatedTaskDependencies,
-  getAllNotCreatedSubTaskDependencies
+  getAllNotCreatedSubTaskDependencies,
+  getAllNotifications,
+  getUserInfoWithID,
+  getNotifyOptions,
+  patchNotifyOptions,
+  getSingleProjectData
 };

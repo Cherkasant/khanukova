@@ -3,6 +3,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Column, useExpanded, useSortBy, useTable } from 'react-table';
 
+import { Avatar } from 'antd';
+
 import { Close } from '../../Assets/Table/Close';
 import { AddNewTaskIcon } from '../../Assets/Table/AddNewTaskIcon';
 import { ArrowDropDownIcon } from '../../Assets/Table/ArrowDropDownIcon';
@@ -22,12 +24,13 @@ import {
   setTaskTitle
 } from '../../Redux/Reducers/postReducer';
 import postSelector from '../../Redux/Selectors/postSelector';
-import { SubTaskTypeTable, TaskTypeTable } from '../../Redux/Types/tasks';
 import { TableColumns } from '../constants/Table/TableData';
 import { AddNewSubTaskIcon } from '../../Assets/Table/AddNewSubTaskIcon';
 
 import { ArrowDropDownTaskIcon } from '../../Assets/Table/ArrowDropDownTaskIcon';
 import { CloseTask } from '../../Assets/Table/CloseTask';
+
+import { SubTaskTypeTable, TaskTypeTable } from '../../Redux/Types/tasks';
 
 import styles from './Table.module.css';
 
@@ -35,80 +38,80 @@ const Table = () => {
   const dispatch = useDispatch();
 
   const singleProject = useSelector(postSelector.getSingleProject);
-
-  const taskData = singleProject?.milestone_data.map((el) => {
-    return {
-      id: el.id,
-      milestone_name: el.milestone_name,
-      description: el.description,
-      attachment: el.attachment,
-      responsible: el.responsible_data,
-      priority: el.priority,
-      start_date: el.start_date,
-      deadline: el.deadline,
-      duration: el.duration,
-      labels: el.labels,
-      color_labels: el.color_labels,
-      dependence: el.dependence_name,
-      progress: el.progress,
-      status: el.status,
-      payment_status: el.payment_status,
-      subRows: !el.task_data
-        ? null
-        : el.task_data.map((elem: TaskTypeTable) => {
-            return {
-              id: elem.id,
-              milestone_name: elem.task_name,
-              description: elem.description,
-              attachment: elem.attachment,
-              responsible: elem.responsible,
-              priority: elem.priority,
-              start_date: elem.start_date,
-              deadline: elem.deadline,
-              duration: elem.duration,
-              labels: elem.labels,
-              color_labels: elem.color_labels,
-              dependence: elem.dependence_name,
-              progress: elem.progress,
-              status: elem.status,
-              payment_status: elem.payment_status,
-              subRows: !elem.subtask_data
-                ? null
-                : elem.subtask_data.map((element: SubTaskTypeTable) => {
-                    return {
-                      id: element.id,
-                      milestone_name: element.sub_task_name,
-                      description: element.description,
-                      attachment: element.attachment,
-                      responsible: element.responsible,
-                      priority: element.priority,
-                      start_date: element.start_date,
-                      deadline: element.deadline,
-                      duration: element.duration,
-                      labels: element.labels,
-                      color_labels: element.color_labels,
-                      dependence: element.dependence_name,
-                      progress: element.progress,
-                      status: element.status,
-                      payment_status: element.payment_status
-                    };
-                  })
-            };
-          })
-    };
-  });
+  const singleProjectData = useSelector(postSelector.getSingleProjectData);
 
   const [taskInfo, setTaskInfo] = useState<any>([]);
   useEffect(() => {
-    if (singleProject) {
+    if (singleProjectData) {
+      const taskData = singleProjectData?.milestone_data.map((el) => {
+        return {
+          id: el.id,
+          milestone_name: el.milestone_name,
+          description: el.description,
+          attachment: el.attachment,
+          responsible: el.responsible_data,
+          priority: el.priority,
+          start_date: el.start_date,
+          deadline: el.deadline,
+          duration: el.duration,
+          labels: el.labels,
+          color_labels: el.color_labels,
+          dependence: el.dependence_name,
+          progress: el.progress,
+          status: el.status,
+          payment_status: el.payment_status,
+          subRows: !el.task_data
+            ? null
+            : el.task_data.map((elem: TaskTypeTable) => {
+                return {
+                  id: elem.id,
+                  milestone_name: elem.task_name,
+                  description: elem.description,
+                  attachment: elem.attachment,
+                  responsible: elem.responsible_data,
+                  priority: elem.priority,
+                  start_date: elem.start_date,
+                  deadline: elem.deadline,
+                  duration: elem.duration,
+                  labels: elem.labels,
+                  color_labels: elem.color_labels,
+                  dependence: elem.dependence_name,
+                  progress: elem.progress,
+                  status: elem.status,
+                  payment_status: elem.payment_status,
+                  subRows: !elem.subtask_data
+                    ? null
+                    : elem.subtask_data.map((element: SubTaskTypeTable) => {
+                        return {
+                          id: element.id,
+                          milestone_name: element.sub_task_name,
+                          description: element.description,
+                          attachment: element.attachment,
+                          responsible: element.responsible_data,
+                          priority: element.priority,
+                          start_date: element.start_date,
+                          deadline: element.deadline,
+                          duration: element.duration,
+                          labels: element.labels,
+                          color_labels: element.color_labels,
+                          dependence: element.dependence_name,
+                          progress: element.progress,
+                          status: element.status,
+                          payment_status: element.payment_status
+                        };
+                      })
+                };
+              })
+        };
+      });
       setTaskInfo(taskData);
     }
-  }, [singleProject]);
+  }, [singleProjectData]);
 
   const COLUMNS: Array<Column> = [
     {
       Header: TableColumns.item,
-      Footer: (props: any) => (
+      Footer: () => (
         <div
           className={styles.footer}
           onClick={() => {
@@ -223,11 +226,28 @@ const Table = () => {
       Header: TableColumns.responsible,
       Footer: '',
       accessor: 'responsible',
-      Cell: (props) => (
+      Cell: (props: any) => (
         <div className={styles.responsibleContainer}>
-          <div className={styles.responsibleCell} onClick={() => console.log(props)}>
-            {props.value}
-          </div>
+          <Avatar.Group
+            maxCount={2}
+            maxPopoverTrigger="click"
+            size={36}
+            maxStyle={{ backgroundColor: '#9bacc9', cursor: 'pointer' }}>
+            {props.value.map((el: any) => {
+              return (
+                <div key={el.id}>
+                  <Avatar
+                    className={styles.responsibleCell}
+                    style={{ fontSize: '16px', lineHeight: '22px' }}
+                    src={el.account_photo}
+                    alt={''}
+                    gap={4}>
+                    {el.nickname}
+                  </Avatar>
+                </div>
+              );
+            })}
+          </Avatar.Group>
         </div>
       )
     },
