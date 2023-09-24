@@ -3,6 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {
   AllChat,
   AllChatData,
+  AllChatDataFilter,
   AllChatFilter,
   AllChatPayload,
   AllMessagesChatPayload,
@@ -15,9 +16,10 @@ type initialStateType = {
   chat: AllChatData | undefined;
   messagesChat: AllMessagesData[];
   messagesChatRender: AllMessagesData[];
-  allChatsFilter: AllChatData[];
+  allChatsFilter: AllChatDataFilter[];
   qauntityAllChat: number;
   qauntityAllMessages: number;
+  checkFilterChats: boolean;
 };
 
 const initialState: initialStateType = {
@@ -27,7 +29,8 @@ const initialState: initialStateType = {
   messagesChatRender: [],
   allChatsFilter: [],
   qauntityAllChat: 0,
-  qauntityAllMessages: 0
+  qauntityAllMessages: 0,
+  checkFilterChats: false
 };
 
 const chatSlice = createSlice({
@@ -69,6 +72,9 @@ const chatSlice = createSlice({
     },
     setQauntityAllMessages: (state, actions) => {
       state.qauntityAllMessages = actions.payload;
+    },
+    setCheckFilterChats: (state, actions) => {
+      state.checkFilterChats = actions.payload;
     }
   }
 });
@@ -85,7 +91,8 @@ export const {
   setAllChatFilter,
   addNewUserChat,
   setQauntityAllChat,
-  setQauntityAllMessages
+  setQauntityAllMessages,
+  setCheckFilterChats
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -77,7 +77,6 @@ const ProfilePage = () => {
   const inputFile = useRef<any>(null);
 
   const [file, setFile] = useState<any>(null);
-
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       setFile(event.target.files[0]);
@@ -93,7 +92,6 @@ const ProfilePage = () => {
       );
     }
   };
-
   const onSaveBtnClick = () => {
     const formData = new FormData();
     formData.append('full_name', name);

@@ -20,8 +20,10 @@ const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandl
   const dispatch = useDispatch();
   const [isOwervrite, setIsOwervrite] = useState(false);
   const allChats = useSelector(chatSelectors.getAllChats);
+  const allChatsFilters = useSelector(chatSelectors.getAllChatsFilter);
   const qauntityAllChat = useSelector(chatSelectors.getQauntityAllChat);
   const personalInfoList = useSelector(profileSelectors.getPersonalInfo);
+  const checkFilterChats = useSelector(chatSelectors.checkFilterChats);
   const [page, setPage] = useState(1);
 
   const onScroll = () => {
@@ -36,7 +38,6 @@ const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandl
   useEffect(() => {
     dispatch(getAllChat({ data: { page_size: 10, page_num: page }, isOwervrite }));
   }, [page]);
-
   return (
     <div className={styles.panelChatsInner}>
       <div
@@ -44,25 +45,42 @@ const AllChatsPanel: React.FC<AllChatsPanelType> = ({ chatId, clickUserChatHandl
         className={classNames(styles.panelChatsUsers, {
           [styles.panelChatsUsersNoHead]: personalInfoList?.role[0] !== Role.PO
         })}>
-        <InfiniteScroll
-          next={onScroll}
-          hasMore={hasMore()}
-          loader={''}
-          dataLength={allChats.length}
-          scrollableTarget="parentScrollDiv">
-          {allChats.map((value, index) => (
-            <UserChat
-              key={index}
-              onClick={() => clickUserChatHandler(value.id)}
-              name={value.title}
-              team={''}
-              className={classNames(styles.wrapUserChat, {
-                [styles.active]: value.id === chatId,
-                [styles.activeTitle]: value.id === chatId
-              })}
-            />
-          ))}
-        </InfiniteScroll>
+        {!checkFilterChats ? (
+          <InfiniteScroll
+            next={onScroll}
+            hasMore={hasMore()}
+            loader={''}
+            dataLength={allChats.length}
+            scrollableTarget="parentScrollDiv">
+            {allChats.map((value) => (
+              <UserChat
+                key={value.id}
+                onClick={() => clickUserChatHandler(value.id)}
+                name={value.title}
+                team={''}
+                className={classNames(styles.wrapUserChat, {
+                  [styles.active]: value.id === chatId,
+                  [styles.activeTitle]: value.id === chatId
+                })}
+              />
+            ))}
+          </InfiniteScroll>
+        ) : (
+          <div>
+            {allChatsFilters.map((value) => (
+              <UserChat
+                key={value.HeadCompany.id}
+                onClick={() => clickUserChatHandler(value.HeadCompany.id)}
+                name={value.HeadCompany.client_industry}
+                team={value.HeadCompany.contact_marketing}
+                className={classNames(styles.wrapUserChat, {
+                  [styles.active]: value.HeadCompany.id === chatId,
+                  [styles.activeTitle]: value.HeadCompany.id === chatId
+                })}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

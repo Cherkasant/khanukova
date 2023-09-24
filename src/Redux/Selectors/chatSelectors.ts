@@ -6,5 +6,6 @@ export default {
   getChats: (state: RootState) => state.chatReducer.chat,
   getMessages: (state: RootState) => state.chatReducer.messagesChat,
   getQauntityAllChat: (state: RootState) => state.chatReducer.qauntityAllChat,
-  getQauntityAllMessages: (state: RootState) => state.chatReducer.qauntityAllMessages
+  getQauntityAllMessages: (state: RootState) => state.chatReducer.qauntityAllMessages,
+  checkFilterChats: (state: RootState) => state.chatReducer.checkFilterChats
 };

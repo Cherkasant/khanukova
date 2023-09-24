@@ -21,7 +21,9 @@ import {
 import { PostMilestoneCommentType } from '../Types/comments';
 import { NotifyOptionsType } from '../Types/notification';
 
+
 const API = create({ baseURL: 'https://api.agiledreamers.com/' });
+
 
 const registerUser = (data: RegisterUserData) => {
   return API.post('/auth/users/', data);
