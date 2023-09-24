@@ -1,18 +1,25 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar, momentLocalizer, SlotInfo, View } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 
+import classNames from 'classnames';
+
 import ModalCalendar from '../Modals/ModalCalendar/ModalCalendar';
 import { setSelectedSlot } from '../../Redux/Reducers/slotReducer';
 import slotSelectors from '../../Redux/Selectors/slotSelectors';
+
+import calendarSelector from '../../Redux/Selectors/calendarSelector';
+
+import { setCalendarModalVisible } from '../../Redux/Reducers/calendarReducer';
 
 import styles from './Events.module.css';
 import CustomToolbar from './CustomToolbar/CustomToolbar';
 import CustomHeader from './CustomHeader/CustomHeader';
 import Event from './Event/Event';
 import EventSearch from './EventSearch/EventSearch';
+import EventModal from './EventModal';
 
 const localizer = momentLocalizer(moment);
 
@@ -45,9 +52,17 @@ const Events = () => {
   const [events, setEvents] = useState<Array<IEvent>>(initialEvents);
   const [isModalClosed, setIsModalClosed] = useState(true);
 
+  const calendar = useSelector(calendarSelector.getCalendar);
   const selectedSlot = useSelector(slotSelectors.getSelectedSlot);
+  const isVisible = useSelector(calendarSelector.calendarModalVisble);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!calendar?.id) {
+      dispatch(setCalendarModalVisible(true));
+    }
+  }, [dispatch, calendar]);
 
   useEffect(() => {
     moment.updateLocale('en', { week: { dow: 0 } });
@@ -78,6 +93,10 @@ const Events = () => {
       setEvents(updatedEvents);
       dispatch(setSelectedSlot(null));
     }
+  };
+
+  const onScreenClick = () => {
+    dispatch(setCalendarModalVisible(false));
   };
 
   return (
@@ -114,6 +133,13 @@ const Events = () => {
           selectable={true}
           onSelectSlot={handleSlotSelect}
         />
+        <div
+          className={classNames(styles.wrapModal, {
+            [styles.showModal]: isVisible
+          })}
+          onClick={onScreenClick}>
+          <EventModal modal={isVisible} />
+        </div>
       </div>
     </>
   );

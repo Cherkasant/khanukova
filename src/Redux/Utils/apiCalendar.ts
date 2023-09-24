@@ -1,8 +1,10 @@
 import { create } from 'apisauce';
 
+import { ProjectIdType } from '../Types/calendar';
+
 const API = create({ baseURL: 'https://chat.agiledreamers.com/' });
 
-const createCalendar = (token: string, projectId: string) => {
+const createCalendar = (token: string, projectId: ProjectIdType) => {
   return API.post('/calendars/', projectId, {
     headers: {
       Authorization: `bearer ${token}`
