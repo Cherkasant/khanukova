@@ -1,0 +1,77 @@
+.wrap {
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  transition: all 0.7s;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 483px;
+  padding: 30px;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 50px 10px rgba(18, 88, 202, 0.15);
+  border-radius: 10px;
+  z-index: 9999;
+  background: #f4f8fe;
+}
+
+.activeModal {
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contentBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.description {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.question {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.eventBtn {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0;
+  background: #1258ca;
+}
+
+.getBtn {
+  color: #212121;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0;
+  background: #d9e1f0;
+}
