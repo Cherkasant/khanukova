@@ -1,134 +1,134 @@
 .container {
-  margin-top: 10px;
-  width: 100%;
-  height: 70%;
+    margin-top: 10px;
+    width: 100%;
+    height: 70%;
 }
 
 .calendar {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
 }
 
 .calendar button {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
 }
 
 :global(.rbc-toolbar) {
-  display: block;
-  text-align: left;
+    display: block;
+    text-align: left;
 }
 
 :global(.rbc-day-bg),
 :global(.rbc-today) {
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
 
 :global(.rbc-month-view),
 :global(.rbc-time-view) {
-  border: none;
-  border-radius: 10px;
-  background-color: #ffffff;
-  padding: 7px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding: 7px;
 }
 
 :global(.rbc-month-view .rbc-header) {
-  font-weight: normal;
-  color: #a3a3a3;
-  text-transform: uppercase;
-  padding: 5px 0;
+    font-weight: normal;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    padding: 5px 0;
 }
 
 :global(.rbc-time-view .rbc-header) {
-  font-weight: normal;
-  padding: 7px 0;
+    font-weight: normal;
+    padding: 7px 0;
 }
 
 :global(.rbc-time-view .rbc-header .rbc-button-link) {
-  text-align: left;
+    text-align: left;
 }
 
 :global(.rbc-date-cell) {
-  padding: 3px 0;
-  text-align: center;
+    padding: 3px 0;
+    text-align: center;
 }
 
 :global(.rbc-date-cell .rbc-button-link) {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 :global(.rbc-month-view .rbc-now .rbc-button-link) {
-  font-size: 12px;
-  position: relative;
-  color: #ffffff;
+    font-size: 12px;
+    position: relative;
+    color: #ffffff;
 }
 
 :global(.rbc-month-view .rbc-now .rbc-button-link::after) {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  background-color: #1258ca;
-  border-radius: 50%;
-  z-index: -1;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #1258ca;
+    border-radius: 50%;
+    z-index: -1;
 }
 
 :global(.rbc-event-label) {
-  display: none;
+    display: none;
 }
 
 :global(.rbc-time-view .rbc-allday-cell) {
-  height: auto;
+    height: auto;
 }
 
 :global(.rbc-time-header-content) {
-  margin-bottom: -2px;
+    margin-bottom: -2px;
 }
 
 :global(.rbc-time-slot) {
-  border-top: none !important;
-  flex: auto;
-  height: 30px;
+    border-top: none !important;
+    flex: auto;
+    height: 30px;
 }
 
 :global(.rbc-event) {
-  font-size: 12px;
-  background-color: inherit;
-  z-index: 10;
+    font-size: 12px;
+    background-color: inherit;
+    z-index: 10;
 }
 
 :global(.rbc-event:hover),
 :global(.rbc-event:focus) {
-  background-color: #f4f8fe;
+    background-color: #f4f8fe;
 }
 
 :global(.rbc-event.rbc-selected) {
-  background-color: #d4e5ff;
+    background-color: #d4e5ff;
 }
 
 :global(.rbc-event-content) {
-  color: #212121;
+    color: #212121;
 }
 
 :global(.rbc-day-slot .rbc-event) {
-  border: none;
+    border: none;
 }
 
 :global(.rbc-current-time-indicator) {
-  z-index: 10;
-  height: 2px;
-  background-color: #1258ca;
+    z-index: 10;
+    height: 2px;
+    background-color: #1258ca;
 }
 
 :global(.rbc-label) {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 :global(.rbc-show-more) {
-  color: #1258ca;
+    color: #1258ca;
 }
 
 /* .addEventBlock {
@@ -157,22 +157,30 @@
   border-radius: 5px;
 } */
 .wrapModal {
-  opacity: 0;
-  visibility: hidden;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(155, 172, 201, 0.3);
-  transition: all 0.7s;
-  position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(155, 172, 201, 0.3);
+    transition: all 0.7s;
+    position: fixed;
 }
 
 .showModal {
-  z-index: 9999;
-  opacity: 1;
-  visibility: visible;
-  transition: all 0.7s;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.7s;
+}
+
+.loader {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9000;
 }

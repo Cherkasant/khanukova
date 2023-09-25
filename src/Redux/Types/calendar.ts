@@ -7,6 +7,7 @@ export type PostEventType = {
 };
 
 export type EventDataType = {
+  title?: string;
   summary: string;
   description: string;
   start: string;
@@ -20,3 +21,4 @@ export type ProjectIdType = {
   summary: string;
   callback: () => void;
 };
+export type EventsType = Array<EventDataType>;

@@ -12,6 +12,18 @@ const createEvent = (token: string, calendarId: string, eventData: EventDataType
   });
 };
 
+const getEvents = (token: string, calendarId: string, timeMin: string) => {
+  return API.get(
+    `/calendars/${calendarId}/events/?time_min=${timeMin}`,
+    {},
+    {
+      headers: {
+        Authorization: `bearer ${token}`
+      }
+    }
+  );
+};
+
 const getSingleEvent = (token: string, calendarId: string, eventId: string) => {
   return API.get(
     `/calendars/${calendarId}/events/${eventId}`,
@@ -33,6 +45,7 @@ const changeSingleEvent = (token: string, calendarId: string, eventId: string, e
 
 export default {
   createEvent,
+  getEvents,
   getSingleEvent,
   changeSingleEvent
 };

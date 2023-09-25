@@ -5,7 +5,7 @@ import { Checkbox, IconButton, Modal } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { EditTitleIcon } from '../../../Assets/icons/EditTitleIcon';
 import PuzzleButton, { PuzzleButtonTypes } from '../../PuzzleButton';
@@ -16,7 +16,11 @@ import UpArrowIcon from '../../../Assets/icons/UpArrowIcon';
 import AddDocIcon from '../../../Assets/icons/AddDocIcon';
 import { AddNotificationIcon } from '../../../Assets/icons/AddNotificationIcon';
 
-import { postEvent } from '../../../Redux/Reducers/calendarReducer';
+import { getEvents, postEvent } from '../../../Redux/Reducers/calendarReducer';
+
+import calendarSelector from '../../../Redux/Selectors/calendarSelector';
+
+import postSelector from '../../../Redux/Selectors/postSelector';
 
 import styles from './ModalCalendar.module.css';
 import EventTime from './EventTime/EventTime';
@@ -66,6 +70,8 @@ const initialNotifications: Array<INotification> = [
 
 const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCalendarProps) => {
   const dispatch = useDispatch();
+  const calendar = useSelector(calendarSelector.getCalendar);
+  const singleProject = useSelector(postSelector.getSingleProject);
 
   const [eventTitle, setEventTitle] = useState('Title new event');
   const [isEditable, setIsEditable] = useState(false);
@@ -99,13 +105,22 @@ const ModalCalendar = ({ selectedSlot, onClose, onAddEvent, isClosed }: ModalCal
     onAddEvent(eventTitle);
     const formattedStart = formatDate(selectedSlot.start).toString();
     const formattedEnd = formatDate(selectedSlot.start).toString();
-    dispatch(
-      postEvent({
-        calendarId: 'p4iqrab23kupukrlg2rrhvahgs@group.calendar.google.com',
-        data: { summary: '2', description: description, start: formattedStart, end: formattedEnd },
-        callback: () => {}
-      })
-    );
+    if (calendar && singleProject) {
+      dispatch(
+        postEvent({
+          calendarId: calendar.id,
+          data: {
+            summary: singleProject.id.toString(),
+            description: description,
+            start: formattedStart,
+            end: formattedEnd
+          },
+          callback: () => {
+            dispatch(getEvents(calendar.id));
+          }
+        })
+      );
+    }
   };
 
   const handleEditTitle = () => {

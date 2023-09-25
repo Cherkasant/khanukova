@@ -12,7 +12,9 @@ import slotSelectors from '../../Redux/Selectors/slotSelectors';
 
 import calendarSelector from '../../Redux/Selectors/calendarSelector';
 
-import { setCalendarModalVisible } from '../../Redux/Reducers/calendarReducer';
+import { getEvents, setCalendarModalVisible } from '../../Redux/Reducers/calendarReducer';
+
+import Loader from '../Loader';
 
 import styles from './Events.module.css';
 import CustomToolbar from './CustomToolbar/CustomToolbar';
@@ -27,42 +29,40 @@ export interface IEvent {
   title: string;
   start: Date;
   end: Date;
+  resource?: string;
 }
 
-const initialEvents: Array<IEvent> = [
-  {
-    title: 'An important event',
-    start: new Date(2023, 7, 9, 10, 0),
-    end: new Date(2023, 7, 9, 12, 0)
-  },
-  {
-    title: 'Another event',
-    start: new Date(2023, 7, 9, 14, 0),
-    end: new Date(2023, 7, 9, 15, 0)
-  },
-  {
-    title: 'Another event',
-    start: new Date(2023, 7, 9, 16, 0),
-    end: new Date(2023, 7, 9, 17, 0)
-  }
-];
+const initialEvents: Array<IEvent> = [];
 
 const Events = () => {
   const [activeView, setActiveView] = useState<View>('month');
   const [events, setEvents] = useState<Array<IEvent>>(initialEvents);
   const [isModalClosed, setIsModalClosed] = useState(true);
 
+  const isLoadingCalendar = useSelector(calendarSelector.isLoadingCalendar);
   const calendar = useSelector(calendarSelector.getCalendar);
   const selectedSlot = useSelector(slotSelectors.getSelectedSlot);
   const isVisible = useSelector(calendarSelector.calendarModalVisble);
+  const createdEvents = useSelector(calendarSelector.getEvents);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!calendar?.id) {
       dispatch(setCalendarModalVisible(true));
+    } else {
+      dispatch(getEvents(calendar.id));
     }
-  }, [dispatch, calendar]);
+  }, [calendar]);
+
+  useEffect(() => {
+    if (createdEvents) {
+      const formattedEvents = createdEvents.map((el) => {
+        return { title: 'Test', start: new Date(el.start), end: new Date(el.end), resource: el.description };
+      });
+      setEvents(formattedEvents);
+    }
+  }, [createdEvents]);
 
   useEffect(() => {
     moment.updateLocale('en', { week: { dow: 0 } });
@@ -90,7 +90,6 @@ const Events = () => {
         end: selectedSlot.end
       };
       const updatedEvents = [...events, newEvent];
-      setEvents(updatedEvents);
       dispatch(setSelectedSlot(null));
     }
   };
@@ -133,13 +132,18 @@ const Events = () => {
           selectable={true}
           onSelectSlot={handleSlotSelect}
         />
-        <div
-          className={classNames(styles.wrapModal, {
-            [styles.showModal]: isVisible
-          })}
-          onClick={onScreenClick}>
-          <EventModal modal={isVisible} />
-        </div>
+
+        {isLoadingCalendar ? (
+          <Loader className={styles.loader} />
+        ) : (
+          <div
+            className={classNames(styles.wrapModal, {
+              [styles.showModal]: isVisible
+            })}
+            onClick={onScreenClick}>
+            <EventModal modal={isVisible} />
+          </div>
+        )}
       </div>
     </>
   );

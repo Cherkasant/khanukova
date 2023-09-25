@@ -1,13 +1,15 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
 
 import API from '../Utils/apiEvents';
 
-import { postEvent } from '../Reducers/calendarReducer';
+import { getEvents, postEvent, setEvents } from '../Reducers/calendarReducer';
 
 import { PostEventType } from '../Types/calendar';
 
 import callCheckingAuth from './callCheckingAuth';
+
+const currentDate = new Date().toISOString().replace('T', ' ').substr(0, 19);
 
 function* postEventWorker(actions: PayloadAction<PostEventType>) {
   const { calendarId, data, callback } = actions.payload;
@@ -19,6 +21,15 @@ function* postEventWorker(actions: PayloadAction<PostEventType>) {
   }
 }
 
+function* getEventsWorker(actions: PayloadAction<string>) {
+  const { ok, data, problem } = yield callCheckingAuth(API.getEvents, actions.payload, currentDate);
+  if (ok && data) {
+    yield put(setEvents(data));
+  } else {
+    console.warn('Error while posting new event', problem);
+  }
+}
+
 export default function* eventsSaga() {
-  yield all([takeLatest(postEvent, postEventWorker)]);
+  yield all([takeLatest(postEvent, postEventWorker), takeLatest(getEvents, getEventsWorker)]);
 }
