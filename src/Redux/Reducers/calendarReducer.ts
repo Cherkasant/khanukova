@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 
-import { CalendarTab, CalendarType, PostEventType, ProjectIdType } from '../Types/calendar';
+import { CalendarTab, CalendarType, EventsType, PostEventType, ProjectIdType } from '../Types/calendar';
 
 type CalendarReducerState = {
   monthIndex: number;
@@ -16,6 +16,8 @@ type CalendarReducerState = {
   calendarId: string;
   calendar: CalendarType | null;
   calendarModalVisible: boolean;
+  events: EventsType;
+  isLoading: boolean;
 };
 
 const initialState: CalendarReducerState = {
@@ -30,7 +32,9 @@ const initialState: CalendarReducerState = {
   currentCalendarTab: 'month',
   calendarId: '',
   calendar: null,
-  calendarModalVisible: false
+  calendarModalVisible: false,
+  events: [],
+  isLoading: false
 };
 
 const calendarSlice = createSlice({
@@ -64,6 +68,13 @@ const calendarSlice = createSlice({
     },
     setCalendarModalVisible: (state, action: PayloadAction<boolean>) => {
       state.calendarModalVisible = action.payload;
+    },
+    getEvents: (state, action: PayloadAction<string>) => {},
+    setEvents: (state, action: PayloadAction<EventsType>) => {
+      state.events = action.payload;
+    },
+    setCreatingCalendar: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     }
   }
 });
@@ -77,7 +88,10 @@ export const {
   postEvent,
   postCalendar,
   setCalendar,
-  setCalendarModalVisible
+  setCalendarModalVisible,
+  getEvents,
+  setEvents,
+  setCreatingCalendar
 } = calendarSlice.actions;
 
 const calendarReducer = calendarSlice.reducer;
