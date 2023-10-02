@@ -19,7 +19,7 @@ import { ACCESS_TOKEN_KEY } from '../../Components/constants/consts';
 
 import callCheckingAuth from './callCheckingAuth';
 
-export const socket = new WebSocket('wss://apipuzzle-be.herokuapp.com/ws/');
+export const socket = new WebSocket('wss://api.agiledreamers.com/ws/');
 export const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY) || sessionStorage.getItem(ACCESS_TOKEN_KEY) || '';
 
 function* startListeningNotificationWorker() {}
